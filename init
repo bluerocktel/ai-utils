@@ -29,7 +29,10 @@ mkdir -p \
     "$TASKS_DIR/done" \
     "$TASKS_DIR/review" \
     "$TASKS_DIR/projects" \
-    "$TASKS_DIR/.locks"
+    "$TASKS_DIR/.locks" \
+    "$TASKS_DIR/scheduled" \
+    "$TASKS_DIR/scheduled/.state" \
+    "$TASKS_DIR/suggestions"
 
 if [ ! -f "$TASKS_DIR/DONE.md" ]; then
     printf '# Task log\n\n' > "$TASKS_DIR/DONE.md"

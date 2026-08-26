@@ -176,6 +176,23 @@ if [ "$MODE" = "run" ]; then
     trap 'rm -f "$STATE_FILE"' EXIT
     write_run_state "$TASK_NAME" "$RUNNER" "$(session_name "$RUNNER" "$TASK_NAME")"
 
+    # Requeue for a later attempt. Every deferral path ends here, so it must not
+    # be able to fail: the launcher normally moves the task into run/ first, but
+    # a direct `--run` on a file still sitting in inbox/ makes source and
+    # destination the same path. `mv` errors on that, and under `set -e` the
+    # abort happens BEFORE the notification and the log line, leaving a bare mv
+    # complaint and no indication the task is still queued. Same hardening, and
+    # the same reason, as restore_brief in ai-brief.
+    requeue_task() {
+        local dest="$INBOX/${TASK_NAME}.md"
+        mkdir -p "$INBOX"
+        [ -e "$TASK_FILE" ] || return 0
+        if [ "$(realpath "$TASK_FILE")" = "$(realpath -m "$dest")" ]; then
+            return 0
+        fi
+        mv "$TASK_FILE" "$dest"
+    }
+
     PROJECT=$(project_from_task "$TASK_FILE")
 
     # ── Per-project exclusive lock ──────────────────────────────────────────
@@ -193,194 +210,253 @@ if [ "$MODE" = "run" ]; then
                 echo "**Status:** DEFERRED (project '$PROJECT' busy — lock wait timed out, not counted as retry)"
                 echo ""
             } >> "$LOG"
-            mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+            requeue_task
             exit 0
         fi
     fi
 
-    {
-        echo "# $TASK_NAME"
-        echo ""
-        echo "**Runner:** $RUNNER"
-        echo "**Started:** $(date '+%Y-%m-%d %H:%M')"
-        echo ""
-        echo "---"
-        echo ""
-    } > "$RESULT_FILE"
-
-    # ── Prompt ──────────────────────────────────────────────────────────────
-    # Vendor-neutral by contract. Anything naming a provider feature is
-    # appended by ai_preamble_extra.
-    PREAMBLE="AUTONOMOUS MODE: You have no user to interact with. Never ask questions, never present options (A/B/C), never wait for confirmation. Make the most reasonable decision and implement immediately. There is no event loop in this headless run: never wait on a monitored event, a scheduled wakeup, a task notification, or any asynchronous callback — those never fire here and the run will simply be killed. If a step needs test results or command output, run it SYNCHRONOUSLY, block on it, and read its output before continuing; if something genuinely cannot complete in one pass, finish now and record what remains in the ## Summary instead of parking to wait. Document choices in a ## Summary at the end. After the ## Summary, add a ## Suggested Commit Message section with a ready-to-use git commit message (subject + optional body) describing all changes. Do not run git commit yourself unless the task file explicitly requires it. CRITICAL: Never use git checkout, git restore, or git reset to undo a previous attempt's changes. Any untracked files or unstaged modifications in the working tree may be legitimate work from other concurrent tasks — do not delete or revert them. If you need to undo your own changes from a previous attempt, edit only the exact lines you added."
-
-    WORKDIR=""
-    if [ -n "$PROJECT" ] && [ -f "$PROJECTS_DIR/${PROJECT}.md" ]; then
-        PREAMBLE="$PREAMBLE
-
-PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_DIR/${PROJECT}.md and follow its Working Directory, stack notes, and conventions. Task type (code vs writing) is defined there."
-        if WD=$(project_working_dir "$PROJECT"); then
-            if [ -d "$WD" ]; then
-                WORKDIR="$WD"
-            fi
-        fi
-    fi
-
-    EXTRA=$(ai_preamble_extra "$TASK_FILE" || true)
-    if [ -n "$EXTRA" ]; then
-        PREAMBLE="$PREAMBLE
-
-$EXTRA"
-    fi
-
-    # ── Model ───────────────────────────────────────────────────────────────
-    # The alias table is per provider; an empty result means "provider default"
-    # and the caller must not second-guess it (providers genuinely differ on
-    # what unset means).
+    # ── Grade-only resume ───────────────────────────────────────────────────
+    # A task carrying ## Awaiting-Eval already RAN: its report is in done/ and
+    # only the verdict is missing (the grader hit an auth failure last time).
+    # Skip the whole work phase and fall straight through to evaluation.
+    #
+    # A dangling pointer must never wedge a task, so a section naming a report
+    # that is not there is stripped and the task runs normally.
+    # The executor's model, resolved once. The alias table is per provider; an
+    # empty result means "provider default" and the caller must not second-guess
+    # it (providers genuinely differ on what unset means).
+    #
+    # Resolved OUTSIDE the work phase because the strategy pass on the FAIL path
+    # uses it too, and that path is reachable from a grade-only resume that the
+    # work phase never ran. Left inside, a resumed task failing its second
+    # evaluation would abort on an unbound variable after its feedback had
+    # already been appended, stranding it in run/.
     MODEL_RAW=$(model_from_task "$TASK_FILE")
     if [ -z "$MODEL_RAW" ]; then
         MODEL_RAW="${default_model:-}"
     fi
     MODEL_ID=$(ai_model_alias "$MODEL_RAW")
 
-    JSON_TMP=$(mktemp)
-    ERR_TMP=$(mktemp)
-    USAGE_TMP=$(mktemp)
-    BODY_TMP=$(mktemp)
+    GRADE_ONLY=0
+    # The agent's exit status is set by the work phase, which a grade-only
+    # resume skips entirely. It is still read when the verdict is logged, so it
+    # has to exist on BOTH paths or `set -u` aborts after a successful grading
+    # and the task is never archived: it stays in inbox/, graded but unfiled,
+    # and the next sweep grades it all over again.
+    STATUS=0
+    AWAITING=$(awaiting_eval_from_task "$TASK_FILE")
+    if [ -n "$AWAITING" ]; then
+        AWAITING_PATH="$DONE_DIR/$(basename "$AWAITING")"
+        if [ -f "$AWAITING_PATH" ]; then
+            GRADE_ONLY=1
+            RESULT_FILE="$AWAITING_PATH"
+            # Reuse the ORIGINAL report's timestamp so the archived pair keeps
+            # matching names (<ts>_<task>.md next to <ts>_<task>.task.md); a
+            # fresh timestamp here would split the pair and break the
+            # *_<slug>.task.md lookups that depend on it.
+            AWAITING_BASE=$(basename "$AWAITING_PATH" .md)
+            if [ "$AWAITING_BASE" != "${AWAITING_BASE%_$TASK_NAME}" ]; then
+                TIMESTAMP="${AWAITING_BASE%_$TASK_NAME}"
+            fi
+            echo "Grade-only resume: report already exists, skipping execution ($RESULT_FILE)"
+            {
+                printf "\n---\n\n**Re-graded:** %s — execution was not repeated (grading had been deferred).\n" \
+                    "$(date '+%Y-%m-%d %H:%M')"
+            } >> "$RESULT_FILE"
+        else
+            echo "## Awaiting-Eval named '$AWAITING' but $AWAITING_PATH is gone — running the task normally." >&2
+        fi
+        strip_awaiting_eval_section "$TASK_FILE"
+    fi
 
-    # The provider owns the timeout wrapper and returns the CLI status verbatim,
-    # including 124 for a timeout. stdout and stderr land in two SEPARATE files;
-    # merging them would corrupt the JSON and silently blank the report.
-    set +e
-    ai_run "${PREAMBLE}
-
-$(cat "$TASK_FILE")" \
-        "$MODEL_ID" \
-        "$WORKDIR" \
-        "$((TASK_TIMEOUT_MIN * 60))" \
-        "$JSON_TMP" \
-        "$ERR_TMP"
-    STATUS=$?
-    set -e
-
-    # ── Auth-failure circuit breaker ────────────────────────────────────────
-    # An auth failure means NO WORK HAPPENED: requeue without burning a retry
-    # and pause only THIS runner's queue (the marker is per runner).
-    if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP"; then
+    if [ "$GRADE_ONLY" -eq 0 ]; then
         {
-            echo "Deferred: authentication failure (no work performed, retry not counted)."
-            ai_json_text "$JSON_TMP"
+            echo "# $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Started:** $(date '+%Y-%m-%d %H:%M')"
             echo ""
             echo "---"
             echo ""
-            echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox pending re-authentication."
-        } >> "$RESULT_FILE"
-        {
-            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
-            echo ""
-            echo "**Runner:** $RUNNER"
-            echo "**Status:** DEFERRED (auth failure — not counted as retry)"
-            echo "**Result:** \`$RESULT_FILE\`"
-            echo ""
-        } >> "$LOG"
-        touch "$COOLDOWN_FILE"
-        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
-        rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
-        notify -u critical "ai-task [$RUNNER]: Auth Failure" \
-            "$TASK_NAME deferred — re-authenticate this runner. Its queue is paused for the cooldown."
-        exit 0
-    fi
+        } > "$RESULT_FILE"
 
-    rm -f "$COOLDOWN_FILE"
+        # ── Prompt ──────────────────────────────────────────────────────────────
+        # Vendor-neutral by contract. Anything naming a provider feature is
+        # appended by ai_preamble_extra.
+        PREAMBLE="AUTONOMOUS MODE: You have no user to interact with. Never ask questions, never present options (A/B/C), never wait for confirmation. Make the most reasonable decision and implement immediately. There is no event loop in this headless run: never wait on a monitored event, a scheduled wakeup, a task notification, or any asynchronous callback — those never fire here and the run will simply be killed. If a step needs test results or command output, run it SYNCHRONOUSLY, block on it, and read its output before continuing; if something genuinely cannot complete in one pass, finish now and record what remains in the ## Summary instead of parking to wait. Document choices in a ## Summary at the end. After the ## Summary, add a ## Suggested Commit Message section with a ready-to-use git commit message (subject + optional body) describing all changes. Do not run git commit yourself unless the task file explicitly requires it. CRITICAL: Never use git checkout, git restore, or git reset to undo a previous attempt's changes. Any untracked files or unstaged modifications in the working tree may be legitimate work from other concurrent tasks — do not delete or revert them. If you need to undo your own changes from a previous attempt, edit only the exact lines you added.
 
-    # ── Killed / interrupted run (no parseable result text) ─────────────────
-    # DEFERRED, not FAIL: an interrupted run proves nothing about the task.
-    if [ "$STATUS" -ne 0 ] && [ -z "$(ai_json_text "$JSON_TMP")" ]; then
-        if [ "$STATUS" -eq 124 ]; then
-            INTERRUPT_REASON="timed out after ${TASK_TIMEOUT_MIN}m"
-        else
-            INTERRUPT_REASON="interrupted (exit code $STATUS)"
+ACCEPTANCE CRITERIA: they define done, but they are not a licence to change anything this task was not asked to change. A criterion can be wrong: its arithmetic can be off, it can assert something about data or files outside this task's scope, or it can contradict another criterion. When a criterion cannot be satisfied by doing the task correctly, do NOT force it. Never delete, overwrite or restructure data, files or schema outside the task's stated scope to make a check pass, and never create a record whose only purpose is to move a count. Do the task correctly, leave the pre-existing state exactly as you found it, and report the conflict in the ## Summary: name the criterion, show the arithmetic or the query that disproves it, say what the correct value is, and state the decision the user has to make. An unsatisfiable criterion is a defect in the task file; reporting it precisely is the right outcome and is far more useful than a check forced green. If a previous attempt already made such an out-of-scope change (look for it in ## Evaluator Feedback), undo that change as part of this attempt and say so."
+
+        WORKDIR=""
+        if [ -n "$PROJECT" ] && [ -f "$PROJECTS_DIR/${PROJECT}.md" ]; then
+            PREAMBLE="$PREAMBLE
+
+PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_DIR/${PROJECT}.md and follow its Working Directory, stack notes, and conventions. Task type (code vs writing) is defined there."
+            if WD=$(project_working_dir "$PROJECT"); then
+                if [ -d "$WD" ]; then
+                    WORKDIR="$WD"
+                fi
+            fi
         fi
-        {
-            echo "Deferred: run $INTERRUPT_REASON, no output — retry not counted."
-            echo ""
-            if [ -s "$ERR_TMP" ]; then
+
+        EXTRA=$(ai_preamble_extra "$TASK_FILE" || true)
+        if [ -n "$EXTRA" ]; then
+            PREAMBLE="$PREAMBLE
+
+$EXTRA"
+        fi
+
+        # ── Model ───────────────────────────────────────────────────────────────
+        JSON_TMP=$(mktemp)
+        ERR_TMP=$(mktemp)
+        USAGE_TMP=$(mktemp)
+        BODY_TMP=$(mktemp)
+
+        # The provider owns the timeout wrapper and returns the CLI status verbatim,
+        # including 124 for a timeout. stdout and stderr land in two SEPARATE files;
+        # merging them would corrupt the JSON and silently blank the report.
+        set +e
+        ai_run "${PREAMBLE}
+
+$(cat "$TASK_FILE")" \
+            "$MODEL_ID" \
+            "$WORKDIR" \
+            "$((TASK_TIMEOUT_MIN * 60))" \
+            "$JSON_TMP" \
+            "$ERR_TMP"
+        STATUS=$?
+        set -e
+
+        # ── Auth-failure circuit breaker ────────────────────────────────────────
+        # An auth failure means NO WORK HAPPENED: requeue without burning a retry
+        # and pause only THIS runner's queue (the marker is per runner).
+        if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP"; then
+            {
+                echo "Deferred: authentication failure (no work performed, retry not counted)."
+                ai_json_text "$JSON_TMP"
+                echo ""
+                echo "---"
+                echo ""
+                echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox pending re-authentication."
+            } >> "$RESULT_FILE"
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** DEFERRED (auth failure — not counted as retry)"
+                echo "**Result:** \`$RESULT_FILE\`"
+                echo ""
+            } >> "$LOG"
+            touch "$COOLDOWN_FILE"
+            requeue_task
+            rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+            notify -u critical "ai-task [$RUNNER]: Auth Failure" \
+                "$TASK_NAME deferred — re-authenticate this runner. Its queue is paused for the cooldown."
+            exit 0
+        fi
+
+        rm -f "$COOLDOWN_FILE"
+
+        # ── Killed / interrupted run (no parseable result text) ─────────────────
+        # DEFERRED, not FAIL: an interrupted run proves nothing about the task.
+        if [ "$STATUS" -ne 0 ] && [ -z "$(ai_json_text "$JSON_TMP")" ]; then
+            if [ "$STATUS" -eq 124 ]; then
+                INTERRUPT_REASON="timed out after ${TASK_TIMEOUT_MIN}m"
+            else
+                INTERRUPT_REASON="interrupted (exit code $STATUS)"
+            fi
+            {
+                echo "Deferred: run $INTERRUPT_REASON, no output — retry not counted."
+                echo ""
+                if [ -s "$ERR_TMP" ]; then
+                    echo "_stderr:_"
+                    echo '```'
+                    cat "$ERR_TMP"
+                    echo '```'
+                    echo ""
+                fi
+                echo "---"
+                echo ""
+                echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox (killed/interrupted run)."
+            } >> "$RESULT_FILE"
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** DEFERRED (run $INTERRUPT_REASON — not counted as retry)"
+                echo "**Result:** \`$RESULT_FILE\`"
+                echo ""
+            } >> "$LOG"
+            requeue_task
+            rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+            notify -u critical "ai-task [$RUNNER]: Task Interrupted" \
+                "$TASK_NAME $INTERRUPT_REASON — requeued, no retry burned."
+            exit 0
+        fi
+
+        RESULT_TEXT=$(ai_json_text "$JSON_TMP")
+        if [ -z "$RESULT_TEXT" ] && { [ -s "$JSON_TMP" ] || [ -s "$ERR_TMP" ]; }; then
+            {
+                echo "> [ai-task] WARNING: could not parse the runner's JSON output (no response text)."
+                echo "> Raw stdout and stderr captures follow."
+                echo ""
+                echo "_stdout:_"
+                echo '```'
+                cat "$JSON_TMP"
+                echo '```'
+                echo ""
                 echo "_stderr:_"
                 echo '```'
                 cat "$ERR_TMP"
                 echo '```'
-                echo ""
-            fi
+            } > "$BODY_TMP"
+        else
+            printf '%s\n' "$RESULT_TEXT" > "$BODY_TMP"
+        fi
+
+        # Cost reporting never fails a task, so the table is written unconditionally.
+        ai_usage_table "$JSON_TMP" "$USAGE_TMP" || true
+
+        if grep -q "^## Suggested Commit Message" "$BODY_TMP" 2>/dev/null; then
+            awk -v tf="$USAGE_TMP" '
+                /^## Suggested Commit Message/ {
+                    while ((getline line < tf) > 0) print line
+                    close(tf)
+                    print ""
+                }
+                { print }
+            ' "$BODY_TMP" >> "$RESULT_FILE"
+        else
+            cat "$BODY_TMP" >> "$RESULT_FILE"
+            echo "" >> "$RESULT_FILE"
+            cat "$USAGE_TMP" >> "$RESULT_FILE"
+        fi
+
+        rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+
+        {
+            echo ""
             echo "---"
             echo ""
-            echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox (killed/interrupted run)."
+            echo "**Finished:** $(date '+%Y-%m-%d %H:%M')"
         } >> "$RESULT_FILE"
-        {
-            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
-            echo ""
-            echo "**Runner:** $RUNNER"
-            echo "**Status:** DEFERRED (run $INTERRUPT_REASON — not counted as retry)"
-            echo "**Result:** \`$RESULT_FILE\`"
-            echo ""
-        } >> "$LOG"
-        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
-        rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
-        notify -u critical "ai-task [$RUNNER]: Task Interrupted" \
-            "$TASK_NAME $INTERRUPT_REASON — requeued, no retry burned."
-        exit 0
-    fi
-
-    RESULT_TEXT=$(ai_json_text "$JSON_TMP")
-    if [ -z "$RESULT_TEXT" ] && { [ -s "$JSON_TMP" ] || [ -s "$ERR_TMP" ]; }; then
-        {
-            echo "> [ai-task] WARNING: could not parse the runner's JSON output (no response text)."
-            echo "> Raw stdout and stderr captures follow."
-            echo ""
-            echo "_stdout:_"
-            echo '```'
-            cat "$JSON_TMP"
-            echo '```'
-            echo ""
-            echo "_stderr:_"
-            echo '```'
-            cat "$ERR_TMP"
-            echo '```'
-        } > "$BODY_TMP"
-    else
-        printf '%s\n' "$RESULT_TEXT" > "$BODY_TMP"
-    fi
-
-    # Cost reporting never fails a task, so the table is written unconditionally.
-    ai_usage_table "$JSON_TMP" "$USAGE_TMP" || true
-
-    if grep -q "^## Suggested Commit Message" "$BODY_TMP" 2>/dev/null; then
-        awk -v tf="$USAGE_TMP" '
-            /^## Suggested Commit Message/ {
-                while ((getline line < tf) > 0) print line
-                close(tf)
-                print ""
-            }
-            { print }
-        ' "$BODY_TMP" >> "$RESULT_FILE"
-    else
-        cat "$BODY_TMP" >> "$RESULT_FILE"
-        echo "" >> "$RESULT_FILE"
-        cat "$USAGE_TMP" >> "$RESULT_FILE"
-    fi
-
-    rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
-
-    {
-        echo ""
-        echo "---"
-        echo ""
-        echo "**Finished:** $(date '+%Y-%m-%d %H:%M')"
-    } >> "$RESULT_FILE"
+    fi   # end of the work phase (skipped entirely on a grade-only resume)
 
     # ── Evaluation ──────────────────────────────────────────────────────────
     # Exit codes: 0 pass, 1 fail, 2 nothing to grade, 3 evaluator auth failure,
-    # 4 test command timed out. AI_RUNNER is exported so the evaluator grades
-    # with the same runner this task actually ran under, even when --runner
-    # overrode the task's own section.
+    # 4 test command timed out.
+    #
+    # The grader is `eval_runner` when config sets one, else the runner that
+    # executed the task. A DIFFERENT provider is the useful configuration: the
+    # value of a second opinion comes from its failure modes being independent,
+    # and a grader sharing the executor's training shares its blind spots.
+    #
+    # AI_RUNNER is still exported, but it now records who EXECUTED rather than
+    # choosing who grades: --runner sits above it in ai-eval's precedence, so
+    # the explicit flag below is what takes effect. A hand-run ai-eval with
+    # neither still lands on eval_runner, then default_runner.
+    EVAL_RUNNER="${eval_runner:-$RUNNER}"
+    EVAL_COOLDOWN_FILE=$(cooldown_path "$EVAL_RUNNER")
     EVAL_BIN="$HOME/bin/ai-eval"
     if [ ! -x "$EVAL_BIN" ]; then
         EVAL_BIN="$SCRIPT_DIR/ai-eval"
@@ -393,7 +469,8 @@ $(cat "$TASK_FILE")" \
         EVAL_STATUS=2
     else
         set +e
-        AI_RUNNER="$RUNNER" "$EVAL_BIN" "$TASK_FILE" "$RESULT_FILE" "$EVAL_OUTPUT"
+        AI_RUNNER="$RUNNER" "$EVAL_BIN" --runner "$EVAL_RUNNER" \
+            "$TASK_FILE" "$RESULT_FILE" "$EVAL_OUTPUT"
         EVAL_STATUS=$?
         set -e
     fi
@@ -403,15 +480,25 @@ $(cat "$TASK_FILE")" \
             echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
             echo ""
             echo "**Runner:** $RUNNER"
-            echo "**Status:** DEFERRED (evaluator auth failure — not counted as retry)"
+            [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
+            echo "**Status:** DEFERRED (evaluator auth failure on '$EVAL_RUNNER' — not counted as retry)"
             echo "**Result:** \`$RESULT_FILE\`"
             echo ""
         } >> "$LOG"
-        touch "$COOLDOWN_FILE"
-        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        # The GRADER's marker, not the executor's. These are the same runner
+        # only when eval_runner is unset; with a split, pausing $RUNNER here
+        # would stop a queue whose credentials are perfectly fine, which is
+        # exactly what the per-runner marker exists to prevent.
+        touch "$EVAL_COOLDOWN_FILE"
+        # The work is finished and the report is on disk. Point the task at it
+        # so the next claim GRADES it instead of executing it a second time:
+        # without this, a grader outage silently converts a completed run into
+        # a full re-run, and the split would cost more than it is worth.
+        set_awaiting_eval "$TASK_FILE" "$(basename "$RESULT_FILE")"
+        requeue_task
         rm -f "$EVAL_OUTPUT"
-        notify -u critical "ai-task [$RUNNER]: Auth Failure" \
-            "$TASK_NAME ran but could not be evaluated (auth). Deferred for re-check."
+        notify -u critical "ai-task [$EVAL_RUNNER]: Evaluator Auth Failure" \
+            "$TASK_NAME ran fine but could not be graded (auth on '$EVAL_RUNNER'). Work kept; grading deferred."
         exit 0
     fi
 
@@ -424,11 +511,12 @@ $(cat "$TASK_FILE")" \
             echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
             echo ""
             echo "**Runner:** $RUNNER"
+            [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
             echo "**Status:** DEFERRED (test command timed out — not counted as retry)"
             echo "**Result:** \`$RESULT_FILE\`"
             echo ""
         } >> "$LOG"
-        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        requeue_task
         rm -f "$EVAL_OUTPUT"
         notify "ai-task [$RUNNER]: Eval Timed Out" \
             "$TASK_NAME verification timed out — requeued, no retry burned."
@@ -474,6 +562,7 @@ Rules:
 - Identify what keeps going wrong: wrong approach, misread requirement, missing step, environment issue?
 - Suggest a specific, different strategy. Name files, methods, commands, or patterns to try instead.
 - Be concrete and actionable. Under 10 lines. No praise, no preamble, no closing remark.
+- If the recurring failure is a criterion that CANNOT be satisfied by doing the task correctly, say exactly that and recommend stopping rather than retrying: name the criterion, give the arithmetic or query that disproves it, and name the decision the user must make. Never propose satisfying a criterion by deleting or restructuring data outside the task's scope, by creating a record whose only purpose is to move a count, or by any workaround that leaves the system worse than the honest shortfall. If an earlier attempt did one of those, the strategy is to undo it.
 - Output only raw Markdown starting with exactly: ## Retry Strategy (Attempt $NEW_RETRIES)
 
 ---
@@ -495,12 +584,13 @@ $(cat "$TASK_FILE")" \
                 echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
                 echo ""
                 echo "**Runner:** $RUNNER"
+                [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
                 echo "**Status:** requeued (retry $NEW_RETRIES/$MAX_RETRIES)"
                 echo "**Result:** \`$RESULT_FILE\`"
                 echo ""
             } >> "$LOG"
 
-            mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+            requeue_task
             rm -f "$EVAL_OUTPUT"
             notify "ai-task [$RUNNER]: Task Requeued" \
                 "$TASK_NAME failed evaluation (retry $NEW_RETRIES/$MAX_RETRIES). Requeued."
@@ -515,6 +605,7 @@ $(cat "$TASK_FILE")" \
                 echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
                 echo ""
                 echo "**Runner:** $RUNNER"
+                [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
                 echo "**Status:** NEEDS REVIEW (failed after $MAX_RETRIES retries)"
                 echo "**Result:** \`$RESULT_FILE\`"
                 echo ""
@@ -534,7 +625,10 @@ $(cat "$TASK_FILE")" \
         echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
         echo ""
         echo "**Runner:** $RUNNER"
-        if [ "$STATUS" -eq 0 ]; then
+        [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
+        if [ "$GRADE_ONLY" -eq 1 ]; then
+            echo "**Status:** completed (graded on a later pass; execution not repeated)"
+        elif [ "$STATUS" -eq 0 ]; then
             echo "**Status:** completed"
         else
             echo "**Status:** completed with agent exit $STATUS (eval PASS)"
@@ -592,6 +686,27 @@ runner_matches() {
     [ "$r" = "$INVOCATION_RUNNER" ]
 }
 
+# A task carrying ## Awaiting-Eval needs nothing but a verdict, so it is
+# claimable only while its GRADER is actually available.
+#
+# This is a starvation guard, not an optimisation. The picker returns the FIRST
+# eligible task, and a grade-only resume defers again within seconds while the
+# grader is in cooldown. Without this check, one task waiting on a down judge
+# would be claimed on every single sweep and nothing behind it in the queue
+# would ever run. A task not awaiting a verdict is unaffected.
+grader_available() {
+    local f="$1" r g marker
+    [ -n "$(awaiting_eval_from_task "$f")" ] || return 0
+    r=$(runner_from_task "$f") || return 0
+    g="${eval_runner:-$r}"
+    marker=$(cooldown_path "$g") || return 0
+    [ -f "$marker" ] || return 0
+    if find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+        return 1
+    fi
+    return 0
+}
+
 # Oldest first, mtime order, whitespace-safe.
 inbox_by_age() {
     find "$INBOX" -maxdepth 1 -type f -name '*.md' -printf '%T@ %p\n' 2>/dev/null \
@@ -605,6 +720,7 @@ select_candidate() {
         [ -n "$f" ] && [ -f "$f" ] || continue
         dep_satisfied "$f" || continue
         runner_matches "$f" || continue
+        grader_available "$f" || continue
         # An existing session for this name means a previous attempt is still
         # in flight; leave the file alone rather than run it twice.
         tmux has-session -t "$(session_name "$INVOCATION_RUNNER" "$(basename "$f" .md)")" 2>/dev/null && continue

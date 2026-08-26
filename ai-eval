@@ -33,12 +33,17 @@ source "$SCRIPT_DIR/lib.sh"
 
 usage() {
     cat <<'USAGE'
-Usage: ai-eval [--runner NAME] TASK_FILE RESULT_FILE [OUTPUT_FILE]
+Usage: ai-eval [--runner NAME] [--model ID] TASK_FILE RESULT_FILE [OUTPUT_FILE]
 
-  --runner NAME  Runner that grades this task. Defaults to $AI_RUNNER (set by
-                 ai-task), then to default_runner from config. Selectable
-                 independently of the task's own ## Runner so a cheap runner
-                 can grade an expensive one.
+  --runner NAME  Runner that grades this task. Then $AI_RUNNER (set by
+                 ai-task), then eval_runner from config, then default_runner.
+                 Selectable independently of the task's own ## Runner so a
+                 cheap runner can grade an expensive one, or so a different
+                 provider can cross-check the one that did the work.
+  --model ID     Model the grader uses. Then eval_model from config, then the
+                 task's ## Model, then default_model. Graded independently of
+                 the task's model because ## Model is a choice about doing the
+                 work, not about judging it.
 
 Exit: 0 pass, 1 fail, 2 nothing to grade, 3 inconclusive (auth/empty verdict),
       4 inconclusive (test command timed out).
@@ -49,6 +54,7 @@ USAGE
 # --runner may appear before or after the positionals, so ai-task and a human
 # can use the same flag order.
 RUNNER_FLAG=""
+MODEL_FLAG=""
 POSITIONAL=()
 
 while [ $# -gt 0 ]; do
@@ -59,6 +65,14 @@ while [ $# -gt 0 ]; do
             ;;
         --runner=*)
             RUNNER_FLAG="${1#*=}"
+            shift
+            ;;
+        --model)
+            MODEL_FLAG="${2:?--model requires a model id}"
+            shift 2
+            ;;
+        --model=*)
+            MODEL_FLAG="${1#*=}"
             shift
             ;;
         -h|--help)
@@ -225,19 +239,30 @@ if ! grep -q "^## Acceptance Criteria" "$TASK_FILE"; then
 fi
 
 # ── Runner ─────────────────────────────────────────────────────────────────
-# The evaluator's runner is chosen independently of the task's: --runner wins,
-# then AI_RUNNER (exported by ai-task so a task is graded under the runner it
-# actually ran on), then default_runner. There is deliberately no logic here
-# that adapts the prompt or the model to a cross-runner pairing.
+# The evaluator's runner is chosen independently of the task's:
+#
+#   --runner  →  AI_RUNNER  →  eval_runner  →  default_runner
+#
+# AI_RUNNER is exported by ai-task and names the runner that actually EXECUTED
+# the task; it sits above eval_runner so an explicit caller still wins. ai-task
+# itself passes --runner, so in the automated path this variable is the record
+# of who did the work rather than the choice of who grades it.
+#
+# `eval_runner` is what makes cross-provider verification possible: the value of
+# a second opinion is that its failure modes are independent, and a grader that
+# shares the executor's training shares its blind spots. There is deliberately
+# no logic here that adapts the prompt to a cross-runner pairing — the prompt
+# grades a report against acceptance criteria, which is provider-neutral.
 RUNNER="$RUNNER_FLAG"
 [ -n "$RUNNER" ] || RUNNER="${AI_RUNNER:-}"
+[ -n "$RUNNER" ] || RUNNER="${eval_runner:-}"
 [ -n "$RUNNER" ] || RUNNER="${default_runner:-}"
 
 # A runner that cannot be loaded is a configuration fault, not a failed task,
 # so it exits 3 (inconclusive) rather than 1. Burning retries on every task in
 # the queue because an adapter is missing is the worse failure mode.
 if [ -z "$RUNNER" ]; then
-    echo "ai-eval: no runner (pass --runner, set AI_RUNNER, or set default_runner in config)" >&2
+    echo "ai-eval: no runner (pass --runner, set AI_RUNNER, or set eval_runner / default_runner in config)" >&2
     exit 3
 fi
 if ! load_provider "$RUNNER"; then
@@ -245,13 +270,22 @@ if ! load_provider "$RUNNER"; then
 fi
 
 # ── Model ──────────────────────────────────────────────────────────────────
-# Same resolution as the task's own run: the task's ## Model, then
-# default_model, then whatever the alias table maps empty to (providers
-# genuinely differ on what unset means, so this must not be second-guessed).
-MODEL_RAW=$(model_from_task "$TASK_FILE")
-if [ -z "$MODEL_RAW" ]; then
-    MODEL_RAW="${default_model:-}"
-fi
+#   --model  →  eval_model  →  the task's ## Model  →  default_model
+#
+# eval_model sits ABOVE the task's ## Model on purpose. `## Model` is a
+# statement about what it takes to DO the work; grading is a different and
+# usually smaller job (read the criteria, read the report, weigh the test
+# output), so inheriting the executor's model silently priced every verdict at
+# the cost of the work. The task's value is still honoured when neither the
+# flag nor the config key is set, so nothing changes for a tree that sets
+# neither.
+#
+# Whatever the alias table maps empty to is the last word: providers genuinely
+# differ on what "unset" means and this must not be second-guessed.
+MODEL_RAW="$MODEL_FLAG"
+[ -n "$MODEL_RAW" ] || MODEL_RAW="${eval_model:-}"
+[ -n "$MODEL_RAW" ] || MODEL_RAW=$(model_from_task "$TASK_FILE")
+[ -n "$MODEL_RAW" ] || MODEL_RAW="${default_model:-}"
 MODEL_ID=$(ai_model_alias "$MODEL_RAW")
 
 PROMPT_TMP=$(mktemp)

@@ -305,13 +305,22 @@ ${BRIEF_ARCHIVE}
 {Numbered concrete instructions. Exact strings to find/replace when relevant.}
 
 ## Acceptance Criteria
-{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Always end with a negative check confirming the old thing is gone.}
+{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Scope every check to what THIS task creates or changes, following the ACCEPTANCE CRITERIA rules below. Always end with a negative check confirming the old thing is gone.}
 ===TASK_FILE_END===
 
 Replace SLUG with a short lowercase description specific to that task (not the whole brief).
 Use ${TODAY} as the date prefix for all filenames.
 
 TARGET RUNNER: every task in this batch will be executed by the runner named '${STAMP_RUNNER}'. Write for that runner: assume only the tools and conventions it actually has. Do NOT write a ## Runner section yourself. ai-brief stamps ## Runner ${STAMP_RUNNER} on every emitted file, and a hand-written one is discarded.
+
+ACCEPTANCE CRITERIA — only write checks that a correct implementation can actually pass:
+- SCOPE EVERY CHECK TO WHAT THIS TASK CREATES OR CHANGES. Assert against a provenance marker the task itself writes: a comment or tag column, a filename pattern, a config key, a specific commit. Never assert on the state of a whole table, a whole directory, or a whole codebase that existed before this task.
+- NEVER write an absolute total that is a baseline you measured during exploration plus a delta you predicted. 'TOTAL == 439 + 143' breaks two ways: the baseline moves if anything else touches the data before the task runs, and the 143 is a guess that exploration cannot fully verify — a case-insensitive collation folding two labels into one row, a value that turns out to already exist, a dedupe or upsert rule. Write '142 rows carrying marker M exist' instead: the task creates those rows, so the task can guarantee them.
+- NEVER assert a global invariant the task does not own. 'No duplicate X anywhere' fails on pre-existing duplicates the task did not create, and the only way to make it pass is to mutate data the task was never asked to touch. Scope it: 'no duplicate X among the rows this task created'.
+- Express idempotency as 'a second run creates nothing new' (a created-count of 0, or an unchanged marker-scoped count), never by restating absolute totals.
+- Prefer a check on the RELATIONSHIP the task is responsible for over a check on a magnitude: a sum that matches the source document, every created row resolving to a valid parent, a generated file parsing cleanly, the old code path being gone.
+- If a figure genuinely matters and you cannot verify it now, put it in ## Context as a number to confirm at run time and make the criterion the comparison the task can actually perform.
+- Final test: if satisfying a criterion would require changing data, files, or schema the task was not asked to touch, the criterion is wrong. Rewrite it.
 
 DEPENDENCIES (optional extra section, never in the first task):
 - At least one task MUST have no ## Depends-on section. That is the task that can run first. A batch in which every task depends on another is rejected whole and nothing reaches the review queue.
