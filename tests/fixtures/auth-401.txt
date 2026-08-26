@@ -1,0 +1,2 @@
+API Error: 401 {"type":"error","error":{"type":"authentication_error","message":"Invalid authentication credentials"}}
+Unauthorized: HTTP 401 returned while starting the session

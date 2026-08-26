@@ -1,0 +1,18 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": false,
+  "num_turns": 12,
+  "session_id": "11111111-2222-3333-4444-555555555555",
+  "result": "Fixture result text for the first provider.\nSecond line, to prove multi-line text survives extraction.",
+  "total_cost_usd": 0.4231,
+  "modelUsage": {
+    "model-tier-a": {
+      "inputTokens": 1840,
+      "outputTokens": 920,
+      "cacheReadInputTokens": 74210,
+      "cacheCreationInputTokens": 3120,
+      "costUSD": 0.4231
+    }
+  }
+}

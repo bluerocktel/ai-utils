@@ -1,0 +1,96 @@
+# Copy to "config" and edit. Sourced as shell key=value by every ai-* script.
+
+# Runner used when a task has no ## Runner section (or an empty one).
+# Must match a provider file name: providers/<runner>.sh
+# Most existing task files carry no ## Runner section, so this is the value
+# nearly every task actually runs under. There is no "any runner" value.
+default_runner=claude
+
+# Max evaluation failures before a task moves to review/ (default 3).
+max_retries=3
+
+# Minutes the launcher pauses after an auth failure before retrying (default 30).
+# The cooldown marker is per runner (.auth-cooldown-<runner>): a 401 on one
+# provider never pauses another provider's queue.
+auth_cooldown_min=30
+
+# Hard wall-clock cap (minutes) on the main headless run per task (default 45).
+task_timeout_min=45
+
+# How long (minutes) a task waits for its per-## Project lock (default 60).
+# The lock is shared across runners: two agents must never be inside the same
+# repo at once.
+project_lock_wait_min=60
+
+# Per-command timeout (minutes) for ## Test Command runs in ai-eval (default 20).
+test_timeout_min=20
+
+# Hard wall-clock cap (minutes) on ai-brief decomposition (default 45).
+brief_timeout_min=45
+
+# Optional default model when a task has no ## Model section.
+# Empty = let the runner's provider decide (see ai_model_alias in
+# providers/CONTRACT.md; providers differ on what "unset" means).
+# default_model=opus
+
+# Optional hard wall-clock cap (minutes) on the evaluator's own agent call.
+# Unset, the evaluator inherits task_timeout_min (then a built-in 45), because
+# its call is the same kind of headless run as the task's. Set this only to
+# make grading time out sooner than the work it grades.
+# eval_timeout_min=15
+
+# ── ai-scheduled (the push side: recurring jobs in scheduled/) ──────────────
+
+# Master switch for the recurring-job engine. 0 disables every job without
+# touching cron or the job files themselves (default 1).
+scheduled_enabled=1
+
+# Hard wall-clock cap (minutes) on one agentic scheduled run, monitor or
+# planner (default 30). The template kind makes no agent call and ignores this.
+scheduled_timeout_min=30
+
+# Cap on how many suggestion stubs one planner run may write (default 5).
+# A run that hits the cap logs what it dropped: a silent truncation would read
+# as the planner's complete opinion.
+plan_ahead_max=5
+
+# How many lines of a routine's own memory ledger
+# (scheduled/.state/<slug>.memory.md) are fed back into its prompt, and the
+# length the ledger is trimmed to after each conclusive run (default 40).
+# BOUNDED on purpose: an unbounded ledger grows the prompt without limit until
+# the routine can no longer see its own recent history. Only an agent routine
+# (a job file carrying ## Agent) has a memory at all; a plain job ignores this.
+agent_memory_lines=40
+
+# Where the agent-layer DEFINITIONS live: agents/<agent>/AGENT.md and
+# agents/<agent>/routines/<slug>.md. Unset means this repository's own agents/,
+# which is what a fresh clone gets. Point it at a separate git repository when
+# the charters and routines are private and this repository is not.
+# Only the two read-only viewers read this key (ai-agent, dtask): the engine
+# runs the PUBLISHED copy in scheduled/, so it is never consulted during a run.
+# Set but not a directory is a warning on stderr and an empty listing, never a
+# silent fallback to the bundled agents/.
+# agents_root=$HOME/ai-agents
+
+# Root of the notes tree a monitor writes its dated reports into
+# (<brain_root>/personal/journal/). Default $HOME/Brain.
+brain_root=$HOME/Brain
+
+# ── Cross-provider verification (who grades the work) ───────────────────────
+
+# Runner that grades a finished task. Unset means the task is graded by the
+# runner that executed it, which is the old behaviour.
+#
+# Setting this to a DIFFERENT provider than default_runner is the point: a
+# grader that shares the executor's training shares its blind spots, so the
+# verdict is worth more when the two fail differently. An auth failure on this
+# runner pauses THIS runner (never the executor's queue) and the task is
+# requeued with ## Awaiting-Eval so the finished work is graded later rather
+# than executed again.
+# eval_runner=claude
+
+# Model the grader uses. Sits ABOVE the task's own ## Model, because ## Model
+# says what it takes to DO the work and grading is a smaller job: read the
+# criteria, read the report, weigh the ## Test Command output. Unset, the
+# grader falls back to the task's ## Model, then default_model.
+# eval_model=sonnet

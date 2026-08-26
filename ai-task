@@ -1,0 +1,804 @@
+#!/bin/bash
+# ai-task: run one queued task autonomously in a detached tmux session.
+#
+# Usage:
+#   ai-task [--runner NAME] [task.md]   Launch a task. With no file argument,
+#                                       picks the oldest inbox task that is
+#                                       unblocked AND belongs to this runner.
+#   ai-task [--runner NAME] --dry-run   Show what the picker would claim and
+#                                       exit. Claims nothing, launches nothing.
+#   ai-task --run FILE [--runner NAME]  Internal mode used by tmux. Do not call
+#                                       directly.
+#
+# Pipeline root: $TASKS_DIR (default ~/tasks). ONE tree serves every runner:
+# the runner is a field on the task, not a separate directory tree.
+#
+# This file is PROVIDER-NEUTRAL by contract. It must never name a vendor, a
+# vendor CLI, a vendor model id, a vendor CLI flag or a vendor JSON field.
+# Everything that differs between runners goes through the six functions in
+# providers/CONTRACT.md, loaded by load_provider.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+usage() {
+    sed -n '3,12p' "$(realpath "$0")" | sed 's/^# \{0,1\}//'
+}
+
+# ── Argument parsing ───────────────────────────────────────────────────────
+# --runner may appear before or after --run / the task file, so both the
+# launcher and the tmux child can be invoked with the same flag order.
+MODE=launch
+RUNNER_FLAG=""
+TASK_ARG=""
+DRY_RUN=0
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --run)
+            MODE=run
+            TASK_ARG="${2:?--run requires a task file}"
+            shift 2
+            ;;
+        --runner)
+            RUNNER_FLAG="${2:?--runner requires a runner name}"
+            shift 2
+            ;;
+        --runner=*)
+            RUNNER_FLAG="${1#*=}"
+            shift
+            ;;
+        --dry-run)
+            DRY_RUN=1
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --*)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 1
+            ;;
+        *)
+            if [ -n "$TASK_ARG" ]; then
+                echo "Unexpected extra argument: $1" >&2
+                exit 1
+            fi
+            TASK_ARG="$1"
+            shift
+            ;;
+    esac
+done
+
+# ── Config ─────────────────────────────────────────────────────────────────
+MAX_RETRIES=3
+TASK_TIMEOUT_MIN=45
+PROJECT_LOCK_WAIT_MIN=60
+AUTH_COOLDOWN_MIN=30
+# The inbox lock is held for milliseconds (select + move), so a long wait here
+# would only ever mean "another launcher is wedged". Seconds, not minutes.
+INBOX_LOCK_WAIT_SEC=30
+
+load_config
+MAX_RETRIES=${max_retries:-$MAX_RETRIES}
+TASK_TIMEOUT_MIN=${task_timeout_min:-$TASK_TIMEOUT_MIN}
+PROJECT_LOCK_WAIT_MIN=${project_lock_wait_min:-$PROJECT_LOCK_WAIT_MIN}
+AUTH_COOLDOWN_MIN=${auth_cooldown_min:-$AUTH_COOLDOWN_MIN}
+
+# ── Shared helpers ─────────────────────────────────────────────────────────
+
+# Runner for one task: an explicit --runner flag wins, otherwise the task's own
+# ## Runner section, which itself falls back to default_runner from config.
+# An unset ## Runner never means "any runner".
+resolve_runner() {
+    local task_file="${1:-}" r=""
+    if [ -n "$RUNNER_FLAG" ]; then
+        r="$RUNNER_FLAG"
+    elif [ -n "$task_file" ] && [ -r "$task_file" ]; then
+        r=$(runner_from_task "$task_file") || r=""
+    else
+        r="${default_runner:-}"
+    fi
+    r=$(printf '%s' "$r" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+    [ -n "$r" ] || return 1
+    printf '%s\n' "$r"
+}
+
+# tmux session name. The runner is part of the name so two runners working the
+# same tree can never collide on a session, and so `tmux ls` says who is who.
+session_name() {
+    local runner="$1" task_name="$2"
+    printf '%s' "ai-${runner}-${task_name}" \
+        | tr -c 'A-Za-z0-9_-' '-' \
+        | cut -c1-50
+}
+
+# Sidecar state file for a claimed task. Additive (never a .md file, so no
+# pipeline glob picks it up) and removed when the run ends. It exists so that
+# `run/` shows WHICH runner owns an in-flight task now that one tree serves
+# several of them.
+run_state_path() {
+    printf '%s\n' "$RUN_DIR/${1}.state"
+}
+
+write_run_state() {
+    local task_name="$1" runner="$2" session="$3"
+    {
+        echo "task=${task_name}"
+        echo "runner=${runner}"
+        echo "session=${session}"
+        echo "started=$(date '+%Y-%m-%d %H:%M:%S')"
+    } > "$(run_state_path "$task_name")" 2>/dev/null || true
+}
+
+dep_satisfied() {
+    local dep
+    dep=$(depends_on_from_task "$1")
+    [ -z "$dep" ] && return 0
+    dep="${dep%.md}"
+    find "$DONE_DIR" -maxdepth 1 -type f -name "*_${dep}.task.md" 2>/dev/null | grep -q .
+}
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Internal execution mode
+# ═══════════════════════════════════════════════════════════════════════════
+if [ "$MODE" = "run" ]; then
+    TASK_FILE="$TASK_ARG"
+    if [ ! -f "$TASK_FILE" ]; then
+        echo "Task file not found: $TASK_FILE" >&2
+        exit 1
+    fi
+    TASK_NAME=$(basename "$TASK_FILE" .md)
+    TIMESTAMP=$(date '+%Y-%m-%d_%H-%M')
+    RESULT_FILE="$DONE_DIR/${TIMESTAMP}_${TASK_NAME}.md"
+
+    if ! RUNNER=$(resolve_runner "$TASK_FILE"); then
+        echo "No runner: task has no ## Runner section and config sets no default_runner." >&2
+        exit 1
+    fi
+    # A half-defined or unknown adapter is fatal here, deliberately: falling
+    # back to some default would hand the task to the wrong provider, and that
+    # is the one mistake that cannot be undone afterwards.
+    load_provider "$RUNNER" || exit 1
+
+    COOLDOWN_FILE=$(cooldown_path "$RUNNER")
+    STATE_FILE=$(run_state_path "$TASK_NAME")
+
+    mkdir -p "$DONE_DIR" "$REVIEW_DIR" "$INBOX" "$RUN_DIR" "$LOCK_DIR"
+
+    # Whatever happens below (success, requeue, review, crash), the in-flight
+    # marker must not outlive the run.
+    trap 'rm -f "$STATE_FILE"' EXIT
+    write_run_state "$TASK_NAME" "$RUNNER" "$(session_name "$RUNNER" "$TASK_NAME")"
+
+    PROJECT=$(project_from_task "$TASK_FILE")
+
+    # ── Per-project exclusive lock ──────────────────────────────────────────
+    # SHARED ACROSS RUNNERS on purpose: the lock file is derived from TASKS_DIR,
+    # not from the runner, so two agents can never be inside the same repo at
+    # once regardless of which provider each is using. A wait timeout is
+    # DEFERRED, not a failure: no work happened, so no retry is burned.
+    if [ -n "$PROJECT" ]; then
+        exec 9>"$LOCK_DIR/${PROJECT}.lock"
+        if ! flock -w "$((PROJECT_LOCK_WAIT_MIN * 60))" 9; then
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** DEFERRED (project '$PROJECT' busy — lock wait timed out, not counted as retry)"
+                echo ""
+            } >> "$LOG"
+            mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+            exit 0
+        fi
+    fi
+
+    {
+        echo "# $TASK_NAME"
+        echo ""
+        echo "**Runner:** $RUNNER"
+        echo "**Started:** $(date '+%Y-%m-%d %H:%M')"
+        echo ""
+        echo "---"
+        echo ""
+    } > "$RESULT_FILE"
+
+    # ── Prompt ──────────────────────────────────────────────────────────────
+    # Vendor-neutral by contract. Anything naming a provider feature is
+    # appended by ai_preamble_extra.
+    PREAMBLE="AUTONOMOUS MODE: You have no user to interact with. Never ask questions, never present options (A/B/C), never wait for confirmation. Make the most reasonable decision and implement immediately. There is no event loop in this headless run: never wait on a monitored event, a scheduled wakeup, a task notification, or any asynchronous callback — those never fire here and the run will simply be killed. If a step needs test results or command output, run it SYNCHRONOUSLY, block on it, and read its output before continuing; if something genuinely cannot complete in one pass, finish now and record what remains in the ## Summary instead of parking to wait. Document choices in a ## Summary at the end. After the ## Summary, add a ## Suggested Commit Message section with a ready-to-use git commit message (subject + optional body) describing all changes. Do not run git commit yourself unless the task file explicitly requires it. CRITICAL: Never use git checkout, git restore, or git reset to undo a previous attempt's changes. Any untracked files or unstaged modifications in the working tree may be legitimate work from other concurrent tasks — do not delete or revert them. If you need to undo your own changes from a previous attempt, edit only the exact lines you added."
+
+    WORKDIR=""
+    if [ -n "$PROJECT" ] && [ -f "$PROJECTS_DIR/${PROJECT}.md" ]; then
+        PREAMBLE="$PREAMBLE
+
+PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_DIR/${PROJECT}.md and follow its Working Directory, stack notes, and conventions. Task type (code vs writing) is defined there."
+        if WD=$(project_working_dir "$PROJECT"); then
+            if [ -d "$WD" ]; then
+                WORKDIR="$WD"
+            fi
+        fi
+    fi
+
+    EXTRA=$(ai_preamble_extra "$TASK_FILE" || true)
+    if [ -n "$EXTRA" ]; then
+        PREAMBLE="$PREAMBLE
+
+$EXTRA"
+    fi
+
+    # ── Model ───────────────────────────────────────────────────────────────
+    # The alias table is per provider; an empty result means "provider default"
+    # and the caller must not second-guess it (providers genuinely differ on
+    # what unset means).
+    MODEL_RAW=$(model_from_task "$TASK_FILE")
+    if [ -z "$MODEL_RAW" ]; then
+        MODEL_RAW="${default_model:-}"
+    fi
+    MODEL_ID=$(ai_model_alias "$MODEL_RAW")
+
+    JSON_TMP=$(mktemp)
+    ERR_TMP=$(mktemp)
+    USAGE_TMP=$(mktemp)
+    BODY_TMP=$(mktemp)
+
+    # The provider owns the timeout wrapper and returns the CLI status verbatim,
+    # including 124 for a timeout. stdout and stderr land in two SEPARATE files;
+    # merging them would corrupt the JSON and silently blank the report.
+    set +e
+    ai_run "${PREAMBLE}
+
+$(cat "$TASK_FILE")" \
+        "$MODEL_ID" \
+        "$WORKDIR" \
+        "$((TASK_TIMEOUT_MIN * 60))" \
+        "$JSON_TMP" \
+        "$ERR_TMP"
+    STATUS=$?
+    set -e
+
+    # ── Auth-failure circuit breaker ────────────────────────────────────────
+    # An auth failure means NO WORK HAPPENED: requeue without burning a retry
+    # and pause only THIS runner's queue (the marker is per runner).
+    if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP"; then
+        {
+            echo "Deferred: authentication failure (no work performed, retry not counted)."
+            ai_json_text "$JSON_TMP"
+            echo ""
+            echo "---"
+            echo ""
+            echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox pending re-authentication."
+        } >> "$RESULT_FILE"
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Status:** DEFERRED (auth failure — not counted as retry)"
+            echo "**Result:** \`$RESULT_FILE\`"
+            echo ""
+        } >> "$LOG"
+        touch "$COOLDOWN_FILE"
+        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+        notify -u critical "ai-task [$RUNNER]: Auth Failure" \
+            "$TASK_NAME deferred — re-authenticate this runner. Its queue is paused for the cooldown."
+        exit 0
+    fi
+
+    rm -f "$COOLDOWN_FILE"
+
+    # ── Killed / interrupted run (no parseable result text) ─────────────────
+    # DEFERRED, not FAIL: an interrupted run proves nothing about the task.
+    if [ "$STATUS" -ne 0 ] && [ -z "$(ai_json_text "$JSON_TMP")" ]; then
+        if [ "$STATUS" -eq 124 ]; then
+            INTERRUPT_REASON="timed out after ${TASK_TIMEOUT_MIN}m"
+        else
+            INTERRUPT_REASON="interrupted (exit code $STATUS)"
+        fi
+        {
+            echo "Deferred: run $INTERRUPT_REASON, no output — retry not counted."
+            echo ""
+            if [ -s "$ERR_TMP" ]; then
+                echo "_stderr:_"
+                echo '```'
+                cat "$ERR_TMP"
+                echo '```'
+                echo ""
+            fi
+            echo "---"
+            echo ""
+            echo "**Deferred:** $(date '+%Y-%m-%d %H:%M') — requeued to inbox (killed/interrupted run)."
+        } >> "$RESULT_FILE"
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Status:** DEFERRED (run $INTERRUPT_REASON — not counted as retry)"
+            echo "**Result:** \`$RESULT_FILE\`"
+            echo ""
+        } >> "$LOG"
+        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+        notify -u critical "ai-task [$RUNNER]: Task Interrupted" \
+            "$TASK_NAME $INTERRUPT_REASON — requeued, no retry burned."
+        exit 0
+    fi
+
+    RESULT_TEXT=$(ai_json_text "$JSON_TMP")
+    if [ -z "$RESULT_TEXT" ] && { [ -s "$JSON_TMP" ] || [ -s "$ERR_TMP" ]; }; then
+        {
+            echo "> [ai-task] WARNING: could not parse the runner's JSON output (no response text)."
+            echo "> Raw stdout and stderr captures follow."
+            echo ""
+            echo "_stdout:_"
+            echo '```'
+            cat "$JSON_TMP"
+            echo '```'
+            echo ""
+            echo "_stderr:_"
+            echo '```'
+            cat "$ERR_TMP"
+            echo '```'
+        } > "$BODY_TMP"
+    else
+        printf '%s\n' "$RESULT_TEXT" > "$BODY_TMP"
+    fi
+
+    # Cost reporting never fails a task, so the table is written unconditionally.
+    ai_usage_table "$JSON_TMP" "$USAGE_TMP" || true
+
+    if grep -q "^## Suggested Commit Message" "$BODY_TMP" 2>/dev/null; then
+        awk -v tf="$USAGE_TMP" '
+            /^## Suggested Commit Message/ {
+                while ((getline line < tf) > 0) print line
+                close(tf)
+                print ""
+            }
+            { print }
+        ' "$BODY_TMP" >> "$RESULT_FILE"
+    else
+        cat "$BODY_TMP" >> "$RESULT_FILE"
+        echo "" >> "$RESULT_FILE"
+        cat "$USAGE_TMP" >> "$RESULT_FILE"
+    fi
+
+    rm -f "$JSON_TMP" "$ERR_TMP" "$USAGE_TMP" "$BODY_TMP"
+
+    {
+        echo ""
+        echo "---"
+        echo ""
+        echo "**Finished:** $(date '+%Y-%m-%d %H:%M')"
+    } >> "$RESULT_FILE"
+
+    # ── Evaluation ──────────────────────────────────────────────────────────
+    # Exit codes: 0 pass, 1 fail, 2 nothing to grade, 3 evaluator auth failure,
+    # 4 test command timed out. AI_RUNNER is exported so the evaluator grades
+    # with the same runner this task actually ran under, even when --runner
+    # overrode the task's own section.
+    EVAL_BIN="$HOME/bin/ai-eval"
+    if [ ! -x "$EVAL_BIN" ]; then
+        EVAL_BIN="$SCRIPT_DIR/ai-eval"
+    fi
+    EVAL_OUTPUT=$(mktemp)
+
+    if [ ! -x "$EVAL_BIN" ]; then
+        # No evaluator installed yet: nothing to grade, so the run stands.
+        echo "_No evaluator available ($EVAL_BIN); result not graded._" >> "$RESULT_FILE"
+        EVAL_STATUS=2
+    else
+        set +e
+        AI_RUNNER="$RUNNER" "$EVAL_BIN" "$TASK_FILE" "$RESULT_FILE" "$EVAL_OUTPUT"
+        EVAL_STATUS=$?
+        set -e
+    fi
+
+    if [ "$EVAL_STATUS" -eq 3 ]; then
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Status:** DEFERRED (evaluator auth failure — not counted as retry)"
+            echo "**Result:** \`$RESULT_FILE\`"
+            echo ""
+        } >> "$LOG"
+        touch "$COOLDOWN_FILE"
+        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        rm -f "$EVAL_OUTPUT"
+        notify -u critical "ai-task [$RUNNER]: Auth Failure" \
+            "$TASK_NAME ran but could not be evaluated (auth). Deferred for re-check."
+        exit 0
+    fi
+
+    if [ "$EVAL_STATUS" -eq 4 ]; then
+        {
+            printf "\n---\n\n## Evaluator (inconclusive)\n\n"
+            cat "$EVAL_OUTPUT"
+        } >> "$RESULT_FILE"
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Status:** DEFERRED (test command timed out — not counted as retry)"
+            echo "**Result:** \`$RESULT_FILE\`"
+            echo ""
+        } >> "$LOG"
+        mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+        rm -f "$EVAL_OUTPUT"
+        notify "ai-task [$RUNNER]: Eval Timed Out" \
+            "$TASK_NAME verification timed out — requeued, no retry burned."
+        exit 0
+    fi
+
+    # Exit 2 = no acceptance criteria and no tests: nothing to grade, so pass.
+    if [ "$EVAL_STATUS" -eq 2 ]; then
+        EVAL_STATUS=0
+    fi
+
+    if [ "$EVAL_STATUS" -eq 1 ]; then
+        RETRIES=$(retries_from_task "$TASK_FILE")
+        RETRIES=${RETRIES:-0}
+
+        if [ "$RETRIES" -lt "$MAX_RETRIES" ]; then
+            NEW_RETRIES=$((RETRIES + 1))
+
+            {
+                printf "\n## Evaluator Feedback (Attempt %s)\n\n" "$NEW_RETRIES"
+                cat "$EVAL_OUTPUT"
+                printf "\n"
+            } >> "$TASK_FILE"
+
+            if grep -q "^## Retries" "$TASK_FILE"; then
+                awk -v n="$NEW_RETRIES" \
+                    '/^## Retries/{print; getline; print n; next} {print}' \
+                    "$TASK_FILE" > "${TASK_FILE}.tmp" && mv "${TASK_FILE}.tmp" "$TASK_FILE"
+            else
+                printf "\n## Retries\n%s\n" "$NEW_RETRIES" >> "$TASK_FILE"
+            fi
+
+            # Strategy pass from the second failure on: the same approach has
+            # now failed twice, so ask for a different one before requeueing.
+            if [ "$NEW_RETRIES" -ge 2 ]; then
+                STRATEGY_JSON=$(mktemp)
+                STRATEGY_ERR=$(mktemp)
+                set +e
+                ai_run "STRATEGY MODE: This task has failed evaluation $NEW_RETRIES times. Diagnose the recurring failure pattern and suggest a concrete alternative approach for the next attempt.
+
+Rules:
+- Read the original task instructions and all ## Evaluator Feedback sections carefully.
+- Identify what keeps going wrong: wrong approach, misread requirement, missing step, environment issue?
+- Suggest a specific, different strategy. Name files, methods, commands, or patterns to try instead.
+- Be concrete and actionable. Under 10 lines. No praise, no preamble, no closing remark.
+- Output only raw Markdown starting with exactly: ## Retry Strategy (Attempt $NEW_RETRIES)
+
+---
+$(cat "$TASK_FILE")" \
+                    "$MODEL_ID" \
+                    "" \
+                    "$((TASK_TIMEOUT_MIN * 60))" \
+                    "$STRATEGY_JSON" \
+                    "$STRATEGY_ERR"
+                set -e
+                STRATEGY_TEXT=$(ai_json_text "$STRATEGY_JSON")
+                rm -f "$STRATEGY_JSON" "$STRATEGY_ERR"
+                if [ -n "$STRATEGY_TEXT" ]; then
+                    printf '\n%s\n' "$STRATEGY_TEXT" >> "$TASK_FILE"
+                fi
+            fi
+
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** requeued (retry $NEW_RETRIES/$MAX_RETRIES)"
+                echo "**Result:** \`$RESULT_FILE\`"
+                echo ""
+            } >> "$LOG"
+
+            mv "$TASK_FILE" "$INBOX/${TASK_NAME}.md"
+            rm -f "$EVAL_OUTPUT"
+            notify "ai-task [$RUNNER]: Task Requeued" \
+                "$TASK_NAME failed evaluation (retry $NEW_RETRIES/$MAX_RETRIES). Requeued."
+            exit 0
+        else
+            {
+                printf "\n---\n\n## Evaluator Feedback (Final Attempt)\n\n"
+                cat "$EVAL_OUTPUT"
+            } >> "$RESULT_FILE"
+
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** NEEDS REVIEW (failed after $MAX_RETRIES retries)"
+                echo "**Result:** \`$RESULT_FILE\`"
+                echo ""
+            } >> "$LOG"
+
+            mv "$TASK_FILE" "$REVIEW_DIR/${TASK_NAME}.md"
+            rm -f "$EVAL_OUTPUT"
+            notify -u critical "ai-task [$RUNNER]: Needs Review" \
+                "$TASK_NAME failed evaluation after $MAX_RETRIES retries."
+            exit 1
+        fi
+    fi
+
+    rm -f "$EVAL_OUTPUT"
+
+    {
+        echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+        echo ""
+        echo "**Runner:** $RUNNER"
+        if [ "$STATUS" -eq 0 ]; then
+            echo "**Status:** completed"
+        else
+            echo "**Status:** completed with agent exit $STATUS (eval PASS)"
+        fi
+        echo "**Result:** \`$RESULT_FILE\`"
+        echo ""
+    } >> "$LOG"
+
+    mv "$TASK_FILE" "$DONE_DIR/${TIMESTAMP}_${TASK_NAME}.task.md"
+    notify "ai-task [$RUNNER]: Task Done" "$TASK_NAME completed successfully."
+    exit 0
+fi
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Launcher mode
+# ═══════════════════════════════════════════════════════════════════════════
+mkdir -p "$INBOX" "$RUN_DIR" "$DONE_DIR" "$REVIEW_DIR" "$LOCK_DIR"
+
+# The runner this invocation acts AS: the --runner flag, else default_runner.
+# It decides which inbox tasks are even visible to this invocation and which
+# cooldown marker gates it.
+if ! INVOCATION_RUNNER=$(resolve_runner ""); then
+    echo "No runner: pass --runner NAME or set default_runner in $SCRIPT_DIR/config" >&2
+    exit 1
+fi
+
+# Validate the adapter before anything is claimed, in a subshell so the
+# launcher's own shell stays clean. A typo in --runner would otherwise just
+# match no task and report an empty queue, or — for a task that literally names
+# the bad runner — claim the file and strand it in run/ when the child died.
+if ! ( load_provider "$INVOCATION_RUNNER" >/dev/null ); then
+    exit 1
+fi
+
+# ── Auth cooldown guard (per runner) ───────────────────────────────────────
+# A recent auth failure pauses only THIS runner's unattended queue; another
+# runner sharing the tree keeps working. An explicit task argument bypasses the
+# guard so the user can kick a task manually right after re-authenticating.
+COOLDOWN_FILE=$(cooldown_path "$INVOCATION_RUNNER")
+if [ -z "$TASK_ARG" ] && [ -f "$COOLDOWN_FILE" ] \
+    && find "$COOLDOWN_FILE" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+    echo "Auth cooldown active for runner '$INVOCATION_RUNNER' (last failure < ${AUTH_COOLDOWN_MIN}m ago). Skipping."
+    echo "Re-authenticate, then run a task manually or: rm $COOLDOWN_FILE"
+    exit 0
+fi
+
+# ── Eligibility ────────────────────────────────────────────────────────────
+# NEW: the picker only sees tasks belonging to this runner. One tree now serves
+# several runners, so a task whose resolved runner (## Runner, else
+# default_runner) is not this invocation's runner must be left for the
+# invocation that owns it — never picked up and never silently retargeted.
+runner_matches() {
+    local r
+    r=$(runner_from_task "$1") || return 1
+    [ "$r" = "$INVOCATION_RUNNER" ]
+}
+
+# Oldest first, mtime order, whitespace-safe.
+inbox_by_age() {
+    find "$INBOX" -maxdepth 1 -type f -name '*.md' -printf '%T@ %p\n' 2>/dev/null \
+        | sort -n \
+        | cut -d' ' -f2-
+}
+
+select_candidate() {
+    local f
+    while IFS= read -r f; do
+        [ -n "$f" ] && [ -f "$f" ] || continue
+        dep_satisfied "$f" || continue
+        runner_matches "$f" || continue
+        # An existing session for this name means a previous attempt is still
+        # in flight; leave the file alone rather than run it twice.
+        tmux has-session -t "$(session_name "$INVOCATION_RUNNER" "$(basename "$f" .md)")" 2>/dev/null && continue
+        printf '%s\n' "$f"
+        return 0
+    done < <(inbox_by_age)
+    return 1
+}
+
+# ── Dry run: selection only, claims nothing ────────────────────────────────
+if [ "$DRY_RUN" -eq 1 ]; then
+    if [ -n "$TASK_ARG" ]; then
+        echo "--dry-run does not take a task file argument" >&2
+        exit 1
+    fi
+    if PICK=$(select_candidate); then
+        echo "runner: $INVOCATION_RUNNER"
+        echo "would claim: $PICK"
+        exit 0
+    fi
+    echo "runner: $INVOCATION_RUNNER"
+    echo "would claim: (nothing eligible)"
+    exit 1
+fi
+
+# ── Atomic claim ───────────────────────────────────────────────────────────
+# NEW: select-and-move happens under an exclusive lock on
+# $TASKS_DIR/.locks/inbox.lock, so two invocations (two runners on different
+# cron intervals, or two hand-runs) can never both walk away with the same
+# file. Without it, both could select the same path and both `mv` it, and the
+# loser's mv would fail or, worse, succeed after the winner had already started.
+#
+# The lock covers ONLY select + move + state marker: it is held for
+# milliseconds and is released when this subshell exits, well before the agent
+# call below. It must never wrap the run itself, or it would serialise all work
+# across the whole queue.
+claim() {
+    local f dest task_name session
+    if [ -n "$TASK_ARG" ]; then
+        f="$TASK_ARG"
+        [ -f "$f" ] || { echo "Task file not found: $f" >&2; return 4; }
+        if ! dep_satisfied "$f"; then
+            return 5
+        fi
+        # An explicitly named file is run as asked: the runner filter is a
+        # queue-picking rule, not a permission check.
+        task_name=$(basename "$f" .md)
+        local file_runner
+        file_runner=$(resolve_runner "$f") || return 6
+        ( load_provider "$file_runner" >/dev/null ) || return 10
+        session=$(session_name "$file_runner" "$task_name")
+        if tmux has-session -t "$session" 2>/dev/null; then
+            echo "Session '$session' already running. Attach: tmux attach -t $session" >&2
+            return 7
+        fi
+        if [ "$(dirname "$(realpath "$f")")" != "$(realpath "$RUN_DIR")" ]; then
+            dest="$RUN_DIR/$(basename "$f")"
+            mv "$f" "$dest" || return 8
+        else
+            dest="$f"
+        fi
+        write_run_state "$task_name" "$file_runner" "$session"
+        printf '%s\n%s\n' "$dest" "$file_runner"
+        return 0
+    fi
+
+    f=$(select_candidate) || return 1
+    task_name=$(basename "$f" .md)
+    dest="$RUN_DIR/$(basename "$f")"
+    [ -e "$dest" ] && return 9
+    mv "$f" "$dest" || return 8
+    session=$(session_name "$INVOCATION_RUNNER" "$task_name")
+    write_run_state "$task_name" "$INVOCATION_RUNNER" "$session"
+    printf '%s\n%s\n' "$dest" "$INVOCATION_RUNNER"
+    return 0
+}
+
+CLAIM_OUT=$(mktemp)
+set +e
+(
+    exec 8>"$LOCK_DIR/inbox.lock"
+    flock -w "$INBOX_LOCK_WAIT_SEC" 8 || exit 3
+    claim
+)> "$CLAIM_OUT"
+CLAIM_STATUS=$?
+set -e
+# Lock released above: everything from here on runs unlocked.
+
+TASK_FILE=$(sed -n '1p' "$CLAIM_OUT")
+EFFECTIVE_RUNNER=$(sed -n '2p' "$CLAIM_OUT")
+rm -f "$CLAIM_OUT"
+
+case "$CLAIM_STATUS" in
+    0) : ;;
+    3)
+        echo "Another launcher is holding the inbox lock (waited ${INBOX_LOCK_WAIT_SEC}s). Skipping."
+        exit 0
+        ;;
+    5)
+        DEP=$(depends_on_from_task "$TASK_ARG")
+        echo "Task blocked: depends on '${DEP%.md}' which is not yet in done/."
+        exit 1
+        ;;
+    6)
+        echo "No runner for '$TASK_ARG': no ## Runner section and no default_runner in config." >&2
+        exit 1
+        ;;
+    4|7|8|9|10)
+        exit 1
+        ;;
+    *)
+        # Nothing eligible for this runner: explain why, from outside the lock.
+        if find "$INBOX" -maxdepth 1 -type f -name '*.md' 2>/dev/null | grep -q .; then
+            BLOCKED_COUNT=$(find "$INBOX" -maxdepth 1 -type f -name '*.md' 2>/dev/null | wc -l)
+            DEAD=""
+            MISSING=""
+            WAITING=""
+            OTHER_RUNNER=""
+            while IFS= read -r f; do
+                [ -n "$f" ] && [ -f "$f" ] || continue
+                if ! runner_matches "$f"; then
+                    OTHER_RUNNER="${OTHER_RUNNER}
+  - $(basename "$f" .md) → runner '$(runner_from_task "$f" || echo unresolved)'"
+                    continue
+                fi
+                d=$(depends_on_from_task "$f")
+                d="${d%.md}"
+                [ -z "$d" ] && continue
+                loc=$(locate_dep_slug "$d")
+                case "$loc" in
+                    review)
+                        DEAD="${DEAD}
+  - $(basename "$f" .md) → dep '${d}' is in review/ (failed)"
+                        ;;
+                    missing)
+                        MISSING="${MISSING}
+  - $(basename "$f" .md) → dep '${d}' is not in inbox/, run/, done/, or review/"
+                        ;;
+                    inbox|run|backlog)
+                        WAITING="${WAITING}
+  - $(basename "$f" .md) → dep '${d}' ($loc)"
+                        ;;
+                esac
+            done < <(inbox_by_age)
+            echo "Nothing runnable for runner '$INVOCATION_RUNNER' among $BLOCKED_COUNT task(s) in $INBOX."
+            if [ -n "$OTHER_RUNNER" ]; then
+                echo "Belongs to another runner (left untouched):$OTHER_RUNNER"
+            fi
+            if [ -n "$DEAD" ]; then
+                echo "Dead dependency chains (dependency failed to review/):$DEAD"
+                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
+                    "One or more inbox tasks depend on a task that failed to review/."
+            fi
+            if [ -n "$MISSING" ]; then
+                echo "Missing dependencies (slug was never created):$MISSING"
+                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
+                    "One or more inbox tasks depend on a task that does not exist."
+            fi
+            if [ -n "$WAITING" ]; then
+                echo "Waiting on other queued tasks:$WAITING"
+            fi
+            if [ -z "$DEAD" ] && [ -z "$MISSING" ] && [ -n "$WAITING" ]; then
+                echo "No runnable root: every task waits on another still-queued task (possible cycle)."
+                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
+                    "Inbox has no runnable root (possible dependency cycle)."
+            fi
+        else
+            echo "Usage: ai-task [--runner NAME] [task.md]"
+            echo "No .md task file found in $INBOX"
+        fi
+        exit 1
+        ;;
+esac
+
+if [ -z "$TASK_FILE" ] || [ -z "$EFFECTIVE_RUNNER" ]; then
+    echo "Claim produced no task file (internal error)." >&2
+    exit 1
+fi
+
+TASK_NAME=$(basename "$TASK_FILE" .md)
+SESSION=$(session_name "$EFFECTIVE_RUNNER" "$TASK_NAME")
+
+SELF_BIN="$HOME/bin/ai-task"
+if [ ! -x "$SELF_BIN" ]; then
+    SELF_BIN="$SCRIPT_DIR/ai-task"
+fi
+
+# TASKS_DIR is passed explicitly: the tmux server has its own environment, so a
+# tree override on this invocation would otherwise be lost and the child would
+# work against the default tree. That would make a throwaway smoke run touch
+# the live queue.
+tmux new-session -d -s "$SESSION" bash -lc \
+    "TASKS_DIR=$(printf '%q' "$TASKS_DIR") $(printf '%q' "$SELF_BIN") --run $(printf '%q' "$TASK_FILE") --runner $(printf '%q' "$EFFECTIVE_RUNNER")"
+
+echo "Task '$TASK_NAME' started in tmux session '$SESSION' (runner: $EFFECTIVE_RUNNER)."
+echo "Monitor : tmux attach -t $SESSION"
+echo "Result  : $DONE_DIR/*_${TASK_NAME}.md"

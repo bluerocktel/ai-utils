@@ -1,0 +1,357 @@
+#!/bin/bash
+# ai-agent: read-only view of the agent layer (agents/CONTRACT.md).
+#
+# An agent owns a recurring business domain; a routine is one small explicit job
+# it performs on a trigger. Both are markdown files in a git repository, under
+# agents/ here by default or under the `agents_root` config key when definitions
+# live in their own repository. A routine file is a valid ai-scheduled job file
+# plus three agent-layer headers (## Agent, ## Permission, and its own slug as
+# the file name), so publishing one is a copy and nothing else.
+#
+# This script adds no engine. ai-scheduled already owns the trigger, the three
+# kinds, the per-job state and the routes into the pipeline. What lives here is
+# naming, permission and validation, plus the publish PLAN.
+#
+# READ-ONLY, like the dashboard: no agent call, no provider loaded, no file
+# moved, nothing written into $TASKS_DIR or anywhere else, ever. That is what
+# makes it safe against the live tree.
+#
+# Usage:
+#   ai-agent                      List every routine, grouped by agent
+#   ai-agent --list               Same
+#   ai-agent --show SLUG          Charter headers, then that routine verbatim
+#   ai-agent --validate           Check every charter and routine; exit 1 on any error
+#   ai-agent --publish-plan [SLUG]  PRINT the cp command(s) a human would run
+#
+# This file is PROVIDER-NEUTRAL by contract: it must never name a vendor, a
+# vendor CLI, a vendor model id or a vendor JSON field. Runner names come from
+# providers/*.sh file names at runtime.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+usage() {
+    echo "Usage:"
+    echo "  ai-agent                        List every routine, grouped by agent"
+    echo "  ai-agent --list                 Same"
+    echo "  ai-agent --show SLUG            Charter headers, then that routine verbatim"
+    echo "  ai-agent --validate             Check every charter and routine (exit 1 on error)"
+    echo "  ai-agent --publish-plan [SLUG]  Print the cp command(s) to publish; runs nothing"
+}
+
+# ── Arguments ───────────────────────────────────────────────────────────────
+MODE="list"
+ARG_SLUG=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --list)          MODE="list"; shift ;;
+        --show)          MODE="show"; ARG_SLUG="${2:?--show requires a routine slug}"; shift 2 ;;
+        --show=*)        MODE="show"; ARG_SLUG="${1#*=}"; shift ;;
+        --validate)      MODE="validate"; shift ;;
+        --publish-plan)  MODE="publish-plan"; shift
+                         # Optional positional slug, but never swallow a flag.
+                         if [ $# -gt 0 ] && [ "${1#-}" = "$1" ]; then ARG_SLUG="$1"; shift; fi ;;
+        --publish-plan=*) MODE="publish-plan"; ARG_SLUG="${1#*=}"; shift ;;
+        -h|--help)       usage; exit 0 ;;
+        *)               echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
+    esac
+done
+
+load_config
+
+# Where the DEFINITIONS live: agents_dir resolves the `agents_root` config key,
+# falling back to this repo's own agents/. Read AFTER load_config, because the
+# key comes from config.
+AGENTS_DIR="$(agents_dir)"
+# Display prefix for definition paths in --validate output. The in-repo default
+# reads better as the relative `agents`, but a configured root must print the
+# path it actually resolved to: a label naming a file that is not there is worse
+# than a long line, and --validate exists to be acted on.
+if [ -n "${agents_root:-}" ]; then AGENTS_LABEL="$AGENTS_DIR"; else AGENTS_LABEL="agents"; fi
+# Honour a caller-set SCRIPT_DIR, then this library's own directory: the same
+# convention load_provider uses to find providers/.
+PROVIDERS_DIR="${SCRIPT_DIR:-$AI_LIB_DIR}/providers"
+
+# ── Enumeration ─────────────────────────────────────────────────────────────
+# Every directory under agents/ holding an AGENT.md, as absolute paths. An
+# absent agents/ directory is not an error: exit 0, no noise, like every other
+# script here against an empty tree.
+agent_dirs() {
+    [ -d "$AGENTS_DIR" ] || return 0
+    find "$AGENTS_DIR" -mindepth 2 -maxdepth 2 -type f -name 'AGENT.md' \
+        -printf '%h\n' 2>/dev/null | sort
+}
+
+# Routine FILE NAMES (<slug>.md) of one agent directory, sorted.
+routine_files() {
+    local adir="$1"
+    [ -d "$adir/routines" ] || return 0
+    find "$adir/routines" -mindepth 1 -maxdepth 1 -type f -name '*.md' \
+        -printf '%f\n' 2>/dev/null | sort
+}
+
+# True when a routine slug is already live as a job in scheduled/.
+is_published() {
+    [ -n "${1:-}" ] && [ -f "$SCHEDULED_DIR/$1.md" ]
+}
+
+# read < propose < act, as a number. Prints nothing and returns 1 on anything
+# else, so a caller can never compare against a level it failed to parse.
+permission_rank() {
+    case "${1:-}" in
+        read)    printf '0\n' ;;
+        propose) printf '1\n' ;;
+        act)     printf '2\n' ;;
+        *)       return 1 ;;
+    esac
+}
+
+# ── --list ──────────────────────────────────────────────────────────────────
+mode_list() {
+    local adirs agent adir file slug kind sched perm pub any=0
+
+    adirs=$(agent_dirs)
+    if [ -z "$adirs" ]; then
+        echo "(no agents defined)"
+        return 0
+    fi
+
+    printf '%-20s %-26s %-9s %-12s %-8s %s\n' \
+        "AGENT" "ROUTINE" "KIND" "SCHEDULE" "PERM" "STATE"
+
+    while IFS= read -r adir; do
+        [ -n "$adir" ] || continue
+        agent=$(basename "$adir")
+        while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            any=1
+            slug="${file%.md}"
+            kind=$(field_from_task Kind "$adir/routines/$file")
+            sched=$(field_from_task Schedule "$adir/routines/$file")
+            # An unparseable permission prints nothing and returns 1; show it
+            # as "?" rather than as the default, which it is not.
+            perm=$(permission_from_job "$adir/routines/$file" || true)
+            [ -n "$perm" ] || perm="?"
+            if is_published "$slug"; then pub="published"; else pub="not published"; fi
+            printf '%-20s %-26s %-9s %-12s %-8s %s\n' \
+                "$agent" "$slug" "${kind:-?}" "${sched:-?}" "$perm" "$pub"
+        done <<< "$(routine_files "$adir")"
+    done <<< "$adirs"
+
+    [ "$any" -eq 1 ] || echo "(no routines defined)"
+    return 0
+}
+
+# ── --show ──────────────────────────────────────────────────────────────────
+mode_show() {
+    local want="$1" adir agent file slug found=""
+
+    while IFS= read -r adir; do
+        [ -n "$adir" ] || continue
+        while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            slug="${file%.md}"
+            [ "$slug" = "$want" ] || continue
+            found="$adir/routines/$file"
+            agent=$(basename "$adir")
+            break
+        done <<< "$(routine_files "$adir")"
+        [ -n "$found" ] && break
+    done <<< "$(agent_dirs)"
+
+    if [ -z "$found" ]; then
+        echo "ai-agent: no routine with slug '$want'" >&2
+        return 1
+    fi
+
+    echo "# Agent: $agent"
+    echo "## Domain: $(field_from_task Domain "$adir/AGENT.md")"
+    echo "## Sources: $(field_from_task Sources "$adir/AGENT.md")"
+    echo "## Permission-Ceiling: $(field_from_task Permission-Ceiling "$adir/AGENT.md")"
+    echo
+    echo "# Routine: $slug ($found)"
+    echo
+    cat "$found"
+    return 0
+}
+
+# ── --validate ──────────────────────────────────────────────────────────────
+# One OK / ERROR line per charter and per routine. Exit 1 if anything failed.
+mode_validate() {
+    local adirs adir agent file slug rc=0
+    local domain sources ceiling ceil_rank
+    local kind sched perm perm_rank owner project runner
+    local errs seen_slugs="" dupe
+
+    adirs=$(agent_dirs)
+    if [ -z "$adirs" ]; then
+        echo "(no agents defined)"
+        return 0
+    fi
+
+    while IFS= read -r adir; do
+        [ -n "$adir" ] || continue
+        agent=$(basename "$adir")
+        errs=""
+
+        domain=$(field_from_task Domain "$adir/AGENT.md")
+        sources=$(field_from_task Sources "$adir/AGENT.md")
+        ceiling=$(field_from_task Permission-Ceiling "$adir/AGENT.md" \
+            | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+
+        [ -n "$domain" ]  || errs="${errs}; ## Domain is missing or empty"
+        [ -n "$sources" ] || errs="${errs}; ## Sources is missing or empty"
+        ceil_rank=$(permission_rank "$ceiling" 2>/dev/null || true)
+        if [ -z "$ceil_rank" ]; then
+            errs="${errs}; ## Permission-Ceiling is '${ceiling:-<unset>}', expected read|propose|act"
+        fi
+
+        if [ -n "$errs" ]; then
+            echo "ERROR: $AGENTS_LABEL/$agent/AGENT.md: ${errs#; }"
+            rc=1
+        else
+            echo "OK: $AGENTS_LABEL/$agent/AGENT.md"
+        fi
+
+        while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            slug="${file%.md}"
+            errs=""
+
+            # The file name IS the identity: the job name once published and the
+            # key of the routine's state. Anything outside [a-z0-9-] would make
+            # those two disagree.
+            case "$slug" in
+                ""|*[!a-z0-9-]*) errs="${errs}; file name must be <slug>.md with <slug> in [a-z0-9-]" ;;
+            esac
+
+            kind=$(field_from_task Kind "$adir/routines/$file" \
+                | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+            case "$kind" in
+                template|monitor|planner) ;;
+                *) errs="${errs}; ## Kind is '${kind:-<unset>}', expected template|monitor|planner" ;;
+            esac
+
+            # is_due returns 2 for an invalid schedule, 1 for not-due, 0 for due.
+            # Only 2 is a validation failure, and under `set -e` the non-zero
+            # returns must be absorbed: 1 is the common, correct case.
+            sched=$(field_from_task Schedule "$adir/routines/$file" | tr -d '[:space:]')
+            local due_rc=0
+            is_due "$slug" "$sched" || due_rc=$?
+            [ "$due_rc" -eq 2 ] && errs="${errs}; ## Schedule is '${sched:-<unset>}', not a valid schedule"
+
+            # ## Agent must name its own parent directory. A routine filed under
+            # one agent while claiming another would inherit the wrong ceiling.
+            owner=$(agent_from_job "$adir/routines/$file")
+            if [ -z "$owner" ]; then
+                errs="${errs}; ## Agent is missing (required: it is what marks a job file as agent-layer)"
+            elif [ "$owner" != "$agent" ]; then
+                errs="${errs}; ## Agent is '$owner' but the routine lives under $AGENTS_LABEL/$agent/"
+            fi
+
+            perm=$(permission_from_job "$adir/routines/$file" || true)
+            if [ -z "$perm" ]; then
+                errs="${errs}; ## Permission does not parse, expected read|propose|act"
+            elif [ -n "$ceil_rank" ]; then
+                perm_rank=$(permission_rank "$perm")
+                if [ "$perm_rank" -gt "$ceil_rank" ]; then
+                    errs="${errs}; ## Permission '$perm' exceeds the charter ceiling '$ceiling'"
+                fi
+            fi
+
+            project=$(field_from_task Project "$adir/routines/$file" | awk 'NR == 1 { print $1 }')
+            if [ -n "$project" ] && [ ! -f "$PROJECTS_DIR/$project.md" ]; then
+                errs="${errs}; ## Project '$project' has no $PROJECTS_DIR/$project.md"
+            fi
+
+            # Read the raw header, NOT runner_from_job: an unset runner is legal
+            # and resolves to default_runner, and only a value actually written
+            # in the file can be wrong here.
+            runner=$(field_from_task Runner "$adir/routines/$file" \
+                | awk 'NR == 1 { print $1 }' | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+            if [ -n "$runner" ] && [ "$runner" != "any" ] && [ ! -f "$PROVIDERS_DIR/$runner.sh" ]; then
+                errs="${errs}; ## Runner '$runner' has no providers/$runner.sh"
+            fi
+
+            # A slug is a global identity: two routines sharing one would share
+            # one state file and one published job name.
+            dupe=$(printf '%s' "$seen_slugs" | tr ' ' '\n' | grep -Fx "$slug" || true)
+            if [ -n "$dupe" ]; then
+                errs="${errs}; slug '$slug' is already used by another routine"
+            else
+                seen_slugs="$seen_slugs $slug"
+            fi
+
+            # A published job that is not agent-layer already owns this name and
+            # this state. Publishing over it would silently replace it.
+            if [ -f "$SCHEDULED_DIR/$slug.md" ] && [ -z "$(agent_from_job "$SCHEDULED_DIR/$slug.md")" ]; then
+                errs="${errs}; slug '$slug' collides with the non-agent job $SCHEDULED_DIR/$slug.md"
+            fi
+
+            if [ -n "$errs" ]; then
+                echo "ERROR: $AGENTS_LABEL/$agent/routines/$file: ${errs#; }"
+                rc=1
+            else
+                echo "OK: $AGENTS_LABEL/$agent/routines/$file"
+            fi
+        done <<< "$(routine_files "$adir")"
+    done <<< "$adirs"
+
+    return "$rc"
+}
+
+# ── --publish-plan ──────────────────────────────────────────────────────────
+# PRINTS the commands, executes nothing.
+#
+# Publishing a routine copies it into $SCHEDULED_DIR, where a scheduler that is
+# ALREADY IN CRON picks it up on its next sweep. From that moment the routine
+# runs unattended, on whatever permission its file declares. That is a
+# deliberate human step, exactly like the cutover commands in README.md: this
+# script prints them and never runs them.
+mode_publish_plan() {
+    local want="${1:-}" adir agent file slug any=0
+
+    echo "# Publish plan. Nothing below has been executed."
+    echo "# Copying a routine into $SCHEDULED_DIR makes it LIVE on the next sweep"
+    echo "# of a scheduler that is already in cron, so publishing is a deliberate"
+    echo "# human step. Review the routine, then run the command yourself."
+    echo
+
+    while IFS= read -r adir; do
+        [ -n "$adir" ] || continue
+        agent=$(basename "$adir")
+        while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            slug="${file%.md}"
+            [ -z "$want" ] || [ "$slug" = "$want" ] || continue
+            any=1
+            if is_published "$slug"; then
+                echo "# $agent/$slug is already published; this would overwrite it."
+            else
+                echo "# $agent/$slug"
+            fi
+            echo "cp '$adir/routines/$file' '$SCHEDULED_DIR/$slug.md'"
+            echo
+        done <<< "$(routine_files "$adir")"
+    done <<< "$(agent_dirs)"
+
+    if [ "$any" -eq 0 ]; then
+        if [ -n "$want" ]; then
+            echo "# (no routine with slug '$want')"
+        else
+            echo "# (no routines to publish)"
+        fi
+    fi
+    return 0
+}
+
+case "$MODE" in
+    list)          mode_list ;;
+    show)          mode_show "$ARG_SLUG" ;;
+    validate)      mode_validate ;;
+    publish-plan)  mode_publish_plan "$ARG_SLUG" ;;
+esac

@@ -1,0 +1,10 @@
+{
+  "type": "result",
+  "text": "Fixture with usage counts but no cost fields anywhere, which is what some auth paths actually return.",
+  "modelUsage": {
+    "model-tier-nocost": {
+      "input_tokens": 1020,
+      "output_tokens": 310
+    }
+  }
+}

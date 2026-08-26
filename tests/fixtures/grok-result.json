@@ -1,0 +1,20 @@
+{
+  "type": "result",
+  "sessionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "text": "Fixture result text for the second provider.\nSecond line, to prove multi-line text survives extraction.",
+  "total_cost_usd": 0.0187,
+  "modelUsage": {
+    "model-tier-camel": {
+      "inputTokens": 2210,
+      "outputTokens": 640,
+      "cacheReadInputTokens": 15980,
+      "costUSD": 0.0121
+    },
+    "model-tier-snake": {
+      "input_tokens": 480,
+      "output_tokens": 130,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.0066
+    }
+  }
+}

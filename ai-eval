@@ -1,0 +1,330 @@
+#!/bin/bash
+# ai-eval: evaluate a completed task against its acceptance criteria.
+#
+# Usage:
+#   ai-eval [--runner NAME] TASK_FILE RESULT_FILE [OUTPUT_FILE]
+#
+# Exit codes (LOAD-BEARING: ai-task branches on every one of them to decide
+# whether an attempt burns a retry, so none of these may be renumbered):
+#   0 = PASS
+#   1 = FAIL
+#   2 = no ## Acceptance Criteria and no passing ## Test Command
+#       (nothing to grade: skip evaluation; also usage errors and a missing
+#        task or result file, so a bad invocation never reads as a FAIL)
+#   3 = inconclusive: evaluator auth failure or empty verdict
+#       (do NOT burn a retry)
+#   4 = inconclusive: a ## Test Command timed out
+#       (do NOT burn a retry, do NOT pause the queue)
+#
+# An empty evaluator response is exit 3, never a FAIL, and this script never
+# emits a blank or dangling verdict: a `VERDICT:` line is printed only when the
+# evaluator actually produced one.
+#
+# This file is PROVIDER-NEUTRAL by contract. It must never name a vendor, a
+# vendor CLI, a vendor model id, a vendor CLI flag or a vendor JSON field.
+# The evaluator's own agent call goes through ai_run / ai_json_text /
+# ai_is_auth_failure from providers/<runner>.sh (see providers/CONTRACT.md).
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+usage() {
+    cat <<'USAGE'
+Usage: ai-eval [--runner NAME] TASK_FILE RESULT_FILE [OUTPUT_FILE]
+
+  --runner NAME  Runner that grades this task. Defaults to $AI_RUNNER (set by
+                 ai-task), then to default_runner from config. Selectable
+                 independently of the task's own ## Runner so a cheap runner
+                 can grade an expensive one.
+
+Exit: 0 pass, 1 fail, 2 nothing to grade, 3 inconclusive (auth/empty verdict),
+      4 inconclusive (test command timed out).
+USAGE
+}
+
+# ── Argument parsing ───────────────────────────────────────────────────────
+# --runner may appear before or after the positionals, so ai-task and a human
+# can use the same flag order.
+RUNNER_FLAG=""
+POSITIONAL=()
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --runner)
+            RUNNER_FLAG="${2:?--runner requires a runner name}"
+            shift 2
+            ;;
+        --runner=*)
+            RUNNER_FLAG="${1#*=}"
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --)
+            shift
+            while [ $# -gt 0 ]; do POSITIONAL+=("$1"); shift; done
+            ;;
+        --*)
+            echo "ai-eval: unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
+        *)
+            POSITIONAL+=("$1")
+            shift
+            ;;
+    esac
+done
+
+TASK_FILE="${POSITIONAL[0]:-}"
+RESULT_FILE="${POSITIONAL[1]:-}"
+OUTPUT_FILE="${POSITIONAL[2]:-}"
+
+if [ "${#POSITIONAL[@]}" -gt 3 ]; then
+    echo "ai-eval: unexpected extra argument: ${POSITIONAL[3]}" >&2
+    usage >&2
+    exit 2
+fi
+
+# Every bad invocation exits 2, not 1: "I could not grade this" must never be
+# reported to the caller as "the agent failed", which would burn a retry.
+if [ -z "$TASK_FILE" ] || [ -z "$RESULT_FILE" ]; then
+    usage >&2
+    exit 2
+fi
+
+if [ ! -f "$TASK_FILE" ]; then
+    echo "ai-eval: task file not found: $TASK_FILE" >&2
+    exit 2
+fi
+
+if [ ! -f "$RESULT_FILE" ]; then
+    echo "ai-eval: result file not found: $RESULT_FILE" >&2
+    exit 2
+fi
+
+# ── Config ─────────────────────────────────────────────────────────────────
+TEST_TIMEOUT_MIN=20
+EVAL_TIMEOUT_MIN=45
+
+load_config
+TEST_TIMEOUT_MIN=${test_timeout_min:-$TEST_TIMEOUT_MIN}
+# No dedicated knob for the evaluator's own run: it is the same kind of headless
+# call as the task's, so it inherits task_timeout_min unless told otherwise.
+EVAL_TIMEOUT_MIN=${eval_timeout_min:-${task_timeout_min:-$EVAL_TIMEOUT_MIN}}
+
+# Minutes → whole seconds, via awk because bash arithmetic is integer-only.
+# A fractional minute is accepted so a throwaway config can cap test commands
+# at a few seconds; anything under a second is floored to 1 so `timeout` can
+# never be handed 0 (which means "no timeout at all").
+min_to_sec() {
+    awk -v m="${1:-0}" 'BEGIN { s = int(m * 60); if (s < 1) s = 1; printf "%d\n", s }'
+}
+
+TEST_TIMEOUT_SEC=$(min_to_sec "$TEST_TIMEOUT_MIN")
+
+# Write the verdict report to OUTPUT_FILE when one was named, else to stdout.
+emit() {
+    if [ -n "$OUTPUT_FILE" ]; then
+        printf '%s\n' "$1" > "$OUTPUT_FILE"
+    else
+        printf '%s\n' "$1"
+    fi
+}
+
+# ── Test Command ───────────────────────────────────────────────────────────
+# Tests run BEFORE the evaluator call: a failing command is a cheap, certain
+# FAIL and there is no point paying for a grading run to confirm it.
+TEST_PASSED=0
+
+if grep -q "^## Test Command" "$TASK_FILE"; then
+    TEST_TMP=$(mktemp)
+    TEST_EXIT=0
+    TEST_RAN=0
+    TEST_FAILED_CMD=""
+
+    # Test output is human-readable text, not JSON, so merging stderr here is
+    # correct and expected. (The separate-streams rule applies to the headless
+    # JSON captures further down, which jq has to parse.)
+    run_one_test() {
+        timeout "$TEST_TIMEOUT_SEC" bash -c "$1" >> "$TEST_TMP" 2>&1
+    }
+
+    timed_out() {
+        emit "$(printf '## Test Results\n\nCommand timed out after %sm (verdict inconclusive):\n```\n%s\n```\n\nPartial output:\n```\n%s\n```' \
+            "$TEST_TIMEOUT_MIN" "$1" "$(cat "$TEST_TMP")")"
+        rm -f "$TEST_TMP"
+        exit 4
+    }
+
+    # A trailing backslash continues a command onto the next line: the pieces
+    # are assembled into ONE command before running, so `cd x && \` + `make`
+    # runs as a single shell where the cd is still in effect. Running the two
+    # halves separately would silently change what the task asked for.
+    ACC=""
+    while IFS= read -r line || [ -n "$line" ]; do
+        case "$line" in '```'*|'~~~'*) continue ;; esac
+        if [ "${line%\\}" != "$line" ]; then
+            ACC="$ACC${line%\\}"
+            continue
+        fi
+        cmd="$ACC$line"
+        ACC=""
+        [ -z "${cmd// }" ] && continue
+        TEST_RAN=1
+        set +e
+        run_one_test "$cmd"
+        CMD_EXIT=$?
+        set -e
+        [ $CMD_EXIT -eq 124 ] && timed_out "$cmd"
+        if [ $CMD_EXIT -ne 0 ]; then
+            TEST_EXIT=$CMD_EXIT
+            TEST_FAILED_CMD="$cmd"
+            break
+        fi
+    done < <(awk '/^## Test Command/{found=1; next} found && /^## /{exit} found{print}' "$TASK_FILE")
+
+    # A section whose last line ends in a backslash leaves the final command in
+    # the accumulator with nothing to terminate it; run it rather than drop it.
+    if [ $TEST_EXIT -eq 0 ] && [ -n "${ACC// }" ]; then
+        TEST_RAN=1
+        set +e
+        run_one_test "$ACC"
+        CMD_EXIT=$?
+        set -e
+        [ $CMD_EXIT -eq 124 ] && timed_out "$ACC"
+        if [ $CMD_EXIT -ne 0 ]; then
+            TEST_EXIT=$CMD_EXIT
+            TEST_FAILED_CMD="$ACC"
+        fi
+    fi
+
+    if [ $TEST_EXIT -ne 0 ]; then
+        emit "$(printf '## Test Results\n\nCommand failed (exit %s):\n```\n%s\n```\n\nOutput:\n```\n%s\n```\n\nVERDICT: FAIL' \
+            "$TEST_EXIT" "$TEST_FAILED_CMD" "$(cat "$TEST_TMP")")"
+        rm -f "$TEST_TMP"
+        exit 1
+    fi
+
+    rm -f "$TEST_TMP"
+    [ $TEST_RAN -eq 1 ] && TEST_PASSED=1
+fi
+
+# No acceptance criteria: tests alone can carry a PASS; otherwise there is
+# nothing to grade and the run stands ungraded (exit 2).
+if ! grep -q "^## Acceptance Criteria" "$TASK_FILE"; then
+    if [ $TEST_PASSED -eq 1 ]; then
+        exit 0
+    fi
+    exit 2
+fi
+
+# ── Runner ─────────────────────────────────────────────────────────────────
+# The evaluator's runner is chosen independently of the task's: --runner wins,
+# then AI_RUNNER (exported by ai-task so a task is graded under the runner it
+# actually ran on), then default_runner. There is deliberately no logic here
+# that adapts the prompt or the model to a cross-runner pairing.
+RUNNER="$RUNNER_FLAG"
+[ -n "$RUNNER" ] || RUNNER="${AI_RUNNER:-}"
+[ -n "$RUNNER" ] || RUNNER="${default_runner:-}"
+
+# A runner that cannot be loaded is a configuration fault, not a failed task,
+# so it exits 3 (inconclusive) rather than 1. Burning retries on every task in
+# the queue because an adapter is missing is the worse failure mode.
+if [ -z "$RUNNER" ]; then
+    echo "ai-eval: no runner (pass --runner, set AI_RUNNER, or set default_runner in config)" >&2
+    exit 3
+fi
+if ! load_provider "$RUNNER"; then
+    exit 3
+fi
+
+# ── Model ──────────────────────────────────────────────────────────────────
+# Same resolution as the task's own run: the task's ## Model, then
+# default_model, then whatever the alias table maps empty to (providers
+# genuinely differ on what unset means, so this must not be second-guessed).
+MODEL_RAW=$(model_from_task "$TASK_FILE")
+if [ -z "$MODEL_RAW" ]; then
+    MODEL_RAW="${default_model:-}"
+fi
+MODEL_ID=$(ai_model_alias "$MODEL_RAW")
+
+PROMPT_TMP=$(mktemp)
+JSON_TMP=$(mktemp)
+ERR_TMP=$(mktemp)
+cleanup() { rm -f "$PROMPT_TMP" "$JSON_TMP" "$ERR_TMP"; }
+trap cleanup EXIT
+
+{
+    cat <<'PREAMBLE'
+You are a skeptical evaluator reviewing the output of an autonomous agent. Assess whether the task was completed correctly against its acceptance criteria.
+
+Rules:
+- Be critical. Do not give the benefit of the doubt.
+- Grade every criterion AS WRITTEN, not as you would charitably reinterpret it. If a criterion names a specific file, path, command, service, table, flag or value, that exact thing is what had to be used. An agent that quietly substituted something equivalent-looking and then reported success has FAILED that criterion, however well the substitute works.
+- If a criterion cannot be verified from the result, mark it FAIL.
+- Do not praise — only report problems.
+- You may use tools (read files, run shell commands) to verify criteria when the result report alone is insufficient.
+
+Output format:
+1. Grade each acceptance criterion as: "- [PASS/FAIL] criterion: one-line reason"
+2. A "## Issues" section listing specific problems to fix (omit section entirely if all PASS).
+3. End your response with exactly one of these two lines:
+   VERDICT: PASS
+   VERDICT: FAIL
+
+---
+## TASK
+
+PREAMBLE
+    cat "$TASK_FILE"
+    printf "\n---\n## RESULT\n\n"
+    cat "$RESULT_FILE"
+} > "$PROMPT_TMP"
+
+# The provider owns the timeout wrapper and returns the CLI status verbatim.
+# stdout and stderr land in two SEPARATE files: merged stderr prepends warnings
+# to the JSON, parsing then fails, and the verdict silently comes out empty.
+set +e
+ai_run "$(cat "$PROMPT_TMP")" \
+    "$MODEL_ID" \
+    "" \
+    "$(min_to_sec "$EVAL_TIMEOUT_MIN")" \
+    "$JSON_TMP" \
+    "$ERR_TMP"
+RUN_STATUS=$?
+set -e
+
+EVAL_TEXT=$(ai_json_text "$JSON_TMP" || true)
+
+# ── Inconclusive ───────────────────────────────────────────────────────────
+# Checked BEFORE anything is emitted. An auth failure means no grading happened
+# and an empty response means no verdict was reached; neither is a FAIL, and
+# neither may leave a verdict line behind. Any partial text is reported with
+# its verdict lines stripped, so a half-finished run can still be read without
+# the caller's grep mistaking it for a decision.
+if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP" || [ -z "$EVAL_TEXT" ]; then
+    INCONCLUSIVE=$(printf '## Evaluation Inconclusive\n\nThe evaluator produced no usable verdict (authentication failure or empty response). No retry burned.')
+    if [ -n "$EVAL_TEXT" ]; then
+        INCONCLUSIVE=$(printf '%s\n\nPartial evaluator output:\n```\n%s\n```' \
+            "$INCONCLUSIVE" "$(printf '%s\n' "$EVAL_TEXT" | grep -v '^VERDICT:' || true)")
+    fi
+    emit "$INCONCLUSIVE"
+    exit 3
+fi
+
+emit "$EVAL_TEXT"
+
+if [ "$RUN_STATUS" -ne 0 ]; then
+    exit 1
+fi
+
+if printf '%s\n' "$EVAL_TEXT" | grep -q "^VERDICT: PASS$"; then
+    exit 0
+fi
+exit 1

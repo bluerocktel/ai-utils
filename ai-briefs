@@ -1,0 +1,93 @@
+#!/bin/bash
+# ai-briefs: decompose every brief in $TASKS_DIR/briefs/, one tmux session each.
+#
+# Usage: ai-briefs [--runner NAME]
+#
+# A thin fan-out over ai-brief: one launch per brief, all running in parallel.
+# Each launch claims its own brief by moving it into run/, so two briefs can
+# never end up in the same session and a second ai-briefs invocation cannot
+# pick up a brief that is already in flight.
+#
+# Everything downstream is ai-brief's: output lands in backlog-for-review/ and
+# waits for a human. Nothing here writes into inbox/.
+#
+# An empty briefs/ directory is the normal steady state, not an error: this
+# exits 0 and says nothing, so the command is safe on a timer.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+RUNNER_ARGS=()
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --runner)
+            RUNNER_ARGS=(--runner "${2:?--runner requires a runner name}")
+            shift 2
+            ;;
+        --runner=*)
+            RUNNER_ARGS=(--runner "${1#*=}")
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: ai-briefs [--runner NAME]"
+            echo ""
+            echo "Decomposes every .md brief in \$TASKS_DIR/briefs/, one tmux session each."
+            echo "Output goes to backlog-for-review/ for human review. Never to inbox/."
+            exit 0
+            ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            echo "Usage: ai-briefs [--runner NAME]" >&2
+            exit 1
+            ;;
+    esac
+done
+
+mkdir -p "$BRIEFS_DIR"
+
+shopt -s nullglob
+BRIEFS=("$BRIEFS_DIR"/*.md)
+shopt -u nullglob
+
+# Quiet exit 0: an empty queue is the normal state on an unattended timer, and
+# a non-zero exit there would be indistinguishable from a real failure.
+if [ ${#BRIEFS[@]} -eq 0 ]; then
+    exit 0
+fi
+
+BRIEF_BIN="$HOME/bin/ai-brief"
+if [ ! -x "$BRIEF_BIN" ]; then
+    BRIEF_BIN="$SCRIPT_DIR/ai-brief"
+fi
+
+if [ ! -x "$BRIEF_BIN" ]; then
+    echo "ai-brief not found or not executable: $BRIEF_BIN" >&2
+    exit 1
+fi
+
+COUNT=0
+FAILED=0
+for BRIEF_FILE in "${BRIEFS[@]}"; do
+    # One bad brief must not abort the fan-out: the remaining ones are
+    # independent and each one reports its own failure.
+    if "$BRIEF_BIN" "${RUNNER_ARGS[@]}" "$BRIEF_FILE"; then
+        COUNT=$((COUNT + 1))
+    else
+        FAILED=$((FAILED + 1))
+        echo "Failed to launch: $BRIEF_FILE" >&2
+    fi
+done
+
+echo ""
+if [ "$FAILED" -gt 0 ]; then
+    echo "$COUNT brief(s) launched in parallel, $FAILED failed to launch."
+else
+    echo "$COUNT brief(s) launched in parallel."
+fi
+echo "List sessions : tmux ls"
+echo "Review queue  : $BACKLOG_REVIEW_DIR/"
+echo "Review gate   : nothing runs until you move a task into $INBOX/"

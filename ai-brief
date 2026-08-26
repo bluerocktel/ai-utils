@@ -1,0 +1,663 @@
+#!/bin/bash
+# ai-brief: decompose a high-level brief into structured task files.
+#
+# Usage:
+#   ai-brief [--runner NAME] [brief.md]  Decompose a brief in a detached tmux
+#                                        session. With no file argument, takes
+#                                        the oldest brief in $TASKS_DIR/briefs/.
+#   ai-brief --run FILE [--runner NAME]  Internal mode used by tmux. Do not call
+#                                        directly.
+#
+# Pipeline:
+#   briefs/ → ai-brief → backlog-for-review/ → (HUMAN REVIEW) → inbox/
+#
+# THE REVIEW GATE IS THE POINT. Emitted tasks land in backlog-for-review/ and
+# nowhere else; a human moves them to inbox/ once read. ai-brief has no write
+# path into inbox/ at all: the only destination it ever writes task files to is
+# $BACKLOG_REVIEW_DIR, and the extraction step strips every path component off
+# the model-proposed filename, so no output from the agent can redirect a write
+# out of that directory.
+#
+# This file is PROVIDER-NEUTRAL by contract. It must never name a vendor, a
+# vendor CLI, a vendor model id, a vendor CLI flag or a vendor JSON field.
+# Everything that differs between runners goes through the six functions in
+# providers/CONTRACT.md, loaded by load_provider.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+usage() {
+    echo "Usage:"
+    echo "  ai-brief [--runner NAME] [brief.md]  Decompose a brief (oldest in briefs/ if omitted)"
+    echo "  ai-brief --run FILE [--runner NAME]  Internal mode used by tmux; do not call directly"
+    echo ""
+    echo "Output goes to backlog-for-review/ for human review. Never to inbox/."
+}
+
+# ── Argument parsing ───────────────────────────────────────────────────────
+# --runner may appear before or after --run / the brief file, so the launcher
+# and the tmux child accept the same flag order.
+MODE=launch
+RUNNER_FLAG=""
+BRIEF_ARG=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --run)
+            MODE=run
+            BRIEF_ARG="${2:?--run requires a brief file}"
+            shift 2
+            ;;
+        --runner)
+            RUNNER_FLAG="${2:?--runner requires a runner name}"
+            shift 2
+            ;;
+        --runner=*)
+            RUNNER_FLAG="${1#*=}"
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --*)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 1
+            ;;
+        *)
+            if [ -n "$BRIEF_ARG" ]; then
+                echo "Unexpected extra argument: $1" >&2
+                exit 1
+            fi
+            BRIEF_ARG="$1"
+            shift
+            ;;
+    esac
+done
+
+# ── Config ─────────────────────────────────────────────────────────────────
+BRIEF_TIMEOUT_MIN=45
+AUTH_COOLDOWN_MIN=30
+
+load_config
+BRIEF_TIMEOUT_MIN=${brief_timeout_min:-$BRIEF_TIMEOUT_MIN}
+AUTH_COOLDOWN_MIN=${auth_cooldown_min:-$AUTH_COOLDOWN_MIN}
+
+# ── Runner resolution ──────────────────────────────────────────────────────
+# Two runners are in play and they are deliberately separate:
+#
+#   DECOMPOSITION runner  the provider that does the decomposition NOW.
+#                         --runner flag, else default_runner.
+#   STAMP runner          the provider that will EXECUTE the emitted tasks,
+#                         written into each file as ## Runner.
+#                         The brief's own ## Runner section wins, else the
+#                         --runner flag, else default_runner.
+#
+# The brief wins for the stamp because a brief decomposed by one runner is
+# often meant for another, and because an implicit runner makes the eventual
+# routing invisible to the human reviewing the batch.
+
+# Normalise a runner name the same way lib.sh does.
+norm_runner() {
+    printf '%s' "${1:-}" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]'
+}
+
+# Raw ## Runner section of a file, with NO fallback to default_runner.
+# runner_from_task cannot be used here: it resolves an absent section to the
+# default, and this caller has to tell "absent" from "explicitly set" apart.
+runner_section_of() {
+    local file="${1:-}"
+    [ -r "$file" ] || return 0
+    awk '/^## Runner/{found=1; next} found && /^[^#]/{print $1; exit} found && /^##/{exit}' "$file" \
+        | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]'
+}
+
+# The runner this invocation acts as: --runner, else default_runner.
+resolve_invocation_runner() {
+    local r
+    r=$(norm_runner "${RUNNER_FLAG:-${default_runner:-}}")
+    [ -n "$r" ] || return 1
+    printf '%s\n' "$r"
+}
+
+# The runner stamped on the emitted tasks: brief section, else flag, else default.
+resolve_stamp_runner() {
+    local brief="${1:-}" r
+    r=$(runner_section_of "$brief")
+    [ -n "$r" ] || r="${RUNNER_FLAG:-}"
+    [ -n "$r" ] || r="${default_runner:-}"
+    r=$(norm_runner "$r")
+    [ -n "$r" ] || return 1
+    printf '%s\n' "$r"
+}
+
+# Force a file's ## Runner section to RUNNER.
+#
+# Any ## Runner the model wrote itself is dropped first: the resolution order
+# above is the authority, and a model-invented runner would route the task to a
+# provider nobody chose. The section is inserted directly after the ## Project
+# block so a human scanning the review queue sees the routing next to the
+# project, without having to scroll.
+stamp_runner_section() {
+    local file="$1" runner="$2" stripped inserted
+    [ -f "$file" ] || return 1
+    stripped=$(mktemp)
+    inserted=$(mktemp)
+
+    awk '
+        /^## Runner([[:space:]]|$)/ { skip = 1; next }
+        skip && /^## / { skip = 0 }
+        skip { next }
+        { print }
+    ' "$file" > "$stripped"
+
+    if grep -qE '^## Project([[:space:]]|$)' "$stripped"; then
+        awk -v runner="$runner" '
+            !done_it && inproj && /^## / {
+                print "## Runner"
+                print runner
+                print ""
+                done_it = 1
+            }
+            { print }
+            /^## Project([[:space:]]|$)/ { inproj = 1 }
+            END {
+                if (!done_it) {
+                    print ""
+                    print "## Runner"
+                    print runner
+                }
+            }
+        ' "$stripped" > "$inserted"
+    else
+        # No ## Project to anchor to: put the routing at the very top, where it
+        # is still the first thing a reviewer reads.
+        {
+            echo "## Runner"
+            printf '%s\n' "$runner"
+            echo ""
+            cat "$stripped"
+        } > "$inserted"
+    fi
+
+    mv "$inserted" "$file"
+    rm -f "$stripped"
+}
+
+# ── Internal execution mode ────────────────────────────────────────────────
+if [ "$MODE" = run ]; then
+    BRIEF_FILE="$BRIEF_ARG"
+    BRIEF_NAME=$(basename "$BRIEF_FILE" .md)
+    TIMESTAMP=$(date '+%Y-%m-%d_%H-%M')
+    TODAY=$(date '+%Y-%m-%d')
+    RAW_FILE="$RUN_DIR/${TIMESTAMP}_${BRIEF_NAME}.raw"
+    BRIEF_ARCHIVE="$BRIEFS_DONE_DIR/${BRIEF_NAME}.md"
+    ERR_TMP=""
+
+    if [ ! -f "$BRIEF_FILE" ]; then
+        echo "Brief file not found: $BRIEF_FILE" >&2
+        exit 1
+    fi
+
+    if ! DECOMP_RUNNER=$(resolve_invocation_runner); then
+        echo "No runner: pass --runner NAME or set default_runner in $SCRIPT_DIR/config" >&2
+        exit 1
+    fi
+    if ! STAMP_RUNNER=$(resolve_stamp_runner "$BRIEF_FILE"); then
+        echo "No runner to stamp: brief has no ## Runner and config sets no default_runner." >&2
+        exit 1
+    fi
+
+    # Validate the stamp target BEFORE the expensive agent call. A stamp naming
+    # a provider that does not exist would produce a whole batch of tasks that
+    # no ai-task invocation can ever claim, and the failure would only surface
+    # much later, after the human review pass.
+    if ! ( load_provider "$STAMP_RUNNER" >/dev/null ); then
+        echo "Refusing to decompose: ## Runner '$STAMP_RUNNER' has no provider." >&2
+        exit 1
+    fi
+    # A half-defined or unknown adapter is fatal, deliberately: falling back to
+    # some default would run the decomposition on a provider nobody chose.
+    load_provider "$DECOMP_RUNNER" || exit 1
+
+    COOLDOWN_FILE=$(cooldown_path "$DECOMP_RUNNER")
+
+    # inbox/ is deliberately absent from this list. ai-brief has no reason to
+    # create it, let alone write to it: the human review gate is the whole
+    # point of the backlog-for-review/ hop.
+    mkdir -p "$RUN_DIR" "$BRIEFS_DIR" "$BRIEFS_DONE_DIR" "$BACKLOG_REVIEW_DIR"
+
+    # Put the brief back in the queue so the next run retries it. Every failure
+    # path calls this, so it must not be able to fail: the launcher normally
+    # moves the brief into run/ first, but a direct `--run` on a file still in
+    # briefs/ makes source and destination the same path. `mv` errors there, and
+    # under `set -e` that aborts before the notify and the "brief restored"
+    # message, leaving the operator with a bare mv complaint and no idea the
+    # brief is still queued.
+    restore_brief() {
+        local dest="$BRIEFS_DIR/${BRIEF_NAME}.md"
+        mkdir -p "$BRIEFS_DIR"
+        [ -e "$BRIEF_FILE" ] || return 0
+        if [ "$(realpath "$BRIEF_FILE")" = "$(realpath -m "$dest")" ]; then
+            return 0
+        fi
+        mv "$BRIEF_FILE" "$dest"
+    }
+
+    write_raw() {
+        {
+            echo "# ai-brief debug capture: $BRIEF_NAME"
+            echo "# $(date '+%Y-%m-%d %H:%M') (decomposed by: $DECOMP_RUNNER, tasks stamped: $STAMP_RUNNER)"
+            echo ""
+            if [ -n "${1:-}" ]; then
+                printf '%s\n' "$1"
+            fi
+            if [ -n "$ERR_TMP" ] && [ -s "$ERR_TMP" ]; then
+                echo ""
+                echo "_stderr:_"
+                echo '```'
+                cat "$ERR_TMP"
+                echo '```'
+            fi
+        } > "$RAW_FILE"
+    }
+
+    PROJECT=$(project_from_task "$BRIEF_FILE")
+
+    # ── Prompt ──────────────────────────────────────────────────────────────
+    # Vendor-neutral by contract. ai_preamble_extra is deliberately NOT appended
+    # here (ai-task does append it): the provider extras describe the shape of a
+    # RESULT REPORT (## Tools Used and friends), which would directly contradict
+    # this prompt's "output only the delimited task blocks" contract and break
+    # extraction.
+    PREAMBLE="BRIEF DECOMPOSITION MODE: You are decomposing a high-level brief into multiple well-scoped autonomous task files ready for execution by ai-task.
+
+Your job, in order:
+
+1. Read the brief and find the ## Project field. Read $PROJECTS_DIR/{alias}.md to learn the working directory, stack, and conventions.
+
+2. Explore the codebase with tools: grep and glob to find the specific files, line numbers, class names, and patterns the work touches. Exclude vendor/, node_modules/, storage/framework/ from all searches. Embed exact paths in every task you produce. Do not invent file paths.
+
+3. Decide how many task files to create. Split when:
+   - Changes are in different areas and could be reviewed or rolled back independently
+   - One step produces output that a later step consumes (sequencing risk)
+   Keep together when changes are tightly coupled or touch only 2-3 files.
+
+4. Determine the execution order. Prefer independent tasks. Only serialize when task B cannot start until files or data that task A creates actually exist. Files that already exist on disk are not a reason to add ## Depends-on.
+
+5. Write each task and output it using EXACTLY this delimiter format, nothing else in your output:
+
+===TASK_FILE_BEGIN: ${TODAY}_SLUG.md===
+## Project
+{alias}
+
+## Brief
+${BRIEF_ARCHIVE}
+
+## Context
+{Why this change is needed. What currently exists. Exact file paths and line numbers you found in step 2. If this task consumes output from a prior task, state exactly what file or data it expects and where. If any decision requires understanding the full scope of the work, refer the executing agent to the ## Brief file.}
+
+## Tasks
+{Numbered concrete instructions. Exact strings to find/replace when relevant.}
+
+## Acceptance Criteria
+{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Always end with a negative check confirming the old thing is gone.}
+===TASK_FILE_END===
+
+Replace SLUG with a short lowercase description specific to that task (not the whole brief).
+Use ${TODAY} as the date prefix for all filenames.
+
+TARGET RUNNER: every task in this batch will be executed by the runner named '${STAMP_RUNNER}'. Write for that runner: assume only the tools and conventions it actually has. Do NOT write a ## Runner section yourself. ai-brief stamps ## Runner ${STAMP_RUNNER} on every emitted file, and a hand-written one is discarded.
+
+DEPENDENCIES (optional extra section, never in the first task):
+- At least one task MUST have no ## Depends-on section. That is the task that can run first. A batch in which every task depends on another is rejected whole and nothing reaches the review queue.
+- Add ## Depends-on only when this task cannot start until another task you emit in THIS same response has finished.
+- The value is the SLUG only (the part after ${TODAY}_, no .md). If you emit ${TODAY}_seed-schema.md, dependents write:
+
+## Depends-on
+seed-schema
+
+- ONE PARENT ONLY. A task may declare exactly one dependency: one slug, on one line. The reader takes the FIRST TOKEN OF THE FIRST LINE under ## Depends-on and ignores everything else, so a second slug is silently discarded and that task will start before the dependency it needs has finished. Emit a linear chain (A then B then C) or several independent chains. NEVER a join where one task depends on two others. If a task genuinely needs the output of two earlier tasks, chain the three: make one of the two parents depend on the other, then depend only on the later one.
+- Never write a cycle (A depends on B, B depends on A, directly or through a longer path). A cycle is rejected whole and nothing reaches the review queue.
+- Every ## Depends-on value MUST match a SLUG you emit in this response. Never depend on a task you did not write. Never invent a setup task and then forget to emit it.
+- Omit the ## Depends-on section entirely when there is no dependency. Do not leave a placeholder.
+
+CRITICAL RULES:
+- Output ONLY the delimited task blocks. No preamble, no commentary, no closing remarks, no code fences.
+- Every task must be self-contained: an autonomous agent picking it up cold must execute it with zero prior context.
+- Every task must be completable in a single focused session without hitting context limits. If a task touches more than 5 files, spans more than 3 distinct logical phases, or involves generating large volumes of content, split it into smaller tasks connected with ## Depends-on. Prefer more tasks over larger tasks.
+- Do not add scope beyond what the brief describes.
+- Do not create tasks that drop tables, delete migrations, or make irreversible infrastructure changes. Instead, write a task with a STOP warning in Context explaining what needs manual review.
+- Multi-language projects: make locale updates explicit in Tasks and Acceptance Criteria for every affected task.
+- Tasks run fully autonomously: no questions, no options, no waiting for input.
+- There is no event loop in this headless run: never wait on a monitored event, a scheduled wakeup, a task notification, or any asynchronous callback. Explore synchronously and write the tasks."
+
+    WORKDIR=""
+    if [ -n "$PROJECT" ] && [ -f "$PROJECTS_DIR/${PROJECT}.md" ]; then
+        PREAMBLE="$PREAMBLE
+
+PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_DIR/${PROJECT}.md and follow its Working Directory, stack notes, and conventions."
+        if WD=$(project_working_dir "$PROJECT"); then
+            if [ -d "$WD" ]; then
+                WORKDIR="$WD"
+            fi
+        fi
+    fi
+
+    # The alias table is per provider and an empty result means "provider
+    # default"; the caller must not second-guess it.
+    MODEL_RAW=$(model_from_task "$BRIEF_FILE")
+    if [ -z "$MODEL_RAW" ]; then
+        MODEL_RAW="${default_model:-}"
+    fi
+    MODEL_ID=$(ai_model_alias "$MODEL_RAW")
+
+    echo "Decomposing '$BRIEF_NAME' with runner '$DECOMP_RUNNER' (timeout ${BRIEF_TIMEOUT_MIN}m)."
+    echo "Emitted tasks will be stamped: ## Runner $STAMP_RUNNER"
+
+    JSON_TMP=$(mktemp)
+    ERR_TMP=$(mktemp)
+
+    # The provider owns the timeout wrapper and returns the CLI status verbatim,
+    # including 124 for a timeout. stdout and stderr land in two SEPARATE files;
+    # merging them corrupts the JSON and silently blanks the extraction.
+    set +e
+    ai_run "${PREAMBLE}
+
+$(cat "$BRIEF_FILE")" \
+        "$MODEL_ID" \
+        "$WORKDIR" \
+        "$((BRIEF_TIMEOUT_MIN * 60))" \
+        "$JSON_TMP" \
+        "$ERR_TMP"
+    STATUS=$?
+    set -e
+
+    # ── Auth-failure circuit breaker ────────────────────────────────────────
+    # No work happened: put the brief back and pause only THIS runner's queue.
+    if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP"; then
+        write_raw "$(ai_json_text "$JSON_TMP")"
+        restore_brief
+        touch "$COOLDOWN_FILE"
+        rm -f "$JSON_TMP" "$ERR_TMP"
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Auth Failure" \
+            "$BRIEF_NAME deferred: re-authenticate this runner. Its queue is paused for the cooldown."
+        echo "Auth failure. Brief restored to $BRIEFS_DIR/${BRIEF_NAME}.md"
+        exit 0
+    fi
+
+    rm -f "$COOLDOWN_FILE"
+
+    RESULT_TEXT=$(ai_json_text "$JSON_TMP")
+    RESULT_TEXT=$(printf '%s' "$RESULT_TEXT" | tr -d '\r')
+
+    if [ "$STATUS" -ne 0 ] && [ -z "$RESULT_TEXT" ]; then
+        if [ "$STATUS" -eq 124 ]; then
+            INTERRUPT_REASON="timed out after ${BRIEF_TIMEOUT_MIN}m"
+        else
+            INTERRUPT_REASON="interrupted (exit code $STATUS)"
+        fi
+        write_raw ""
+        restore_brief
+        rm -f "$JSON_TMP" "$ERR_TMP"
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Brief Failed" \
+            "$BRIEF_NAME $INTERRUPT_REASON. Restored to briefs/. See $RAW_FILE"
+        echo "Failed: $INTERRUPT_REASON. Brief restored. Debug: $RAW_FILE"
+        exit 1
+    fi
+
+    if [ -z "$RESULT_TEXT" ]; then
+        write_raw ""
+        if [ -s "$JSON_TMP" ]; then
+            {
+                echo ""
+                echo "_stdout:_"
+                echo '```'
+                cat "$JSON_TMP"
+                echo '```'
+            } >> "$RAW_FILE"
+        fi
+        restore_brief
+        rm -f "$JSON_TMP" "$ERR_TMP"
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Brief Failed" \
+            "$BRIEF_NAME produced empty output. Restored to briefs/. See $RAW_FILE"
+        echo "Empty output. Brief restored. Debug: $RAW_FILE"
+        exit 1
+    fi
+
+    echo "Runner finished (exit $STATUS). Extracting task files..."
+
+    # ── Extraction ──────────────────────────────────────────────────────────
+    # The ONLY destination is $BACKLOG_REVIEW_DIR. The proposed filename has
+    # every path component stripped (gsub of everything up to the last slash)
+    # and is then reduced to [A-Za-z0-9._-], so no model output can steer a
+    # write into inbox/ or anywhere else outside the review queue.
+    TEXT_TMP=$(mktemp)
+    MANIFEST=$(mktemp)
+    printf '%s\n' "$RESULT_TEXT" > "$TEXT_TMP"
+
+    N_FILES=$(awk -v dir="$BACKLOG_REVIEW_DIR" -v manifest="$MANIFEST" '
+        /^===TASK_FILE_BEGIN: / {
+            sub(/^===TASK_FILE_BEGIN: /, "")
+            sub(/===[ \t]*$/, "")
+            filename = $0
+            gsub(/.*\//, "", filename)
+            gsub(/[^A-Za-z0-9._-]/, "-", filename)
+            if (filename != "" && filename !~ /\.md$/) filename = filename ".md"
+            if (filename == "" || filename == ".md") {
+                in_file = 0
+                next
+            }
+            in_file = 1
+            buffer = ""
+            next
+        }
+        /^===TASK_FILE_END===/ {
+            if (in_file && filename != "") {
+                print buffer > (dir "/" filename)
+                close(dir "/" filename)
+                print filename >> manifest
+                close(manifest)
+                n++
+            }
+            in_file = 0
+            filename = ""
+            next
+        }
+        in_file {
+            buffer = (buffer ? buffer "\n" $0 : $0)
+        }
+        END { print (n ? n : 0) }
+    ' "$TEXT_TMP")
+    N_FILES=${N_FILES:-0}
+
+    rm -f "$JSON_TMP" "$ERR_TMP" "$TEXT_TMP"
+
+    if [ "$N_FILES" -eq 0 ]; then
+        rm -f "$MANIFEST"
+        write_raw "$RESULT_TEXT"
+        restore_brief
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Brief Failed" \
+            "$BRIEF_NAME produced no task files. Check $RAW_FILE"
+        echo "No ===TASK_FILE_BEGIN=== blocks found. Brief restored. Debug: $RAW_FILE"
+        exit 1
+    fi
+
+    # ── Stamp ## Runner on every emitted file ───────────────────────────────
+    # Done here, not left to the model: routing that depends on the model having
+    # remembered to write a section is routing that silently regresses. Every
+    # file in the manifest gets one, and the count is asserted below.
+    while IFS= read -r fn || [ -n "$fn" ]; do
+        [ -n "$fn" ] || continue
+        [ -f "$BACKLOG_REVIEW_DIR/$fn" ] || continue
+        stamp_runner_section "$BACKLOG_REVIEW_DIR/$fn" "$STAMP_RUNNER"
+    done < "$MANIFEST"
+
+    # ── Dependency graph repair / validation ────────────────────────────────
+    # Strips a ## Depends-on whose slug was never emitted (the batch still
+    # runs, that task simply starts earlier), and fails the whole batch on a
+    # cycle or on a graph with no root. A batch with no root would sit in the
+    # review queue looking fine and then never start.
+    GRAPH_NOTES=$(mktemp)
+    set +e
+    repair_brief_task_graph "$MANIFEST" "$BACKLOG_REVIEW_DIR" > "$GRAPH_NOTES"
+    GRAPH_STATUS=$?
+    set -e
+    if [ -s "$GRAPH_NOTES" ]; then
+        echo "Dependency graph:"
+        cat "$GRAPH_NOTES"
+    fi
+
+    if [ $GRAPH_STATUS -ne 0 ]; then
+        while IFS= read -r fn || [ -n "$fn" ]; do
+            [ -n "$fn" ] && rm -f "$BACKLOG_REVIEW_DIR/$fn"
+        done < "$MANIFEST"
+        write_raw "$RESULT_TEXT"
+        {
+            echo ""
+            echo "## Graph validation"
+            echo ""
+            cat "$GRAPH_NOTES"
+        } >> "$RAW_FILE"
+        restore_brief
+        rm -f "$MANIFEST" "$GRAPH_NOTES"
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Brief Failed" \
+            "$BRIEF_NAME dependency graph is invalid (no root or cycle). Restored to briefs/. See $RAW_FILE"
+        echo "Invalid dependency graph. Brief restored. Debug: $RAW_FILE"
+        exit 1
+    fi
+
+    STRIPPED_NOTE=""
+    if grep -q "dangling Depends-on" "$GRAPH_NOTES" 2>/dev/null; then
+        STRIPPED_NOTE=" (dangling Depends-on stripped)"
+    fi
+
+    # Assert the stamp actually landed on every file. Cheap, and it turns a
+    # silent routing hole into a loud failure while the batch is still ours to
+    # roll back.
+    N_STAMPED=0
+    while IFS= read -r fn || [ -n "$fn" ]; do
+        [ -n "$fn" ] || continue
+        if grep -qE '^## Runner([[:space:]]|$)' "$BACKLOG_REVIEW_DIR/$fn" 2>/dev/null; then
+            N_STAMPED=$((N_STAMPED + 1))
+        fi
+    done < "$MANIFEST"
+
+    if [ "$N_STAMPED" -ne "$N_FILES" ]; then
+        while IFS= read -r fn || [ -n "$fn" ]; do
+            [ -n "$fn" ] && rm -f "$BACKLOG_REVIEW_DIR/$fn"
+        done < "$MANIFEST"
+        write_raw "$RESULT_TEXT"
+        restore_brief
+        rm -f "$MANIFEST" "$GRAPH_NOTES"
+        notify -u critical "ai-brief [$DECOMP_RUNNER]: Brief Failed" \
+            "$BRIEF_NAME: only $N_STAMPED of $N_FILES tasks carry ## Runner. Restored to briefs/."
+        echo "Runner stamp missing on $((N_FILES - N_STAMPED)) task(s). Brief restored. Debug: $RAW_FILE"
+        exit 1
+    fi
+
+    rm -f "$MANIFEST" "$GRAPH_NOTES"
+
+    mv "$BRIEF_FILE" "$BRIEF_ARCHIVE"
+    rm -f "$RAW_FILE"
+
+    notify "ai-brief [$DECOMP_RUNNER]: Brief Decomposed" \
+        "$BRIEF_NAME → $N_FILES task(s) in backlog-for-review/ for runner $STAMP_RUNNER${STRIPPED_NOTE}"
+    echo "Wrote $N_FILES task(s) to $BACKLOG_REVIEW_DIR${STRIPPED_NOTE}"
+    echo "All $N_STAMPED task(s) stamped: ## Runner $STAMP_RUNNER"
+    echo "Brief archived: $BRIEF_ARCHIVE"
+    echo "REVIEW GATE: read them, then move the ones you want run into $INBOX/"
+    exit 0
+fi
+
+# ── Launcher mode ──────────────────────────────────────────────────────────
+if ! INVOCATION_RUNNER=$(resolve_invocation_runner); then
+    echo "No runner: pass --runner NAME or set default_runner in $SCRIPT_DIR/config" >&2
+    exit 1
+fi
+
+# Validate the adapter before the brief is moved anywhere. A typo in --runner
+# would otherwise strand the brief in run/ when the tmux child died.
+if ! ( load_provider "$INVOCATION_RUNNER" >/dev/null ); then
+    exit 1
+fi
+
+# ── Auth cooldown guard (per runner) ───────────────────────────────────────
+# A recent auth failure pauses only THIS runner's unattended queue. An explicit
+# brief argument bypasses the guard so the user can kick one off manually right
+# after re-authenticating.
+COOLDOWN_FILE=$(cooldown_path "$INVOCATION_RUNNER")
+if [ -z "$BRIEF_ARG" ] && [ -f "$COOLDOWN_FILE" ] \
+    && find "$COOLDOWN_FILE" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+    echo "Auth cooldown active for runner '$INVOCATION_RUNNER' (last failure < ${AUTH_COOLDOWN_MIN}m ago). Skipping."
+    echo "Re-authenticate, then run a brief manually or: rm $COOLDOWN_FILE"
+    exit 0
+fi
+
+mkdir -p "$BRIEFS_DIR" "$BRIEFS_DONE_DIR" "$RUN_DIR" "$BACKLOG_REVIEW_DIR"
+
+if [ -n "$BRIEF_ARG" ]; then
+    BRIEF_FILE="$BRIEF_ARG"
+    if [ ! -f "$BRIEF_FILE" ]; then
+        echo "Brief file not found: $BRIEF_FILE" >&2
+        exit 1
+    fi
+else
+    # Oldest first, mtime order, whitespace-safe.
+    BRIEF_FILE=$(find "$BRIEFS_DIR" -maxdepth 1 -type f -name '*.md' -printf '%T@ %p\n' 2>/dev/null \
+        | sort -n | head -n 1 | cut -d' ' -f2-)
+fi
+
+if [ -z "$BRIEF_FILE" ] || [ ! -f "$BRIEF_FILE" ]; then
+    usage
+    echo ""
+    echo "No .md brief file found in $BRIEFS_DIR"
+    exit 1
+fi
+
+BRIEF_NAME=$(basename "$BRIEF_FILE" .md)
+
+# The stamp is resolved here too, purely so the launcher can name it in its
+# output: the human who queued the brief sees the routing before the run ends.
+STAMP_RUNNER=$(resolve_stamp_runner "$BRIEF_FILE") || STAMP_RUNNER="$INVOCATION_RUNNER"
+
+# The runner is part of the session name so two runners working the same tree
+# can never collide, and so `tmux ls` says who is who.
+SESSION=$(printf '%s' "ai-brief-${INVOCATION_RUNNER}-${BRIEF_NAME}" \
+    | tr -c 'A-Za-z0-9_-' '-' | cut -c1-50)
+
+# "=$SESSION" forces an EXACT match. A bare -t target falls back to prefix
+# matching, so a brief named `foo` would collide with a running `foo-2` and
+# refuse to launch: exactly the case the ai-briefs fan-out hits.
+if tmux has-session -t "=$SESSION" 2>/dev/null; then
+    echo "Session '$SESSION' already running. Attach: tmux attach -t $SESSION"
+    exit 1
+fi
+
+# Claim the brief by moving it out of briefs/ so a second launcher (or the
+# fan-out in ai-briefs) cannot pick the same file up twice.
+if [ "$(dirname "$(realpath "$BRIEF_FILE")")" != "$(realpath "$RUN_DIR")" ]; then
+    mv "$BRIEF_FILE" "$RUN_DIR/"
+    BRIEF_FILE="$RUN_DIR/$(basename "$BRIEF_FILE")"
+fi
+
+SELF_BIN="$HOME/bin/ai-brief"
+if [ ! -x "$SELF_BIN" ]; then
+    SELF_BIN="$SCRIPT_DIR/ai-brief"
+fi
+
+# TASKS_DIR is passed explicitly: the tmux server has its own environment, so a
+# tree override on this invocation would otherwise be lost and the child would
+# work against the default tree. That would make a throwaway smoke run touch
+# the live queue.
+tmux new-session -d -s "$SESSION" bash -lc \
+    "TASKS_DIR=$(printf '%q' "$TASKS_DIR") $(printf '%q' "$SELF_BIN") --run $(printf '%q' "$BRIEF_FILE") --runner $(printf '%q' "$INVOCATION_RUNNER")"
+
+echo "Decomposing '$BRIEF_NAME' in tmux session '$SESSION' (runner: $INVOCATION_RUNNER)."
+echo "Tasks will be stamped: ## Runner $STAMP_RUNNER"
+echo "Monitor : tmux attach -t $SESSION"
+echo "Result  : $BACKLOG_REVIEW_DIR/ (review it, then move what you want into $INBOX/)"

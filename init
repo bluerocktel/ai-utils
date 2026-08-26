@@ -1,0 +1,119 @@
+#!/bin/bash
+# init: set up the ai-utils pipeline tree under TASKS_DIR (default ~/tasks/)
+#   briefs → ai-brief → backlog-for-review → (human review) → inbox → ai-task → done/review
+#
+# Usage: ./init            (or ai-init, once the user installs a symlink)
+#        TASKS_DIR=/tmp/t ./init   (throwaway smoke tree)
+#
+# Idempotent by design, and deliberately additive only: it creates the nine
+# pipeline directories and DONE.md if missing, and never renames, moves or
+# deletes anything. Against the live ~/tasks/ tree (which already has all of
+# them) it is a no-op. The sample task and example project file are seeded only
+# for a non-default TASKS_DIR, so a smoke run cannot drop files into the live
+# inbox or projects directory.
+
+set -euo pipefail
+
+DEFAULT_TASKS_DIR="$HOME/tasks"
+TASKS_DIR="${TASKS_DIR:-$DEFAULT_TASKS_DIR}"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+
+echo "Initializing $TASKS_DIR ..."
+
+mkdir -p \
+    "$TASKS_DIR/briefs" \
+    "$TASKS_DIR/briefs/done" \
+    "$TASKS_DIR/backlog-for-review" \
+    "$TASKS_DIR/inbox" \
+    "$TASKS_DIR/run" \
+    "$TASKS_DIR/done" \
+    "$TASKS_DIR/review" \
+    "$TASKS_DIR/projects" \
+    "$TASKS_DIR/.locks"
+
+if [ ! -f "$TASKS_DIR/DONE.md" ]; then
+    printf '# Task log\n\n' > "$TASKS_DIR/DONE.md"
+    echo "Created $TASKS_DIR/DONE.md"
+fi
+
+if [ "$TASKS_DIR" = "$DEFAULT_TASKS_DIR" ]; then
+    echo "Live tree ($DEFAULT_TASKS_DIR): skipping sample task and example project seed."
+else
+    SAMPLE="$TASKS_DIR/inbox/sample-echo-task.md"
+    if [ -f "$SAMPLE" ] \
+        || ls "$TASKS_DIR/done/"*sample-echo-task* >/dev/null 2>&1 \
+        || ls "$TASKS_DIR/run/"*sample-echo-task* >/dev/null 2>&1 \
+        || ls "$TASKS_DIR/review/"*sample-echo-task* >/dev/null 2>&1; then
+        echo "Sample task already present or previously processed, skipping seed."
+    else
+        cat > "$SAMPLE" <<'SAMPLEEOF'
+# Sample echo task (smoke test)
+
+## Context
+
+Smoke-test task for ai-utils. No project tree required.
+
+## Tasks
+
+1. Write the single line `ai-utils ok` into `/tmp/ai-utils-sample.txt` (overwrite if present).
+2. Confirm the file exists and contains exactly that line.
+
+## Expected outcome
+
+`/tmp/ai-utils-sample.txt` exists with contents: ai-utils ok
+
+## Acceptance Criteria
+
+- File `/tmp/ai-utils-sample.txt` exists
+- File contents are exactly: ai-utils ok
+
+## Test Command
+
+test -f /tmp/ai-utils-sample.txt
+grep -qx 'ai-utils ok' /tmp/ai-utils-sample.txt
+SAMPLEEOF
+        echo "Created sample task: $SAMPLE"
+    fi
+
+    PROJECT_SAMPLE="$TASKS_DIR/projects/example.md"
+    if [ ! -f "$PROJECT_SAMPLE" ]; then
+        cat > "$PROJECT_SAMPLE" <<'PROJEOF'
+## Type
+code
+
+## Aliases
+- `example`
+
+## Working Directory
+`~/`
+
+## Notes
+
+Rename or replace this file. Reference a project from a task with:
+
+## Project
+example
+PROJEOF
+        echo "Created example project file: $PROJECT_SAMPLE"
+    fi
+fi
+
+echo ""
+echo "Done. Directories ready:"
+echo "  $TASKS_DIR/briefs/              # drop a loose feature brief here"
+echo "  $TASKS_DIR/briefs/done/         # archived briefs (referenced by ## Brief)"
+echo "  $TASKS_DIR/backlog-for-review/  # structured tasks waiting for your review"
+echo "  $TASKS_DIR/inbox/               # drop ready-to-run .md tasks here"
+echo "  $TASKS_DIR/run/                 # tasks / briefs currently executing"
+echo "  $TASKS_DIR/done/                # results + archived task files"
+echo "  $TASKS_DIR/review/              # failed after max retries"
+echo "  $TASKS_DIR/projects/            # optional project context files"
+echo ""
+echo "Config (once):"
+echo "  cp $SCRIPT_DIR/config.example $SCRIPT_DIR/config"
+echo "  # then set default_runner= to the provider a task without ## Runner should use"
+echo ""
+echo "A task picks its runner with a ## Runner section; unset means default_runner."
+echo "The auth cooldown marker is per runner: $TASKS_DIR/.auth-cooldown-<runner>"
+echo ""
+echo "Symlinks and cron are a MANUAL step for the user; this script installs neither."

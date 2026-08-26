@@ -1,0 +1,541 @@
+#!/bin/bash
+# dtask: dashboard view of the ai-utils pipeline (~/tasks/, all runners).
+#
+# Read-only. Never calls an agent, never moves a file, never writes into the
+# tree: it only reads $TASKS_DIR (via lib.sh) and $SCRIPT_DIR/providers/*.sh.
+#
+# Ported from the reference dashboard that already covered what four separate
+# per-provider dashboards (dtask, ltask, vtask, mtask) used to split up. This
+# single script replaces all four for the unified tree. Runner names are never
+# hardcoded here: they come from config (default_runner) and from
+# providers/*.sh / .auth-cooldown-* file names at runtime.
+#
+# Usage:
+#   dtask                  Show dashboard once
+#   dtask -w               Live refresh every 30 seconds
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+PROVIDERS_DIR="$SCRIPT_DIR/providers"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+
+if [ "${1:-}" = "-w" ]; then
+    exec watch -n 30 -c "$(realpath "$0")"
+fi
+
+AUTH_COOLDOWN_MIN=30
+load_config
+AUTH_COOLDOWN_MIN=${auth_cooldown_min:-$AUTH_COOLDOWN_MIN}
+
+# ── Colors ──────────────────────────────────────────────────────
+if [ "${NO_COLOR:-}" ]; then
+    BOLD="" RED="" GREEN="" YELLOW="" BLUE="" CYAN="" DIM="" RESET=""
+else
+    BOLD=$(tput bold 2>/dev/null || echo "")
+    RED=$(tput setaf 1 2>/dev/null || echo "")
+    GREEN=$(tput setaf 2 2>/dev/null || echo "")
+    YELLOW=$(tput setaf 3 2>/dev/null || echo "")
+    BLUE=$(tput setaf 4 2>/dev/null || echo "")
+    CYAN=$(tput setaf 6 2>/dev/null || echo "")
+    DIM=$(tput dim 2>/dev/null || tput setaf 8 2>/dev/null || echo "")
+    RESET=$(tput sgr0 2>/dev/null || echo "")
+fi
+
+# ── Helpers ─────────────────────────────────────────────────────
+
+# Count .md task files in a directory (ignores sidecars: .state, .raw, .log).
+_count() {
+    local dir="$1" n
+    [ -d "$dir" ] || { echo 0; return; }
+    n=$(find "$dir" -maxdepth 1 -type f -name "*.md" | wc -l)
+    echo "${n// /}"
+}
+
+# List basenames (strip .md) of .md task files in a directory
+_list() {
+    local dir="$1"
+    [ -d "$dir" ] || return
+    find "$dir" -maxdepth 1 -type f -name "*.md" -printf "%f\n" | sed 's/\.md$//' | sort
+}
+
+# Strip YYYY-MM-DD_ and optional HH-MM_ prefixes for display
+_display() {
+    echo "$1" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9]\{2\}-[0-9]\{2\}_//' \
+              | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_//'
+}
+
+# Elapsed time from file mtime
+_elapsed() {
+    local file="$1"
+    local now mtime diff
+    now=$(date +%s)
+    mtime=$(stat -c %Y "$file" 2>/dev/null || echo "$now")
+    diff=$((now - mtime))
+    if   [ "$diff" -lt 60 ];   then echo "${diff}s"
+    elif [ "$diff" -lt 3600 ]; then echo "$((diff/60))m"
+    else echo "$((diff/3600))h$((diff%3600/60))m"
+    fi
+}
+
+# tmux session name used by ai-task for one runner/task pair.
+_session_task() {
+    printf '%s' "ai-${1}-${2}" | tr -c 'A-Za-z0-9_-' '-' | cut -c1-50
+}
+
+# tmux session name used by ai-brief for one runner/brief pair.
+_session_brief() {
+    printf '%s' "ai-brief-${1}-${2}" | tr -c 'A-Za-z0-9_-' '-' | cut -c1-50
+}
+
+# Runner names this tree knows about: every providers/<runner>.sh on disk,
+# plus the suffix of any .auth-cooldown-<runner> marker actually present, so a
+# marker never goes unreported just because its provider file was removed.
+_known_runners() {
+    local f name
+    declare -A seen=()
+    if [ -d "$PROVIDERS_DIR" ]; then
+        for f in "$PROVIDERS_DIR"/*.sh; do
+            [ -f "$f" ] || continue
+            name=$(basename "$f" .sh)
+            seen[$name]=1
+        done
+    fi
+    for f in "$TASKS_DIR"/.auth-cooldown-*; do
+        [ -f "$f" ] || continue
+        name="${f##*/.auth-cooldown-}"
+        [ -n "$name" ] && seen[$name]=1
+    done
+    printf '%s\n' "${!seen[@]}" | sort
+}
+
+# Resolve a task file's runner, falling back to default_runner (never blank,
+# never "unknown"): runner_from_task already does this, this just names the
+# rare case where neither is configured.
+_runner_of() {
+    runner_from_task "$1" 2>/dev/null || echo "unconfigured"
+}
+
+# Resolve the runner for a DONE.md entry, given the **Result:** path it names.
+#
+# That path is the RESULT file, which carries the runner as a bold field
+# (`**Runner:** x`), NOT as a `## Runner` heading. Handing it straight to
+# runner_from_task therefore always finds nothing and falls back to
+# default_runner, so every archived entry rendered as the default runner
+# whatever it actually ran on. Read the archived task file instead: ai-task
+# stores it beside the result as `<base>.task.md`, and that one does carry a
+# real `## Runner` section.
+#
+# Order matters: the `.task.md` companion is ground truth, the result file's
+# bold field is the fallback for an entry whose task file has been moved away,
+# and only then do we resolve to the configured default.
+_runner_of_result() {
+    local result="${1:-}" task_file bold
+    [ -n "$result" ] || { echo "unconfigured"; return 0; }
+
+    task_file="${result%.md}.task.md"
+    if [ -r "$task_file" ]; then
+        runner_from_task "$task_file" 2>/dev/null && return 0
+    fi
+
+    if [ -r "$result" ]; then
+        bold=$(awk '/^\*\*Runner:\*\*/ {sub(/^\*\*Runner:\*\* +/, ""); print; exit}' \
+            "$result" 2>/dev/null | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+        [ -n "$bold" ] && { printf '%s\n' "$bold"; return 0; }
+    fi
+
+    _runner_of "$result"
+}
+
+# Print a section header
+_section() {
+    printf '\n%s%s%s\n' "${BOLD}${CYAN}" "$1" "$RESET"
+}
+
+# Print a separator line
+_sep() {
+    printf '%s%s%s\n' "$DIM" "────────────────────────────────────────────────────────────" "$RESET"
+}
+
+# Format a pipeline stage: dimmed if 0, yellow if warn+count>0, else normal
+_stage() {
+    local label="$1" count="$2" warn="${3:-}"
+    if [ "$count" -eq 0 ]; then
+        printf '%s%s(%d)%s' "$DIM" "$label" "$count" "$RESET"
+    elif [ -n "$warn" ]; then
+        printf '%s%s%s(%s%d%s)' "$BOLD" "$label" "$RESET" "${YELLOW}" "$count" "$RESET"
+    else
+        printf '%s%s%s(%d)' "$BOLD" "$label" "$RESET" "$count"
+    fi
+}
+
+# True if the given runner's cooldown marker is still inside the window.
+_cooldown_active() {
+    local marker
+    marker=$(cooldown_path "$1") || return 1
+    [ -f "$marker" ] || return 1
+    find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .
+}
+
+_cooldown_left() {
+    local marker now mtime elapsed left
+    marker=$(cooldown_path "$1") || { echo 0; return; }
+    now=$(date +%s)
+    mtime=$(stat -c %Y "$marker" 2>/dev/null || echo "$now")
+    elapsed=$(( (now - mtime) / 60 ))
+    left=$((AUTH_COOLDOWN_MIN - elapsed))
+    [ "$left" -lt 0 ] && left=0
+    echo "$left"
+}
+
+# ── Counts ──────────────────────────────────────────────────────
+n_briefs=$(_count "$BRIEFS_DIR")
+n_brev=$(_count "$BACKLOG_REVIEW_DIR")
+n_inbox=$(_count "$INBOX")
+n_run=$(_count "$RUN_DIR")
+n_review=$(_count "$REVIEW_DIR")
+
+total_attention=$((n_brev + n_review))
+
+# ── Today's stats from DONE.md ──────────────────────────────────
+today=$(date '+%Y-%m-%d')
+n_done=0; n_retry=0; n_failed=0; n_needs_review=0; n_deferred=0
+
+if [ -f "$LOG" ]; then
+    today_statuses=$(awk -v d="$today" '
+        /^## / { in_today = ($2 == d) }
+        in_today && /^\*\*Status:\*\*/ { print }
+    ' "$LOG")
+    n_done=$(echo "$today_statuses" | grep -c "completed" || true)
+    n_retry=$(echo "$today_statuses" | grep -c "requeued" || true)
+    n_failed=$(echo "$today_statuses" | grep -c "FAILED" || true)
+    n_needs_review=$(echo "$today_statuses" | grep -c "NEEDS REVIEW" || true)
+    n_deferred=$(echo "$today_statuses" | grep -c "DEFERRED" || true)
+fi
+
+# ── Header ──────────────────────────────────────────────────────
+printf '%s  ai-dash%s  ·  %s\n' "${BOLD}${BLUE}" "$RESET" "$(date '+%a %b %-d, %H:%M')"
+_sep
+
+# ── Per-runner auth cooldown ─────────────────────────────────────
+cooldown_any=0
+while IFS= read -r r; do
+    [ -z "$r" ] && continue
+    if _cooldown_active "$r"; then
+        cooldown_any=1
+        printf '%s  ⚠  AUTH COOLDOWN (%s)  %s%sm remaining%s  ·  unattended launches paused for this runner\n' \
+            "${BOLD}${RED}" "$r" "$RESET" "$(_cooldown_left "$r")" "$DIM"
+    fi
+done < <(_known_runners)
+[ "$cooldown_any" -eq 1 ] && _sep
+
+# ── Needs Attention ─────────────────────────────────────────────
+_section "⚑  NEEDS ATTENTION"
+
+if [ "$total_attention" -eq 0 ]; then
+    printf '  %s✓ Nothing needs your attention%s\n' "$GREEN" "$RESET"
+else
+    printf '  %s%d item(s) require your input%s\n\n' "${BOLD}${YELLOW}" "$total_attention" "$RESET"
+
+    while IFS= read -r name; do
+        [ -z "$name" ] && continue
+        runner=$(_runner_of "$BACKLOG_REVIEW_DIR/${name}.md")
+        printf '  %s●%s %-40s  %s[%s]%s  %s(backlog for review)%s\n' \
+            "$YELLOW" "$RESET" "$(_display "$name")" "$CYAN" "$runner" "$RESET" "$DIM" "$RESET"
+    done < <(_list "$BACKLOG_REVIEW_DIR")
+
+    while IFS= read -r name; do
+        [ -z "$name" ] && continue
+        runner=$(_runner_of "$REVIEW_DIR/${name}.md")
+        printf '  %s●%s %-40s  %s[%s]%s  %s(failed, needs review)%s\n' \
+            "$RED" "$RESET" "$(_display "$name")" "$CYAN" "$runner" "$RESET" "$DIM" "$RESET"
+    done < <(_list "$REVIEW_DIR")
+fi
+
+# ── Pipeline ────────────────────────────────────────────────────
+_section "  PIPELINE"
+
+printf '  '
+_stage "briefs" "$n_briefs"
+printf ' → '
+_stage "prep-review" "$n_brev" warn
+printf ' → '
+_stage "inbox" "$n_inbox"
+printf ' → '
+_stage "running" "$n_run"
+printf ' → '
+_stage "review" "$n_review" warn
+printf '\n'
+
+# ── Running ─────────────────────────────────────────────────────
+_section "  RUNNING"
+
+running=()
+while IFS= read -r name; do
+    [ -n "$name" ] && running+=("$name")
+done < <(_list "$RUN_DIR")
+
+if [ ${#running[@]} -eq 0 ]; then
+    printf '  %s(none)%s\n' "$DIM" "$RESET"
+else
+    for name in "${running[@]}"; do
+        f="$RUN_DIR/${name}.md"
+        [ -f "$f" ] || f=$(find "$RUN_DIR" -maxdepth 1 -type f -name "${name}.md" | head -1)
+        elapsed=$(_elapsed "$f")
+
+        # ai-task drops a .state sidecar recording the exact runner and
+        # session it claimed the task under; that is ground truth. Fall back
+        # to resolving the task's own ## Runner only when no sidecar exists
+        # (e.g. a brief mid-decomposition, or an item claimed some other way).
+        runner="" sess=""
+        state="$RUN_DIR/${name}.state"
+        if [ -f "$state" ]; then
+            runner=$(awk -F= '/^runner=/{print $2; exit}' "$state")
+            sess=$(awk -F= '/^session=/{print $2; exit}' "$state")
+        fi
+        [ -n "$runner" ] || runner=$(_runner_of "$f")
+
+        if [ -n "$sess" ] && tmux has-session -t "=$sess" 2>/dev/null; then
+            status="${GREEN}● live${RESET}"
+        elif tmux has-session -t "=$(_session_brief "$runner" "$name")" 2>/dev/null; then
+            status="${GREEN}● live${RESET}  ${DIM}brief${RESET}"
+        elif tmux has-session -t "=$(_session_task "$runner" "$name")" 2>/dev/null; then
+            status="${GREEN}● live${RESET}"
+        else
+            status="${YELLOW}○ orphan${RESET}"
+        fi
+        printf '  %b  %s[%s]%s  %-45s  %s(%s)%s\n' \
+            "$status" "$CYAN" "$runner" "$RESET" "$name" "$DIM" "$elapsed" "$RESET"
+    done
+fi
+
+# ── Today's stats ────────────────────────────────────────────────
+_section "  TODAY  $(date '+%Y-%m-%d')"
+
+fail_color=""
+[ "$n_failed" -gt 0 ] && fail_color="$RED"
+review_color=""
+[ "$n_needs_review" -gt 0 ] && review_color="$RED"
+defer_color=""
+[ "$n_deferred" -gt 0 ] && defer_color="$CYAN"
+
+printf '  %sCompleted:%s %s%d%s   %sRetried:%s %d   %sDeferred:%s %s%d%s   %sFailed:%s %s%d%s   %sNeeds Review:%s %s%d%s\n' \
+    "$BOLD" "$RESET" "$GREEN" "$n_done" "$RESET" \
+    "$BOLD" "$RESET" "$n_retry" \
+    "$BOLD" "$RESET" "$defer_color" "$n_deferred" "$RESET" \
+    "$BOLD" "$RESET" "$fail_color" "$n_failed" "$RESET" \
+    "$BOLD" "$RESET" "$review_color" "$n_needs_review" "$RESET"
+
+# ── By runner ─────────────────────────────────────────────────────
+_section "  BY RUNNER"
+
+declare -A runner_briefs runner_brev runner_inbox runner_run runner_review
+
+_tally_runner() {
+    local dir="$1"
+    local -n _rmap="$2"
+    local file r
+    [ -d "$dir" ] || return
+    while IFS= read -r name; do
+        [ -z "$name" ] && continue
+        file="$dir/${name}.md"
+        [ -f "$file" ] || continue
+        r=$(_runner_of "$file")
+        _rmap[$r]=$(( ${_rmap[$r]:-0} + 1 ))
+    done < <(_list "$dir")
+}
+
+_tally_runner "$BRIEFS_DIR"         runner_briefs
+_tally_runner "$BACKLOG_REVIEW_DIR" runner_brev
+_tally_runner "$INBOX"              runner_inbox
+_tally_runner "$RUN_DIR"            runner_run
+_tally_runner "$REVIEW_DIR"         runner_review
+
+declare -A all_runners
+for r in "${!runner_briefs[@]}" "${!runner_brev[@]}" \
+         "${!runner_inbox[@]}" "${!runner_run[@]}" "${!runner_review[@]}"; do
+    all_runners[$r]=1
+done
+
+if [ ${#all_runners[@]} -eq 0 ]; then
+    printf '  %s(no tasks in pipeline)%s\n' "$DIM" "$RESET"
+else
+    for r in $(printf '%s\n' "${!all_runners[@]}" | sort); do
+        printf '  %s%-20s%s' "$BOLD" "$r" "$RESET"
+        [ "${runner_briefs[$r]:-0}" -gt 0 ] && printf '  briefs:%d'          "${runner_briefs[$r]}"
+        [ "${runner_brev[$r]:-0}"   -gt 0 ] && printf '  %sprep-review:%d%s' "$YELLOW" "${runner_brev[$r]}" "$RESET"
+        [ "${runner_inbox[$r]:-0}"  -gt 0 ] && printf '  inbox:%d'           "${runner_inbox[$r]}"
+        [ "${runner_run[$r]:-0}"    -gt 0 ] && printf '  %srunning:%d%s'     "$GREEN" "${runner_run[$r]}" "$RESET"
+        [ "${runner_review[$r]:-0}" -gt 0 ] && printf '  %sreview:%d%s'      "$RED" "${runner_review[$r]}" "$RESET"
+        printf '\n'
+    done
+fi
+
+# ── By project ───────────────────────────────────────────────────
+_section "  BY PROJECT"
+
+declare -A proj_briefs proj_brev proj_inbox proj_run proj_review
+
+_tally() {
+    local dir="$1"
+    local -n _map="$2"
+    local file proj
+    [ -d "$dir" ] || return
+    while IFS= read -r name; do
+        [ -z "$name" ] && continue
+        file="$dir/${name}.md"
+        [ -f "$file" ] || continue
+        proj=$(project_from_task "$file")
+        [ -z "$proj" ] && proj="other"
+        _map[$proj]=$(( ${_map[$proj]:-0} + 1 ))
+    done < <(_list "$dir")
+}
+
+_tally "$BRIEFS_DIR"         proj_briefs
+_tally "$BACKLOG_REVIEW_DIR" proj_brev
+_tally "$INBOX"              proj_inbox
+_tally "$RUN_DIR"            proj_run
+_tally "$REVIEW_DIR"         proj_review
+
+declare -A all_projects
+for p in "${!proj_briefs[@]}" "${!proj_brev[@]}" \
+         "${!proj_inbox[@]}" "${!proj_run[@]}" "${!proj_review[@]}"; do
+    all_projects[$p]=1
+done
+
+if [ ${#all_projects[@]} -eq 0 ]; then
+    printf '  %s(no tasks in pipeline)%s\n' "$DIM" "$RESET"
+else
+    for proj in $(printf '%s\n' "${!all_projects[@]}" | sort); do
+        printf '  %s%-20s%s' "$BOLD" "$proj" "$RESET"
+        [ "${proj_briefs[$proj]:-0}" -gt 0 ] && printf '  briefs:%d'          "${proj_briefs[$proj]}"
+        [ "${proj_brev[$proj]:-0}"   -gt 0 ] && printf '  %sprep-review:%d%s' "$YELLOW" "${proj_brev[$proj]}" "$RESET"
+        [ "${proj_inbox[$proj]:-0}"  -gt 0 ] && printf '  inbox:%d'           "${proj_inbox[$proj]}"
+        [ "${proj_run[$proj]:-0}"    -gt 0 ] && printf '  %srunning:%d%s'     "$GREEN" "${proj_run[$proj]}" "$RESET"
+        [ "${proj_review[$proj]:-0}" -gt 0 ] && printf '  %sreview:%d%s'      "$RED" "${proj_review[$proj]}" "$RESET"
+        printf '\n'
+    done
+fi
+
+# ── Agents ───────────────────────────────────────────────────────
+# Inventory of the agent layer (agents/CONTRACT.md): one line per routine
+# defined in THIS repo, grouped by its owning agent.
+#
+# Strictly read-only, like the rest of this script: it reads the definition root
+# and $SCHEDULED_DIR, and writes nothing anywhere. Both are guarded, so an
+# absent agents/ or scheduled/ is silence, not an error.
+#
+# Prints NOTHING AT ALL, not even the header, when no routine is defined: a
+# tree with no agents must render exactly the dashboard it rendered before this
+# section existed.
+AGENTS_DIR="$(agents_dir)"
+
+# Routine definition files, as absolute paths: agents/<agent>/routines/<slug>.md
+_routine_files() {
+    [ -d "$AGENTS_DIR" ] || return
+    find "$AGENTS_DIR" -mindepth 3 -maxdepth 3 -type f -path '*/routines/*.md' \
+        2>/dev/null | sort
+}
+
+_agent_routines=$(_routine_files)
+
+if [ -n "$_agent_routines" ]; then
+    _section "  AGENTS"
+
+    _last_agent=""
+    while IFS= read -r rfile; do
+        [ -n "$rfile" ] || continue
+        [ -f "$rfile" ] || continue
+
+        rslug=$(basename "$rfile" .md)
+        # <agents_dir>/<agent>/routines/<slug>.md → <agent>
+        ragent=$(basename "$(dirname "$(dirname "$rfile")")")
+        rkind=$(field_from_task Kind "$rfile" | awk 'NR == 1 {print $1}')
+        rsched=$(field_from_task Schedule "$rfile" | awk 'NR == 1 {print $1}')
+        # permission_from_job prints nothing and returns 1 on a value it does
+        # not recognise: show that as "?", never as the default, which it is
+        # not — an unrecognised permission makes ai-scheduled skip the job.
+        rperm=$(permission_from_job "$rfile" 2>/dev/null || true)
+        [ -n "$rperm" ] || rperm="?"
+
+        # `act` is the level that can reach outside this pipeline, so it is
+        # the one that has to be visible at a glance.
+        case "$rperm" in
+            act)     perm_color="$RED" ;;
+            propose) perm_color="$YELLOW" ;;
+            read)    perm_color="$DIM" ;;
+            *)       perm_color="$RED" ;;
+        esac
+
+        # Published = the slug is live as a job file in scheduled/.
+        rstate="${DIM}not published${RESET}"
+        if [ -f "$SCHEDULED_DIR/$rslug.md" ]; then
+            rstate="${GREEN}published${RESET}"
+            # <slug>.run holds the epoch seconds of the last dispatch and is
+            # written at that instant, so its mtime is the same moment: reuse
+            # _elapsed rather than growing a second time formatter.
+            if [ -f "$SCHED_STATE_DIR/$rslug.run" ]; then
+                rstate="$rstate ${DIM}· ran $(_elapsed "$SCHED_STATE_DIR/$rslug.run") ago${RESET}"
+            else
+                rstate="$rstate ${DIM}· never run${RESET}"
+            fi
+        fi
+
+        if [ "$ragent" != "$_last_agent" ]; then
+            printf '  %s%s%s\n' "$BOLD" "$ragent" "$RESET"
+            _last_agent="$ragent"
+        fi
+
+        printf '    %-26s %-9s %-12s %b%-8s%b  %b\n' \
+            "$rslug" "${rkind:-?}" "${rsched:-?}" \
+            "$perm_color" "$rperm" "$RESET" "$rstate"
+    done <<< "$_agent_routines"
+fi
+
+# ── Recent activity ───────────────────────────────────────────────
+_section "  RECENT ACTIVITY"
+
+if [ -f "$LOG" ]; then
+    awk '
+        /^## [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2} - / {
+            split($0, h, " - ")
+            ts = substr(h[1], 4)
+            name = h[2]
+            status = ""
+            result = ""
+        }
+        /^\*\*Status:\*\*/ && name != "" {
+            line = $0
+            sub(/^\*\*Status:\*\* /, "", line)
+            status = line
+        }
+        /^\*\*Result:\*\*/ && name != "" && status != "" {
+            line = $0
+            sub(/^\*\*Result:\*\* `/, "", line)
+            sub(/`$/, "", line)
+            entries[n++] = ts "|" name "|" status "|" line
+            name = ""
+        }
+        END {
+            start = (n > 8) ? n - 8 : 0
+            for (i = start; i < n; i++) print entries[i]
+        }
+    ' "$LOG" | while IFS='|' read -r ts name status result; do
+        time_part="${ts#* }"
+        display=$(_display "$name")
+        runner=$(_runner_of_result "$result")
+
+        if [[ "$status" == *"completed"* ]];      then icon="${GREEN}✓${RESET}"
+        elif [[ "$status" == *"requeued"* ]];     then icon="${YELLOW}↺${RESET}"
+        elif [[ "$status" == *"DEFERRED"* ]];     then icon="${CYAN}↓${RESET}"
+        elif [[ "$status" == *"NEEDS REVIEW"* ]]; then icon="${RED}!${RESET}"
+        else                                           icon="${RED}✗${RESET}"
+        fi
+
+        printf '  %s  %b  %s[%s]%s  %s%-45s%s  %s%s%s\n' \
+            "$time_part" "$icon" "$CYAN" "$runner" "$RESET" "$BOLD" "$display" "$RESET" "$DIM" "$status" "$RESET"
+    done
+else
+    printf '  %s(no log yet)%s\n' "$DIM" "$RESET"
+fi
+
+printf '\n%s%s%s\n' "$DIM" "$(date '+Updated: %H:%M:%S')  ·  live: dtask -w" "$RESET"
