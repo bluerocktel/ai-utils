@@ -122,6 +122,87 @@ field_from_task() {
 
     printf '%s' "$val" | tr -d '\r' | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//'
 }
+# Print every line of one "## Section" of a file: everything after the heading
+# up to the next line beginning with "##", or EOF.
+#
+#   section_from_task Relationships ~/tasks/projects/brteladmin.md
+#
+# Companion to field_from_task, not a replacement for it: field_from_task
+# returns ONE line (the inline value, else the line after the heading), which
+# is right for ## Runner / ## Model / ## Project and wrong for a multi-line
+# bullet block like ## Relationships.
+#
+# The heading match is case-insensitive and tolerates both "## Name" and
+# "## Name:". An absent section prints nothing and returns 0: callers run under
+# `set -e`, and a project file with no such section is the common case.
+section_from_task() {
+    local field="$1" file="$2"
+    [ -r "$file" ] || return 0
+    awk -v f="$field" '
+        /^##/ {
+            line = tolower($0)
+            sub(/[[:space:]]+$/, "", line)
+            sub(/:$/, "", line)
+            insec = (line == tolower("## " f))
+            next
+        }
+        insec { print }
+    ' "$file" | tr -d '\r'
+    return 0
+}
+
+# Outbound propagation targets declared by one project, one per line, as
+# "verb<TAB>alias":
+#
+#   project_relationship_targets brteladmin
+#   → mirror<TAB>oryn
+#     content<TAB>brtelsite
+#     content<TAB>marketing
+#
+# Reads the ## Relationships section of $PROJECTS_DIR/<project>.md and matches
+# bullets of the form "- <verb> <arrow> <alias>: <prose>".
+#
+# VERB HANDLING IS PERMISSIVE, TARGET HANDLING IS STRICT. Any verb is passed
+# through rather than being checked against a hardcoded mirror|content list:
+# the live tree already carries a `host` verb, and a closed list drops it
+# silently. What gets validated is the TARGET, by the caller, against this set
+# plus the existence of the target's own project file. A verb this repo has
+# never seen is a label on a proposal a human still has to promote; an
+# unvalidated target is a write attributed to a project that may not exist.
+#
+# Both arrow spellings are accepted: the real project files use the Unicode
+# arrow (U+2192), while ai-scheduled's planner prompt advertises the ASCII
+# "->". No project file is rewritten either way.
+#
+# Prints nothing and returns 0 when the project file is missing, has no
+# ## Relationships section, or declares "(none ...)" — the last case falls out
+# for free, since it is not a bullet.
+project_relationship_targets() {
+    local project="${1:-}" file
+    [ -n "$project" ] || return 0
+    # A path component in the alias would read a project file outside the tree.
+    project=$(basename "$project" | tr -cd '[:alnum:]._-')
+    [ -n "$project" ] || return 0
+    file="$PROJECTS_DIR/${project}.md"
+    [ -r "$file" ] || return 0
+
+    section_from_task Relationships "$file" \
+        | sed 's/\xe2\x86\x92/->/g' \
+        | awk '
+            /^[[:space:]]*-[[:space:]]+[A-Za-z0-9_-]+[[:space:]]*->[[:space:]]*[A-Za-z0-9._-]+[[:space:]]*:/ {
+                line = $0
+                sub(/^[[:space:]]*-[[:space:]]+/, "", line)
+                split(line, part, /[[:space:]]*->[[:space:]]*/)
+                verb = part[1]
+                sub(/[[:space:]]+$/, "", verb)
+                rest = part[2]
+                alias = substr(rest, 1, index(rest, ":") - 1)
+                gsub(/[[:space:]]/, "", alias)
+                if (verb != "" && alias != "") printf "%s\t%s\n", verb, alias
+            }
+        '
+    return 0
+}
 
 # Resolve the runner for a scheduled JOB file (## Runner, either spelling).
 #
@@ -599,6 +680,64 @@ slug_exists() {
     done
     slug_file_in_dir "$DONE_DIR" ".task.md" "$slug" && return 0
     return 1
+}
+# ── Suggestion stubs ────────────────────────────────────────────────────────
+# A stub is the machine's proposal for follow-up work; a human reads
+# suggestions/ and promotes what is worth doing. Write one file per stub, named
+# by its own slug, skipping any slug already anywhere in the pipeline.
+#
+#   write_stub <stub-text> <origin-slug> [<permitted-targets>]
+#
+# The slug is reduced to [A-Za-z0-9-] and stripped of every path component, so
+# no agent output can steer a write out of suggestions/ (same rule as
+# ai-brief's filename handling).
+#
+# PERMITTED TARGETS is a newline-separated set of project aliases this stub may
+# be attributed to. When it is non-empty the stub's `project:` line must be one
+# of them AND $PROJECTS_DIR/<alias>.md must exist, or the stub is refused with
+# a log line naming the rejected target. Enforced here rather than only in the
+# prompt that produced the stub: a rule that lives in prompt text is a rule the
+# model can talk itself out of, and the whole point of a bounded cross-project
+# reflex is that the bound holds. An EMPTY argument keeps the pre-existing
+# behaviour exactly, which is what the two ai-scheduled call sites rely on.
+#
+# Messages go to stdout prefixed with $STUB_LOG_PREFIX, rather than through a
+# log() that only one caller defines. ai-scheduled sets it to its own prefix so
+# its output is unchanged by this function having moved here.
+STUB_LOG_PREFIX="${STUB_LOG_PREFIX:-}"
+
+write_stub() {
+    local stub="$1" jobslug="$2" allowed="${3:-}" slug body target
+    slug=$(printf '%s' "$stub" | awk -F': *' '/^slug:/{print $2; exit}')
+    slug=$(basename "${slug:-}" | tr -cd '[:alnum:]-')
+    if [ -z "$slug" ]; then
+        echo "${STUB_LOG_PREFIX}job '$jobslug': suggestion had no usable slug — not written"
+        return 1
+    fi
+    if slug_exists "$slug"; then
+        echo "${STUB_LOG_PREFIX}job '$jobslug': skip stub '$slug' (already in the pipeline)"
+        return 1
+    fi
+    if [ -n "$allowed" ]; then
+        target=$(printf '%s' "$stub" | awk -F': *' '/^project:/{print $2; exit}')
+        target=$(basename "${target:-}" | tr -cd '[:alnum:]._-')
+        if [ -z "$target" ] \
+            || ! printf '%s\n' "$allowed" | grep -qxF -- "$target" \
+            || [ ! -f "$PROJECTS_DIR/${target}.md" ]; then
+            echo "${STUB_LOG_PREFIX}job '$jobslug': refuse stub '$slug' — target project '${target:-none}' is not a permitted target"
+            return 1
+        fi
+    fi
+    mkdir -p "$SUGGEST_DIR"
+    # Body is everything after the first '---' separator line.
+    body=$(printf '%s\n' "$stub" | awk 'p{print} /^---$/{p=1}')
+    if [ -z "${body//[[:space:]]/}" ]; then
+        echo "${STUB_LOG_PREFIX}job '$jobslug': suggestion '$slug' had an empty body — not written"
+        return 1
+    fi
+    printf '%s\n' "$body" > "$SUGGEST_DIR/${slug}.md"
+    echo "${STUB_LOG_PREFIX}job '$jobslug': wrote suggestion → $slug"
+    return 0
 }
 
 # Print the body of one fenced block from stdin: everything strictly between a

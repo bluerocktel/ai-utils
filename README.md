@@ -37,10 +37,13 @@ repo's working notes, and `providers/CONTRACT.md` for the provider contract.
    ▼                    ┌────────────┴────────────┐
  done/               retries left            max_retries
  + DONE.md               │                        │
-                         ▼                        ▼
-                     inbox/                   review/
-                  (with evaluator          (parked for you;
-                   feedback appended)       burns no further work)
+   │                     ▼                        ▼
+   │                 inbox/                   review/
+   │              (with evaluator          (parked for you;
+   │               feedback appended)       burns no further work)
+   │
+   └──▶ suggestions/               follow-up stubs proposed on the way past,
+                                   before the task file is archived
 ```
 
 Deferrals (auth failure, project lock timeout, interrupt, timeout, empty
@@ -116,6 +119,8 @@ empty `config` still runs.
 | `task_timeout_min` | `45` | Hard wall-clock cap on the main headless run per task. An overrun is exit `124`, which defers without burning a retry. |
 | `project_lock_wait_min` | `60` | How long a task waits for `$TASKS_DIR/.locks/<project>.lock`. The lock is **shared across runners**. A wait timeout is a deferral, not a failure. |
 | `test_timeout_min` | `20` | Per-command cap on each `## Test Command` line in `ai-eval`. A timeout is exit `4`: inconclusive, no retry burned, queue **not** paused. Accepts a fractional minute (`0.05`) so a throwaway config can cap tests at a few seconds. |
+| `suggest_enabled` | `1` | Whether `ai-task` proposes follow-up task stubs into `suggestions/` after a task passes evaluation. `0` disables the call entirely. The stubs are a reading pile: nothing there runs until you move it into `inbox/`. |
+| `suggest_max` | `3` | Cap on follow-up stubs written per task. A stub may target the task's own project or a project that project declares under `## Relationships`, and no other; the bound is enforced when the stub is written, not merely asked for in the prompt. |
 | `brief_timeout_min` | `45` | Hard cap on an `ai-brief` decomposition run. A timeout restores the brief to `briefs/`. |
 | `default_model` | unset (commented out) | Model used when a task has no `## Model` section. Unset means the provider decides, and providers differ on what "unset" means: see `ai_model_alias` in `providers/CONTRACT.md`. |
 | `eval_runner` | unset (commented out) | Runner that **grades** a finished task. Unset means the task is graded by the runner that executed it. Setting it to a *different provider* is the point: a grader that shares the executor's training shares its blind spots. An auth failure on this runner pauses **this** runner and requeues the task with `## Awaiting-Eval`, so finished work is graded later rather than executed again. |
@@ -211,6 +216,49 @@ line whenever the grader differs from the executor — without it the log cannot
 explain a verdict. An in-flight task gets a `run/<task>.state` sidecar naming
 its runner and tmux session, so a unified tree stays readable. The sidecar is
 removed when the run ends.
+
+### Follow-up suggestions (`suggest_enabled`, `suggest_max`)
+
+On the verified-success path only (the run completed **and** passed
+evaluation), `ai-task` makes one extra agent call that proposes follow-up task
+stubs into `suggestions/`, then archives the task. It reads the task file and
+its result report, never a git diff: a diff would include whatever a concurrent
+sibling task changed in the same tree.
+
+`suggestions/` is its **only** destination. Nothing there runs until you move
+it into `inbox/` yourself, which is why this reflex is allowed to exist at all
+next to the human review gate that `ai-brief` respects.
+
+Silence is the default: `NONE` is a correct and common answer, and an empty
+response is treated the same way. At most `suggest_max` stubs are written per
+task, and the whole call is best-effort, so a suggester that fails, times out,
+or returns nonsense cannot keep a passing task out of `done/`.
+
+**It is cross-project, bounded by the origin project's declared
+relationships.** A stub may target the task's own project, or a project the
+origin's `~/tasks/projects/<origin>.md` names under `## Relationships`, and
+nothing else:
+
+```markdown
+## Relationships
+
+- mirror → oryn: the Filament rewrite of the same domain.
+- content → brtelsite: a user-facing feature may warrant a matching page.
+```
+
+`mirror` means a code task in the target, `content` means a writing task, and
+the verb is carried through as the stub's `kind:`. Any verb is accepted, so a
+relationship this repo has not seen before is not silently dropped; the
+**target** is what gets checked. Both arrow spellings (`→` and `->`) parse.
+
+The bound is enforced when the stub is written, not just requested in the
+prompt: a stub whose `project:` is not in the permitted set, or names a project
+with no file in `~/tasks/projects/`, is refused and logged. A project declaring
+`(none)` therefore gets same-project suggestions only.
+
+A task with no `## Project` produces nothing: there is no attribution for a
+stub and no relationship set to bound it by. Slugs already anywhere in the
+pipeline are skipped, the same check the scheduled planner uses.
 
 ### `## Awaiting-Eval`: never execute finished work twice
 
@@ -594,9 +642,11 @@ signal would report a change, and then report its reversion as a second change.
 **`planner`** — an agentic synthesiser. Reads recent `done/` summaries, project
 files, the live queues and `review/` failures, then proposes at most
 `plan_ahead_max` ranked stubs into `suggestions/`. It is told that silence is
-acceptable, and `NONE` is a successful run that stamps state. Its whole purpose
-is synthesis a per-task reflex cannot do: connecting several finished tasks,
-advancing a roadmap, or rethinking a failure.
+acceptable, and `NONE` is a successful run that stamps state. It complements
+the per-task suggester rather than replacing it: the reflex sees one finished
+task in detail and proposes from its result report while that report is fresh,
+and the planner does what a per-task reflex cannot: connecting several finished
+tasks, advancing a roadmap, or rethinking a failure.
 
 A stub whose slug already exists anywhere in the pipeline is skipped, so the
 same idea is not proposed twice. `review/` is deliberately excluded from that

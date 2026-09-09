@@ -180,36 +180,11 @@ cooldown_active() {
 }
 
 # ── Suggestion stubs ────────────────────────────────────────────────────────
-# A stub is the machine's proposal for follow-up work; a human reads
-# suggestions/ and promotes what is worth doing. Write one file per stub, named
-# by its own slug, skipping any slug already anywhere in the pipeline.
-#
-# The slug is reduced to [A-Za-z0-9-] and stripped of every path component, so
-# no agent output can steer a write out of suggestions/ (same rule as
-# ai-brief's filename handling).
-write_stub() {
-    local stub="$1" jobslug="$2" slug body
-    slug=$(printf '%s' "$stub" | awk -F': *' '/^slug:/{print $2; exit}')
-    slug=$(basename "${slug:-}" | tr -cd '[:alnum:]-')
-    if [ -z "$slug" ]; then
-        log "job '$jobslug': suggestion had no usable slug — not written"
-        return 1
-    fi
-    if slug_exists "$slug"; then
-        log "job '$jobslug': skip stub '$slug' (already in the pipeline)"
-        return 1
-    fi
-    mkdir -p "$SUGGEST_DIR"
-    # Body is everything after the first '---' separator line.
-    body=$(printf '%s\n' "$stub" | awk 'p{print} /^---$/{p=1}')
-    if [ -z "${body//[[:space:]]/}" ]; then
-        log "job '$jobslug': suggestion '$slug' had an empty body — not written"
-        return 1
-    fi
-    printf '%s\n' "$body" > "$SUGGEST_DIR/${slug}.md"
-    log "job '$jobslug': wrote suggestion → $slug"
-    return 0
-}
+# write_stub lives in lib.sh: ai-task's per-task suggester writes the same kind
+# of file and the two must not drift. It logs through $STUB_LOG_PREFIX instead
+# of log(), which is defined only here, so the prefix is set once and its
+# output is byte-identical to when the function lived in this file.
+STUB_LOG_PREFIX="ai-scheduled: "
 
 # ── Agent layer: the permission contract ────────────────────────────────────
 # agents/CONTRACT.md defines what a routine may CAUSE at each level. This turns

@@ -236,6 +236,34 @@ prompt. Do not half-build it by relaxing only the prompt.
   to grade, `3` inconclusive/auth (no retry, pauses that runner), `4` test
   timeout (no retry, does **not** pause). Keep `3` and `4` distinct. Do not
   renumber any of them: `ai-task` branches on every one.
+- **`ai-task`'s follow-up suggester writes to `suggestions/` and nowhere else.**
+  `generate_suggestions` runs on the verified-success path only, and it runs
+  **before** the archival `mv "$TASK_FILE" "$DONE_DIR/..."` because it reads the
+  task file in place: move the call after the `mv` and it reads a path that no
+  longer exists. It is called as `generate_suggestions || true`, so a failed,
+  timed-out or garbage suggester can never keep a task that passed out of
+  `done/` — silence is a correct outcome, and `NONE` and an empty response are
+  both treated as zero stubs. It is cross-project (deliberately unlike the fork
+  it came from), bounded by the ORIGIN project's `## Relationships`, and **that
+  bound is enforced in `write_stub`, not in the prompt**: `write_stub`'s third
+  argument is the permitted target set, and a stub whose `project:` is outside
+  it, or names a project with no file in `$PROJECTS_DIR`, is refused and
+  logged. A rule that lives only in prompt text is a rule the model can talk
+  itself out of, and a routine reads the world. Verb handling is the mirror
+  image: permissive, because the live tree already carries a `host` verb that a
+  hardcoded `mirror|content` list would silently drop, and the verb only
+  becomes the stub's `kind:` on a file a human still has to promote.
+  `project_relationship_targets` accepts both `→` (what every project file
+  actually uses) and `->` (what `ai-scheduled:621` advertises), and rewrites no
+  project file either way.
+- **`write_stub` lives in `lib.sh` and is shared by `ai-task` and
+  `ai-scheduled`.** It logs through `STUB_LOG_PREFIX` rather than a `log()`
+  that only `ai-scheduled` defines; `ai-scheduled` sets the prefix to
+  `"ai-scheduled: "` so its stdout is byte-identical to when the function lived
+  in that file. Its third argument is optional and an EMPTY value keeps the
+  pre-existing behaviour exactly, which is what `ai-scheduled`'s two call sites
+  rely on. Do not change the wording of its messages: they are the moved
+  function's contract with the older caller.
 - **`ai-brief` has no write path into `inbox/`.** The human review gate is the
   single most important property of the pipeline. `inbox/` is deliberately
   absent even from its `mkdir -p` list, and the model-proposed filename is

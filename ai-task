@@ -83,12 +83,22 @@ AUTH_COOLDOWN_MIN=30
 # The inbox lock is held for milliseconds (select + move), so a long wait here
 # would only ever mean "another launcher is wedged". Seconds, not minutes.
 INBOX_LOCK_WAIT_SEC=30
+# Per-task follow-up suggester: on by default, capped low. See
+# generate_suggestions below.
+SUGGEST_ENABLED=1
+SUGGEST_MAX=3
 
 load_config
 MAX_RETRIES=${max_retries:-$MAX_RETRIES}
 TASK_TIMEOUT_MIN=${task_timeout_min:-$TASK_TIMEOUT_MIN}
 PROJECT_LOCK_WAIT_MIN=${project_lock_wait_min:-$PROJECT_LOCK_WAIT_MIN}
 AUTH_COOLDOWN_MIN=${auth_cooldown_min:-$AUTH_COOLDOWN_MIN}
+SUGGEST_ENABLED=${suggest_enabled:-$SUGGEST_ENABLED}
+SUGGEST_MAX=${suggest_max:-$SUGGEST_MAX}
+
+# Prefix for write_stub's own messages (it lives in lib.sh and is shared with
+# ai-scheduled, so it logs through this rather than through a local log()).
+STUB_LOG_PREFIX="ai-task: "
 
 # ── Shared helpers ─────────────────────────────────────────────────────────
 
@@ -142,6 +152,141 @@ dep_satisfied() {
     [ -z "$dep" ] && return 0
     dep="${dep%.md}"
     find "$DONE_DIR" -maxdepth 1 -type f -name "*_${dep}.task.md" 2>/dev/null | grep -q .
+}
+# ── Per-task follow-up suggester ───────────────────────────────────────────
+# Called ONLY from the verified-success branch (the run completed AND passed
+# evaluation), and BEFORE the task file is archived, because it reads
+# $TASK_FILE at its current path. Proposes follow-up task stubs into
+# suggestions/, which is a reading pile the human promotes from: this is the
+# only destination it has, and it must never gain a write path into inbox/ or
+# the review queue.
+#
+# CROSS-PROJECT, BOUNDED BY THE ORIGIN'S DECLARED RELATIONSHIPS. A stub may
+# target the origin project, or a project the origin names under
+# ## Relationships, and nothing else. The bound is enforced by write_stub (it
+# validates the stub's project: line against the permitted set and against the
+# existence of that project's own file), not merely stated in the prompt.
+#
+# It reads the task file and its result report, never a git diff: a diff would
+# include whatever a concurrent sibling task changed in the same tree.
+#
+# Runs on the EXECUTOR's provider with $MODEL_ID, exactly like the strategy
+# pass: ai-eval runs as a separate process, so nothing has swapped the provider
+# functions in this shell. Sets SUGGEST_COUNT; the caller invokes it as
+# `generate_suggestions || true`, so a suggester failure can never keep a
+# passing task out of done/.
+#
+# Relies on globals: PROJECT, TASK_FILE, TASK_NAME, RESULT_FILE, MODEL_ID,
+# SUGGEST_ENABLED, SUGGEST_MAX, TASK_TIMEOUT_MIN.
+generate_suggestions() {
+    SUGGEST_COUNT=0
+    [ "$SUGGEST_ENABLED" = "1" ] || return 0
+    # No ## Project means no attribution for a stub, and no relationships to
+    # bound it by. Silence is the right answer, not a guessed target.
+    [ -n "$PROJECT" ] || return 0
+
+    local allowed targets verb alias sug_json sug_err sug_text parse f written skipped
+    allowed="$PROJECT"
+    targets="- $PROJECT (kind: same-project)"
+    while IFS=$'\t' read -r verb alias; do
+        { [ -n "${verb:-}" ] && [ -n "${alias:-}" ]; } || continue
+        # A declared alias with no project file of its own cannot be a target:
+        # the stub would be attributed to a project that does not exist.
+        [ -f "$PROJECTS_DIR/${alias}.md" ] || continue
+        allowed="${allowed}"$'\n'"${alias}"
+        targets="${targets}"$'\n'"- $alias (kind: $verb)"
+    done < <(project_relationship_targets "$PROJECT")
+
+    if [ "$allowed" = "$PROJECT" ]; then
+        targets="${targets}"$'\n'"(The origin project declares no ## Relationships, so it is the ONLY permitted target.)"
+    fi
+
+    sug_json=$(mktemp)
+    sug_err=$(mktemp)
+    set +e
+    ai_run "SUGGESTER MODE: A task just completed and PASSED evaluation in project '$PROJECT'. Propose the follow-up task stubs, if any, that the user may want to queue next.
+
+Rules:
+- Silence is the default. Only propose work you would genuinely bet is worth doing. Zero suggestions is a correct and common answer.
+- Propose AT MOST $SUGGEST_MAX stubs.
+- A stub may target the ORIGIN project or a project the origin declares under ## Relationships, and NO other project. The permitted targets, with the kind each one takes, are exactly:
+$targets
+- A 'mirror' target means a CODE task there: propagate this change to the equivalent surface. A 'content' target means a WRITING task there: a page, an article, a release note. Any other verb keeps its own name as the kind and means the same thing: what the origin owes that target.
+- Never invent a target. A stub naming a project not listed above is discarded.
+- Do NOT propose anything the result report already implies is done, and no trivial or obvious cleanup.
+- Each stub must be concrete: a clear title, what to do, and acceptance criteria. Scope each to under ~5 files and split anything larger.
+- Scope every acceptance criterion to what the task itself creates: no baseline-plus-predicted-delta totals, and no global invariant the task does not own.
+
+Output ONLY the stubs, each fenced EXACTLY as below, with no preamble and no closing remark. If nothing is worth proposing, output the single line: NONE
+
+===SUGGESTION===
+slug: <kebab-case-unique-slug>
+project: <one of the permitted targets above>
+kind: <same-project, or that target's relationship verb>
+---
+# <Title>
+
+## Project
+<the same target project alias>
+
+## Origin
+Suggested after '$TASK_NAME' completed in '$PROJECT'.
+
+<body: what to do, plus acceptance criteria>
+===END===
+
+--- ORIGINAL TASK ---
+$(cat "$TASK_FILE")
+
+--- RESULT REPORT (what was done) ---
+$(cat "$RESULT_FILE")" \
+        "$MODEL_ID" \
+        "" \
+        "$((TASK_TIMEOUT_MIN * 60))" \
+        "$sug_json" \
+        "$sug_err"
+    set -e
+    sug_text=$(ai_json_text "$sug_json")
+    rm -f "$sug_json" "$sug_err"
+
+    # An empty response and a bare NONE are both successful runs with zero
+    # stubs. Neither is worth more than a log line.
+    if [ -z "$sug_text" ]; then
+        echo "ai-task: suggester returned nothing for '$TASK_NAME' — no follow-ups proposed"
+        return 0
+    fi
+    if printf '%s' "$sug_text" | grep -qx 'NONE'; then
+        echo "ai-task: suggester proposed no follow-ups for '$TASK_NAME'"
+        return 0
+    fi
+
+    parse=$(mktemp -d)
+    awk -v dir="$parse" '
+        /^===SUGGESTION===/ { n++; cur = sprintf("%s/stub-%03d", dir, n); inblk = 1; next }
+        /^===END===/ { inblk = 0; next }
+        inblk { print > cur }
+    ' <<< "$sug_text"
+
+    written=0
+    skipped=0
+    for f in "$parse"/stub-*; do
+        [ -f "$f" ] || continue
+        if [ "$written" -ge "$SUGGEST_MAX" ]; then
+            skipped=$((skipped + 1))
+            continue
+        fi
+        if write_stub "$(cat "$f")" "$TASK_NAME" "$allowed"; then
+            written=$((written + 1))
+        else
+            skipped=$((skipped + 1))
+        fi
+    done
+    rm -rf "$parse"
+
+    SUGGEST_COUNT="$written"
+    # Never a silent cap, for the same reason as the planner's: the
+    # suggestions directory would otherwise read as the model's whole opinion.
+    echo "ai-task: suggester wrote $written follow-up(s) for '$TASK_NAME', $skipped skipped (cap $SUGGEST_MAX)"
 }
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -444,7 +589,7 @@ $(cat "$TASK_FILE")" \
 
     # ── Evaluation ──────────────────────────────────────────────────────────
     # Exit codes: 0 pass, 1 fail, 2 nothing to grade, 3 evaluator auth failure,
-    # 4 test command timed out.
+    # 4 test command timed out, 5 = ai-eval returned VERDICT: UNSATISFIABLE.
     #
     # The grader is `eval_runner` when config sets one, else the runner that
     # executed the task. A DIFFERENT provider is the useful configuration: the
@@ -521,6 +666,37 @@ $(cat "$TASK_FILE")" \
         notify "ai-task [$RUNNER]: Eval Timed Out" \
             "$TASK_NAME verification timed out — requeued, no retry burned."
         exit 0
+    fi
+
+    # Exit 5 = VERDICT: UNSATISFIABLE. The evaluator found a criterion that no
+    # correct execution of this task could satisfy, and backed it with a command
+    # and its output. What is wrong is the TASK FILE, so no number of retries
+    # can turn it green: falling through to the FAIL path below would spend
+    # every remaining attempt rediscovering the same defective criterion and
+    # then land here anyway, three runs later. The retry counter is deliberately
+    # neither read nor written on this path: the attempt that produced the
+    # evidence did its job.
+    if [ "$EVAL_STATUS" -eq 5 ]; then
+        {
+            printf "\n---\n\n## Evaluator (unsatisfiable acceptance criteria)\n\n"
+            cat "$EVAL_OUTPUT"
+        } >> "$RESULT_FILE"
+
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
+            echo "**Status:** NEEDS REVIEW (unsatisfiable acceptance criteria — no retry burned)"
+            echo "**Result:** \`$RESULT_FILE\`"
+            echo ""
+        } >> "$LOG"
+
+        mv "$TASK_FILE" "$REVIEW_DIR/${TASK_NAME}.md"
+        rm -f "$EVAL_OUTPUT"
+        notify -u critical "ai-task [$RUNNER]: Unsatisfiable Criteria" \
+            "$TASK_NAME cannot pass as written. The TASK FILE needs fixing, not the code — see ## Unsatisfiable Criteria in the report. Moved to review/, no retry burned."
+        exit 1
     fi
 
     # Exit 2 = no acceptance criteria and no tests: nothing to grade, so pass.
@@ -637,8 +813,18 @@ $(cat "$TASK_FILE")" \
         echo ""
     } >> "$LOG"
 
+    # BEFORE the archival mv: the suggester reads $TASK_FILE at its current
+    # path. `|| true` on purpose — a suggester failure must never keep a task
+    # that passed out of done/.
+    SUGGEST_COUNT=0
+    generate_suggestions || true
+
     mv "$TASK_FILE" "$DONE_DIR/${TIMESTAMP}_${TASK_NAME}.task.md"
-    notify "ai-task [$RUNNER]: Task Done" "$TASK_NAME completed successfully."
+    DONE_MSG="$TASK_NAME completed successfully."
+    if [ "$SUGGEST_COUNT" -gt 0 ]; then
+        DONE_MSG="$DONE_MSG $SUGGEST_COUNT follow-up suggestion(s) in suggestions/."
+    fi
+    notify "ai-task [$RUNNER]: Task Done" "$DONE_MSG"
     exit 0
 fi
 

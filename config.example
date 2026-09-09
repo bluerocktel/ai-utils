@@ -25,6 +25,17 @@ project_lock_wait_min=60
 # Per-command timeout (minutes) for ## Test Command runs in ai-eval (default 20).
 test_timeout_min=20
 
+# After a task completes AND passes evaluation, propose follow-up task stubs
+# into ~/tasks/suggestions/ for you to read and promote by hand. Nothing there
+# runs until you move it into inbox/ yourself. Set to 0 to disable (default 1).
+suggest_enabled=1
+
+# Per-task cap on how many follow-up suggestions are written (default 3).
+# A stub may target the task's own project or a project that project declares
+# under ## Relationships, and no other: the bound is enforced when the stub is
+# written, not merely asked for in the prompt.
+suggest_max=3
+
 # Hard wall-clock cap (minutes) on ai-brief decomposition (default 45).
 brief_timeout_min=45
 
