@@ -196,7 +196,7 @@ claim subshell exits (`ai-task:679-682`), long before the agent call
 | Lock / marker | Path | Scope |
 |---|---|---|
 | Inbox claim | `$TASKS_DIR/.locks/inbox.lock` | shared; held for milliseconds |
-| Per-project | `$TASKS_DIR/.locks/<project>.lock` | **shared across runners** on purpose: two agents must never be inside the same repo at once. A wait timeout is DEFERRED, not a failure, and burns no retry. |
+| Per-project | `$TASKS_DIR/.locks/<canonical-project>.lock` | **shared across runners** on purpose: two agents must never be inside the same repo at once. A wait timeout is DEFERRED, not a failure, and burns no retry. The name is the **canonical** project, not the raw `## Project` token: see [Alias-safe project locks](#alias-safe-project-locks). |
 | Auth cooldown | `$TASKS_DIR/.auth-cooldown-<runner>` | **per runner**: a 401 on one provider never pauses another provider's queue. An **evaluator** auth failure touches the marker of the runner that was *grading*, which with `eval_runner` set is not the runner that executed. |
 
 ### Outcomes
@@ -210,6 +210,50 @@ claim subshell exits (`ai-task:679-682`), long before the agent call
 | Auth failure while **grading** | requeued to `inbox/` with `## Awaiting-Eval`; cooldown touched for the **grading** runner | **no** |
 | Project lock wait times out | requeued to `inbox/` | **no** |
 | Run killed, timed out, or produced no parseable text | requeued to `inbox/` | **no** |
+
+#### Alias-safe project locks
+
+A project file declares aliases, and every alias is the same repository under
+another spelling: a `projects/demo-proj.md` whose `## Aliases` lists
+`demo-proj`, `demoproj` and `demo-project` points all three at one working
+directory. The lock name used to be the `## Project` token exactly as written,
+so those three spellings took three different lock files, and a task using a
+non-canonical alias could run
+**concurrently with a canonical one in the same git working tree** — the one
+thing the lock exists to prevent.
+
+`ai-task` now resolves the name through `canonical_project` (in `lib.sh`)
+before opening the descriptor:
+
+1. Sanitise: strip every path component and reduce to `[A-Za-z0-9._-]`, so the
+   value cannot place the lock outside `$TASKS_DIR/.locks/`.
+2. If `projects/<value>.md` exists, use it as-is. This is the common case and
+   costs no directory scan.
+3. Otherwise match the value, case-insensitively, against every project's
+   `## Aliases` bullets and use the first matching project's filename.
+4. Otherwise use the sanitised value unchanged: an unknown project behaves
+   exactly as it did before.
+
+This is not hypothetical: scanning the live tree for `## Project` values with
+no matching `projects/<value>.md` turns up a declared hyphenation variant of
+one real project and a case variant of another (lock filenames are
+case-sensitive), and both now resolve to the canonical name. When the resolved
+name differs from the raw one, `ai-task` prints a line saying so, so the
+divergence shows up in `cron.log` rather than being silent.
+
+**Only the lock name changes.** `## Project` still means the raw token
+everywhere else: the `projects/<project>.md` read, the prompt, the log and
+`DONE.md`. A task written with an undeclared spelling therefore still fails to
+load its project context, which is the same root cause and a real defect, but
+fixing it would change the prompt delivered to tasks already queued.
+
+**Known limitation during the transition.** The previous-generation
+orchestrator still running from cron is read-only reference here and keeps the
+old lock naming until the cutover. Until then, a task using an alias dispatched
+by the old orchestrator and a task using the canonical name dispatched by
+`ai-task` still take different lock files and can still collide. The cutover
+(swapping the cron lines over to `ai-task`) closes this; nothing in the
+read-only fork is changed to close it early.
 
 Every `DONE.md` entry carries a `**Runner:**` line, plus a `**Graded by:**`
 line whenever the grader differs from the executor — without it the log cannot

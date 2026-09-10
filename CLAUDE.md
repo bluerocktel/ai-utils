@@ -168,6 +168,31 @@ Contrast with the two other locks:
 A project-lock wait timeout is a **deferral**, not a failure: requeued
 unchanged, no retry burned.
 
+- **The lock name is `canonical_project "$PROJECT"`, not the raw `## Project`
+  token.** A project file declares aliases, and every alias is the same
+  repository under another spelling (`demo-proj`, `demoproj`, `demo-project`:
+  one working directory). The raw token gave each spelling its **own lock
+  file**, which is a hole straight through the one guarantee this lock exists
+  to provide. `canonical_project` in `lib.sh` sanitises the value (`basename` +
+  `[A-Za-z0-9._-]`, since it is interpolated into a path under `$LOCK_DIR`),
+  returns it unchanged when `projects/<value>.md` exists so the common case
+  pays for no scan, otherwise matches it case-insensitively against every
+  project's `## Aliases` bullets, and otherwise passes it through unchanged.
+  `ai-task` echoes one line whenever the resolved name differs, so the
+  divergence is visible in `cron.log` rather than being silent. The live tree
+  really does carry values this changes — a declared hyphenation variant of one
+  project and a case variant of another, lock filenames being case-sensitive —
+  so this is not a hypothetical.
+
+  Two things not to widen. **`$PROJECT` still means the raw token everywhere
+  else:** the `$PROJECTS_DIR/${PROJECT}.md` read, the prompt, the log,
+  `DONE.md`. A task written with a non-canonical alias also fails to *load its
+  project file* today, which is the same root cause and a real defect, but
+  fixing it changes the prompt delivered to tasks already sitting in the queue,
+  so it is a separate task and still open. And **`project_from_task` is not the
+  place for this:** it stays byte-identical, as gotcha 4's reasoning requires
+  of all three parsers.
+
 ### 4. An unset `## Runner` resolves to `default_runner`, never to "any runner".
 
 `runner_from_task` in `lib.sh` maps an absent, empty, or literal `any` value to

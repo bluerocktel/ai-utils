@@ -345,6 +345,71 @@ project_from_task() {
     awk '/^## Project/{found=1; next} found && /^[^#]/{print $1; exit} found && /^##/{exit}' "$1"
 }
 
+# Canonical project name to use for the PER-PROJECT LOCK.
+# Given a project file demo-proj.md whose ## Aliases lists demo-proj, demoproj
+# and demo-project:
+#   canonical_project demo-proj        -> demo-proj   (file exists, no scan)
+#   canonical_project demoproj         -> demo-proj   (declared alias)
+#   canonical_project DemoProj         -> demo-proj   (case-insensitive)
+#   canonical_project totally-unknown  -> totally-unknown (passthrough)
+#
+# THE LOCK NAME MUST BE ONE PER REPOSITORY, and an alias is the same repository
+# under another spelling. project_from_task prints the ## Project token
+# verbatim, so a task written with a declared alias took a DIFFERENT lock file
+# from a canonical one and the two could run inside the same git working tree at
+# once. That is the single guarantee the unified tree rests on.
+#
+# This is an ADDITION. project_from_task / runner_from_task / model_from_task
+# are untouched, and nothing else about what $PROJECT means changes: the
+# project-file read, the prompt, the log and DONE.md all keep the raw value.
+#
+# SANITISES FIRST, before any lookup: the result is interpolated straight into
+# a path under $LOCK_DIR, so a value carrying `/` or `..` would place the lock
+# outside it. Same rule, same reason, as ai-brief's filename handling and
+# write_stub's slug handling.
+#
+# Empty input prints nothing and returns 1 (a caller with no project takes no
+# lock at all). Every other input prints a non-empty value containing no `/`
+# and returns 0, including when $PROJECTS_DIR does not exist: a missing
+# projects/ directory must degrade to today's behaviour, not abort a sweep.
+canonical_project() {
+    local raw="${1:-}" value lower stem file
+    [ -n "$raw" ] || return 1
+
+    value=$(basename "$raw" | tr -cd '[:alnum:]._-')
+    # A value that sanitises away entirely (`///`, `@@@`) must still name a
+    # lock: sharing one over-broad lock is safe, an empty name is not.
+    [ -n "$value" ] || { printf '%s\n' "_unnamed"; return 0; }
+
+    # The common case, and it must not pay for a scan.
+    [ -f "$PROJECTS_DIR/${value}.md" ] && { printf '%s\n' "$value"; return 0; }
+
+    [ -d "$PROJECTS_DIR" ] || { printf '%s\n' "$value"; return 0; }
+
+    lower=$(printf '%s' "$value" | tr '[:upper:]' '[:lower:]')
+    for file in "$PROJECTS_DIR"/*.md; do
+        [ -f "$file" ] || continue
+        stem=$(basename "$file" .md)
+        # Bullets look like "- `demo-proj`": leading dash, optional backticks,
+        # optional whitespace. Compared case-insensitively, because lock
+        # filenames are case-sensitive and the live tree really does carry a
+        # value that differs from its project only in case. Hyphens stay
+        # significant: `demo-proj` and `demoproj` are two distinct aliases that
+        # a project file has to list separately.
+        if section_from_task Aliases "$file" \
+            | sed -E 's/^[[:space:]]*-[[:space:]]*//; s/`//g; s/^[[:space:]]+//; s/[[:space:]]+$//' \
+            | tr '[:upper:]' '[:lower:]' \
+            | grep -qxF -- "$lower"; then
+            printf '%s\n' "$stem"
+            return 0
+        fi
+    done
+
+    # Matches nothing: today's behaviour, unchanged.
+    printf '%s\n' "$value"
+    return 0
+}
+
 # First non-heading line under ## Depends-on (first token only).
 depends_on_from_task() {
     awk '/^## Depends-on/{found=1; next} found && /^[^#]/{print $1; exit} found && /^##/{exit}' "$1"

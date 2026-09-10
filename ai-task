@@ -345,8 +345,25 @@ if [ "$MODE" = "run" ]; then
     # not from the runner, so two agents can never be inside the same repo at
     # once regardless of which provider each is using. A wait timeout is
     # DEFERRED, not a failure: no work happened, so no retry is burned.
+    #
+    # THE LOCK NAME IS RESOLVED, NOT THE RAW ## Project TOKEN. The name has to
+    # be ONE PER REPOSITORY, and an alias is the same repository under another
+    # spelling: a project file declaring demo-proj, demoproj and demo-project
+    # points all three at one working directory, but the raw token gave each
+    # its own lock file and so let two agents into that tree at once.
+    # canonical_project collapses the declared aliases and sanitises the value,
+    # which is otherwise interpolated unchecked into a path under $LOCK_DIR.
+    # $PROJECT ITSELF IS UNTOUCHED: the project-file read, the prompt, the log
+    # and DONE.md all keep the value the task actually wrote.
     if [ -n "$PROJECT" ]; then
-        exec 9>"$LOCK_DIR/${PROJECT}.lock"
+        PROJECT_LOCK_NAME=$(canonical_project "$PROJECT")
+        # Visible in cron.log rather than silent: a task locking under a name
+        # it did not write is exactly the thing a human debugging a collision
+        # needs to see.
+        if [ "$PROJECT_LOCK_NAME" != "$PROJECT" ]; then
+            echo "ai-task: project '$PROJECT' locks as '$PROJECT_LOCK_NAME' (declared alias of the same repository)"
+        fi
+        exec 9>"$LOCK_DIR/${PROJECT_LOCK_NAME}.lock"
         if ! flock -w "$((PROJECT_LOCK_WAIT_MIN * 60))" 9; then
             {
                 echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
