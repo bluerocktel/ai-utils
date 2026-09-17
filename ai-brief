@@ -188,6 +188,112 @@ stamp_runner_section() {
     rm -f "$stripped"
 }
 
+# ── Acceptance-criteria lint ────────────────────────────────────────────────
+# Appends a ## Criteria Warnings section to an emitted task file when a
+# criterion matches one of the shapes that has actually produced an
+# unsatisfiable check here. It WARNS and never rejects: the batch lands in a
+# human review queue, and a linter confident enough to delete a task would
+# need to be right far more often than a heuristic can be.
+#
+# Five shapes, each mapped to a real failure:
+#   1. an asserted integer nobody re-derived  (a brief said 24, the file had 23,
+#      the criterion demanded 28)
+#   2. a `grep -c` whose pattern also appears in a fenced block under ## Tasks,
+#      so obeying the instruction inflates the count the criterion asserts
+#   3. an assertion that ONE named file holds more than one match, when the
+#      second match usually belongs to a different file
+#   4. a git working-tree state assertion  (june-minutes-pdf demanded
+#      `git diff -- <paths> | ... | wc -l` return 0, against a tree carrying a
+#      months-old uncommitted fix the build itself depended on)
+#
+#   5. a multi-word grep against raw extracted document text with no line
+#      join  (agm-report-regenerate-pdf greped a regenerated PDF for
+#      `Lions Christmas Party`; pdftotext hard-wraps, the renderer broke the
+#      line after `Christmas`, and the count was 0 for every correct run)
+#
+# Reads the file, writes only the appended section. Always returns 0: a lint
+# hiccup must never cost a decomposed batch.
+lint_task_criteria() {
+    local file="$1" crit tasks warns
+    [ -f "$file" ] || return 0
+
+    crit=$(awk '/^## Acceptance Criteria/{f=1;next} f&&/^## /{exit} f{print}' "$file")
+    [ -n "${crit//[[:space:]]/}" ] || return 0
+
+    # Only the FENCED text under ## Tasks: prose naturally repeats the names a
+    # criterion greps for, and warning on that would fire on every task.
+    tasks=$(awk '/^## Tasks/{f=1;next} f&&/^## /{exit} f&&/^[[:space:]]*```/{inb=!inb;next} f&&inb{print}' "$file")
+
+    warns=$(
+        printf '%s\n' "$crit" | while IFS= read -r line; do
+            case "$line" in
+                [-*]*) ;;
+                *) continue ;;
+            esac
+            # (1) an asserted integer literal. "report"/"record" mark the
+            # observe-don't-assert form the rules ask for, so skip those.
+            if printf '%s' "$line" | grep -qiE "(returns|equals|is exactly|exactly|==)[[:space:]]+.?\`?[0-9]+" \
+               && ! printf '%s' "$line" | grep -qiE '\b(report|record|observ)'; then
+                printf '  - asserted integer: re-derive it with a command, or assert the invariant and report the number instead.\n    %s\n' "$line"
+            fi
+            # (3) more than one match demanded from a single named file.
+            if printf '%s' "$line" | grep -qiE 'matches? (at least )?(twice|[2-9]|two|three)' ; then
+                printf '  - multi-match in one file: confirm that file owns every match, else name each file and assert one each.\n    %s\n' "$line"
+            fi
+            # (4) a git working-tree state assertion. The permitted shape
+            # asserts changed-line CONTENT (`... | grep -c <pattern>` returns
+            # 0); a bare `wc -l`, or a demand that git report nothing, is tree
+            # state, which the task does not own and no ## Criteria Baseline
+            # can license, because every task shares one tree with tasks from
+            # other batches that run while it runs.
+            if printf '%s' "$line" | grep -qE '\bgit[[:space:]]+(diff|status|ls-files)\b' \
+               && ! printf '%s' "$line" | grep -qiE '\b(report|record|observ)'; then
+                if printf '%s' "$line" | grep -qE '\|[[:space:]]*wc[[:space:]]+-l' \
+                   || printf '%s' "$line" | grep -qiE 'is clean|lists nothing|no output|returns nothing|is empty|shows no change|unchanged|byte-identical'; then
+                    printf '  - git working-tree state: forbidden in every form, and a baseline cannot license one (the tree is shared with tasks that run concurrently). Assert changed-line CONTENT with a pattern instead of counting lines, or have the run sha256sum the paths first and sha256sum -c them last.\n    %s\n' "$line"
+                fi
+            fi
+            # (5) a multi-word phrase greped against raw extracted document
+            # text. pdftotext and its family hard-wrap what they emit, so a
+            # phrase that renders correctly in the document is split across two
+            # output lines and the grep returns 0 for every correct run. A
+            # single-token pattern cannot wrap, and a pipeline that joins the
+            # lines first is the fix, so neither of those warns.
+            if printf '%s' "$line" | grep -qE '\b(pdftotext|pdftoppm|pdfinfo|catdoc|antiword)\b' \
+               && printf '%s' "$line" | grep -qE '\|[[:space:]]*grep\b' \
+               && ! printf '%s' "$line" | grep -qE '\btr[^|]*\\n|\btr[[:space:]]+-d|\bpaste[[:space:]]+-sd|\bgrep[^|]*[[:space:]]-[A-Za-z]*z|\bawk[^|]*RS=|\bsed[^|]*[[:space:]]-[A-Za-z]*z'; then
+                if printf '%s' "$line" | sed 's/.*|[[:space:]]*grep/grep/' \
+                   | grep -qE "'[^']*[[:space:]][^']*'|\"[^\"]*[[:space:]][^\"]*\""; then
+                    printf '  - phrase grep on extracted text: pdftotext hard-wraps its output, so a phrase that renders correctly in the document is still split across two lines and the grep fails for every correct run. Join the extraction first, for example by piping through tr with a newline argument, or grep a single word that cannot wrap.\n    %s\n' "$line"
+                fi
+            fi
+            # (2) a counting grep whose pattern is dictated by ## Tasks itself.
+            if [ -n "$tasks" ] && printf '%s' "$line" | grep -q 'grep -c'; then
+                printf '%s' "$line" | grep -oE "grep -c[^\`]*'[^']+'" | grep -oE "'[^']+'" | tr -d "'" \
+                | while IFS= read -r pat; do
+                    [ -n "$pat" ] || continue
+                    if printf '%s' "$tasks" | grep -qF -- "$pat"; then
+                        printf '  - pattern %s is also prescribed literally under ## Tasks, so following the instruction changes this count.\n    %s\n' "$pat" "$line"
+                    fi
+                done
+            fi
+        done
+    )
+
+    [ -n "${warns//[[:space:]]/}" ] || return 0
+    {
+        echo ""
+        echo "## Criteria Warnings"
+        echo ""
+        echo "Written by ai-brief's lint, for the human reviewing this batch. Each line"
+        echo "is a criterion shape that has produced an unsatisfiable check before. None"
+        echo "of them is automatically wrong; check each before promoting this task."
+        echo ""
+        printf '%s\n' "$warns"
+    } >> "$file"
+    return 0
+}
+
 # ── Internal execution mode ────────────────────────────────────────────────
 if [ "$MODE" = run ]; then
     BRIEF_FILE="$BRIEF_ARG"
@@ -280,7 +386,7 @@ Your job, in order:
 
 1. Read the brief and find the ## Project field. Read $PROJECTS_DIR/{alias}.md to learn the working directory, stack, and conventions.
 
-2. Explore the codebase with tools: grep and glob to find the specific files, line numbers, class names, and patterns the work touches. Exclude vendor/, node_modules/, storage/framework/ from all searches. Embed exact paths in every task you produce. Do not invent file paths.
+2. Explore the codebase with tools: grep and glob to find the specific files, line numbers, class names, and patterns the work touches. Exclude vendor/, node_modules/, storage/framework/ from all searches. Embed exact paths in every task you produce. Do not invent file paths. While you are in the working directory, RUN every check you intend to turn into an acceptance criterion and note what it returns right now: step 5 requires those observed values, and a criterion you never ran is a guess.
 
 3. Decide how many task files to create. Split when:
    - Changes are in different areas and could be reviewed or rolled back independently
@@ -304,8 +410,11 @@ ${BRIEF_ARCHIVE}
 ## Tasks
 {Numbered concrete instructions. Exact strings to find/replace when relevant.}
 
+## Criteria Baseline
+{One line per acceptance criterion that asserts a count, an absence, or a git state, in the form 'exact command' -> observed value, recording what that command returns NOW, before any of this work exists. Run them; do not predict them. Write NONE when no criterion needs one. This section is what lets the executing agent and the evaluator tell a criterion that has merely not been met yet from one that was already false when the task was written.}
+
 ## Acceptance Criteria
-{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Scope every check to what THIS task creates or changes, following the ACCEPTANCE CRITERIA rules below. Always end with a negative check confirming the old thing is gone.}
+{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Scope every check to what THIS task creates or changes, following the ACCEPTANCE CRITERIA rules below. Every count, absence or git-state check you write here must have its measured line in ## Criteria Baseline above. Always end with a negative check confirming the old thing is gone.}
 ===TASK_FILE_END===
 
 Replace SLUG with a short lowercase description specific to that task (not the whole brief).
@@ -314,9 +423,15 @@ Use ${TODAY} as the date prefix for all filenames.
 TARGET RUNNER: every task in this batch will be executed by the runner named '${STAMP_RUNNER}'. Write for that runner: assume only the tools and conventions it actually has. Do NOT write a ## Runner section yourself. ai-brief stamps ## Runner ${STAMP_RUNNER} on every emitted file, and a hand-written one is discarded.
 
 ACCEPTANCE CRITERIA — only write checks that a correct implementation can actually pass:
+- MEASURE BEFORE YOU ASSERT. This rule governs every rule below it. A criterion naming a count, an absence, or a git state is a claim about a repository you have open in front of you, so RUN the exact command before you write the criterion and put the command and what it returned in ## Criteria Baseline. A criterion its own baseline already contradicts is false before the task starts: rewrite it as a delta this task owns. Three that reached execution unmeasured, each costing every retry the task had: 'grep -c ... returns 1' on a file that already contained 1 before the step that adds another; 'git diff --name-only A...B lists only the six files' on a range that already listed 73; 'grep -rn <address> over app/ ... tests/ returns no match' where two pre-existing matches were never in the task's scope. One command each would have caught all three. The rules below name the shapes that have gone wrong so far; measuring is what catches the ones nobody has named yet.
 - SCOPE EVERY CHECK TO WHAT THIS TASK CREATES OR CHANGES. Assert against a provenance marker the task itself writes: a comment or tag column, a filename pattern, a config key, a specific commit. Never assert on the state of a whole table, a whole directory, or a whole codebase that existed before this task.
 - NEVER write an absolute total that is a baseline you measured during exploration plus a delta you predicted. 'TOTAL == 439 + 143' breaks two ways: the baseline moves if anything else touches the data before the task runs, and the 143 is a guess that exploration cannot fully verify — a case-insensitive collation folding two labels into one row, a value that turns out to already exist, a dedupe or upsert rule. Write '142 rows carrying marker M exist' instead: the task creates those rows, so the task can guarantee them.
 - NEVER assert a global invariant the task does not own. 'No duplicate X anywhere' fails on pre-existing duplicates the task did not create, and the only way to make it pass is to mutate data the task was never asked to touch. Scope it: 'no duplicate X among the rows this task created'.
+- NEVER make a criterion out of git working-tree state, in ANY form: not whole-tree, not path-scoped, not piped through grep. All of these are forbidden: 'git status is clean', 'git status --porcelain -- <path> lists nothing', 'git status --porcelain -- <path> | grep X returns no output', 'git diff --stat <path> shows no change', 'X is unchanged / byte-identical'. NARROWING THE CHECK TO A PATH DOES NOT MAKE IT SAFE — the path-scoped form is the shape that has failed most often, precisely because it reads like compliance with this rule. The reason is not only the ## Depends-on chain: EVERY task shares ONE working tree with every other task running against that repo, including tasks from OTHER batches that you know nothing about and that run WHILE this task runs. Tree state is therefore not a property this task controls. Unlike a count, it is NOT made safe by measuring first: a path that is clean when you write the criterion is dirty by the time the task executes, through nobody's fault, so a ## Criteria Baseline line can NEVER license one of these. Replace it with whichever of these fits: (a) assert CONTENT rather than state — 'git diff -- <paths> | grep -E "^[+-]" | grep -v "^[+-][+-]" | grep -c <pattern>' returns 0, i.e. no CHANGED line touches the thing this task must leave alone; (b) a self-check the run performs on itself — record 'sha256sum <paths>' as the run's FIRST action and re-run 'sha256sum -c' as its LAST, requiring OK; (c) assert the absence of THIS task's own marker where it must not appear — 'grep -l <markerThisTaskWrites> <dir>/*' piped to a count of forbidden files returns 0. Use git status only in a criterion whose required value is 'report the output', with no emptiness demanded.
+- NEVER take a number from the brief on trust. A count, a total, or a 'there are N of them' stated in the brief is an UNVERIFIED CLAIM, not a measurement. Re-derive every number you put in a criterion with a command you actually ran during exploration, and when the brief's figure and your command disagree, the command wins and you note the correction in ## Context. This is the most common source of an impossible criterion, because the arithmetic looks sound: a brief asserting 24 keys where the file emits 23 produced the criterion 'returns 28', and no correct run could ever reach it.
+- NEVER write a counting criterion whose pattern also matches text your own ## Tasks section tells the agent to write. If a step dictates a literal comment or code block, and a criterion counts occurrences of a string that appears inside it, the two contradict each other: following the instruction inflates the count and fails the check, and the only escape is to silently edit the instruction. Before writing a grep -c, search your own task text for the pattern. When it appears there, count the CALL SITE and not the bare name: prefer a pattern like 'if (\$x = helperName(' over 'helperName('.
+- NEVER assert that one named file contains more than one match unless exploration PROVED that file owns them all. A criterion of the shape 'grep -n X FooController.php matches at least twice' is wrong the moment the second occurrence belongs in BarController.php, and the only way to force it green is to add a duplicate whose sole purpose is to move a count. Name each file that owns one, and assert one match in each.
+- NEVER grep a multi-word phrase against raw extracted document text. Extraction tools hard-wrap what they emit: pdftotext and its equivalents break each output line where the renderer broke it, so a phrase that reads correctly in the document is split across two lines and the grep returns 0 for every correct run. Measuring first cannot save this one, because the wrap belongs to the renderer and not to the task, so the criterion is false before the task starts and no correct execution can reach it. The real case: a criterion greping a regenerated PDF for 'Lions Christmas Party' returned 0 because the renderer broke the line between 'Christmas' and 'Party', and a task that had done its work correctly and completely reached review anyway. Join the extraction before the grep, by piping it through tr with a newline argument so the document arrives as one line, or assert a single word that cannot wrap.
 - Express idempotency as 'a second run creates nothing new' (a created-count of 0, or an unchanged marker-scoped count), never by restating absolute totals.
 - Prefer a check on the RELATIONSHIP the task is responsible for over a check on a magnitude: a sum that matches the source document, every created row resolving to a valid parent, a generated file parsing cleanly, the old code path being gone.
 - If a figure genuinely matters and you cannot verify it now, put it in ## Context as a number to confirm at run time and make the criterion the comparison the task can actually perform.
@@ -355,6 +470,13 @@ PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_
                 WORKDIR="$WD"
             fi
         fi
+    fi
+
+    PROJECT_INSTRUCTIONS=$(project_instructions "$PROJECT")
+    if [ -n "$PROJECT_INSTRUCTIONS" ]; then
+        PREAMBLE="$PREAMBLE
+
+$PROJECT_INSTRUCTIONS"
     fi
 
     # The alias table is per provider and an empty result means "provider
@@ -569,6 +691,20 @@ $(cat "$BRIEF_FILE")" \
         exit 1
     fi
 
+    # ── Lint the acceptance criteria ────────────────────────────────────────
+    # After the stamp assertion, so it only runs on a batch that is actually
+    # being kept, and before the manifest is dropped. Warnings only: the files
+    # go to a human either way.
+    N_WARNED=0
+    while IFS= read -r fn || [ -n "$fn" ]; do
+        [ -n "$fn" ] || continue
+        [ -f "$BACKLOG_REVIEW_DIR/$fn" ] || continue
+        lint_task_criteria "$BACKLOG_REVIEW_DIR/$fn" || true
+        if grep -q '^## Criteria Warnings' "$BACKLOG_REVIEW_DIR/$fn" 2>/dev/null; then
+            N_WARNED=$((N_WARNED + 1))
+        fi
+    done < "$MANIFEST"
+
     rm -f "$MANIFEST" "$GRAPH_NOTES"
 
     mv "$BRIEF_FILE" "$BRIEF_ARCHIVE"
@@ -578,6 +714,9 @@ $(cat "$BRIEF_FILE")" \
         "$BRIEF_NAME → $N_FILES task(s) in backlog-for-review/ for runner $STAMP_RUNNER${STRIPPED_NOTE}"
     echo "Wrote $N_FILES task(s) to $BACKLOG_REVIEW_DIR${STRIPPED_NOTE}"
     echo "All $N_STAMPED task(s) stamped: ## Runner $STAMP_RUNNER"
+    if [ "$N_WARNED" -gt 0 ]; then
+        echo "Criteria lint: $N_WARNED task(s) carry a ## Criteria Warnings section. Read it before promoting."
+    fi
     echo "Brief archived: $BRIEF_ARCHIVE"
     echo "REVIEW GATE: read them, then move the ones you want run into $INBOX/"
     exit 0

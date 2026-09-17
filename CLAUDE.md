@@ -85,6 +85,24 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
 
 ## The provider contract
 
+Project instruction references are resolved by `project_instructions` in
+`lib.sh` and embedded by `ai-task`, `ai-brief`, and agent-based `ai-eval`.
+The legacy `## CLAUDE.md` metadata heading is an intentional exception to the
+vendor-name rule in shared code: it names an existing instruction reference,
+not a runner or CLI feature. `## Instructions` is the neutral alternative and
+takes precedence. Resolve relative paths beside the project definition, retain
+spaces, and never evaluate shell expressions. Missing references are a no-op;
+unreadable explicitly referenced files warn in stderr and in the prompt.
+
+The `codex` adapter additionally supports JSONL captures from `codex exec`.
+Keep event parsing inside `providers/codex.sh`: completed-turn gating prevents
+progress text from becoming a report, and structured error-event filtering
+keeps tool output quoting a 401 from pausing the queue. Model strings are
+passed through; an unset model uses the CLI configuration. Regression tests
+are in `tests/test_codex.py` (offline, including evaluator integration), run
+with `python3 -m unittest discover -s tests -v`. No shared orchestration or
+live routing changes are required to load this provider.
+
 Six functions, in one file per runner, sourced after `lib.sh` and after
 `load_config`. `load_provider` refuses to run a provider that is missing any of
 the six rather than falling back to a default, because a silent fallback sends
@@ -108,7 +126,7 @@ every line after the source in the caller.
 out" (deferred, no retry burned) from "failed" (retry burned). Normalising it
 starts consuming retries on tasks that never got to finish.
 
-## The five gotchas
+## The six gotchas
 
 These are the five things the forks got wrong most often, and the five things
 most likely to be reintroduced by a well-meaning edit.
@@ -235,6 +253,41 @@ If you ever need a real join, it is a change to `depends_on_from_task`, the
 `dep_satisfied` check, `locate_dep_slug`, the dashboard, and the decomposition
 prompt. Do not half-build it by relaxing only the prompt.
 
+### 6. `ai_is_auth_failure` is TIERED. Generic 401 wording is not enough.
+
+The circuit breaker scans the CLI's **stdout** capture as well as stderr, and
+stdout holds the agent's own report. So any task that talks to a third-party API
+and quotes its 401 was matching the breaker's own patterns.
+
+That happened: `colt-unrated-live-test-0561` put COLT's refusal body
+(`message: " Authentication error"`) in a results table. The breaker read it as
+*this* CLI being logged out, dropped `.auth-cooldown-claude`, and paused the
+runner queue. Three consecutive full re-runs of a 25-turn task, each ending in
+`DEFERRED (auth failure)`, before the task reached `review/` on an unrelated
+criterion. The old comment claiming "a false positive only costs a cooldown" was
+wrong and has been corrected in both providers.
+
+The function now splits its patterns:
+
+- **strong** — only this CLI's own auth layer emits them (`API Error: 401`,
+  `please run claude login`, `OAuth token expired|revoked`, `ANTHROPIC_API_KEY`;
+  for grok, `XAI_API_KEY` and the session-start failure). Scanned in every
+  capture.
+- **broad** — generic 401/authorisation wording any vendor can emit (`HTTP 401`,
+  `Unauthorized`, `authentication error`, `credentials invalid`, ...). Scanned
+  **only** when the capture is not a completed result envelope.
+
+"Completed result envelope" means `jq -r '.result'` is non-empty: proof the CLI
+authenticated and the agent ran, so auth wording inside it is the agent quoting
+someone else. stderr, and an empty or absent `.result`, still get the full set,
+because a genuine auth failure produces no result. The signature is unchanged,
+so all four call sites (`ai-task`, `ai-brief`, `ai-scheduled` x2) get the fix
+without edits. `tests/fixtures/third-party-401-result.json` is the real capture
+that caused this, kept as a regression case.
+
+When adding a pattern, decide which tier it belongs in. A pattern a vendor's
+error body could plausibly contain is **broad**, not strong.
+
 ## Other things to watch out for
 
 - **Every deferral path in `ai-task --run` goes through `requeue_task`,** which
@@ -259,8 +312,55 @@ prompt. Do not half-build it by relaxing only the prompt.
   is `-t "=NAME"`. Inherited from both forks; still present here.
 - **`ai-eval`'s exit codes are the interface.** `0` PASS, `1` FAIL, `2` nothing
   to grade, `3` inconclusive/auth (no retry, pauses that runner), `4` test
-  timeout (no retry, does **not** pause). Keep `3` and `4` distinct. Do not
+  timeout (no retry, does **not** pause), `5` unsatisfiable criteria (no retry,
+  does **not** pause, straight to `review/`). Keep `3` and `4` distinct. Do not
   renumber any of them: `ai-task` branches on every one.
+- **An `UNSATISFIABLE` verdict (exit `5`) means the TASK FILE is wrong, and a
+  human must fix the criterion. Retrying cannot help.** That is the entire
+  reason it exists as a separate code rather than a FAIL: a criterion that
+  compares against a branch nobody has moved since 2022, or asserts a count
+  measured *before* the edit in a task whose job is to change what is counted,
+  is a defect in the file. Graded as a FAIL it costs `max_retries` full runs to
+  rediscover the same defect three times, and reaches `review/` anyway. Four
+  things to keep right:
+  - **The evidence gate is enforced in `ai-eval`, not only in the prompt.**
+    `VERDICT: UNSATISFIABLE` earns exit `5` only when an
+    `## Unsatisfiable Criteria` section is also present; without it the verdict
+    falls through to `1`. Exit `5` skips the whole retry loop, so a verdict a
+    human cannot re-check must not be able to reach it — otherwise the code is a
+    way for an agent to declare work impossible instead of doing it. The
+    fall-through direction is the safe one: it costs one retry, where the reverse
+    mistake costs the task its grading entirely.
+  - **The two pre-existing grading rules stay exactly as they are.** "Grade
+    every criterion AS WRITTEN" and "if a criterion cannot be verified from the
+    result, mark it FAIL" are both still in the prompt and are not weakened.
+    *Cannot be verified* and *is demonstrably false* are different findings, and
+    only the second one earns the new verdict. Softening either line turns a
+    narrow exception into a charitable reinterpretation of every criterion.
+  - **Partial work plus an impossible criterion is FAIL, but a SECOND
+    impossible criterion is not.** Condition (c) of the prompt reads "every
+    *other* criterion either PASSES, or independently satisfies (a) and (b)".
+    The half it exists to enforce is the first one: without it the verdict
+    becomes a way to abandon a half-finished task by finding one bad criterion
+    in it. The half that was wrong until 2026-09-11 was reading it as "exactly
+    one criterion may be bad", which is backwards — a task file with two false
+    premises is more broken than one with a single false premise, not less.
+    Measured over the 21 tasks that reached `review/`: **a single bad criterion
+    earned exit `5` seven times out of seven, and two or more earned it zero
+    times out of six**, and two evaluator reports name condition (c) as the
+    reason in so many words. Those six tasks each spent their whole retry
+    budget re-proving the same premises false. What keeps the widened condition
+    honest is that evidence is **per criterion** — `## Unsatisfiable Criteria`
+    takes one entry per offending criterion, each with its own command and
+    output, so claiming N of them costs N demonstrations. Do not let one
+    argument cover several.
+  - **The `EVAL_STATUS -eq 5` branch in `ai-task` neither reads nor writes
+    `## Retries`.** Do not "for consistency" add a counter bump: the attempt
+    that produced the evidence did its job, and the next thing that has to
+    happen is a human editing the criterion. The branch is also ordered before
+    the exit-`2` normalisation, and note that the tail of that chain treats any
+    *unrecognised* status as a PASS — so a new code must always get its own
+    branch, never be left to fall through.
 - **`ai-task`'s follow-up suggester writes to `suggestions/` and nowhere else.**
   `generate_suggestions` runs on the verified-success path only, and it runs
   **before** the archival `mv "$TASK_FILE" "$DONE_DIR/..."` because it reads the
@@ -304,6 +404,30 @@ prompt. Do not half-build it by relaxing only the prompt.
   Use single quotes for quoted examples inside the prompt, as the rest of it
   does. Verified failure: `V="a "X == 1" b"` prints `==: command not found` and
   assigns nothing.
+- **The same string must contain no unescaped `$` either.** It is expanded, so a
+  `$` in prompt *content* is a parameter expansion, and under `set -u` an
+  unbound name aborts the script on the spot. This has happened: an acceptance-
+  criteria rule illustrating a PHP call site wrote `'if ($x = helperName('` and
+  every `ai-brief --run` died with `x: unbound variable` at the closing line of
+  the assignment — before `restore_brief` is ever called, so the brief was left
+  stranded in `run/` with no `.raw` and no notification, and the tmux window
+  closed in under a second with the message nowhere. `bash -n` passes.
+  Write `\$` for a literal dollar, and note that the interpolations the prompt
+  legitimately needs (`${TODAY}`, `${STAMP_RUNNER}`, `${BRIEF_ARCHIVE}`,
+  `$PROJECTS_DIR`) are the only bare ones that belong there.
+- **And no backticks, for the third time the same way.** A backtick in prompt
+  *content* is command substitution, so the text between a pair of them is
+  **executed** and replaced by its output. Writing a template field as
+  `` `exact command` -> observed value `` made `ai-brief` print
+  `exact: command not found` and deliver the field with the phrase silently
+  deleted. `bash -n` passes, and the prompt still looks right in the source.
+  Markdown habit is what makes this one likely — backticks are the natural way
+  to mark a command in the prose you are writing — so note that the whole
+  existing prompt contains **zero** backticks and use single quotes, as the
+  rest of it does. The check that catches all three hazards is to render the
+  assignment rather than read it: extract the `PREAMBLE=` block, `source` it
+  with the four interpolations set, and confirm it prints no error and
+  `${#PREAMBLE}` is the length you expect.
 - **Both of `ai-task`'s prompts tell the agent not to force an unsatisfiable
   criterion.** The autonomous preamble says: do the task correctly, change
   nothing outside its stated scope to make a check pass, never create a record
@@ -324,13 +448,83 @@ prompt. Do not half-build it by relaxing only the prompt.
   space, not just that `bash -n` passes.
 - **Acceptance criteria in the decomposition prompt must be scoped to what the
   task creates.** No baseline-plus-predicted-delta totals, no global invariants
-  the task does not own, and idempotency stated as "a second run creates nothing
-  new" rather than as an absolute count. A criterion that a correct
+  the task does not own, no assertion about git working-tree state in any
+  form — not whole-tree, not path-scoped, not piped through grep (every task
+  shares one tree with concurrent tasks from other batches that run while it
+  runs, so a path clean at generation time is dirty at execution time and no
+  `## Criteria Baseline` line can license the check; assert changed-line content,
+  or a `sha256sum` recorded and re-checked by the run, instead), and
+  idempotency stated as "a second run creates nothing new" rather than as an
+  absolute count. A criterion that a correct
   implementation cannot pass is indistinguishable from one that has not passed
   yet, so the retry loop spends every attempt on it — and an agent under
   pressure to satisfy it may mutate data outside the task's scope. See the
   README section "Acceptance criteria must be scoped to the task" for the
   case that produced this rule.
+- **`lint_task_criteria` now carries a fourth shape: the git working-tree
+  assertion.** The prompt rule above has been in place and still let one
+  through, because the shape that got past it was the *permitted* form with its
+  teeth pulled: `git diff -- <paths> | grep -E '^[+-]' | grep -v '^[+-][+-]' |
+  wc -l` returns `0`. Variant (a) ends in `grep -c <pattern>` and asserts
+  changed-line CONTENT; swap that last stage for `wc -l` and it counts every
+  changed line again, which is tree state wearing the approved form's clothes.
+  The lint only flagged it as an "asserted integer", the human read that as the
+  mild warning it usually is, and `2026-09-16_june-minutes-pdf` reached `review/`
+  having done its work correctly and completely: the tree held a months-old
+  uncommitted `header.tex` fix that the conversion itself depended on, so the
+  command returned `10` before the task started and reverting it failed the
+  task's first criterion instead. So the lint fires on a `git diff|status|
+  ls-files` criterion that ends in `| wc -l`, or that demands git report
+  nothing (`is clean`, `lists nothing`, `no output`, `unchanged`,
+  `byte-identical`), and stays silent when the line says `report`/`record`/
+  `observe`, which is the one legitimate use of `git status` in a criterion.
+  **Keep the `wc -l` / `grep -c` distinction when editing this rule:** it is
+  the whole discriminator between the forbidden shape and the permitted one,
+  and a rule that fired on both would warn on every correctly written criterion
+  and be ignored accordingly.
+- **And a fifth shape: a multi-word phrase greped against raw extracted
+  document text.** `pdftotext` and its family hard-wrap what they emit, so a
+  phrase that renders perfectly in the document arrives split across two output
+  lines and the grep returns `0` for every correct run. `2026-09-17_agm-report-
+  regenerate-pdf` asserted `pdftotext ... | grep -c 'Lions Christmas Party'`
+  returns 1 or more; pandoc broke the line between `Christmas` and `Party`, the
+  task froze the markdown, the conversion script and `header.tex` so no correct
+  run could move the wrap, and it reached `review/` on exit `5` having done its
+  work correctly. The fix is to join the extraction first
+  (`pdftotext ... | tr '\n' ' ' | grep -c ...` returns `1`) or to grep a single
+  word that cannot wrap. The lint fires on an extraction command
+  (`pdftotext`/`pdftoppm`/`pdfinfo`/`catdoc`/`antiword`) piped into a `grep`
+  whose pattern contains a **space**, and stays silent when the pipeline joins
+  lines first (`tr` with a newline argument, `tr -d`, `paste -sd`, `grep -z`,
+  `awk` with `RS=`, `sed -z`). **Keep the space in the pattern as the
+  discriminator:** a single-token pattern cannot wrap, and a rule that fired on
+  one would warn on every PDF task and be ignored like the asserted-integer
+  one. `tests/test_criteria_lint.sh` is the offline regression test; it
+  extracts the function rather than sourcing `ai-brief`, which would run the
+  launcher.
+- **Above those shape rules sits one measurement rule, and it is the one that
+  generalises.** `MEASURE BEFORE YOU ASSERT` requires the decomposing agent to
+  RUN any criterion that names a count, an absence or a git state before
+  writing it, and to record the command and what it returned in a
+  `## Criteria Baseline` section emitted **before** `## Acceptance Criteria`,
+  so the measurements are written before the assertions that depend on them.
+  The shape rules enumerate the ways criteria have gone wrong so far; of the
+  21 tasks that reached `review/`, **16 were blocked by a bad criterion and
+  only 1 by a genuinely wrong implementation**, across nine distinct shapes.
+  Enumeration cannot keep up with that, and `ai-brief` already runs the
+  decomposition inside the project working directory (`WORKDIR`, `ai-brief`
+  around line 423), so the agent can simply check. One command would have
+  caught each of the three worst cases: a `grep -c` asserted to return `1` on a
+  file that already contained one match, a branch-range `git diff` asserted to
+  list six files where it already listed 73, and a negative `grep` over paths
+  the task never owned.
+  Two knock-on effects, both deliberate. The section is inert to every parser
+  (`section_from_task` and friends match on their own headers, and the lint
+  bounds `## Acceptance Criteria` at the next `## `), and `ai-eval` passes the
+  **whole** task file to the evaluator, so a recorded baseline lands in the
+  grading prompt for free — which is exactly the command-and-output evidence
+  that gate (a) of UNSATISFIABLE demands. Two tasks burned a retry each purely
+  because attempt 1 argued impossibility in prose with no command output.
 - **`ai_preamble_extra` is deliberately NOT appended to the decomposition
   prompt** in `ai-brief`, unlike `ai-task`. The provider extras describe the
   shape of a *result report*, which contradicts that prompt's "output only the

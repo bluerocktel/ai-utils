@@ -104,6 +104,86 @@ how a smoke run is kept off the live tree:
 TASKS_DIR=/tmp/ai-utils-smoke ./ai-task --runner claude
 ```
 
+## Referenced project instructions
+
+`ai-task`, `ai-brief`, and the agent-based phase of `ai-eval` embed the contents
+of the instruction file referenced by `~/tasks/projects/<project>.md` directly
+in their prompts. This works for every runner, including ones that do not
+automatically discover `CLAUDE.md`.
+
+```markdown
+## CLAUDE.md
+`~/Scripts/example/CLAUDE.md`
+```
+
+The optional provider-neutral heading `## Instructions` takes precedence over
+`## CLAUDE.md` when both contain a reference. Use one path on the first nonempty
+line of the section. Absolute paths, `~/` paths, and paths relative to the
+project definition's directory are supported, including spaces and optional
+surrounding backticks. Shell expressions and environment variables are not
+evaluated. The referenced file is included as-is; nested references are not
+expanded by the pipeline.
+
+Absent references add no prompt content. An explicit reference to an unreadable
+file produces a stderr warning and a visible missing-context notice in the
+prompt; the run continues and is instructed to report the missing context.
+The evaluator's existing test-only paths remain unchanged.
+
+## Codex runner
+
+`providers/codex.sh` implements the same six-function interface as the other
+runners. It uses `codex exec --json`; no SDK, API client library, or new runtime
+dependency is required. Install/authenticate the Codex CLI separately and ensure
+`codex`, `jq`, and `timeout` are on the launcher's `PATH` (including cron/tmux).
+The adapter's flags were checked against `codex-cli 0.154.0`.
+
+```sh
+codex --version
+codex login
+```
+
+To route an individual task, use the existing next-line task header:
+
+```markdown
+## Runner
+codex
+```
+
+Scheduled jobs use `## Runner: codex`. To make Codex the default for tasks
+without a runner, set `default_runner=codex` in your local `config`. Keep the
+current default when existing jobs depend on another provider's tools. Codex
+uses its own configured MCP servers and skills; another CLI's integrations
+are not automatically transferred.
+
+Leave `## Model` and `default_model` unset to use Codex's configured model, or
+supply an exact model ID accepted by your installation. Model strings pass
+through unchanged; aliases belonging to another provider are not translated.
+For cross-provider grading, set `eval_runner=codex` and set `eval_model` to a
+Codex-compatible model ID: otherwise the evaluator inherits the task's model,
+which may be an alias belonging to its executor.
+
+As with the existing autonomous providers, execution bypasses interactive
+approvals. This adapter passes `--dangerously-bypass-approvals-and-sandbox`,
+which also disables Codex's sandbox. It inherits the CLI configuration and
+supports working directories outside Git repositories.
+
+Raw captures remain JSONL. Only the last agent message in a completed turn
+becomes the result; interrupted progress messages are not usable reports.
+Usage reports include input, output, and cached input tokens. Model identity
+and dollar cost are marked unavailable because the completion event does not
+report them. See the [official non-interactive documentation](https://developers.openai.com/codex/noninteractive/)
+for the event format and CLI execution options.
+
+Offline regressions (Python 3 standard library, Bash, jq, timeout; no API calls):
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+The tests use a fake CLI and temporary files, including an `ai-eval` integration
+check. They do not launch real tasks or validate account access. Installing
+cron entries or changing existing routing remains a separate deployment step.
+
 ## Configuration
 
 `config` lives beside the scripts and is sourced as shell `key=value`. It is
@@ -362,6 +442,7 @@ to decide whether the attempt burns a retry, so none of them may be renumbered.
 | `2` | Nothing to grade: no `## Acceptance Criteria` and no passing `## Test Command`. Also covers a usage error and a missing task or result file, so a bad invocation is never read as a failed task. `ai-task` treats it as "the run stands, ungraded". | — |
 | `3` | Inconclusive: evaluator auth failure, or an empty verdict. **No** retry burned; `ai-task` requeues the task and touches that runner's cooldown marker. | **no** |
 | `4` | Inconclusive: a `## Test Command` timed out. **No** retry burned and the queue is **not** paused, because a slow test says nothing about credentials. | **no** |
+| `5` | One or more criteria are **unsatisfiable as written**: the evaluator returned `VERDICT: UNSATISFIABLE` together with an `## Unsatisfiable Criteria` section. **No** retry burned; `ai-task` moves the task straight to `review/` for a human. | **no** |
 
 A passing `## Test Command` with no `## Acceptance Criteria` is a `0`, not a
 `2`: tests alone can carry a PASS.
@@ -400,6 +481,62 @@ an equivalent-looking one and reported success has failed the criterion, however
 well the substitute works. This is the check that catches the most expensive
 class of false success, where the work is real but not the work that was asked
 for.
+
+### Unsatisfiable criteria (exit `5`)
+
+A criterion can be wrong. It can compare against a branch that has not moved in
+years, assert a count measured before the edit in a task whose job is to change
+what is counted, or pin a test to state a sibling task removes. Graded as
+written, such a criterion is a FAIL, the task is requeued, and after
+`max_retries` it reaches `review/` having burned three full runs to rediscover
+the same defect each time.
+
+`VERDICT: UNSATISFIABLE` is the outcome for that case, and the bar is narrow.
+All three of these must hold:
+
+1. the result file **demonstrates** the criterion's premise is false, showing a
+   command *and* its output, not merely asserting that the criterion is
+   unreasonable;
+2. no correct execution of the task could have satisfied it: impossible, not
+   merely hard, slow or left unverified;
+3. every **other** criterion either passes, or independently satisfies 1 and 2.
+
+Condition 3 is about unfinished work, not about arithmetic. Several criteria in
+the same task may be unsatisfiable at once, and the verdict still stands: a task
+file with two false premises is more broken than one with a single false
+premise, not less. Read the other way — as "exactly one criterion may be bad" —
+it sent six tasks through their entire retry budget re-proving the same premises
+false on every attempt, while a single bad criterion earned exit `5` seven times
+out of seven. What keeps the condition honest is that the evidence is **per
+criterion**: `## Unsatisfiable Criteria` takes one entry per offending criterion,
+each with its own command and output, so claiming N of them costs N
+demonstrations and one argument may never cover several.
+
+A criterion the agent simply did not check is a FAIL, not UNSATISFIABLE, and so
+is partial work alongside an impossible criterion. The two pre-existing rules
+are untouched: criteria are still graded as written, and one that cannot be
+verified from the result is still a FAIL. "Cannot be verified" and "is
+demonstrably false" are different findings and only the second earns the new
+verdict.
+
+The evaluator must also emit an `## Unsatisfiable Criteria` section naming each
+offending criterion and quoting the evidence from the result file. This is
+**enforced in `ai-eval` itself**, not just requested in the prompt: a
+`VERDICT: UNSATISFIABLE` with no such section exits `1`, not `5`. Exit `5` skips
+the entire retry loop, so it would otherwise be a way for an agent to dodge work
+by declaring it impossible; requiring evidence a human can re-run is what makes
+it an audit trail instead of a free pass.
+
+On exit `5` `ai-task` burns no retry, appends the evaluator's report under
+`## Evaluator (unsatisfiable acceptance criteria)`, moves the task to `review/`,
+and logs:
+
+```
+**Status:** NEEDS REVIEW (unsatisfiable acceptance criteria — no retry burned)
+```
+
+**The task file is what needs fixing, not the code.** Retrying it cannot help:
+edit the criterion (or delete it), then move the file back to `inbox/`.
 
 ### The `--runner` flag
 
@@ -519,17 +656,46 @@ otherwise only surface after the human review pass. The run also asserts that
 the stamp landed on every file in the batch and rolls the batch back if it did
 not.
 
+### Acceptance criteria must be measured, not predicted
+
+An acceptance criterion naming a count, an absence or a git state is a claim
+about a repository — and `ai-brief` decomposes a brief **inside that
+repository's working directory**, so the agent writing the criterion can check
+it. `MEASURE BEFORE YOU ASSERT` requires exactly that: run the command, then
+write the criterion, and record both in a `## Criteria Baseline` section that is
+emitted just above `## Acceptance Criteria`, one line per criterion, as
+`command` -> the value observed *before* any of the work exists. A criterion its
+own baseline already contradicts was false before the task started, and gets
+rewritten as a delta the task owns.
+
+This rule governs the shape rules below it. Of the 21 tasks that have reached
+`review/`, **16 were blocked by a bad criterion and exactly 1 by a wrong
+implementation**, spread across nine distinct shapes — more shapes than a list
+of prohibitions can stay ahead of. One command would have caught each of the
+three worst: a `grep -c` asserted to return `1` against a file that already
+contained one match, a branch-range `git diff` asserted to list six files where
+it already listed 73, and a negative `grep` over paths the task never owned.
+
+The baseline earns its place twice more. A human reading the review queue sees
+the measured value directly above the assertion that depends on it, which is
+what makes a bad criterion obvious at promotion time rather than three runs
+later. And `ai-eval` hands the **whole** task file to the evaluator, so the
+baseline lands in the grading prompt for free — it is precisely the
+command-and-output evidence that condition 1 of UNSATISFIABLE demands.
+
 ### Acceptance criteria must be scoped to the task
 
-The decomposition prompt forbids a class of criterion that reads as rigorous and
-is actually unpassable. Three rules, all learned from one task that burned every
-retry it had:
+Below the measurement rule, the decomposition prompt forbids a class of
+criterion that reads as rigorous and is actually unpassable. Five rules, each
+learned from a task that burned retries on it:
 
 | Don't write | Write instead |
 |---|---|
 | `Item::count() == 439 + 143` (a measured baseline plus a predicted delta) | `142 rows carrying marker M exist` |
 | `no duplicate X anywhere` (a global invariant the task does not own) | `no duplicate X among the rows this task created` |
 | `re-run leaves count at 582` (idempotency restated as an absolute) | `a second run creates nothing new (created-count 0)` |
+| `git diff --stat cdrs/.env` shows no change (a working tree a sibling task dirties) | record `sha256sum cdrs/.env` first, re-check it last, require a match |
+| `pdftotext report.pdf - \| grep -c 'Lions Christmas Party'` returns 1 or more (a phrase greped against hard-wrapped extracted text) | join the extraction first: `pdftotext report.pdf - \| tr '\n' ' ' \| grep -c ...`, or assert a single word that cannot wrap |
 
 Both halves of a baseline-plus-delta criterion are unsafe. The **baseline moves**
 if anything else touches the data between decomposition and execution, and the
@@ -537,6 +703,41 @@ if anything else touches the data between decomposition and execution, and the
 this rule, two product labels differing only in one letter's case folded into a
 single row under a case-insensitive collation, so 143 new items were only ever
 going to be 142.
+
+The fourth rule has a different cause from the first three, which are all about
+numbers. A `## Depends-on` chain shares **one** git working tree: that is the point
+of chaining. So a criterion asserting a path is undiffed is false the moment the
+dependency writes, and it is false *before the dependent task starts* — no
+execution of it, however correct, can pass. `colt-unrated-consolidated-mode`
+carried `git diff --stat cdrs/.env` shows no change while its own declared
+dependency `colt-unrated-get-script` existed to add a credential block to that
+exact file. It burned one retry as a FAIL, then landed in `review/` as
+UNSATISFIABLE. The replacement asserts the thing actually meant — *this task did
+not touch the file* — from state the run produces itself.
+
+The fifth rule is the same failure wearing a different hat: a criterion that no
+correct run can reach, because the thing it measures is not the thing the task
+controls. `pdftotext` and every other extraction tool hard-wrap their output at
+the point the renderer wrapped the page, so a phrase that reads perfectly in the
+PDF is delivered to `grep` split across two lines.
+`2026-09-17_agm-report-regenerate-pdf` regenerated its PDF correctly and still
+landed in `review/`, because pandoc broke `Lions Christmas Party` between
+`Christmas` and `Party` and the task had frozen the markdown, the conversion
+script and `header.tex`, so nothing a correct run could do would move the wrap.
+Piping the extraction through `tr '\n' ' '` first returns `1`. Its sibling
+`2026-09-17_agm-agenda-pdf` carried four more of the same shape and had to be
+fixed by hand in `backlog-for-review/`.
+
+Some of these shapes are also checked mechanically. `lint_task_criteria`
+in `ai-brief` appends a `## Criteria Warnings` section to every emitted task
+file whose criteria match one of them: an asserted integer nobody re-derived, a
+`grep -c` whose pattern the task's own `## Tasks` section dictates, more than
+one match demanded from a single named file, a git working-tree state
+assertion, and a multi-word phrase greped against unjoined extracted text. It
+**warns and never rejects** — the batch is going to a human review queue
+anyway, and a linter confident enough to delete a task would have to be right
+far more often than a heuristic can be. The warnings are for the person
+promoting the task out of `backlog-for-review/`.
 
 The failure mode is the expensive part. A criterion that cannot pass is
 indistinguishable, to an autonomous retry, from a criterion that has not passed
