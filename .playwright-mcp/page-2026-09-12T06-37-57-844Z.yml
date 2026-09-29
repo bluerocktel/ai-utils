@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - button "Skip to content" [ref=e3] [cursor=pointer]
+    - button "Accessibility Feedback" [ref=e6] [cursor=pointer]
+    - generic [ref=e9]:
+      - link [ref=e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Back to Bing search" [level=1] [ref=e11]
+      - search [ref=e12]:
+        - button "Search" [ref=e15] [cursor=pointer]
+        - searchbox "Enter your search here – Search suggestions will show as you type" [ref=e16]: "\"PAREF Gestion\" 153 boulevard Haussmann contact"
+        - button "Search using an image" [ref=e19] [cursor=pointer]
+    - complementary "Account Rewards and Preferences" [ref=e21]:
+      - button "Microsoft Rewards" [ref=e22] [cursor=pointer]
+      - link "Sign in" [ref=e23] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Search Filter" [ref=e25]:
+      - list [ref=e26]:
+        - listitem [ref=e27]:
+          - link "All" [ref=e28] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=e29]:
+          - link "Search" [ref=e30] [cursor=pointer]:
+            - /url: /copilotsearch?q=%22PAREF+Gestion%22+153+boulevard+Haussmann+contact&FORM=CSSCOP
+        - listitem [ref=e33]:
+          - link "Images" [ref=e34] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=74f950e68af59ba4ff17c838b82b78666306565b5ae69d48fc1bc0d38beb97cbJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT0lMjJQQVJFRitHZXN0aW9uJTIyKzE1Mytib3VsZXZhcmQrSGF1c3NtYW5uK2NvbnRhY3QmRk9STT1IRFJTQzI&ntb=1
+        - listitem [ref=e35]:
+          - link "Videos" [ref=e36] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d502356880243874d64a3d5b0ecbdb8ea69ca787c01f6add454b307263206fecJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT0lMjJQQVJFRitHZXN0aW9uJTIyKzE1Mytib3VsZXZhcmQrSGF1c3NtYW5uK2NvbnRhY3QmRk9STT1IRFJTQzM&ntb=1
+        - listitem [ref=e37]:
+          - link "Maps" [ref=e38] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=7d8ff5164296bf16ac33f139229d7c36345bff678fbcbdd222def2e95c424222JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT0lMjJQQVJFRitHZXN0aW9uJTIyKzE1Mytib3VsZXZhcmQrSGF1c3NtYW5uK2NvbnRhY3QmRk9STT1IRFJTQzQ&ntb=1
+        - listitem [ref=e39]:
+          - link "News" [ref=e40] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=a47279a94637465c98ce5f823c7622d39d3fe730def539c5aa2bae37a68af349JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9JTIyUEFSRUYrR2VzdGlvbiUyMisxNTMrYm91bGV2YXJkK0hhdXNzbWFubitjb250YWN0JkZPUk09SERSU0M2&ntb=1
+        - listitem [ref=e41]:
+          - button [ref=e42] [cursor=pointer]
+        - listitem [ref=e46]:
+          - link [ref=e49] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: About search results
+            - img "About search results" [ref=e51]
+  - contentinfo [ref=e52]:
+    - generic [ref=e53]:
+      - list:
+        - listitem [ref=e54]:
+          - link "Privacy" [ref=e55] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=e56]:
+          - link "Terms" [ref=e57] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

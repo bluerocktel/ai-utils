@@ -1,0 +1,396 @@
+- generic [ref=f64e1]:
+  - link [ref=f64e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f64e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f64e10]:
+      - generic [ref=f64e12]:
+        - img "Google" [ref=f64e13]
+        - generic [ref=f64e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f64e16] [cursor=pointer]':
+            - generic [ref=f64e17]: fr
+          - link "Se connecter" [ref=f64e19] [cursor=pointer]
+      - generic [ref=f64e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f64e21]
+        - generic [ref=f64e22]:
+          - generic [ref=f64e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f64e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f64e25]:
+              - listitem [ref=f64e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f64e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f64e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f64e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f64e30]:
+              - listitem [ref=f64e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f64e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f64e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f64e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f64e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f64e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f64e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f64e38]:
+        - generic [ref=f64e39]:
+          - button "Tout refuser" [ref=f64e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f64e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f64e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f64e44]: Plus d'options
+      - generic [ref=f64e45]:
+        - link "Confidentialité" [ref=f64e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f64e47]: ·
+        - link "Conditions d'utilisation" [ref=f64e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f64e53]:
+    - search [ref=f64e54]:
+      - generic [ref=f64e57]:
+        - link [ref=f64e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&ictx=0&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4QpYkNegQIBhBm
+        - generic [ref=f64e59]:
+          - combobox [ref=f64e62]: "\"Citynove\" Paris téléphone contact \"Citynove\" Paris téléphone contact"
+          - generic [ref=f64e63]:
+            - button [ref=f64e65] [cursor=pointer]
+            - generic [ref=f64e70]:
+              - button [ref=f64e71] [cursor=pointer]
+              - button [ref=f64e74] [cursor=pointer]
+        - button [ref=f64e77] [cursor=pointer]
+    - generic [ref=f64e82]:
+      - button [ref=f64e84] [cursor=pointer]
+      - button [ref=f64e85] [cursor=pointer]
+      - generic [ref=f64e91]:
+        - button [ref=f64e93] [cursor=pointer]
+        - link [ref=f64e98] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Citynove%2522%2BParis%2Bt%25C3%25A9l%25C3%25A9phone%2Bcontact%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f64e99]: Connexion
+  - generic [ref=f64e101]:
+    - navigation [ref=f64e107]:
+      - list [ref=f64e110]:
+        - listitem [ref=f64e111]:
+          - link [ref=f64e114] [cursor=pointer]:
+            - /url: /search?q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q2J8OegQICxAD
+            - generic [ref=f64e115]: Mode IA
+        - listitem [ref=f64e118]:
+          - link [disabled] [ref=f64e119]:
+            - generic [ref=f64e120]: Tous
+        - listitem [ref=f64e122]:
+          - link [ref=f64e123] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4QtKgLegQIDxAB
+            - generic [ref=f64e124]: Images
+        - listitem [ref=f64e126]:
+          - link [ref=f64e127] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4QtKgLegQIERAB
+            - generic [ref=f64e128]: Vidéos
+        - listitem [ref=f64e130]:
+          - link [ref=f64e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q0pQJegQIExAB
+            - generic [ref=f64e132]: Actualités
+        - listitem [ref=f64e134]:
+          - link [ref=f64e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Qs6gLegQIEBAB
+            - generic [ref=f64e136]: Vidéos courtes
+        - listitem [ref=f64e138]:
+          - link [ref=f64e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7Hkn8yWBpuZ8SrFmWun9dg8NU65Njndt8IIZVQ0EZEKE96KF_epQoJkgXuqdq6dlmxS4Fb98UQv6ZD6Rw83Xr8zpOPJiomlOCqFdhZWy4fLe5jOEZxJgsnfbadNdMYYDf5pNia&q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Qs6gLegQIFBAB
+            - generic [ref=f64e140]: Web
+        - listitem [ref=f64e142]:
+          - button [ref=f64e143] [cursor=pointer]:
+            - generic [ref=f64e144]: Plus
+    - heading [level=1] [ref=f64e150]: Résultats de recherche
+    - generic [ref=f64e151]:
+      - generic [ref=f64e152]:
+        - generic [ref=f64e160]:
+          - heading [level=2] [ref=f64e161]:
+            - generic [ref=f64e168]: Paris
+          - generic [ref=f64e170]:
+            - text: ∙
+            - button [ref=f64e171] [cursor=pointer]: Choisir une zone
+          - button [ref=f64e174] [cursor=pointer]
+        - generic [ref=f64e193]:
+          - heading [level=2] [ref=f64e197]:
+            - generic [ref=f64e198]:
+              - generic [ref=f64e199]: Raisonnement…
+              - generic [ref=f64e201]: Recherche en cours…
+              - generic [ref=f64e211]: Réfléchit un peu plus longtemps…
+          - progressbar [ref=f64e214]
+      - main [ref=f64e265]:
+        - generic [ref=f64e269]:
+          - generic [ref=f64e271]:
+            - generic [ref=f64e274]:
+              - generic [ref=f64e278]:
+                - link [ref=f64e294] [cursor=pointer]:
+                  - /url: /maps/place/Citynove/data=!4m2!3m1!1s0x0:0xbbea897be31e8579?sa=X&ved=1t:2428&hl=fr&ictx=111
+                - generic [ref=f64e300]:
+                  - heading [level=2] [ref=f64e303]:
+                    - link [ref=f64e304] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Citynove&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0dl4fyXUgdi4oV4QoTXcwkPhj0PqoiNiHVQBHHGi1EtCODLlgRjlYi84BbUF98AWb4NtvpE%3D&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q_coHegQILBAB
+                      - text: Citynove
+                  - generic [ref=f64e307]:
+                    - text: 2,3
+                    - button [ref=f64e313] [cursor=pointer]: 3 avis Google
+                    - button [ref=f64e317] [cursor=pointer]
+                    - text: Conseiller en gestion des affaires à Paris
+                - generic [ref=f64e327]:
+                  - generic [ref=f64e340]:
+                    - link [ref=f64e342] [cursor=pointer]:
+                      - /url: http://citynove.com/
+                      - generic [ref=f64e343]: Site Web
+                    - link [ref=f64e349]:
+                      - generic [ref=f64e350] [cursor=pointer]: Itinéraire
+                    - button [ref=f64e359] [cursor=pointer]:
+                      - generic [ref=f64e360]: Rédiger un avis
+                    - button [ref=f64e370] [cursor=pointer]:
+                      - generic [ref=f64e373]: Enregistrer
+                    - button [ref=f64e376] [cursor=pointer]:
+                      - generic [ref=f64e377]: Partager
+                    - button [ref=f64e383] [cursor=pointer]:
+                      - generic [ref=f64e384]: Appeler
+                  - generic [ref=f64e393]:
+                    - generic [ref=f64e396]:
+                      - text: "Emplacement :"
+                      - link [ref=f64e397] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Galeries+Lafayette+Haussmann&ludocid=16606804023406433683&lsig=AB86z5ULOkz_AkTgjO9VtXPHHIcn&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q8G0oAHoECDsQAQ
+                        - text: Galeries Lafayette Haussmann
+                    - generic [ref=f64e400]:
+                      - generic [ref=f64e401]:
+                        - link [ref=f64e402] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citynove+adresse&ludocid=13540786394827228537&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q6BN6BAg4EAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 27 Rue de la Chau. d'Antin, 75009 Paris
+                    - generic [ref=f64e406]:
+                      - generic [ref=f64e407]:
+                        - link [ref=f64e408] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citynove+t%C3%A9l%C3%A9phone&ludocid=13540786394827228537&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q6BN6BAg6EAI
+                          - text: Téléphone
+                        - text: ":"
+                      - link [ref=f64e411] [cursor=pointer]:
+                        - /url: "#"
+                        - text: 01 42 82 85 29
+                    - generic [ref=f64e415]:
+                      - generic [ref=f64e416]:
+                        - link [ref=f64e419] [cursor=pointer]:
+                          - /url: "#"
+                          - text: Suggérer une modification
+                        - text: ·
+                        - link [ref=f64e420] [cursor=pointer]:
+                          - /url: https://business.google.com/create?hl=fr&getstarted&authuser=0&fp=13540786394827228537&gmbsrc=fr-fr-et-ip-z-gmb-s-z-l~skp%7Cclaimbz%7Cu&ppsrc=GMBSI
+                          - text: Vous êtes le propriétaire de cet établissement ?
+                      - generic [ref=f64e421]:
+                        - generic [ref=f64e422]: Ajouter les informations manquantes
+                        - link [ref=f64e423] [cursor=pointer]: Ajouter les horaires
+                  - generic [ref=f64e432]:
+                    - generic [ref=f64e434]:
+                      - generic [ref=f64e435]: Les avis ne sont pas vérifiés
+                      - button [ref=f64e438] [cursor=pointer]
+                    - generic [ref=f64e443]:
+                      - generic [ref=f64e445]:
+                        - button [ref=f64e447] [cursor=pointer]:
+                          - generic [ref=f64e448]:
+                            - generic [ref=f64e449]: Google
+                            - list [ref=f64e456]:
+                              - listitem [ref=f64e457]: 2,3/5
+                              - listitem [ref=f64e458]: 3 avis
+                        - link [ref=f64e459] [cursor=pointer]:
+                          - /url: https://www.infobel.com/fr/france/citynove/paris/FR104925959-0142828529/businessdetails.aspx
+                          - generic [ref=f64e460]:
+                            - generic [ref=f64e461]: Infobel
+                            - list [ref=f64e468]:
+                              - listitem [ref=f64e469]: 2,3/5
+                              - listitem [ref=f64e470]: 3 avis
+                      - button [aria-hidden] [ref=f64e471] [cursor=pointer]
+                    - button [ref=f64e477]:
+                      - generic [ref=f64e478] [cursor=pointer]: Ajouter un avis
+                    - link [ref=f64e522] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rXpVTGo8Q3tLiwdrkswWafzzoDaNiVk11zwWm90ofeN9d1IBfkPRPSZwOCDmGMg32bjEP_DkU5ZjhBzoMkw1zmLvaz-huUphrm__at9WpQM0MA1OieHGP8yZ41a9Z9xTUEvoVEyJOfcQVZxzBGQi5H62AR8o&q=Citynove+Avis&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_2uAtbtwQON7PDsWT2IQWSnP2bZKmeFWGmdP7ddkLdEoq-98g1BUi-J9XFkHDIPH4uOPcmYZ1u56w_I-JLJGlhLeGCQX&sa=X&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q_4MLegQIPhAQ
+                      - generic [ref=f64e523]: Afficher tous les avis
+                  - generic [ref=f64e533]:
+                    - heading [level=3] [ref=f64e534]: Profils
+                    - generic [ref=f64e535]:
+                      - link [ref=f64e539] [cursor=pointer]:
+                        - /url: /goto?url=CAESWwHrOzAVOX8S-OzQW5tkduNaypmT2GrptPnYTyhaRO1tMBv4O_WkIvac6HbntA1NeMHYu6g6YxqsHRvnewMjUpHlrgQgd9lHeCXSknwAqXh43I2KdQy4ip60JCc
+                        - generic [ref=f64e540]: Instagram
+                      - link [ref=f64e549] [cursor=pointer]:
+                        - /url: /goto?url=CAESbgHrOzAV1_yLdi9CnjFLIhCavDG8Nyo2ao6AXXNIVxD37nSbnYN1X4KwsLLD9A9IrESlbQI-wn4ugczZc3bdTXIS1Y2sAeMvwljyoNnCkQ2d68r_AXE4VKymoD1la3FndpGL8ZHHAtEWALeczua5
+                        - generic [ref=f64e550]: LinkedIn
+              - link [ref=f64e557] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=f64e567]:
+              - generic [ref=f64e568]:
+                - link [ref=f64e570] [cursor=pointer]:
+                  - /url: "#"
+                  - text: 01 42 82 85 29
+                - generic [ref=f64e571]: Citynove – Numéro de téléphone principal
+              - list [ref=f64e575]:
+                - button [ref=f64e576] [cursor=pointer]:
+                  - generic [ref=f64e577]: Appeler
+                - link [ref=f64e581] [cursor=pointer]:
+                  - /url: /maps/dir//Citynove/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x47e66e3709221aad:0xbbea897be31e8579?sa=X&ved=1t:97007&hl=fr&ictx=111
+                  - generic [ref=f64e582]: Itinéraire
+                - button [ref=f64e591] [cursor=pointer]:
+                  - generic [ref=f64e592]:
+                    - text: Copier
+                    - textbox [aria-hidden] [ref=f64e599]: 01 42 82 85 29
+          - generic [ref=f64e602]:
+            - heading [level=2] [ref=f64e603]: Résultats Web
+            - generic [ref=f64e604]:
+              - generic [ref=f64e607]:
+                - link [ref=f64e609] [cursor=pointer]:
+                  - /url: /goto?url=CAESYAHrOzAV8RMmb7R5mjE_RuS21I34cgGPYuNm_xcL0LVRqW3V5RL0voVoqhByUxrktvQCKLcWCplz6Mp-FlNU_b4vrvkSkEOqgeIulEMRViUrOj-rXirA4Ywg1ow2SbMBNQ
+                  - heading [level=3] [ref=f64e610]: CITYNOVE ASSET MANAGEMENT à Paris
+                  - generic [ref=f64e616]:
+                    - generic [ref=f64e617]: Pages Jaunes
+                    - generic [ref=f64e619]: https://www.pagesjaunes.fr › pros
+                - button [ref=f64e625] [cursor=pointer]
+              - generic [ref=f64e632]:
+                - emphasis [ref=f64e633]: CITYNOVE
+                - text: ASSET MANAGEMENT ; Lundi, 09h30 - 20h00 ; Mardi, 09h30 - 20h00 ; Mercredi, 09h30 - 20h00 ; Jeudi, 09h30 - 21h00 ; Vendredi, 09h30 - 20h00.
+          - generic [ref=f64e637]:
+            - generic [ref=f64e640]:
+              - link [ref=f64e642] [cursor=pointer]:
+                - /url: /goto?url=CAESXgHrOzAVaVYkcWOvC226aZK97rdcs0h6Pqe2hng9s3_BgScrzGyQ-n410NEwJfF4jGkMzkK7DI8FYLdGiJnvrJ8JluQJ-oxIYgfU-XuT9x8CRM4zAIQVQ-fi7ZPRVWY
+                - heading [level=3] [ref=f64e643]: Mentions légales
+                - generic [ref=f64e649]:
+                  - generic [ref=f64e650]: Citynove
+                  - generic [ref=f64e652]: https://citynove.com › mentions-legales
+              - button [ref=f64e658] [cursor=pointer]
+            - generic [ref=f64e665]:
+              - text: RCS
+              - emphasis [ref=f64e666]: Paris
+              - text: "898 357 876. N° TVA : FR32898357876 Siège social : 8 place Saint Sulpice 75006"
+              - emphasis [ref=f64e667]: Paris
+              - text: .
+              - emphasis [ref=f64e668]: Contact contact
+              - text: "@"
+              - emphasis [ref=f64e669]: citynove
+              - text: .fr. Réalisations · Approche · Expertise
+          - generic [ref=f64e673]:
+            - generic [ref=f64e676]:
+              - link [ref=f64e678] [cursor=pointer]:
+                - /url: /goto?url=CAESaQHrOzAV-VMZfhlZ1rrIx15q4yx9nGZnWZ2K3Jp-MhYBzGn_hRj9-z2Hg4YEzbrwAcgIOVMVuf8XKxP53KuHJnI3n-UZjXfqI_Ryjs0rnys_BOi7gjRw1pVLKyFBmtz_8YttlsmkEH0F4w
+                - heading [level=3] [ref=f64e679]: Citynove Asset Management - Administrateur de biens, 27 ...
+                - generic [ref=f64e685]:
+                  - generic [ref=f64e686]: Mappy
+                  - generic [ref=f64e688]: https://fr.mappy.com › poi
+              - button [ref=f64e694] [cursor=pointer]
+            - generic [ref=f64e701]:
+              - text: Découvrez
+              - emphasis [ref=f64e702]: Citynove
+              - text: Asset Management (27 r Chaussée d'Antin, 75009
+              - emphasis [ref=f64e703]: Paris
+              - text: ) ... de 9h30 à 20h. Position sur la carte, horaires, adresse,
+              - emphasis [ref=f64e704]: téléphone
+              - text: ... Modifier ...
+          - generic [ref=f64e708]:
+            - generic [ref=f64e711]:
+              - link [ref=f64e713] [cursor=pointer]:
+                - /url: /goto?url=CAESdgHrOzAVDZDvIwxU9XRLn1PNz9DydK2bRLGRL42PbcSCMtl8Sc0nMTSY7WtUxloqBaKJckjRYUqsmWM0yah8LpjRPMF0tvSVmSoRNMJC1VrYcIvMpR3RwN5NR-1rjI0anh9aprWNlCzxG4x6KrWJ3X0clru_ZG8
+                - heading [level=3] [ref=f64e714]: Société CITYNOVE ASSET MANAGEMENT à 75009 PARIS
+                - generic [ref=f64e720]:
+                  - generic [ref=f64e721]: data.gouv.fr
+                  - generic [ref=f64e723]: https://annuaire-entreprises.data.gouv.fr › ... › 68.32A
+              - button [ref=f64e729] [cursor=pointer]
+            - generic [ref=f64e736]:
+              - text: Siège social de
+              - emphasis [ref=f64e737]: CITYNOVE
+              - text: ASSET MANAGEMENT ; Adresse. 27 RUE DE LA CHAUSSEE D'ANTIN 75009
+              - emphasis [ref=f64e738]: PARIS
+              - text: ; SIRET. 562 120 311 00021 ; Clef NIC. 00021 ; Activité principale de ...
+          - generic [ref=f64e742]:
+            - generic [ref=f64e745]:
+              - link [ref=f64e747] [cursor=pointer]:
+                - /url: /goto?url=CAESlAEB6zswFUuRkw77mvxGRwRMcHbZbqwPl61a4Yl-xae1QyKrCcgJ4it7y2KQf3_IJ1aFFSHCmmLCl35-cdfm9k-Y2xsy_z5ehDs1xnpjp7_wsrMyGsXd8FofUxmRZD8bxCPYaC3MvI9CaIIpZCdHeZf7RoWLxM3JrZ63C96PJDCe5-ef8abOh8TQO8b9pENvZ5fIINje
+                - heading [level=3] [ref=f64e748]: Citynove, Paris, FR | Informations sur l'entreprise
+                - generic [ref=f64e754]:
+                  - generic [ref=f64e755]: Infobel
+                  - generic [ref=f64e757]: https://www.infobel.com › ... › Paris
+              - button [ref=f64e763] [cursor=pointer]
+            - generic [ref=f64e769]:
+              - generic [ref=f64e770]: 2 sept. 2026 —
+              - generic [ref=f64e771]:
+                - text: Trouvez des informations sur cette entreprise, telles que le numéro de
+                - emphasis [ref=f64e772]: téléphone
+                - text: ( ...
+                - emphasis [ref=f64e773]: Citynove
+                - text: à
+                - emphasis [ref=f64e774]: Paris
+                - text: .
+                - emphasis [ref=f64e775]: Citynove
+                - text: . 27 Rue de la Chaussée d'Antin
+          - generic [ref=f64e779]:
+            - generic [ref=f64e782]:
+              - link [ref=f64e784] [cursor=pointer]:
+                - /url: /goto?url=CAESVQHrOzAViAi0TT2CPSiwgY9SVZnuF3nSwasJFnl72mDPuFKBGvyCVLQeMXVE0DbAV7cqvVtk5jPVNG8QWukxAQvOkEGqHZb_bZV6CkW1aMrXGSIdHOg
+                - heading [level=3] [ref=f64e785]: contact
+                - generic [ref=f64e791]:
+                  - generic [ref=f64e792]: Citynove
+                  - generic [ref=f64e794]: https://citynove.com › contact
+              - button [ref=f64e800] [cursor=pointer]
+            - generic [ref=f64e807]:
+              - text: Contactez-nous. 27 Rue de la Chaussée d'Antin 75009
+              - emphasis [ref=f64e808]: Paris
+              - text: ...
+          - generic [ref=f64e812]:
+            - generic [ref=f64e815]:
+              - link [ref=f64e817] [cursor=pointer]:
+                - /url: /goto?url=CAESggEB6zswFbp2wj-nj1UogvCdLwAnIo2zEIoMzrRHyA8tbzdbp77PddVvnUOSUeCSYRbqE0WTbSY7B5FPduI2O4XM83WGiL8x8vqkK-zUxAgkBds96VP5f_3jWrbTGteioaRqGGqO9kj7O0-XVyCcVeqBavYHcVYgJ4zkx7jQu2_zGQk8
+                - heading [level=3] [ref=f64e818]: Citynove AM - Groupe Galeries Lafayette
+                - generic [ref=f64e824]:
+                  - generic [ref=f64e825]: ContactOut
+                  - generic [ref=f64e827]: https://contactout.com › Company Directory
+              - button [ref=f64e833] [cursor=pointer]
+            - generic [ref=f64e840]:
+              - text: You can
+              - emphasis [ref=f64e841]: contact Citynove
+              - text: AM - Groupe Galeries Lafayette by calling +33 1 42 82 34 56. Where is
+              - emphasis [ref=f64e842]: Citynove
+              - text: AM - Groupe Galeries Lafayette headquarters located?
+          - generic [ref=f64e846]:
+            - generic [ref=f64e849]:
+              - link [ref=f64e851] [cursor=pointer]:
+                - /url: /goto?url=CAESTQHrOzAVfNXG_yRbls7tq3nyisWjE3mMt5TijPEFkGNWlahjY83d7FlBIOlnEzwdWy1fh-Nc0BM32zjQXPxXDE46_F12um-MbiR9DBLJ
+                - heading [level=3] [ref=f64e852]: Citynove - Paris
+                - generic [ref=f64e858]:
+                  - generic [ref=f64e859]: Citynove
+                  - generic [ref=f64e861]: https://citynove.com
+              - button [ref=f64e867] [cursor=pointer]
+            - generic [ref=f64e874]:
+              - emphasis [ref=f64e875]: Citynove
+              - text: s'inscrit dans la vision des bâtisseurs des Grands Magasins Galeries Lafayette. ...
+              - emphasis [ref=f64e876]: Contact
+              - text: · Realisations · Approach · Expertise · Teams · Connection
+          - generic [ref=f64e880]:
+            - generic [ref=f64e883]:
+              - link [ref=f64e885] [cursor=pointer]:
+                - /url: /goto?url=CAESagHrOzAV2d7A18hoGENtkWec3xdcezkqy9QV0HbS9xzBZf9LVPx3929MvwjXaZFDQoZhzVOECy-3gbamxF3rOC6_ccPtyYSA4bHgKZqn5RFV6M1ijq3e9eWVXLodeD7csOwh6hLm8Ij2sps
+                - heading [level=3] [ref=f64e886]: Politique de confidentialité
+                - generic [ref=f64e892]:
+                  - generic [ref=f64e893]: Citynove
+                  - generic [ref=f64e895]: https://citynove.com › politique-de-confidentialite
+              - button [ref=f64e901] [cursor=pointer]
+            - generic [ref=f64e908]:
+              - text: Par
+              - emphasis [ref=f64e909]: Citynove
+              - text: ", on entend la société"
+              - emphasis [ref=f64e910]: Citynove
+              - text: du Groupe GALERIES LAFAYETTE, dont le siège social se situe 27 rue de la Chaussée d'Antin – 75009
+              - emphasis [ref=f64e911]: Paris
+              - text: . La présente ...
+        - navigation [ref=f64e914]:
+          - heading [level=1] [ref=f64e915]: Navigation par pages
+          - text: "1"
+          - link [ref=f64e918] [cursor=pointer]:
+            - /url: /search?q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=MfSkas_8NLKtkdUP9ZDN8AI&start=10&sa=N&sstk=AS6-VmKLI8Xd2Gesi-4E_tmZ9P9o5xSexwryz_q64BV1UgyJh76YILiwt4gS915KfBhOENE6YYvMNbCV6QpY7pSnnoJDdey5g1Q7zw&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q8tMDegQIRRAE
+            - text: "2"
+          - heading [level=2] [ref=f64e920]:
+            - link [ref=f64e921] [cursor=pointer]:
+              - /url: /search?q=%22Citynove%22+Paris+t%C3%A9l%C3%A9phone+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=MfSkas_8NLKtkdUP9ZDN8AI&start=10&sa=N&sstk=AS6-VmKLI8Xd2Gesi-4E_tmZ9P9o5xSexwryz_q64BV1UgyJh76YILiwt4gS915KfBhOENE6YYvMNbCV6QpY7pSnnoJDdey5g1Q7zw&ved=2ahUKEwiP2ff4t-iWAxWyVqQEHXVIEy4Q8NMDegQIRRAG
+              - generic [ref=f64e923]: Suivant
+      - complementary [ref=f64e924]:
+        - heading [level=2] [ref=f64e925]: Résultats complémentaires
+    - contentinfo [ref=f64e926]:
+      - heading [level=1] [ref=f64e927]: Liens de pied de page

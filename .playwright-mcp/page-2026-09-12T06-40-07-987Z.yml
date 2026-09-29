@@ -1,0 +1,126 @@
+- generic [ref=f45e1]:
+  - link [ref=f45e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f45e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f45e10]:
+      - generic [ref=f45e12]:
+        - img "Google" [ref=f45e13]
+        - generic [ref=f45e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f45e16] [cursor=pointer]':
+            - generic [ref=f45e17]: fr
+          - link "Se connecter" [ref=f45e19] [cursor=pointer]
+      - generic [ref=f45e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f45e21]
+        - generic [ref=f45e22]:
+          - generic [ref=f45e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f45e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f45e25]:
+              - listitem [ref=f45e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f45e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f45e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f45e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f45e30]:
+              - listitem [ref=f45e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f45e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f45e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f45e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f45e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f45e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f45e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f45e38]:
+        - generic [ref=f45e39]:
+          - button "Tout refuser" [ref=f45e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f45e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f45e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f45e44]: Plus d'options
+      - generic [ref=f45e45]:
+        - link "Confidentialité" [ref=f45e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f45e47]: ·
+        - link "Conditions d'utilisation" [ref=f45e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f45e53]:
+    - search [ref=f45e54]:
+      - generic [ref=f45e57]:
+        - link [ref=f45e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&ictx=0&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQpYkNegQIBhBm
+        - generic [ref=f45e59]:
+          - combobox [ref=f45e62]: site:118000.fr "Fondation Rothschild" Bargue site:118000.fr "Fondation Rothschild" Bargue
+          - generic [ref=f45e63]:
+            - button [ref=f45e65] [cursor=pointer]
+            - generic [ref=f45e70]:
+              - button [ref=f45e71] [cursor=pointer]
+              - button [ref=f45e74] [cursor=pointer]
+        - button [ref=f45e77] [cursor=pointer]
+    - generic [ref=f45e82]:
+      - button [ref=f45e84] [cursor=pointer]
+      - button [ref=f45e85] [cursor=pointer]
+      - generic [ref=f45e91]:
+        - button [ref=f45e93] [cursor=pointer]
+        - link [ref=f45e98] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3Dsite:118000.fr%2B%2522Fondation%2BRothschild%2522%2BBargue%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f45e99]: Connexion
+  - generic [ref=f45e101]:
+    - navigation [ref=f45e107]:
+      - list [ref=f45e110]:
+        - listitem [ref=f45e111]:
+          - link [ref=f45e114] [cursor=pointer]:
+            - /url: /search?q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&sca_esv=02c6818e7845ba38&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQ2J8OegQIEhAD
+            - generic [ref=f45e115]: Mode IA
+        - listitem [ref=f45e118]:
+          - link [disabled] [ref=f45e119]:
+            - generic [ref=f45e120]: Tous
+        - listitem [ref=f45e122]:
+          - link [ref=f45e123] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQtKgLegQIFRAB
+            - generic [ref=f45e124]: Images
+        - listitem [ref=f45e126]:
+          - link [ref=f45e127] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQtKgLegQIGBAB
+            - generic [ref=f45e128]: Vidéos
+        - listitem [ref=f45e130]:
+          - link [ref=f45e131] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=3&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQs6gLegQIFhAB
+            - generic [ref=f45e132]: Produits
+        - listitem [ref=f45e134]:
+          - link [ref=f45e135] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQ0pQJegQIFxAB
+            - generic [ref=f45e136]: Actualités
+        - listitem [ref=f45e138]:
+          - link [ref=f45e139] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:118000.fr+%22Fondation+Rothschild%22+Bargue&sa=X&ved=2ahUKEwjJ76TGt-iWAxU0VKQEHWZuKZAQs6gLegQIFBAB
+            - generic [ref=f45e140]: Vidéos courtes
+        - listitem [ref=f45e142]:
+          - button [ref=f45e143] [cursor=pointer]:
+            - generic [ref=f45e144]: Plus
+    - heading [level=1] [ref=f45e150]: Résultats de recherche
+    - main [ref=f45e152]:
+      - generic [ref=f45e159]:
+        - heading [level=2] [ref=f45e160]: Résultats Web
+        - generic [ref=f45e161]:
+          - generic [ref=f45e164]:
+            - link [ref=f45e166] [cursor=pointer]:
+              - /url: /goto?url=CAESWwHrOzAVMk5PZZWO0M0dumQK_t84ohQQuwgmbWue__LJ7Nf-p81Rcl-4ignjw3SIn1seKAb744iYdbmFiviyYWm4Yie8M7exG7sKQW99ec3NqjMSw9gr25GelaU
+              - heading [level=3] [ref=f45e167]: Fondation Rothschild à PARIS 75015 (RUE BARGUE)
+              - generic [ref=f45e173]:
+                - generic [ref=f45e174]: 118000.fr
+                - generic [ref=f45e176]: https://www.118000.fr › ...
+            - button [ref=f45e182] [cursor=pointer]
+          - generic [ref=f45e189]:
+            - text: ...
+            - emphasis [ref=f45e190]: Fondation Rothschild
+            - text: .
+            - emphasis [ref=f45e191]: Fondation Rothschild
+            - text: "à PARIS 75015 : Adresse, horaires, téléphone."
+            - emphasis [ref=f45e192]: Fondation Rothschild
+            - text: . H 00 11 RUE
+            - emphasis [ref=f45e193]: BARGUE
+            - text: 75015 Paris. Administrateur de ...
+    - contentinfo [ref=f45e194]:
+      - heading [level=1] [ref=f45e195]: Liens de pied de page

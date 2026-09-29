@@ -1,0 +1,16 @@
+[     850ms] [WARNING] [@sentry/vue]: Misconfigured SDK. Vue specific errors will not be captured.
+Update your `Sentry.init` call with an appropriate config option:
+`app` (Application Instance - Vue 3) or `Vue` (Vue Constructor - Vue 2). @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[     994ms] [LOG] %c😱 background-color: #f8f5f2; padding: 3px; font-size: 30px; @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[     995ms] [LOG] %cScraper c'est bien. Utiliser notre API, c'est mieux.
+Il existe une offre gratuite, et l'API propose la totalité des informations présentes sur les pages Pappers.
+Toutes les infos sont disponibles ici : https://www.pappers.fr/api background-color: #f8f5f2; padding: 3px; @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[     995ms] [LOG] 
+ @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[     995ms] [LOG] %cPS : Si vous choisissez tout de même la version scraping, il est possible que vous ayez quelques surprises ;) background-color: #f8f5f2; padding: 3px; @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[     995ms] [LOG] 
+ @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[    1058ms] [ERROR] The method setTrackerUrl is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Matomo trackers documentation: https://developer.matomo.org/guides/tracking-javascript-guide#multiple-piwik-trackers @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[    1059ms] [ERROR] The method setTrackerUrl is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Matomo trackers documentation: https://developer.matomo.org/guides/tracking-javascript-guide#multiple-piwik-trackers @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[    1059ms] [ERROR] The method setSiteId is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Matomo trackers documentation: https://developer.matomo.org/guides/tracking-javascript-guide#multiple-piwik-trackers @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1
+[    1059ms] [ERROR] The method setSiteId is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Matomo trackers documentation: https://developer.matomo.org/guides/tracking-javascript-guide#multiple-piwik-trackers @ https://www.pappers.fr/js/app.js?id=ba084947e4e3a514f70247513ac81dbc:1

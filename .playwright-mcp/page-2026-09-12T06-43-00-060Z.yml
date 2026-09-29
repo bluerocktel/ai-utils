@@ -1,0 +1,1941 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - text: 
+    - banner:
+      - generic [ref=f1e3]:
+        - link [ref=f1e4] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f1e13]:
+          - img "Recherche" [ref=f1e14]
+          - searchbox "Entreprise, N° SIREN, Dirigeant, Mot-clé..." [ref=f1e15]
+        - dialog [ref=f1e17]:
+          - generic [active] [ref=f1e18]:
+            - banner [ref=f1e19]:
+              - generic [ref=f1e20]:
+                - generic [ref=f1e21]:
+                  - heading "Nos différentes solutions selon vos besoins" [level=3] [ref=f1e22]
+                  - generic [ref=f1e23]: Découvrez les autres services Pappers
+                - generic [ref=f1e24]: 
+            - generic [ref=f1e27]:
+              - generic [ref=f1e28]:
+                - generic [ref=f1e29]: 
+                - generic [ref=f1e30]:
+                  - heading "Formalités d’entreprise" [level=3] [ref=f1e31]
+                  - text: Annonces légales, création d'entreprise, registres dématérialisés
+                - link "Pappers Services" [ref=f1e32] [cursor=pointer]:
+                  - /url: https://services.pappers.fr/
+              - generic [ref=f1e33]:
+                - generic [ref=f1e34]: 
+                - generic [ref=f1e35]:
+                  - heading "L'actualité institutionnelle" [level=3] [ref=f1e36]
+                  - text: Textes de lois, amendements, questions et députés
+                - link "Pappers Politique" [ref=f1e37] [cursor=pointer]:
+                  - /url: https://politique.pappers.fr/
+              - generic [ref=f1e38]:
+                - generic [ref=f1e39]: 
+                - generic [ref=f1e40]:
+                  - heading "Votre veille juridique" [level=3] [ref=f1e41]: Votreveille juridique
+                  - text: Consultez la jurisprudence et activez une veille personnalisée
+                - link "Pappers Justice" [ref=f1e42] [cursor=pointer]:
+                  - /url: https://justice.pappers.fr/
+              - generic [ref=f1e43]:
+                - generic [ref=f1e44]: 
+                - generic [ref=f1e45]:
+                  - heading "Toute la donnée immobilière" [level=3] [ref=f1e46]
+                  - text: Prospectez et détecter des opportunités immobilières
+                - link "Pappers Immobilier" [ref=f1e47] [cursor=pointer]:
+                  - /url: https://immobilier.pappers.fr/
+        - generic [ref=f1e48]:
+          - list [ref=f1e49]:
+            - listitem [ref=f1e50]:
+              - link "Nos offres " [ref=f1e51] [cursor=pointer]:
+                - /url: /fonctionnalites
+                - text: Nos offres
+                - generic [ref=f1e52]: 
+              - text:                                                                                    
+            - listitem [ref=f1e53]:
+              - generic [ref=f1e54] [cursor=pointer]:
+                - text: Nos sites
+                - generic [ref=f1e55]: 
+              - text:     
+            - listitem [ref=f1e56]:
+              - link "Connexion" [ref=f1e57] [cursor=pointer]:
+                - /url: /connexion?redirect=https://www.pappers.fr/entreprise/citynove-asset-management-562120311
+          - button "Menu" [ref=f1e58] [cursor=pointer]
+    - generic [ref=f1e62]:
+      - generic [ref=f1e64]:
+        - generic [ref=f1e65]:
+          - generic [ref=f1e66]: "Mise à jour RCS : le 12/09/2026"
+          - generic [ref=f1e67]: "Mise à jour RNE : le 12/09/2026"
+          - generic [ref=f1e68]: "Mise à jour INSEE : le 11/09/2026"
+        - generic [ref=f1e69]:
+          - generic [ref=f1e70]:
+            - heading "CITYNOVE ASSET MANAGEMENT" [level=1] [ref=f1e71]
+            - generic [ref=f1e72]:
+              - text: 562 120 311 ·
+              - generic [ref=f1e74]:
+                - text: Active
+                - generic [ref=f1e75]: 
+          - generic [ref=f1e76]:
+            - table [ref=f1e78]:
+              - rowgroup [ref=f1e79]:
+                - row [ref=f1e80]:
+                  - rowheader "Adresse :" [ref=f1e81]
+                  - cell "27 RUE DE LA CHAUSSEE D'ANTIN, 75009 PARIS " [ref=f1e82]:
+                    - text: 27 RUE DE LA CHAUSSEE D'ANTIN, 75009 PARIS
+                    - generic [ref=f1e83] [cursor=pointer]: 
+                - row [ref=f1e84]:
+                  - rowheader "Activité :" [ref=f1e85]
+                  - cell "Administration d'immeubles et autres biens immobiliers" [ref=f1e86]
+                - row [ref=f1e87]:
+                  - rowheader "Effectif :" [ref=f1e88]
+                  - cell "Entre 20 et 49 salariés (donnée 2023)" [ref=f1e89]
+                - row [ref=f1e90]:
+                  - rowheader "Création :" [ref=f1e91]
+                  - cell "01/01/1956" [ref=f1e92]
+                - row [ref=f1e93]:
+                  - rowheader "Dirigeants :" [ref=f1e94]
+                  - cell [ref=f1e95]:
+                    - link "Belloy Augustin" [ref=f1e96] [cursor=pointer]:
+                      - /url: /dirigeant/augustin_belloy_1975-07
+                    - text: ","
+                    - link "Tabareau Etienne" [ref=f1e97] [cursor=pointer]:
+                      - /url: /dirigeant/etienne_tabareau_1968-04
+            - generic [ref=f1e98]:
+              - link " Suivre cette entreprise" [ref=f1e100] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=f1e101]: 
+                - generic [ref=f1e102]: Suivre cette entreprise
+              - link " Voir les statuts" [ref=f1e103] [cursor=pointer]:
+                - /url: citynove-asset-management-562120311/documents/CITYNOVE%20ASSET%20MANAGEMENT - Copie%20des%20statuts%20mis%20%C3%A0%20jour 29-07-2025.pdf
+                - generic [ref=f1e104]: 
+                - paragraph [ref=f1e105]: Voir les statuts
+              - link " Voir les comptes" [ref=f1e106] [cursor=pointer]:
+                - /url: citynove-asset-management-562120311/comptes/CITYNOVE%20ASSET%20MANAGEMENT - Comptes sociaux 2019 20-06-2022.pdf
+                - generic [ref=f1e107]: 
+                - paragraph [ref=f1e108]: Voir les comptes
+              - button " Solvabilité" [ref=f1e109] [cursor=pointer]:
+                - generic [ref=f1e110]:
+                  - generic [ref=f1e111]: 
+                  - paragraph [ref=f1e112]: Solvabilité
+      - generic [ref=f1e113]:
+        - button "" [ref=f1e115] [cursor=pointer]
+        - generic [ref=f1e117]:
+          - generic [ref=f1e118]:
+            - generic [ref=f1e119]:
+              - heading "Informations juridiques de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e120]
+              - link [ref=f1e122] [cursor=pointer]:
+                - /url: "#"
+            - generic [ref=f1e132]:
+              - table [ref=f1e133]:
+                - rowgroup [ref=f1e134]:
+                  - row [ref=f1e135]:
+                    - rowheader "SIREN :" [ref=f1e136]
+                    - cell "562 120 311 " [ref=f1e137]:
+                      - text: 562 120 311
+                      - generic [ref=f1e138] [cursor=pointer]: 
+                  - row [ref=f1e139]:
+                    - rowheader "SIRET (siège) :" [ref=f1e140]
+                    - cell "562 120 311 00021 " [ref=f1e141]:
+                      - text: 562 120 311 00021
+                      - generic [ref=f1e142] [cursor=pointer]: 
+                  - row [ref=f1e143]:
+                    - rowheader "Forme juridique :" [ref=f1e144]
+                    - cell "SAS, société par actions simplifiée" [ref=f1e145]
+                  - row [ref=f1e146]:
+                    - rowheader "Numéro de TVA :" [ref=f1e147]
+                    - cell "FR37562120311  " [ref=f1e148]:
+                      - generic [ref=f1e149]:
+                        - text: FR37562120311
+                        - link "" [ref=f1e150] [cursor=pointer]:
+                          - /url: https://ec.europa.eu/taxation_customs/vies/?locale=fr
+                        - generic [ref=f1e152] [cursor=pointer]: 
+                  - row [ref=f1e153]:
+                    - rowheader "Inscription au RCS :" [ref=f1e154]
+                    - cell "INSCRIT  (au greffe de PARIS , le 14/11/1956 )" [ref=f1e155]:
+                      - generic [ref=f1e156]:
+                        - text: INSCRIT
+                        - generic [ref=f1e157]: 
+                      - text: (au greffe de PARIS , le 14/11/1956 )
+                  - row [ref=f1e158]:
+                    - rowheader [ref=f1e159]
+                    - cell "Voir 5 observations du greffe" [ref=f1e160]
+                  - row [ref=f1e163]:
+                    - rowheader "Inscription au RNE :" [ref=f1e164]
+                    - cell "INSCRIT  (le 14/11/1956)" [ref=f1e165]:
+                      - generic [ref=f1e166]:
+                        - text: INSCRIT
+                        - generic [ref=f1e167]: 
+                      - text: (le 14/11/1956)
+                  - row [ref=f1e168]:
+                    - rowheader "Numéro RCS :" [ref=f1e169]
+                    - cell "562 120 311 R.C.S. Paris " [ref=f1e170]:
+                      - text: 562 120 311 R.C.S. Paris
+                      - generic [ref=f1e171] [cursor=pointer]: 
+                  - row [ref=f1e172]:
+                    - rowheader "Capital social :" [ref=f1e173]
+                    - cell "324 000,00 €" [ref=f1e174]
+              - generic [ref=f1e175]:
+                - button " Avis situation SIRENE " [ref=f1e178] [cursor=pointer]:
+                  - generic [ref=f1e179]: 
+                  - paragraph [ref=f1e180]: Avis situation SIRENE
+                  - generic [ref=f1e181]: 
+                - link " Extrait INPI" [ref=f1e182] [cursor=pointer]:
+                  - /url: https://data.inpi.fr/export/companies?format=pdf&ids=[%22562120311%22]
+                  - generic [ref=f1e183]: 
+                  - paragraph [ref=f1e184]: Extrait INPI
+                - link " Extrait Pappers" [ref=f1e186] [cursor=pointer]:
+                  - /url: citynove-asset-management-562120311/CITYNOVE%20ASSET%20MANAGEMENT - Extrait d'immatriculation.pdf
+                  - generic [ref=f1e187]: 
+                  - paragraph [ref=f1e188]: Extrait Pappers
+          - generic [ref=f1e189]:
+            - heading "Activité de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e191]
+            - generic [ref=f1e192]:
+              - table [ref=f1e193]:
+                - rowgroup [ref=f1e194]:
+                  - row [ref=f1e195]:
+                    - rowheader "Activité principale déclarée :" [ref=f1e196]
+                    - cell [ref=f1e197]:
+                      - generic [ref=f1e198]:
+                        - text: L'administration de biens et la gestion immobilière pour le compte d'autrui de tous biens immobiliers ou société immobilière - l'activité d'agent immobilier et d'intermédiaire en matière immobilière la...
+                        - link "Voir plus" [ref=f1e199] [cursor=pointer]:
+                          - /url: "#"
+                  - row [ref=f1e200]:
+                    - rowheader "Code NAF ou APE :" [ref=f1e201]
+                    - cell "68.32A  (Administration d'immeubles et autres biens immobiliers)" [ref=f1e202]:
+                      - generic [ref=f1e203]:
+                        - text: 68.32A
+                        - generic [ref=f1e204] [cursor=pointer]: 
+                        - text: (Administration d'immeubles et autres biens immobiliers)
+                  - row [ref=f1e205]:
+                    - rowheader "Domaine d’activité :" [ref=f1e206]
+                    - cell "Activités immobilières" [ref=f1e207]
+                  - row [ref=f1e208]:
+                    - rowheader "Forme d'exercice :" [ref=f1e209]
+                    - cell "Commerciale" [ref=f1e210]
+                  - row [ref=f1e211]:
+                    - rowheader "Convention collective :" [ref=f1e212]
+                    - cell [ref=f1e213]:
+                      - link "Immobilier - IDCC 1527" [ref=f1e215] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/conventions-collectives/de-limmobilier
+                  - row [ref=f1e216]:
+                    - rowheader "Date de clôture d'exercice comptable :" [ref=f1e217]
+                    - cell "31/12/2026" [ref=f1e218]
+                  - row [ref=f1e219]:
+                    - rowheader "Inscriptions au fichier des professionnels de l'immobilier, sous le numéro CPI75012017000022686  :" [ref=f1e220]:
+                      - text: Inscriptions au fichier des professionnels de l'immobilier, sous le numéro
+                      - generic [ref=f1e221]:
+                        - generic [ref=f1e222]:
+                          - text: CPI75012017000022686
+                          - generic [ref=f1e223] [cursor=pointer]: 
+                        - text: ":"
+                    - 'cell "Transaction Gestion immobilière INSCRIT  (à la CCI Paris Île-de-France) Garantie financière : 110 000 € Voir plus" [ref=f1e224]':
+                      - list [ref=f1e225]:
+                        - listitem [ref=f1e226]: Transaction
+                        - listitem [ref=f1e227]: Gestion immobilière
+                      - text: INSCRIT
+                      - generic [ref=f1e228]: 
+                      - text: "(à la CCI Paris Île-de-France) Garantie financière : 110 000 €"
+                      - link "Voir plus" [ref=f1e230] [cursor=pointer]:
+                        - /url: "#"
+              - generic [ref=f1e231]:
+                - img "Logo Coover" [ref=f1e232]
+                - link "Découvrir les offres de Coover, courtier spécialisé dans l’assurance professionnelle des professions réglementées " [ref=f1e233] [cursor=pointer]:
+                  - /url: https://www.coover.fr/?utm_source=pe
+                  - text: Découvrir les offres de Coover, courtier spécialisé dans l’assurance professionnelle des professions réglementées
+                  - generic [ref=f1e234]: 
+          - generic [ref=f1e236]:
+            - generic [ref=f1e237]:
+              - heading "Domiciliez votre entreprise dès 14,90 € ht/mois." [level=2] [ref=f1e238]
+              - link "Domicilier mon entreprise" [ref=f1e239] [cursor=pointer]:
+                - /url: https://www.lestricolores.fr/?utm_source=pappers
+            - img "Image Les Tricolores" [ref=f1e241]
+            - generic [ref=f1e242]:
+              - generic [ref=f1e243]: Publicité
+              - generic [ref=f1e244] [cursor=pointer]:
+                - text: Devenir partenaire de Pappers
+                - generic [ref=f1e245]: 
+          - generic [ref=f1e247]:
+            - generic [ref=f1e248]:
+              - generic [ref=f1e249]:
+                - heading "Etablissements de l'entreprise CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e251]
+                - list [ref=f1e253]:
+                  - listitem [ref=f1e254]:
+                    - generic [ref=f1e255]:
+                      - generic [ref=f1e256]:
+                        - generic [ref=f1e257]: 
+                        - generic [ref=f1e258]:
+                          - text: Siège et établissement principal
+                          - paragraph [ref=f1e259]:
+                            - text: En activité
+                            - generic [ref=f1e260]: 
+                      - generic [ref=f1e261]:
+                        - text: 562 120 311 00021
+                        - generic [ref=f1e262] [cursor=pointer]: 
+                        - link "" [ref=f1e263] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/56212031100021
+                    - generic [ref=f1e265]:
+                      - generic [ref=f1e266]:
+                        - text: "Adresse : 27 RUE DE LA CHAUSSEE D'ANTIN 75009 PARIS"
+                        - generic [ref=f1e267] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f1e269] [cursor=pointer]:
+                        - /url: "#coords-56212031100021"
+                      - generic [ref=f1e270]: "Date de création : 11/12/2006"
+                  - listitem [ref=f1e271]:
+                    - generic [ref=f1e272]:
+                      - generic [ref=f1e273]:
+                        - generic [ref=f1e274]: 
+                        - generic [ref=f1e275]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f1e276]:
+                            - text: En activité
+                            - generic [ref=f1e277]: 
+                      - generic [ref=f1e278]:
+                        - text: 562 120 311 00054
+                        - generic [ref=f1e279] [cursor=pointer]: 
+                        - link "" [ref=f1e280] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/56212031100054
+                    - generic [ref=f1e282]:
+                      - generic [ref=f1e283]:
+                        - text: "Adresse : 209 BOULEVARD PINEL 69500 BRON"
+                        - generic [ref=f1e284] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f1e286] [cursor=pointer]:
+                        - /url: "#coords-56212031100054"
+                      - generic [ref=f1e287]: "Date de création : 30/04/2026"
+                      - generic [ref=f1e288]: "Nom commercial : CITYNOVE ASSET MANAGEMENT"
+                  - listitem [ref=f1e289]:
+                    - generic [ref=f1e290]:
+                      - generic [ref=f1e291]:
+                        - generic [ref=f1e292]: 
+                        - generic [ref=f1e293]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f1e294]:
+                            - text: En activité
+                            - generic [ref=f1e295]: 
+                      - generic [ref=f1e296]:
+                        - text: 562 120 311 00047
+                        - generic [ref=f1e297] [cursor=pointer]: 
+                        - link "" [ref=f1e298] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/56212031100047
+                    - generic [ref=f1e300]:
+                      - generic [ref=f1e301]:
+                        - text: "Adresse : 2 B RUE THOMAS RUPHY 74000 ANNECY"
+                        - generic [ref=f1e302] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f1e304] [cursor=pointer]:
+                        - /url: "#coords-56212031100047"
+                      - generic [ref=f1e305]: "Date de création : 10/11/2022"
+                  - listitem [ref=f1e306]:
+                    - generic [ref=f1e307]:
+                      - generic [ref=f1e308]:
+                        - generic [ref=f1e309]: 
+                        - generic [ref=f1e310]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f1e311]:
+                            - text: Fermé
+                            - generic [ref=f1e312]: 
+                      - generic [ref=f1e313]:
+                        - text: 562 120 311 00039
+                        - generic [ref=f1e314] [cursor=pointer]: 
+                        - link "" [ref=f1e315] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/56212031100039
+                    - generic [ref=f1e317]:
+                      - generic [ref=f1e318]:
+                        - text: "Adresse : CENTRE COMMERCIAL CAP 3000 AVENUE EUGENE DONADEI 06700 SAINT-LAURENT-DU-VAR"
+                        - generic [ref=f1e319] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f1e321] [cursor=pointer]:
+                        - /url: "#coords-56212031100039"
+                      - generic [ref=f1e322]: "Date de création : 01/04/2008"
+                      - generic [ref=f1e323]: "Date de clôture : 30/11/2010"
+                  - listitem [ref=f1e324]:
+                    - generic [ref=f1e325]:
+                      - generic [ref=f1e326]:
+                        - generic [ref=f1e327]: 
+                        - generic [ref=f1e328]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f1e329]:
+                            - text: Fermé
+                            - generic [ref=f1e330]: 
+                      - generic [ref=f1e331]:
+                        - text: 562 120 311 00013
+                        - generic [ref=f1e332] [cursor=pointer]: 
+                        - link "" [ref=f1e333] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/56212031100013
+                    - generic [ref=f1e335]:
+                      - generic [ref=f1e336]:
+                        - text: "Adresse : 55 RUE DE LA VERRERIE 75004 PARIS"
+                        - generic [ref=f1e337] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f1e339] [cursor=pointer]:
+                        - /url: "#coords-56212031100013"
+                      - generic [ref=f1e340]: "Date de création : 01/01/1956"
+                      - generic [ref=f1e341]:
+                        - text: "Date de clôture : 11/12/2006 et transféré vers"
+                        - link "un autre établissement" [ref=f1e342] [cursor=pointer]:
+                          - /url: "#siret-56212031100021"
+                      - generic [ref=f1e343]: "Activité distincte : Services annexes à la production (74.8K)"
+              - text:       
+            - generic [ref=f1e344]:
+              - generic [ref=f1e345]: Etablissements (5)
+              - generic [ref=f1e347] [cursor=pointer]: Carte
+          - generic [ref=f1e349]:
+            - heading "Finances de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e351]
+            - generic [ref=f1e353]:
+              - generic [ref=f1e358]:
+                - generic [ref=f1e359]: Chiffre d'affaires
+                - generic [ref=f1e360]: Résultat net
+                - generic [ref=f1e361]: Effectif
+              - table [ref=f1e366]:
+                - rowgroup [ref=f1e367]:
+                  - row [ref=f1e368]:
+                    - columnheader "Performance" [ref=f1e369]
+                    - columnheader "2019" [ref=f1e370]
+                    - columnheader "2018" [ref=f1e371]
+                    - columnheader "2017" [ref=f1e372]
+                    - columnheader "2016" [ref=f1e373]
+                  - row [ref=f1e374]:
+                    - rowheader "Chiffre d'affaires (€)" [ref=f1e375]
+                    - cell "7,03M" [ref=f1e376]
+                    - cell "7,46M" [ref=f1e377]
+                    - cell "6,79M" [ref=f1e378]
+                    - cell "7,4M" [ref=f1e379]
+                  - row [ref=f1e380]:
+                    - rowheader "Marge brute (€)" [ref=f1e381]
+                    - cell "7,04M" [ref=f1e382]
+                    - cell "7,46M" [ref=f1e383]
+                    - cell "6,79M" [ref=f1e384]
+                    - cell "7,4M" [ref=f1e385]
+                  - row [ref=f1e386]:
+                    - rowheader "EBITDA - EBE (€)" [ref=f1e387]
+                    - cell "12,4M" [ref=f1e388]
+                    - cell "1,99M" [ref=f1e389]
+                    - cell "1,32M" [ref=f1e390]
+                    - cell "2,24M" [ref=f1e391]
+                  - row [ref=f1e392]:
+                    - rowheader "Résultat d'exploitation (€)" [ref=f1e393]
+                    - cell "1,69M" [ref=f1e394]
+                    - cell "1,99M" [ref=f1e395]
+                    - cell "1,32M" [ref=f1e396]
+                    - cell "2,23M" [ref=f1e397]
+                  - row [ref=f1e398]:
+                    - rowheader "Résultat net (€)" [ref=f1e399]
+                    - cell "1,22M" [ref=f1e400]
+                    - cell "1,38M" [ref=f1e401]
+                    - cell "980K" [ref=f1e402]
+                    - cell "1,51M" [ref=f1e403]
+                  - row [ref=f1e404]:
+                    - columnheader "Croissance" [ref=f1e405]
+                    - columnheader "2019" [ref=f1e406]
+                    - columnheader "2018" [ref=f1e407]
+                    - columnheader "2017" [ref=f1e408]
+                    - columnheader "2016" [ref=f1e409]
+                  - row [ref=f1e410]:
+                    - rowheader "Taux de croissance du CA (%)" [ref=f1e411]
+                    - cell "-5,7" [ref=f1e412]
+                    - cell "9,9" [ref=f1e413]
+                    - cell "-8,3" [ref=f1e414]
+                    - cell "21,8" [ref=f1e415]
+                  - row [ref=f1e416]:
+                    - rowheader "Taux de croissance de l'effectif (%)" [ref=f1e417]
+                    - cell "3,4" [ref=f1e418]
+                    - cell "11,5" [ref=f1e419]
+                    - cell [ref=f1e420]
+                    - cell [ref=f1e421]
+                  - row [ref=f1e422]:
+                    - rowheader "Taux de marge brute (%)" [ref=f1e423]
+                    - cell "100" [ref=f1e424]
+                    - cell "100" [ref=f1e425]
+                    - cell "100" [ref=f1e426]
+                    - cell "100" [ref=f1e427]
+                  - row [ref=f1e428]:
+                    - rowheader "Taux de marge d'EBITDA (%)" [ref=f1e429]
+                    - cell "176" [ref=f1e430]
+                    - cell "26,7" [ref=f1e431]
+                    - cell "19,5" [ref=f1e432]
+                    - cell "30,2" [ref=f1e433]
+                  - row [ref=f1e434]:
+                    - rowheader "Taux de marge opérationnelle (%)" [ref=f1e435]
+                    - cell "24" [ref=f1e436]
+                    - cell "26,6" [ref=f1e437]
+                    - cell "19,4" [ref=f1e438]
+                    - cell "30,2" [ref=f1e439]
+                  - row [ref=f1e440]:
+                    - columnheader "Gestion BFR" [ref=f1e441]
+                    - columnheader "2019" [ref=f1e442]
+                    - columnheader "2018" [ref=f1e443]
+                    - columnheader "2017" [ref=f1e444]
+                    - columnheader "2016" [ref=f1e445]
+                  - row [ref=f1e446]:
+                    - rowheader "BFR (€)" [ref=f1e447]
+                    - cell "7,82M" [ref=f1e448]
+                    - cell "6,75M" [ref=f1e449]
+                    - cell "5,34M" [ref=f1e450]
+                    - cell "4,35M" [ref=f1e451]
+                  - row [ref=f1e452]:
+                    - rowheader "BFR exploitation (€)" [ref=f1e453]
+                    - cell "1,72M" [ref=f1e454]
+                    - cell "3,17M" [ref=f1e455]
+                    - cell "172K" [ref=f1e456]
+                    - cell "586K" [ref=f1e457]
+                  - row [ref=f1e458]:
+                    - rowheader "BFR hors exploitation (€)" [ref=f1e459]
+                    - cell "6,11M" [ref=f1e460]
+                    - cell "3,58M" [ref=f1e461]
+                    - cell "5,17M" [ref=f1e462]
+                    - cell "3,77M" [ref=f1e463]
+                  - row [ref=f1e464]:
+                    - rowheader "BFR (j de CA)" [ref=f1e465]
+                    - cell "406" [ref=f1e466]
+                    - cell "330" [ref=f1e467]
+                    - cell "288" [ref=f1e468]
+                    - cell "215" [ref=f1e469]
+                  - row [ref=f1e470]:
+                    - rowheader "BFR exploitation (j de CA)" [ref=f1e471]
+                    - cell "89" [ref=f1e472]
+                    - cell "155" [ref=f1e473]
+                    - cell "9,3" [ref=f1e474]
+                    - cell "28,9" [ref=f1e475]
+                  - row [ref=f1e476]:
+                    - rowheader "BFR hors exploitation (j de CA)" [ref=f1e477]
+                    - cell "317" [ref=f1e478]
+                    - cell "175" [ref=f1e479]
+                    - cell "278" [ref=f1e480]
+                    - cell "186" [ref=f1e481]
+                  - row [ref=f1e482]:
+                    - rowheader "Délai de paiement clients (j)" [ref=f1e483]
+                    - cell "94,1" [ref=f1e484]
+                    - cell "0" [ref=f1e485]
+                    - cell "25" [ref=f1e486]
+                    - cell "33,1" [ref=f1e487]
+                  - row [ref=f1e488]:
+                    - columnheader "Délai de paiement fournisseurs (j)" [ref=f1e489]
+                    - cell [ref=f1e490]
+                    - cell [ref=f1e491]
+                    - cell [ref=f1e492]
+                    - cell "14,9" [ref=f1e493]
+                  - row [ref=f1e494]:
+                    - rowheader "Ratio des stocks / CA (j)" [ref=f1e495]
+                    - cell "0" [ref=f1e496]
+                    - cell "165" [ref=f1e497]
+                    - cell "0" [ref=f1e498]
+                    - cell "0" [ref=f1e499]
+                  - row [ref=f1e500]:
+                    - columnheader "Autonomie financière" [ref=f1e501]
+                    - columnheader "2019" [ref=f1e502]
+                    - columnheader "2018" [ref=f1e503]
+                    - columnheader "2017" [ref=f1e504]
+                    - columnheader "2016" [ref=f1e505]
+                  - row [ref=f1e506]:
+                    - rowheader "Capacité d'autofinancement (€)" [ref=f1e507]
+                    - cell "1,67M" [ref=f1e508]
+                    - cell "1,39M" [ref=f1e509]
+                    - cell "984K" [ref=f1e510]
+                    - cell "1,51M" [ref=f1e511]
+                  - row [ref=f1e512]:
+                    - rowheader "Capacité d'autofinancement / CA (%)" [ref=f1e513]
+                    - cell "23,8" [ref=f1e514]
+                    - cell "18,6" [ref=f1e515]
+                    - cell "14,5" [ref=f1e516]
+                    - cell "20,5" [ref=f1e517]
+                  - row [ref=f1e518]:
+                    - rowheader "Fonds de roulement net global (€)" [ref=f1e519]
+                    - cell "7,83M" [ref=f1e520]
+                    - cell "6,75M" [ref=f1e521]
+                    - cell "5,34M" [ref=f1e522]
+                    - cell "4,36M" [ref=f1e523]
+                  - row [ref=f1e524]:
+                    - rowheader "Couverture du BFR" [ref=f1e525]
+                    - cell "1" [ref=f1e526]
+                    - cell "1" [ref=f1e527]
+                    - cell "1" [ref=f1e528]
+                    - cell "1" [ref=f1e529]
+                  - row [ref=f1e530]:
+                    - rowheader "Trésorerie (€)" [ref=f1e531]
+                    - cell "8K" [ref=f1e532]
+                    - cell "3K" [ref=f1e533]
+                    - cell "0" [ref=f1e534]
+                    - cell "10K" [ref=f1e535]
+                  - row [ref=f1e536]:
+                    - rowheader "Capacité de remboursement" [ref=f1e537]
+                    - cell "0" [ref=f1e538]
+                    - cell "0" [ref=f1e539]
+                    - cell "0" [ref=f1e540]
+                    - cell "0" [ref=f1e541]
+                  - row [ref=f1e542]:
+                    - rowheader "Ratio d'endettement (Gearing)" [ref=f1e543]
+                    - cell "0" [ref=f1e544]
+                    - cell "0" [ref=f1e545]
+                    - cell "0" [ref=f1e546]
+                    - cell "0" [ref=f1e547]
+                  - row [ref=f1e548]:
+                    - rowheader "Autonomie financière (%)" [ref=f1e549]
+                    - cell "76,4" [ref=f1e550]
+                    - cell "76,1" [ref=f1e551]
+                    - cell "72" [ref=f1e552]
+                    - cell "68,5" [ref=f1e553]
+                  - row [ref=f1e554]:
+                    - rowheader "Taux de levier (DFN/EBITDA)" [ref=f1e555]
+                    - cell "0" [ref=f1e556]
+                    - cell "0" [ref=f1e557]
+                    - cell "0" [ref=f1e558]
+                    - cell "0" [ref=f1e559]
+                  - row [ref=f1e560]:
+                    - columnheader "Solvabilité" [ref=f1e561]
+                    - columnheader "2019" [ref=f1e562]
+                    - columnheader "2018" [ref=f1e563]
+                    - columnheader "2017" [ref=f1e564]
+                    - columnheader "2016" [ref=f1e565]
+                  - row [ref=f1e566]:
+                    - rowheader "Couverture des dettes" [ref=f1e567]
+                    - cell "-16,4" [ref=f1e568]
+                    - cell "-1,15K" [ref=f1e569]
+                    - cell [ref=f1e570]
+                    - cell "-2,5" [ref=f1e571]
+                  - row [ref=f1e572]:
+                    - rowheader "Fonds propres (€)" [ref=f1e573]
+                    - cell "7,89M" [ref=f1e574]
+                    - cell "6,66M" [ref=f1e575]
+                    - cell "5,28M" [ref=f1e576]
+                    - cell "4,3M" [ref=f1e577]
+                  - row [ref=f1e578]:
+                    - columnheader "Rentabilité" [ref=f1e579]
+                    - columnheader "2019" [ref=f1e580]
+                    - columnheader "2018" [ref=f1e581]
+                    - columnheader "2017" [ref=f1e582]
+                    - columnheader "2016" [ref=f1e583]
+                  - row [ref=f1e584]:
+                    - rowheader "Marge nette (%)" [ref=f1e585]
+                    - cell "24" [ref=f1e586]
+                    - cell "18,5" [ref=f1e587]
+                    - cell "14,4" [ref=f1e588]
+                    - cell "20,4" [ref=f1e589]
+                  - row [ref=f1e590]:
+                    - rowheader "Rentabilité sur fonds propres (%)" [ref=f1e591]
+                    - cell "21,4" [ref=f1e592]
+                    - cell "20,7" [ref=f1e593]
+                    - cell "18,6" [ref=f1e594]
+                    - cell "35,1" [ref=f1e595]
+                  - row [ref=f1e596]:
+                    - rowheader "Rentabilité économique (%)" [ref=f1e597]
+                    - cell "16,3" [ref=f1e598]
+                    - cell "15,8" [ref=f1e599]
+                    - cell "13,4" [ref=f1e600]
+                    - cell "24" [ref=f1e601]
+                  - row [ref=f1e602]:
+                    - rowheader "Valeur ajoutée (€)" [ref=f1e603]
+                    - cell "7,03M" [ref=f1e604]
+                    - cell "7,46M" [ref=f1e605]
+                    - cell "6,79M" [ref=f1e606]
+                    - cell "5,3M" [ref=f1e607]
+                  - row [ref=f1e608]:
+                    - rowheader "Valeur ajoutée / CA (%)" [ref=f1e609]
+                    - cell "100" [ref=f1e610]
+                    - cell "100" [ref=f1e611]
+                    - cell "100" [ref=f1e612]
+                    - cell "71,6" [ref=f1e613]
+                  - row [ref=f1e614]:
+                    - columnheader "Structure d'activité" [ref=f1e615]
+                    - columnheader "2019" [ref=f1e616]
+                    - columnheader "2018" [ref=f1e617]
+                    - columnheader "2017" [ref=f1e618]
+                    - columnheader "2016" [ref=f1e619]
+                  - row [ref=f1e620]:
+                    - rowheader "Effectif" [ref=f1e621]
+                    - cell "30" [ref=f1e622]
+                    - cell "29" [ref=f1e623]
+                    - cell "26" [ref=f1e624]
+                    - cell [ref=f1e625]
+                  - row [ref=f1e626]:
+                    - rowheader "Salaires et charges sociales (€)" [ref=f1e627]
+                    - cell "-5,17M" [ref=f1e628]
+                    - cell "3,04M" [ref=f1e629]
+                    - cell "2,84M" [ref=f1e630]
+                    - cell "2,9M" [ref=f1e631]
+                  - row [ref=f1e632]:
+                    - rowheader "Salaires / CA (%)" [ref=f1e633]
+                    - cell "-73,5" [ref=f1e634]
+                    - cell "40,7" [ref=f1e635]
+                    - cell "41,8" [ref=f1e636]
+                    - cell "39,1" [ref=f1e637]
+                  - row [ref=f1e638]:
+                    - rowheader "Impôts et taxes (€)" [ref=f1e639]
+                    - cell "-176K" [ref=f1e640]
+                    - cell "188K" [ref=f1e641]
+                    - cell "144K" [ref=f1e642]
+                    - cell "169K" [ref=f1e643]
+                  - row [ref=f1e644]:
+                    - rowheader "Chiffre d'affaires à l'export (€)" [ref=f1e645]
+                    - cell "7,03M" [ref=f1e646]
+                    - cell [ref=f1e647]
+                    - cell "6,79M" [ref=f1e648]
+                    - cell [ref=f1e649]
+          - generic [ref=f1e651]:
+            - generic [ref=f1e652]:
+              - generic [ref=f1e653]:
+                - heading "Dirigeants et représentants de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e655]
+                - list [ref=f1e656]:
+                  - generic [ref=f1e657]:
+                    - listitem [ref=f1e658]:
+                      - generic [ref=f1e659]:
+                        - link "Tabareau Etienne" [ref=f1e661] [cursor=pointer]:
+                          - /url: /dirigeant/etienne_tabareau_1968-04
+                        - generic [ref=f1e662]: Directeur général
+                        - generic [ref=f1e663]: 58 ans - 04/1968
+                      - generic [ref=f1e664]:
+                        - generic [ref=f1e665]: Depuis le 26/10/2020
+                        - link " Suivre" [ref=f1e667] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e668]: 
+                          - generic [ref=f1e669]: Suivre
+                    - listitem [ref=f1e670]:
+                      - generic [ref=f1e671]:
+                        - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e673] [cursor=pointer]:
+                          - /url: pricewaterhousecoopers-audit-672006483
+                        - generic [ref=f1e674]: Commissaire aux comptes titulaire
+                        - generic [ref=f1e676]:
+                          - text: "SIREN :"
+                          - link "672006483" [ref=f1e677] [cursor=pointer]:
+                            - /url: pricewaterhousecoopers-audit-672006483
+                      - generic [ref=f1e678]:
+                        - generic [ref=f1e679]: Depuis le 28/06/2019
+                        - link " Suivre" [ref=f1e681] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e682]: 
+                          - generic [ref=f1e683]: Suivre
+                    - listitem [ref=f1e684]:
+                      - generic [ref=f1e685]:
+                        - link "Belloy Augustin" [ref=f1e687] [cursor=pointer]:
+                          - /url: /dirigeant/augustin_belloy_1975-07
+                        - generic [ref=f1e688]: Président
+                        - generic [ref=f1e689]: 51 ans - 07/1975
+                      - generic [ref=f1e690]:
+                        - generic [ref=f1e691]: Depuis le 23/07/2008
+                        - link " Suivre" [ref=f1e693] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e694]: 
+                          - generic [ref=f1e695]: Suivre
+                  - generic [ref=f1e696]: Anciens dirigeants
+                  - generic [ref=f1e699]:
+                    - listitem [ref=f1e700]:
+                      - generic [ref=f1e701]:
+                        - link "COSTA Eric" [ref=f1e703] [cursor=pointer]:
+                          - /url: /dirigeant/eric_costa_1965-07
+                        - generic [ref=f1e704]: Ancien président
+                        - generic [ref=f1e705]: 61 ans - 07/1965
+                      - generic [ref=f1e706]:
+                        - generic [ref=f1e707]: Du 16/11/2010 au 09/11/2020
+                        - link " Suivre" [ref=f1e709] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e710]: 
+                          - generic [ref=f1e711]: Suivre
+                    - listitem [ref=f1e712]:
+                      - generic [ref=f1e713]:
+                        - link "CAILLIAU DEDOUIT ET ASSOCIES" [ref=f1e715] [cursor=pointer]:
+                          - /url: cailliau-dedouit-et-associes-722012051
+                        - generic [ref=f1e716]: Ancien commissaire aux comptes titulaire
+                        - generic [ref=f1e718]:
+                          - text: "SIREN :"
+                          - link "722012051" [ref=f1e719] [cursor=pointer]:
+                            - /url: cailliau-dedouit-et-associes-722012051
+                      - generic [ref=f1e720]:
+                        - generic [ref=f1e721]: Du 16/11/2010 au 04/09/2019
+                        - link " Suivre" [ref=f1e723] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e724]: 
+                          - generic [ref=f1e725]: Suivre
+                    - listitem [ref=f1e726]:
+                      - generic [ref=f1e727]:
+                        - link "CARDON Didier" [ref=f1e729] [cursor=pointer]:
+                          - /url: /dirigeant/didier_cardon_1952-07
+                        - generic [ref=f1e730]: Ancien commissaire aux comptes suppléant
+                        - generic [ref=f1e731]: 74 ans - 07/1952
+                      - generic [ref=f1e732]:
+                        - generic [ref=f1e733]: Du 16/11/2010 au 04/09/2019
+                        - link " Suivre" [ref=f1e735] [cursor=pointer]:
+                          - /url: "#"
+                          - generic [ref=f1e736]: 
+                          - generic [ref=f1e737]: Suivre
+              - text: 
+            - generic [ref=f1e738]:
+              - generic [ref=f1e739]: Dirigeants et représentants (6)
+              - generic [ref=f1e741] [cursor=pointer]: Entreprises dirigées (1)
+          - generic [ref=f1e743]:
+            - heading "Actionnaires et bénéficiaires effectifs de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e745]
+            - generic [ref=f1e747]:
+              - generic [ref=f1e748]:
+                - generic [ref=f1e749]: 
+                - generic [ref=f1e750]: Accès restreint aux données des bénéficiaires effectifs
+              - paragraph [ref=f1e751]:
+                - text: Les données liées aux bénéficiaires effectifs (identité des actionnaires, parts, droits de vote, etc.) sont
+                - link "réservées aux personnes habilitées " [ref=f1e752] [cursor=pointer]:
+                  - /url: /acces-beneficiaires-effectifs
+                  - text: réservées aux personnes habilitées
+                  - generic [ref=f1e753]: 
+                - text: .
+              - link "Faire une demande d'accès " [ref=f1e754] [cursor=pointer]:
+                - /url: /acces-beneficiaires-effectifs
+                - text: Faire une demande d'accès
+                - generic [ref=f1e755]: 
+          - generic [ref=f1e756]:
+            - generic [ref=f1e757]:
+              - heading "Documents juridiques de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e758]
+              - generic [ref=f1e759] [cursor=pointer]: 
+            - generic [ref=f1e762]:
+              - button "Filtrer par type de document " [ref=f1e764] [cursor=pointer]:
+                - text: Filtrer par type de document
+                - generic [ref=f1e765]: 
+              - list [ref=f1e767]:
+                - listitem [ref=f1e768]:
+                  - generic [ref=f1e769]:
+                    - list [ref=f1e770]:
+                      - listitem [ref=f1e771]:
+                        - text: PV ayant décidé et constaté la modification enregistrée, certifié conforme par le représentant légal
+                        - list
+                    - generic [ref=f1e772]: 29/07/2025
+                  - link "Télécharger le document" [ref=f1e775] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e776]: 
+                - listitem [ref=f1e777]:
+                  - generic [ref=f1e778]:
+                    - list [ref=f1e779]:
+                      - listitem [ref=f1e780]:
+                        - text: Copie des statuts mis à jour
+                        - list
+                    - generic [ref=f1e781]: 29/07/2025
+                  - link "Télécharger le document" [ref=f1e784] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e785]: 
+                - listitem [ref=f1e786]:
+                  - generic [ref=f1e787]:
+                    - list [ref=f1e788]:
+                      - listitem [ref=f1e789]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e790]:
+                          - listitem [ref=f1e791]: Changement de directeur général
+                          - listitem [ref=f1e792]: Changement de président
+                    - generic [ref=f1e793]: 09/11/2020
+                  - link "Télécharger le document" [ref=f1e796] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e797]: 
+                - listitem [ref=f1e798]:
+                  - generic [ref=f1e799]:
+                    - list [ref=f1e800]:
+                      - listitem [ref=f1e801]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e802]:
+                          - listitem [ref=f1e803]: Modification(s) statutaire(s)
+                      - listitem [ref=f1e804]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e805]: 26/08/2020
+                  - link "Télécharger le document" [ref=f1e808] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e809]: 
+                - listitem [ref=f1e810]:
+                  - generic [ref=f1e811]:
+                    - list [ref=f1e812]:
+                      - listitem [ref=f1e813]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e814]:
+                          - listitem [ref=f1e815]: Modification(s) statutaire(s)
+                          - listitem [ref=f1e816]: Changement de commissaire aux comptes titulaire
+                          - listitem [ref=f1e817]: Fin de mission de commissaire aux comptes suppléant
+                      - listitem [ref=f1e818]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e819]: 04/09/2019
+                  - link "Télécharger le document" [ref=f1e822] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e823]: 
+                - listitem [ref=f1e824]:
+                  - generic [ref=f1e825]:
+                    - list [ref=f1e826]:
+                      - listitem [ref=f1e827]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e828]:
+                          - listitem [ref=f1e829]: Modification(s) statutaire(s)
+                      - listitem [ref=f1e830]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e831]: 17/07/2018
+                  - link "Télécharger le document" [ref=f1e834] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e835]: 
+                - listitem [ref=f1e836]:
+                  - generic [ref=f1e837]:
+                    - list [ref=f1e838]:
+                      - listitem [ref=f1e839]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e840]:
+                          - listitem [ref=f1e841]: Modification(s) statutaire(s)
+                      - listitem [ref=f1e842]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e843]: 07/08/2017
+                  - link "Télécharger le document" [ref=f1e846] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e847]: 
+                - listitem [ref=f1e848]:
+                  - generic [ref=f1e849]:
+                    - list [ref=f1e850]:
+                      - listitem [ref=f1e851]:
+                        - text: Décision(s) de l'associé unique
+                        - list
+                      - listitem [ref=f1e852]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e853]: 16/07/2012
+                  - link "Télécharger le document" [ref=f1e856] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e857]: 
+                - listitem [ref=f1e858]:
+                  - generic [ref=f1e859]:
+                    - list [ref=f1e860]:
+                      - listitem [ref=f1e861]:
+                        - text: Décision(s) de l'associé unique
+                        - list
+                      - listitem [ref=f1e862]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e863]: 16/07/2012
+                  - link "Télécharger le document" [ref=f1e866] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e867]: 
+                - listitem [ref=f1e868]:
+                  - generic [ref=f1e869]:
+                    - list [ref=f1e870]:
+                      - listitem [ref=f1e871]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e872]:
+                          - listitem [ref=f1e873]: Changement de commissaire aux comptes titulaire et suppléant
+                    - generic [ref=f1e874]: 16/11/2010
+                  - link "Télécharger le document" [ref=f1e877] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e878]: 
+                - listitem [ref=f1e879]:
+                  - generic [ref=f1e880]:
+                    - list [ref=f1e881]:
+                      - listitem [ref=f1e882]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e883]:
+                          - listitem [ref=f1e884]: Modification(s) statutaire(s)
+                      - listitem [ref=f1e885]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e886]: 15/07/2010
+                  - link "Télécharger le document" [ref=f1e889] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e890]: 
+                - listitem [ref=f1e891]:
+                  - generic [ref=f1e892]:
+                    - list [ref=f1e893]:
+                      - listitem [ref=f1e894]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e895]:
+                          - listitem [ref=f1e896]: Modification(s) statutaire(s)
+                      - listitem [ref=f1e897]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e898]: 15/07/2010
+                  - link "Télécharger le document" [ref=f1e901] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e902]: 
+                - listitem [ref=f1e903]:
+                  - generic [ref=f1e904]:
+                    - list [ref=f1e905]:
+                      - listitem [ref=f1e906]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e907]:
+                          - listitem [ref=f1e908]: Changement de directeur général
+                    - generic [ref=f1e909]: 23/07/2008
+                  - link "Télécharger le document" [ref=f1e912] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e913]: 
+                - listitem [ref=f1e914]:
+                  - generic [ref=f1e915]:
+                    - list [ref=f1e916]:
+                      - listitem [ref=f1e917]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e918]:
+                          - listitem [ref=f1e919]: Changement de la dénomination sociale CITIVAL ASSET MANAGEMENT
+                          - listitem [ref=f1e920]: Changement relatif à l'objet social
+                      - listitem [ref=f1e921]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e922]: 16/11/2007
+                  - link "Télécharger le document" [ref=f1e925] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e926]: 
+                - listitem [ref=f1e927]:
+                  - generic [ref=f1e928]:
+                    - list [ref=f1e929]:
+                      - listitem [ref=f1e930]:
+                        - text: Procès-verbal
+                        - list [ref=f1e931]:
+                          - listitem [ref=f1e932]: Renouvellement de mandat de commissaire aux comptes titulaire
+                          - listitem [ref=f1e933]: Changement de commissaire aux comptes suppléant
+                    - generic [ref=f1e934]: 27/07/2007
+                  - link "Télécharger le document" [ref=f1e937] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e938]: 
+                - listitem [ref=f1e939]:
+                  - generic [ref=f1e940]:
+                    - list [ref=f1e941]:
+                      - listitem [ref=f1e942]:
+                        - text: Décision(s) de l'associé unique
+                        - list [ref=f1e943]:
+                          - listitem [ref=f1e944]: Changement de la dénomination sociale CITIVAL
+                      - listitem [ref=f1e945]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e946]: 04/04/2007
+                  - link "Télécharger le document" [ref=f1e949] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e950]: 
+                - listitem [ref=f1e951]:
+                  - generic [ref=f1e952]:
+                    - list [ref=f1e953]:
+                      - listitem [ref=f1e954]:
+                        - text: Procès-verbal
+                        - list [ref=f1e955]:
+                          - listitem [ref=f1e956]: Changement de président
+                          - listitem [ref=f1e957]: Changement de la dénomination sociale FIACMI
+                          - listitem [ref=f1e958]: Transfert du siège social 55 RUE DE LA VERRERIE 75004 PARIS
+                          - listitem [ref=f1e959]: Changement relatif à l'objet social
+                          - listitem [ref=f1e960]: Changement de directeur général
+                      - listitem [ref=f1e961]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f1e962]: 20/12/2006
+                  - link "Télécharger le document" [ref=f1e965] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e966]: 
+                - listitem [ref=f1e967]:
+                  - generic [ref=f1e968]:
+                    - list [ref=f1e969]:
+                      - listitem [ref=f1e970]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e971]:
+                          - listitem [ref=f1e972]: Changement de président
+                    - generic [ref=f1e973]: 30/08/2005
+                  - link "Télécharger le document" [ref=f1e976] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e977]: 
+                - listitem [ref=f1e978]:
+                  - generic [ref=f1e979]:
+                    - list [ref=f1e980]:
+                      - listitem [ref=f1e981]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f1e982]:
+                          - listitem [ref=f1e983]: Changement de commissaire aux comptes titulaire et suppléant
+                    - generic [ref=f1e984]: 07/09/2004
+                  - link "Télécharger le document" [ref=f1e987] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e988]: 
+                - listitem [ref=f1e989]:
+                  - generic [ref=f1e990]:
+                    - list [ref=f1e991]:
+                      - listitem [ref=f1e992]:
+                        - text: Procès-verbal d'assemblée générale extraordinaire
+                        - list [ref=f1e993]:
+                          - listitem [ref=f1e994]: Renouvellement de mandat de commissaire aux comptes titulaire
+                          - listitem [ref=f1e995]: Renouvellement de mandat de commissaire aux comptes suppléant
+                          - listitem [ref=f1e996]: Nomination de directeur général
+                          - listitem [ref=f1e997]: Changement de juge-commissaire SA EN SAS
+                          - listitem [ref=f1e998]: Nomination de président
+                      - listitem [ref=f1e999]:
+                        - text: Statuts mis à jour
+                        - list [ref=f1e1000]:
+                          - listitem [ref=f1e1001]: Divers
+                    - generic [ref=f1e1002]: 08/07/2004
+                  - link "Télécharger le document" [ref=f1e1005] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1006]: 
+                - listitem [ref=f1e1007]:
+                  - generic [ref=f1e1008]:
+                    - list [ref=f1e1009]:
+                      - listitem [ref=f1e1010]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e1011]:
+                          - listitem [ref=f1e1012]: Changement de commissaire aux comptes suppléant
+                    - generic [ref=f1e1013]: 18/11/2003
+                  - link "Télécharger le document" [ref=f1e1016] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1017]: 
+                - listitem [ref=f1e1018]:
+                  - generic [ref=f1e1019]:
+                    - list [ref=f1e1020]:
+                      - listitem [ref=f1e1021]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e1022]:
+                          - listitem [ref=f1e1023]: Mise en harmonie des statuts AVEC LA LOI NRE DU 15 05 2001
+                          - listitem [ref=f1e1024]: Nomination de directeur général
+                          - listitem [ref=f1e1025]: Augmentation du capital social NG
+                          - listitem [ref=f1e1026]: Conversion du capital en euros
+                      - listitem [ref=f1e1027]:
+                        - text: Statuts mis à jour
+                        - list [ref=f1e1028]:
+                          - listitem [ref=f1e1029]: Divers
+                    - generic [ref=f1e1030]: 04/11/2002
+                  - link "Télécharger le document" [ref=f1e1033] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1034]: 
+                - listitem [ref=f1e1035]:
+                  - generic [ref=f1e1036]:
+                    - list [ref=f1e1037]:
+                      - listitem [ref=f1e1038]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e1039]:
+                          - listitem [ref=f1e1040]: Changement de commissaire aux comptes titulaire
+                    - generic [ref=f1e1041]: 28/08/2001
+                  - link "Télécharger le document" [ref=f1e1044] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1045]: 
+                - listitem [ref=f1e1046]:
+                  - generic [ref=f1e1047]:
+                    - list [ref=f1e1048]:
+                      - listitem [ref=f1e1049]:
+                        - text: Ordonnance
+                        - list [ref=f1e1050]:
+                          - listitem [ref=f1e1051]: Nomination de commissaire aux apports
+                    - generic [ref=f1e1052]: 01/08/2001
+                  - link "Télécharger le document" [ref=f1e1055] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1056]: 
+                - listitem [ref=f1e1057]:
+                  - generic [ref=f1e1058]:
+                    - list [ref=f1e1059]:
+                      - listitem [ref=f1e1060]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e1061]:
+                          - listitem [ref=f1e1062]: Nomination(s) d'administrateur(s)
+                          - listitem [ref=f1e1063]: Changement de président
+                          - listitem [ref=f1e1064]: Changement(s) d'administrateur(s)
+                    - generic [ref=f1e1065]: 23/10/2000
+                  - link "Télécharger le document" [ref=f1e1068] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1069]: 
+                - listitem [ref=f1e1070]:
+                  - generic [ref=f1e1071]:
+                    - list [ref=f1e1072]:
+                      - listitem [ref=f1e1073]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f1e1074]:
+                          - listitem [ref=f1e1075]: Changement(s) d'administrateur(s)
+                    - generic [ref=f1e1076]: 30/07/1999
+                  - link "Télécharger le document" [ref=f1e1079] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1080]: 
+                - listitem [ref=f1e1081]:
+                  - generic [ref=f1e1082]:
+                    - list [ref=f1e1083]:
+                      - listitem [ref=f1e1084]:
+                        - text: Procès-verbal d'assemblée générale ordinaire
+                        - list [ref=f1e1085]:
+                          - listitem [ref=f1e1086]: Changement(s) d'administrateur(s)
+                          - listitem [ref=f1e1087]: Changement de président directeur général
+                    - generic [ref=f1e1088]: 16/07/1997
+                  - link "Télécharger le document" [ref=f1e1091] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1092]: 
+            - generic [ref=f1e1093] [cursor=pointer]:
+              - text: Rechercher dans les documents
+              - generic [ref=f1e1094]: 
+          - generic [ref=f1e1095]:
+            - generic [ref=f1e1096]:
+              - heading "Comptes annuels de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e1097]
+              - generic [ref=f1e1098] [cursor=pointer]: 
+            - list [ref=f1e1102]:
+              - listitem [ref=f1e1103]:
+                - generic [ref=f1e1104]:
+                  - strong [ref=f1e1105]: Comptes sociaux 2019
+                  - generic [ref=f1e1106]: 20/06/2022
+                - generic [ref=f1e1107]:
+                  - link "Télécharger le document" [ref=f1e1109] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1110]: 
+                  - link "Télécharger le document" [ref=f1e1112] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1113]: 
+              - listitem [ref=f1e1114]:
+                - generic [ref=f1e1115]:
+                  - strong [ref=f1e1116]: Comptes sociaux 2018
+                  - generic [ref=f1e1117]: 20/06/2022
+                - generic [ref=f1e1118]:
+                  - link "Télécharger le document" [ref=f1e1120] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1121]: 
+                  - link "Télécharger le document" [ref=f1e1123] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1124]: 
+              - listitem [ref=f1e1125]:
+                - generic [ref=f1e1126]:
+                  - strong [ref=f1e1127]: Comptes sociaux 2017
+                  - generic [ref=f1e1128]: 20/06/2022
+                - generic [ref=f1e1129]:
+                  - link "Télécharger le document" [ref=f1e1131] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1132]: 
+                  - link "Télécharger le document" [ref=f1e1134] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1135]: 
+              - listitem [ref=f1e1136]:
+                - generic [ref=f1e1137]:
+                  - strong [ref=f1e1138]: Comptes sociaux 2016
+                  - generic [ref=f1e1139]: 03/08/2017
+                - generic [ref=f1e1140]:
+                  - link "Télécharger le document" [ref=f1e1142] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1143]: 
+                  - link "Télécharger le document" [ref=f1e1145] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f1e1146]: 
+          - generic [ref=f1e1148]:
+            - generic [ref=f1e1149]:
+              - generic [ref=f1e1150]:
+                - heading "Conformité de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e1152]
+                - generic [ref=f1e1154]:
+                  - generic [ref=f1e1155]: 0 procédure collective
+                  - generic [ref=f1e1157]:
+                    - generic [ref=f1e1158]:
+                      - generic [ref=f1e1159]: 
+                      - text: 2 contentieux
+                    - generic [ref=f1e1160]:
+                      - generic [ref=f1e1161]: En savoir plus
+                      - generic [ref=f1e1162]: 
+                  - generic [ref=f1e1163]: 0 sanction
+                - link "Tester la conformité de son entreprise " [ref=f1e1166] [cursor=pointer]:
+                  - /url: https://services.pappers.fr/conformite
+                  - text: Tester la conformité de son entreprise
+                  - generic [ref=f1e1167]: 
+                - generic [ref=f1e1168]:
+                  - link "Les alertes complètes sont disponibles via notre offre Pappers Pro. Découvrez toutes les fonctionnalités de la plateforme " [ref=f1e1169] [cursor=pointer]:
+                    - /url: https://www.pappers.fr/pappers-pro
+                    - text: Les alertes complètes sont disponibles via notre offre Pappers Pro. Découvrez toutes les fonctionnalités de la plateforme
+                    - generic [ref=f1e1170]: 
+                  - img "Logo Pappers Pro" [ref=f1e1171]
+              - text:    
+            - generic [ref=f1e1172]:
+              - generic [ref=f1e1173]: Résumé
+              - generic [ref=f1e1175] [cursor=pointer]: Alertes
+              - generic [ref=f1e1177] [cursor=pointer]: Procédures collectives
+              - generic [ref=f1e1179] [cursor=pointer]: Contentieux
+          - generic [ref=f1e1181]:
+            - generic [ref=f1e1184]:
+              - heading "Annonces BODACC de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e1186]
+              - generic [ref=f1e1187]:
+                - button "Filtrer par type d'annonce " [ref=f1e1189] [cursor=pointer]:
+                  - text: Filtrer par type d'annonce
+                  - generic [ref=f1e1190]: 
+                - list [ref=f1e1192]:
+                  - listitem [ref=f1e1193]:
+                    - generic [ref=f1e1194]:
+                      - generic [ref=f1e1195]:
+                        - generic [ref=f1e1196]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1197]: 06/07/2022
+                      - generic [ref=f1e1198]: RCS de Paris
+                    - generic [ref=f1e1199]:
+                      - generic [ref=f1e1200]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1201]: "Date de clôture : 31/12/2019"
+                      - generic [ref=f1e1202]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20220130, annonce n°6900 " [ref=f1e1203] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20220130/6900
+                      - text: Bodacc C n°20220130, annonce n°6900
+                      - generic [ref=f1e1204]: 
+                  - listitem [ref=f1e1205]:
+                    - generic [ref=f1e1206]:
+                      - generic [ref=f1e1207]:
+                        - generic [ref=f1e1208]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1209]: 06/07/2022
+                      - generic [ref=f1e1210]: RCS de Paris
+                    - generic [ref=f1e1211]:
+                      - generic [ref=f1e1212]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1213]: "Date de clôture : 31/12/2018"
+                      - generic [ref=f1e1214]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20220130, annonce n°6899 " [ref=f1e1215] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20220130/6899
+                      - text: Bodacc C n°20220130, annonce n°6899
+                      - generic [ref=f1e1216]: 
+                  - listitem [ref=f1e1217]:
+                    - generic [ref=f1e1218]:
+                      - generic [ref=f1e1219]:
+                        - generic [ref=f1e1220]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1221]: 06/07/2022
+                      - generic [ref=f1e1222]: RCS de Paris
+                    - generic [ref=f1e1223]:
+                      - generic [ref=f1e1224]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1225]: "Date de clôture : 31/12/2017"
+                      - generic [ref=f1e1226]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20220130, annonce n°6898 " [ref=f1e1227] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20220130/6898
+                      - text: Bodacc C n°20220130, annonce n°6898
+                      - generic [ref=f1e1228]: 
+                  - listitem [ref=f1e1229]:
+                    - generic [ref=f1e1230]:
+                      - generic [ref=f1e1231]:
+                        - generic [ref=f1e1232]: MODIFICATION
+                        - generic [ref=f1e1233]: 18/11/2020
+                      - generic [ref=f1e1234]: RCS de Paris
+                    - generic [ref=f1e1235]:
+                      - generic [ref=f1e1236]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1237]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1238]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1239]: "Description : modification survenue sur l'administration"
+                      - generic [ref=f1e1240]: "Administration : Président partant : Costa, Eric ; modification du Président Belloy, Augustin ; nomination du Directeur général : Tabareau, Etienne"
+                    - link "Bodacc B n°20200224, annonce n°714 " [ref=f1e1241] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20200224/714
+                      - text: Bodacc B n°20200224, annonce n°714
+                      - generic [ref=f1e1242]: 
+                  - listitem [ref=f1e1243]:
+                    - generic [ref=f1e1244]:
+                      - generic [ref=f1e1245]:
+                        - generic [ref=f1e1246]: MODIFICATION
+                        - generic [ref=f1e1247]: 13/09/2019
+                      - generic [ref=f1e1248]: RCS de Paris
+                    - generic [ref=f1e1249]:
+                      - generic [ref=f1e1250]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1251]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1252]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1253]: "Description : modification survenue sur l'administration"
+                      - generic [ref=f1e1254]: "Administration : nomination du Commissaire aux comptes : PRICEWATERHOUSECOOPERS AUDIT ; Commissaire aux comptes titulaire partant : CAILLIAU DEDOUIT ET ASSOCIES ; Commissaire aux comptes suppléant partant : Cardon, Didier"
+                    - link "Bodacc B n°20190177, annonce n°734 " [ref=f1e1255] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20190177/734
+                      - text: Bodacc B n°20190177, annonce n°734
+                      - generic [ref=f1e1256]: 
+                  - listitem [ref=f1e1257]:
+                    - generic [ref=f1e1258]:
+                      - generic [ref=f1e1259]:
+                        - generic [ref=f1e1260]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1261]: 06/09/2017
+                      - generic [ref=f1e1262]: RCS de Paris
+                    - generic [ref=f1e1263]:
+                      - generic [ref=f1e1264]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1265]: "Date de clôture : 31/12/2016"
+                      - generic [ref=f1e1266]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20170090, annonce n°9515 " [ref=f1e1267] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20170090/9515
+                      - text: Bodacc C n°20170090, annonce n°9515
+                      - generic [ref=f1e1268]: 
+                  - listitem [ref=f1e1269]:
+                    - generic [ref=f1e1270]:
+                      - generic [ref=f1e1271]:
+                        - generic [ref=f1e1272]: MODIFICATION
+                        - generic [ref=f1e1273]: 01/08/2017
+                      - generic [ref=f1e1274]: RCS de Paris
+                    - generic [ref=f1e1275]:
+                      - generic [ref=f1e1276]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1277]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1278]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1279]: "Description : modification survenue sur l'activité de l'établissement principal"
+                    - link "Bodacc B n°20170145, annonce n°1064 " [ref=f1e1280] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20170145/1064
+                      - text: Bodacc B n°20170145, annonce n°1064
+                      - generic [ref=f1e1281]: 
+                  - listitem [ref=f1e1282]:
+                    - generic [ref=f1e1283]:
+                      - generic [ref=f1e1284]:
+                        - generic [ref=f1e1285]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1286]: 30/08/2016
+                      - generic [ref=f1e1287]: RCS de Paris
+                    - generic [ref=f1e1288]:
+                      - generic [ref=f1e1289]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1290]: "Date de clôture : 31/12/2015"
+                      - generic [ref=f1e1291]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20160091, annonce n°9915 " [ref=f1e1292] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20160091/9915
+                      - text: Bodacc C n°20160091, annonce n°9915
+                      - generic [ref=f1e1293]: 
+                  - listitem [ref=f1e1294]:
+                    - generic [ref=f1e1295]:
+                      - generic [ref=f1e1296]:
+                        - generic [ref=f1e1297]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1298]: 14/09/2015
+                      - generic [ref=f1e1299]: RCS de Paris
+                    - generic [ref=f1e1300]:
+                      - generic [ref=f1e1301]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1302]: "Date de clôture : 31/12/2014"
+                      - generic [ref=f1e1303]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20150093, annonce n°5178 " [ref=f1e1304] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20150093/5178
+                      - text: Bodacc C n°20150093, annonce n°5178
+                      - generic [ref=f1e1305]: 
+                  - listitem [ref=f1e1306]:
+                    - generic [ref=f1e1307]:
+                      - generic [ref=f1e1308]:
+                        - generic [ref=f1e1309]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1310]: 13/08/2014
+                      - generic [ref=f1e1311]: RCS de Paris
+                    - generic [ref=f1e1312]:
+                      - generic [ref=f1e1313]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1314]: "Date de clôture : 31/12/2013"
+                      - generic [ref=f1e1315]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20140055, annonce n°5763 " [ref=f1e1316] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20140055/5763
+                      - text: Bodacc C n°20140055, annonce n°5763
+                      - generic [ref=f1e1317]: 
+                  - listitem [ref=f1e1318]:
+                    - generic [ref=f1e1319]:
+                      - generic [ref=f1e1320]:
+                        - generic [ref=f1e1321]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1322]: 30/08/2013
+                      - generic [ref=f1e1323]: RCS de Paris
+                    - generic [ref=f1e1324]:
+                      - generic [ref=f1e1325]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1326]: "Date de clôture : 31/12/2012"
+                      - generic [ref=f1e1327]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20130059, annonce n°12445 " [ref=f1e1328] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20130059/12445
+                      - text: Bodacc C n°20130059, annonce n°12445
+                      - generic [ref=f1e1329]: 
+                  - listitem [ref=f1e1330]:
+                    - generic [ref=f1e1331]:
+                      - generic [ref=f1e1332]:
+                        - generic [ref=f1e1333]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1334]: 08/09/2012
+                      - generic [ref=f1e1335]: RCS de Paris
+                    - generic [ref=f1e1336]:
+                      - generic [ref=f1e1337]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1338]: "Date de clôture : 31/12/2011"
+                      - generic [ref=f1e1339]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20120063, annonce n°12864 " [ref=f1e1340] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20120063/12864
+                      - text: Bodacc C n°20120063, annonce n°12864
+                      - generic [ref=f1e1341]: 
+                  - listitem [ref=f1e1342]:
+                    - generic [ref=f1e1343]:
+                      - generic [ref=f1e1344]:
+                        - generic [ref=f1e1345]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1346]: 07/09/2011
+                      - generic [ref=f1e1347]: RCS de Paris
+                    - generic [ref=f1e1348]:
+                      - generic [ref=f1e1349]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1350]: "Date de clôture : 31/12/2010"
+                      - generic [ref=f1e1351]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20110054, annonce n°11918 " [ref=f1e1352] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20110054/11918
+                      - text: Bodacc C n°20110054, annonce n°11918
+                      - generic [ref=f1e1353]: 
+                  - listitem [ref=f1e1354]:
+                    - generic [ref=f1e1355]:
+                      - generic [ref=f1e1356]:
+                        - generic [ref=f1e1357]: MODIFICATION
+                        - generic [ref=f1e1358]: 02/12/2010
+                      - generic [ref=f1e1359]: RCS de Paris
+                    - generic [ref=f1e1360]:
+                      - generic [ref=f1e1361]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1362]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1363]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1364]: "Description : modification survenue sur l'administration"
+                      - generic [ref=f1e1365]: "Administration : Commissaire aux comptes titulaire partant : PRICEWATERHOUSECOOPERS AUDIT (SA), nomination du Commissaire aux comptes titulaire : CAILLIAU DEDOUIT ET ASSOCIES, Commissaire aux comptes suppléant partant : Boris, Etienne, nomination du Commissaire aux comptes suppléant : Cardon, Didier"
+                    - link "Bodacc B n°20100233, annonce n°2151 " [ref=f1e1366] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20100233/2151
+                      - text: Bodacc B n°20100233, annonce n°2151
+                      - generic [ref=f1e1367]: 
+                  - listitem [ref=f1e1368]:
+                    - generic [ref=f1e1369]:
+                      - generic [ref=f1e1370]:
+                        - generic [ref=f1e1371]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1372]: 20/09/2010
+                      - generic [ref=f1e1373]: RCS de Paris
+                    - generic [ref=f1e1374]:
+                      - generic [ref=f1e1375]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1376]: "Date de clôture : 31/12/2009"
+                      - generic [ref=f1e1377]: "Adresse : 27 R DE LA CHAUSSEE D ANTIN 75009 PARIS"
+                    - link "Bodacc C n°20100065, annonce n°10381 " [ref=f1e1378] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20100065/10381
+                      - text: Bodacc C n°20100065, annonce n°10381
+                      - generic [ref=f1e1379]: 
+                  - listitem [ref=f1e1380]:
+                    - generic [ref=f1e1381]:
+                      - generic [ref=f1e1382]:
+                        - generic [ref=f1e1383]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1384]: 20/09/2009
+                      - generic [ref=f1e1385]: RCS de Paris
+                    - generic [ref=f1e1386]:
+                      - generic [ref=f1e1387]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1388]: "Date de clôture : 31/12/2008"
+                      - generic [ref=f1e1389]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20090069, annonce n°11166 " [ref=f1e1390] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20090069/11166
+                      - text: Bodacc C n°20090069, annonce n°11166
+                      - generic [ref=f1e1391]: 
+                  - listitem [ref=f1e1392]:
+                    - generic [ref=f1e1393]:
+                      - generic [ref=f1e1394]:
+                        - generic [ref=f1e1395]: DÉPÔT DES COMPTES
+                        - generic [ref=f1e1396]: 22/10/2008
+                      - generic [ref=f1e1397]: RCS de Paris
+                    - generic [ref=f1e1398]:
+                      - generic [ref=f1e1399]: "Type de dépôt : Comptes annuels et rapports"
+                      - generic [ref=f1e1400]: "Date de clôture : 31/12/2007"
+                      - generic [ref=f1e1401]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                    - link "Bodacc C n°20080086, annonce n°9400 " [ref=f1e1402] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20080086/9400
+                      - text: Bodacc C n°20080086, annonce n°9400
+                      - generic [ref=f1e1403]: 
+                  - listitem [ref=f1e1404]:
+                    - generic [ref=f1e1405]:
+                      - generic [ref=f1e1406]:
+                        - generic [ref=f1e1407]: MODIFICATION
+                        - generic [ref=f1e1408]: 26/08/2008
+                      - generic [ref=f1e1409]: RCS de Paris
+                    - generic [ref=f1e1410]:
+                      - generic [ref=f1e1411]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1412]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1413]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1414]: "Description : modification survenue sur l'administration"
+                      - generic [ref=f1e1415]: "Administration : Directeur général partant : Perrin, Yves, nomination du Directeur général : Belloy, Augustin"
+                    - link "Bodacc B n°20080151, annonce n°1000 " [ref=f1e1416] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20080151/1000
+                      - text: Bodacc B n°20080151, annonce n°1000
+                      - generic [ref=f1e1417]: 
+                  - listitem [ref=f1e1418]:
+                    - generic [ref=f1e1419]:
+                      - generic [ref=f1e1420]:
+                        - generic [ref=f1e1421]: MODIFICATION
+                        - generic [ref=f1e1422]: 04/04/2008
+                      - generic [ref=f1e1423]: RCS de Paris
+                    - generic [ref=f1e1424]:
+                      - generic [ref=f1e1425]: "Dénomination : CITYNOVE ASSET MANAGEMENT"
+                      - generic [ref=f1e1426]: "Capital : 324 000,00 €"
+                      - generic [ref=f1e1427]: "Adresse : 27 rue de la Chaussée d'Antin 75009 Paris"
+                      - generic [ref=f1e1428]: "Description : modification survenue sur la dénomination"
+                    - link "Bodacc B n°20080058, annonce n°1700 " [ref=f1e1429] [cursor=pointer]:
+                      - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20080058/1700
+                      - text: Bodacc B n°20080058, annonce n°1700
+                      - generic [ref=f1e1430]: 
+            - link [ref=f1e1432] [cursor=pointer]:
+              - /url: https://services.pappers.fr?utm_source=pappers&utm_medium=bloc-bodacc&utm_campaign=annonces-legales
+              - img "Annonce légale" [ref=f1e1433]
+              - text: Rédiger et publier une annonce légale sur Pappers Services
+          - generic [ref=f1e1435]:
+            - generic [ref=f1e1436]:
+              - heading "Cartographie de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e1437]
+              - generic [ref=f1e1438]:
+                - link "" [ref=f1e1440] [cursor=pointer]:
+                  - /url: "#"
+                - link "" [ref=f1e1442] [cursor=pointer]:
+                  - /url: "#"
+            - generic [ref=f1e1445]: 
+          - generic [ref=f1e1447]:
+            - heading "Comment contacter CITYNOVE ASSET MANAGEMENT ?" [level=2] [ref=f1e1449]
+            - generic [ref=f1e1450]:
+              - table [ref=f1e1451]:
+                - rowgroup [ref=f1e1452]:
+                  - row [ref=f1e1453]:
+                    - rowheader "Téléphone :" [ref=f1e1454]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f1e1455]
+                  - row [ref=f1e1456]:
+                    - rowheader "Email :" [ref=f1e1457]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f1e1458]
+                  - row [ref=f1e1459]:
+                    - rowheader "Sites internet :" [ref=f1e1460]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f1e1461]
+                  - row [ref=f1e1462]:
+                    - rowheader "Réseaux sociaux :" [ref=f1e1463]
+                    - cell "  " [ref=f1e1464]:
+                      - link "" [ref=f1e1465] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/company/citynove---groupe-galeries-lafayette
+                      - generic [ref=f1e1467]: 
+                      - generic [ref=f1e1469]: 
+                  - row [ref=f1e1471]:
+                    - rowheader "Adresse complète :" [ref=f1e1472]
+                    - cell "27 RUE DE LA CHAUSSEE D'ANTIN 75009 PARIS " [ref=f1e1473]:
+                      - generic [ref=f1e1474]:
+                        - text: 27 RUE DE LA CHAUSSEE D'ANTIN 75009 PARIS
+                        - generic [ref=f1e1475] [cursor=pointer]: 
+              - generic [ref=f1e1478] [cursor=pointer]:
+                - text: Délégué à la protection des données
+                - generic [ref=f1e1479]: 
+              - generic [ref=f1e1481]:
+                - generic [ref=f1e1482]: 
+                - generic [ref=f1e1483]: Cette entreprise s'est opposée à l'utilisation de ses données à des fins de prospection.
+          - generic [ref=f1e1484]:
+            - heading "Services recommandés pour les SAS" [level=2] [ref=f1e1486]
+            - generic [ref=f1e1488]:
+              - table [ref=f1e1489]:
+                - rowgroup [ref=f1e1490]:
+                  - row [ref=f1e1491]:
+                    - columnheader "Prestataire" [ref=f1e1492]
+                    - columnheader "Service" [ref=f1e1493]
+                - rowgroup [ref=f1e1494]:
+                  - row [ref=f1e1495]:
+                    - cell [ref=f1e1496]:
+                      - img "Logo B.Conseil" [ref=f1e1497]
+                    - cell "Financement innovation" [ref=f1e1498]
+                    - cell [ref=f1e1499]:
+                      - link "En savoir plus" [ref=f1e1500] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/bconseil
+                        - text: En savoir plus 
+                  - row [ref=f1e1501]:
+                    - cell [ref=f1e1502]:
+                      - img "Logo Sofradom" [ref=f1e1503]
+                    - cell "Domiciliation" [ref=f1e1504]
+                    - cell [ref=f1e1505]:
+                      - link "En savoir plus" [ref=f1e1506] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/sofradom
+                        - text: En savoir plus 
+                  - row [ref=f1e1507]:
+                    - cell [ref=f1e1508]:
+                      - img "Logo Pennylane" [ref=f1e1509]
+                    - cell "Comptabilité" [ref=f1e1510]
+                    - cell [ref=f1e1511]:
+                      - link "En savoir plus" [ref=f1e1512] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/pennylanesarl
+                        - text: En savoir plus 
+                  - row [ref=f1e1513]:
+                    - cell [ref=f1e1514]:
+                      - img "Logo Axonaut" [ref=f1e1515]
+                    - cell "Logiciel de gestion français" [ref=f1e1516]
+                    - cell [ref=f1e1517]:
+                      - link "En savoir plus" [ref=f1e1518] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/axonaut
+                        - text: En savoir plus 
+                  - row [ref=f1e1519]:
+                    - cell [ref=f1e1520]:
+                      - img "Logo Kase" [ref=f1e1521]
+                    - cell "Courtier grossiste" [ref=f1e1522]
+                    - cell [ref=f1e1523]:
+                      - link "En savoir plus" [ref=f1e1524] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/kase
+                        - text: En savoir plus 
+              - generic [ref=f1e1525]: Voir notre méthodologie
+          - generic [ref=f1e1527]:
+            - heading "Entreprises citées de CITYNOVE ASSET MANAGEMENT" [level=2] [ref=f1e1529]
+            - list [ref=f1e1531]:
+              - listitem [ref=f1e1532]:
+                - generic [ref=f1e1533]:
+                  - link "SOCIETE ANONYME DES GALERIES LAFAYETTE (542 094 065)" [ref=f1e1534] [cursor=pointer]:
+                    - /url: societe-anonyme-des-galeries-lafayette-542094065
+                  - generic [ref=f1e1535]: Cité 13 fois entre 2007 et 2020
+                - generic [ref=f1e1536]:
+                  - generic [ref=f1e1537]:
+                    - generic [ref=f1e1538]:
+                      - generic [ref=f1e1539]:
+                        - text: Nature
+                        - generic [ref=f1e1540]:
+                          - text: supposée
+                          - generic [ref=f1e1541]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1542]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "Philippe Houze" [ref=f1e1543] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Philippe+Houze&date_de_naissance_beneficiaire_min=27-11-1947&date_de_naissance_beneficiaire_max=27-11-1947
+                      - text: ","
+                      - link "Ginette Moulin" [ref=f1e1544] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Ginette+Heilbronn&date_de_naissance_beneficiaire_min=07-02-1927&date_de_naissance_beneficiaire_max=07-02-1927
+                      - text: ","
+                      - link "Isabelle Moulin" [ref=f1e1545] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Isabelle+Moulin&date_de_naissance_beneficiaire_min=04-05-1953&date_de_naissance_beneficiaire_max=04-05-1953
+                      - text: et 13 autres
+                  - link "En savoir plus" [ref=f1e1547] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1548]:
+                - generic [ref=f1e1549]:
+                  - link "MAISON GJ (828 919 787)" [ref=f1e1550] [cursor=pointer]:
+                    - /url: maison-gj-828919787
+                  - generic [ref=f1e1551]: Cité 1 fois en 2017
+                - generic [ref=f1e1552]:
+                  - generic [ref=f1e1553]:
+                    - generic [ref=f1e1554]:
+                      - generic [ref=f1e1555]:
+                        - text: Nature
+                        - generic [ref=f1e1556]:
+                          - text: supposée
+                          - generic [ref=f1e1557]: 
+                        - text: "de la relation :"
+                      - text: Assureur
+                    - generic [ref=f1e1558]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "Gilles CHOKOTE LEUKEU" [ref=f1e1559] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Gilles+CHOKOTE+LEUKEU&date_de_naissance_beneficiaire_min=25-11-1987&date_de_naissance_beneficiaire_max=25-11-1987
+                      - text: ","
+                      - link "Julie DODIER" [ref=f1e1560] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Julie+DODIER
+                  - link "En savoir plus" [ref=f1e1562] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1563]:
+                - generic [ref=f1e1564]:
+                  - link "GL IMMO MARAIS (542 052 865)" [ref=f1e1565] [cursor=pointer]:
+                    - /url: gl-immo-marais-542052865
+                  - generic [ref=f1e1566]: Cité 5 fois entre 2004 et 2015
+                - generic [ref=f1e1567]:
+                  - generic [ref=f1e1568]:
+                    - generic [ref=f1e1569]:
+                      - generic [ref=f1e1570]:
+                        - text: Nature
+                        - generic [ref=f1e1571]:
+                          - text: supposée
+                          - generic [ref=f1e1572]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1573]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e1574] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=672006483
+                      - text: ","
+                      - link "Nicolas Houze" [ref=f1e1575] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Nicolas+Houze&date_de_naissance_beneficiaire_min=16-03-1975&date_de_naissance_beneficiaire_max=16-03-1975
+                      - text: ","
+                      - link "Ginette HEILBRONN" [ref=f1e1576] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Ginette+HEILBRONN&date_de_naissance_beneficiaire_min=01-02-1927&date_de_naissance_beneficiaire_max=01-02-1927
+                  - link "En savoir plus" [ref=f1e1578] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1579]:
+                - generic [ref=f1e1580]:
+                  - link "BHV EXPLOITATION (572 232 650)" [ref=f1e1581] [cursor=pointer]:
+                    - /url: bhv-exploitation-572232650
+                  - generic [ref=f1e1582]: Cité 1 fois en 2015
+                - generic [ref=f1e1583]:
+                  - generic [ref=f1e1584]:
+                    - generic [ref=f1e1585]:
+                      - generic [ref=f1e1586]:
+                        - text: Nature
+                        - generic [ref=f1e1587]:
+                          - text: supposée
+                          - generic [ref=f1e1588]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1589]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e1590] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=672006483
+                      - text: ","
+                      - link "Nicolas Houzé" [ref=f1e1591] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Nicolas+Houz%C3%A9&date_de_naissance_beneficiaire_min=16-03-1975&date_de_naissance_beneficiaire_max=16-03-1975
+                      - text: ","
+                      - link "Amandine De Souza Pereira" [ref=f1e1592] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Amandine+De+Souza+Pereira&date_de_naissance_beneficiaire_min=08-04-1979&date_de_naissance_beneficiaire_max=08-04-1979
+                      - text: et 1 autre
+                  - link "En savoir plus" [ref=f1e1594] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1595]:
+                - generic [ref=f1e1596]:
+                  - link "GUERIN JOAILLERIE (440 452 316)" [ref=f1e1597] [cursor=pointer]:
+                    - /url: guerin-joaillerie-440452316
+                  - generic [ref=f1e1598]: Cité 1 fois en 2012
+                - generic [ref=f1e1599]:
+                  - generic [ref=f1e1600]:
+                    - generic [ref=f1e1601]:
+                      - generic [ref=f1e1602]:
+                        - text: Nature
+                        - generic [ref=f1e1603]:
+                          - text: supposée
+                          - generic [ref=f1e1604]: 
+                        - text: "de la relation :"
+                      - text: Inconnue
+                    - generic [ref=f1e1605]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e1606] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=672006483
+                      - text: ","
+                      - link "LA COMPAGNIE DE 1827" [ref=f1e1607] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=851886135
+                      - text: ","
+                      - link "CAUCHY-CHAUMONT & ASSOCIES - SOCIETE CIVILE PROFESSIONNELLE DE COMMISSAIRES AUX COMPTES" [ref=f1e1608] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=394613418
+                      - text: et 2 autres
+                  - link "En savoir plus" [ref=f1e1610] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1611]:
+                - generic [ref=f1e1612]:
+                  - link "GROUPE GALERIES LAFAYETTE SERVICES - GGL SERVICES (612 038 679)" [ref=f1e1613] [cursor=pointer]:
+                    - /url: groupe-galeries-lafayette-services-ggl-services-612038679
+                  - generic [ref=f1e1614]: Cité 1 fois en 2010
+                - generic [ref=f1e1615]:
+                  - generic [ref=f1e1616]:
+                    - generic [ref=f1e1617]:
+                      - generic [ref=f1e1618]:
+                        - text: Nature
+                        - generic [ref=f1e1619]:
+                          - text: supposée
+                          - generic [ref=f1e1620]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1621]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "Ugo SUPINO" [ref=f1e1622] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Ugo+SUPINO&date_de_naissance_beneficiaire_min=08-04-1958&date_de_naissance_beneficiaire_max=08-04-1958
+                      - text: ","
+                      - link "SOCIETE D'ETUDES FINANCIERES ET D'AUDIT COMPTABLE - SEFAC SOCIETE D'EXPERTISE COMPTABLE ET DE COMMISSARIAT AUX COMPTES" [ref=f1e1623] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=328581202
+                      - text: ","
+                      - link "GINETTE MOULIN" [ref=f1e1624] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=GINETTE+HEILBRONN&date_de_naissance_beneficiaire_min=01-02-1927&date_de_naissance_beneficiaire_max=01-02-1927
+                  - link "En savoir plus" [ref=f1e1626] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1627]:
+                - generic [ref=f1e1628]:
+                  - link "MAGASINS GALERIES LAFAYETTE (957 503 931)" [ref=f1e1629] [cursor=pointer]:
+                    - /url: magasins-galeries-lafayette-957503931
+                  - generic [ref=f1e1630]: Cité 1 fois en 2010
+                - generic [ref=f1e1631]:
+                  - generic [ref=f1e1632]:
+                    - generic [ref=f1e1633]:
+                      - generic [ref=f1e1634]:
+                        - text: Nature
+                        - generic [ref=f1e1635]:
+                          - text: supposée
+                          - generic [ref=f1e1636]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1637]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e1638] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=672006483
+                      - text: ","
+                      - link "Nicolas Houzé" [ref=f1e1639] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Nicolas+Houz%C3%A9&date_de_naissance_beneficiaire_min=16-03-1975&date_de_naissance_beneficiaire_max=16-03-1975
+                      - text: ","
+                      - link "Alexandre Liot" [ref=f1e1640] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Alexandre+Liot&date_de_naissance_beneficiaire_min=11-11-1980&date_de_naissance_beneficiaire_max=11-11-1980
+                      - text: et 1 autre
+                  - link "En savoir plus" [ref=f1e1642] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1643]:
+                - generic [ref=f1e1644]:
+                  - link "GL RIVOLI (592 052 237)" [ref=f1e1645] [cursor=pointer]:
+                    - /url: gl-rivoli-592052237
+                  - generic [ref=f1e1646]: Cité 1 fois en 2007
+                - generic [ref=f1e1647]:
+                  - generic [ref=f1e1648]:
+                    - generic [ref=f1e1649]:
+                      - generic [ref=f1e1650]:
+                        - text: Nature
+                        - generic [ref=f1e1651]:
+                          - text: supposée
+                          - generic [ref=f1e1652]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1653]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f1e1654] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=672006483
+                      - text: ","
+                      - link "Bernard GELBFARB" [ref=f1e1655] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Bernard+GELBFARB&date_de_naissance_beneficiaire_min=13-04-1954&date_de_naissance_beneficiaire_max=13-04-1954
+                      - text: ","
+                      - link "Ginette MOULIN" [ref=f1e1656] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Ginette+HEILBRONN&date_de_naissance_beneficiaire_min=01-02-1927&date_de_naissance_beneficiaire_max=01-02-1927
+                  - link "En savoir plus" [ref=f1e1658] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1659]:
+                - generic [ref=f1e1660]:
+                  - link "PRICEWATERHOUSECOOPERS AUDIT (672 006 483)" [ref=f1e1661] [cursor=pointer]:
+                    - /url: pricewaterhousecoopers-audit-672006483
+                  - generic [ref=f1e1662]: Cité 1 fois en 2003
+                - generic [ref=f1e1663]:
+                  - generic [ref=f1e1665]:
+                    - generic [ref=f1e1666]:
+                      - text: Nature
+                      - generic [ref=f1e1667]:
+                        - text: supposée
+                        - generic [ref=f1e1668]: 
+                      - text: "de la relation :"
+                    - text: Commissaire aux comptes
+                  - link "En savoir plus" [ref=f1e1670] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f1e1671]:
+                - generic [ref=f1e1672]:
+                  - link "CONCEPT MARQUES PROPRES (314 066 416)" [ref=f1e1673] [cursor=pointer]:
+                    - /url: concept-marques-propres-314066416
+                  - generic [ref=f1e1674]: Cité 1 fois en 1995
+                - generic [ref=f1e1675]:
+                  - generic [ref=f1e1676]:
+                    - generic [ref=f1e1677]:
+                      - generic [ref=f1e1678]:
+                        - text: Nature
+                        - generic [ref=f1e1679]:
+                          - text: supposée
+                          - generic [ref=f1e1680]: 
+                        - text: "de la relation :"
+                      - text: Actionnariat
+                    - generic [ref=f1e1681]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "CAILLIAU DEDOUIT ET ASSOCIES" [ref=f1e1682] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=722012051
+                      - text: ","
+                      - link "Didier CARDON" [ref=f1e1683] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Didier+CARDON&date_de_naissance_beneficiaire_min=07-07-1952&date_de_naissance_beneficiaire_max=07-07-1952
+                      - text: ","
+                      - link "Laurene Dauchez" [ref=f1e1684] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Laurene+Durand+de+Villers&date_de_naissance_beneficiaire_min=13-02-1973&date_de_naissance_beneficiaire_max=13-02-1973
+                  - link "En savoir plus" [ref=f1e1686] [cursor=pointer]:
+                    - /url: "#"
+          - text: 
+          - generic [ref=f1e1687]:
+            - generic [ref=f1e1688]:
+              - generic [ref=f1e1689]: 
+              - heading "Prospecter dans ce secteur" [level=2] [ref=f1e1691]
+            - generic [ref=f1e1693]:
+              - generic [ref=f1e1694]: 74 074 entreprises exercent la même activité de Administration d'immeubles et autres biens immobiliers que CITYNOVE ASSET MANAGEMENT
+              - generic [ref=f1e1695]:
+                - button " Exporter la liste" [ref=f1e1696] [cursor=pointer]:
+                  - generic [ref=f1e1697]: 
+                  - text: Exporter la liste
+                - button " Créer une veille sur ce secteur" [ref=f1e1698] [cursor=pointer]:
+                  - generic [ref=f1e1699]: 
+                  - text: Créer une veille sur ce secteur
+    - contentinfo [ref=f1e1700]:
+      - generic [ref=f1e1701]:
+        - generic [ref=f1e1702]:
+          - link [ref=f1e1704] [cursor=pointer]:
+            - /url: /
+            - img "Logo Pappers Entreprises" [ref=f1e1705]
+          - generic [ref=f1e1706]:
+            - link "LinkedIn" [ref=f1e1707] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/pappers/
+              - generic [ref=f1e1708]: 
+            - link "Partager sur Facebook" [ref=f1e1709] [cursor=pointer]:
+              - /url: http://www.facebook.com/sharer.php?u=https://www.pappers.fr/
+              - generic [ref=f1e1710]: 
+            - link "Twitter" [ref=f1e1711] [cursor=pointer]:
+              - /url: https://twitter.com/get_pappers
+              - generic [ref=f1e1712]: 
+        - list [ref=f1e1714]:
+          - listitem [ref=f1e1715]:
+            - text: Ressources
+            - paragraph [ref=f1e1716]:
+              - link "Presse" [ref=f1e1717] [cursor=pointer]:
+                - /url: /presse
+            - paragraph [ref=f1e1718]:
+              - link "Classements " [ref=f1e1719] [cursor=pointer]:
+                - /url: /classements
+                - text: Classements
+                - generic [ref=f1e1720]: 
+            - paragraph [ref=f1e1721]:
+              - link "Blog" [ref=f1e1722] [cursor=pointer]:
+                - /url: /guide
+          - listitem [ref=f1e1723]:
+            - text: Informations légales
+            - paragraph [ref=f1e1724]:
+              - link "Données personnelles" [ref=f1e1725] [cursor=pointer]:
+                - /url: /protection-des-donnees
+            - paragraph [ref=f1e1726]:
+              - link "Mentions légales" [ref=f1e1727] [cursor=pointer]:
+                - /url: /mentions-legales
+          - listitem [ref=f1e1728]:
+            - text: Nous connaître
+            - paragraph [ref=f1e1729]:
+              - link "A propos" [ref=f1e1730] [cursor=pointer]:
+                - /url: /a-propos
+            - paragraph [ref=f1e1731]:
+              - link "FAQ" [ref=f1e1732] [cursor=pointer]:
+                - /url: /faq
+            - paragraph [ref=f1e1733]:
+              - link "Contact" [ref=f1e1734] [cursor=pointer]:
+                - /url: /contact
+        - list [ref=f1e1736]:
+          - paragraph [ref=f1e1737]: Nos données sont constamment actualisées, entièrement gratuites et proviennent de l'INSEE, l'INPI et du BODACC.
+          - generic [ref=f1e1738]:
+            - paragraph [ref=f1e1739]: "Inscrivez-vous à la newsletter mensuelle :"
+            - group [ref=f1e1740]:
+              - textbox "E-mail" [ref=f1e1741]
+              - button "" [disabled] [ref=f1e1742] [cursor=pointer]
+            - group [ref=f1e1744]:
+              - checkbox "En vous inscrivant, vous acceptez la Politique générale de Protection des Données." [ref=f1e1745]
+              - generic [ref=f1e1746]:
+                - text: En vous inscrivant, vous acceptez la
+                - link "Politique générale de Protection des Données" [ref=f1e1747] [cursor=pointer]:
+                  - /url: /protection-des-donnees
+                - text: .
+  - generic:  

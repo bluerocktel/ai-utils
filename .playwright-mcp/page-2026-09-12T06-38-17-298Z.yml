@@ -1,0 +1,216 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - button "Skip to content" [ref=f4e3] [cursor=pointer]
+    - button "Accessibility Feedback" [ref=f4e6] [cursor=pointer]
+    - generic [ref=f4e9]:
+      - link [ref=f4e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Back to Bing search" [level=1] [ref=f4e11]
+      - search [ref=f4e12]:
+        - button "Search" [ref=f4e15] [cursor=pointer]
+        - searchbox "Enter your search here – Search suggestions will show as you type" [ref=f4e16]: "\"Fondation Rothschild\" \"8 rue de Prague\" Paris logement syndic contact"
+        - button "Search using an image" [ref=f4e19] [cursor=pointer]
+    - complementary "Account Rewards and Preferences" [ref=f4e21]:
+      - button "Microsoft Rewards" [ref=f4e22] [cursor=pointer]
+      - link "Sign in" [ref=f4e23] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Search Filter" [ref=f4e25]:
+      - list [ref=f4e26]:
+        - listitem [ref=f4e27]:
+          - link "All" [ref=f4e28] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=f4e29]:
+          - link "Search" [ref=f4e30] [cursor=pointer]:
+            - /url: /copilotsearch?q=%22Fondation+Rothschild%22+%228+rue+de+Prague%22+Paris+logement+syndic+contact&FORM=CSSCOP
+        - listitem [ref=f4e33]:
+          - link "Images" [ref=f4e34] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=78ae8d7117cf54a63808df49100f7672fb8e848a039de00e2206879f1366f6cbJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT0lMjJGb25kYXRpb24rUm90aHNjaGlsZCUyMislMjI4K3J1ZStkZStQcmFndWUlMjIrUGFyaXMrbG9nZW1lbnQrc3luZGljK2NvbnRhY3QmRk9STT1IRFJTQzI&ntb=1
+        - listitem [ref=f4e35]:
+          - link "Videos" [ref=f4e36] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=b62478b199405d47e1a6ffbdca9310b65a7e9937c8fbbebbe3fdcd3585846dedJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT0lMjJGb25kYXRpb24rUm90aHNjaGlsZCUyMislMjI4K3J1ZStkZStQcmFndWUlMjIrUGFyaXMrbG9nZW1lbnQrc3luZGljK2NvbnRhY3QmRk9STT1IRFJTQzM&ntb=1
+        - listitem [ref=f4e37]:
+          - link "Maps" [ref=f4e38] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=14a886272549ceff28cfa309470cfcc3e9903eb971d7f6be103b6c07ec92ef7dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT0lMjJGb25kYXRpb24rUm90aHNjaGlsZCUyMislMjI4K3J1ZStkZStQcmFndWUlMjIrUGFyaXMrbG9nZW1lbnQrc3luZGljK2NvbnRhY3QmRk9STT1IRFJTQzQ&ntb=1
+        - listitem [ref=f4e39]:
+          - link "News" [ref=f4e40] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=596dd9ad008add913b076c6f1d1e6c58825c4e894d7007e7d4fc1a461cd71cc1JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9JTIyRm9uZGF0aW9uK1JvdGhzY2hpbGQlMjIrJTIyOCtydWUrZGUrUHJhZ3VlJTIyK1BhcmlzK2xvZ2VtZW50K3N5bmRpYytjb250YWN0JkZPUk09SERSU0M2&ntb=1
+        - listitem [ref=f4e41]:
+          - button [ref=f4e42] [cursor=pointer]
+        - listitem [ref=f4e46]:
+          - link [ref=f4e49] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: About search results
+            - img "About search results" [ref=f4e51]
+  - generic [ref=f4e52]:
+    - main "Search Results" [ref=f4e53]:
+      - generic [ref=f4e54]: About 68,900 results
+      - list [ref=f4e56]:
+        - listitem [ref=f4e57]:
+          - link "fondationdefrance.org" [ref=f4e59] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=430a0ee38eb5defc0b95c8567595ddad0bb82c0564c6ea579fdbcaaf3d0a6eb2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uZGVmcmFuY2Uub3JnL2ZyLw&ntb=1
+            - generic [ref=f4e64]:
+              - generic [ref=f4e65]: fondationdefrance.org
+              - generic [ref=f4e68]:
+                - strong [ref=f4e69]: https://
+                - text: www.fondationdefrance.org
+          - heading [level=2] [ref=f4e70]:
+            - link [ref=f4e71] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=430a0ee38eb5defc0b95c8567595ddad0bb82c0564c6ea579fdbcaaf3d0a6eb2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uZGVmcmFuY2Uub3JnL2ZyLw&ntb=1
+              - text: La
+              - strong [ref=f4e72]: Fondation
+              - text: de toutes les causes -
+              - strong [ref=f4e73]: Fondation de France
+          - paragraph [ref=f4e75]: Particuliers, entreprises, porteurs de projet… Chacun a le pouvoir d’agir pour l’intérêt général. À la Fondation de France, nous vous …
+        - listitem [ref=f4e76]:
+          - link "assoconnect.com" [ref=f4e78] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=677ad7fc2fb4cccd4e69528d2c628b20762d474960243be106009b3e42016e36JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuYXNzb2Nvbm5lY3QuY29tL2Jsb2cvZm9uZGF0aW9uLWRlZmluaXRpb24tZm9uY3Rpb25uZW1lbnQ&ntb=1
+            - generic [ref=f4e83]:
+              - generic [ref=f4e84]: assoconnect.com
+              - generic [ref=f4e87]:
+                - strong [ref=f4e88]: https://
+                - text: www.assoconnect.com › blog › fondation-definition...
+          - heading [level=2] [ref=f4e89]:
+            - 'link "Tout comprendre aux fondations : définition, rôle et ..." [ref=f4e90] [cursor=pointer]':
+              - /url: https://www.bing.com/ck/a?!&&p=677ad7fc2fb4cccd4e69528d2c628b20762d474960243be106009b3e42016e36JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuYXNzb2Nvbm5lY3QuY29tL2Jsb2cvZm9uZGF0aW9uLWRlZmluaXRpb24tZm9uY3Rpb25uZW1lbnQ&ntb=1
+          - paragraph [ref=f4e92]: Un fonds de dotation diffère d’une fondation dans son statut juridique, ses caractéristiques financières et son mode de gouvernance. …
+        - listitem [ref=f4e93]:
+          - link "labonnecause.fr" [ref=f4e95] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=4cc27f862c72f31e132ac2954ff1cde16ce56220f6713d8868f84dd1bac7141eJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9sYWJvbm5lY2F1c2UuZnIvZ3VpZGUtZHUtZG9uL2xpc3RlLWFzc29jaWF0aW9ucy9saXN0ZS1mb25kYXRpb25zLw&ntb=1
+            - generic [ref=f4e100]:
+              - generic [ref=f4e101]: labonnecause.fr
+              - generic [ref=f4e104]:
+                - strong [ref=f4e105]: https://
+                - text: labonnecause.fr › guide-du-don › liste-associations › ...
+          - heading [level=2] [ref=f4e106]:
+            - link "Liste des fondations en France - labonnecause.fr" [ref=f4e107] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=4cc27f862c72f31e132ac2954ff1cde16ce56220f6713d8868f84dd1bac7141eJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9sYWJvbm5lY2F1c2UuZnIvZ3VpZGUtZHUtZG9uL2xpc3RlLWFzc29jaWF0aW9ucy9saXN0ZS1mb25kYXRpb25zLw&ntb=1
+          - paragraph [ref=f4e109]: 28 Nov 2024 · Les fondations en France jouent un rôle essentiel dans la société en soutenant de nombreuses causes, allant de la …
+        - listitem [ref=f4e110]:
+          - link "wikipedia.org" [ref=f4e112] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=6c13af94f8dd9cad51cde6ad4bcaf0fdb0977d27391039d7e10c0e4f0d2e0b70JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci5tLndpa2lwZWRpYS5vcmcvd2lraS9Gb25kYXRpb25fKGluc3RpdHV0aW9uKQ&ntb=1
+            - generic [ref=f4e117]:
+              - generic [ref=f4e118]: wikipedia.org
+              - generic [ref=f4e121]:
+                - strong [ref=f4e122]: https://
+                - text: fr.m.wikipedia.org › wiki › Fondation_(institution)
+          - heading [level=2] [ref=f4e123]:
+            - link [ref=f4e124] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=6c13af94f8dd9cad51cde6ad4bcaf0fdb0977d27391039d7e10c0e4f0d2e0b70JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci5tLndpa2lwZWRpYS5vcmcvd2lraS9Gb25kYXRpb25fKGluc3RpdHV0aW9uKQ&ntb=1
+              - strong [ref=f4e125]: Fondation (institution
+              - text: ) — Wikipédia
+          - paragraph [ref=f4e127]: Une fondation est une personne morale de droit privé à but non lucratif créée par un ou plusieurs donateurs, eux-mêmes pouvant …
+        - listitem [ref=f4e128]:
+          - link "fondationdefrance.org" [ref=f4e130] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=940cbd017ef46c8786f9e43703a5f0dc6595c164b8c606924080564cc24c7af2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uZGVmcmFuY2Uub3JnL2ZyL2FubnVhaXJlLWRlcy1mb25kYXRpb25z&ntb=1
+            - generic [ref=f4e135]:
+              - generic [ref=f4e136]: fondationdefrance.org
+              - generic [ref=f4e139]:
+                - strong [ref=f4e140]: https://
+                - text: www.fondationdefrance.org › fr › annuaire-des-fondations
+          - heading [level=2] [ref=f4e141]:
+            - link [ref=f4e142] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=940cbd017ef46c8786f9e43703a5f0dc6595c164b8c606924080564cc24c7af2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uZGVmcmFuY2Uub3JnL2ZyL2FubnVhaXJlLWRlcy1mb25kYXRpb25z&ntb=1
+              - text: Annuaire des fondations abritées -
+              - strong [ref=f4e143]: Fondation
+              - text: de France
+          - paragraph [ref=f4e145]: La Fondation Marie-Pierre Crosnier Mangeat est engagée pour l’environnement, la biodiversité, l’agriculture durable, la transmission …
+        - listitem [ref=f4e146]:
+          - link "centre-francais-fondations.org" [ref=f4e148] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=6c39c139668ba7f6e85df277187fcda4ff8c7be48cc307bd427ef77d1e2c49f4JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2VudHJlLWZyYW5jYWlzLWZvbmRhdGlvbnMub3JnLw&ntb=1
+            - generic [ref=f4e153]:
+              - generic [ref=f4e154]: centre-francais-fondations.org
+              - generic [ref=f4e157]:
+                - strong [ref=f4e158]: https://
+                - text: www.centre-francais-fondations.org
+          - heading [level=2] [ref=f4e159]:
+            - link "CFF – La fédération des fonds et fondations" [ref=f4e160] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=6c39c139668ba7f6e85df277187fcda4ff8c7be48cc307bd427ef77d1e2c49f4JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2VudHJlLWZyYW5jYWlzLWZvbmRhdGlvbnMub3JnLw&ntb=1
+          - paragraph [ref=f4e162]: La fédération des fonds et fondations 8 000 fonds et fondations en France. 17 milliards d’euros au service de l’intérêt général.
+        - listitem [ref=f4e163]:
+          - link "fondation-patrimoine.org" [ref=f4e165] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=2817002e62047375cac0d32d541f4e1e42722b7d5a7f3db9ce05676ce15066bfJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uLXBhdHJpbW9pbmUub3JnLw&ntb=1
+            - generic [ref=f4e170]:
+              - generic [ref=f4e171]: fondation-patrimoine.org
+              - generic [ref=f4e174]:
+                - strong [ref=f4e175]: https://
+                - text: www.fondation-patrimoine.org
+          - heading [level=2] [ref=f4e176]:
+            - link [ref=f4e177] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=2817002e62047375cac0d32d541f4e1e42722b7d5a7f3db9ce05676ce15066bfJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZm9uZGF0aW9uLXBhdHJpbW9pbmUub3JnLw&ntb=1
+              - text: Bienvenue sur le site de la
+              - strong [ref=f4e178]: Fondation
+              - text: du patrimoine
+          - paragraph [ref=f4e180]: Premier acteur de la générosité en faveur du patrimoine, la Fondation accompagne des projets de restauration partout en France. …
+        - listitem [ref=f4e181]:
+          - link "wikipedia.org" [ref=f4e183] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=5234af63bd3e50514361519e0e875a44d226becde421348dd10de8959f8f9134JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci5tLndpa2lwZWRpYS5vcmcvd2lraS9Gb25kYXRpb25fZGVfRnJhbmNl&ntb=1
+            - generic [ref=f4e188]:
+              - generic [ref=f4e189]: wikipedia.org
+              - generic [ref=f4e192]:
+                - strong [ref=f4e193]: https://
+                - text: fr.m.wikipedia.org › wiki › Fondation_de_France
+          - heading [level=2] [ref=f4e194]:
+            - link [ref=f4e195] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=5234af63bd3e50514361519e0e875a44d226becde421348dd10de8959f8f9134JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci5tLndpa2lwZWRpYS5vcmcvd2lraS9Gb25kYXRpb25fZGVfRnJhbmNl&ntb=1
+              - strong [ref=f4e196]: Fondation de France
+              - text: — Wikipédia
+          - paragraph [ref=f4e198]: Depuis sa création, la Fondation de France s’est engagée sur des domaines jusque-là peu explorés, contribuant à des avancées …
+        - listitem [ref=f4e199]:
+          - link "fondationdesfemmes.org" [ref=f4e201] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=c592fb3b7c18c27ee2be63660b9b21973f282811f629c52488d1665a72a73fb0JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mb25kYXRpb25kZXNmZW1tZXMub3JnLw&ntb=1
+            - generic [ref=f4e206]:
+              - generic [ref=f4e207]: fondationdesfemmes.org
+              - generic [ref=f4e210]:
+                - strong [ref=f4e211]: https://
+                - text: fondationdesfemmes.org
+          - heading [level=2] [ref=f4e212]:
+            - link [ref=f4e213] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=c592fb3b7c18c27ee2be63660b9b21973f282811f629c52488d1665a72a73fb0JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mb25kYXRpb25kZXNmZW1tZXMub3JnLw&ntb=1
+              - strong [ref=f4e214]: Fondation
+              - text: des Femmes
+          - paragraph [ref=f4e216]: 29 Jun 2026 · La Fondation des Femmes est la fondation de référence en France pour les droits des femmes et la lutte contre les …
+        - listitem [ref=f4e217]:
+          - link "service-public.gouv.fr" [ref=f4e219] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=0f5d8e1e0c02fed010db517a88add29e918c115a6c9fa828881559ef7a7633ffJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuc2VydmljZS1wdWJsaWMuZ291di5mci9wYXJ0aWN1bGllcnMvdm9zZHJvaXRzL0YzMTAyMQ&ntb=1
+            - generic [ref=f4e224]:
+              - generic [ref=f4e225]: service-public.gouv.fr
+              - generic [ref=f4e228]:
+                - strong [ref=f4e229]: https://
+                - text: www.service-public.gouv.fr › particuliers › ...
+          - heading [level=2] [ref=f4e230]:
+            - link [ref=f4e231] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=0f5d8e1e0c02fed010db517a88add29e918c115a6c9fa828881559ef7a7633ffJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuc2VydmljZS1wdWJsaWMuZ291di5mci9wYXJ0aWN1bGllcnMvdm9zZHJvaXRzL0YzMTAyMQ&ntb=1
+              - text: Comment se renseigner sur une
+              - strong [ref=f4e232]: fondation
+              - text: ou un fonds de ...
+          - paragraph [ref=f4e234]: Depuis le 18 décembre 2024, les fondations reconnues d’utilité publique (FRUP), les fondations d’entreprise et les fonds de dotation …
+        - listitem [ref=f4e235]:
+          - link "Some results have been removed" [ref=f4e237] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=624ab3a8085cfffd064a58fe3fbfb38c3ebc981281d18f0fc4b3851b9839d078JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9NjE3MzUw&ntb=1
+        - listitem [ref=f4e238]:
+          - navigation "More results for \"Fondation Rothschild\" \"8 rue de Prague\" Paris logement syndic contact":
+            - list:
+              - listitem [ref=f4e239]:
+                - generic "Page 1" [ref=f4e240]: "1"
+              - listitem [ref=f4e241]:
+                - link "Page 2" [ref=f4e242] [cursor=pointer]:
+                  - /url: /search?q=%22Fondation+Rothschild%22+%228+rue+de+Prague%22+Paris+logement+syndic+contact&FPIG=E0FEE2CA21AE4F6691CA5FB23BBD24FE&first=11&FORM=PERE
+                  - text: "2"
+              - listitem [ref=f4e243]:
+                - link "Page 3" [ref=f4e244] [cursor=pointer]:
+                  - /url: /search?q=%22Fondation+Rothschild%22+%228+rue+de+Prague%22+Paris+logement+syndic+contact&FPIG=E0FEE2CA21AE4F6691CA5FB23BBD24FE&first=21&FORM=PERE1
+                  - text: "3"
+              - listitem [ref=f4e245]:
+                - link "Next page" [ref=f4e246] [cursor=pointer]:
+                  - /url: /search?q=%22Fondation+Rothschild%22+%228+rue+de+Prague%22+Paris+logement+syndic+contact&FPIG=E0FEE2CA21AE4F6691CA5FB23BBD24FE&first=11&FORM=PORE
+    - complementary "Additional Results" [ref=f4e247]
+    - complementary "Explore More"
+  - contentinfo [ref=f4e248]:
+    - generic [ref=f4e249]:
+      - list:
+        - listitem [ref=f4e250]:
+          - link "Privacy" [ref=f4e251] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=f4e252]:
+          - link "Terms" [ref=f4e253] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

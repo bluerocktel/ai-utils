@@ -412,7 +412,22 @@ canonical_project() {
 
 # First non-heading line under ## Depends-on (first token only).
 depends_on_from_task() {
-    awk '/^## Depends-on/{found=1; next} found && /^[^#]/{print $1; exit} found && /^##/{exit}' "$1"
+    # Still "first token of the first line" (see CLAUDE.md section 5) - this does
+    # NOT introduce joins. It only sanitises that token, which is almost always
+    # written with markdown decoration:
+    #     `2026-09-12_some-task.md` - why this task needs it
+    # Keep only characters that can occur in a task filename, so backticks,
+    # quotes, brackets and emphasis markers cannot leak into the slug and make
+    # dep_satisfied() search for "*_`slug.md`.task.md", which can never match.
+    awk '
+        /^## Depends-on/ { found = 1; next }
+        found && /^##/   { exit }
+        found && /^[^#]/ {
+            dep = $1
+            gsub(/[^A-Za-z0-9._-]/, "", dep)
+            if (dep != "") { print dep; exit }
+        }
+    ' "$1"
 }
 
 # Short slug from a task filename: strip .md and an optional YYYY-MM-DD_ prefix.
@@ -463,6 +478,54 @@ locate_dep_slug() {
         return 0
     fi
     echo missing
+}
+
+# ── Blocked inbox tasks ────────────────────────────────────────────────────
+#
+# One TSV line per inbox/ task whose ## Depends-on is not satisfied:
+#
+#     <task-basename>\t<dep-slug>\t<location>
+#
+# <location> is locate_dep_slug's answer for the dep, and it sorts blocks into
+# two kinds that need opposite responses from a human:
+#
+#   review | missing    DEAD. Nothing still moving through the pipeline can
+#                       ever satisfy this dep, so the task waits forever.
+#                       `review` is the common one: dep_satisfied accepts only
+#                       done/*_<slug>.task.md, and a parent that reached
+#                       review/ (failed evaluation, or an unsatisfiable
+#                       criterion) never produces one.
+#   inbox | run | backlog
+#                       WAITING. Ordinary queue order, resolves on its own.
+#
+# A task whose dep is in done/ is not printed at all: it is runnable. So is a
+# task with no ## Depends-on.
+#
+# This is the classification ai-task already performs inline on its "nothing
+# eligible" branch. It lives here so the dashboard and the launcher cannot
+# drift into disagreeing about what "blocked" means — a dashboard that called
+# a task blocked while the launcher was happily claiming it would be worse
+# than neither of them reporting anything.
+#
+# Deliberately NOT runner-aware, and it must stay that way. runner_matches is
+# scoped to one invocation's --runner, while the dashboard reports across every
+# runner at once; ai-task layers its own runner partition on top of this.
+#
+# Order is mtime, oldest first, matching inbox_by_age: the launcher reports in
+# the order it would have claimed, and that is the order a reader expects.
+blocked_inbox_tasks() {
+    local f dep loc
+    [ -d "$INBOX" ] || return 0
+    while IFS= read -r f; do
+        [ -n "$f" ] && [ -f "$f" ] || continue
+        dep=$(depends_on_from_task "$f")
+        dep="${dep%.md}"
+        [ -n "$dep" ] || continue
+        loc=$(locate_dep_slug "$dep")
+        [ "$loc" = "done" ] && continue
+        printf '%s\t%s\t%s\n' "$(basename "$f" .md)" "$dep" "$loc"
+    done < <(find "$INBOX" -maxdepth 1 -type f -name '*.md' -printf '%T@ %p\n' 2>/dev/null \
+                 | sort -n | cut -d' ' -f2-)
 }
 
 # ── Awaiting-Eval (a finished run whose grading was deferred) ──────────────
@@ -611,6 +674,21 @@ retries_from_task() {
     awk '/^## Retries/{found=1; next} found && /^[0-9]+$/{print; exit} found && /^##/{exit}' "$1" | tr -d '[:space:]'
 }
 
+# Write the ## Retries counter on a task file, appending the section when the
+# file has none. Shared by ai-task's FAIL path (bump) and --unblock (reset to
+# 0) so the two cannot drift into writing the counter differently: a requeue
+# that left a stale count would spend the remaining budget on a task a human
+# has just finished repairing.
+set_retries() {
+    local file="$1" n="$2"
+    if grep -q "^## Retries" "$file"; then
+        awk -v n="$n" '/^## Retries/{print; getline; print n; next} {print}' \
+            "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+    else
+        printf "\n## Retries\n%s\n" "$n" >> "$file"
+    fi
+}
+
 # Extract Working Directory path from a project file (strip backticks).
 project_working_dir() {
     local proj="$1" raw
@@ -624,6 +702,36 @@ project_working_dir() {
     esac
     [ -n "$raw" ] || return 1
     printf '%s\n' "$raw"
+}
+
+# Render explicitly referenced project instructions into a prompt. The legacy
+# CLAUDE.md heading is project metadata, not a provider selection. Instructions
+# is also accepted for projects that use a provider-neutral heading.
+# Relative references resolve beside the project definition; never eval paths.
+project_instructions() {
+    local proj="${1:-}" project_file raw path contents
+    [ -n "$proj" ] || return 0
+    project_file="$PROJECTS_DIR/${proj}.md"
+    [ -r "$project_file" ] || return 0
+    raw=$(section_from_task 'Instructions' "$project_file")
+    [ -n "$raw" ] || raw=$(section_from_task 'CLAUDE.md' "$project_file")
+    raw=$(printf '%s\n' "$raw" | awk 'NF {print; exit}' \
+        | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//; s/^`(.*)`$/\1/')
+    [ -n "$raw" ] || return 0
+    case "$raw" in
+        \~/*) path="$HOME/${raw#\~/}" ;;
+        /*) path="$raw" ;;
+        *) path="$(dirname "$project_file")/$raw" ;;
+    esac
+    printf '\n--- BEGIN PROJECT INSTRUCTIONS ---\nSource: %s\n\n' "$path"
+    if [ -f "$path" ] && [ -r "$path" ] && contents=$(cat -- "$path"); then
+        printf '%s\n' "$contents"
+    else
+        printf 'Project instructions unavailable: %s\n' "$path" >&2
+        printf 'The referenced instruction file could not be read. Report this missing context explicitly; do not claim to have followed it.\n'
+    fi
+    printf '\n--- END PROJECT INSTRUCTIONS ---\n'
+    return 0
 }
 
 # ── Recurring jobs (ai-scheduled) ──────────────────────────────────────────

@@ -1,0 +1,217 @@
+- generic [active] [ref=f15e1]:
+  - banner [ref=f15e2]:
+    - button "Skip to content" [ref=f15e3] [cursor=pointer]
+    - button "Accessibility Feedback" [ref=f15e6] [cursor=pointer]
+    - generic [ref=f15e9]:
+      - link [ref=f15e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Back to Bing search" [level=1] [ref=f15e11]
+      - search [ref=f15e12]:
+        - button "Search" [ref=f15e15] [cursor=pointer]
+        - searchbox "Enter your search here – Search suggestions will show as you type" [ref=f15e16]: "\"CABINET BALZANO\" syndic Paris 14 contact"
+        - button "Search using an image" [ref=f15e19] [cursor=pointer]
+    - complementary "Account Rewards and Preferences" [ref=f15e21]:
+      - button "Microsoft Rewards"
+      - link "Sign in" [ref=f15e22] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Search Filter" [ref=f15e24]:
+      - list [ref=f15e25]:
+        - listitem [ref=f15e26]:
+          - link "All" [ref=f15e27] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=f15e28]:
+          - link "Search" [ref=f15e29] [cursor=pointer]:
+            - /url: /copilotsearch?q=%22CABINET+BALZANO%22+syndic+Paris+14+contact&FORM=CSSCOP
+        - listitem [ref=f15e32]:
+          - link "Images" [ref=f15e33] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=7c2f33094fa98804a45e764ed1500cc1d9b6948543dceeb20ef2121410ae7ba4JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT0lMjJDQUJJTkVUK0JBTFpBTk8lMjIrc3luZGljK1BhcmlzKzE0K2NvbnRhY3QmRk9STT1IRFJTQzI&ntb=1
+        - listitem [ref=f15e34]:
+          - link "Videos" [ref=f15e35] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=8782a8a290ef58325b6dcb9efb9a2c36fdb9e9bc26f5a49d08aa620368538222JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT0lMjJDQUJJTkVUK0JBTFpBTk8lMjIrc3luZGljK1BhcmlzKzE0K2NvbnRhY3QmRk9STT1IRFJTQzM&ntb=1
+        - listitem [ref=f15e36]:
+          - link "Maps" [ref=f15e37] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=5c37deab1b55c886ff77d5793cfd737ea127d54506623392f887732ad052d426JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT0lMjJDQUJJTkVUK0JBTFpBTk8lMjIrc3luZGljK1BhcmlzKzE0K2NvbnRhY3QmRk9STT1IRFJTQzQ&ntb=1
+        - listitem [ref=f15e38]:
+          - link "News" [ref=f15e39] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=02027f00234523a437568e067079cbeaa480511f35a2bf90dda6c564b32504cdJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9JTIyQ0FCSU5FVCtCQUxaQU5PJTIyK3N5bmRpYytQYXJpcysxNCtjb250YWN0JkZPUk09SERSU0M2&ntb=1
+        - listitem [ref=f15e40]:
+          - button [ref=f15e41] [cursor=pointer]
+        - listitem [ref=f15e45]:
+          - link [ref=f15e48] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: About search results
+            - img "About search results" [ref=f15e50]
+  - generic [ref=f15e51]:
+    - main "Search Results" [ref=f15e52]:
+      - generic [ref=f15e53]: About 254,000 results
+      - list [ref=f15e55]:
+        - listitem [ref=f15e56]:
+          - link "doctolib.fr" [ref=f15e58] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=240f15157cf925628c0cfb5098bd88da62995932953b9400a729a1d7c8554b1fJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZG9jdG9saWIuZnIvY2VudHJlLWQtaW1hZ2VyaWUtbWVkaWNhbGUvY2xheWUtc291aWxseS9jYWJpbmV0LXNhaW50LWNvbWUtaW1wZg&ntb=1
+            - generic [ref=f15e63]:
+              - generic [ref=f15e64]: doctolib.fr
+              - generic [ref=f15e67]:
+                - strong [ref=f15e68]: https://
+                - text: www.doctolib.fr › centre-d-imagerie-medicale › claye-souilly › ...
+          - heading [level=2] [ref=f15e69]:
+            - link [ref=f15e70] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=240f15157cf925628c0cfb5098bd88da62995932953b9400a729a1d7c8554b1fJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZG9jdG9saWIuZnIvY2VudHJlLWQtaW1hZ2VyaWUtbWVkaWNhbGUvY2xheWUtc291aWxseS9jYWJpbmV0LXNhaW50LWNvbWUtaW1wZg&ntb=1
+              - text: IMPF
+              - strong [ref=f15e71]: Cabinet Claye - Souilly
+              - text: "- Radiographie, Echographie ... - Doctolib"
+          - paragraph [ref=f15e73]: Situé au sein du centre commercial Carrefour de Claye-Souilly, le cabinet vous accueille du lundi au samedi pour vos examens de …
+        - listitem [ref=f15e74]:
+          - link "wikipedia.org" [ref=f15e76] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=0749847290514bef8faceb3494abdc30482d0edb32804053894fedfd226540eaJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci53aWtpcGVkaWEub3JnL3dpa2kvQ2FiaW5ldA&ntb=1
+            - generic [ref=f15e81]:
+              - generic [ref=f15e82]: wikipedia.org
+              - generic [ref=f15e85]:
+                - strong [ref=f15e86]: https://
+                - text: fr.wikipedia.org › wiki › Cabinet
+          - heading [level=2] [ref=f15e87]:
+            - link [ref=f15e88] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=0749847290514bef8faceb3494abdc30482d0edb32804053894fedfd226540eaJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9mci53aWtpcGVkaWEub3JnL3dpa2kvQ2FiaW5ldA&ntb=1
+              - strong [ref=f15e89]: Cabinet
+              - text: — Wikipédia
+          - paragraph [ref=f15e91]: Basculer la table des matières. Cabinet. 8 langues. Deutsch. English. Esperanto. Euskara.
+        - listitem [ref=f15e92]:
+          - link "larousse.fr" [ref=f15e94] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=863212a6bbaed05a448059e8c3f3ec0121a976bcc40a8304e931e92cb2c33a06JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cubGFyb3Vzc2UuZnIvZGljdGlvbm5haXJlcy9mcmFuY2Fpcy9jYWJpbmV0LzExODgx&ntb=1
+            - generic [ref=f15e99]:
+              - generic [ref=f15e100]: larousse.fr
+              - generic [ref=f15e103]:
+                - strong [ref=f15e104]: https://
+                - text: www.larousse.fr › dictionnaires › francais › cabinet
+          - heading [level=2] [ref=f15e105]:
+            - link [ref=f15e106] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=863212a6bbaed05a448059e8c3f3ec0121a976bcc40a8304e931e92cb2c33a06JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cubGFyb3Vzc2UuZnIvZGljdGlvbm5haXJlcy9mcmFuY2Fpcy9jYWJpbmV0LzExODgx&ntb=1
+              - text: "Définitions :"
+              - strong [ref=f15e107]: cabinet
+              - text: ", cabinets - Dictionnaire de français Larousse"
+          - paragraph [ref=f15e109]: Petite pièce servant de dépendance à une autre pièce. 2. Vieux. Pièce réservée au travail intellectuel ; bureau. 3. Local …
+        - listitem [ref=f15e110]:
+          - link "yukab.fr" [ref=f15e112] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=6667606819d28466c5dd546b14bb2254678f2637e8b57fce68f706ff377796aaJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWIuZnIv&ntb=1
+            - generic [ref=f15e117]:
+              - generic [ref=f15e118]: yukab.fr
+              - generic [ref=f15e121]:
+                - strong [ref=f15e122]: https://
+                - text: www.yukab.fr
+          - heading [level=2] [ref=f15e123]:
+            - link [ref=f15e124] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=6667606819d28466c5dd546b14bb2254678f2637e8b57fce68f706ff377796aaJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWIuZnIv&ntb=1
+              - strong [ref=f15e125]: Cabinet
+              - text: Thérapeutique Yukab | île de France
+          - paragraph [ref=f15e127]: Bienvenue dans l'univers thérapeutique de Yukab, l'espace où votre bien-être devient notre priorité. Nos cabinets thérapeutiques …
+        - listitem [ref=f15e128]:
+          - link "doctolib.fr" [ref=f15e130] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=26d6ef0ff7a556f15ce416870aa3563afdb06d32215c4a49dedaabf63226b4b0JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZG9jdG9saWIuZnIvbWFpc29uLWRlLXNhbnRlL2NsYXllLXNvdWlsbHkvbWFpc29uLWRlLXNhbnRlLXBsdXJpZGlzY2lwbGluYWlyZS1tc3AtYm9pcy1kZXMtZ3Jhbmdlcy1jbGF5ZS1zb3VpbGx5&ntb=1
+            - generic [ref=f15e135]:
+              - generic [ref=f15e136]: doctolib.fr
+              - generic [ref=f15e139]:
+                - strong [ref=f15e140]: https://
+                - text: www.doctolib.fr › maison-de-sante › claye-souilly › maison-de-sante...
+          - heading [level=2] [ref=f15e141]:
+            - link "Maison de Santé Pluridisciplinaire (MSP) Bois des Granges - Claye ..." [ref=f15e142] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=26d6ef0ff7a556f15ce416870aa3563afdb06d32215c4a49dedaabf63226b4b0JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZG9jdG9saWIuZnIvbWFpc29uLWRlLXNhbnRlL2NsYXllLXNvdWlsbHkvbWFpc29uLWRlLXNhbnRlLXBsdXJpZGlzY2lwbGluYWlyZS1tc3AtYm9pcy1kZXMtZ3Jhbmdlcy1jbGF5ZS1zb3VpbGx5&ntb=1
+          - paragraph [ref=f15e144]: Les praticiens de la Maison de Santé Pluridisciplinaire (MSP) Bois des Granges vous accueillent au 3, boulevard de Soave, 77410, …
+        - listitem [ref=f15e145]:
+          - link "impf.fr" [ref=f15e147] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=9f0fdbf18bd18b8a8fdd2bc00a0b1df2b4342c804506b1fa3d431804fa011b44JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuaW1wZi5mci9jZW50cmVpbWFnZXJpZS9jYWJpbmV0LXNhaW50LWNvbWUv&ntb=1
+            - generic [ref=f15e152]:
+              - generic [ref=f15e153]: impf.fr
+              - generic [ref=f15e156]:
+                - strong [ref=f15e157]: https://
+                - text: www.impf.fr › centreimagerie › cabinet-saint-come
+          - heading [level=2] [ref=f15e158]:
+            - link [ref=f15e159] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=9f0fdbf18bd18b8a8fdd2bc00a0b1df2b4342c804506b1fa3d431804fa011b44JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuaW1wZi5mci9jZW50cmVpbWFnZXJpZS9jYWJpbmV0LXNhaW50LWNvbWUv&ntb=1
+              - strong [ref=f15e160]: Cabinet
+              - text: Saint Come - impf.fr
+          - paragraph [ref=f15e162]: Par la RN3, sortie « Centre Commercial ». Entrèe tout à gauche du centre commercial.
+        - listitem [ref=f15e163]:
+          - link "pagesjaunes.fr" [ref=f15e165] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=1c61fd51e2176805f0c6c50d4838c385f3fbdc9a9b5663f09f3f17c0426e828cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cucGFnZXNqYXVuZXMuZnIvYW5udWFpcmUvY2xheWUtc291aWxseS03Ny9pbmZpcm1pZXJzLWNhYmluZXRzLXNvaW5zLWEtZG9taWNpbGU&ntb=1
+            - generic [ref=f15e170]:
+              - generic [ref=f15e171]: pagesjaunes.fr
+              - generic [ref=f15e174]:
+                - strong [ref=f15e175]: https://
+                - text: www.pagesjaunes.fr › annuaire › infirmiers-cabinets-soins-a-domicile
+          - heading [level=2] [ref=f15e176]:
+            - link [ref=f15e177] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=1c61fd51e2176805f0c6c50d4838c385f3fbdc9a9b5663f09f3f17c0426e828cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cucGFnZXNqYXVuZXMuZnIvYW5udWFpcmUvY2xheWUtc291aWxseS03Ny9pbmZpcm1pZXJzLWNhYmluZXRzLXNvaW5zLWEtZG9taWNpbGU&ntb=1
+              - strong [ref=f15e178]: Cabinet
+              - text: infirmier à Claye Souilly, RDV, horaires et infos
+          - paragraph [ref=f15e180]: "Cabinet infirmier à Claye Souilly (77) : Trouvez tous les infirmiers proches de chez vous et prenez RDV. Consultez les avis clients et …"
+        - listitem [ref=f15e181]:
+          - link "yukab.fr" [ref=f15e183] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=b5a7f48f44df59d77202947c47edf3d1455b90f756c6b7491eb0e856032d6a2dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWIuZnIvY2xheWUtc291aWxseQ&ntb=1
+            - generic [ref=f15e188]:
+              - generic [ref=f15e189]: yukab.fr
+              - generic [ref=f15e192]:
+                - strong [ref=f15e193]: https://
+                - text: www.yukab.fr › claye-souilly
+          - heading [level=2] [ref=f15e194]:
+            - link [ref=f15e195] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=b5a7f48f44df59d77202947c47edf3d1455b90f756c6b7491eb0e856032d6a2dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWIuZnIvY2xheWUtc291aWxseQ&ntb=1
+              - strong [ref=f15e196]: Cabinet
+              - text: Thérapeutique Yukab à Claye-souilly
+          - paragraph [ref=f15e198]: Des professionnels à votre écoute... Bienvenue sur le site du Cabinet Thérapeutique Yukab situé à Claye-souilly (77410). Nous …
+        - listitem [ref=f15e199]:
+          - link "cabinet-dentaire-claye-souilly.fr" [ref=f15e201] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=e15c5bdc747ab18e8328984152bc04c5799dbbf03a050206b64a3ab415a3571cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2FiaW5ldC1kZW50YWlyZS1jbGF5ZS1zb3VpbGx5LmZyLw&ntb=1
+            - generic [ref=f15e206]:
+              - generic [ref=f15e207]: cabinet-dentaire-claye-souilly.fr
+              - generic [ref=f15e210]:
+                - strong [ref=f15e211]: https://
+                - text: www.cabinet-dentaire-claye-souilly.fr
+          - heading [level=2] [ref=f15e212]:
+            - link [ref=f15e213] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=e15c5bdc747ab18e8328984152bc04c5799dbbf03a050206b64a3ab415a3571cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2FiaW5ldC1kZW50YWlyZS1jbGF5ZS1zb3VpbGx5LmZyLw&ntb=1
+              - text: Accueil -
+              - strong [ref=f15e214]: Cabinet
+              - text: dentaire Claye Souilly
+          - paragraph [ref=f15e216]: Le Cabinet du Bois des Granges vous accueille à Claye Souilly, en Seine et Marne, à proximité de Paris du lundi au vendredi.
+        - listitem [ref=f15e217]:
+          - link "yukab-location.fr" [ref=f15e219] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=f300680e77b9a29ad019cbd70203a1f055740061a1cf538e81c4580c4e0c81d2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWItbG9jYXRpb24uZnIvbm9zLWNhYmluZXRz&ntb=1
+            - generic [ref=f15e224]:
+              - generic [ref=f15e225]: yukab-location.fr
+              - generic [ref=f15e228]:
+                - strong [ref=f15e229]: https://
+                - text: www.yukab-location.fr › nos-cabinets
+          - heading [level=2] [ref=f15e230]:
+            - link "Nos cabinets | Yukab - Locations cabinets" [ref=f15e231] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=f300680e77b9a29ad019cbd70203a1f055740061a1cf538e81c4580c4e0c81d2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cueXVrYWItbG9jYXRpb24uZnIvbm9zLWNhYmluZXRz&ntb=1
+          - paragraph [ref=f15e233]: Bienvenue sur le site de nos Cabinets Thérapeutiques Yukab, composés de professionnels médicaux, paramédicaux et de thérapies …
+        - listitem [ref=f15e234]:
+          - link "Some results have been removed" [ref=f15e236] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=624ab3a8085cfffd064a58fe3fbfb38c3ebc981281d18f0fc4b3851b9839d078JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9NjE3MzUw&ntb=1
+        - listitem [ref=f15e237]:
+          - navigation "More results for \"CABINET BALZANO\" syndic Paris 14 contact":
+            - list:
+              - listitem [ref=f15e238]:
+                - generic "Page 1" [ref=f15e239]: "1"
+              - listitem [ref=f15e240]:
+                - link "Page 2" [ref=f15e241] [cursor=pointer]:
+                  - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+14+contact&FPIG=2577BAA33F324FFC84BBF9AE39F991CE&first=11&FORM=PERE
+                  - text: "2"
+              - listitem [ref=f15e242]:
+                - link "Page 3" [ref=f15e243] [cursor=pointer]:
+                  - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+14+contact&FPIG=2577BAA33F324FFC84BBF9AE39F991CE&first=21&FORM=PERE1
+                  - text: "3"
+              - listitem [ref=f15e244]:
+                - link "Next page" [ref=f15e245] [cursor=pointer]:
+                  - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+14+contact&FPIG=2577BAA33F324FFC84BBF9AE39F991CE&first=11&FORM=PORE
+    - complementary "Additional Results" [ref=f15e246]
+    - complementary "Explore More" [ref=f15e247]:
+      - list
+  - contentinfo [ref=f15e248]:
+    - generic [ref=f15e249]:
+      - list:
+        - listitem [ref=f15e250]:
+          - link "Privacy" [ref=f15e251] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=f15e252]:
+          - link "Terms" [ref=f15e253] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

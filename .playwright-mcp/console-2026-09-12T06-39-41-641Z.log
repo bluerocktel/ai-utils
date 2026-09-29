@@ -1,0 +1,6 @@
+[     801ms] [WARNING] initFollowStorageFinished @ https://www.societe.com/js/app-surveillance.js?20260911094854:954
+[     801ms] [WARNING] initFollowStorageFinished @ https://www.societe.com/js/app-surveillance.js?20260911094854:954
+[    2352ms] [ERROR] NotSupportedError: Failed to execute 'browsingTopics' on 'Document': document.browsingTopics() is deprecated and has been removed.
+    at getTopics (https://hb.360yield.com/privacy-sandbox/topics.html:14:41)
+    at https://hb.360yield.com/privacy-sandbox/topics.html:24:28
+    at https://hb.360yield.com/privacy-sandbox/topics.html:34:7 @ https://hb.360yield.com/privacy-sandbox/topics.html:18

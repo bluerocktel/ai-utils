@@ -1,0 +1,329 @@
+- generic [ref=f17e1]:
+  - link [ref=f17e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f17e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f17e10]:
+      - generic [ref=f17e12]:
+        - img "Google" [ref=f17e13]
+        - generic [ref=f17e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f17e16] [cursor=pointer]':
+            - generic [ref=f17e17]: fr
+          - link "Se connecter" [ref=f17e19] [cursor=pointer]
+      - generic [ref=f17e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f17e21]
+        - generic [ref=f17e22]:
+          - generic [ref=f17e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f17e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f17e25]:
+              - listitem [ref=f17e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f17e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f17e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f17e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f17e30]:
+              - listitem [ref=f17e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f17e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f17e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f17e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f17e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f17e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f17e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f17e38]:
+        - generic [ref=f17e39]:
+          - button "Tout refuser" [ref=f17e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f17e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f17e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f17e44]: Plus d'options
+      - generic [ref=f17e45]:
+        - link "Confidentialité" [ref=f17e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f17e47]: ·
+        - link "Conditions d'utilisation" [ref=f17e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f17e53]:
+    - search [ref=f17e54]:
+      - generic [ref=f17e57]:
+        - link [ref=f17e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&ictx=0&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84QpYkNegQIBhBm
+        - generic [ref=f17e59]:
+          - combobox [ref=f17e62]: "\"Fondation Rothschild\" logement social Paris \"rue de Prague\" OR \"rue Bargue\" site officiel contact \"Fondation Rothschild\" logement social Paris \"rue de Prague\" OR \"rue Bargue\" site officiel contact"
+          - generic [ref=f17e63]:
+            - button [ref=f17e65] [cursor=pointer]
+            - generic [ref=f17e70]:
+              - button [ref=f17e71] [cursor=pointer]
+              - button [ref=f17e74] [cursor=pointer]
+        - button [ref=f17e77] [cursor=pointer]
+    - generic [ref=f17e82]:
+      - button [ref=f17e84] [cursor=pointer]
+      - button [ref=f17e85] [cursor=pointer]
+      - generic [ref=f17e91]:
+        - button [ref=f17e93] [cursor=pointer]
+        - link [ref=f17e98] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Fondation%2BRothschild%2522%2Blogement%2Bsocial%2BParis%2B%2522rue%2Bde%2BPrague%2522%2BOR%2B%2522rue%2BBargue%2522%2Bsite%2Bofficiel%2Bcontact%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f17e99]: Connexion
+  - generic [ref=f17e101]:
+    - navigation [ref=f17e107]:
+      - list [ref=f17e110]:
+        - listitem [ref=f17e111]:
+          - link [ref=f17e114] [cursor=pointer]:
+            - /url: /search?q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sca_esv=02c6818e7845ba38&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q2J8OegQIExAD
+            - generic [ref=f17e115]: Mode IA
+        - listitem [ref=f17e118]:
+          - link [disabled] [ref=f17e119]:
+            - generic [ref=f17e120]: Tous
+        - listitem [ref=f17e122]:
+          - link [ref=f17e123] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84QtKgLegQIGBAB
+            - generic [ref=f17e124]: Images
+        - listitem [ref=f17e126]:
+          - link [ref=f17e127] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q0pQJegQIFRAB
+            - generic [ref=f17e128]: Actualités
+        - listitem [ref=f17e130]:
+          - link [ref=f17e131] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Qs6gLegQIGRAB
+            - generic [ref=f17e132]: Vidéos courtes
+        - listitem [ref=f17e134]:
+          - link [ref=f17e135] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84QtKgLegQIFxAB
+            - generic [ref=f17e136]: Vidéos
+        - listitem [ref=f17e138]:
+          - link [ref=f17e139] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknO6Ibz4i-wuauadGVV_BpauDd176MRZql82-cM17zoQJ_ovdX5qKO0Wx1Nu9SjYGjage48JX0DWnEB7ENmgOFmrJ6RscuR_gkqCnDVILvVUdQMeNZFPHfH4IGsHPLrpkgJ-NWs&q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Qs6gLegQIFhAB
+            - generic [ref=f17e140]: Web
+        - listitem [ref=f17e142]:
+          - button [ref=f17e143] [cursor=pointer]:
+            - generic [ref=f17e144]: Plus
+    - heading [level=1] [ref=f17e150]: Résultats de recherche
+    - generic [ref=f17e151]:
+      - generic [ref=f17e168]:
+        - heading [level=2] [ref=f17e172]:
+          - generic [ref=f17e173]: Raisonnement…
+        - progressbar [ref=f17e175]
+      - main [ref=f17e177]:
+        - generic [ref=f17e181]:
+          - generic [ref=f17e184]:
+            - heading [level=2] [ref=f17e185]: Résultats Web
+            - generic [ref=f17e186]:
+              - generic [ref=f17e189]:
+                - link [ref=f17e191] [cursor=pointer]:
+                  - /url: /goto?url=CAESWwHrOzAVJefhF9J1aQnQQXEPkZUbfGxMlLDM5qBMdYHpfWuWCJ7tmd6LR-5JFicRz0hPSSQV-ht69A3tJFbekaiX6vviOkJiiIWH3_tdY2XyGRK7NlCH8UGnYBQ
+                  - heading [level=3] [ref=f17e192]: Fondation Rothschild à PARIS 75015 (RUE BARGUE)
+                  - generic [ref=f17e198]:
+                    - generic [ref=f17e199]: 118000.fr
+                    - generic [ref=f17e201]: https://www.118000.fr › ...
+                - button [ref=f17e207] [cursor=pointer]
+              - generic [ref=f17e214]:
+                - emphasis [ref=f17e215]: Fondation Rothschild
+                - text: à
+                - emphasis [ref=f17e216]: PARIS
+                - text: "75015 : Adresse, horaires, téléphone."
+                - emphasis [ref=f17e217]: Fondation Rothschild
+                - text: . H 00 11
+                - emphasis [ref=f17e218]: RUE BARGUE
+                - text: "75015"
+                - emphasis [ref=f17e219]: Paris
+                - text: . Administrateur de biens et syndic de ...
+              - generic [ref=f17e220]: "Termes manquants : logement ‎social"
+          - generic [ref=f17e226]:
+            - heading [level=2] [ref=f17e228]: Autres questions
+            - generic [ref=f17e229]:
+              - button [ref=f17e235] [cursor=pointer]:
+                - generic [ref=f17e236]: Comment contacter Rothschild ?
+              - button [ref=f17e249] [cursor=pointer]:
+                - generic [ref=f17e250]: Comment contacter la Fondation Adolphe de Rothschild ?
+              - button [ref=f17e263] [cursor=pointer]:
+                - generic [ref=f17e264]: Quel est le salaire moyen chez la Fondation Rothschild en France ?
+              - button [ref=f17e277] [cursor=pointer]:
+                - generic [ref=f17e278]: L'hôpital Fondation Rothschild est-il un établissement privé ou public ?
+          - generic [ref=f17e287]:
+            - heading [level=2] [ref=f17e288]: Résultats Web
+            - generic [ref=f17e289]:
+              - generic [ref=f17e292]:
+                - link [ref=f17e294] [cursor=pointer]:
+                  - /url: /goto?url=CAESfgHrOzAVUSLHLIOfzB6UG5hgorsByjqwuDlrAEMQKnpqMlu-t_AgplbstmVHjAbqpzp6IcI2EX6ZLTjwIAa8Tf1tn4fieenJh9HxUJsD5ANYJyKG6SFd2Mf8NAFrW7ocRwUs3Cs67rFFVbvcexsB63ffalcdv7EAdmpJy1RW-w
+                  - heading [level=3] [ref=f17e295]: Société FONDATION DE ROTHSCHILD à PARIS (75012). ...
+                  - generic [ref=f17e301]:
+                    - generic [ref=f17e302]: Societe.com
+                    - generic [ref=f17e304]: https://www.societe.com › societe › fondation-de-rothsc...
+                - button [ref=f17e310] [cursor=pointer]
+              - generic [ref=f17e317]:
+                - emphasis [ref=f17e318]: FONDATION ROTHSCHILD
+                - text: UNITE SOINS SUITE - 75012. Établissement secondaire ... 8
+                - emphasis [ref=f17e319]: RUE DE PRAGUE
+                - text: ", 75012"
+                - emphasis [ref=f17e320]: PARIS
+                - text: . Dossier d'urbanisme. MAISON DE CONVALESCENCE ...
+          - generic [ref=f17e324]:
+            - generic [ref=f17e327]:
+              - link [ref=f17e329] [cursor=pointer]:
+                - /url: /goto?url=CAESdgHrOzAVr1LBEmMX9kZ21nBPCBIS-a8TpZnmPW38d-qXd0ACGSMnAWzoDJaN3qzfih38iYDOb6ldfiJcVyjLDpBFUPcrRimYRr00WlG7uU9cXo-WT5hVWsU81qHeCj9kNn5Rw6dtFlqfIvzWBTEzm0kdHAOg0xs
+                - heading [level=3] [ref=f17e330]: Société FONDATION DE ROTHSCHILD à 75012 PARIS
+                - generic [ref=f17e336]:
+                  - generic [ref=f17e337]: data.gouv.fr
+                  - generic [ref=f17e339]: https://annuaire-entreprises.data.gouv.fr › ... › 88.99B
+              - button [ref=f17e345] [cursor=pointer]
+            - generic [ref=f17e352]:
+              - text: "Détails (nom, enseigne, adresse) :"
+              - emphasis [ref=f17e353]: FONDATION ROTHSCHILD
+              - text: "UNITE SOINS SUITE ... Détails (nom, enseigne, adresse) : 8"
+              - emphasis [ref=f17e354]: RUE DE PRAGUE
+              - text: "75012"
+              - emphasis [ref=f17e355]: PARIS
+              - text: ", État : fermé ..."
+          - generic [ref=f17e359]:
+            - generic [ref=f17e362]:
+              - link [ref=f17e364] [cursor=pointer]:
+                - /url: /goto?url=CAESZwHrOzAVYdDDYV7aRJjwYETcF93KfGCbArEzl1fixxo6MKIz8WoHGP0eOqekx96WCXGxT4rCkkgNsLsANVD5jl69GB9AWSmYPvIlrfkpKGN3bqY8WMHk9KXeUVhdwqQtQd30gkb2TBw
+                - heading [level=3] [ref=f17e365]: HBM rue Prague Paris 12 Augustin Rey Henri-Paul Nénot
+                - generic [ref=f17e371]:
+                  - generic [ref=f17e372]: Paris Promeneurs
+                  - generic [ref=f17e374]: https://paris-promeneurs.com › ... › Patrimoine ancien
+              - button [ref=f17e380] [cursor=pointer]
+            - generic [ref=f17e387]:
+              - text: La
+              - emphasis [ref=f17e388]: fondation Rothschild
+              - text: . La
+              - emphasis [ref=f17e389]: fondation Rothschild
+              - text: est créée en 1904 pour « l ...
+              - emphasis [ref=f17e390]: rue de Prague
+              - text: (1909), les HBM
+              - emphasis [ref=f17e391]: rue Bargue
+              - text: (1912) et les HBM rue Marcadet ...
+            - generic [ref=f17e393]:
+              - text: "Termes manquants : social ‎| Afficher les résultats avec :"
+              - link [ref=f17e394] [cursor=pointer]:
+                - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&q=%22Fondation+Rothschild%22+logement+%22social%22+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sa=X&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q5t4CegQISRAB
+                - text: social
+          - generic [ref=f17e398]:
+            - heading [level=2] [ref=f17e402]: Images
+            - generic [ref=f17e406]:
+              - generic [ref=f17e410] [cursor=pointer]:
+                - link [ref=f17e411]:
+                  - /url: /goto?url=CAESmAEB6zswFXcK_LDN6HGycePQ7Ec4hob31J5ViIck-6LeYohaOlvA6q4qR1RgLCkYQQTxXXPoUk677hPgqnW0cCzbommlgNCPJgas5Beim0NCaEl8fthe1WnJJBEycr9c4R6VkjHjUSaQmTHzu91d9VTLCDRD_Lbue9DcM_x_YfZ8y502nUXYFmfmPC6BMA3auf-6chmRROidMw
+                - button [ref=f17e413]
+                - generic [ref=f17e417]:
+                  - generic [ref=f17e419]: Fichier:P1030692 Paris XII rue de Prague immeuble n°8 rwk ...
+                  - generic [ref=f17e420]:
+                    - generic [ref=f17e422]: Wikipédia
+                    - button [ref=f17e432]
+              - generic [ref=f17e440] [cursor=pointer]:
+                - link [ref=f17e441]:
+                  - /url: /goto?url=CAESZwHrOzAVYdDDYV7aRJjwYETcF93KfGCbArEzl1fixxo6MKIz8WoHGP0eOqekx96WCXGxT4rCkkgNsLsANVD5jl69GB9AWSmYPvIlrfkpKGN3bqY8WMHk9KXeUVhdwqQtQd30gkb2TBw
+                - button [ref=f17e443]
+                - generic [ref=f17e447]:
+                  - generic [ref=f17e449]: HBM rue Prague Paris 12 Augustin Rey Henri-Paul Nénot
+                  - generic [ref=f17e450]:
+                    - generic [ref=f17e452]: Paris Promeneurs
+                    - button [ref=f17e462]
+              - generic [ref=f17e470] [cursor=pointer]:
+                - link [ref=f17e471]:
+                  - /url: /goto?url=CAESZwHrOzAVYdDDYV7aRJjwYETcF93KfGCbArEzl1fixxo6MKIz8WoHGP0eOqekx96WCXGxT4rCkkgNsLsANVD5jl69GB9AWSmYPvIlrfkpKGN3bqY8WMHk9KXeUVhdwqQtQd30gkb2TBw
+                - button [ref=f17e473]
+                - generic [ref=f17e477]:
+                  - generic [ref=f17e479]: HBM rue Prague Paris 12 Augustin Rey Henri-Paul Nénot
+                  - generic [ref=f17e480]:
+                    - generic [ref=f17e482]: Paris Promeneurs
+                    - button [ref=f17e492]
+            - button [ref=f17e498] [cursor=pointer]:
+              - separator [aria-hidden] [ref=f17e499]
+              - generic [ref=f17e500]: Afficher plus d'images
+          - generic [ref=f17e507]:
+            - heading [level=2] [ref=f17e508]: Résultats Web
+            - generic [ref=f17e509]:
+              - generic [ref=f17e512]:
+                - link [ref=f17e514] [cursor=pointer]:
+                  - /url: /goto?url=CAESrwEB6zswFWREpXWzRKSKH0hm8bqt70e6SKjobz1TWzbPunE5FmFDu8LY1gRMgmLG9B1FC9OUe5Dfe03ewXUyimfB2wLoM-rs-Mws42eKHuvgvDhpiByWdxnDzcNvjJGBgEgJQjocWiVfc2DGR5_7x0HpBxbgTmVH4Po39Zbs0QfT7Yka4NIMt0qAOjE7DgDlh0egDrpP7iIPZ3bRGHonBXHYMcPPrKQ9yb14OyXumf5m
+                  - heading [level=3] [ref=f17e515]: Henri Provensal « vers ces rivages lointains où se meurt la ...
+                  - generic [ref=f17e521]:
+                    - generic [ref=f17e522]: WordPress.com
+                    - generic [ref=f17e524]: https://permareperterrasblog.wordpress.com › 2020/06/01
+                - button [ref=f17e530] [cursor=pointer]
+              - generic [ref=f17e536]:
+                - generic [ref=f17e537]: 1 juin 2020 —
+                - generic [ref=f17e538]:
+                  - text: En 1904, les barons Edmond, Alphonse et Gustave de Rothschild créent la
+                  - emphasis [ref=f17e539]: Fondation Rothschild
+                  - text: ", dix millions de francs sont investis. ..."
+                  - emphasis [ref=f17e540]: rue Bargue
+                  - text: ...
+          - generic [ref=f17e544]:
+            - generic [ref=f17e547]:
+              - link [ref=f17e549] [cursor=pointer]:
+                - /url: /goto?url=CAESggEB6zswFfYdTUadWrMZuvWClXvpg0-xG8M0-_ZaQROebnzznBaC7c1JFc560OCGAQlKizzzo3DciKgIV1UZvzp24rnRDHL6S9Q_4v4VFKSZmzSwloAfkmCKp8rtMyXRmkEXq2ZxEc1jSl6XOBCu5TGKfeajNBDWwayAWZfdwmdTxXYY
+                - heading [level=3] [ref=f17e550]: CXXXe ANNEE. - No 63 MARDI 9 AOÛT 2011
+                - generic [ref=f17e559]:
+                  - generic [ref=f17e560]: Ville de Paris
+                  - generic [ref=f17e562]: https://cdn.paris.fr › paris › 2020/02/26
+              - generic [ref=f17e564]: PDF
+              - button [ref=f17e569] [cursor=pointer]
+            - generic [ref=f17e574]:
+              - generic [ref=f17e575]:
+                - generic [ref=f17e576]: 26 févr. 2020 —
+                - generic [ref=f17e577]:
+                  - text: rue Lamblardie, 75012
+                  - emphasis [ref=f17e578]: Paris
+                  - text: ", géré par la"
+                  - emphasis [ref=f17e579]: Fondation Rothschild
+                  - text: ", sont autorisées comme suit : Dépenses prévisionnelles : — Groupe I: dépenses ..."
+              - generic [ref=f17e580]: 44 pages
+          - generic [ref=f17e584]:
+            - generic [ref=f17e587]:
+              - link [ref=f17e589] [cursor=pointer]:
+                - /url: /goto?url=CAESngEB6zswFQ7wG_mABiSQCSjh_KjGMmiz0QDGT2SgZ6YE4UokIsv36WBBjXaY1UySQjkr03dvALw_xPpDxCHdcjoedKcfuJ1jLsgZtgojQE84EShduN1F9EDFPDNK3dUcNUrG0W-xwCMXEJ9woAoztjwiTO6iTh_Omk80orW275DyDkiG-JZYhsPyI1nwSJC6DVbLkpiOP5Y1uZb9k8jnJQ
+                - heading [level=3] [ref=f17e590]: Guide 2016
+                - generic [ref=f17e596]:
+                  - generic [ref=f17e597]: Agence régionale de santé Ile-de-France
+                  - generic [ref=f17e599]: https://www.iledefrance.ars.sante.fr › default › files
+              - generic [ref=f17e601]: PDF
+              - button [ref=f17e606] [cursor=pointer]
+            - generic [ref=f17e611]:
+              - generic [ref=f17e613]:
+                - text: "✓ 2 PASS ophtalmologiques (PASS-O) :"
+                - emphasis [ref=f17e614]: Fondation Rothschild
+                - text: (75), Hôtel Dieu (75). ... 13
+                - emphasis [ref=f17e615]: rue Bargue
+                - text: . 75015
+                - emphasis [ref=f17e616]: Paris
+                - text: . 01 53 58 33 50. SPASAD La Vie à Domicile. 3 ...
+              - generic [ref=f17e617]: 218 pages
+          - generic [ref=f17e621]:
+            - generic [ref=f17e624]:
+              - link [ref=f17e626] [cursor=pointer]:
+                - /url: /goto?url=CAESbwHrOzAV0lqKaW0RQbU93Vo-dgDHv7Q1U-9QPOUyFtb3ZIzUwUebDW5fVvgX0TdAaGSbOSVJ6tFNuQQrFTorNhXsR2aXjPNV2wsO-cMReDobeyfZA6QwMbACGjauVJuGblsH4Ovz0RqjuFIfuPqiOQ
+                - heading [level=3] [ref=f17e627]: L'habitat du salarié moderne en France, Grande-Bretagne ...
+                - generic [ref=f17e633]:
+                  - generic [ref=f17e634]: OpenEdition Books
+                  - generic [ref=f17e636]: https://books.openedition.org › enseditions
+              - button [ref=f17e642] [cursor=pointer]
+            - generic [ref=f17e649]:
+              - text: 8 C'est le cas par exemple des immeubles construits à
+              - emphasis [ref=f17e650]: Paris
+              - text: par la
+              - emphasis [ref=f17e651]: Fondation Rothschild
+              - text: ", notamment"
+              - emphasis [ref=f17e652]: rue de Prague
+              - text: (1905) et rue Marcadet (1913-1919) (cf ...
+        - navigation [ref=f17e655]:
+          - heading [level=1] [ref=f17e656]: Navigation par pages
+          - text: "1"
+          - link [ref=f17e659] [cursor=pointer]:
+            - /url: /search?q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sca_esv=02c6818e7845ba38&hl=fr&ei=k_OkavGFGamikdUP9Yuc8Aw&start=10&sa=N&sstk=AS6-VmLOraWxpBIltdzrzFlEuQ4307nHAC2ya63_Cj_-fROSZHFkWACFmDHAXC0zN7wB_-D1-YSjdVOcwrbwLPsSwwG93W4nhf0Jxw&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q8tMDegQINBAE
+            - text: "2"
+          - link [ref=f17e661] [cursor=pointer]:
+            - /url: /search?q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sca_esv=02c6818e7845ba38&hl=fr&ei=k_OkavGFGamikdUP9Yuc8Aw&start=20&sa=N&sstk=AS6-VmLOraWxpBIltdzrzFlEuQ4307nHAC2ya63_Cj_-fROSZHFkWACFmDHAXC0zN7wB_-D1-YSjdVOcwrbwLPsSwwG93W4nhf0Jxw&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q8tMDegQINBAG
+            - text: "3"
+          - link [ref=f17e663] [cursor=pointer]:
+            - /url: /search?q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sca_esv=02c6818e7845ba38&hl=fr&ei=k_OkavGFGamikdUP9Yuc8Aw&start=30&sa=N&sstk=AS6-VmLOraWxpBIltdzrzFlEuQ4307nHAC2ya63_Cj_-fROSZHFkWACFmDHAXC0zN7wB_-D1-YSjdVOcwrbwLPsSwwG93W4nhf0Jxw&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q8tMDegQINBAI
+            - text: "4"
+          - heading [level=2] [ref=f17e665]:
+            - link [ref=f17e666] [cursor=pointer]:
+              - /url: /search?q=%22Fondation+Rothschild%22+logement+social+Paris+%22rue+de+Prague%22+OR+%22rue+Bargue%22+site+officiel+contact&sca_esv=02c6818e7845ba38&hl=fr&ei=k_OkavGFGamikdUP9Yuc8Aw&start=10&sa=N&sstk=AS6-VmLOraWxpBIltdzrzFlEuQ4307nHAC2ya63_Cj_-fROSZHFkWACFmDHAXC0zN7wB_-D1-YSjdVOcwrbwLPsSwwG93W4nhf0Jxw&ved=2ahUKEwixm7Ctt-iWAxUpUaQEHfUFB84Q8NMDegQINBAK
+              - generic [ref=f17e668]: Suivant
+    - contentinfo [ref=f17e669]:
+      - heading [level=1] [ref=f17e670]: Liens de pied de page

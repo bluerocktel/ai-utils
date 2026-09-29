@@ -15,6 +15,23 @@
 #       (do NOT burn a retry)
 #   4 = inconclusive: a ## Test Command timed out
 #       (do NOT burn a retry, do NOT pause the queue)
+#   5 = one or more criteria are unsatisfiable as written
+#       (do NOT burn a retry; route to review for the human)
+#
+# Exit 5 says the TASK FILE is wrong, not the work: a criterion that no correct
+# execution of the task could satisfy cannot be retried into passing, so the
+# three attempts that would be spent rediscovering it are skipped and a human
+# is asked to fix the criterion. This holds however MANY criteria are bad:
+# condition (c) in the prompt lets a second unsatisfiable criterion stand
+# beside the first instead of demoting the verdict to FAIL. Reading two false
+# premises as a plain failure is what sent six tasks through their full retry
+# budget, each one re-proving both premises false on every attempt.
+#
+# The bar is deliberately high and enforced below in code as well as in the
+# prompt: the evaluator must return
+# `VERDICT: UNSATISFIABLE` *and* an `## Unsatisfiable Criteria` section, or the
+# verdict is read as a plain FAIL. Without that, exit 5 would be a way for an
+# agent to dodge work by declaring it impossible.
 #
 # An empty evaluator response is exit 3, never a FAIL, and this script never
 # emits a blank or dangling verdict: a `VERDICT:` line is printed only when the
@@ -46,7 +63,8 @@ Usage: ai-eval [--runner NAME] [--model ID] TASK_FILE RESULT_FILE [OUTPUT_FILE]
                  work, not about judging it.
 
 Exit: 0 pass, 1 fail, 2 nothing to grade, 3 inconclusive (auth/empty verdict),
-      4 inconclusive (test command timed out).
+      4 inconclusive (test command timed out),
+      5 unsatisfiable acceptance criteria (no retry; needs a human).
 USAGE
 }
 
@@ -302,21 +320,32 @@ Rules:
 - Be critical. Do not give the benefit of the doubt.
 - Grade every criterion AS WRITTEN, not as you would charitably reinterpret it. If a criterion names a specific file, path, command, service, table, flag or value, that exact thing is what had to be used. An agent that quietly substituted something equivalent-looking and then reported success has FAILED that criterion, however well the substitute works.
 - If a criterion cannot be verified from the result, mark it FAIL.
+- A criterion that is demonstrably FALSE ABOUT THE WORLD is a different thing from one that is unmet or unverified. That case, and only that case, has its own verdict; see UNSATISFIABLE below. It is an exception to neither of the two rules above, which still apply in full to every other criterion.
 - Do not praise — only report problems.
 - You may use tools (read files, run shell commands) to verify criteria when the result report alone is insufficient.
 
+UNSATISFIABLE — use this verdict ONLY when ALL THREE of the following hold:
+  (a) the result file demonstrates that the criterion's premise is FALSE, by showing a command AND its output, rather than merely asserting that the criterion is unreasonable, unfair, badly worded or hard;
+  (b) no correct execution of this task could have satisfied the criterion — it is impossible, not merely hard, slow, expensive, or left unverified;
+  (c) every OTHER acceptance criterion either PASSES, or independently satisfies (a) and (b) in its own right.
+More than one criterion in the same task can be unsatisfiable, and when that happens the verdict is still UNSATISFIABLE. A task file carrying two false premises is more broken than one carrying a single false premise, not less, and grading it FAIL spends every retry rediscovering both. What (c) forbids is mixing this verdict with work that is merely unfinished, not finding a second bad criterion. Each criterion you grade UNSATISFIABLE needs its own command and its own output in ## Unsatisfiable Criteria: evidence is per criterion and one argument may never cover several, so claiming N of them costs N demonstrations.
+A criterion the agent simply did not check is FAIL, not UNSATISFIABLE. Incomplete or partial work plus an impossible criterion is FAIL, not UNSATISFIABLE. An assertion that a criterion is impossible, with no command and no output in the result file to back it, is FAIL. Where you are unsure, the answer is FAIL.
+
 Output format:
-1. Grade each acceptance criterion as: "- [PASS/FAIL] criterion: one-line reason"
+1. Grade each acceptance criterion as: "- [PASS/FAIL/UNSATISFIABLE] criterion: one-line reason"
 2. A "## Issues" section listing specific problems to fix (omit section entirely if all PASS).
-3. End your response with exactly one of these two lines:
+3. When, and only when, your verdict is UNSATISFIABLE: an "## Unsatisfiable Criteria" section with ONE ENTRY PER offending criterion, each naming that criterion verbatim and quoting the evidence from the result file — the command and its output — that disproves that particular one. This section is what makes the outcome auditable by a human, so a UNSATISFIABLE verdict without it is read as a plain FAIL.
+4. End your response with exactly one of these three lines:
    VERDICT: PASS
    VERDICT: FAIL
+   VERDICT: UNSATISFIABLE
 
 ---
 ## TASK
 
 PREAMBLE
     cat "$TASK_FILE"
+    project_instructions "$(project_from_task "$TASK_FILE")"
     printf "\n---\n## RESULT\n\n"
     cat "$RESULT_FILE"
 } > "$PROMPT_TMP"
@@ -361,4 +390,16 @@ fi
 if printf '%s\n' "$EVAL_TEXT" | grep -q "^VERDICT: PASS$"; then
     exit 0
 fi
+
+# The auditable section is required HERE, in code, not only asked for in the
+# prompt: exit 5 skips the whole retry loop, so a verdict a human cannot check
+# must not be able to reach it. An UNSATISFIABLE with no
+# `## Unsatisfiable Criteria` section falls through to the FAIL below, which is
+# the safe direction — it costs one retry, where the reverse mistake costs the
+# task its grading altogether.
+if printf '%s\n' "$EVAL_TEXT" | grep -q "^VERDICT: UNSATISFIABLE$" \
+   && printf '%s\n' "$EVAL_TEXT" | grep -q "^## Unsatisfiable Criteria"; then
+    exit 5
+fi
+
 exit 1

@@ -1,0 +1,224 @@
+- generic [active] [ref=f6e1]:
+  - banner [ref=f6e2]:
+    - button "Passer au contenu" [ref=f6e3] [cursor=pointer]
+    - button "Commentaires sur l’accessibilité" [ref=f6e6] [cursor=pointer]
+    - generic [ref=f6e9]:
+      - link [ref=f6e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Retour à la recherche Bing" [level=1] [ref=f6e11]
+      - search [ref=f6e12]:
+        - button "Rechercher" [ref=f6e15] [cursor=pointer]
+        - searchbox "Entrez votre recherche ici - Les suggestions de recherche s’affichera au fur et à mesure de la frappe" [ref=f6e16]: site:linkedin.com/company "Valiere Cortez" OR "CRAUNOT" OR "Cabinet LOUIS-PORCHERET" OR "Cabinet ROLAND-GOSSELIN"
+        - generic [ref=f6e17] [cursor=pointer]
+        - button "Rechercher à l’aide d’une image" [ref=f6e21] [cursor=pointer]
+    - complementary "Récompenses et préférences du compte" [ref=f6e23]:
+      - button "Microsoft Rewards"
+      - link "Connexion" [ref=f6e24] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Filtre de recherche" [ref=f6e26]:
+      - list [ref=f6e27]:
+        - listitem [ref=f6e28]:
+          - link "Tout" [ref=f6e29] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=f6e30]:
+          - link "Rechercher" [ref=f6e31] [cursor=pointer]:
+            - /url: /copilotsearch?q=site%3alinkedin.com%2fcompany+%22Valiere+Cortez%22+OR+%22CRAUNOT%22+OR+%22Cabinet+LOUIS-PORCHERET%22+OR+%22Cabinet+ROLAND-GOSSELIN%22&FORM=CSSCOP
+        - listitem [ref=f6e34]:
+          - link "Images" [ref=f6e35] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=02f8ea3b833a1a3c8c0df5b7cf5d1e22c71e8f5fd150880a5e046406101ec119JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT1zaXRlJTNhbGlua2VkaW4uY29tJTJmY29tcGFueSslMjJWYWxpZXJlK0NvcnRleiUyMitPUislMjJDUkFVTk9UJTIyK09SKyUyMkNhYmluZXQrTE9VSVMtUE9SQ0hFUkVUJTIyK09SKyUyMkNhYmluZXQrUk9MQU5ELUdPU1NFTElOJTIyJkZPUk09SERSU0My&ntb=1
+        - listitem [ref=f6e36]:
+          - link "Vidéos" [ref=f6e37] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=346040cff45b0e80f911ffa45642662c2324cff249aa58db41ca38770acf7634JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT1zaXRlJTNhbGlua2VkaW4uY29tJTJmY29tcGFueSslMjJWYWxpZXJlK0NvcnRleiUyMitPUislMjJDUkFVTk9UJTIyK09SKyUyMkNhYmluZXQrTE9VSVMtUE9SQ0hFUkVUJTIyK09SKyUyMkNhYmluZXQrUk9MQU5ELUdPU1NFTElOJTIyJkZPUk09SERSU0Mz&ntb=1
+        - listitem [ref=f6e38]:
+          - link "Cartes" [ref=f6e39] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=1ebebf817f4bf18a82a520700276f62660ee0373d0a6f31bb43a800e6f3dffafJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT1zaXRlJTNhbGlua2VkaW4uY29tJTJmY29tcGFueSslMjJWYWxpZXJlK0NvcnRleiUyMitPUislMjJDUkFVTk9UJTIyK09SKyUyMkNhYmluZXQrTE9VSVMtUE9SQ0hFUkVUJTIyK09SKyUyMkNhYmluZXQrUk9MQU5ELUdPU1NFTElOJTIyJkZPUk09SERSU0M0&ntb=1
+        - listitem [ref=f6e40]:
+          - link "Actualités" [ref=f6e41] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=35e45c2001699533d56f444e4270f6434ddba2b7ff044caf5b7e960e174cabc2JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9c2l0ZSUzYWxpbmtlZGluLmNvbSUyZmNvbXBhbnkrJTIyVmFsaWVyZStDb3J0ZXolMjIrT1IrJTIyQ1JBVU5PVCUyMitPUislMjJDYWJpbmV0K0xPVUlTLVBPUkNIRVJFVCUyMitPUislMjJDYWJpbmV0K1JPTEFORC1HT1NTRUxJTiUyMiZGT1JNPUhEUlNDNg&ntb=1
+        - listitem [ref=f6e42]:
+          - button [ref=f6e43] [cursor=pointer]
+        - listitem [ref=f6e47]:
+          - link [ref=f6e50] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: À propos des résultats de recherche
+            - img "À propos des résultats de recherche" [ref=f6e52]
+  - generic [ref=f6e53]:
+    - main "Résultats de la recherche" [ref=f6e54]:
+      - generic [ref=f6e55]: Environ 17 600 résultats
+      - list [ref=f6e57]:
+        - listitem [ref=f6e58]:
+          - link "equidia.fr" [ref=f6e60] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=04be9e0892019822452ddfb58d4ed11cc619214f785001ff29ae9934a3642cfdJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci8&ntb=1
+            - generic [ref=f6e65]:
+              - generic [ref=f6e66]: equidia.fr
+              - generic [ref=f6e69]:
+                - strong [ref=f6e70]: https://
+                - text: www.equidia.fr
+          - heading [level=2] [ref=f6e71]:
+            - link [ref=f6e72] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=04be9e0892019822452ddfb58d4ed11cc619214f785001ff29ae9934a3642cfdJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci8&ntb=1
+              - strong [ref=f6e73]: Equidia
+          - paragraph [ref=f6e75]: Découvrez Equidia, la référence des courses hippiques PMU en direct et en replay. Retrouvez les résultats, actualités et pronostics …
+        - listitem [ref=f6e76]:
+          - link "equidia.fr" [ref=f6e78] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=c3200a232d1f585b5b8a99cf7eec9e929b3fb659c021233075f1ff57b4612999JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9kaXJlY3Q&ntb=1
+            - generic [ref=f6e83]:
+              - generic [ref=f6e84]: equidia.fr
+              - generic [ref=f6e87]:
+                - strong [ref=f6e88]: https://
+                - text: www.equidia.fr › direct
+          - heading [level=2] [ref=f6e89]:
+            - link [ref=f6e90] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=c3200a232d1f585b5b8a99cf7eec9e929b3fb659c021233075f1ff57b4612999JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9kaXJlY3Q&ntb=1
+              - text: Suivez les courses hippiques en direct sur
+              - strong [ref=f6e91]: Equidia
+              - text: ": vivez l'expérience ..."
+          - paragraph [ref=f6e93]: 16 avr. 2026 · Plongez dans l'univers passionnant des courses hippiques en direct sur Equidia. Suivez toutes les courses depuis …
+        - listitem [ref=f6e94]:
+          - link "equidia.fr" [ref=f6e96] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=55485bcc439873f1732a2e3ca694f99a2b16e01565492200e85b070b95c60136JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9jb3Vyc2VzLWhpcHBpcXVl&ntb=1
+            - generic [ref=f6e101]:
+              - generic [ref=f6e102]: equidia.fr
+              - generic [ref=f6e105]:
+                - strong [ref=f6e106]: https://
+                - text: www.equidia.fr › courses-hippique
+          - heading [level=2] [ref=f6e107]:
+            - link [ref=f6e108] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=55485bcc439873f1732a2e3ca694f99a2b16e01565492200e85b070b95c60136JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9jb3Vyc2VzLWhpcHBpcXVl&ntb=1
+              - text: Vivez les
+              - strong [ref=f6e109]: courses
+              - text: hippiques comme si vous y étiez sur
+              - strong [ref=f6e110]: Equidia
+              - text: ": …"
+          - paragraph [ref=f6e112]: "Ne manquez rien des courses PMU sur Equidia : suivez l'actualité, les résultats et les pronostics en temps réel, et vibrez au rythme …"
+        - listitem [ref=f6e113]:
+          - link "equidia.fr" [ref=f6e115] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=3b7a6f36381c999d4a1dbaddbaa1abb141e85b364699abedd249ee95d6d585cfJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9wcm9ub3N0aWNz&ntb=1
+            - generic [ref=f6e120]:
+              - generic [ref=f6e121]: equidia.fr
+              - generic [ref=f6e124]:
+                - strong [ref=f6e125]: https://
+                - text: www.equidia.fr › pronostics
+          - heading [level=2] [ref=f6e126]:
+            - link [ref=f6e127] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=3b7a6f36381c999d4a1dbaddbaa1abb141e85b364699abedd249ee95d6d585cfJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci9wcm9ub3N0aWNz&ntb=1
+              - text: Pronostics et cotes des courses PMU -
+              - strong [ref=f6e128]: Equidia
+          - paragraph [ref=f6e130]: "Sélectionnez 3 partants selon votre pronostic d’ordre d’arrivée : Partant favori, avec la plus petite cote Mesure calculée à partir …"
+        - listitem [ref=f6e131]:
+          - link "equidia.fr" [ref=f6e133] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=e2fc9111b8fb6a80c52a1d99444cb2f87c480955236c624cb482bc1f2195d80cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci8_bG9naW49dHJ1ZQ&ntb=1
+            - generic [ref=f6e138]:
+              - generic [ref=f6e139]: equidia.fr
+              - generic [ref=f6e142]:
+                - strong [ref=f6e143]: https://
+                - text: www.equidia.fr
+          - heading [level=2] [ref=f6e144]:
+            - link [ref=f6e145] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=e2fc9111b8fb6a80c52a1d99444cb2f87c480955236c624cb482bc1f2195d80cJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuZXF1aWRpYS5mci8_bG9naW49dHJ1ZQ&ntb=1
+              - text: Courses hippiques en direct, en replay, pronostics du Quinté ... -
+              - strong [ref=f6e146]: Equidia
+          - paragraph [ref=f6e148]: Découvrez Equidia, la référence des courses hippiques PMU en direct et en replay. Retrouvez les résultats, actualités et pronostics …
+        - listitem [ref=f6e149]:
+          - link "turfomania.fr" [ref=f6e151] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=7bbbe375488da52bd6a6db6e97ade625266852a2f2ff642eda5f5b6f82d885a3JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cudHVyZm9tYW5pYS5mci9xdWludGUv&ntb=1
+            - generic [ref=f6e156]:
+              - generic [ref=f6e157]: turfomania.fr
+              - generic [ref=f6e160]:
+                - strong [ref=f6e161]: https://
+                - text: www.turfomania.fr › quinte
+          - heading [level=2] [ref=f6e162]:
+            - link [ref=f6e163] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=7bbbe375488da52bd6a6db6e97ade625266852a2f2ff642eda5f5b6f82d885a3JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cudHVyZm9tYW5pYS5mci9xdWludGUv&ntb=1
+              - text: Pronostic
+              - strong [ref=f6e164]: Quinté du Jour
+              - text: – Partants & Pronostic Quinté+ PMU
+          - paragraph [ref=f6e166]: "Il y a 6 heures · Pronostic Quinté du jour gratuit : partants PMU, analyse complète et pronostic expert pour le Quinté+ d'aujourd'hui. …"
+        - listitem [ref=f6e167]:
+          - link "tv-programme.com" [ref=f6e169] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=f0dd335d79261b9ec91f98d3f34b91ad7f80f285d37922c9796a1ab1a0f68f52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly90di1wcm9ncmFtbWUuY29tL2VxdWlkaWEvZGlyZWN0&ntb=1
+            - generic [ref=f6e174]:
+              - generic [ref=f6e175]: tv-programme.com
+              - generic [ref=f6e178]:
+                - strong [ref=f6e179]: https://
+                - text: tv-programme.com › equidia › direct
+          - heading [level=2] [ref=f6e180]:
+            - link [ref=f6e181] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=f0dd335d79261b9ec91f98d3f34b91ad7f80f285d37922c9796a1ab1a0f68f52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly90di1wcm9ncmFtbWUuY29tL2VxdWlkaWEvZGlyZWN0&ntb=1
+              - strong [ref=f6e182]: Equidia
+              - text: direct > regarder
+              - strong [ref=f6e183]: Equidia
+              - text: en direct sur internet
+          - paragraph [ref=f6e185]: 14 févr. 2026 · Suivez Equidia en direct sur tv-programme.com et ne manquez aucun événement des courses hippiques. La chaîne …
+        - listitem [ref=f6e186]:
+          - link "canalturf.com" [ref=f6e188] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=4e9ef6d73722db763831498abc7d13c4a58f14356022d448c662eb413fc379c6JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2FuYWx0dXJmLmNvbS8&ntb=1
+            - generic [ref=f6e193]:
+              - generic [ref=f6e194]: canalturf.com
+              - generic [ref=f6e197]:
+                - strong [ref=f6e198]: https://
+                - text: www.canalturf.com
+          - heading [level=2] [ref=f6e199]:
+            - 'link "Canalturf : Pronostics Quinté PMU gratuits, résultat et rapports des ..." [ref=f6e200] [cursor=pointer]':
+              - /url: https://www.bing.com/ck/a?!&&p=4e9ef6d73722db763831498abc7d13c4a58f14356022d448c662eb413fc379c6JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cuY2FuYWx0dXJmLmNvbS8&ntb=1
+          - paragraph [ref=f6e202]: Il y a 6 heures · Retrouvez les pronostics pmu gratuits, les résultats et rapports du Quinté et des courses des journalistes Canalturf
+        - listitem [ref=f6e203]:
+          - link "google.com" [ref=f6e205] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=6004aadb41d85a721f856168fd7311427c14fa997cf7fe8a2c21cab1e0eae7d4JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9wbGF5Lmdvb2dsZS5jb20vc3RvcmUvYXBwcy9kZXRhaWxzP2lkPWNvbS5lcXVpZGlhLmFuZHJvaWQmaGw9aXQ&ntb=1
+            - generic [ref=f6e210]:
+              - generic [ref=f6e211]: google.com
+              - generic [ref=f6e214]:
+                - strong [ref=f6e215]: https://
+                - text: play.google.com › store › apps › details
+          - heading [level=2] [ref=f6e216]:
+            - link [ref=f6e217] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=6004aadb41d85a721f856168fd7311427c14fa997cf7fe8a2c21cab1e0eae7d4JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9wbGF5Lmdvb2dsZS5jb20vc3RvcmUvYXBwcy9kZXRhaWxzP2lkPWNvbS5lcXVpZGlhLmFuZHJvaWQmaGw9aXQ&ntb=1
+              - strong [ref=f6e218]: Equidia
+              - text: "- App su Google Play"
+          - paragraph [ref=f6e220]: App gratuita al 100% per seguire in diretta le gare e tutti i programmi Equidia. Abbiamo la stessa passione per le corse. Per questo ti …
+        - listitem [ref=f6e221]:
+          - link "turfoo.fr" [ref=f6e223] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=58c5458e44bcc3e2e92fe0d7dcdaee6239ef2f0a11270d5e453701887c962c87JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cudHVyZm9vLmZyL3Byb25vc3RpY3MtcG11L3RpZXJjZS9wcmVzc2Uv&ntb=1
+            - generic [ref=f6e228]:
+              - generic [ref=f6e229]: turfoo.fr
+              - generic [ref=f6e232]:
+                - strong [ref=f6e233]: https://
+                - text: www.turfoo.fr › pronostics-pmu › tierce › presse
+          - heading [level=2] [ref=f6e234]:
+            - link [ref=f6e235] [cursor=pointer]:
+              - /url: https://www.bing.com/ck/a?!&&p=58c5458e44bcc3e2e92fe0d7dcdaee6239ef2f0a11270d5e453701887c962c87JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly93d3cudHVyZm9vLmZyL3Byb25vc3RpY3MtcG11L3RpZXJjZS9wcmVzc2Uv&ntb=1
+              - strong [ref=f6e236]: Pronostics pmu
+              - text: de la presse pour le Quinté du jour, c'est gratuit !
+          - paragraph [ref=f6e238]: Il y a 6 heures · Découvrez chaque jour les pronostics de la presse hippique pour le prochain Quinté avec le pronostic de 30 …
+        - listitem [ref=f6e239]:
+          - link "Certains résultats ont été supprimés" [ref=f6e241] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=624ab3a8085cfffd064a58fe3fbfb38c3ebc981281d18f0fc4b3851b9839d078JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9NjE3MzUw&ntb=1
+        - listitem [ref=f6e242]:
+          - navigation "Plus de résultats pour site:linkedin.com/company \"Valiere Cortez\" OR \"CRAUNOT\" OR \"Cabinet LOUIS-PORCHERET\" OR \"Cabinet ROLAND-GOSSELIN\"":
+            - list:
+              - listitem [ref=f6e243]:
+                - generic "Page 1" [ref=f6e244]: "1"
+              - listitem [ref=f6e245]:
+                - link "Page 2" [ref=f6e246] [cursor=pointer]:
+                  - /url: /search?q=site%3alinkedin.com%2fcompany+%22Valiere+Cortez%22+OR+%22CRAUNOT%22+OR+%22Cabinet+LOUIS-PORCHERET%22+OR+%22Cabinet+ROLAND-GOSSELIN%22&setlang=fr&FPIG=45E41FEC597E41E6BC2006D7F1D61627&first=11&FORM=PERE
+                  - text: "2"
+              - listitem [ref=f6e247]:
+                - link "Page 3" [ref=f6e248] [cursor=pointer]:
+                  - /url: /search?q=site%3alinkedin.com%2fcompany+%22Valiere+Cortez%22+OR+%22CRAUNOT%22+OR+%22Cabinet+LOUIS-PORCHERET%22+OR+%22Cabinet+ROLAND-GOSSELIN%22&setlang=fr&FPIG=45E41FEC597E41E6BC2006D7F1D61627&first=21&FORM=PERE1
+                  - text: "3"
+              - listitem [ref=f6e249]:
+                - link "Page suivante" [ref=f6e250] [cursor=pointer]:
+                  - /url: /search?q=site%3alinkedin.com%2fcompany+%22Valiere+Cortez%22+OR+%22CRAUNOT%22+OR+%22Cabinet+LOUIS-PORCHERET%22+OR+%22Cabinet+ROLAND-GOSSELIN%22&setlang=fr&FPIG=45E41FEC597E41E6BC2006D7F1D61627&first=11&FORM=PORE
+    - complementary "Résultats supplémentaires" [ref=f6e251]:
+      - list
+    - complementary "En savoir plus" [ref=f6e252]:
+      - list
+  - contentinfo [ref=f6e253]:
+    - generic [ref=f6e254]:
+      - list:
+        - listitem [ref=f6e255]:
+          - link "Confidentialité" [ref=f6e256] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=f6e257]:
+          - link "Conditions générales" [ref=f6e258] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

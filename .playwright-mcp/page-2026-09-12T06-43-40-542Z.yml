@@ -1,0 +1,770 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - navigation [ref=f8e3]:
+      - generic [ref=f8e5]:
+        - 'link "SyndiCompare : Accueil" [ref=f8e6] [cursor=pointer]':
+          - /url: /
+          - generic [ref=f8e7]: SyndiCompare
+        - list [ref=f8e8]:
+          - listitem [ref=f8e9]:
+            - link "Guide de la copropriété" [ref=f8e10] [cursor=pointer]:
+              - /url: /categories
+          - listitem [ref=f8e11]:
+            - link "Changer de syndic" [ref=f8e12] [cursor=pointer]:
+              - /url: /changer-de-syndic
+          - listitem [ref=f8e13]:
+            - link "Qui sommes-nous" [ref=f8e14] [cursor=pointer]:
+              - /url: /pages/qui_sommes_nous
+        - generic [ref=f8e15]:
+          - link "Connexion" [ref=f8e16] [cursor=pointer]:
+            - /url: /users/sign_in
+          - link "Comparer les syndics" [ref=f8e17] [cursor=pointer]:
+            - /url: /comparaison_utilisateurs/debut_comparaison_syndic
+  - main [ref=f8e21]:
+    - generic [ref=f8e23]:
+      - navigation "Fil d'Ariane" [ref=f8e24]:
+        - list [ref=f8e26]:
+          - listitem [ref=f8e27]:
+            - link "Accueil" [ref=f8e28] [cursor=pointer]:
+              - /url: /
+          - listitem [aria-hidden] [ref=f8e32]
+          - listitem [ref=f8e35]:
+            - link "Classement des syndics" [ref=f8e36] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics
+          - listitem [aria-hidden] [ref=f8e37]
+          - listitem [ref=f8e40]:
+            - link "Île-de-France" [ref=f8e41] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics/ile-de-france
+          - listitem [aria-hidden] [ref=f8e42]
+          - listitem [ref=f8e45]:
+            - link "Paris" [ref=f8e46] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris
+          - listitem [aria-hidden] [ref=f8e47]
+          - listitem [ref=f8e50]:
+            - link "Paris 03" [ref=f8e51] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03
+          - listitem [aria-hidden] [ref=f8e52]
+          - listitem [ref=f8e55]:
+            - generic [ref=f8e56]: Glf loick fouchet
+      - generic [ref=f8e59]:
+        - generic [ref=f8e60]:
+          - generic [ref=f8e61]: Fiche détaillée
+          - heading "Toutes les informations sur le Syndic Glf loick fouchet" [level=1] [ref=f8e66]:
+            - generic [ref=f8e67]: Toutes les informations sur le Syndic
+            - generic [ref=f8e68]: Glf loick fouchet
+          - generic "80 % de son portefeuille fait entre 11 et 50 lots" [ref=f8e70]: Spécialiste copropriétés moyennes
+          - generic [ref=f8e73]:
+            - 'generic "Source : registre Sirene (INSEE)" [ref=f8e74]': Fondé en 1984
+            - 'generic "Source : registre Sirene (INSEE) · effectif 2023, donnée la plus récente publiée par l''INSEE" [ref=f8e77]': 20 à 49 salariés
+            - generic "Au moins 90 % des mandats en cours de son portefeuille ont une échéance à jour au Registre National des Copropriétés" [ref=f8e80]: Registre national tenu à jour
+          - generic [ref=f8e83]:
+            - generic [ref=f8e84]:
+              - generic [ref=f8e88]: "83"
+              - generic [ref=f8e89]: Copropriétés
+            - generic [ref=f8e90]:
+              - generic [ref=f8e94]: "1956"
+              - generic [ref=f8e95]: Lots principaux
+            - generic [ref=f8e96]:
+              - generic [ref=f8e101]: Paris 3
+              - generic [ref=f8e102]: Localisation
+          - generic [ref=f8e104]:
+            - generic [ref=f8e105]:
+              - generic [ref=f8e106]: 2.5/5
+              - generic [ref=f8e107]: Basé sur 275 avis
+            - img "Logo Google Reviews" [ref=f8e121]
+          - generic [ref=f8e122]:
+            - paragraph [ref=f8e123]: Obtenez des devis de syndics pour votre copropriété
+            - generic [ref=f8e124]:
+              - button "Ma situation Ma copropriété est gérée par Glf Loick Fouchet" [ref=f8e125] [cursor=pointer]:
+                - generic [ref=f8e126]: Ma situation
+                - text: Ma copropriété est gérée par Glf Loick Fouchet
+              - button "Ma situation Je cherche un syndic, ce cabinet m'intéresse" [ref=f8e127] [cursor=pointer]:
+                - generic [ref=f8e128]: Ma situation
+                - text: Je cherche un syndic, ce cabinet m'intéresse
+            - paragraph [ref=f8e129]: "Comparez les honoraires des syndics de Paris 03 : devis gratuits en 2 minutes."
+            - generic [ref=f8e130]:
+              - paragraph [ref=f8e131]:
+                - generic [ref=f8e132]: 
+                - text: Trouvez directement votre copropriété
+              - generic [ref=f8e134]:
+                - generic [ref=f8e135]:
+                  - generic [ref=f8e136]:
+                    - generic: 
+                    - textbox "14 rue de la Paix, 75001, Paris" [ref=f8e137]
+                  - button "Rechercher" [ref=f8e138] [cursor=pointer]
+                - text: 
+              - generic [ref=f8e139]: ou
+              - button " Me géolocaliser et trouver mon immeuble" [ref=f8e143] [cursor=pointer]:
+                - generic [ref=f8e144]: 
+                - generic [ref=f8e145]: Me géolocaliser et trouver mon immeuble
+            - paragraph [ref=f8e146]: Sans engagement. Vos coordonnées ne sont transmises qu'aux syndics que vous retenez.
+          - generic [ref=f8e147]:
+            - heading "À propos du syndic" [level=2] [ref=f8e148]
+            - paragraph [ref=f8e152]: "GLF LOICK FOUCHET est un syndic professionnel installé à Paris 03. Il gère 83 copropriétés immatriculées au registre national, représentant environ 1 956 lots, réparties sur 26 communes. Sa plus ancienne copropriété au registre est immatriculée depuis 2017. Spécialiste des copropriétés moyennes : 80 % de son portefeuille fait entre 11 et 50 lots. Note Google : 2.5/5 (275 avis). Sur les 24 derniers mois, son portefeuille a enregistré 4 copropriétés gagnées et 9 perdues*."
+            - generic [ref=f8e153]:
+              - generic [ref=f8e154]:
+                - generic [ref=f8e155]: "+4"
+                - generic [ref=f8e156]: copropriétés gagnées*
+              - generic [ref=f8e157]:
+                - generic [ref=f8e158]: −9
+                - generic [ref=f8e159]: copropriétés perdues*
+              - generic [ref=f8e160]:
+                - generic [ref=f8e161]: "-5"
+                - generic [ref=f8e162]: solde net (24 mois)*
+            - paragraph [ref=f8e163]:
+              - link "Voir le détail des copropriétés gagnées et perdues par GLF LOICK FOUCHET →" [ref=f8e164] [cursor=pointer]:
+                - /url: /changements-de-syndic/syndic/1217
+            - generic [ref=f8e165]:
+              - generic [ref=f8e166]:
+                - generic [ref=f8e167]: 95,4 % de copropriétés conservées sur 12 mois
+                - generic [ref=f8e168]: "Moyenne nationale : 94,6 %"
+              - paragraph [ref=f8e169]: Part du portefeuille géré il y a douze mois toujours géré aujourd'hui, calculée sur les changements de syndic déclarés au registre national (décisions d'assemblées générales souvent antérieures de plusieurs mois). Hors réorganisations internes d'un même réseau et cessions de portefeuille.
+            - paragraph [ref=f8e170]: "* Méthodologie : données issues du registre national d'immatriculation des copropriétés (ANAH / data.gouv.fr), actualisées trimestriellement. Les mouvements comptabilisent uniquement les changements de syndic organiques : les transferts liés aux fusions, acquisitions et réorganisations internes détectés sont exclus. Le registre étant déclaratif, ces chiffres reflètent les déclarations des syndics et peuvent différer de la réalité. Le nombre de copropriétaires ayant lancé une comparaison est mesuré sur la plateforme SyndiCompare : demandes avec le motif « changer de syndic », dédoublonnées par utilisateur, attribuées au syndic en place au moment de la demande (à un trimestre près), hors demandes de test. Période : 24 derniers mois glissants."
+          - generic [ref=f8e171]:
+            - paragraph [ref=f8e172]:
+              - generic [ref=f8e173]: 
+              - text: Trouvez directement votre copropriété
+            - generic [ref=f8e175]:
+              - generic [ref=f8e176]:
+                - generic [ref=f8e177]:
+                  - generic: 
+                  - textbox "14 rue de la Paix, 75001, Paris" [ref=f8e178]
+                - button "Rechercher" [ref=f8e179] [cursor=pointer]
+              - text: 
+            - generic [ref=f8e180]: ou
+            - button " Me géolocaliser et trouver mon immeuble" [ref=f8e184] [cursor=pointer]:
+              - generic [ref=f8e185]: 
+              - generic [ref=f8e186]: Me géolocaliser et trouver mon immeuble
+          - link "Comparer les Syndics" [ref=f8e188] [cursor=pointer]:
+            - /url: /comparaison_utilisateurs/debut_comparaison_syndic
+        - generic [ref=f8e195]:
+          - heading "Résumé" [level=2] [ref=f8e196]
+          - generic [ref=f8e197]:
+            - generic [ref=f8e198]:
+              - generic [ref=f8e199]: Copropriétés gérées
+              - generic [ref=f8e200]: "83"
+            - generic [ref=f8e201]:
+              - generic [ref=f8e202]: Lots en gestion
+              - generic [ref=f8e203]: "1956"
+            - generic [ref=f8e204]:
+              - generic [ref=f8e205]: Zone d'activité
+              - generic [ref=f8e206]: Paris 3
+            - generic [ref=f8e207]:
+              - generic [ref=f8e208]: Note moyenne
+              - generic [ref=f8e209]: 2.5/5
+      - generic [ref=f8e213]:
+        - generic [ref=f8e214]:
+          - heading "Le patrimoine en gestion du Syndic Glf loick fouchet" [level=2] [ref=f8e215]:
+            - generic [ref=f8e216]: Le patrimoine en gestion du Syndic
+            - generic [ref=f8e217]: Glf loick fouchet
+          - paragraph [ref=f8e218]: Découvrez toutes les copropriétés gérées par ce syndic
+        - generic [ref=f8e219]:
+          - generic [ref=f8e220]:
+            - heading "Liste des copropriétés" [level=3] [ref=f8e221]
+            - paragraph [ref=f8e222]: Cliquez sur une copropriété pour voir les détails
+          - table [ref=f8e224]:
+            - rowgroup [ref=f8e225]:
+              - row [ref=f8e226]:
+                - columnheader "Nom usuel" [ref=f8e227]
+                - columnheader "Devis disponibles" [ref=f8e232]
+                - columnheader "Adresse" [ref=f8e237]
+                - columnheader "Lots" [ref=f8e243]
+                - columnheader "Construction" [ref=f8e248]
+            - rowgroup [ref=f8e253]:
+              - row [ref=f8e254] [cursor=pointer]:
+                - cell [ref=f8e255]:
+                  - link "SDC 15 rue PETRARQUE" [ref=f8e258]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-15-rue-petrarque
+                - cell "18 devis disponibles" [ref=f8e261]
+                - cell "15 r petrarque 75016 Paris" [ref=f8e265]
+                - cell "97" [ref=f8e267]
+                - cell "20/12/1951" [ref=f8e269]
+              - row [ref=f8e271] [cursor=pointer]:
+                - cell [ref=f8e272]:
+                  - link "4-6 AVENUE CLAUDE VELLEFAUX" [ref=f8e275]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/4-6-avenue-claude-vellefaux
+                - cell "14 devis disponibles" [ref=f8e278]
+                - cell "4-6 av claude vellefaux 75010 Paris" [ref=f8e282]
+                - cell "60" [ref=f8e284]
+                - cell "09/01/1985" [ref=f8e286]
+              - row [ref=f8e288] [cursor=pointer]:
+                - cell [ref=f8e289]:
+                  - link "SDC 26-28 UNIVERSITE" [ref=f8e292]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-26-28-universite
+                - cell "16 devis disponibles" [ref=f8e295]
+                - cell "26 r de l'universite 75007 Paris" [ref=f8e299]
+                - cell "56" [ref=f8e301]
+                - cell "07/06/1978" [ref=f8e303]
+              - row [ref=f8e305] [cursor=pointer]:
+                - cell [ref=f8e306]:
+                  - link "SDC 42 RUE DE MAUBEUGE – 75009 PARIS" [ref=f8e309]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-42-rue-de-maubeuge-75009-paris
+                - cell "16 devis disponibles" [ref=f8e312]
+                - cell "42 r de maubeuge 75009 Paris" [ref=f8e316]
+                - cell "54" [ref=f8e318]
+                - cell "15/12/1951" [ref=f8e320]
+              - row [ref=f8e322] [cursor=pointer]:
+                - cell [ref=f8e323]:
+                  - link "114 RUE DES MOINES" [ref=f8e326]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/114-rue-des-moines
+                - cell "19 devis disponibles" [ref=f8e329]
+                - cell "114 r des moines 75017 PARIS" [ref=f8e333]
+                - cell "47" [ref=f8e335]
+                - cell "27/03/1963" [ref=f8e337]
+              - row [ref=f8e339] [cursor=pointer]:
+                - cell [ref=f8e340]:
+                  - link "SDC 11/13 RUE SAINT GILLES" [ref=f8e343]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-11-13-rue-saint-gilles
+                - cell "12 devis disponibles" [ref=f8e346]
+                - cell "11 r saint-gilles 75003 Paris" [ref=f8e350]
+                - cell "47" [ref=f8e352]
+                - cell "23/12/1987" [ref=f8e354]
+              - row [ref=f8e356] [cursor=pointer]:
+                - cell [ref=f8e357]:
+                  - link "SDC 117 RUE CAULAINCOURT" [ref=f8e360]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-117-rue-caulaincourt
+                - cell "18 devis disponibles" [ref=f8e363]
+                - cell "117 r caulaincourt 75018 Paris" [ref=f8e367]
+                - cell "45" [ref=f8e369]
+                - cell "27/09/1978" [ref=f8e371]
+              - row [ref=f8e373] [cursor=pointer]:
+                - cell [ref=f8e374]:
+                  - link "SDC 93, rue de Bagnolet – 75020 PARIS" [ref=f8e377]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-93-rue-de-bagnolet-75020-paris
+                - cell "16 devis disponibles" [ref=f8e380]
+                - cell "93 r de bagnolet 75020 Paris" [ref=f8e384]
+                - cell "44" [ref=f8e386]
+                - cell "29/11/1972" [ref=f8e388]
+              - row [ref=f8e390] [cursor=pointer]:
+                - cell [ref=f8e391]:
+                  - link "SDC 22, rue Réaumur – 75003 PARIS" [ref=f8e394]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-22-rue-reaumur-75003-paris
+                - cell "13 devis disponibles" [ref=f8e397]
+                - cell "22 r reaumur 75003 Paris" [ref=f8e401]
+                - cell "40" [ref=f8e403]
+                - cell "25/09/1984" [ref=f8e405]
+              - row [ref=f8e407] [cursor=pointer]:
+                - cell [ref=f8e408]:
+                  - link "SDC RESIDENCE CAMILLE SAINT SAENS – 75011 PARIS" [ref=f8e411]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-residence-camille-saint-saens-75011-paris
+                - cell "14 devis disponibles" [ref=f8e414]
+                - cell "23 r des taillandiers 75011 Paris" [ref=f8e418]
+                - cell "38" [ref=f8e420]
+                - cell "08/02/1995" [ref=f8e422]
+              - row [ref=f8e424] [cursor=pointer]:
+                - cell [ref=f8e425]:
+                  - link "SYNDICAT DES COPROPRIETAIRES DU 2 RUE MARIOTTE" [ref=f8e428]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/syndicat-des-coproprietaires-du-2-rue-mariotte
+                - cell "20 devis disponibles" [ref=f8e431]
+                - cell "2 Rue Mariotte 75017 Paris" [ref=f8e435]
+                - cell "38" [ref=f8e437]
+                - cell "01/12/2023" [ref=f8e439]
+              - row [ref=f8e441] [cursor=pointer]:
+                - cell [ref=f8e442]:
+                  - link "sdc 3 rue FELIX FAURE" [ref=f8e445]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-3-rue-felix-faure
+                - cell "15 devis disponibles" [ref=f8e448]
+                - cell "3 r felix faure 75015 Paris" [ref=f8e452]
+                - cell "36" [ref=f8e454]
+                - cell "01/12/1979" [ref=f8e456]
+              - row [ref=f8e458] [cursor=pointer]:
+                - cell [ref=f8e459]:
+                  - link "SDC du 95 rue de PATAY 75013 PARIS" [ref=f8e462]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-du-95-rue-de-patay-75013-paris
+                - cell "12 devis disponibles" [ref=f8e465]
+                - cell "95 r de patay 75013 Paris" [ref=f8e469]
+                - cell "35" [ref=f8e471]
+                - cell "30/10/2014" [ref=f8e473]
+              - row [ref=f8e475] [cursor=pointer]:
+                - cell [ref=f8e476]:
+                  - link "SDC 41 RUE DES ABBESSES" [ref=f8e479]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-41-rue-des-abbesses
+                - cell "18 devis disponibles" [ref=f8e482]
+                - cell "41 r des abbesses 75018 Paris" [ref=f8e486]
+                - cell "35" [ref=f8e488]
+                - cell "29/03/1972" [ref=f8e490]
+              - row [ref=f8e492] [cursor=pointer]:
+                - cell [ref=f8e493]:
+                  - link "SDC 67 BOULEVARD VOLTAIRE" [ref=f8e496]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-67-boulevard-voltaire
+                - cell "14 devis disponibles" [ref=f8e499]
+                - cell "67 bd voltaire 75011 Paris" [ref=f8e503]
+                - cell "34" [ref=f8e505]
+                - cell "04/02/1960" [ref=f8e507]
+              - row [ref=f8e509] [cursor=pointer]:
+                - cell [ref=f8e510]:
+                  - link "SDC 55, rue Condorcet – 75009 PARIS" [ref=f8e513]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-55-rue-condorcet-75009-paris
+                - cell "15 devis disponibles" [ref=f8e516]
+                - cell "55 r condorcet 75009 Paris" [ref=f8e520]
+                - cell "33" [ref=f8e522]
+                - cell "15/11/1969" [ref=f8e524]
+              - row [ref=f8e526] [cursor=pointer]:
+                - cell [ref=f8e527]:
+                  - link "SDC 17, avenue Victor Hugo– 75116 PARIS" [ref=f8e530]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-17-avenue-victor-hugo-75116-paris
+                - cell "19 devis disponibles" [ref=f8e533]
+                - cell "17 av victor hugo 75016 Paris" [ref=f8e537]
+                - cell "33" [ref=f8e539]
+                - cell "24/01/1978" [ref=f8e541]
+              - row [ref=f8e543] [cursor=pointer]:
+                - cell [ref=f8e544]:
+                  - link "3 Boulevard de Charonne" [ref=f8e547]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/3-boulevard-de-charonne
+                - cell "14 devis disponibles" [ref=f8e550]
+                - cell "3 Boulevard de Charonne 75011 Paris" [ref=f8e554]
+                - cell "33" [ref=f8e556]
+                - cell "27/02/2025" [ref=f8e558]
+              - row [ref=f8e560] [cursor=pointer]:
+                - cell [ref=f8e561]:
+                  - link "SDC 44, rue de Longchamp – 75116 PARIS" [ref=f8e564]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-44-rue-de-longchamp-75116-paris
+                - cell "19 devis disponibles" [ref=f8e567]
+                - cell "44 r de longchamp 75016 Paris" [ref=f8e571]
+                - cell "31" [ref=f8e573]
+                - cell "03/02/1977" [ref=f8e575]
+              - row [ref=f8e577] [cursor=pointer]:
+                - cell [ref=f8e578]:
+                  - link "SDC 24, rue de Longchamp 75116 PARIS" [ref=f8e581]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-24-rue-de-longchamp-75116-paris
+                - cell "19 devis disponibles" [ref=f8e584]
+                - cell "24 r de longchamp 75016 Paris" [ref=f8e588]
+                - cell "31" [ref=f8e590]
+                - cell "11/06/1975" [ref=f8e592]
+              - row [ref=f8e594] [cursor=pointer]:
+                - cell [ref=f8e595]:
+                  - link "SDC 12, rue Damrémont - 75018 PARIS" [ref=f8e598]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-12-rue-damremont-75018-paris
+                - cell "18 devis disponibles" [ref=f8e601]
+                - cell "12 r damremont 75018 Paris" [ref=f8e605]
+                - cell "29" [ref=f8e607]
+                - cell "15/03/1957" [ref=f8e609]
+              - row [ref=f8e611] [cursor=pointer]:
+                - cell [ref=f8e612]:
+                  - link "SDC 28 AV DE LA REPUBLIQUE 92130 ISSY LES MOULINEA" [ref=f8e615]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-28-av-de-la-republique-92130-issy-les-moulinea
+                - cell "10 devis disponibles" [ref=f8e618]
+                - cell "28 av de la republique 92130 Issy-les-Moulineaux" [ref=f8e622]
+                - cell "28" [ref=f8e624]
+                - cell "28/12/1950" [ref=f8e626]
+              - row [ref=f8e628] [cursor=pointer]:
+                - cell [ref=f8e629]:
+                  - link "SDC 123, RUE DU FBG POISSONNIERE – 75009 PARIS" [ref=f8e632]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-123-rue-du-fbg-poissonniere-75009-paris
+                - cell "15 devis disponibles" [ref=f8e635]
+                - cell "123 r du faubourg poissonniere 75009 Paris" [ref=f8e639]
+                - cell "28" [ref=f8e641]
+                - cell "23/11/1948" [ref=f8e643]
+              - row [ref=f8e645] [cursor=pointer]:
+                - cell [ref=f8e646]:
+                  - link "SDC 130 BD VOLTAIRE" [ref=f8e649]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-130-bd-voltaire
+                - cell "14 devis disponibles" [ref=f8e652]
+                - cell "130 bd voltaire 75011 Paris" [ref=f8e656]
+                - cell "27" [ref=f8e658]
+                - cell "05/03/1993" [ref=f8e660]
+              - row [ref=f8e662] [cursor=pointer]:
+                - cell [ref=f8e663]:
+                  - link "41 et 41 Bis rue Marjolin 92 300 LEVALLOIS PERRET" [ref=f8e666]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/41-et-41-bis-rue-marjolin-92-300-levallois-perret
+                - cell "17 devis disponibles" [ref=f8e669]
+                - cell "41 r marjolin 92300 Levallois-Perret" [ref=f8e673]
+                - cell "26" [ref=f8e675]
+                - cell "23/08/2000" [ref=f8e677]
+              - row [ref=f8e679] [cursor=pointer]:
+                - cell [ref=f8e680]:
+                  - link "SDC 17 avenue TRUDAINE – 75009 PARIS" [ref=f8e683]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-17-avenue-trudaine-75009-paris
+                - cell "15 devis disponibles" [ref=f8e686]
+                - cell "17 av trudaine 75009 Paris" [ref=f8e690]
+                - cell "26" [ref=f8e692]
+                - cell "30/01/1973" [ref=f8e694]
+              - row [ref=f8e696] [cursor=pointer]:
+                - cell [ref=f8e697]:
+                  - link "SDC 5 RUE CHAPON" [ref=f8e700]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-5-rue-chapon
+                - cell "13 devis disponibles" [ref=f8e703]
+                - cell "5 r chapon 75003 Paris" [ref=f8e707]
+                - cell "25" [ref=f8e709]
+                - cell "07/01/1999" [ref=f8e711]
+              - row [ref=f8e713] [cursor=pointer]:
+                - cell [ref=f8e714]:
+                  - link "SDC 83 AVENUE DE CLICHY" [ref=f8e717]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-83-avenue-de-clichy
+                - cell "20 devis disponibles" [ref=f8e720]
+                - cell "83 av de clichy 75017 Paris" [ref=f8e724]
+                - cell "25" [ref=f8e726]
+                - cell "28/05/1969" [ref=f8e728]
+              - row [ref=f8e730] [cursor=pointer]:
+                - cell [ref=f8e731]:
+                  - link "SDC 61, rue Condorcet – 75009 PARIS" [ref=f8e734]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-61-rue-condorcet-75009-paris
+                - cell "13 devis disponibles" [ref=f8e737]
+                - cell "61 r condorcet 75009 Paris" [ref=f8e741]
+                - cell "24" [ref=f8e743]
+                - cell "29/06/1949" [ref=f8e745]
+              - row [ref=f8e747] [cursor=pointer]:
+                - cell [ref=f8e748]:
+                  - link "SDC 5 RUE FESSART - BOULOGNE" [ref=f8e751]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-5-rue-fessart-boulogne
+                - cell "13 devis disponibles" [ref=f8e754]
+                - cell "5 r fessart 92100 Boulogne-Billancourt" [ref=f8e758]
+                - cell "24" [ref=f8e760]
+                - cell "28/07/1986" [ref=f8e762]
+              - row [ref=f8e764] [cursor=pointer]:
+                - cell [ref=f8e765]:
+                  - link "SDC 26 rue de la Croix Nivert" [ref=f8e768]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-26-rue-de-la-croix-nivert
+                - cell "13 devis disponibles" [ref=f8e771]
+                - cell "26 r de la croix nivert 75015 Paris" [ref=f8e775]
+                - cell "24" [ref=f8e777]
+                - cell "03/04/1969" [ref=f8e779]
+              - row [ref=f8e781] [cursor=pointer]:
+                - cell [ref=f8e782]:
+                  - link "SDC 173 RUE D'ALESIA" [ref=f8e785]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-173-rue-d-alesia
+                - cell "11 devis disponibles" [ref=f8e788]
+                - cell "173 r d'alesia 75014 Paris" [ref=f8e792]
+                - cell "24" [ref=f8e794]
+                - cell "10/11/1972" [ref=f8e796]
+              - row [ref=f8e798] [cursor=pointer]:
+                - cell [ref=f8e799]:
+                  - link "139 Boulevard Pereire" [ref=f8e802]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/139-boulevard-pereire
+                - cell "18 devis disponibles" [ref=f8e805]
+                - cell "139 bd pereire 75017 Paris" [ref=f8e809]
+                - cell "24" [ref=f8e811]
+                - cell "30/06/1981" [ref=f8e813]
+              - row [ref=f8e815] [cursor=pointer]:
+                - cell [ref=f8e816]:
+                  - link "SDC 61 rue de Lyon" [ref=f8e819]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-61-rue-de-lyon
+                - cell "11 devis disponibles" [ref=f8e822]
+                - cell "61 r de lyon 75012 Paris" [ref=f8e826]
+                - cell "24" [ref=f8e828]
+                - cell "11/04/1953" [ref=f8e830]
+              - row [ref=f8e832] [cursor=pointer]:
+                - cell [ref=f8e833]:
+                  - link "12 RUE DU GRENIER ST-LAZARE" [ref=f8e836]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/12-rue-du-grenier-st-lazare
+                - cell "11 devis disponibles" [ref=f8e839]
+                - cell "12 r du grenier saint-lazare 75003 Paris" [ref=f8e843]
+                - cell "23" [ref=f8e845]
+                - cell "29/03/1984" [ref=f8e847]
+              - row [ref=f8e849] [cursor=pointer]:
+                - cell [ref=f8e850]:
+                  - link "21 Bis rue de Paradis" [ref=f8e853]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/21-bis-rue-de-paradis
+                - cell "10 devis disponibles" [ref=f8e856]
+                - cell "21B r de paradis 75010 Paris" [ref=f8e860]
+                - cell "23" [ref=f8e862]
+                - cell "01/06/2013" [ref=f8e864]
+              - row [ref=f8e866] [cursor=pointer]:
+                - cell [ref=f8e867]:
+                  - link "SDC 110 RUE DE CLIGNANCOURT" [ref=f8e870]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-110-rue-de-clignancourt
+                - cell "15 devis disponibles" [ref=f8e873]
+                - cell "110 r de clignancourt 75018 Paris" [ref=f8e877]
+                - cell "22" [ref=f8e879]
+                - cell "01/01/1966" [ref=f8e881]
+              - row [ref=f8e883] [cursor=pointer]:
+                - cell [ref=f8e884]:
+                  - link "23 RUE DAGOBERT CLICHY" [ref=f8e887]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/23-rue-dagobert-clichy
+                - cell "14 devis disponibles" [ref=f8e890]
+                - cell "23 r dagobert 92110 Clichy" [ref=f8e894]
+                - cell "22" [ref=f8e896]
+                - cell "30/04/2019" [ref=f8e898]
+              - row [ref=f8e900] [cursor=pointer]:
+                - cell [ref=f8e901]:
+                  - link "46 rue des Bergers" [ref=f8e904]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/46-rue-des-bergers
+                - cell "13 devis disponibles" [ref=f8e907]
+                - cell "46 r des bergers 75015 Paris" [ref=f8e911]
+                - cell "22" [ref=f8e913]
+                - cell "23/03/1964" [ref=f8e915]
+              - row [ref=f8e917] [cursor=pointer]:
+                - cell [ref=f8e918]:
+                  - link "SDC 42 rue des Peupliers" [ref=f8e921]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-42-rue-des-peupliers
+                - cell "13 devis disponibles" [ref=f8e924]
+                - cell "42 r des peupliers 92100 Boulogne-Billancourt" [ref=f8e928]
+                - cell "21" [ref=f8e930]
+                - cell "31/05/1966" [ref=f8e932]
+              - row [ref=f8e934] [cursor=pointer]:
+                - cell [ref=f8e935]:
+                  - link "SDC 17 RUE LEPIC" [ref=f8e938]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-17-rue-lepic
+                - cell "15 devis disponibles" [ref=f8e941]
+                - cell "17 r lepic 75018 Paris" [ref=f8e945]
+                - cell "21" [ref=f8e947]
+                - cell "04/06/2003" [ref=f8e949]
+              - row [ref=f8e951] [cursor=pointer]:
+                - cell [ref=f8e952]:
+                  - link "58, Rue de L'AQUEDUC" [ref=f8e955]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/58-rue-de-l-aqueduc
+                - cell "10 devis disponibles" [ref=f8e958]
+                - cell "58 r de l'aqueduc 75010 Paris" [ref=f8e962]
+                - cell "21" [ref=f8e964]
+                - cell "14/10/1971" [ref=f8e966]
+              - row [ref=f8e968] [cursor=pointer]:
+                - cell [ref=f8e969]:
+                  - link "SDC 104 RUE AMELOT" [ref=f8e972]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-104-rue-amelot
+                - cell "12 devis disponibles" [ref=f8e975]
+                - cell "104 r amelot 75011 Paris" [ref=f8e979]
+                - cell "20" [ref=f8e981]
+                - cell "03/10/1985" [ref=f8e983]
+              - row [ref=f8e985] [cursor=pointer]:
+                - cell [ref=f8e986]:
+                  - link "137 AVENUE MOZART ET 108 RUE JEAN DE LA FONTAINE" [ref=f8e989]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/137-avenue-mozart-et-108-rue-jean-de-la-fontaine
+                - cell "14 devis disponibles" [ref=f8e992]
+                - cell "137 av mozart 75016 Paris" [ref=f8e996]
+                - cell "19" [ref=f8e998]
+                - cell "04/04/2018" [ref=f8e1000]
+              - row [ref=f8e1002] [cursor=pointer]:
+                - cell [ref=f8e1003]:
+                  - link "SDC 3 RUE DES HUISSIERS NEUILLY" [ref=f8e1006]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-3-rue-des-huissiers-neuilly
+                - cell "15 devis disponibles" [ref=f8e1009]
+                - cell "3 Rue des Huissiers 92200 Neuilly-sur-Seine" [ref=f8e1013]
+                - cell "19" [ref=f8e1015]
+                - cell "24/07/2023" [ref=f8e1017]
+              - row [ref=f8e1019] [cursor=pointer]:
+                - cell [ref=f8e1020]:
+                  - link "SDC 177 RUE DU TEMPLE" [ref=f8e1023]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-177-rue-du-temple
+                - cell "10 devis disponibles" [ref=f8e1026]
+                - cell "177 r du temple 75003 Paris" [ref=f8e1030]
+                - cell "19" [ref=f8e1032]
+                - cell "22/07/2013" [ref=f8e1034]
+              - row [ref=f8e1036] [cursor=pointer]:
+                - cell [ref=f8e1037]:
+                  - link "11 VILLA DE GUELMA" [ref=f8e1040]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/11-villa-de-guelma
+                - cell "11 devis disponibles" [ref=f8e1043]
+                - cell "11 vla de guelma 75018 Paris" [ref=f8e1047]
+                - cell "18" [ref=f8e1049]
+                - cell "14/08/1981" [ref=f8e1051]
+              - row [ref=f8e1053] [cursor=pointer]:
+                - cell [ref=f8e1054]:
+                  - link "SDC 5 BLD JEAN JAURES" [ref=f8e1057]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-5-bld-jean-jaures
+                - cell "12 devis disponibles" [ref=f8e1060]
+                - cell "5 bd jean jaures 92100 Boulogne-Billancourt" [ref=f8e1064]
+                - cell "18" [ref=f8e1066]
+                - cell "09/04/2004" [ref=f8e1068]
+              - row [ref=f8e1070] [cursor=pointer]:
+                - cell [ref=f8e1071]:
+                  - link "20 RUE DE RICHELIEU" [ref=f8e1074]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/20-rue-de-richelieu
+                - cell "10 devis disponibles" [ref=f8e1077]
+                - cell "20 r de richelieu 75001 Paris" [ref=f8e1081]
+                - cell "18" [ref=f8e1083]
+                - cell "23/09/1970" [ref=f8e1085]
+              - row [ref=f8e1087] [cursor=pointer]:
+                - cell [ref=f8e1088]:
+                  - link "SDC 26 RUE DE LA PAIX - BOIS COLOMBES" [ref=f8e1091]:
+                    - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072/buildings/sdc-26-rue-de-la-paix-bois-colombes
+                - cell "8 devis disponibles" [ref=f8e1094]
+                - cell "26 r de la paix 92270 Bois-Colombes" [ref=f8e1098]
+                - cell "18" [ref=f8e1100]
+                - cell "11/12/1995" [ref=f8e1102]
+          - navigation "Pagination" [ref=f8e1105]:
+            - generic [ref=f8e1106]: ← Précédent
+            - generic [ref=f8e1107]: "1"
+            - link "2" [ref=f8e1108] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072?page=2
+            - link "Suivant →" [ref=f8e1109] [cursor=pointer]:
+              - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/glf-loick-fouchet-33054212700072?page=2
+      - generic [ref=f8e1111]:
+        - generic [ref=f8e1113]:
+          - heading "Avis des copropriétaires" [level=2] [ref=f8e1114]
+          - paragraph [ref=f8e1115]:
+            - text: Déposés directement sur SyndiCompare et confirmés par email.
+            - link "Comment fonctionnent les avis ?" [ref=f8e1116] [cursor=pointer]:
+              - /url: /avis-des-coproprietaires
+        - paragraph [ref=f8e1117]: Aucun avis n'a encore été déposé sur ce cabinet via SyndiCompare. Soyez le premier !
+        - generic [ref=f8e1118]:
+          - heading "Votre copropriété est gérée par Glf Loick Fouchet ? Donnez votre avis" [level=3] [ref=f8e1119]
+          - generic [ref=f8e1120]:
+            - generic [ref=f8e1121]:
+              - text: Votre note
+              - generic [ref=f8e1122]:
+                - button "1 sur 5" [ref=f8e1123] [cursor=pointer]
+                - button "2 sur 5" [ref=f8e1126] [cursor=pointer]
+                - button "3 sur 5" [ref=f8e1129] [cursor=pointer]
+                - button "4 sur 5" [ref=f8e1132] [cursor=pointer]
+                - button "5 sur 5" [ref=f8e1135] [cursor=pointer]
+            - generic [ref=f8e1138]:
+              - generic [ref=f8e1139]:
+                - text: Votre nom
+                - textbox "Votre nom Affiché sous la forme « Marie D. »" [ref=f8e1140]:
+                  - /placeholder: Marie Dupont
+                - generic [ref=f8e1141]: Affiché sous la forme « Marie D. »
+              - generic [ref=f8e1142]:
+                - text: Votre email
+                - textbox "Votre email Jamais publié, sert uniquement à confirmer votre avis" [ref=f8e1143]:
+                  - /placeholder: marie@exemple.fr
+                - generic [ref=f8e1144]: Jamais publié, sert uniquement à confirmer votre avis
+            - generic [ref=f8e1145]:
+              - generic [ref=f8e1146]:
+                - text: Vous êtes
+                - combobox "Vous êtes" [ref=f8e1147]:
+                  - option "Copropriétaire" [selected]
+                  - option "Membre du conseil syndical"
+                  - option "Ancien copropriétaire"
+              - generic [ref=f8e1148]:
+                - text: Géré par ce syndic depuis
+                - combobox "Géré par ce syndic depuis" [ref=f8e1149]:
+                  - option "Je préfère ne pas préciser" [selected]
+                  - option "Moins d'un an"
+                  - option "Entre 1 et 3 ans"
+                  - option "Plus de 3 ans"
+            - generic [ref=f8e1150]:
+              - generic [ref=f8e1151]: Votre avis (facultatif)
+              - textbox "Votre avis (facultatif)" [ref=f8e1152]:
+                - /placeholder: Réactivité, tenue des AG, transparence des comptes, suivi des travaux…
+            - textbox [aria-hidden] [ref=f8e1153]
+            - paragraph [ref=f8e1154]:
+              - text: En publiant, vous certifiez être ou avoir été copropriétaire dans une résidence gérée par ce cabinet, sans lien d'intérêt avec lui ni ses concurrents. Aucune contrepartie n'est offerte.
+              - link "Fonctionnement et modération des avis" [ref=f8e1155] [cursor=pointer]:
+                - /url: /avis-des-coproprietaires
+              - text: .
+            - button "Publier mon avis" [ref=f8e1156] [cursor=pointer]
+      - generic [ref=f8e1158]:
+        - heading "Les autres syndics de copropriété à PARIS 03" [level=2] [ref=f8e1159]:
+          - generic [ref=f8e1160]: Les autres syndics de copropriété à
+          - generic [ref=f8e1161]: PARIS 03
+        - paragraph [ref=f8e1162]: Comparez ce syndic avec les autres professionnels référencés dans la même commune.
+        - generic [ref=f8e1163]:
+          - link "Adextra services immobiliers" [ref=f8e1164] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/adextra-services-immobiliers-52255371800019
+          - link "Az foncier" [ref=f8e1165] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/az-foncier-53837719300031
+          - link "Balma gestion" [ref=f8e1166] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/balma-gestion-39200329900030
+          - link "Cabinet gorin" [ref=f8e1167] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/cabinet-gorin-39947629000016
+          - link "Cabinet passet" [ref=f8e1168] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/cabinet-passet-39369442700039
+          - link "Cabinet roumilhac" [ref=f8e1169] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/cabinet-roumilhac-48070885800042
+          - link "Compagnie immobiliere perrissel et associes" [ref=f8e1170] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/compagnie-immobiliere-perrissel-et-associes-05480416600145
+          - link "Conan gestion" [ref=f8e1171] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/conan-gestion-34533870100039
+          - link "Gerant 2.0" [ref=f8e1172] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/gerant-2-0-83397445400013
+          - link "I.p.g. immobiliere parisienne de gestion" [ref=f8e1173] [cursor=pointer]:
+            - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03/syndics/i-p-g-immobiliere-parisienne-de-gestion-31620224100030
+        - link "Voir le classement complet des syndics à PARIS 03" [ref=f8e1175] [cursor=pointer]:
+          - /url: /syndics/classement_des_syndics/regions/ile-de-france/departements/paris/communes/paris-03
+  - contentinfo [ref=f8e1179]:
+    - generic [ref=f8e1180]:
+      - generic [ref=f8e1181]:
+        - generic [ref=f8e1182]:
+          - generic [ref=f8e1183]:
+            - generic [ref=f8e1184]: SyndiCompare
+            - paragraph [ref=f8e1185]: Premier comparateur de tarifs de Syndics créé en France. Trouvez le syndic idéal pour votre copropriété en quelques clics.
+          - generic [ref=f8e1186]:
+            - heading "À propos" [level=4] [ref=f8e1187]
+            - list [ref=f8e1188]:
+              - listitem [ref=f8e1189]:
+                - link "Qui sommes-nous ?" [ref=f8e1190] [cursor=pointer]:
+                  - /url: /pages/qui_sommes_nous
+              - listitem [ref=f8e1191]:
+                - link "L'histoire" [ref=f8e1192] [cursor=pointer]:
+                  - /url: /pages/l_histoire
+        - generic [ref=f8e1193]:
+          - heading "Pour les Syndics" [level=4] [ref=f8e1194]
+          - paragraph [ref=f8e1195]: Rejoignez notre réseau de syndics partenaires et développez votre portefeuille client.
+          - link "Devenir partenaire" [ref=f8e1196] [cursor=pointer]:
+            - /url: /devenir-partenaire
+        - generic [ref=f8e1200]:
+          - heading "Guide & Aide" [level=4] [ref=f8e1201]
+          - generic [ref=f8e1202]:
+            - generic [ref=f8e1203]:
+              - heading "Guide de la copropriété" [level=5] [ref=f8e1204]
+              - list [ref=f8e1205]:
+                - listitem [ref=f8e1206]:
+                  - link "Le syndic" [ref=f8e1207] [cursor=pointer]:
+                    - /url: /categories/le-syndic-de-copropriete
+                - listitem [ref=f8e1208]:
+                  - link "Le conseil syndical" [ref=f8e1209] [cursor=pointer]:
+                    - /url: /categories/le-conseil-syndical
+                - listitem [ref=f8e1210]:
+                  - link "Les travaux" [ref=f8e1211] [cursor=pointer]:
+                    - /url: /categories/les-travaux-en-copropriete
+                - listitem [ref=f8e1212]:
+                  - link "L'assemblée générale" [ref=f8e1213] [cursor=pointer]:
+                    - /url: /categories/l-assemblee-generale
+            - generic [ref=f8e1214]:
+              - heading "Centre d'aide" [level=5] [ref=f8e1215]
+              - list [ref=f8e1216]:
+                - listitem [ref=f8e1217]:
+                  - link "Changer de syndic" [ref=f8e1218] [cursor=pointer]:
+                    - /url: /pages/changer_de_syndic
+                - listitem [ref=f8e1219]:
+                  - link "Nous contacter" [ref=f8e1220] [cursor=pointer]:
+                    - /url: /contact
+            - generic [ref=f8e1221]:
+              - heading "Données & Statistiques" [level=5] [ref=f8e1222]
+              - list [ref=f8e1223]:
+                - listitem [ref=f8e1224]:
+                  - link "Classement des syndics" [ref=f8e1225] [cursor=pointer]:
+                    - /url: /syndics/classement_des_syndics
+                - listitem [ref=f8e1226]:
+                  - link "Changements de syndics en France" [ref=f8e1227] [cursor=pointer]:
+                    - /url: /changements-de-syndic
+                - listitem [ref=f8e1228]:
+                  - link "Copropriétés en gestion bénévole" [ref=f8e1229] [cursor=pointer]:
+                    - /url: /coproprietes-gestion-benevole
+                - listitem [ref=f8e1230]:
+                  - link "Copropriétés sans syndic déclaré" [ref=f8e1231] [cursor=pointer]:
+                    - /url: /coproprietes-sans-syndic-declare
+                - listitem [ref=f8e1232]:
+                  - link "Tarif d'un syndic par ville" [ref=f8e1233] [cursor=pointer]:
+                    - /url: /tarif-syndic
+        - generic [ref=f8e1234]:
+          - heading "Légal & Avis" [level=4] [ref=f8e1235]
+          - list [ref=f8e1236]:
+            - listitem [ref=f8e1237]:
+              - link "Mentions légales" [ref=f8e1238] [cursor=pointer]:
+                - /url: /pages/mentions_legales
+            - listitem [ref=f8e1239]:
+              - link "Mentions comparateur" [ref=f8e1240] [cursor=pointer]:
+                - /url: /pages/mentions_comparateur
+            - listitem [ref=f8e1241]:
+              - link "Politique de confidentialité" [ref=f8e1242] [cursor=pointer]:
+                - /url: /pages/politique_de_confidentialite
+            - listitem [ref=f8e1243]:
+              - link "Conditions générales" [ref=f8e1244] [cursor=pointer]:
+                - /url: /pages/conditions_generales
+          - generic [ref=f8e1245]:
+            - heading "Nos avis clients" [level=5] [ref=f8e1246]
+            - link [ref=f8e1249] [cursor=pointer]:
+              - /url: https://www.ekomi.fr/avis-clients-syndicomparecom.html
+              - 'img "Avis consommateur: Jai apprécié lefficacité et la qualité découte" [ref=f8e1250]'
+      - generic [ref=f8e1252]:
+        - generic [ref=f8e1253]:
+          - generic [ref=f8e1254]: 558K+
+          - generic [ref=f8e1255]: Immeubles référencés
+        - generic [ref=f8e1256]:
+          - generic [ref=f8e1257]: 5K+
+          - generic [ref=f8e1258]: Syndics en base de données
+        - generic [ref=f8e1259]:
+          - generic [ref=f8e1260]: 128K+
+          - generic [ref=f8e1261]: Comparaisons réalisées
+        - generic [ref=f8e1262]:
+          - generic [ref=f8e1263]: 4.8★
+          - generic [ref=f8e1264]: Note moyenne
+      - generic [ref=f8e1266]:
+        - generic [ref=f8e1267]:
+          - paragraph [ref=f8e1268]: © 2026 SyndiCompare. Tous droits réservés.
+          - paragraph [ref=f8e1269]: Premier comparateur de tarifs de Syndics créé en France
+        - generic [ref=f8e1270]:
+          - generic [ref=f8e1271]: Service gratuit
+          - generic [ref=f8e1274]: Données sécurisées
+  - generic [ref=f8e1278]: © 2016-2026 Syndicompare.

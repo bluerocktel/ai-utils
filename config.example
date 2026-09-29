@@ -6,6 +6,12 @@
 # nearly every task actually runs under. There is no "any runner" value.
 default_runner=claude
 
+# Codex is also available as runner codex (providers/codex.sh). Requires an
+# authenticated codex CLI on the cron/tmux PATH; see README's Codex runner.
+# Leave default_model unset to inherit that CLI's model configuration.
+# When using eval_runner=codex with another executor, explicitly set eval_model
+# to a Codex-compatible model ID to avoid inheriting the executor's model alias.
+
 # Max evaluation failures before a task moves to review/ (default 3).
 max_retries=3
 

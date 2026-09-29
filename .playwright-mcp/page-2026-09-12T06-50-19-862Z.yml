@@ -1,0 +1,127 @@
+- generic [ref=f21e2]:
+  - generic [ref=f21e3]:
+    - link "DuckDuckGo" [ref=f21e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f21e5]:
+      - generic [ref=f21e6]:
+        - textbox [ref=f21e7]: "\"5 C Développement\" Mistercamp maeva camping franchise"
+        - button "Submit" [ref=f21e8] [cursor=pointer]
+      - combobox [ref=f21e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f21e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f21e15]:
+    - generic [ref=f21e17]:
+      - heading [level=2] [ref=f21e18]:
+        - link "La franchise la plus rentable - Ouvrir une franchise en 2026" [ref=f21e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dreussir%252Dfranchise.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3Dxb03OmOSog4i6adXClGqJDmi8ImddgK4k2KyHYguOanAGrhF19RCiglUCRDLFt%252Dwq5mymzHEjrM7zfLJdFKYzL4bqJzT960%252D2cUSM8IPnpaFAwixDuhzCVFJX4ur9I0jlUjA5qkyVZS%252D0nW_H78DBC3k1IG9xV8E1qtmbOH6xGg.myOYeRZHJWPHAuTbDFEB3g%26rut%3D03e8e892a1ee25f24d0ecb2f24fc1dda7d0001596720483bc73da785aed8a59e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8Op3J7DxDV4_arIbfXxCkSTVUCUwMFwcaNF_XNBEIMuO_eY87COoCBzFFd7fCwahdFJqIEBz%252DaQHnV3WneObAbv6KBV763zd3IGSqEFC4y2QNWwbD4ogd%252D_BbMpPtv9%252D0gnAzTCvRCQFG4D3Md6erXmHOMQ7dhMX2AgjSi%252DeyjXgPAhm6X%252DfdqRQyjubPmrsSyD%252D5cVqOBKGwhTE6irC_LsDVcn8%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cucmV1c3Npci1mcmFuY2hpc2UuY29tJTJmbGVhZHMlMmZxdWFsaWYlM2Z1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jYW1wYWlnbiUzZEZSX0ZyYW5jaGlzZV9SZW50YWJsZXMlMjZ1dG1fbWVkaXVtJTNkbGFuZGluZyUyNnV0bV9jcmVhJTNkcmZyYW5jaGlzZXNyZW50YWJsZXNwbWF4JTI2bXNjbGtpZCUzZDJjMDMzMDNhNzJkNDEwODViYWFiNWE5ZTg0ZmY4ZGZi%2526rlid%253D2c03303a72d41085baab5a9e84ff8dfb%26vqd%3D4%2D208644191716850820930486043149217964676%26iurl%3D%257B1%257DIG%253DAC098D6F5CD24514AA8F1BA1FB9CF19E%2526CID%253D3FA310F077F26016022D0722768961E4%2526ID%253DDevEx%252C5032.1&rut=70edc20af7c306d24d336e5481ba9c50a0aea0622c9a9ce2c36bb02b8c5a0086
+        - button "Ad" [ref=f21e21]
+      - link "reussir-franchise.com" [ref=f21e24] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dreussir%252Dfranchise.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3Dxb03OmOSog4i6adXClGqJDmi8ImddgK4k2KyHYguOanAGrhF19RCiglUCRDLFt%252Dwq5mymzHEjrM7zfLJdFKYzL4bqJzT960%252D2cUSM8IPnpaFAwixDuhzCVFJX4ur9I0jlUjA5qkyVZS%252D0nW_H78DBC3k1IG9xV8E1qtmbOH6xGg.myOYeRZHJWPHAuTbDFEB3g%26rut%3D03e8e892a1ee25f24d0ecb2f24fc1dda7d0001596720483bc73da785aed8a59e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8Op3J7DxDV4_arIbfXxCkSTVUCUwMFwcaNF_XNBEIMuO_eY87COoCBzFFd7fCwahdFJqIEBz%252DaQHnV3WneObAbv6KBV763zd3IGSqEFC4y2QNWwbD4ogd%252D_BbMpPtv9%252D0gnAzTCvRCQFG4D3Md6erXmHOMQ7dhMX2AgjSi%252DeyjXgPAhm6X%252DfdqRQyjubPmrsSyD%252D5cVqOBKGwhTE6irC_LsDVcn8%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cucmV1c3Npci1mcmFuY2hpc2UuY29tJTJmbGVhZHMlMmZxdWFsaWYlM2Z1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jYW1wYWlnbiUzZEZSX0ZyYW5jaGlzZV9SZW50YWJsZXMlMjZ1dG1fbWVkaXVtJTNkbGFuZGluZyUyNnV0bV9jcmVhJTNkcmZyYW5jaGlzZXNyZW50YWJsZXNwbWF4JTI2bXNjbGtpZCUzZDJjMDMzMDNhNzJkNDEwODViYWFiNWE5ZTg0ZmY4ZGZi%2526rlid%253D2c03303a72d41085baab5a9e84ff8dfb%26vqd%3D4%2D208644191716850820930486043149217964676%26iurl%3D%257B1%257DIG%253DAC098D6F5CD24514AA8F1BA1FB9CF19E%2526CID%253D3FA310F077F26016022D0722768961E4%2526ID%253DDevEx%252C5032.1&rut=70edc20af7c306d24d336e5481ba9c50a0aea0622c9a9ce2c36bb02b8c5a0086
+      - link "Sélection de franchises rentables en 2026. Zones disponibles. Accompagnement complet. Découvrez la franchise la plus rentable en France , adaptée à votre profil" [ref=f21e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dreussir%252Dfranchise.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3Dxb03OmOSog4i6adXClGqJDmi8ImddgK4k2KyHYguOanAGrhF19RCiglUCRDLFt%252Dwq5mymzHEjrM7zfLJdFKYzL4bqJzT960%252D2cUSM8IPnpaFAwixDuhzCVFJX4ur9I0jlUjA5qkyVZS%252D0nW_H78DBC3k1IG9xV8E1qtmbOH6xGg.myOYeRZHJWPHAuTbDFEB3g%26rut%3D03e8e892a1ee25f24d0ecb2f24fc1dda7d0001596720483bc73da785aed8a59e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8Op3J7DxDV4_arIbfXxCkSTVUCUwMFwcaNF_XNBEIMuO_eY87COoCBzFFd7fCwahdFJqIEBz%252DaQHnV3WneObAbv6KBV763zd3IGSqEFC4y2QNWwbD4ogd%252D_BbMpPtv9%252D0gnAzTCvRCQFG4D3Md6erXmHOMQ7dhMX2AgjSi%252DeyjXgPAhm6X%252DfdqRQyjubPmrsSyD%252D5cVqOBKGwhTE6irC_LsDVcn8%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cucmV1c3Npci1mcmFuY2hpc2UuY29tJTJmbGVhZHMlMmZxdWFsaWYlM2Z1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jYW1wYWlnbiUzZEZSX0ZyYW5jaGlzZV9SZW50YWJsZXMlMjZ1dG1fbWVkaXVtJTNkbGFuZGluZyUyNnV0bV9jcmVhJTNkcmZyYW5jaGlzZXNyZW50YWJsZXNwbWF4JTI2bXNjbGtpZCUzZDJjMDMzMDNhNzJkNDEwODViYWFiNWE5ZTg0ZmY4ZGZi%2526rlid%253D2c03303a72d41085baab5a9e84ff8dfb%26vqd%3D4%2D208644191716850820930486043149217964676%26iurl%3D%257B1%257DIG%253DAC098D6F5CD24514AA8F1BA1FB9CF19E%2526CID%253D3FA310F077F26016022D0722768961E4%2526ID%253DDevEx%252C5032.1&rut=70edc20af7c306d24d336e5481ba9c50a0aea0622c9a9ce2c36bb02b8c5a0086
+    - generic [ref=f21e27]:
+      - heading [level=2] [ref=f21e28]:
+        - link "PDF Conditions Générales de Vente Mistercamp" [ref=f21e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.mistercamp.com%2Fmistercamp%2Fdocuments%2FCGV_12_06_2024_MAJ.pdf&rut=5f5d29bf467b954adcb8be507b545d0019513a26d9414d68161a6dbdda337118
+          - generic [ref=f21e30]: PDF
+          - text: Conditions Générales de Vente Mistercamp
+      - generic [ref=f21e32]:
+        - link [ref=f21e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.mistercamp.com%2Fmistercamp%2Fdocuments%2FCGV_12_06_2024_MAJ.pdf&rut=5f5d29bf467b954adcb8be507b545d0019513a26d9414d68161a6dbdda337118
+        - link "www.mistercamp.com/mistercamp/documents/CGV_12_06_2024_MAJ.pdf" [ref=f21e35] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.mistercamp.com%2Fmistercamp%2Fdocuments%2FCGV_12_06_2024_MAJ.pdf&rut=5f5d29bf467b954adcb8be507b545d0019513a26d9414d68161a6dbdda337118
+      - link "Toute dérogation aux présentes conditions générales doit faire l'objet d'un accord écrit de MISTERCAMP, une marque de 5 C Développement préalablement à la réservation du SEJOUR." [ref=f21e36] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.mistercamp.com%2Fmistercamp%2Fdocuments%2FCGV_12_06_2024_MAJ.pdf&rut=5f5d29bf467b954adcb8be507b545d0019513a26d9414d68161a6dbdda337118
+    - generic [ref=f21e38]:
+      - heading [level=2] [ref=f21e39]:
+        - link "Conditions Générales de Vente Mistercamp - Law Insider" [ref=f21e40] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.lawinsider.com%2Ffr%2Fcontracts%2F86z5ev8PME5&rut=047a2abc75e5c83ff223a764c4d789f97135f61700eb1c2e23fc53ec587b4009
+      - generic [ref=f21e42]:
+        - link [ref=f21e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.lawinsider.com%2Ffr%2Fcontracts%2F86z5ev8PME5&rut=047a2abc75e5c83ff223a764c4d789f97135f61700eb1c2e23fc53ec587b4009
+        - link "www.lawinsider.com/fr/contracts/86z5ev8PME5" [ref=f21e45] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.lawinsider.com%2Ffr%2Fcontracts%2F86z5ev8PME5&rut=047a2abc75e5c83ff223a764c4d789f97135f61700eb1c2e23fc53ec587b4009
+      - link "Les présentes conditions générales définissent les obligations respectives de MISTERCAMP, une marque de 5 C Développement, et du CLIENT dans le cadre de la vente de SEJOUR (S) par MISTERCAMP une marque de 5 C Développement sur le SITE ou par téléphone." [ref=f21e46] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.lawinsider.com%2Ffr%2Fcontracts%2F86z5ev8PME5&rut=047a2abc75e5c83ff223a764c4d789f97135f61700eb1c2e23fc53ec587b4009
+    - generic [ref=f21e48]:
+      - heading [level=2] [ref=f21e49]:
+        - link "5 C Développement | Agence immobilière, Cholet - Cylex Recherche Locale" [ref=f21e50] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2F5%2Dc%2Dd%25C3%25A9veloppement%2D13672004.html&rut=4bf1a8ed31d9660b36334d7a433d82dd60b82c714d2d76bed9e8fcdd65f9030a
+      - generic [ref=f21e52]:
+        - link [ref=f21e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2F5%2Dc%2Dd%25C3%25A9veloppement%2D13672004.html&rut=4bf1a8ed31d9660b36334d7a433d82dd60b82c714d2d76bed9e8fcdd65f9030a
+        - link "www.cylex-locale.fr/entreprises/5-c-développement-13672004.html" [ref=f21e55] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2F5%2Dc%2Dd%25C3%25A9veloppement%2D13672004.html&rut=4bf1a8ed31d9660b36334d7a433d82dd60b82c714d2d76bed9e8fcdd65f9030a
+        - text: 2026-05-02T00:00:00.0000000
+      - link "Le téléchargement en masse de Cylex vous permet de publier des profils d'entreprise en quelques clics, idéal pour les annuaires, les agences et les entreprises multi-sites. Gagnez du temps et augmentez votre visibilité efficacement pour seulement 1,00 €par profil par an (hors TVA)." [ref=f21e56] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2F5%2Dc%2Dd%25C3%25A9veloppement%2D13672004.html&rut=4bf1a8ed31d9660b36334d7a433d82dd60b82c714d2d76bed9e8fcdd65f9030a
+    - link "Feedback" [ref=f21e58] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

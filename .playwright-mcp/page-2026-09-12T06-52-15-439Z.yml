@@ -1,0 +1,192 @@
+- generic [ref=f46e2]:
+  - generic [ref=f46e3]:
+    - link "DuckDuckGo" [ref=f46e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f46e5]:
+      - generic [ref=f46e6]:
+        - textbox [ref=f46e7]: "\"Time Tours\" voyagiste Berrebi Clichy"
+        - button "Submit" [ref=f46e8] [cursor=pointer]
+      - combobox [ref=f46e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f46e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f46e15]:
+    - generic [ref=f46e17]:
+      - heading [level=2] [ref=f46e18]:
+        - 'link "Time Tours : \"les clients CE ne se rendent plus compte de la valeur des ..." [ref=f46e19] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.tourmag.com%2FTime%2DTours%2Dles%2Dclients%2DCE%2Dne%2Dse%2Drendent%2Dplus%2Dcompte%2Dde%2Dla%2Dvaleur%2Ddes%2Dchoses_a72668.html&rut=ce58864d7324eec8fdaedb2b45f2a545f53b75d3a831f3d7906640f20fe1befb
+      - generic [ref=f46e21]:
+        - link [ref=f46e23] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.tourmag.com%2FTime%2DTours%2Dles%2Dclients%2DCE%2Dne%2Dse%2Drendent%2Dplus%2Dcompte%2Dde%2Dla%2Dvaleur%2Ddes%2Dchoses_a72668.html&rut=ce58864d7324eec8fdaedb2b45f2a545f53b75d3a831f3d7906640f20fe1befb
+        - link "www.tourmag.com/Time-Tours-les-clients-CE-ne-se-rendent-plus-compte-de-la-valeur-des-choses_a72668.html" [ref=f46e24] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.tourmag.com%2FTime%2DTours%2Dles%2Dclients%2DCE%2Dne%2Dse%2Drendent%2Dplus%2Dcompte%2Dde%2Dla%2Dvaleur%2Ddes%2Dchoses_a72668.html&rut=ce58864d7324eec8fdaedb2b45f2a545f53b75d3a831f3d7906640f20fe1befb
+      - link "Le groupiste Time Tours est installé dans un petit immeuble discret acquis au cœur d'un quartier populaire de Paris. C'est une affaire de famille. Le père Jacky Berrebi et le fils Bruno l ..." [ref=f46e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.tourmag.com%2FTime%2DTours%2Dles%2Dclients%2DCE%2Dne%2Dse%2Drendent%2Dplus%2Dcompte%2Dde%2Dla%2Dvaleur%2Ddes%2Dchoses_a72668.html&rut=ce58864d7324eec8fdaedb2b45f2a545f53b75d3a831f3d7906640f20fe1befb
+    - generic [ref=f46e27]:
+      - heading [level=2] [ref=f46e28]:
+        - link "Accueil - Time Tours" [ref=f46e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2F&rut=b6fd3411e195b6102cd668ef57246e5def6296ea78b914f6fb2a6c106d39c8a0
+      - generic [ref=f46e31]:
+        - link [ref=f46e33] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2F&rut=b6fd3411e195b6102cd668ef57246e5def6296ea78b914f6fb2a6c106d39c8a0
+        - link "www.timetours.fr" [ref=f46e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2F&rut=b6fd3411e195b6102cd668ef57246e5def6296ea78b914f6fb2a6c106d39c8a0
+      - link "Plus de 20 ans d'expertise pour créer des voyages de groupes sur mesure, pour les CSE, groupes d'amis, associations et collectivités." [ref=f46e35] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2F&rut=b6fd3411e195b6102cd668ef57246e5def6296ea78b914f6fb2a6c106d39c8a0
+    - generic [ref=f46e37]:
+      - heading [level=2] [ref=f46e38]:
+        - link "Bruno Berrebi | Dirigeant de la Société TIME TOURS - Infonet" [ref=f46e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finfonet.fr%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=ef68191b2899f25255884f3adb30517a0e363e25822ef43ad4e06b58bfdf5b5c
+      - generic [ref=f46e41]:
+        - link [ref=f46e43] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finfonet.fr%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=ef68191b2899f25255884f3adb30517a0e363e25822ef43ad4e06b58bfdf5b5c
+        - link "infonet.fr/dirigeants/66aa16d25da7ac2c4bf65447/" [ref=f46e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finfonet.fr%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=ef68191b2899f25255884f3adb30517a0e363e25822ef43ad4e06b58bfdf5b5c
+      - 'link "Consulter la fiche dirigeant de Berrebi Bruno : Directeur Général de l''entreprise Time Tours à CLICHY." [ref=f46e45] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finfonet.fr%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=ef68191b2899f25255884f3adb30517a0e363e25822ef43ad4e06b58bfdf5b5c
+    - generic [ref=f46e47]:
+      - heading [level=2] [ref=f46e48]:
+        - link "Bruno Berrebi - Président chez Groupe Premium Travel | LinkedIn" [ref=f46e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fbruno%2Dberrebi%2D69740ba8&rut=93e99c47e0857f86010524889a08a60debc4d558c495d522c97b360a2c2edf6a
+      - generic [ref=f46e51]:
+        - link [ref=f46e53] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fbruno%2Dberrebi%2D69740ba8&rut=93e99c47e0857f86010524889a08a60debc4d558c495d522c97b360a2c2edf6a
+        - link "fr.linkedin.com/in/bruno-berrebi-69740ba8" [ref=f46e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fbruno%2Dberrebi%2D69740ba8&rut=93e99c47e0857f86010524889a08a60debc4d558c495d522c97b360a2c2edf6a
+      - link "Président chez Groupe Premium Travel · Le Groupe Premium Travel (composé des marques Time Tours, La Française des Circuits, East West Travel, Nowengo, Back Roads, Terres de Charme et Tapis Rouge) est spécialiste des voyages de groupes, circuits et voyages à la carte ! Avec des bureaux en France et à l&#39;étranger, nous mettons notre expertise et notre professionnalisme à votre ..." [ref=f46e55] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fbruno%2Dberrebi%2D69740ba8&rut=93e99c47e0857f86010524889a08a60debc4d558c495d522c97b360a2c2edf6a
+    - generic [ref=f46e57]:
+      - heading [level=2] [ref=f46e58]:
+        - link "Bruno Berrebi / Mandataire social de la société TIME TOURS | Les ..." [ref=f46e59] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flesentreprises.com%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=33c972008f456619a556dddea871160f7c808a1a69388f79128e6cfdb10fb9c6
+      - generic [ref=f46e61]:
+        - link [ref=f46e63] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flesentreprises.com%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=33c972008f456619a556dddea871160f7c808a1a69388f79128e6cfdb10fb9c6
+        - link "lesentreprises.com/dirigeants/66aa16d25da7ac2c4bf65447/" [ref=f46e64] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flesentreprises.com%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=33c972008f456619a556dddea871160f7c808a1a69388f79128e6cfdb10fb9c6
+      - 'link "Consultez les informations du dirigeant Berrebi Bruno : exerçant la fonction de Directeur Général au sein de la société TIME TOURS située à CLICHY." [ref=f46e65] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flesentreprises.com%2Fdirigeants%2F66aa16d25da7ac2c4bf65447%2F&rut=33c972008f456619a556dddea871160f7c808a1a69388f79128e6cfdb10fb9c6
+    - generic [ref=f46e67]:
+      - heading [level=2] [ref=f46e68]:
+        - link "Time Tours | Voyagiste et tour-opérateur, Clichy" [ref=f46e69] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2Ftime%2Dtours%2D12969892.html&rut=c1649490f3476b543ba85e2b94a55ec9a541178814f7890f9fbbee43d7230bad
+      - generic [ref=f46e71]:
+        - link [ref=f46e73] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2Ftime%2Dtours%2D12969892.html&rut=c1649490f3476b543ba85e2b94a55ec9a541178814f7890f9fbbee43d7230bad
+        - link "www.cylex-locale.fr/entreprises/time-tours-12969892.html" [ref=f46e74] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2Ftime%2Dtours%2D12969892.html&rut=c1649490f3476b543ba85e2b94a55ec9a541178814f7890f9fbbee43d7230bad
+      - link "Voir Time Tours à Clichy, Immeuble concept, 4-10 Rue Mozart sur Cylex et trouver ☎ 01 40 32 47..., données de contact, ⌚ horaires d'ouverture." [ref=f46e75] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cylex%2Dlocale.fr%2Fentreprises%2Ftime%2Dtours%2D12969892.html&rut=c1649490f3476b543ba85e2b94a55ec9a541178814f7890f9fbbee43d7230bad
+    - generic [ref=f46e77]:
+      - heading [level=2] [ref=f46e78]:
+        - link "Jacky Berrebi - Directeur chez Time Tours | LinkedIn" [ref=f46e79] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjacky%2Dberrebi%2D705749104&rut=4d54a1987100b7f200a50f3238ce5fc3c7647e4be799f059b6b5d7deb2314535
+      - generic [ref=f46e81]:
+        - link [ref=f46e83] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjacky%2Dberrebi%2D705749104&rut=4d54a1987100b7f200a50f3238ce5fc3c7647e4be799f059b6b5d7deb2314535
+        - link "fr.linkedin.com/in/jacky-berrebi-705749104" [ref=f46e84] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjacky%2Dberrebi%2D705749104&rut=4d54a1987100b7f200a50f3238ce5fc3c7647e4be799f059b6b5d7deb2314535
+      - 'link "Directeur chez Time Tours · Expérience : Time Tours · Lieu : Paris · 27 relations sur LinkedIn. Consultez le profil de Jacky Berrebi sur LinkedIn, une communauté professionnelle d''un milliard de membres." [ref=f46e85] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjacky%2Dberrebi%2D705749104&rut=4d54a1987100b7f200a50f3238ce5fc3c7647e4be799f059b6b5d7deb2314535
+    - generic [ref=f46e87]:
+      - heading [level=2] [ref=f46e88]:
+        - link "TIME TOURS Company Profile | CLICHY, ILE DE FRANCE | Competitors ..." [ref=f46e89] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.dnb.com%2Fbusiness%2Ddirectory%2Fcompany%2Dprofiles.time_tours.2268c90121d46d9a79f1b679bc1554d7.html&rut=eb7ebcb13856e5d2820b4e6c98f194fc9263872c70f1faa108eb58cc4c495232
+      - generic [ref=f46e91]:
+        - link [ref=f46e93] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.dnb.com%2Fbusiness%2Ddirectory%2Fcompany%2Dprofiles.time_tours.2268c90121d46d9a79f1b679bc1554d7.html&rut=eb7ebcb13856e5d2820b4e6c98f194fc9263872c70f1faa108eb58cc4c495232
+        - link "www.dnb.com/business-directory/company-profiles.time_tours.2268c90121d46d9a79f1b679bc1554d7.html" [ref=f46e94] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.dnb.com%2Fbusiness%2Ddirectory%2Fcompany%2Dprofiles.time_tours.2268c90121d46d9a79f1b679bc1554d7.html&rut=eb7ebcb13856e5d2820b4e6c98f194fc9263872c70f1faa108eb58cc4c495232
+      - link "Find company research, competitor information, contact details & financial data for TIME TOURS of CLICHY, ILE DE FRANCE. Get the latest business insights from Dun & Bradstreet." [ref=f46e95] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.dnb.com%2Fbusiness%2Ddirectory%2Fcompany%2Dprofiles.time_tours.2268c90121d46d9a79f1b679bc1554d7.html&rut=eb7ebcb13856e5d2820b4e6c98f194fc9263872c70f1faa108eb58cc4c495232
+    - generic [ref=f46e97]:
+      - heading [level=2] [ref=f46e98]:
+        - 'link "Time Tours à Clichy : SIRET/SIREN, numéro de TVA, info légales - N ..." [ref=f46e99] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.pagesjaunes.fr%2Fsiret%2F44145947600087&rut=94c79fbdf2e9daf3f0daabfa09fb53f696842b99fb20f7b2498773597962888d
+      - generic [ref=f46e101]:
+        - link [ref=f46e103] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.pagesjaunes.fr%2Fsiret%2F44145947600087&rut=94c79fbdf2e9daf3f0daabfa09fb53f696842b99fb20f7b2498773597962888d
+        - link "www.pagesjaunes.fr/siret/44145947600087" [ref=f46e104] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.pagesjaunes.fr%2Fsiret%2F44145947600087&rut=94c79fbdf2e9daf3f0daabfa09fb53f696842b99fb20f7b2498773597962888d
+      - 'link "Time Tours (SIRET 44145947600087) à Clichy : adresse, numéro de TVA, retrouvez les coordonnées et informations légales sur le professionnel" [ref=f46e105] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.pagesjaunes.fr%2Fsiret%2F44145947600087&rut=94c79fbdf2e9daf3f0daabfa09fb53f696842b99fb20f7b2498773597962888d
+    - generic [ref=f46e107]:
+      - heading [level=2] [ref=f46e108]:
+        - link "Nos voyages - Time Tours" [ref=f46e109] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2Fnos%2Dvoyages%2F&rut=0cc78f76fe5f1343268b903550aae88e4b430be5948d45f2aa1ad8a2765f11cf
+      - generic [ref=f46e111]:
+        - link [ref=f46e113] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2Fnos%2Dvoyages%2F&rut=0cc78f76fe5f1343268b903550aae88e4b430be5948d45f2aa1ad8a2765f11cf
+        - link "www.timetours.fr/nos-voyages/" [ref=f46e114] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2Fnos%2Dvoyages%2F&rut=0cc78f76fe5f1343268b903550aae88e4b430be5948d45f2aa1ad8a2765f11cf
+      - 'link "Canada - Splendeurs de l''Est : Du Quebec à New York" [ref=f46e115] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.timetours.fr%2Fnos%2Dvoyages%2F&rut=0cc78f76fe5f1343268b903550aae88e4b430be5948d45f2aa1ad8a2765f11cf
+    - link "Feedback" [ref=f46e117] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

@@ -1,0 +1,373 @@
+- generic [ref=f56e1]:
+  - link [ref=f56e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f56e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f56e10]:
+      - generic [ref=f56e12]:
+        - img "Google" [ref=f56e13]
+        - generic [ref=f56e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f56e16] [cursor=pointer]':
+            - generic [ref=f56e17]: fr
+          - link "Se connecter" [ref=f56e19] [cursor=pointer]
+      - generic [ref=f56e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f56e21]
+        - generic [ref=f56e22]:
+          - generic [ref=f56e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f56e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f56e25]:
+              - listitem [ref=f56e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f56e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f56e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f56e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f56e30]:
+              - listitem [ref=f56e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f56e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f56e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f56e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f56e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f56e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f56e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f56e38]:
+        - generic [ref=f56e39]:
+          - button "Tout refuser" [ref=f56e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f56e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f56e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f56e44]: Plus d'options
+      - generic [ref=f56e45]:
+        - link "Confidentialité" [ref=f56e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f56e47]: ·
+        - link "Conditions d'utilisation" [ref=f56e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f56e53]:
+    - search [ref=f56e54]:
+      - generic [ref=f56e57]:
+        - link [ref=f56e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&ictx=0&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4QpYkNegQIBhBm
+        - generic [ref=f56e59]:
+          - combobox [ref=f56e62]: "\"Valiere Cortez\" syndic copropriété Paris contact \"Valiere Cortez\" syndic copropriété Paris contact"
+          - generic [ref=f56e63]:
+            - button [ref=f56e65] [cursor=pointer]
+            - generic [ref=f56e70]:
+              - button [ref=f56e71] [cursor=pointer]
+              - button [ref=f56e74] [cursor=pointer]
+        - button [ref=f56e77] [cursor=pointer]
+    - generic [ref=f56e82]:
+      - button [ref=f56e84] [cursor=pointer]
+      - button [ref=f56e85] [cursor=pointer]
+      - generic [ref=f56e91]:
+        - button [ref=f56e93] [cursor=pointer]
+        - link [ref=f56e98] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Valiere%2BCortez%2522%2Bsyndic%2Bcopropri%25C3%25A9t%25C3%25A9%2BParis%2Bcontact%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f56e99]: Connexion
+  - generic [ref=f56e101]:
+    - navigation [ref=f56e107]:
+      - list [ref=f56e110]:
+        - listitem [ref=f56e111]:
+          - link [ref=f56e114] [cursor=pointer]:
+            - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q2J8OegQIExAD
+            - generic [ref=f56e115]: Mode IA
+        - listitem [ref=f56e118]:
+          - link [disabled] [ref=f56e119]:
+            - generic [ref=f56e120]: Tous
+        - listitem [ref=f56e122]:
+          - link [ref=f56e123] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4QtKgLegQIGRAB
+            - generic [ref=f56e124]: Images
+        - listitem [ref=f56e126]:
+          - link [ref=f56e127] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4QtKgLegQIFxAB
+            - generic [ref=f56e128]: Vidéos
+        - listitem [ref=f56e130]:
+          - link [ref=f56e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Qs6gLegQIFRAB
+            - generic [ref=f56e132]: Vidéos courtes
+        - listitem [ref=f56e134]:
+          - link [ref=f56e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q0pQJegQIGBAB
+            - generic [ref=f56e136]: Actualités
+        - listitem [ref=f56e138]:
+          - link [ref=f56e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sa=X&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Qs6gLegQIFhAB
+            - generic [ref=f56e140]: Web
+        - listitem [ref=f56e142]:
+          - button [ref=f56e143] [cursor=pointer]:
+            - generic [ref=f56e144]: Plus
+    - heading [level=1] [ref=f56e150]: Résultats de recherche
+    - main [ref=f56e152]:
+      - generic [ref=f56e159]:
+        - heading [level=2] [ref=f56e160]:
+          - generic [ref=f56e167]: Paris
+        - generic [ref=f56e169]:
+          - text: ∙
+          - button [ref=f56e170] [cursor=pointer]: Choisir une zone
+        - button [ref=f56e173] [cursor=pointer]
+      - generic [ref=f56e180]:
+        - generic [ref=f56e183]:
+          - heading [level=2] [ref=f56e184]: Résultats Web
+          - generic [ref=f56e185]:
+            - generic [ref=f56e188]:
+              - link [ref=f56e190] [cursor=pointer]:
+                - /url: /goto?url=CAESXgHrOzAVr9gvkCPaiLHiE-bEHZDFzz0nqfYwKlwHtu_55CvGWHjMpMEW2S47xU_bRCgFf9_FeulOPAlB158OnhHKwOQUZ4xbMB8l4b9Z9byr-k6tWaAZvknmnqe3-Vo
+                - heading [level=3] [ref=f56e191]: Valière CortezNous contacter
+                - generic [ref=f56e197]:
+                  - generic [ref=f56e198]: Valière Cortez
+                  - generic [ref=f56e200]: https://www.valierecortez.com › contact
+              - button [ref=f56e206] [cursor=pointer]
+            - generic [ref=f56e213]:
+              - emphasis [ref=f56e214]: Valière Cortez
+              - text: ; Gestion Locative Location. 2 rue Crémieux,
+              - emphasis [ref=f56e215]: Paris
+              - text: 12e | 01.43.43.18.90 ;
+              - emphasis [ref=f56e216]: Syndic
+              - text: de
+              - emphasis [ref=f56e217]: copropriété
+              - text: . 7, boulevard Diderot,
+              - emphasis [ref=f56e218]: Paris
+              - text: 12e | 01.43.43.17.62 ...
+        - generic [ref=f56e222]:
+          - heading [level=2] [ref=f56e223]: Résultats de recherche à proximité
+          - generic [ref=f56e224]:
+            - generic [ref=f56e226]:
+              - heading [level=2] [ref=f56e228]: Entreprises
+              - button [ref=f56e232] [cursor=pointer]
+            - heading [level=3] [ref=f56e237]: Carte
+            - generic [ref=f56e242]:
+              - generic [ref=f56e245]:
+                - button [ref=f56e247]:
+                  - generic [ref=f56e251] [cursor=pointer]:
+                    - heading [level=3] [ref=f56e252]:
+                      - generic [ref=f56e253]: Valière Cortez
+                    - generic [ref=f56e254]:
+                      - img [ref=f56e256]: 4,2(288)
+                      - text: · Société de gestion immobilière
+                    - generic [ref=f56e260]: 7 Bd Diderot
+                    - generic [ref=f56e261]:
+                      - generic [ref=f56e262]: Fermé · Ouvre à 09:00 lun.
+                      - text: · 01 43 43 17 62
+                    - generic [ref=f56e263]: "Propose : Gestion de copropriétés"
+                - link [ref=f56e274] [cursor=pointer]:
+                  - /url: /goto?url=CAESVgHrOzAV1uAdWnwTdxorU_CtQCkFFYewKpzeGMLeKfXNdA8tlAJEyt9YPMDkwMzry4agQ548DvTeWRhlg2S3gRmSRE0qCNgG86DwnRH955TN5MuTfGW7
+                  - generic [ref=f56e275]: Site Web
+                - link [ref=f56e282] [cursor=pointer]:
+                  - /url: /maps/dir//Vali%C3%A8re+Cortez,+7+Bd+Diderot,+75012+Paris/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x47e6735e6a02e557:0x6e6e3f7bc91d7da0?sa=X&ved=1t:57443&hl=fr&ictx=111
+                  - generic [ref=f56e283]: Itinéraire
+              - generic [ref=f56e296]:
+                - button [ref=f56e298]:
+                  - generic [ref=f56e302] [cursor=pointer]:
+                    - heading [level=3] [ref=f56e303]:
+                      - generic [ref=f56e304]: Valière Cortez
+                    - generic [ref=f56e305]:
+                      - img [ref=f56e307]: 4,8(146)
+                      - text: · Société de gestion immobilière
+                    - generic [ref=f56e311]: 2 Rue Crémieux
+                    - generic [ref=f56e312]:
+                      - generic [ref=f56e313]: Fermé · Ouvre à 09:00 lun.
+                      - text: · 01 43 43 18 90
+                    - generic [ref=f56e314]: "\"Je recommande vraiment la gestion Valière Cortez !\""
+                - link [ref=f56e324] [cursor=pointer]:
+                  - /url: /goto?url=CAESVQHrOzAVh3lNxKi4Llh44bbAqinWyx0lFwroNhhSG7FgD8u7lFu7J49oBHuPckCb0lBVLY3VxgmZYx7U_jhaLBqia9z5Tw5ylLd0KnYKi8j94ua1dSY
+                  - generic [ref=f56e325]: Site Web
+                - link [ref=f56e332] [cursor=pointer]:
+                  - /url: /maps/dir//Vali%C3%A8re+Cortez,+2+Rue+Cr%C3%A9mieux,+75012+Paris/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x47e673383ca3d009:0x4e7738030c569447?sa=X&ved=1t:57443&hl=fr&ictx=111
+                  - generic [ref=f56e333]: Itinéraire
+        - generic [ref=f56e345]:
+          - heading [level=2] [ref=f56e346]: Résultats Web
+          - generic [ref=f56e347]:
+            - generic [ref=f56e350]:
+              - link [ref=f56e352] [cursor=pointer]:
+                - /url: /goto?url=CAESYAHrOzAVJLKL1yRVxyK0pTYork8gAMT1Fbs77dqxQJfRpFFnRj6IxZAUcLEGJN3fg6DFhVBzzh1Lsj9SCAdEVbwnic-DRjLAbykSYYM1YU1xaQHDYC3pyjrpM8mwtUxKZw
+                - heading [level=3] [ref=f56e353]: Valière Cortez à Paris - Syndic de copropriété (adresse, ...
+                - generic [ref=f56e359]:
+                  - generic [ref=f56e360]: Pages Jaunes
+                  - generic [ref=f56e362]: https://www.pagesjaunes.fr › pros
+              - button [ref=f56e368] [cursor=pointer]
+            - generic [ref=f56e375]:
+              - text: Téléphone
+              - emphasis [ref=f56e376]: Valière Cortez
+              - text: ", Crémieux 75012"
+              - emphasis [ref=f56e377]: Paris
+              - text: · Téléphone Poulain Frédéric, Bercy 75012
+              - emphasis [ref=f56e378]: Paris
+              - text: · Adresse ICF Novedis, Diderot 75012
+              - emphasis [ref=f56e379]: Paris
+              - text: ·
+              - emphasis [ref=f56e380]: Contact Syndic
+              - text: ...
+        - generic [ref=f56e384]:
+          - generic [ref=f56e387]:
+            - link [ref=f56e389] [cursor=pointer]:
+              - /url: /goto?url=CAESbAHrOzAV_WVfQfbkWdK7tmHhLsPRSoXGTIrghALH4zKcI36G4obr4ZbT5td9RaEABmJvuLIesP-O4Q3wjs2yuMuKbhNiBgQrsecKDgmebpYd4W2wPYRHWNM6ipAGc3LYyAYWs8bD_G3-9hnKeA
+              - heading [level=3] [ref=f56e390]: Syndic de copropriété
+              - generic [ref=f56e396]:
+                - generic [ref=f56e397]: Valière Cortez
+                - generic [ref=f56e399]: https://www.valierecortez.com › syndic-de-copropriete
+            - button [ref=f56e405] [cursor=pointer]
+          - generic [ref=f56e412]:
+            - text: Chez
+            - emphasis [ref=f56e413]: Valière Cortez
+            - text: ", nous aimons l'analogie du médecin de famille et du"
+            - emphasis [ref=f56e414]: syndic
+            - text: de
+            - emphasis [ref=f56e415]: copropriété
+            - text: ": il possède une vision historique et globale d'un immeuble."
+        - generic [ref=f56e419]:
+          - generic [ref=f56e422]:
+            - link [ref=f56e424] [cursor=pointer]:
+              - /url: /goto?url=CAESdgHrOzAV4EQEC5_LycpweWgqx-R_x8Y3DYs5Zl91Wy-dxb3GuP_355s__KKOEl2GadGbXxNvhAD-BeMLI93_T2gFI7xuPpysYZRJslb7TevY90mCJTyO3aGksQ0ILnl2BCUdYsgxjaqnOjsdEBm14oakC87bMbo
+              - heading [level=3] [ref=f56e425]: Société VALIERE CORTEZ SYNDIC DE COPROPRIETE ...
+              - generic [ref=f56e431]:
+                - generic [ref=f56e432]: data.gouv.fr
+                - generic [ref=f56e434]: https://annuaire-entreprises.data.gouv.fr › ... › 68.32A
+            - button [ref=f56e440] [cursor=pointer]
+          - generic [ref=f56e447]:
+            - text: Adresse postale.
+            - emphasis [ref=f56e448]: VALIERE CORTEZ
+            - text: ", 7 BD DIDEROT 221 - 225 R DE BERCY 2 RUE AUDUBON 75012"
+            - emphasis [ref=f56e449]: PARIS
+            - text: ; Forme juridique. SAS, société par actions simplifiée.
+        - generic [ref=f56e454]:
+          - heading [level=2] [ref=f56e456]: Autres questions
+          - generic [ref=f56e457]:
+            - button [ref=f56e463] [cursor=pointer]:
+              - generic [ref=f56e464]: Comment contacter son syndic de copropriété ?
+            - button [ref=f56e477] [cursor=pointer]:
+              - generic [ref=f56e478]: Comment trouver les coordonnées d'un syndic de copropriété ?
+            - button [ref=f56e491] [cursor=pointer]:
+              - generic [ref=f56e492]: Quels sont les honoraires d'un syndic à Paris ?
+        - generic [ref=f56e501]:
+          - heading [level=2] [ref=f56e502]: Résultats Web
+          - generic [ref=f56e503]:
+            - generic [ref=f56e506]:
+              - link [ref=f56e508] [cursor=pointer]:
+                - /url: /goto?url=CAESaQHrOzAVj7jBgpzl8hrW2j0yWkeLLC9yVdMCQOO7K6jXGKkGLd2KVkwnpMbdeE9XRlY1P4j5DD8gdipiew4bsv4KlFAmyoSpq308HFNcXgq0DI0iDH-mVsnHbQSTxQyKNvtlEfZJnfyNlw
+                - heading [level=3] [ref=f56e509]: Valière Cortez - Syndic de copropriétés, 7 Boulevard ...
+                - generic [ref=f56e515]:
+                  - generic [ref=f56e516]: Mappy
+                  - generic [ref=f56e518]: https://fr.mappy.com › poi
+              - button [ref=f56e524] [cursor=pointer]
+            - generic [ref=f56e531]:
+              - text: Découvrez
+              - emphasis [ref=f56e532]: Valière Cortez
+              - text: (7 Boulevard Diderot, 75012
+              - emphasis [ref=f56e533]: Paris
+              - text: ") avec toutes les photos du quartier, le plan d'accès, les avis et les infos pratiques : horaires, ..."
+        - generic [ref=f56e537]:
+          - generic [ref=f56e540]:
+            - link [ref=f56e542] [cursor=pointer]:
+              - /url: /goto?url=CAESVgHrOzAV1uAdWnwTdxorU_CtQCkFFYewKpzeGMLeKfXNdA8tlAJEyt9YPMDkwMzry4agQ548DvTeWRhlg2S3gRmSRE0qCNgG86DwnRH955TN5MuTfGW7
+              - heading [level=3] [ref=f56e543]: Valière CortezValière Cortez Immobilier, Vente, Location ...
+              - generic [ref=f56e549]:
+                - generic [ref=f56e550]: Valière Cortez
+                - generic [ref=f56e552]: https://www.valierecortez.com
+            - button [ref=f56e558] [cursor=pointer]
+          - generic [ref=f56e565]:
+            - emphasis [ref=f56e566]: Valière Cortez
+            - text: ", votre partenaire immobilier depuis plus de 30 à"
+            - emphasis [ref=f56e567]: Paris
+            - text: 12. Vente, Location, Gestion et
+            - emphasis [ref=f56e568]: Syndic
+            - text: .
+        - generic [ref=f56e572]:
+          - generic [ref=f56e575]:
+            - link [ref=f56e577] [cursor=pointer]:
+              - /url: /goto?url=CAESpAEB6zswFV-RQAiZ9qkwmEUFAq3T1tgJ-wXv-RojJtapwD4RAC5WrkchwNwJGtjxhVbRAlXqcEYdu8rxnUrMTYztzblHQr5jqdF-YmKPAOGOorohVTp4f_ToG5B64OV1u2_WeoTn9ok6BmkbQLdHvm09wHMdrDuOxPvjKVu7o1DoGR5y1YL5P51J8iie387kvH4XKLhq_L8i8bAuc-mS7Tm3XlEuwg
+              - heading [level=3] [ref=f56e578]: VALIERE CORTEZ SYNDIC DE COPROPRIETE de PARIS 12
+              - generic [ref=f56e584]:
+                - generic [ref=f56e585]: annuairedescoproprietes.fr
+                - generic [ref=f56e587]: https://annuairedescoproprietes.fr › Syndic › PARIS 12
+            - button [ref=f56e593] [cursor=pointer]
+          - generic [ref=f56e600]:
+            - text: Dénomination du
+            - emphasis [ref=f56e601]: syndic
+            - text: ","
+            - emphasis [ref=f56e602]: VALIERE CORTEZ SYNDIC
+            - text: DE
+            - emphasis [ref=f56e603]: COPROPRIETE
+            - text: ; Adresse. 2 RUE AUDUBON 7 BD DIDEROT 221 - 225 R DE BERCY 75012
+            - emphasis [ref=f56e604]: PARIS
+            - text: 12, France ; Commune.
+            - emphasis [ref=f56e605]: PARIS
+            - text: 12 ...
+        - generic [ref=f56e609]:
+          - generic [ref=f56e612]:
+            - link [ref=f56e614] [cursor=pointer]:
+              - /url: /goto?url=CAESYAHrOzAVDl3BmHP9Cl3MUgtSKlppdlzodZAL3hT9zdl9y9-xUwsiAqOgW3m7zJqMu4DS472bvxUd1SZHM69Kd9jQ7GisxPrR_g81dHElVKz8sPRzlvzmaiLjWsXyWNVxnQ
+              - heading [level=3] [ref=f56e615]: Valière Cortez à Paris
+              - generic [ref=f56e621]:
+                - generic [ref=f56e622]: Pages Jaunes
+                - generic [ref=f56e624]: https://www.pagesjaunes.fr › pros
+            - button [ref=f56e630] [cursor=pointer]
+          - generic [ref=f56e637]:
+            - emphasis [ref=f56e638]: Valière Cortez
+            - text: à
+            - emphasis [ref=f56e639]: Paris
+            - text: "(75) Gestion locative : adresse, photos, retrouvez les coordonnées et informations sur le professionnel."
+        - generic [ref=f56e643]:
+          - generic [ref=f56e646]:
+            - link [ref=f56e648] [cursor=pointer]:
+              - /url: /goto?url=CAESfgHrOzAVnCaXpE24UzzTWO2szkJPTcOfN5rwy9gnwQpnBhUzeEZ3ZdYYRMKagCLTK0u-XlShb8u8Bt2lkKa16v7DchG4RdOUmRUG3eOpl1CBApimU1NQHeg_Hy1UtWJbosnMxjLL8xALqKKp1WrR242BVCNB45uwXXn3_e7S1g
+              - heading [level=3] [ref=f56e649]: VALIERE CORTEZ SYNDIC DE COPROPRIETE à 75016 PARIS
+              - generic [ref=f56e655]:
+                - generic [ref=f56e656]: data.gouv.fr
+                - generic [ref=f56e658]: https://annuaire-entreprises.data.gouv.fr › etablissement
+            - button [ref=f56e664] [cursor=pointer]
+          - generic [ref=f56e671]:
+            - text: Nom de l'établissement.
+            - emphasis [ref=f56e672]: VALIERE CORTEZ SYNDIC
+            - text: DE
+            - emphasis [ref=f56e673]: COPROPRIETE
+            - text: ; Adresse. 19 RUE DE PASSY 75016
+            - emphasis [ref=f56e674]: PARIS
+            - text: ; SIRET. 790 159 461 00033 ; Clef NIC. 00033 ; N° TVA ...
+        - generic [ref=f56e678]:
+          - generic [ref=f56e681]:
+            - link [ref=f56e683] [cursor=pointer]:
+              - /url: /goto?url=CAESZQHrOzAV6yw3pPY27IVEAgg_HYCLAxB6VA3CU3KAEp8M7a1s7jlzV3kCKePVRrRV7c0AEc9DT4hDKA-DomU855HYWvAonK1NLfuoIvimhN-dh-2n-fK41D42Tc6BzlZKhBFSH73C
+              - heading [level=3] [ref=f56e684]: Valière CortezNous connaître
+              - generic [ref=f56e690]:
+                - generic [ref=f56e691]: Valière Cortez
+                - generic [ref=f56e693]: https://www.valierecortez.com › nous-connaitre
+            - button [ref=f56e699] [cursor=pointer]
+          - generic [ref=f56e706]:
+            - text: ... com.
+            - emphasis [ref=f56e707]: valiere-cortez
+            - text: "-signature. Nos adresses. 2, rue Crémieux,"
+            - emphasis [ref=f56e708]: Paris
+            - text: 12e0143431890 · 7, bld Diderot,
+            - emphasis [ref=f56e709]: Paris
+            - text: 12e0143431762 ·
+            - emphasis [ref=f56e710]: Valière Cortez
+            - text: .
+            - emphasis [ref=f56e711]: Valière cortez
+            - text: © 2026 ...
+      - navigation [ref=f56e714]:
+        - heading [level=1] [ref=f56e715]: Navigation par pages
+        - text: "1"
+        - link [ref=f56e718] [cursor=pointer]:
+          - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=10&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8tMDegQIPRAE
+          - text: "2"
+        - link [ref=f56e720] [cursor=pointer]:
+          - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=20&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8tMDegQIPRAG
+          - text: "3"
+        - link [ref=f56e722] [cursor=pointer]:
+          - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=30&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8tMDegQIPRAI
+          - text: "4"
+        - link [ref=f56e724] [cursor=pointer]:
+          - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=40&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8tMDegQIPRAK
+          - text: "5"
+        - link [ref=f56e726] [cursor=pointer]:
+          - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=50&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8tMDegQIPRAM
+          - text: "6"
+        - heading [level=2] [ref=f56e728]:
+          - link [ref=f56e729] [cursor=pointer]:
+            - /url: /search?q=%22Valiere+Cortez%22+syndic+copropri%C3%A9t%C3%A9+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=LfSkaqqjJurgkdUP3cXQ8AY&start=10&sa=N&sstk=AS6-VmJxcFZxn_WV0OKPjZt08UxaVteObxbDOXYl-4deJsO2UoasP1jEFDHl0lIImcFvdC5xC8f3_uBlZdvnAeB0A4IpXyJvj6DYQA&ved=2ahUKEwjq7fT2t-iWAxVqcKQEHd0iFG4Q8NMDegQIPRAO
+            - generic [ref=f56e731]: Suivant
+    - contentinfo [ref=f56e732]:
+      - heading [level=1] [ref=f56e733]: Liens de pied de page

@@ -1,0 +1,245 @@
+- generic [ref=f16e1]:
+  - link [ref=f16e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f16e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f16e10]:
+      - generic [ref=f16e12]:
+        - img "Google" [ref=f16e13]
+        - generic [ref=f16e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f16e16] [cursor=pointer]':
+            - generic [ref=f16e17]: fr
+          - link "Se connecter" [ref=f16e19] [cursor=pointer]
+      - generic [ref=f16e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f16e21]
+        - generic [ref=f16e22]:
+          - generic [ref=f16e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f16e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f16e25]:
+              - listitem [ref=f16e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f16e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f16e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f16e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f16e30]:
+              - listitem [ref=f16e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f16e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f16e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f16e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f16e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f16e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f16e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f16e38]:
+        - generic [ref=f16e39]:
+          - button "Tout refuser" [ref=f16e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f16e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f16e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f16e44]: Plus d'options
+      - generic [ref=f16e45]:
+        - link "Confidentialité" [ref=f16e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f16e47]: ·
+        - link "Conditions d'utilisation" [ref=f16e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f16e53]:
+    - search [ref=f16e54]:
+      - generic [ref=f16e57]:
+        - link [ref=f16e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&ictx=0&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQpYkNegQIBhBm
+        - generic [ref=f16e59]:
+          - combobox [ref=f16e62]: "\"784393142\" \"784393142\""
+          - generic [ref=f16e63]:
+            - button [ref=f16e65] [cursor=pointer]
+            - generic [ref=f16e70]:
+              - button [ref=f16e71] [cursor=pointer]
+              - button [ref=f16e74] [cursor=pointer]
+        - button [ref=f16e77] [cursor=pointer]
+    - generic [ref=f16e82]:
+      - button [ref=f16e84] [cursor=pointer]
+      - button [ref=f16e85] [cursor=pointer]
+      - generic [ref=f16e91]:
+        - button [ref=f16e93] [cursor=pointer]
+        - link [ref=f16e98] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522784393142%2522%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f16e99]: Connexion
+  - generic [ref=f16e101]:
+    - navigation [ref=f16e107]:
+      - list [ref=f16e110]:
+        - listitem [ref=f16e111]:
+          - link [ref=f16e114] [cursor=pointer]:
+            - /url: /search?q=%22784393142%22&sca_esv=02c6818e7845ba38&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQ2J8OegQIERAD
+            - generic [ref=f16e115]: Mode IA
+        - listitem [ref=f16e118]:
+          - link [disabled] [ref=f16e119]:
+            - generic [ref=f16e120]: Tous
+        - listitem [ref=f16e122]:
+          - link [ref=f16e123] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=3&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&q=%22784393142%22&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQs6gLegQIFxAB
+            - generic [ref=f16e124]: Produits
+        - listitem [ref=f16e126]:
+          - link [ref=f16e127] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&q=%22784393142%22&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQtKgLegQIFhAB
+            - generic [ref=f16e128]: Images
+        - listitem [ref=f16e130]:
+          - link [ref=f16e131] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&q=%22784393142%22&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQtKgLegQIFRAB
+            - generic [ref=f16e132]: Vidéos
+        - listitem [ref=f16e134]:
+          - link [ref=f16e135] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&q=%22784393142%22&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQ0pQJegQIExAB
+            - generic [ref=f16e136]: Actualités
+        - listitem [ref=f16e138]:
+          - link [ref=f16e139] [cursor=pointer]:
+            - /url: /search?sca_esv=02c6818e7845ba38&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDVGqy8kH-675IaYWrzQ0MoUopBIajPBkWh6Fa0oM8PaTEEaduSJRnfXLCJLiCd0etjxxOJSeP64ooqv0F_DIRZtnl4VWokvGHRAf6XuWxSpUwtbcCV3t2vb0Jz7C06sAaj_tjv5NPU7Paz5-iE2BsLxkbOlOxSD0DqD-VzI5v3QXFvtN42MhnjG0TQe24AjP2P106uQ&q=%22784393142%22&sa=X&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQs6gLegQIFBAB
+            - generic [ref=f16e140]: Vidéos courtes
+        - listitem [ref=f16e142]:
+          - button [ref=f16e143] [cursor=pointer]:
+            - generic [ref=f16e144]: Plus
+    - heading [level=1] [ref=f16e150]: Résultats de recherche
+    - main [ref=f16e152]:
+      - generic [ref=f16e156]:
+        - generic [ref=f16e159]:
+          - heading [level=2] [ref=f16e160]: Résultats Web
+          - generic [ref=f16e161]:
+            - generic [ref=f16e164]:
+              - link [ref=f16e166] [cursor=pointer]:
+                - /url: /goto?url=CAESZwHrOzAVgeJTcOWsJ-ghGhUBFwWx6_4RqMwe1bHE-wV0icSOrSlG6TrlsFziKslsYuuYGbdGgwUZFhgKvmSUHMLMMGPnSoeEZ2tlxoxOrFgftkXvhVOlp-ZWoIIxLbwLbSL_LkS1SvE
+                - heading [level=3] [ref=f16e167]: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD
+                - generic [ref=f16e173]:
+                  - generic [ref=f16e174]: Pappers
+                  - generic [ref=f16e176]: https://www.pappers.fr › entreprise › zzz-784393142
+              - button [ref=f16e182] [cursor=pointer]
+            - generic [ref=f16e187]: "Adresse : 8 RUE DE PRAGUE, 75012 PARIS. Activité : Administration d'immeubles et autres biens immobiliers. Effectif : Entre 20 et 49 salariés (donnée 2023)."
+        - generic [ref=f16e192]:
+          - generic [ref=f16e195]:
+            - link [ref=f16e197] [cursor=pointer]:
+              - /url: /goto?url=CAESjwEB6zswFdNuZZdfKh9XdV_JpLYH2H43311MvRGBHkbtRBCWE7Cw1_zY-2j6G9RaTTkMwKQpGVpYEAwbU-yyPu5uzdqN_0oKauV1I-XmEB1HUDM9D17DFVI0tdHTa_w-NPF7dZkryD8IzE6r7XhIBUf4JBsLkSWbVAPMqcEdyYugg5Splyb_zhjYtzYB2j3Vfw
+              - heading [level=3] [ref=f16e198]: fondat rothschild instit a de rothschild
+              - generic [ref=f16e204]:
+                - generic [ref=f16e205]: Societe.com
+                - generic [ref=f16e207]: https://www.societe.com › societe › fondat-rothschild-in...
+            - button [ref=f16e213] [cursor=pointer]
+          - generic [ref=f16e220]:
+            - text: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD à PARIS (
+            - emphasis [ref=f16e221]: "784393142"
+            - text: ). RCS, K-BIS, RNE, SIREN, SIRET, bilans, statuts, chiffre d'affaires, valeur, valorisation, ...
+        - generic [ref=f16e225]:
+          - generic [ref=f16e228]:
+            - link [ref=f16e230] [cursor=pointer]:
+              - /url: /goto?url=CAESdgHrOzAVKm3wAOTcxq87DX6oavH0sWZODoL4FT1hQjYDeqYbunUUlGS78AVFEOBuTHVHtiTbaKce6G-gjJNcMWs2WPJQ46Rt5mMFXCb5mVn6sW1f6oZGfhEYq9fwp4hfPUbkm_qJ9ulHyVBGkiIORbV8uE9RunE
+              - heading [level=3] [ref=f16e231]: fondat rothschild instit a de rothschild
+              - generic [ref=f16e237]:
+                - generic [ref=f16e238]: data.gouv.fr
+                - generic [ref=f16e240]: https://annuaire-entreprises.data.gouv.fr › ... › 68.32A
+            - button [ref=f16e246] [cursor=pointer]
+          - generic [ref=f16e251]: Son siège social est domicilié au 8 RUE DE PRAGUE 75012 PARIS. Elle possède 5 établissements dont 3 sont en activité. Fiche résumé · Dirigeants · Documents.
+        - generic [ref=f16e256]:
+          - generic [ref=f16e259]:
+            - link [ref=f16e261] [cursor=pointer]:
+              - /url: /goto?url=CAESiAEB6zswFZxNN1fdlcKk7V2lKQf_Jgnq1E2N8-35XA8UrdKzBpYKK2Y41oJiR5c4-TJbMJiZoS4Wda1MTehRd2AU09Evl_WnN7Is3hFBQiskRrkPXFH16WTgFz5K7gqGKjVpnbewkoH_mHE6TDGn5BglmAAQdDWV2vboJmcBuCkX_HiOLqkGSdmi
+              - heading [level=3] [ref=f16e262]: fondat rothschild instit a de rothschild
+              - generic [ref=f16e268]:
+                - generic [ref=f16e269]: VIKTA
+                - generic [ref=f16e271]: https://app.vikta.com › vikdata › fondat-rothschild-instit-...
+            - button [ref=f16e277] [cursor=pointer]
+          - generic [ref=f16e284]:
+            - text: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD PARIS (75012)
+            - emphasis [ref=f16e285]: "784393142"
+            - text: ": Bilans, statuts, chiffre d'affaires, dirigeants, actionnaires, annonces commerciales, ..."
+        - generic [ref=f16e289]:
+          - generic [ref=f16e292]:
+            - link [ref=f16e294] [cursor=pointer]:
+              - /url: /goto?url=CAESYwHrOzAVD6zCjli2h6AYr0GH2No3kLcF-YUggaFTpdvnXoVs1Vn6edUnj0VbC1MVWZ90Brl5vIqTaRndoXVCW7JTxygQPSJxjVO94y6Y6ZZ0uXWaRr23vY8VlGCcf1_apWCMdg
+              - heading [level=3] [ref=f16e295]: "FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD : 11 parcelles ..."
+              - generic [ref=f16e301]:
+                - generic [ref=f16e302]: cadaimmo.com
+                - generic [ref=f16e304]: https://www.cadaimmo.com › Annuaire des sociétés
+            - button [ref=f16e310] [cursor=pointer]
+          - generic [ref=f16e317]:
+            - emphasis [ref=f16e318]: "784393142"
+            - text: · 9300. En activité. FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD, 9300, a été immatriculée en 1990 et a son siège à PARIS. Au millésime cadastral 2025 ...
+        - generic [ref=f16e322]:
+          - generic [ref=f16e325]:
+            - link [ref=f16e327] [cursor=pointer]:
+              - /url: /goto?url=CAESYAHrOzAVWoW5gFsq_gunhaHWh9c1MlWcPgo2TDe9BBFd0PSqLU9H0Xtpjgk0NwNrG5n4XF3pTzd_wf2yNWbgHAQVdMen6JZxjqQz0901tSUaccE8eTuyN26adxxnqyEWkw
+              - heading [level=3] [ref=f16e328]: Fondation Rothschild - Maison de retraite privée
+              - generic [ref=f16e334]:
+                - generic [ref=f16e335]: Pages Jaunes
+                - generic [ref=f16e337]: https://www.pagesjaunes.fr › pros
+            - button [ref=f16e343] [cursor=pointer]
+          - generic [ref=f16e350]:
+            - emphasis [ref=f16e351]: "784393142"
+            - text: "; Forme juridique: Fondation; Création d'entreprise: 30 janvier 1990; Effectif de l'entreprise: 20 à 49 salariés; Autres dénominations: FONDAT ..."
+        - generic [ref=f16e355]:
+          - generic [ref=f16e358]:
+            - link [ref=f16e360] [cursor=pointer]:
+              - /url: /goto?url=CAESkQEB6zswFRweR-sw7f9nHmBpuLTx_L2yR3vYNNhbbkaUU6SGmmtQ16iMM8R2bmtysuSdG1K8juIEn-9aR0mHx1CG31bkoSI9LVWmPFhd3lP-0Km-RD9rr-hHO7YjPtO2vSSjMF22aCGR5ptQnL3MNOVHYQwn8JGU0glPUalk58cFrvFUW8xrGKg4QHCW8VX7JtWt
+              - heading [level=3] [ref=f16e361]: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD
+              - generic [ref=f16e367]:
+                - generic [ref=f16e368]: data-prospection.fr
+                - generic [ref=f16e370]: https://data-prospection.fr › entreprise › 784393142
+            - button [ref=f16e376] [cursor=pointer]
+          - generic [ref=f16e383]:
+            - text: "Informations complètes sur FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD: SIREN"
+            - emphasis [ref=f16e384]: "784393142"
+            - text: ", secteur Administration d'immeubles et autres biens immobiliers,…"
+        - generic [ref=f16e388]:
+          - generic [ref=f16e391]:
+            - link [ref=f16e393] [cursor=pointer]:
+              - /url: /goto?url=CAESlwEB6zswFQYcY6vALk8LX7THSFfibYamYgirOD3IuR2A-ztHWBCctgUEER84O5Z6UV5XFyuaVfTAcP4BrFVh_Z37I9W2Ckuewl-IF62BHmybgHYVehkahXAsow1evD0Z9AmcHE0ID6fLnUIZ-6UdvIsky2A9NPcBoxj7D7RSVq-LRveI1SY_4d04U6Bk2nyQgVO3rj2QqnWD
+              - heading [level=3] [ref=f16e394]: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD - PARIS
+              - generic [ref=f16e400]:
+                - generic [ref=f16e401]: Net1901
+                - generic [ref=f16e403]: https://www.net1901.org › entreprise › FONDAT-ROTH...
+            - button [ref=f16e409] [cursor=pointer]
+          - generic [ref=f16e416]:
+            - text: "FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD ; Date de création : 01/10/2000 ; Siège de l'unité légale : oui ; Siret : 78439314200053 / Siren :"
+            - emphasis [ref=f16e417]: "784393142"
+            - text: "/ NIC : 00053."
+        - generic [ref=f16e421]:
+          - generic [ref=f16e424]:
+            - link [ref=f16e426] [cursor=pointer]:
+              - /url: /goto?url=CAESWwHrOzAVA2tmF73qihI_FKN4O7t9QLYJAKieytP2g1HYiORX7Y6iM-I7cNlC1nUf9uuhBae3h6ePAdwSE9RtRsFjwH6GohEFUc2GNMhyBNW_WWqpKhag8FiigM8
+              - heading [level=3] [ref=f16e427]: Fondation Rothschild à PARIS 75015 (RUE BARGUE)
+              - generic [ref=f16e433]:
+                - generic [ref=f16e434]: 118000.fr
+                - generic [ref=f16e436]: https://www.118000.fr › ...
+            - button [ref=f16e442] [cursor=pointer]
+          - generic [ref=f16e449]:
+            - text: "Siren :"
+            - emphasis [ref=f16e450]: "784393142"
+            - text: . A proximité. Syndicat des Copropriétaires de l'Immeuble Paris (72 m) · Syndicat de Copropriété Paris (79 m) · Syndicat des Copropriétés Paris ...
+        - generic [ref=f16e454]:
+          - generic [ref=f16e457]:
+            - link [ref=f16e459] [cursor=pointer]:
+              - /url: /goto?url=CAESjwEB6zswFby74vehASH5L0MAGMQmnPGoU_Ax-x07IBbAB3M3T5jp8T2Nj37eCo0WTB-GXXQpQFNpmi5mj5EmJbe7Ljnt_y-YVW9JoLHJuuF5NeWy7YXoLLmwko3gU_CKuQEVvjKprR-LnC466Upy-i_feorCkt4ApuZcoclC5HRBqZ8o6ZwaAtPsO__6NbQfpA
+              - heading [level=3] [ref=f16e460]: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD à Paris
+              - generic [ref=f16e466]:
+                - generic [ref=f16e467]: Infonet.fr
+                - generic [ref=f16e469]: https://infonet.fr › ... › Entreprises dans le NAF 6832A
+            - button [ref=f16e475] [cursor=pointer]
+          - generic [ref=f16e482]:
+            - text: FONDAT ROTHSCHILD INSTIT A DE ROTHSCHILD ; Greffe. PARIS ; RCS. PARIS
+            - emphasis [ref=f16e483]: "784393142"
+            - text: ; SIREN.
+            - emphasis [ref=f16e484]: "784393142"
+            - text: ; SIRET. 78439314200053 ; N° TVA. FR81784393142.
+      - navigation [ref=f16e487]:
+        - heading [level=1] [ref=f16e488]: Navigation par pages
+        - text: "1"
+        - link [ref=f16e491] [cursor=pointer]:
+          - /url: /search?q=%22784393142%22&sca_esv=02c6818e7845ba38&hl=fr&ei=ivOkar3pFfOskdUP5dbOYQ&start=10&sa=N&sstk=AS6-VmIjdaCzPE1bCqh_fTzBn9bRemNO0JONjkCd7347TztSxjhmZy3Z7S86XqibD_3GxJOQRKSq9F-8-uE2fde2o6zDRBXh26Qi7g&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQ8tMDegQIPhAE
+          - text: "2"
+        - link [ref=f16e493] [cursor=pointer]:
+          - /url: /search?q=%22784393142%22&sca_esv=02c6818e7845ba38&hl=fr&ei=ivOkar3pFfOskdUP5dbOYQ&start=20&sa=N&sstk=AS6-VmIjdaCzPE1bCqh_fTzBn9bRemNO0JONjkCd7347TztSxjhmZy3Z7S86XqibD_3GxJOQRKSq9F-8-uE2fde2o6zDRBXh26Qi7g&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQ8tMDegQIPhAG
+          - text: "3"
+        - heading [level=2] [ref=f16e495]:
+          - link [ref=f16e496] [cursor=pointer]:
+            - /url: /search?q=%22784393142%22&sca_esv=02c6818e7845ba38&hl=fr&ei=ivOkar3pFfOskdUP5dbOYQ&start=10&sa=N&sstk=AS6-VmIjdaCzPE1bCqh_fTzBn9bRemNO0JONjkCd7347TztSxjhmZy3Z7S86XqibD_3GxJOQRKSq9F-8-uE2fde2o6zDRBXh26Qi7g&ved=2ahUKEwi91oept-iWAxVzVqQEHWWrMwwQ8NMDegQIPhAI
+            - generic [ref=f16e498]: Suivant
+    - contentinfo [ref=f16e499]:
+      - heading [level=1] [ref=f16e500]: Liens de pied de page

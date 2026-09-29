@@ -1,0 +1,474 @@
+- generic [ref=f4e1]:
+  - link [ref=f4e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f4e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f4e10]:
+      - generic [ref=f4e12]:
+        - img "Google" [ref=f4e13]
+        - generic [ref=f4e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f4e16] [cursor=pointer]':
+            - generic [ref=f4e17]: fr
+          - link "Se connecter" [ref=f4e19] [cursor=pointer]
+      - generic [ref=f4e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f4e21]
+        - generic [ref=f4e22]:
+          - generic [ref=f4e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f4e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f4e25]:
+              - listitem [ref=f4e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f4e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f4e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f4e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f4e30]:
+              - listitem [ref=f4e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f4e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f4e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f4e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f4e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f4e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f4e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f4e38]:
+        - generic [ref=f4e39]:
+          - button "Tout refuser" [ref=f4e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f4e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f4e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f4e44]: Plus d'options
+      - generic [ref=f4e45]:
+        - link "Confidentialité" [ref=f4e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f4e47]: ·
+        - link "Conditions d'utilisation" [ref=f4e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f4e53]:
+    - search [ref=f4e54]:
+      - generic [ref=f4e56]:
+        - link [ref=f4e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQPHoECAYQZA
+        - generic [ref=f4e66]:
+          - generic [ref=f4e67]:
+            - combobox [ref=f4e70]: "\"Citya Pecorari\" \"9 rue de Joinville\" OR Paris 19 contact téléphone \"Citya Pecorari\" \"9 rue de Joinville\" OR Paris 19 contact téléphone"
+            - generic [ref=f4e71]:
+              - button [ref=f4e73] [cursor=pointer]
+              - generic [ref=f4e78]:
+                - button [ref=f4e79] [cursor=pointer]
+                - button [ref=f4e82] [cursor=pointer]
+          - button [ref=f4e85] [cursor=pointer]
+    - generic [ref=f4e90]:
+      - button [ref=f4e92] [cursor=pointer]
+      - button [ref=f4e93] [cursor=pointer]
+      - generic [ref=f4e99]:
+        - button [ref=f4e101] [cursor=pointer]
+        - link [ref=f4e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Citya%2BPecorari%2522%2B%25229%2Brue%2Bde%2BJoinville%2522%2BOR%2BParis%2B19%2Bcontact%2Bt%25C3%25A9l%25C3%25A9phone%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f4e107]: Connexion
+  - generic [ref=f4e109]:
+    - navigation [ref=f4e115]:
+      - list [ref=f4e118]:
+        - listitem [ref=f4e119]:
+          - link [ref=f4e122] [cursor=pointer]:
+            - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ2J8OegQIDBAD
+            - generic [ref=f4e123]: Mode IA
+        - listitem [ref=f4e126]:
+          - link [disabled] [ref=f4e127]:
+            - generic [ref=f4e128]: Tous
+        - listitem [ref=f4e130]:
+          - link [ref=f4e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQtKgLegQIEBAB
+            - generic [ref=f4e132]: Images
+        - listitem [ref=f4e134]:
+          - link [ref=f4e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQs6gLegQIFRAB
+            - generic [ref=f4e136]: Vidéos courtes
+        - listitem [ref=f4e138]:
+          - link [ref=f4e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQtKgLegQIFBAB
+            - generic [ref=f4e140]: Vidéos
+        - listitem [ref=f4e142]:
+          - link [ref=f4e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ0pQJegQIDhAB
+            - generic [ref=f4e144]: Actualités
+        - listitem [ref=f4e146]:
+          - link [ref=f4e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQs6gLegQIERAB
+            - generic [ref=f4e148]: Web
+        - listitem [ref=f4e150]:
+          - button [ref=f4e151] [cursor=pointer]:
+            - generic [ref=f4e152]: Plus
+    - heading [level=1] [ref=f4e158]: Résultats de recherche
+    - generic [ref=f4e159]:
+      - generic [ref=f4e160]:
+        - generic [ref=f4e168]:
+          - heading [level=2] [ref=f4e169]:
+            - generic [ref=f4e176]: 19e Arrondissement, Paris
+          - generic [ref=f4e178]:
+            - text: ∙
+            - button [ref=f4e179] [cursor=pointer]: Choisir une zone
+          - button [ref=f4e182] [cursor=pointer]
+        - generic [ref=f4e201]:
+          - heading [level=2] [ref=f4e205]:
+            - generic [ref=f4e206]:
+              - generic [ref=f4e207]: Raisonnement…
+              - generic [ref=f4e209]: Recherche en cours…
+              - generic [ref=f4e219]: Réfléchit un peu plus longtemps…
+          - progressbar [ref=f4e222]
+      - main [ref=f4e345]:
+        - generic [ref=f4e349]:
+          - generic [ref=f4e351]:
+            - generic [ref=f4e354]:
+              - generic [ref=f4e358]:
+                - generic [ref=f4e366]:
+                  - button [ref=f4e370] [cursor=pointer]:
+                    - generic [ref=f4e371]: Voir les photos
+                  - generic [ref=f4e374]:
+                    - link [ref=f4e377] [cursor=pointer]:
+                      - /url: /maps/place/Agence+Immobili%C3%A8re+-+Citya+P%C3%A9corari/data=!4m2!3m1!1s0x0:0x8459a9a503e970a8?sa=X&ved=1t:2428&hl=fr&ictx=111
+                    - link [ref=f4e387] [cursor=pointer]:
+                      - /url: /local/place/fid/0x47e66da500601913:0x8459a9a503e970a8/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3DqI4xTZaimFnhyWLiD3eTfQ%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D241.53194%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFnFJNHhUWmFpbUZuaHlXTGlEM2VUZlE%3D&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQpx96BAg7EBI
+                      - generic [ref=f4e389]: Extérieur
+                - generic [ref=f4e392]:
+                  - heading [level=2] [ref=f4e395]:
+                    - link [ref=f4e396] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Agence+Immobili%C3%A8re+-+Citya+P%C3%A9corari&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0SzS-K5bKZ22UnDudFdADxp5lqarR4DzIej1BqNTcRiMR-oWZqNCqttbUVZpkdTyd8EQKmKSA1GFiKFxAV_uIjkqNJGv3lXXUKQNFsSaBWYPay5JHA%3D%3D&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ_coHegQIJxAB
+                      - text: Agence Immobilière - Citya Pécorari
+                  - generic [ref=f4e399]:
+                    - text: 3,1
+                    - button [ref=f4e405] [cursor=pointer]: 264 avis Google
+                    - button [ref=f4e409] [cursor=pointer]
+                    - text: Agence immobilière à Paris
+                - generic [ref=f4e419]:
+                  - generic [ref=f4e432]:
+                    - link [ref=f4e434] [cursor=pointer]:
+                      - /url: https://www.citya.com/agences-immobilieres/paris-19e-arrondissement-75019/167?utm_campaign=paris_19e_arrondissement&utm_medium=gmb&utm_source=google
+                      - generic [ref=f4e435]: Site Web
+                    - link [ref=f4e441]:
+                      - generic [ref=f4e442] [cursor=pointer]: Itinéraire
+                    - button [ref=f4e451] [cursor=pointer]:
+                      - generic [ref=f4e452]: Rédiger un avis
+                    - button [ref=f4e462] [cursor=pointer]:
+                      - generic [ref=f4e465]: Enregistrer
+                    - button [ref=f4e468] [cursor=pointer]:
+                      - generic [ref=f4e469]: Partager
+                    - button [ref=f4e475] [cursor=pointer]:
+                      - generic [ref=f4e476]: Appeler
+                  - generic [ref=f4e485]:
+                    - generic [ref=f4e488]:
+                      - generic [ref=f4e489]:
+                        - link [ref=f4e490] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citya+pecorari+adresse&ludocid=9536840212134064296&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ6BN6BAgwEAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 9 Rue de Joinville, 75019 Paris
+                    - generic [ref=f4e494]:
+                      - generic [ref=f4e495]:
+                        - link [ref=f4e496] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citya+pecorari+t%C3%A9l%C3%A9phone&ludocid=9536840212134064296&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ6BN6BAgxEAI
+                          - text: Téléphone
+                        - text: ":"
+                      - link [ref=f4e499] [cursor=pointer]:
+                        - /url: "#"
+                        - text: 01 40 36 82 09
+                    - generic [ref=f4e501]:
+                      - generic [ref=f4e502]:
+                        - link [ref=f4e503] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citya+pecorari+horaires&ludocid=9536840212134064296&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ6BN6BAgvEAI
+                          - text: Horaires
+                        - text: ":"
+                      - button [ref=f4e505]:
+                        - generic [ref=f4e506]: Fermé · Ouvre à 09:00 lun.
+                    - link [ref=f4e520] [cursor=pointer]:
+                      - /url: "#"
+                      - text: Suggérer une modification
+                  - generic [ref=f4e530]:
+                    - generic [ref=f4e531]:
+                      - text: "Rendez-vous:"
+                      - link [ref=f4e533] [cursor=pointer]:
+                        - /url: https://www.citya.com/nous-contacter/167?
+                        - text: citya.com
+                    - button [ref=f4e535] [cursor=pointer]:
+                      - generic [ref=f4e536]: Fournisseurs
+                  - generic [ref=f4e548]:
+                    - generic [ref=f4e550]:
+                      - generic [ref=f4e551]: Les avis ne sont pas vérifiés
+                      - button [ref=f4e554] [cursor=pointer]
+                    - generic [ref=f4e561]:
+                      - button [ref=f4e563] [cursor=pointer]:
+                        - generic [ref=f4e564]:
+                          - generic [ref=f4e565]: Google
+                          - list [ref=f4e572]:
+                            - listitem [ref=f4e573]: 3,1/5
+                            - listitem [ref=f4e574]: 264 avis
+                      - link [ref=f4e575] [cursor=pointer]:
+                        - /url: https://www.pagesjaunes.fr/pros/00290003
+                        - generic [ref=f4e576]:
+                          - generic [ref=f4e577]: Pages Jaunes
+                          - list [ref=f4e584]:
+                            - listitem [ref=f4e585]: 1,5/5
+                            - listitem [ref=f4e586]: 10 avis
+                    - button [ref=f4e588]:
+                      - generic [ref=f4e589] [cursor=pointer]: Ajouter un avis
+                    - link [ref=f4e633] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rqi--IS5qqFykt0uxkCtW_Mzm3uLbuUfhgFj0UVDZhIEePPZmY7jKsFw5Z4PtscGu4i4_jI575jS9nNoV9_KhF9A7uS0dVlnhEm8UvW210IOsG-4GZDN9GL9NnUze6U2yzl1DAZak4eCY3hATSizlGke1Jk94VToq-Q2_TEN8VsUyK5tyVHqSy8K_UbfitWhEI1jQHX6KaHwYNRIoSahXCYGSsJJPtKotOWECzXduoToqnayk&q=Agence+Immobili%C3%A8re+-+Citya+P%C3%A9corari+Avis&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_yGkKQkpFohuHlQZECCeVc1cc1-a-RUu_6g0P5IvdAgOIoKf99fM_EULK32HrCjWtEq1IEMWwc6M4JNEUhmPedupvjSlKl8jI0wydH5v_AWSG82aowEhiem9J397vUeJii5nONo%3D&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ_4MLegQIQRAQ
+                      - generic [ref=f4e634]: Afficher tous les avis
+                  - generic [ref=f4e647]:
+                    - generic [ref=f4e648]:
+                      - heading [level=3] [ref=f4e649]: "Source : Agence Immobilière - Citya Pécorari"
+                      - button [ref=f4e651]
+                    - generic [ref=f4e655]:
+                      - text: "\"Citya Paris Immobilier Pécorari, votre agence de confiance au cœur de Paris 19e, offre une gamme complète de services immobiliers. Que vous soyez propriétaire désireux de vendre, en quête de votre futur achat ou futur locataire, notre équipe..."
+                      - button [ref=f4e656] [cursor=pointer]: Plus
+                  - generic [ref=f4e662]:
+                    - heading [level=3] [ref=f4e663]: Profils
+                    - generic [ref=f4e664]:
+                      - link [ref=f4e668] [cursor=pointer]:
+                        - /url: /goto?url=CAEScAHrOzAVP4V4TMZjEEunYX2Zp9R8mkgFS3krxgwcHSu54Nf0dOKX18xFYFPw95pcsAVkAMdegUzYNojHt7SDIm8CdwRncLxH-wcgzCZfYV9MTIZnbI7X8K7Ja-MNEcfazTKA7p-da7yI7Fv_YuRYCf0
+                        - generic [ref=f4e669]: YouTube
+                      - link [ref=f4e678] [cursor=pointer]:
+                        - /url: /goto?url=CAESYQHrOzAVObyXwTs892Vsvdwlpz1qOw12jmKGNUkfXo4EXHJ0OkRbTZp7F0k49oQ3P9njLRGFxq0XTPKUqsE0SxXBqIBU9eD445vcc7u7CGpgJ3nUlvlPR4tzGhssutC5cf4
+                        - generic [ref=f4e679]: Facebook
+                      - link [ref=f4e688] [cursor=pointer]:
+                        - /url: /goto?url=CAESWwHrOzAV_L69yb9im9yGckRrMqzkJz2L-UXAHyErT6hNXSlAZP-XTVOEDJXxZzhsHMdueehY8rtoBC6e1l6kbCBYtZ61YHABJNvzoLmwLoH3rmFhtRAhErYfU94
+                        - generic [ref=f4e689]: X (Twitter)
+                      - link [ref=f4e698] [cursor=pointer]:
+                        - /url: /goto?url=CAESXwHrOzAVGmHf443sZ79Thg1NeFCIMfgySkIJzacnQuhD1hS4AXfQGF7rhg59hGx2fKzRyv2gUTXyvMkKlcPypuGlw1TbuU0KEjP1tds1x7gL7PnAix3czhkWrCUQIqg0
+                        - generic [ref=f4e699]: TikTok
+                  - generic [ref=f4e711]:
+                    - heading [level=3] [ref=f4e712]:
+                      - link [ref=f4e713] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=CITYA+PECORARI&stick=H4sIAAAAAAAAAONgFuLVT9c3NCwpSi4qqcyxVELlagkGZ6aklidWFvulVpQEl6QWFC9i5XP2DIl0VAhwdfYPcgzy3MHKCAAOImBpRwAAAA&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQMSgAegQIKxAB
+                        - text: Recherches associées
+                    - generic [ref=f4e714]:
+                      - link [ref=f4e716] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Citya+Modern%27Imm&si=APenkKllX05q7xl66dAosm6nb1iuMgV7Bv8meTZS-zIzIS3OM3gDSyabwByL7W28SGVZGhbkMe-TO_4RoVOvEpjLfRO2d-tKAdTZx-mx_j_y7tlieTPdbo95S9rurkXq3OO9mnazCxxYGjQdt5kYapD9cxHTQvlUuCYKRfV04A0b_W3X6eiOzKUOEJgClLSBVyPzWv2ePHv5uVOznuqxQeTpCVGvDKEvmx29JC8coEOS1q7pih0UBhaqXMUkN-Vm-hMurjch5Xcqqv6K5YJKwlZdQwSeoP_ri-YjmAg9snV97-b84Z3Wq2uUXHqa5MsHa3nfamYDnveh&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQxA16BAgrEAQ
+                        - generic [ref=f4e720]: Agence Immobilière Paris - Citya Modern'imm
+                      - link [ref=f4e722] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Agence+Immobili%C3%A8re+Paris+-+Cabinet+Journ%C3%A9&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0Yg8Qrs9tNAMWDX8z-hSlc7eBkA4rJi0gtO0I-rksrk2j-PBuvXoRfrvJFPfibpvmF68JSwFiEpc7rYxeitvu7f3zhHOFUmD58ZorAkXfSxFQweV6gP2XWvXCkJfGc48TfzMc_ZVQGGoPVwkoSidcQwiigfCj8eFYSnEqLEGt5hCsI12E7Gv1H4oteC5bmAXcByWMUThuEFULeJe7ipubfTLEplFza-_yFqfQVzuk0KlUdWkBMtcpKTuTqlMRQJ8Z0NmuaR5fRx071ANML2ADxy6T63aiD6s811ImBxxzAzzuI-j3GfhDbTRRo_C8cJVk5R17C8%3D&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQxA16BAgrEAc
+                        - generic [ref=f4e726]: Agence Immobilière Paris - Cabinet Journé
+                      - link [ref=f4e728] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=citya+nogent+sur+marne&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0QLfyMdkNVYh3QSV_MsSTz0TqwNgsJJMaZdPAPVlg-ol751x-kJHTA6BCXDBOsLkEXgj7SzY6H4EzRpWuOKc48Ro_61yIKpwjYlxykc5mdsZOiTUzh-OqOdAh7IERQsdd40cniI1B__v2TQO5R94DzJhCUTLdf02kv1m2jT2JPSIB7_A3awG8BWGcwTiXqdLO7E0oBv3igAKB9ONRvEJlzwz-IzMmNQY3WdORFbw6fSjX-4etjy5Pr4oAtHUtWde6VTYgFPzZicql3mXHIRxotbLjNfeC5zdnkXnFZzzA2_0wdWx-A%3D%3D&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQxA16BAgrEAo
+                        - generic [ref=f4e732]: Agence Nogent-Sur-Marne - Citya SGA
+                      - link [ref=f4e734] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=CITYA+ETOILE&si=APenkKnTl1SNyGw93eJictriFKjA8wrAY1gKp22d_AvA68HEctseyrCvrf1sxDXnw4X2fouxF4xP55epsNsewlJ2IjjrYFGPbTNMO2Q4_KWIgZ1zwo0ayc8l9LjlemRHflXnT7vMcyKtBpP59voR-Q3cfaXEp-hRCblvs1eIng1FLdXSaxvhfy_RbJCI0KSXPitmfi58qExndjW7yxWYT5botLpKJG1h9uqWQIRF2NZFYHyjzhUn3UWWL659RYkOcPc405l8IK1QDfg_bmYA8wffo_d94L7qc6WATH0ftdMThJKVa97w2XVgRo3lIy0x9Bff5RmEHPHW&sa=X&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQxA16BAgrEA0
+                        - generic [ref=f4e738]: Agence Immobilière Paris - Citya Étoile
+              - link [ref=f4e740] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=f4e750]:
+              - generic [ref=f4e751]:
+                - link [ref=f4e753] [cursor=pointer]:
+                  - /url: "#"
+                  - text: 01 40 36 82 09
+                - generic [ref=f4e754]: Agence Immobilière - Citya Pécorari – Numéro de téléphone principal
+              - list [ref=f4e758]:
+                - button [ref=f4e759] [cursor=pointer]:
+                  - generic [ref=f4e760]: Appeler
+                - link [ref=f4e764] [cursor=pointer]:
+                  - /url: /maps/dir//Agence+Immobili%C3%A8re+-+Citya+P%C3%A9corari/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x47e66da500601913:0x8459a9a503e970a8?sa=X&ved=1t:97007&hl=fr&ictx=111
+                  - generic [ref=f4e765]: Itinéraire
+                - button [ref=f4e774] [cursor=pointer]:
+                  - generic [ref=f4e775]:
+                    - text: Copier
+                    - textbox [aria-hidden] [ref=f4e782]: 01 40 36 82 09
+          - generic [ref=f4e785]:
+            - heading [level=2] [ref=f4e786]: Résultats Web
+            - generic [ref=f4e787]:
+              - generic [ref=f4e790]:
+                - link [ref=f4e792] [cursor=pointer]:
+                  - /url: /goto?url=CAEShQEB6zswFdFTG51ttBRx1tHnbx0F5pWe00PTaKwZuI5DsyXO17VWZxkuctrIlfB1jFStgfY-1J3Wqg5Gc_45j7t3hpYeIQjn4IoxYcEZJOslGy5A6kqZDGPlwx5ZJ1MDS3XutnuqN5cYRVr02QG6WQAbk4Fhzh-qRr8Hc9eFnQlVmRRuzkVQ
+                  - heading [level=3] [ref=f4e793]: Agence immobilière Paris 19e Arrondissement (75019)
+                  - generic [ref=f4e799]:
+                    - generic [ref=f4e800]: Citya Immobilier
+                    - generic [ref=f4e802]: https://www.citya.com › agences-immobilieres › paris-19...
+                - button [ref=f4e808] [cursor=pointer]
+              - generic [ref=f4e815]:
+                - text: "Agence immobilière :"
+                - emphasis [ref=f4e816]: Citya Pecorari
+                - text: à
+                - emphasis [ref=f4e817]: Paris
+                - text: "19e Arrondissement vous guide dans votre projet immobilier : estimation, achat, location, gestion locative et ..."
+              - generic [ref=f4e820]:
+                - img [ref=f4e822]: 3,0(558)
+                - button [ref=f4e828]
+          - generic [ref=f4e835]:
+            - generic [ref=f4e838]:
+              - link [ref=f4e840] [cursor=pointer]:
+                - /url: /goto?url=CAESYAHrOzAVZgD23p3gm6UNTxPM-VgAqjYTHePbyYQGIXKd0xI4dXSFrCFCLDi3edtFc5FrVnogpMH1WxEa_rFIzuHjQ9DfM6chHftAMYGzjdYWRBKbox6QSJTLcHK1MV0wFQ
+                - heading [level=3] [ref=f4e841]: Citya Immobilier - 9 rue Joinville 75019 Paris
+                - generic [ref=f4e847]:
+                  - generic [ref=f4e848]: Pages Jaunes
+                  - generic [ref=f4e850]: https://www.pagesjaunes.fr › pros
+              - button [ref=f4e856] [cursor=pointer]
+            - generic [ref=f4e863]:
+              - text: "20 à 49 salariés; Autres dénominations: CITYA IMMOBILIER PECORARI"
+              - emphasis [ref=f4e864]: CITYA PECORARI
+              - text: "... Adresse :"
+              - emphasis [ref=f4e865]: 9 rue de Joinville 75019 Paris
+              - text: . Comptes annuels et rapports. Date ...
+          - generic [ref=f4e869]:
+            - generic [ref=f4e872]:
+              - link [ref=f4e874] [cursor=pointer]:
+                - /url: /goto?url=CAESgQEB6zswFb8QD4g-6OrwJjrcJIFGEz7o588xl7v14rVVh025qJUqvoFqaent701cud22B0yCpRJ_uOfMtorYepNKGCUyrxWYxEIYxmllxJhnps453sabOIsUxrsAuSM00p7_MXJScjc8Jfb347MbxZYQsnvF5lUEkLT_ntEi2fdAL6s
+                - heading [level=3] [ref=f4e875]: Agence immobilière à Paris 19e Arrondissement (75019)
+                - generic [ref=f4e881]:
+                  - generic [ref=f4e882]: Citya Immobilier
+                  - generic [ref=f4e884]: https://www.citya.com › ... › Île-de-France › Paris (75)
+              - button [ref=f4e890] [cursor=pointer]
+            - generic [ref=f4e897]:
+              - emphasis [ref=f4e898]: 75019 Paris 19e
+              - text: Arrondissement FRANCE. Logo Agence immo
+              - emphasis [ref=f4e899]: Citya Pecorari
+              - text: . 01 40 36 82 09 Afficher le numéro 01 40 36 82 09. Consulter l'agence.
+              - emphasis [ref=f4e900]: Contacter
+              - text: l'agence.
+          - generic [ref=f4e905]:
+            - heading [level=2] [ref=f4e907]: Autres questions
+            - generic [ref=f4e908]:
+              - button [ref=f4e914] [cursor=pointer]:
+                - generic [ref=f4e915]: Quel est le salaire d'un gestionnaire locatif chez Citya ?
+              - button [ref=f4e928] [cursor=pointer]:
+                - generic [ref=f4e929]: Qui est le PDG de Citya ?
+              - button [ref=f4e942] [cursor=pointer]:
+                - generic [ref=f4e943]: Quelle est la réputation de Citya immobilier ?
+              - button [ref=f4e956] [cursor=pointer]:
+                - generic [ref=f4e957]: Quels sont les honoraires du syndic Citya ?
+          - generic [ref=f4e966]:
+            - heading [level=2] [ref=f4e967]: Résultats Web
+            - generic [ref=f4e968]:
+              - generic [ref=f4e971]:
+                - link [ref=f4e973] [cursor=pointer]:
+                  - /url: /goto?url=CAESdgHrOzAV9SLaj1F9SZH32PnaL-xjxlsySQG6eMmzku51EF4VbgArIcdcMckN0DAGiMcW62cp-xQQe1z85aR6kskvFXg85nlwa1ifbADyFOjTxWZqDtxhH3bBzR3BDn0iq96X9XhqCGfRUtCxMkDmtM7O0eExGGM
+                  - heading [level=3] [ref=f4e974]: citya immobilier pecorari (citya pecorari)
+                  - generic [ref=f4e980]:
+                    - generic [ref=f4e981]: data.gouv.fr
+                    - generic [ref=f4e983]: https://annuaire-entreprises.data.gouv.fr › ... › 68.32A
+                - button [ref=f4e989] [cursor=pointer]
+              - generic [ref=f4e996]:
+                - text: Siège social de CITYA IMMOBILIER PECORARI (
+                - emphasis [ref=f4e997]: CITYA PECORARI
+                - text: ) ; Adresse.
+                - emphasis [ref=f4e998]: 9 RUE DE JOINVILLE 75019 PARIS
+                - text: ; SIRET. 411 301 039 00086 ; Clef NIC. 00086 ; Activité ...
+          - generic [ref=f4e1002]:
+            - generic [ref=f4e1005]:
+              - link [ref=f4e1007] [cursor=pointer]:
+                - /url: /goto?url=CAESlwEB6zswFYKb7TQQG4h4wjAlsXcE96AfO2fBj2dPkY5LRR3fLMSj2i5lv3Cv3l1kK1q8L0OGrG4qzbEbdIJ8lkHLaKbOFGJd5tdk4_F67dh4BB0ux2FeWT5hqG-TluaF4H4SS-Nif_cCYI-Z5qRce9mFcWs2mbg1w_LyLF12POo0QhQbd3xceQfPinl3UPWVjTZqKgSRPrcj
+                - heading [level=3] [ref=f4e1008]: Agence immobilière à Paris - 19ème arrondissement (75019)
+                - generic [ref=f4e1014]:
+                  - generic [ref=f4e1015]: Location-etudiant.fr
+                  - generic [ref=f4e1017]: https://www.location-etudiant.fr › detail_agence_immo...
+              - button [ref=f4e1023] [cursor=pointer]
+            - generic [ref=f4e1030]:
+              - text: L'agence immobilière
+              - emphasis [ref=f4e1031]: CITYA PECORARI
+              - text: IMMOBILIER est située au 9 Rue Joinville,
+              - emphasis [ref=f4e1032]: 75019 Paris
+              - text: "-"
+              - emphasis [ref=f4e1033]: 19ème
+              - text: arrondissement /
+              - emphasis [ref=f4e1034]: Téléphone
+              - text: ": 0140368209"
+          - generic [ref=f4e1038]:
+            - generic [ref=f4e1041]:
+              - link [ref=f4e1043] [cursor=pointer]:
+                - /url: /goto?url=CAESaAHrOzAV7KLe3uxSoc4FCP2xq1Z4oSsl7Seei6snE6NB705uhBJW8c7m9c71tUmbk_j8wiUgmSLS5U6rFhVWAyAJDQfJxq3X-EmZKjThE__O6ZD0xI__TFHDLD6lqZOVFkydggRDRQYO
+                - heading [level=3] [ref=f4e1044]: Citya Immobilier à Paris
+                - generic [ref=f4e1050]:
+                  - generic [ref=f4e1051]: L'annuaire 118 712
+                  - generic [ref=f4e1053]: https://www.118712.fr › agences immobilières
+              - button [ref=f4e1059] [cursor=pointer]
+            - generic [ref=f4e1066]:
+              - text: www.citya.com/agences-immobilieres/
+              - emphasis [ref=f4e1067]: paris
+              - text: "-"
+              - emphasis [ref=f4e1068]: 19e
+              - text: "-arrondissement-"
+              - emphasis [ref=f4e1069]: "75019"
+              - text: /167 Voir ...
+              - emphasis [ref=f4e1070]: CITYA PECORARI
+              - text: ". Nombre d'établissements: 0. A découvrir également. The"
+              - emphasis [ref=f4e1071]: Phone
+              - text: ...
+          - generic [ref=f4e1075]:
+            - generic [ref=f4e1078]:
+              - link [ref=f4e1080] [cursor=pointer]:
+                - /url: /goto?url=CAESXAHrOzAVNlEb2EAmRzGQ9SvuzpjgPU6prGN0ULPVJCHpiDuBwxErhfxh9JVaprUMAOpls7JlJl8nLUP_pdItRe155v7rAH1SmA6E3N5GCWev1J9fx9iY0cWarIzB
+                - heading [level=3] [ref=f4e1081]: Contactez-nous
+                - generic [ref=f4e1087]:
+                  - generic [ref=f4e1088]: Citya Immobilier
+                  - generic [ref=f4e1090]: https://www.citya.com › nous-contacter
+              - button [ref=f4e1096] [cursor=pointer]
+            - generic [ref=f4e1103]:
+              - text: "["
+              - emphasis [ref=f4e1104]: Paris 19e
+              - text: Arrondissement]
+              - emphasis [ref=f4e1105]: Citya Pecorari
+              - text: ","
+              - emphasis [ref=f4e1106]: 9 rue de Joinville
+              - text: ", ["
+              - emphasis [ref=f4e1107]: Paris
+              - text: 8e ...
+              - emphasis [ref=f4e1108]: Contact
+              - text: ", 4 rue des coches, [Saint-Julien-en-Genevois] Citya Du Genevois, 26B ..."
+          - generic [ref=f4e1112]:
+            - generic [ref=f4e1115]:
+              - link [ref=f4e1117] [cursor=pointer]:
+                - /url: /goto?url=CAEShQEB6zswFfQFQiZy4SElpniXaB8MibfUSDXEInSXgjmUSsFNWJJQVL4B5coccKYKEkwZDaMt4fW8AKp0NQAz83kd2RkNdUhaL0Y1yBksGJBWedn-1bjWlsb19EYkzLjaymQX-09isut9VnCpTZLADH_f3wwPWW8ZvzXWjPUBoeQTON4XnFoz
+                - heading [level=3] [ref=f4e1118]: CITYA PECORARI - Agence immobilière FNAIM - PARIS ...
+                - generic [ref=f4e1124]:
+                  - generic [ref=f4e1125]: Fnaim
+                  - generic [ref=f4e1127]: https://www.fnaim.fr › ... › ILE-DE-FRANCE › PARIS
+              - button [ref=f4e1133] [cursor=pointer]
+            - generic [ref=f4e1140]:
+              - emphasis [ref=f4e1141]: CITYA PECORARI
+              - text: . Transaction Vente Achat; Location habitation; Syndic de copropriété; Administrateur de biens.
+              - emphasis [ref=f4e1142]: 9 RUE DE JOINVILLE 75019 PARIS 19
+              - text: · www.citya.com.
+          - generic [ref=f4e1146]:
+            - generic [ref=f4e1149]:
+              - link [ref=f4e1151] [cursor=pointer]:
+                - /url: /goto?url=CAESngEB6zswFdVHOavK6_kPMkX_RASTtb_SRUKXF6i1djMch_aAwS7tsAj4UXIpp24fbWZeYHkiVDJPAoxijO9h8dfyltNt0bFA4-UwDHvMH2MPs_4md87rZkuPx1pprwiT6j9mkL10T_eFdJbQM9wc3vkMujO3i5J4QgtENw6FKHbkYmPxHk7L3ZAV56veb2kyg2FR6w4GZHKMyd0GO_UR8g
+                - heading [level=3] [ref=f4e1152]: Agence Immobilière Paris - Citya Pécorari à Paris
+                - generic [ref=f4e1158]:
+                  - generic [ref=f4e1159]: consultants.contact
+                  - generic [ref=f4e1161]: https://consultant-immobilier.consultants.contact › agen...
+              - button [ref=f4e1167] [cursor=pointer]
+            - generic [ref=f4e1173]:
+              - generic [ref=f4e1174]: 19 nov. 2025 —
+              - generic [ref=f4e1175]:
+                - text: Découvrez toutes les informations concernant Agence immobilière Agence Immobilière
+                - emphasis [ref=f4e1176]: Paris
+                - text: "-"
+                - emphasis [ref=f4e1177]: Citya Pécorari
+                - text: ...
+                - emphasis [ref=f4e1178]: 9 Rue de Joinville
+                - text: ","
+                - emphasis [ref=f4e1179]: 75019 Paris
+                - text: ...
+        - navigation [ref=f4e1182]:
+          - heading [level=1] [ref=f4e1183]: Navigation par pages
+          - text: "1"
+          - link [ref=f4e1186] [cursor=pointer]:
+            - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&ei=2vSkaqrbMLr4kdUPkoeBqAo&start=10&sa=N&sstk=AS6-VmL3RoBEb5DC7Qj2MvNvTJgfdr2x7uUUdOByYhCK2oVxOf5nQsWbW9iDZQkHwNt1WkFKnBajwgG_KWYsEnNFD7UcIMNNV_2CKg&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ8tMDegQIXhAE
+            - text: "2"
+          - link [ref=f4e1188] [cursor=pointer]:
+            - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&ei=2vSkaqrbMLr4kdUPkoeBqAo&start=20&sa=N&sstk=AS6-VmL3RoBEb5DC7Qj2MvNvTJgfdr2x7uUUdOByYhCK2oVxOf5nQsWbW9iDZQkHwNt1WkFKnBajwgG_KWYsEnNFD7UcIMNNV_2CKg&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ8tMDegQIXhAG
+            - text: "3"
+          - link [ref=f4e1190] [cursor=pointer]:
+            - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&ei=2vSkaqrbMLr4kdUPkoeBqAo&start=30&sa=N&sstk=AS6-VmL3RoBEb5DC7Qj2MvNvTJgfdr2x7uUUdOByYhCK2oVxOf5nQsWbW9iDZQkHwNt1WkFKnBajwgG_KWYsEnNFD7UcIMNNV_2CKg&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ8tMDegQIXhAI
+            - text: "4"
+          - link [ref=f4e1192] [cursor=pointer]:
+            - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&ei=2vSkaqrbMLr4kdUPkoeBqAo&start=40&sa=N&sstk=AS6-VmL3RoBEb5DC7Qj2MvNvTJgfdr2x7uUUdOByYhCK2oVxOf5nQsWbW9iDZQkHwNt1WkFKnBajwgG_KWYsEnNFD7UcIMNNV_2CKg&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ8tMDegQIXhAK
+            - text: "5"
+          - heading [level=2] [ref=f4e1194]:
+            - link [ref=f4e1195] [cursor=pointer]:
+              - /url: /search?q=%22Citya+Pecorari%22+%229+rue+de+Joinville%22+OR+Paris+19+contact+t%C3%A9l%C3%A9phone&sca_esv=ead2612d6155db9a&hl=fr&ei=2vSkaqrbMLr4kdUPkoeBqAo&start=10&sa=N&sstk=AS6-VmL3RoBEb5DC7Qj2MvNvTJgfdr2x7uUUdOByYhCK2oVxOf5nQsWbW9iDZQkHwNt1WkFKnBajwgG_KWYsEnNFD7UcIMNNV_2CKg&ved=2ahUKEwiqsL7JuOiWAxU6fKQEHZJDAKUQ8NMDegQIXhAM
+              - generic [ref=f4e1197]: Suivant
+      - complementary [ref=f4e1198]:
+        - heading [level=2] [ref=f4e1199]: Résultats complémentaires
+    - contentinfo [ref=f4e1200]:
+      - heading [level=1] [ref=f4e1201]: Liens de pied de page

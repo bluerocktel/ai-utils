@@ -1,0 +1,1112 @@
+- generic [ref=f24e1]:
+  - dialog "Bienvenue chez Societe.com Gestion du consentement" [ref=f24e4]:
+    - document [active] [ref=f24e5]:
+      - button "Continuer sans accepter" [ref=f24e6] [cursor=pointer]: Continuer sans accepter →
+      - heading "\"logo societe.com\"" [level=1] [ref=f24e8]
+      - generic [ref=f24e9]:
+        - paragraph [ref=f24e11]:
+          - text: Avec votre accord, nous et
+          - button "nos 488 partenaires" [ref=f24e12] [cursor=pointer]
+          - text: utilisons des cookies ou technologies similaires pour stocker, consulter et traiter des données personnelles telles que votre visite sur ce site internet, les adresses IP et les identifiants de cookie. Certains partenaires ne demandent pas votre consentement pour traiter vos données et se fondent sur leur intérêt commercial légitime. À tout moment, vous pouvez retirer votre consentement ou vous opposer au traitement des données fondé sur l'intérêt légitime en cliquant sur « En savoir plus » ou en allant dans notre politique de confidentialité sur ce site internet.
+        - paragraph [ref=f24e14]:
+          - heading "Vos données personnelles sont traitées pour les finalités suivantes:" [level=2] [ref=f24e15]
+          - generic [ref=f24e16]: Analyser activement les caractéristiques de l’appareil pour l’identification, Mesure d'audience, Publicités et contenu personnalisés, mesure de performance des publicités et du contenu, études d’audience et développement de services, Stocker et/ou accéder à des informations sur un appareil, Utiliser des données de géolocalisation précises
+      - generic [ref=f24e17]:
+        - button "En savoir plus" [ref=f24e18] [cursor=pointer]
+        - button "Accepter et Fermer" [ref=f24e19] [cursor=pointer]
+  - banner [ref=f24e21]:
+    - link "Page d'accueil Société.com" [ref=f24e23] [cursor=pointer]:
+      - /url: /
+    - text:        Nouveauté  
+    - search [ref=f24e26]:
+      - generic [ref=f24e27]:
+        - generic [aria-hidden] [ref=f24e28]: 
+        - textbox "Entreprise, dirigeant, SIREN..." [ref=f24e29]
+        - text: 
+    - list [ref=f24e30]:
+      - text:  
+      - listitem: 
+      - listitem [ref=f24e31]:
+        - button "Menu principal" [ref=f24e32] [cursor=pointer]
+  - main [ref=f24e35]:
+    - navigation "Breadcrumb" [ref=f24e36]:
+      - list [ref=f24e37]:
+        - listitem [ref=f24e38]:
+          - link "Entreprises françaises" [ref=f24e39] [cursor=pointer]:
+            - /url: /entreprises
+          - text: 
+        - listitem [ref=f24e41]:
+          - link "Paris" [ref=f24e42] [cursor=pointer]:
+            - /url: /entreprises/paris-75
+          - text: 
+        - listitem [ref=f24e44]:
+          - link "79 - Activités des agences de voyag..." [ref=f24e45] [cursor=pointer]:
+            - /url: /entreprises/paris-75/activites-des-agences-de-voyage-voyagistes-services-de-reservation-et-activites-connexes
+          - text: 
+        - listitem [ref=f24e46]:
+          - link "7990Z - Autres services de réservation..." [ref=f24e47] [cursor=pointer]:
+            - /url: /entreprises/paris-75/autres-services-de-reservation-et-activites-connexes-7990Z
+          - text: 
+        - listitem [ref=f24e48]:
+          - generic [ref=f24e49]: PROMZ HOTEL
+    - generic [ref=f24e51]:
+      - generic [ref=f24e52]:
+        - generic [ref=f24e53]:
+          - img "France" [ref=f24e56] [cursor=pointer]
+          - heading "PROMZ HOTEL" [level=1] [ref=f24e57]
+        - generic [ref=f24e58]:
+          - generic [ref=f24e59]:
+            - generic [aria-hidden] [ref=f24e60]: 
+            - text: Active
+          - generic [ref=f24e61]: 10 à 19 salariés
+      - generic [ref=f24e64]:
+        - button "Solvabilité" [ref=f24e65] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e66]: 
+        - button "Appeler" [ref=f24e70] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e71]: 
+        - button "Surveiller" [ref=f24e73] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e74]: 
+      - text:  OU
+    - generic [ref=f24e79]:
+      - generic [ref=f24e80]:
+        - generic [ref=f24e81]:
+          - term [ref=f24e82]: SIREN
+          - definition [ref=f24e83]:
+            - text: 802 142 174
+            - button "Copier le numéro SIREN" [ref=f24e84] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e85]: 
+        - generic [ref=f24e86]:
+          - term [ref=f24e87]: SIRET DU SIEGE SOCIAL
+          - definition [ref=f24e88]:
+            - text: 802 142 174 00035
+            - button "Copier le numéro SIRET" [ref=f24e89] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e90]: 
+        - generic [ref=f24e91]:
+          - term [ref=f24e92]: NUMÉRO DE TVA
+          - definition [ref=f24e93]:
+            - text: FR94802142174
+            - button "Copier le numéro de TVA Intracommunautaire" [ref=f24e94] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e95]: 
+        - generic [ref=f24e96]:
+          - term [ref=f24e97]: DATE DE CREATION
+          - definition [ref=f24e98]: 7 mai 2014
+        - generic [ref=f24e99]:
+          - term [ref=f24e100]: ACTIVITÉ (NAF / APE)
+          - definition [ref=f24e101]:
+            - text: Autres services de réservation et activités connexes - 7990Z
+            - button "Copier le code NAF ou APE" [ref=f24e102] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e103]: 
+        - generic [ref=f24e104]:
+          - term [ref=f24e105]: FORME JURIDIQUE
+          - definition [ref=f24e106]:
+            - text: Société par actions simplifiée
+            - button "Copier la forme juridique" [ref=f24e107] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e108]: 
+        - generic [ref=f24e109]:
+          - term [ref=f24e110]: ADRESSE
+          - definition [ref=f24e111]:
+            - text: 11 RUE D'ORSEL, 75018 PARIS
+            - button "Copier l'adresse principale de l'entreprise" [ref=f24e112] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e113]: 
+        - generic [ref=f24e114]:
+          - term [ref=f24e115]: DIRIGEANTS
+          - definition [ref=f24e116]:
+            - link "Haby DJIMERA-DIA" [ref=f24e117] [cursor=pointer]:
+              - /url: /manager/Haby.DJIMERA-DIA.uugb5fQyAEl.html
+            - link "+ 2 autres dirigeants" [ref=f24e118] [cursor=pointer]:
+              - /url: "#__managers"
+        - generic [ref=f24e119]:
+          - term [ref=f24e120]: SOURCES & MISES À JOUR LE 11/09/2026
+          - definition [ref=f24e121]:
+            - generic [ref=f24e122]:
+              - link "Insee" [ref=f24e123] [cursor=pointer]:
+                - /url: https://www.insee.fr/fr/accueil
+              - text: ","
+            - link "RNE" [ref=f24e125] [cursor=pointer]:
+              - /url: https://registre.entreprises.gouv.fr/
+      - generic [ref=f24e127]:
+        - button "Mentions légales" [ref=f24e128] [cursor=pointer]
+        - button "Statuts à jour" [ref=f24e129] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e130]: 
+        - button "Obtenir le rapport" [ref=f24e132] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e133]: 
+    - generic [ref=f24e135]:
+      - navigation [ref=f24e136]:
+        - list [ref=f24e137]:
+          - listitem [ref=f24e138]:
+            - link "Kbis" [ref=f24e139] [cursor=pointer]:
+              - /url: "#__infos"
+              - generic [aria-hidden] [ref=f24e140]: 
+              - text: Kbis
+          - listitem [ref=f24e141]:
+            - link "Contact" [ref=f24e142] [cursor=pointer]:
+              - /url: "#__contact"
+              - generic [aria-hidden] [ref=f24e143]: 
+              - text: Contact
+          - listitem [ref=f24e144]:
+            - link "Établissements" [ref=f24e145] [cursor=pointer]:
+              - /url: "#__establishments"
+              - generic [aria-hidden] [ref=f24e146]: 
+              - text: Établissements
+          - listitem [ref=f24e147]:
+            - link "Dirigeants" [ref=f24e148] [cursor=pointer]:
+              - /url: "#__managers"
+              - generic [aria-hidden] [ref=f24e149]: 
+              - text: Dirigeants
+          - listitem [ref=f24e150]:
+            - link "Finances" [ref=f24e151] [cursor=pointer]:
+              - /url: "#__financial"
+              - generic [aria-hidden] [ref=f24e152]: 
+              - text: Finances
+          - listitem [ref=f24e153]:
+            - link "Documents" [ref=f24e154] [cursor=pointer]:
+              - /url: "#__documents"
+              - generic [aria-hidden] [ref=f24e155]: 
+              - text: Documents
+          - listitem [ref=f24e156]:
+            - link "Annonces" [ref=f24e157] [cursor=pointer]:
+              - /url: "#__legalNotices"
+              - generic [aria-hidden] [ref=f24e158]: 
+              - text: Annonces
+          - listitem [ref=f24e159]:
+            - link "Extra-financier" [ref=f24e160] [cursor=pointer]:
+              - /url: "#__xfinancial"
+              - generic [aria-hidden] [ref=f24e161]: 
+              - text: Extra-financier
+          - listitem [ref=f24e162]:
+            - link "Juridique" [ref=f24e163] [cursor=pointer]:
+              - /url: "#__legal"
+              - generic [aria-hidden] [ref=f24e164]: 
+              - text: Juridique
+          - listitem [ref=f24e165]:
+            - link "Historique" [ref=f24e166] [cursor=pointer]:
+              - /url: "#__history"
+              - generic [aria-hidden] [ref=f24e167]: 
+              - text: Historique
+      - generic [ref=f24e169]:
+        - button "Menu des sections" [ref=f24e170] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e171]: 
+        - link "Recherche IA" [ref=f24e172] [cursor=pointer]:
+          - /url: /ia
+          - generic [aria-hidden] [ref=f24e173]: 
+        - list [ref=f24e175]:
+          - listitem [ref=f24e176]:
+            - link "Kbis" [ref=f24e177] [cursor=pointer]:
+              - /url: "#__infos"
+              - generic [aria-hidden] [ref=f24e178]: 
+              - text: Kbis
+          - listitem [ref=f24e179]:
+            - link "Contact" [ref=f24e180] [cursor=pointer]:
+              - /url: "#__contact"
+              - generic [aria-hidden] [ref=f24e181]: 
+              - text: Contact
+          - listitem [ref=f24e182]:
+            - link "Établissements" [ref=f24e183] [cursor=pointer]:
+              - /url: "#__establishments"
+              - generic [aria-hidden] [ref=f24e184]: 
+              - text: Établissements
+          - listitem [ref=f24e185]:
+            - link "Dirigeants" [ref=f24e186] [cursor=pointer]:
+              - /url: "#__managers"
+              - generic [aria-hidden] [ref=f24e187]: 
+              - text: Dirigeants
+          - listitem [ref=f24e188]:
+            - link "Finances" [ref=f24e189] [cursor=pointer]:
+              - /url: "#__financial"
+              - generic [aria-hidden] [ref=f24e190]: 
+              - text: Finances
+          - listitem [ref=f24e191]:
+            - link "Documents" [ref=f24e192] [cursor=pointer]:
+              - /url: "#__documents"
+              - generic [aria-hidden] [ref=f24e193]: 
+              - text: Documents
+          - listitem [ref=f24e194]:
+            - link "Annonces" [ref=f24e195] [cursor=pointer]:
+              - /url: "#__legalNotices"
+              - generic [aria-hidden] [ref=f24e196]: 
+              - text: Annonces
+          - listitem [ref=f24e197]:
+            - link "Extra-financier" [ref=f24e198] [cursor=pointer]:
+              - /url: "#__xfinancial"
+              - generic [aria-hidden] [ref=f24e199]: 
+              - text: Extra-financier
+          - listitem [ref=f24e200]:
+            - link "Juridique" [ref=f24e201] [cursor=pointer]:
+              - /url: "#__legal"
+              - generic [aria-hidden] [ref=f24e202]: 
+              - text: Juridique
+          - listitem [ref=f24e203]:
+            - link "Historique" [ref=f24e204] [cursor=pointer]:
+              - /url: "#__history"
+              - generic [aria-hidden] [ref=f24e205]: 
+              - text: Historique
+    - generic [ref=f24e206]:
+      - list [ref=f24e207]:
+        - listitem [ref=f24e208]:
+          - heading " Finances" [level=2] [ref=f24e209]:
+            - generic [ref=f24e210]: 
+            - text: Finances
+          - list [ref=f24e211]:
+            - listitem [ref=f24e212] [cursor=pointer]: Etude de solvabilité Disponible
+            - listitem [ref=f24e213] [cursor=pointer]: États des dettes Disponible
+            - listitem [ref=f24e214] [cursor=pointer]: Valeur de l'entreprise Disponible
+      - list [ref=f24e215]:
+        - listitem [ref=f24e216]:
+          - heading " Extra-financier" [level=2] [ref=f24e217]:
+            - generic [ref=f24e218]: 
+            - text: Extra-financier
+          - list [ref=f24e219]:
+            - listitem [ref=f24e220] [cursor=pointer]:
+              - text: Bilan carbone®
+              - generic [ref=f24e221]: 
+              - text: Non déposé
+            - listitem [ref=f24e223] [cursor=pointer]:
+              - text: Rapport d'impact
+              - generic [ref=f24e224]: 
+              - text: Non déposé
+            - listitem [ref=f24e226] [cursor=pointer]:
+              - text: Score de souveraineté
+              - generic [ref=f24e227]: 
+              - text: Non déposé
+      - list [ref=f24e229]:
+        - listitem [ref=f24e230]:
+          - heading " Conformité" [level=2] [ref=f24e231]:
+            - generic [ref=f24e232]: 
+            - text: Conformité
+          - list [ref=f24e233]:
+            - listitem [ref=f24e234] [cursor=pointer]: Extrait Kbis Disponible
+            - listitem [ref=f24e235] [cursor=pointer]:
+              - text: Assurance RC PRO
+              - generic [ref=f24e236]: 
+              - text: Non déposé
+            - listitem [ref=f24e238] [cursor=pointer]:
+              - text: Attestation URSSAF
+              - generic [ref=f24e239]: 
+              - text: Non déposé
+    - article [ref=f24e241]:
+      - generic [ref=f24e242]:
+        - generic [ref=f24e243]:
+          - generic [aria-hidden] [ref=f24e244]: 
+          - text: Nouveau • Espace Pro
+        - generic [ref=f24e245]: 100% Gratuit
+      - generic [ref=f24e246]:
+        - heading "Vous travaillez pour PROMZ HOTEL ? Prenez-en le contrôle." [level=2] [ref=f24e247]:
+          - text: Vous travaillez pour PROMZ HOTEL ?
+          - generic [ref=f24e248]: Prenez-en le contrôle.
+        - button "Associer à mon compte" [ref=f24e249] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f24e250]: 
+    - generic [ref=f24e253]:
+      - article [ref=f24e255]:
+        - heading "Rapport complet officiel" [level=2] [ref=f24e257]
+        - generic "Rapport complet officiel" [ref=f24e258]:
+          - list [ref=f24e259]:
+            - listitem [ref=f24e260]:
+              - generic [ref=f24e261]:
+                - time [ref=f24e262]: 12/09/2026
+                - button "Obtenir le rapport" [ref=f24e264] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e265]: 
+                - generic [ref=f24e267]:
+                  - generic [aria-hidden] [ref=f24e269]: 
+                  - generic [ref=f24e271]:
+                    - heading "Solvabilité, Actionnaires, Conformité ..." [level=3] [ref=f24e272]
+                    - paragraph [ref=f24e273]:
+                      - text: Accédez à une synthèse de toutes les informations en notre possession pour cette entreprise sur les aspects
+                      - strong [ref=f24e274]: légaux, juridiques, financiers, actionnariats et de conformité
+                      - text: . Utilisez le rapport complet officiel pour analyser une entreprise à partir d'un seul et même document.
+                      - link "Voir un exemple" [ref=f24e275] [cursor=pointer]:
+                        - /url: /docs/rapport-complet-officiel-societe-com-exemple.pdf
+      - generic [ref=f24e278]:
+        - heading "Informations Légales" [level=2] [ref=f24e280]
+        - article [ref=f24e281]:
+          - generic [ref=f24e282]:
+            - generic [ref=f24e283]:
+              - term [ref=f24e284]: Activité principale déclarée
+              - definition [ref=f24e285]:
+                - text: Incubateur tourisme, coworking, formation, activités touristiques. Restaurant. Concept store. Galerie. Librairie. Art capillaire. Tresses africaines. Cosmétiques mode beauté. Déco. Bien être. Domiciliation. Edition. Son. Image. Recrutement. Transport de marchandises et location de véhicules avec conducteur destiné au transport de marchandises de moins de 3.5 tonnes, évènementiel, agencement d'intérieurs.
+                - button "Copier l'activité principale de l'entreprise" [ref=f24e286] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e287]: 
+            - generic [ref=f24e288]:
+              - term [ref=f24e289]: Convention collective déduite
+              - definition [ref=f24e290]:
+                - text: Organismes de tourisme à but non lucratif (1909)
+                - button "Copier l'intitulé de la convention collective déduite de l'entreprise" [ref=f24e291] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e292]: 
+            - generic [ref=f24e293]:
+              - term [ref=f24e294]: Capital social
+              - definition [ref=f24e295]:
+                - generic [ref=f24e296]: 9 000,00 €
+                - button "Copier le capital de l'entreprise" [ref=f24e297] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e298]: 
+            - generic [ref=f24e299]:
+              - term [ref=f24e300]: Noms commerciaux
+              - definition [ref=f24e301]:
+                - text: PROMZ HOTEL - GRAND TOUR
+                - button "Copier les noms commerciaux de l'entreprise" [ref=f24e302] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e303]: 
+            - generic [ref=f24e304]:
+              - generic [ref=f24e305]:
+                - term [ref=f24e306]: Statut RCS
+                - definition [ref=f24e307]:
+                  - generic [ref=f24e308]: Inscrite
+                  - generic [ref=f24e309]: le 7 mai 2014
+                  - button "Télécharger Situation RCS" [ref=f24e310] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e311]: 
+              - generic [ref=f24e312]:
+                - term [ref=f24e313]: Statut INSEE
+                - definition [ref=f24e314]:
+                  - generic [ref=f24e315]: Inscrite
+                  - generic [ref=f24e316]: le 5 juin 2014
+                  - button "Télécharger Situation SIRENE" [ref=f24e317] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e318]: 
+              - generic [ref=f24e320]:
+                - term [ref=f24e321]: Statut RNE
+                - definition [ref=f24e322]:
+                  - generic [ref=f24e323]: Inscrite
+                  - generic [ref=f24e324]: le 7 mai 2014
+                  - button "Télécharger Situation RCS" [ref=f24e325] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e326]: 
+          - generic [ref=f24e328]:
+            - button "Avis situation SIRENE" [ref=f24e329] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e330]: 
+            - button "Extrait RNE" [ref=f24e332] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e333]: 
+            - button "Extrait Kbis" [ref=f24e335] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f24e336]: 
+      - generic [ref=f24e338]:
+        - article [ref=f24e339]:
+          - heading "Contacter PROMZ HOTEL" [level=2] [ref=f24e341]
+          - generic [ref=f24e343]:
+            - generic [ref=f24e344]:
+              - term [ref=f24e345]: Téléphone
+              - definition [ref=f24e346] [cursor=pointer]:
+                - link "Appeler" [ref=f24e348]:
+                  - /url: ""
+                  - generic [aria-hidden] [ref=f24e349]: 
+                  - generic [ref=f24e350]: Afficher le numéro
+            - generic [ref=f24e351]:
+              - term [ref=f24e352]: Mail de contact
+              - definition [ref=f24e353]:
+                - button "Obtenir les 2 emails" [ref=f24e354] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e356]: 
+        - article [ref=f24e357]:
+          - heading "Prospecter Autres services de réservation et activités connexes à Paris" [level=2] [ref=f24e359]
+          - generic [ref=f24e361]:
+            - generic [ref=f24e362]: 6 513 emails disponibles
+            - generic [ref=f24e368]:
+              - generic [ref=f24e369]: 1 919 Direction / Encadrement
+              - generic [ref=f24e372]: 450 Commercial / Ventes
+              - generic [ref=f24e375]: 245 Marketing / Communication
+              - generic [ref=f24e378]: 3 899 Autres
+          - link "Exporter les contacts" [ref=f24e383] [cursor=pointer]:
+            - /url: /fichier?ftAnaf=7990Z&ftLplace=75
+            - generic [aria-hidden] [ref=f24e384]: 
+      - generic [ref=f24e386]:
+        - heading "Établissements" [level=2] [ref=f24e388]
+        - generic [ref=f24e389]:
+          - list [ref=f24e390]:
+            - listitem [ref=f24e391]:
+              - list [ref=f24e392]:
+                - listitem [ref=f24e393]:
+                  - article [ref=f24e394]:
+                    - generic [ref=f24e395]:
+                      - heading "PROMZ HOTEL - GRAND TOUR - 75018" [level=3] [ref=f24e396]:
+                        - paragraph [ref=f24e397]:
+                          - generic [aria-hidden] [ref=f24e398]:  
+                          - generic [ref=f24e399]: PROMZ HOTEL - GRAND TOUR - 75018
+                      - paragraph [ref=f24e400]: Siège social depuis le 24 janvier 2018 (8 ans)
+                    - generic [ref=f24e401]:
+                      - generic [ref=f24e402]:
+                        - term [ref=f24e403]: SIRET
+                        - definition [ref=f24e404]:
+                          - text: 802 142 174 00035
+                          - button "Copier le numéro SIRET" [ref=f24e405] [cursor=pointer]:
+                            - generic [aria-hidden] [ref=f24e406]: 
+                      - generic [ref=f24e407]:
+                        - term [ref=f24e408]: Activité
+                        - definition [ref=f24e409]: Portails internet - 6312Z
+                      - generic [ref=f24e410]:
+                        - term [ref=f24e411]: Adresse
+                        - definition [ref=f24e412]:
+                          - link "11 RUE D'ORSEL, 75018 PARIS" [ref=f24e413] [cursor=pointer]:
+                            - /url: /maps/?siret=80214217400035
+                            - generic [aria-hidden] [ref=f24e414]: 
+                            - text: 11 RUE D'ORSEL, 75018 PARIS
+                  - complementary [ref=f24e415]:
+                    - generic [ref=f24e416]:
+                      - button "Appeler" [ref=f24e419] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f24e420]: 
+                      - button " Dossier d'urbanisme" [ref=f24e422] [cursor=pointer]:
+                        - generic [ref=f24e423]: 
+                        - generic [ref=f24e424]: Dossier d'urbanisme
+                - listitem [ref=f24e425]:
+                  - article [ref=f24e426]:
+                    - generic [ref=f24e427]:
+                      - heading "PROMZ HOTEL - 75002" [level=3] [ref=f24e428]:
+                        - paragraph [ref=f24e429]:
+                          - generic [aria-hidden] [ref=f24e430]:  
+                          - generic [ref=f24e431]: PROMZ HOTEL - 75002
+                      - paragraph [ref=f24e432]: Établissement secondaire depuis le 8 avril 2022 (4 ans)
+                    - generic [ref=f24e433]:
+                      - generic [ref=f24e434]:
+                        - term [ref=f24e435]: SIRET
+                        - definition [ref=f24e436]:
+                          - text: 802 142 174 00076
+                          - button "Copier le numéro SIRET" [ref=f24e437] [cursor=pointer]:
+                            - generic [aria-hidden] [ref=f24e438]: 
+                      - generic [ref=f24e439]:
+                        - term [ref=f24e440]: Activité
+                        - definition [ref=f24e441]: Autres services de réservation et activités connexes - 7990Z
+                      - generic [ref=f24e442]:
+                        - term [ref=f24e443]: Adresse
+                        - definition [ref=f24e444]:
+                          - link "4 RUE THOREL, 75002 PARIS" [ref=f24e445] [cursor=pointer]:
+                            - /url: /maps/?siret=80214217400076
+                            - generic [aria-hidden] [ref=f24e446]: 
+                            - text: 4 RUE THOREL, 75002 PARIS
+                  - complementary [ref=f24e447]:
+                    - generic [ref=f24e448]:
+                      - button "Appeler" [ref=f24e451] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f24e452]: 
+                      - button " Dossier d'urbanisme" [ref=f24e454] [cursor=pointer]:
+                        - generic [ref=f24e455]: 
+                        - generic [ref=f24e456]: Dossier d'urbanisme
+                - text:                        
+            - text:    
+          - generic [ref=f24e458]:
+            - button "Afficher les 7 établissements" [ref=f24e461] [cursor=pointer]
+            - generic [ref=f24e462]:
+              - generic [ref=f24e463]:
+                - text: Établissements
+                - generic [ref=f24e464] [cursor=pointer]: 
+              - list [ref=f24e466]:
+                - listitem [ref=f24e467]:
+                  - button "Tous" [ref=f24e468] [cursor=pointer]
+                - listitem [ref=f24e469]:
+                  - button "Ouverts" [ref=f24e470] [cursor=pointer]
+                - listitem [ref=f24e471]:
+                  - button "Fermé" [ref=f24e472] [cursor=pointer]
+      - generic [ref=f24e475]:
+        - generic [ref=f24e477]:
+          - heading "Dirigeants de PROMZ HOTEL" [level=2] [ref=f24e479]
+          - list [ref=f24e480]:
+            - listitem [ref=f24e481]:
+              - list [ref=f24e482]:
+                - listitem [ref=f24e483]:
+                  - article [ref=f24e484]:
+                    - heading [level=3] [ref=f24e486]:
+                      - link "Haby DJIMERA-DIA" [ref=f24e487] [cursor=pointer]:
+                        - /url: /manager/Haby.DJIMERA-DIA.uugb5fQyAEl.html
+                        - generic [aria-hidden] [ref=f24e488]:  
+                    - generic [ref=f24e490]:
+                      - generic [ref=f24e491]:
+                        - term [ref=f24e492]: Né en
+                        - definition [ref=f24e493]: 1977 (49 ans)
+                      - generic [ref=f24e494]:
+                        - term [ref=f24e495]: Mandat
+                        - definition [ref=f24e496]: Président depuis le 10 mai 2014 (12 ans)
+                  - complementary [ref=f24e497]:
+                    - link "Voir la fiche" [ref=f24e498] [cursor=pointer]:
+                      - /url: /manager/Haby.DJIMERA-DIA.uugb5fQyAEl.html
+                - listitem [ref=f24e499]:
+                  - article [ref=f24e500]:
+                    - heading [level=3] [ref=f24e502]:
+                      - link "Haby Djimera Dia" [ref=f24e503] [cursor=pointer]:
+                        - /url: /manager/Haby.DJIMERA DIA.u6NJBS_5AlX.html
+                        - generic [aria-hidden] [ref=f24e504]:  
+                    - generic [ref=f24e506]:
+                      - generic [ref=f24e507]:
+                        - term [ref=f24e508]: Née en
+                        - definition [ref=f24e509]: 1977 (49 ans)
+                      - generic [ref=f24e510]:
+                        - term [ref=f24e511]: Mandat
+                        - definition [ref=f24e512]: Président depuis le (-1 an)
+                  - complementary [ref=f24e513]:
+                    - link "Voir la fiche" [ref=f24e514] [cursor=pointer]:
+                      - /url: /manager/Haby.DJIMERA DIA.u6NJBS_5AlX.html
+                - text:  
+          - generic [ref=f24e516]:
+            - button "Afficher les 3 dirigeants" [ref=f24e519] [cursor=pointer]
+            - generic [ref=f24e520]:
+              - generic [ref=f24e521]:
+                - text: Dirigeants
+                - generic [ref=f24e522] [cursor=pointer]: 
+              - list [ref=f24e524]:
+                - listitem [ref=f24e525]:
+                  - button "Tous" [ref=f24e526] [cursor=pointer]
+                - listitem [ref=f24e527]:
+                  - button "Actuels" [ref=f24e528] [cursor=pointer]
+        - article [ref=f24e531]:
+          - heading "Structure capitalistique" [level=2] [ref=f24e533]
+          - generic "Structure capitalistique" [ref=f24e534]:
+            - list [ref=f24e535]:
+              - listitem [ref=f24e536]:
+                - generic [ref=f24e537]:
+                  - time [ref=f24e538]: 12/09/2026
+                  - button "Liste des actionnaires" [ref=f24e540] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e541]: 
+                  - generic [ref=f24e543]:
+                    - generic [aria-hidden] [ref=f24e545]: 
+                    - generic [ref=f24e547]:
+                      - heading "Actionnaires, têtes de groupe, filiales ..." [level=3] [ref=f24e548]
+                      - paragraph [ref=f24e549]:
+                        - text: Identifiez l'ensemble des entités ayant un lien capitalistique avec cette entreprise.
+                        - link "Voir un exemple" [ref=f24e550] [cursor=pointer]:
+                          - /url: /docs/liste-des-actionnaires-societe-com-exemple.pdf
+        - article [ref=f24e552]:
+          - generic [ref=f24e553]:
+            - heading "Obtenir la liste des bénéficiaires effectifs" [level=2] [ref=f24e555]
+            - generic [ref=f24e556]:
+              - paragraph [ref=f24e557]: Depuis le 31 juillet 2024, pour avoir accès aux Registre des bénéficiaires effectifs (RBE) vous devez être habilité.
+              - link "Formulaire d'accès aux bénéficiaires effectifs" [ref=f24e558] [cursor=pointer]:
+                - /url: https://blog.societe.com/acces-aux-beneficiaires-effectifs
+                - text: Formulaire d'accès
+      - generic [ref=f24e560]:
+        - heading "Finances" [level=2] [ref=f24e562]
+        - generic [ref=f24e563]:
+          - text: 
+          - paragraph [ref=f24e564]:
+            - text: Cette entreprise nous a transmis ses comptes sous clause de confidentialité.
+            - strong [ref=f24e565]: Les analyses financières restent disponibles.
+        - list [ref=f24e568]:
+          - listitem [ref=f24e569]:
+            - generic [ref=f24e570]:
+              - time [ref=f24e571]: 12/09/2026
+              - button "Solvabilité" [ref=f24e573] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f24e574]: 
+              - generic [ref=f24e576]:
+                - generic [aria-hidden] [ref=f24e578]: 
+                - generic [ref=f24e580]:
+                  - heading "Notation financière, risque de défaillance, historique..." [level=3] [ref=f24e581]
+                  - paragraph [ref=f24e582]:
+                    - text: Anticipez la défaillance d'un tiers d'ici 12 mois avec l'étude de sovabilité et évitez de mettre en risque votre entreprise.
+                    - link "Voir un exemple" [ref=f24e583] [cursor=pointer]:
+                      - /url: /docs/score-de-solvabilite-societe-com-exemple.pdf
+        - list [ref=f24e586]:
+          - listitem [ref=f24e587]:
+            - generic [ref=f24e588]:
+              - time [ref=f24e589]: 12/09/2026
+              - button "Dettes" [ref=f24e591] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f24e592]: 
+              - generic [ref=f24e594]:
+                - generic [aria-hidden] [ref=f24e596]: 
+                - generic [ref=f24e598]:
+                  - heading "Endettement, risques financiers..." [level=3] [ref=f24e599]
+                  - paragraph [ref=f24e600]:
+                    - text: Accédez aux dettes, sûretés, privilèges et inscriptions financières certifiés par les greffiers des tribunaux de commerce.
+                    - link "Voir un exemple" [ref=f24e601] [cursor=pointer]:
+                      - /url: /docs/etat-endettement-societe-com-exemple.pdf
+        - list [ref=f24e604]:
+          - listitem [ref=f24e605]:
+            - generic [ref=f24e606]:
+              - time [ref=f24e607]: 12/09/2026
+              - button "Valorisation" [ref=f24e609] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f24e610]: 
+              - generic [ref=f24e612]:
+                - generic [aria-hidden] [ref=f24e614]: 
+                - generic [ref=f24e616]:
+                  - heading "Valorisation" [level=3] [ref=f24e617]
+                  - paragraph [ref=f24e618]: Valeur économique calculée à partir de sa rentabilité, sa structure financière, ses perspectives de croissance et son environnement de marché.
+      - article [ref=f24e620]:
+        - heading "Documents de PROMZ HOTEL" [level=2] [ref=f24e622]
+        - generic [ref=f24e623]:
+          - list [ref=f24e624]:
+            - listitem [ref=f24e625] [cursor=pointer]:
+              - generic [ref=f24e626]:
+                - time [ref=f24e627]: 30/11/2022
+                - generic [ref=f24e628]:
+                  - button "Résumé IA" [ref=f24e629]:
+                    - generic [aria-hidden] [ref=f24e630]: 
+                  - button "Consulter" [ref=f24e631]:
+                    - generic [aria-hidden] [ref=f24e632]: 
+                  - button "Télécharger" [ref=f24e633]:
+                    - generic [aria-hidden] [ref=f24e634]: 
+                - generic [ref=f24e635]:
+                  - generic [aria-hidden] [ref=f24e637]: 
+                  - generic [ref=f24e639]:
+                    - heading "Procès-verbal d'assemblée générale extraordinaire - Statuts mis à jour" [level=3] [ref=f24e640]
+                    - paragraph [ref=f24e641]: Extension de l'objet social - Modification(s) statutaire(s)
+            - listitem [ref=f24e642] [cursor=pointer]:
+              - generic [ref=f24e643]:
+                - time [ref=f24e644]: 11/04/2022
+                - generic [ref=f24e645]:
+                  - button "Résumé IA" [ref=f24e646]:
+                    - generic [aria-hidden] [ref=f24e647]: 
+                  - button "Consulter" [ref=f24e648]:
+                    - generic [aria-hidden] [ref=f24e649]: 
+                  - button "Télécharger" [ref=f24e650]:
+                    - generic [aria-hidden] [ref=f24e651]: 
+                - generic [ref=f24e652]:
+                  - generic [aria-hidden] [ref=f24e654]: 
+                  - generic [ref=f24e656]:
+                    - heading "Statuts mis à jour - Procès-verbal d'assemblée générale extraordinaire" [level=3] [ref=f24e657]
+                    - paragraph [ref=f24e658]: Extension de l'objet social
+            - listitem [ref=f24e659] [cursor=pointer]:
+              - generic [ref=f24e660]:
+                - time [ref=f24e661]: 09/01/2018
+                - generic [ref=f24e662]:
+                  - button "Résumé IA" [ref=f24e663]:
+                    - generic [aria-hidden] [ref=f24e664]: 
+                  - button "Consulter" [ref=f24e665]:
+                    - generic [aria-hidden] [ref=f24e666]: 
+                  - button "Télécharger" [ref=f24e667]:
+                    - generic [aria-hidden] [ref=f24e668]: 
+                - generic [ref=f24e669]:
+                  - generic [aria-hidden] [ref=f24e671]: 
+                  - generic [ref=f24e673]:
+                    - heading "Procès-verbal d'assemblée générale extraordinaire - Statuts mis à jour" [level=3] [ref=f24e674]
+                    - paragraph [ref=f24e675]: Extension de l'objet social - Modification(s) statutaire(s) - Transfert du siège social 9 rue Bailly 75003 Paris - Augmentation du capital social
+            - text:            
+          - generic [ref=f24e677]:
+            - generic [ref=f24e679]:
+              - button "Rechercher dans les documents" [ref=f24e680] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f24e681]: 
+              - button "Afficher les 6 documents" [ref=f24e683] [cursor=pointer]
+            - generic [ref=f24e685]:
+              - text: 6 Documents officiels
+              - generic [ref=f24e686] [cursor=pointer]: 
+      - generic [ref=f24e690]:
+        - heading "Annonces légales de PROMZ HOTEL" [level=2] [ref=f24e692]
+        - article [ref=f24e693]:
+          - generic [ref=f24e694]:
+            - text: 
+            - paragraph [ref=f24e695]:
+              - text: Publiez votre annonce légale avec Societe.com et recevez votre attestation de parution dans les 10 min
+              - link "Commencer à publier" [ref=f24e696] [cursor=pointer]:
+                - /url: /services/annonces-legales
+          - list [ref=f24e697]:
+            - listitem [ref=f24e698] [cursor=pointer]:
+              - generic [ref=f24e699]:
+                - time [ref=f24e700]: 31/12/2024
+                - generic [ref=f24e701]:
+                  - button [ref=f24e702]:
+                    - generic [aria-hidden] [ref=f24e703]: 
+                  - button [ref=f24e704]:
+                    - generic [aria-hidden] [ref=f24e705]: 
+                - generic [ref=f24e706]:
+                  - generic [aria-hidden] [ref=f24e708]: 
+                  - heading "Annonce BODACC - Comptes annuels et rapports" [level=3] [ref=f24e711]
+            - listitem [ref=f24e712] [cursor=pointer]:
+              - generic [ref=f24e713]:
+                - time [ref=f24e714]: 31/12/2023
+                - generic [ref=f24e715]:
+                  - button [ref=f24e716]:
+                    - generic [aria-hidden] [ref=f24e717]: 
+                  - button [ref=f24e718]:
+                    - generic [aria-hidden] [ref=f24e719]: 
+                - generic [ref=f24e720]:
+                  - generic [aria-hidden] [ref=f24e722]: 
+                  - heading "Annonce BODACC - Comptes annuels et rapports" [level=3] [ref=f24e725]
+            - listitem [ref=f24e726] [cursor=pointer]:
+              - generic [ref=f24e727]:
+                - time [ref=f24e728]: 23/05/2023
+                - generic [ref=f24e729]:
+                  - button "Consulter" [ref=f24e730]:
+                    - generic [aria-hidden] [ref=f24e731]: 
+                  - button "Télécharger" [ref=f24e732]:
+                    - generic [aria-hidden] [ref=f24e733]: 
+                - generic [ref=f24e734]:
+                  - generic [aria-hidden] [ref=f24e736]: 
+                  - generic [ref=f24e738]:
+                    - 'heading "Annonce JAL - Location gérance : début / prorogation" [level=3] [ref=f24e739]'
+                    - paragraph [ref=f24e740]: Suivant acte ssp en date du 01/02/2022, la sociéte SAS PROMZHOTEL GRAND TOUR SAS au capital de 9000 , RCS 802142174 PARIS, 11 rue dOrsel, 18e Arrondisseme 18e Arrondissement 75018 PARIS 18, représenté par Haby DJIME RA-DIA a donné en location gérance à la société DIASPORAS SARL unipersonnelle au capital de 1000 , RCS 953253531 PARIS, 11 rue dOrsel, 18e Arrondisseme 11 RUE DORSEL 75018 PARIS, représenté par Haby DJIMERA-DIA un fonds de commerce de Restaurant Espace culturel (Coworking Galerie-Création capillaire Librairie) sis et exploité au 6, rue de Tracy 75002 75018 PARIS 18, pour une durée allant du 23/05/2023 au 31/01/2031. 280821]
+            - text:                                          
+          - generic [ref=f24e742]:
+            - generic [ref=f24e744]:
+              - link "Publier maintenant" [ref=f24e745] [cursor=pointer]:
+                - /url: /services/annonces-legales
+              - button "Afficher les 17 annonces" [ref=f24e746] [cursor=pointer]
+            - generic [ref=f24e748]:
+              - text: 17 Annonces
+              - generic [ref=f24e749] [cursor=pointer]: 
+      - generic [ref=f24e753]:
+        - generic [ref=f24e754]:
+          - heading "Bilan carbone" [level=2] [ref=f24e756]
+          - paragraph [ref=f24e757]: Le bilan carbone est un ensemble de méthodes permettant de mesurer et de suivre la quantité de gaz à effet de serre (GES) qu'une organisation émet du fait de son activité.
+          - generic [ref=f24e758]:  Aucun bilan carbone disponible pour cette entreprise
+          - link "Calculer mon bilan carbone" [ref=f24e761] [cursor=pointer]:
+            - /url: /solutions/bilan-carbone
+            - generic [aria-hidden] [ref=f24e763]: 
+        - generic [ref=f24e764]:
+          - heading "Score de souveraineté" [level=2] [ref=f24e766]
+          - paragraph [ref=f24e767]: Le score de souveraineté représente la dépendance de l'entreprise vis à vis de l'ensemble de ses partenaires. Le score apprécie la capacité de l'entreprise à contracter avec des partenaires réduisant ses risques en cas de tensions, conflits ou mesures extérieures à son pays domestique.
+          - generic [ref=f24e768]:
+            - generic [ref=f24e769]:
+              - generic [ref=f24e772]: 68/100
+              - generic [ref=f24e773] [cursor=pointer]:
+                - text: Score sectoriel
+                - generic [ref=f24e774]: 
+            - list [ref=f24e775]:
+              - listitem [ref=f24e776]: Gouvernance
+              - listitem [ref=f24e777]: Dépendance commerciale
+              - listitem [ref=f24e778]: Souveraineté numérique
+              - listitem [ref=f24e779]: Achats & approvisionnements
+            - img "Graphique score de souveraineté" [ref=f24e780]
+          - button "Voir détails" [ref=f24e794] [cursor=pointer]:
+            - text: Voir détails
+            - generic [aria-hidden] [ref=f24e795]: 
+          - link "Obtenir mon score de souveraineté" [ref=f24e798] [cursor=pointer]:
+            - /url: /rendez-vous?id=ddea0b13f549087525da10897d8b3936&type=sovereignty
+            - generic [aria-hidden] [ref=f24e800]: 
+        - generic [ref=f24e801]:
+          - heading "Score d'impact" [level=2] [ref=f24e803]
+          - paragraph [ref=f24e804]: Le score extra-financier d'impact évalue sur une année la performance d'une entreprise en matière sociale, fiscale et territoriale.
+          - generic [ref=f24e805]:
+            - combobox "Année" [ref=f24e806]:
+              - option "2026"
+              - option "2025"
+              - option "2024" [selected]
+              - option "2023"
+              - option "2022"
+              - option "2021"
+              - option "2020"
+              - option "2019"
+              - option "2018"
+              - option "2017"
+            - text: 
+          - generic [ref=f24e807]:
+            - generic [ref=f24e808]:
+              - paragraph [ref=f24e809]: Score 2024
+              - generic [ref=f24e810]: D
+              - generic [ref=f24e811]:  0
+              - list [ref=f24e812]:
+                - listitem [ref=f24e813]: A
+                - listitem [ref=f24e814]: B
+                - listitem [ref=f24e815]: C
+                - listitem [ref=f24e816]: D
+                - listitem [ref=f24e817]: E
+            - list [ref=f24e818]:
+              - listitem [ref=f24e819]:
+                - button [ref=f24e821] [cursor=pointer]:
+                  - heading "Score territorial D" [level=3] [ref=f24e822]:
+                    - text: Score territorial D
+                    - generic [aria-hidden] [ref=f24e823]: 
+              - listitem [ref=f24e824]:
+                - button [ref=f24e826] [cursor=pointer]:
+                  - heading "Score social D" [level=3] [ref=f24e827]:
+                    - text: Score social D
+                    - generic [aria-hidden] [ref=f24e828]: 
+              - listitem [ref=f24e829]:
+                - button [ref=f24e831] [cursor=pointer]:
+                  - heading "Score fiscal D" [level=3] [ref=f24e832]:
+                    - text: Score fiscal D
+                    - generic [aria-hidden] [ref=f24e833]: 
+              - listitem [ref=f24e834]:
+                - link "Compléter son score extra-financier" [ref=f24e836] [cursor=pointer]:
+                  - /url: https://simulation.in-france.fr?siren=802142174
+                  - generic [aria-hidden] [ref=f24e838]: 
+      - generic [ref=f24e839]:
+        - heading "Cartographie de PROMZ HOTEL" [level=2] [ref=f24e841]
+        - generic [ref=f24e843]:
+          - link [ref=f24e844] [cursor=pointer]:
+            - /url: https://carto.societe.com/?siren=802142174
+            - img "Cartographie gratuite de PROMZ HOTEL" [ref=f24e845]
+          - link "Explorer la cartographie" [ref=f24e847] [cursor=pointer]:
+            - /url: https://carto.societe.com/?siren=802142174
+      - article [ref=f24e848]:
+        - heading "Entreprise liée" [level=2] [ref=f24e850]
+        - list [ref=f24e852]:
+          - listitem [ref=f24e853]:
+            - article [ref=f24e854]:
+              - generic [ref=f24e855]:
+                - heading [level=3] [ref=f24e856]:
+                  - link "MARILLIER INVESTISSEMENTS" [ref=f24e857] [cursor=pointer]:
+                    - /url: /societe/marillier-investissements-340063304.html
+                    - generic [aria-hidden] [ref=f24e858]: 
+                - paragraph [ref=f24e860]: Cité 3 fois entre 2018 et 2022
+              - list [ref=f24e861]:
+                - listitem [ref=f24e862]:
+                  - generic [ref=f24e863]: SIREN
+                  - generic [ref=f24e864]: 340 063 304
+                  - button "Copier le numéro SIREN" [ref=f24e865] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e866]: 
+                - listitem [ref=f24e867]:
+                  - text: Dirigeants
+                  - link "Claude MARILLIER" [ref=f24e868] [cursor=pointer]:
+                    - /url: /manager/Claude.MARILLIER.7jw0toInVmb.html
+                  - text: ","
+                  - link "Robert MARILLIER" [ref=f24e869] [cursor=pointer]:
+                    - /url: /manager/Robert.MARILLIER.sfknrLsK_7o.html
+                  - text: ","
+                  - link "B.R. AUDIT" [ref=f24e870] [cursor=pointer]:
+                    - /url: /societe/b-r-audit-348593070.html
+              - button [ref=f24e871] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f24e873]: 
+                - heading "3 Documents liés" [level=3] [ref=f24e874]
+                - generic [aria-hidden] [ref=f24e875]: 
+              - text:         
+      - article [ref=f24e876]:
+        - heading "Entreprise dirigée" [level=2] [ref=f24e878]
+        - list [ref=f24e880]:
+          - listitem [ref=f24e881]:
+            - article [ref=f24e882]:
+              - generic [ref=f24e883]:
+                - heading [level=3] [ref=f24e884]:
+                  - link "KODA BAMBADO" [ref=f24e885] [cursor=pointer]:
+                    - /url: /societe/koda-bambado-995283017.html
+                    - generic [aria-hidden] [ref=f24e886]: 
+                - paragraph [ref=f24e888]: Depuis le 23-12-2025
+              - list [ref=f24e889]:
+                - listitem [ref=f24e890]:
+                  - generic [ref=f24e891]: SIREN
+                  - generic [ref=f24e892]: 995 283 017
+                  - button "Copier le numéro SIREN" [ref=f24e893] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f24e894]: 
+                - listitem [ref=f24e895]: FONCTION PROMZ HOTEL est Associé
+            - complementary [ref=f24e896]:
+              - link "Voir la fiche" [ref=f24e897] [cursor=pointer]:
+                - /url: /societe/koda-bambado-995283017.html
+      - article [ref=f24e901]:
+        - heading "Marques déposées" [level=2] [ref=f24e903]
+        - list [ref=f24e905]:
+          - listitem [ref=f24e906]:
+            - article [ref=f24e907]:
+              - generic [ref=f24e908]:
+                - heading "PROMZHOTEL" [level=3] [ref=f24e909]
+                - paragraph [ref=f24e910]:
+                  - generic [aria-hidden] [ref=f24e911]: 
+                  - text: Marque expirée
+                  - generic [aria-hidden] [ref=f24e912]: 
+                  - text: Marque non en vigueur
+              - list [ref=f24e913]:
+                - listitem [ref=f24e914]:
+                  - generic [ref=f24e915]: "Date de dépôt :"
+                  - strong [ref=f24e917]:
+                    - time [ref=f24e918]: 02 septembre 2014
+                - listitem [ref=f24e919]:
+                  - generic [ref=f24e920]: "Date d'expiration :"
+                  - strong [ref=f24e922]:
+                    - time [ref=f24e923]: 02 septembre 2024
+              - paragraph [ref=f24e924]: Date d'expiration dépassée
+              - paragraph [ref=f24e925]:
+                - text: "Classes :"
+                - button "Services de restauration (alimentation) ; hébergement temporaire" [ref=f24e926] [cursor=pointer]: "43"
+            - complementary [ref=f24e927]:
+              - generic [ref=f24e928]:
+                - button "Télécharger l'image" [ref=f24e929] [cursor=pointer]:
+                  - generic [ref=f24e930]: 
+                - img "PROMZHOTEL_logo"
+          - listitem [ref=f24e931]:
+            - article [ref=f24e932]:
+              - generic [ref=f24e933]:
+                - heading "PREMS HOTEL" [level=3] [ref=f24e934]
+                - paragraph [ref=f24e935]:
+                  - generic [aria-hidden] [ref=f24e936]: 
+                  - text: Marque ayant fait l'objet d'un retrait total
+                  - generic [aria-hidden] [ref=f24e937]: 
+                  - text: Marque non en vigueur
+              - list [ref=f24e938]:
+                - listitem [ref=f24e939]:
+                  - generic [ref=f24e940]: "Date de dépôt :"
+                  - strong [ref=f24e942]:
+                    - time [ref=f24e943]: 13 juin 2014
+                - listitem [ref=f24e944]:
+                  - generic [ref=f24e945]: "Date d'expiration :"
+                  - generic:
+                    - strong:
+                      - time
+              - paragraph
+              - paragraph [ref=f24e946]:
+                - text: "Classes :"
+                - button "Services de restauration (alimentation) ; hébergement temporaire" [ref=f24e947] [cursor=pointer]: "43"
+            - complementary [ref=f24e948]:
+              - generic [ref=f24e949]:
+                - button "Télécharger l'image" [ref=f24e950] [cursor=pointer]:
+                  - generic [ref=f24e951]: 
+                - img "PREMS HOTEL_logo"
+      - generic [ref=f24e952]:
+        - heading "Historique de PROMZ HOTEL" [level=2] [ref=f24e954]
+        - article [ref=f24e955]:
+          - heading "3 événements depuis 2014" [level=3] [ref=f24e957]
+          - generic [ref=f24e959]:
+            - generic [ref=f24e960]:
+              - button "2025 1 événement" [expanded] [ref=f24e961] [cursor=pointer]:
+                - generic [ref=f24e962]:
+                  - generic [ref=f24e963]: "2025"
+                  - generic [ref=f24e964]: 1 événement
+                - generic [aria-hidden] [ref=f24e965]: 
+              - list [ref=f24e966]:
+                - listitem [ref=f24e967]:
+                  - paragraph [ref=f24e968]: mardi 24 décembre 2025
+                  - list [ref=f24e969]:
+                    - listitem [ref=f24e970]:
+                      - generic [aria-hidden] [ref=f24e971]: 
+                      - paragraph [ref=f24e972]:
+                        - link "PROMZ HOTEL" [ref=f24e973] [cursor=pointer]:
+                          - /url: /societe/promz-hotel-802142174.html
+                        - text: accède au statut d'associé de
+                        - link "KODA BAMBADO" [ref=f24e974] [cursor=pointer]:
+                          - /url: /societe/koda-bambado-995283017.html
+                        - text: .
+            - generic [ref=f24e975]:
+              - button "2014 2 événements" [ref=f24e976] [cursor=pointer]:
+                - generic [ref=f24e977]:
+                  - generic [ref=f24e978]: "2014"
+                  - generic [ref=f24e979]: 2 événements
+                - generic [aria-hidden] [ref=f24e980]: 
+              - list:
+                - listitem [ref=f24e981]:
+                  - paragraph [ref=f24e982]: vendredi 10 mai 2014
+                  - list [ref=f24e983]:
+                    - listitem [ref=f24e984]:
+                      - generic [aria-hidden] [ref=f24e985]: 
+                      - paragraph [ref=f24e986]:
+                        - link "Christophe TOUZALIN" [ref=f24e987] [cursor=pointer]:
+                          - /url: /manager/Christophe.TOUZALIN.y-GGzdoyxki.html
+                        - text: assume maintenant la fonction de directeur général.
+                    - listitem [ref=f24e988]:
+                      - generic [aria-hidden] [ref=f24e989]: 
+                      - paragraph [ref=f24e990]:
+                        - link "Haby Djimera Dia" [ref=f24e991] [cursor=pointer]:
+                          - /url: /manager/Haby.DJIMERA-DIA.uugb5fQyAEl.html
+                        - text: est promue président.
+      - article [ref=f24e992]:
+        - heading "Étude de marché du secteur de l'entreprise" [level=2] [ref=f24e994]
+        - generic "Étude de marché du secteur de l'entreprise" [ref=f24e995]:
+          - list [ref=f24e996]:
+            - listitem [ref=f24e997]:
+              - generic [ref=f24e998]:
+                - time [ref=f24e999]: 25/08/2022
+                - button "Obtenir l'étude" [ref=f24e1001] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f24e1002]: 
+                - generic [ref=f24e1004]:
+                  - generic [aria-hidden] [ref=f24e1006]: 
+                  - generic [ref=f24e1008]:
+                    - heading "Le marché de la billetterie de spectacle - France" [level=3] [ref=f24e1009]
+                    - paragraph [ref=f24e1010]:
+                      - text: "Cette étude propose une analyse approfondie du marché de la billetterie de spectacle : croissance du canal en ligne, impact de la numérisation, profils des consommateurs, lutte contre le marché noir, évolution des acteurs clés, prévisions jusqu'en 2025.."
+                      - link "Voir un exemple" [ref=f24e1011] [cursor=pointer]:
+                        - /url: /docs/etude-marche-exemple.pdf
+      - generic [ref=f24e1012]:
+        - heading "Nos services pour les Société par actions simplifiée" [level=3] [ref=f24e1013]
+        - list [ref=f24e1014]:
+          - listitem [ref=f24e1015]:
+            - img "logo LegalPlace" [ref=f24e1016]
+            - paragraph [ref=f24e1017]: Créer son entreprise
+            - link "En savoir plus à propos du partenariat LegalPlace" [ref=f24e1018] [cursor=pointer]:
+              - /url: https://www.legalplace.fr/creation/creation-entreprise-2
+              - generic [ref=f24e1019]: 
+          - listitem [ref=f24e1020]:
+            - img "logo Revolut" [ref=f24e1021]
+            - paragraph [ref=f24e1022]: Ouvrir un compte bancaire pro
+            - link "En savoir plus à propos du partenariat Revolut" [ref=f24e1023] [cursor=pointer]:
+              - /url: https://revolutbusiness.ngih.net/c/7333184/3925468/9943
+              - generic [ref=f24e1024]: 
+          - listitem [ref=f24e1025]:
+            - img "logo ComptaPlace by LegalPlace" [ref=f24e1026]
+            - paragraph [ref=f24e1027]: Gérer sa comptabilité
+            - link "En savoir plus à propos du partenariat Comptaplace" [ref=f24e1028] [cursor=pointer]:
+              - /url: https://www.comptaplace.fr/?utm_source=partner&utm_campaign=societe
+              - generic [ref=f24e1029]: 
+          - listitem [ref=f24e1030]:
+            - img "logo Impayés.com" [ref=f24e1031]
+            - paragraph [ref=f24e1032]: Récupérer ses impayés
+            - link "En savoir plus à propos du partenariat Impayés.com" [ref=f24e1033] [cursor=pointer]:
+              - /url: https://www.impayes.com/lp-partenaire-societecom.html
+              - generic [ref=f24e1034]: 
+          - listitem [ref=f24e1035]:
+            - img "logo Pennylane" [ref=f24e1036]
+            - paragraph [ref=f24e1037]: Gérer sa facture électronique
+            - link "En savoir plus à propos du partenariat Pennylane" [ref=f24e1038] [cursor=pointer]:
+              - /url: https://www.pennylane.com/fr/facture-electronique-societe?utm_source=societe&utm_medium=paid&ae=381
+              - generic [ref=f24e1039]: 
+      - generic [ref=f24e1040]:
+        - heading "Ces entreprises peuvent vous intéresser" [level=3] [ref=f24e1042]
+        - list [ref=f24e1043]:
+          - listitem [ref=f24e1044]:
+            - link [ref=f24e1045] [cursor=pointer]:
+              - /url: /societe/smurfit-westrock-france-493254908.html
+              - heading "SMURFIT WESTROCK FRANCE" [level=4] [ref=f24e1046]
+              - paragraph [ref=f24e1047]: "SIREN: 493 254 908"
+          - listitem [ref=f24e1048]:
+            - link [ref=f24e1049] [cursor=pointer]:
+              - /url: /societe/sisca-352747018.html
+              - heading "SISCA" [level=4] [ref=f24e1050]
+              - paragraph [ref=f24e1051]: "SIREN: 352 747 018"
+          - listitem [ref=f24e1052]:
+            - link [ref=f24e1053] [cursor=pointer]:
+              - /url: /societe/enterprise-holdings-france-318771995.html
+              - heading "ENTERPRISE HOLDINGS FRANCE" [level=4] [ref=f24e1054]
+              - paragraph [ref=f24e1055]: "SIREN: 318 771 995"
+          - listitem [ref=f24e1056]:
+            - link [ref=f24e1057] [cursor=pointer]:
+              - /url: /societe/xerox-602055311.html
+              - heading "XEROX" [level=4] [ref=f24e1058]
+              - paragraph [ref=f24e1059]: "SIREN: 602 055 311"
+          - listitem [ref=f24e1060]:
+            - link [ref=f24e1061] [cursor=pointer]:
+              - /url: /societe/ineo-infracom-409867942.html
+              - heading "INEO INFRACOM" [level=4] [ref=f24e1062]
+              - paragraph [ref=f24e1063]: "SIREN: 409 867 942"
+  - contentinfo [ref=f24e1064]:
+    - generic "Footer Navigation" [ref=f24e1065]:
+      - generic [ref=f24e1066]:
+        - link "Retour à l'accueil" [ref=f24e1067] [cursor=pointer]:
+          - /url: /
+        - list [ref=f24e1068]:
+          - listitem [ref=f24e1069]:
+            - heading "Offres et services" [level=2] [ref=f24e1070]
+            - list [ref=f24e1071]:
+              - listitem [ref=f24e1072]:
+                - link "Offres" [ref=f24e1073] [cursor=pointer]:
+                  - /url: /offres.html
+              - listitem [ref=f24e1074]:
+                - link "Fichiers" [ref=f24e1075] [cursor=pointer]:
+                  - /url: https://fichier.societe.com/pages/fichier-entreprises.html
+              - listitem [ref=f24e1076]:
+                - link "Annuaire" [ref=f24e1077] [cursor=pointer]:
+                  - /url: /entreprises
+              - listitem [ref=f24e1078]:
+                - link "API" [ref=f24e1079] [cursor=pointer]:
+                  - /url: /solutions/api
+          - listitem [ref=f24e1080]:
+            - heading "Aide et contact" [level=2] [ref=f24e1081]
+            - list [ref=f24e1082]:
+              - listitem [ref=f24e1083]:
+                - link "Contact Societe.com" [ref=f24e1084] [cursor=pointer]:
+                  - /url: /ia?contact
+              - listitem [ref=f24e1085]:
+                - link "Glossaire" [ref=f24e1086] [cursor=pointer]:
+                  - /url: /glossaire/index.html
+          - listitem [ref=f24e1087]:
+            - heading "Actualité" [level=2] [ref=f24e1088]
+            - list [ref=f24e1089]:
+              - listitem [ref=f24e1090]:
+                - link "Blog Societe" [ref=f24e1091] [cursor=pointer]:
+                  - /url: https://blog.societe.com/
+              - listitem [ref=f24e1092]:
+                - heading "Suivez-nous" [level=2] [ref=f24e1093]
+                - list [ref=f24e1094]:
+                  - listitem [ref=f24e1095]:
+                    - link "Suivez-nous sur LinkedIn" [ref=f24e1096] [cursor=pointer]:
+                      - /url: https://fr.linkedin.com/company/societe.com
+                      - generic [aria-hidden] [ref=f24e1097]: 
+                  - listitem [ref=f24e1098]:
+                    - link "X (anciennement Twitter)" [ref=f24e1099] [cursor=pointer]:
+                      - /url: https://twitter.com/Societe_com
+                      - generic [aria-hidden] [ref=f24e1100]: 
+                  - listitem [ref=f24e1102]:
+                    - link "Visualisez nos vidéos et podcasts sur Youtube" [ref=f24e1103] [cursor=pointer]:
+                      - /url: https://www.youtube.com/@Soci%C3%A9t%C3%A9_FR
+                      - generic [aria-hidden] [ref=f24e1104]: 
+                  - listitem [ref=f24e1105]:
+                    - link "Retrouvez nos vidéos et podcasts sur TikTok" [ref=f24e1106] [cursor=pointer]:
+                      - /url: https://www.tiktok.com/@societe.com
+                      - generic [aria-hidden] [ref=f24e1107]: 
+    - generic [ref=f24e1109]:
+      - paragraph [ref=f24e1110]: ©2026 SOCIETE SAS
+      - list [ref=f24e1111]:
+        - listitem [ref=f24e1112]:
+          - link "À propos" [ref=f24e1113] [cursor=pointer]:
+            - /url: /pages/a-propos.html
+        - listitem [ref=f24e1114]:
+          - link "CGU & CGV" [ref=f24e1115] [cursor=pointer]:
+            - /url: /pages/cgu-cgv.html
+        - listitem [ref=f24e1116]:
+          - link "Gestion des cookies" [ref=f24e1117] [cursor=pointer]:
+            - /url: javascript:Didomi.preferences.show()
+        - listitem [ref=f24e1118]:
+          - link "Politique de confidentialité" [ref=f24e1119] [cursor=pointer]:
+            - /url: /pages/politique-de-protection-des-donnees-personnelles.html
+        - listitem [ref=f24e1120]:
+          - link "Mentions Légales" [ref=f24e1121] [cursor=pointer]:
+            - /url: /pages/mentions-legales.html

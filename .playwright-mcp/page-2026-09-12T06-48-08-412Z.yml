@@ -1,0 +1,14 @@
+- generic [ref=f40e2]:
+  - separator [ref=f40e3]
+  - iframe [ref=f40e8]:
+    - generic [ref=f41e2]:
+      - generic [ref=f41e3]:
+        - checkbox "I'm not a robot" [ref=f41e7]
+        - generic [aria-hidden] [ref=f41e11]: I'm not a robot
+      - generic [ref=f41e12]: reCAPTCHA
+  - separator [ref=f40e9]
+  - generic [ref=f40e10]:
+    - text: À propos de cette page Nos systèmes ont détecté un trafic exceptionnel sur votre réseau informatique. Cette page permet de vérifier que c'est bien vous qui envoyez des requêtes, et non un robot.
+    - link "Que s'est-il passé ?" [ref=f40e11] [cursor=pointer]:
+      - /url: "#"
+    - generic [ref=f40e12]: "Adresse IP : 146.59.233.15Heure : 2026-09-12T06:48:07ZURL : https://www.google.com/search?q=%22XANADU%22+%2275+rue+du+Rocher%22+OR+%22Dunaxa%22+voyages+agence+Paris&hl=fr&num=20"

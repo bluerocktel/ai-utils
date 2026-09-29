@@ -1,0 +1,495 @@
+- generic [ref=f41e1]:
+  - banner [ref=f41e2]:
+    - navigation [ref=f41e3]:
+      - generic [ref=f41e4]:
+        - link [ref=f41e5] [cursor=pointer]:
+          - /url: https://www.118000.fr/
+          - img "118000.fr" [ref=f41e6]
+        - list [ref=f41e8]:
+          - listitem [ref=f41e9]:
+            - link " S'inscrire Mon compte":
+              - /url: "#"
+          - listitem:
+            - link " Connexion":
+              - /url: "#"
+              - generic [ref=f41e10] [cursor=pointer]: 
+              - text: Connexion
+    - navigation [ref=f41e12]:
+      - list [ref=f41e13]:
+        - listitem [ref=f41e14]:
+          - link "Annuaire Professionnels" [ref=f41e16] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f41e17]:
+          - link "Annuaire Enseignes" [ref=f41e18] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f41e19]:
+          - link "Annuaire Particuliers" [ref=f41e20] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f41e21]:
+          - link "Annuaire Inversé" [ref=f41e22] [cursor=pointer]:
+            - /url: "#"
+    - search [ref=f41e23]:
+      - generic [ref=f41e24]:
+        - generic [ref=f41e26]:
+          - generic [ref=f41e27] [cursor=pointer]: Qui ? Quoi ?
+          - generic [ref=f41e29]:
+            - textbox "Qui ? Quoi ?" [ref=f41e31]:
+              - /placeholder: Plombier, Alain Dupont, 01 23 45 67 89, ...
+              - text: Fondation rothschild
+            - list
+        - generic [ref=f41e33]:
+          - generic [ref=f41e34] [cursor=pointer]: Où ?
+          - generic [ref=f41e36]:
+            - textbox "Où ?" [ref=f41e37]:
+              - /placeholder: Paris 02, Nice, 34 000, ...
+            - strong [ref=f41e38]:
+              - checkbox "Près de :" [ref=f41e39]
+              - generic [ref=f41e40] [cursor=pointer]: "Près de :"
+            - list
+          - button "〉 trouver !" [ref=f41e42] [cursor=pointer]
+    - generic [ref=f41e44]:
+      - paragraph [ref=f41e45]:
+        - link "Annuaire téléphonique" [ref=f41e47] [cursor=pointer]:
+          - /url: https://www.118000.fr
+        - generic [ref=f41e48]: 〉
+        - strong [ref=f41e49]: Votre recherche
+      - button "Voir la carte" [ref=f41e50] [cursor=pointer]
+  - main [ref=f41e51]:
+    - generic:
+      - list
+    - generic [ref=f41e52]:
+      - article [ref=f41e53]:
+        - generic [ref=f41e54]:
+          - heading "〉 Administrateur de biens et syndic de copropriété à CABOURG. Adresse, horaires d’ouverture, téléphone" [level=1] [ref=f41e56]
+          - generic [ref=f41e57]: 23 résultats
+        - generic [ref=f41e58] [cursor=pointer]:
+          - generic [ref=f41e59]:
+            - generic [ref=f41e60]:
+              - heading [level=2] [ref=f41e61]:
+                - link "Comité d'Etablissement Rothschild" [ref=f41e62]:
+                  - /url: https://www.118000.fr/e_C0008814865
+              - heading "〉 administrateur de biens et syndic de copropriété" [level=3] [ref=f41e63]
+              - generic [ref=f41e64]: résid Le NarvalAVENUE DES SYCOMORES14390 Cabourg
+            - link "Ouvrir numéro" [ref=f41e67]:
+              - /url: tel:0231242446
+              - text: 02 31 24 24 46
+          - paragraph [ref=f41e69]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e70]
+          - paragraph [ref=f41e72]:
+            - button "Bouton J'aime" [ref=f41e73]: 
+        - generic [ref=f41e74] [cursor=pointer]:
+          - generic [ref=f41e75]:
+            - generic [ref=f41e76]:
+              - heading [level=2] [ref=f41e77]:
+                - link "Crèche de la Fondation Adolphe de Rothschild" [ref=f41e78]:
+                  - /url: https://www.118000.fr/e_C0084484661
+              - heading "〉 crèche" [level=3] [ref=f41e79]
+              - generic [ref=f41e80]: 44 Rue Mathurin Moreau75019 Paris 19
+            - link "Ouvrir numéro" [ref=f41e83]:
+              - /url: tel:0967401940
+              - text: 09 67 40 19 40
+          - link "Plus d'infos" [ref=f41e85]:
+            - /url: "#"
+          - generic [ref=f41e86]:
+            - paragraph [ref=f41e87]:
+              - strong [ref=f41e88]: " Fermé :"
+              - text: Ouvrira Lundi à partir de 07:00
+              - link "(Voir tous les horaires)" [ref=f41e89]:
+                - /url: https://www.118000.fr/e_C0084484661#hours
+            - paragraph [ref=f41e90]:
+              - button "Bouton J'aime" [ref=f41e91]: 
+        - insertion
+        - generic [ref=f41e92] [cursor=pointer]:
+          - generic [ref=f41e93]:
+            - generic [ref=f41e94]:
+              - heading [level=2] [ref=f41e95]:
+                - link "Fondation A. De Rothschild" [ref=f41e96]:
+                  - /url: https://www.118000.fr/e_C0033706665
+              - heading "〉 établissement de cure, de réadaptation et de convalescence" [level=3] [ref=f41e97]
+              - generic [ref=f41e98]: 20 RUE VICTOR HUGO60270 Gouvieux
+            - link "Ouvrir numéro" [ref=f41e101]:
+              - /url: tel:0344584848
+              - text: 03 44 58 48 48
+          - paragraph [ref=f41e103]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e104]
+          - paragraph [ref=f41e106]:
+            - button "Bouton J'aime" [ref=f41e107]: 
+        - generic [ref=f41e108] [cursor=pointer]:
+          - generic [ref=f41e109]:
+            - generic [ref=f41e110]:
+              - heading [level=2] [ref=f41e111]:
+                - link "Fondation Alphonse De Rothschild" [ref=f41e112]:
+                  - /url: https://www.118000.fr/e_C0039652548
+              - heading "〉 établissement de cure, de réadaptation et de convalescence" [level=3] [ref=f41e113]
+              - generic [ref=f41e114]: 20 RUE VICTOR HUGO60270 Gouvieux
+            - link "Ouvrir numéro" [ref=f41e117]:
+              - /url: tel:0344584848
+              - text: 03 44 58 48 48
+          - paragraph [ref=f41e119]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e120]
+          - paragraph [ref=f41e122]:
+            - button "Bouton J'aime" [ref=f41e123]: 
+        - generic [ref=f41e124] [cursor=pointer]:
+          - generic [ref=f41e125]:
+            - generic [ref=f41e126]:
+              - heading [level=2] [ref=f41e127]:
+                - link "Fondation de Rothschild" [ref=f41e128]:
+                  - /url: https://www.118000.fr/e_C0102319323
+              - heading "〉 crèche" [level=3] [ref=f41e129]
+              - generic [ref=f41e130]: 75012 Paris
+            - link "Ouvrir numéro" [ref=f41e133]:
+              - /url: tel:0146461840
+              - text: 01 46 46 18 40
+          - paragraph [ref=f41e135]:
+            - button "〉 C'est mon établissement" [ref=f41e136]
+          - paragraph [ref=f41e138]:
+            - button "Bouton J'aime" [ref=f41e139]: 
+        - generic [ref=f41e140] [cursor=pointer]:
+          - generic [ref=f41e141]:
+            - generic [ref=f41e142]:
+              - heading [level=2] [ref=f41e143]:
+                - link "Fondation de Rothschild" [ref=f41e144]:
+                  - /url: https://www.118000.fr/e_C0001497499
+              - heading "〉 maison et home d'enfants" [level=3] [ref=f41e145]
+              - generic [ref=f41e146]: 4 RUE DUNOIS75013 Paris
+            - link "Ouvrir numéro" [ref=f41e149]:
+              - /url: tel:0153615340
+              - text: 01 53 61 53 40
+          - paragraph [ref=f41e151]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e152]
+          - paragraph [ref=f41e154]:
+            - button "Bouton J'aime" [ref=f41e155]: 
+        - generic [ref=f41e156] [cursor=pointer]:
+          - generic [ref=f41e157]:
+            - generic [ref=f41e158]:
+              - heading [level=2] [ref=f41e159]:
+                - link "Fondation de Rothschild" [ref=f41e160]:
+                  - /url: https://www.118000.fr/e_C0001497500
+              - heading "〉 centre d'accueil pour personnes en difficulté" [level=3] [ref=f41e161]
+              - generic [ref=f41e162]: 8 R DES DEFENSEURS DE VERDUN94130 Nogent Sur Marne
+            - link "Ouvrir numéro" [ref=f41e165]:
+              - /url: tel:0143246773
+              - text: 01 43 24 67 73
+          - paragraph [ref=f41e167]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e168]
+          - paragraph [ref=f41e170]:
+            - button "Bouton J'aime" [ref=f41e171]: 
+        - generic [ref=f41e172] [cursor=pointer]:
+          - generic [ref=f41e173]:
+            - generic [ref=f41e174]:
+              - heading [level=2] [ref=f41e175]:
+                - link "Fondation de Rothschild" [ref=f41e176]:
+                  - /url: https://www.118000.fr/e_C0001497503
+              - heading "〉 centre médical et social, dispensaire" [level=3] [ref=f41e177]
+              - generic [ref=f41e178]: 118 RUE DE PARIS93100 Montreuil
+            - link "Ouvrir numéro" [ref=f41e181]:
+              - /url: tel:0143605881
+              - text: 01 43 60 58 81
+          - paragraph [ref=f41e183]:
+            - button "Bouton J'aime" [ref=f41e184]: 
+        - generic [ref=f41e185] [cursor=pointer]:
+          - generic [ref=f41e186]:
+            - generic [ref=f41e187]:
+              - heading [level=2] [ref=f41e188]:
+                - link "Fondation de Rothschild Paris" [ref=f41e189]:
+                  - /url: https://www.118000.fr/e_C0001497264
+              - heading "〉 hôpital" [level=3] [ref=f41e190]
+              - generic [ref=f41e191]: 78 RUE DE PICPUS75012 Paris
+            - link "Ouvrir numéro" [ref=f41e194]:
+              - /url: tel:0680631776
+              - text: 06 80 63 17 76
+          - paragraph [ref=f41e196]:
+            - button "Bouton J'aime" [ref=f41e197]: 
+        - generic [ref=f41e198] [cursor=pointer]:
+          - generic [ref=f41e199]:
+            - generic [ref=f41e200]:
+              - heading [level=2] [ref=f41e201]:
+                - link "FONDATION OPHTALMOLOGIQUE ADOLPHE de ROTHSCHILD" [ref=f41e202]:
+                  - /url: https://www.118000.fr/e_C0034835647
+              - heading "〉 hôpital" [level=3] [ref=f41e203]
+              - generic [ref=f41e204]: 25 RUE MANIN75019 Paris
+            - link "Ouvrir numéro" [ref=f41e207]:
+              - /url: tel:0148036400
+              - text: 01 48 03 64 00
+          - paragraph [ref=f41e209]:
+            - button "〉 C'est mon établissement" [ref=f41e210]
+          - paragraph [ref=f41e212]:
+            - button "Bouton J'aime" [ref=f41e213]: 
+        - generic [ref=f41e214] [cursor=pointer]:
+          - generic [ref=f41e215]:
+            - generic [ref=f41e216]:
+              - heading [level=2] [ref=f41e217]:
+                - link "Fondation Ophtalmologique Adolphe Rothschlid" [ref=f41e218]:
+                  - /url: https://www.118000.fr/e_C0034835649
+              - heading "〉 hôpital" [level=3] [ref=f41e219]
+              - generic [ref=f41e220]: 39 AVENUE MATHURIN MOREAU75019 Paris
+            - link "Ouvrir numéro" [ref=f41e223]:
+              - /url: tel:0142451686
+              - text: 01 42 45 16 86
+          - paragraph [ref=f41e225]:
+            - button "〉 C'est mon établissement" [ref=f41e226]
+          - paragraph [ref=f41e228]:
+            - button "Bouton J'aime" [ref=f41e229]: 
+        - generic [ref=f41e230] [cursor=pointer]:
+          - generic [ref=f41e231]:
+            - generic [ref=f41e232]:
+              - heading [level=2] [ref=f41e233]:
+                - link "Fondation Ophtalmologique Rothschild" [ref=f41e234]:
+                  - /url: https://www.118000.fr/e_C0001497792
+              - heading "〉 hôpital" [level=3] [ref=f41e235]
+              - generic [ref=f41e236]: 25 RUE MANIN75019 Paris
+            - link "Ouvrir numéro" [ref=f41e239]:
+              - /url: tel:0148036565
+              - text: 01 48 03 65 65
+          - paragraph [ref=f41e241]:
+            - button "〉 C'est mon établissement" [ref=f41e242]
+          - paragraph [ref=f41e244]:
+            - button "Bouton J'aime" [ref=f41e245]: 
+        - generic [ref=f41e246] [cursor=pointer]:
+          - generic [ref=f41e247]:
+            - generic [ref=f41e248]:
+              - heading [level=2] [ref=f41e249]:
+                - link "FONDATION OPTHALMOLOGIQUE A de ROTHSCHILD (Hôpital De Spécialités TETE Et COU)" [ref=f41e250]:
+                  - /url: https://www.118000.fr/e_C0034835650
+              - heading "〉 hôpital" [level=3] [ref=f41e251]
+              - generic [ref=f41e252]: 25 RUE MANIN75019 Paris
+            - link "Ouvrir numéro" [ref=f41e255]:
+              - /url: tel:0148036565
+              - text: 01 48 03 65 65
+          - paragraph [ref=f41e257]:
+            - button "〉 C'est mon établissement" [ref=f41e258]
+          - paragraph [ref=f41e260]:
+            - button "Bouton J'aime" [ref=f41e261]: 
+        - generic [ref=f41e262] [cursor=pointer]:
+          - generic [ref=f41e263]:
+            - generic [ref=f41e264]:
+              - heading [level=2] [ref=f41e265]:
+                - link "Fondation Opthalmologique Adolphe De Rot" [ref=f41e266]:
+                  - /url: https://www.118000.fr/e_C0034652744
+              - heading "〉 hôpital" [level=3] [ref=f41e267]
+              - generic [ref=f41e268]: 25 RUE MANIN75019 Paris
+            - link "Ouvrir numéro" [ref=f41e271]:
+              - /url: tel:0148036565
+              - text: 01 48 03 65 65
+          - paragraph [ref=f41e273]:
+            - button "〉 C'est mon établissement" [ref=f41e274]
+          - paragraph [ref=f41e276]:
+            - button "Bouton J'aime" [ref=f41e277]: 
+        - generic [ref=f41e278] [cursor=pointer]:
+          - generic [ref=f41e279]:
+            - generic [ref=f41e280]:
+              - heading [level=2] [ref=f41e281]:
+                - link "Fondation Rothschild" [ref=f41e282]:
+                  - /url: https://www.118000.fr/e_C0063721800
+              - heading "〉 administrateur de biens et syndic de copropriété" [level=3] [ref=f41e283]
+              - generic [ref=f41e284]: H 0011 RUE BARGUE75015 Paris
+            - link "Ouvrir numéro" [ref=f41e287]:
+              - /url: tel:0140270851
+              - text: 01 40 27 08 51
+          - paragraph [ref=f41e289]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e290]
+          - paragraph [ref=f41e292]:
+            - button "Bouton J'aime" [ref=f41e293]: 
+        - generic [ref=f41e294] [cursor=pointer]:
+          - generic [ref=f41e295]:
+            - generic [ref=f41e296]:
+              - heading [level=2] [ref=f41e297]:
+                - link "Fondation Rothschild" [ref=f41e298]:
+                  - /url: https://www.118000.fr/e_C0079316356
+              - heading "〉 association humanitaire (entraide, action sociale)" [level=3] [ref=f41e299]
+              - generic [ref=f41e300]: 13 R DES ECLUSES SAINT MARTIN75010 Paris
+            - link "Ouvrir numéro" [ref=f41e303]:
+              - /url: tel:0140034870
+              - text: 01 40 03 48 70
+          - paragraph [ref=f41e305]:
+            - button "〉 C'est mon association" [ref=f41e306]
+          - paragraph [ref=f41e308]:
+            - button "Bouton J'aime" [ref=f41e309]: 
+        - insertion
+        - generic [ref=f41e310] [cursor=pointer]:
+          - generic [ref=f41e311]:
+            - generic [ref=f41e312]:
+              - heading [level=2] [ref=f41e313]:
+                - link "Fondation Rothschild" [ref=f41e314]:
+                  - /url: https://www.118000.fr/e_C0063721801
+              - heading "〉 administrateur de biens et syndic de copropriété" [level=3] [ref=f41e315]
+              - generic [ref=f41e316]: A 001 RUE POPINCOURT75011 Paris
+            - link "Ouvrir numéro" [ref=f41e319]:
+              - /url: tel:0147007492
+              - text: 01 47 00 74 92
+          - paragraph [ref=f41e321]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e322]
+          - paragraph [ref=f41e324]:
+            - button "Bouton J'aime" [ref=f41e325]: 
+        - generic [ref=f41e326] [cursor=pointer]:
+          - generic [ref=f41e327]:
+            - generic [ref=f41e328]:
+              - heading [level=2] [ref=f41e329]:
+                - link "Fondation Rothschild" [ref=f41e330]:
+                  - /url: https://www.118000.fr/e_C0001497869
+              - heading "〉 maison de retraite établissement privé" [level=3] [ref=f41e331]
+              - generic [ref=f41e332]: LA GUETTE77174 Villeneuve Saint Denis
+            - link "Ouvrir numéro" [ref=f41e335]:
+              - /url: tel:0160435300
+              - text: 01 60 43 53 00
+          - paragraph [ref=f41e337]:
+            - button "〉 C'est mon entreprise ?" [ref=f41e338]
+          - paragraph [ref=f41e340]:
+            - button "Bouton J'aime" [ref=f41e341]: 
+        - list [ref=f41e342]:
+          - listitem [ref=f41e343]:
+            - generic [ref=f41e344]: "1"
+          - listitem [ref=f41e345]:
+            - generic [ref=f41e346] [cursor=pointer]: "2"
+          - listitem [ref=f41e347]:
+            - link "Page suivante" [ref=f41e348] [cursor=pointer]: 〉
+      - complementary [ref=f41e349]:
+        - generic [ref=f41e351]:
+          - paragraph [ref=f41e353]: " Ils peuvent aussi m’intéresser :"
+          - list [ref=f41e354]:
+            - listitem [ref=f41e355]:
+              - link "Location d'appartements - Cabourg" [ref=f41e356] [cursor=pointer]:
+                - /url: https://www.118000.fr/v_cabourg_14/c_location-d-appartements
+            - listitem [ref=f41e357]:
+              - 'link "Location meublée : maison, appartement et chambre - Cabourg" [ref=f41e358] [cursor=pointer]':
+                - /url: https://www.118000.fr/v_cabourg_14/c_location-meublee-maison-appartement-et-chambre
+        - generic [ref=f41e359]:
+          - paragraph [ref=f41e361]: " Autour de Cabourg :"
+          - list [ref=f41e362]:
+            - listitem [ref=f41e363]:
+              - link "administrateur de biens e... à Dives-sur-Mer" [ref=f41e364] [cursor=pointer]:
+                - /url: https://www.118000.fr/v_dives-sur-mer_14/c_administrateur-de-biens-et-syndic-de-copropriete
+            - listitem [ref=f41e365]:
+              - link "administrateur de biens e... à Houlgate" [ref=f41e366] [cursor=pointer]:
+                - /url: https://www.118000.fr/v_houlgate_14/c_administrateur-de-biens-et-syndic-de-copropriete
+    - generic [ref=f41e367]:
+      - heading "Comment trouver un administrateur de biens et syndic de copropriété à Cabourg ?" [level=2] [ref=f41e368]
+      - paragraph [ref=f41e369]: À Cabourg, la gestion de vos biens immobiliers et de vos copropriétés est essentielle pour garantir leur valorisation et leur bon fonctionnement. Les administrateurs de biens et syndics de copropriété jouent un rôle clé dans l'entretien et l'organisation des espaces communs, tout en veillant au respect des réglementations en vigueur. Grâce à leur expertise, ces professionnels vous accompagnent dans la gestion quotidienne de vos biens.
+      - heading "Questions fréquentes sur le métier d'administrateur de biens et syndic de copropriété" [level=3] [ref=f41e370]
+      - paragraph [ref=f41e371]:
+        - strong [ref=f41e372]: Comment choisir un bon syndic de copropriété ?
+        - text: Pour choisir un syndic de copropriété compétent, il est important de vérifier ses références, son expérience et sa connaissance des spécificités locales. Un bon syndic doit également être à l'écoute des copropriétaires et capable de gérer les conflits de manière efficace.
+      - paragraph [ref=f41e373]:
+        - strong [ref=f41e374]: Quel est le rôle d'un administrateur de biens ?
+        - text: L'administrateur de biens est chargé de la gestion locative d'un bien immobilier. Il s'occupe de la recherche de locataires, de la rédaction des baux, de la perception des loyers et de la gestion des réparations nécessaires.
+      - paragraph [ref=f41e375]:
+        - strong [ref=f41e376]: Combien coûte un syndic de copropriété à Cabourg ?
+        - text: Le coût d'un syndic de copropriété peut varier en fonction de la taille de la copropriété et des services proposés. En général, les honoraires se situent entre 10 et 15 euros par mètre carré, mais il est conseillé de demander plusieurs devis pour comparer.
+      - paragraph [ref=f41e377]:
+        - strong [ref=f41e378]: Pourquoi faire appel à un syndic professionnel ?
+        - text: Faire appel à un syndic professionnel permet de bénéficier d'une gestion experte et impartiale de la copropriété. Cela garantit une meilleure organisation des assemblées générales, une gestion rigoureuse des finances et une réactivité face aux problèmes quotidiens.
+      - paragraph [ref=f41e379]:
+        - strong [ref=f41e380]: Quels services propose un administrateur de biens ?
+        - text: Un administrateur de biens propose divers services, tels que la gestion locative, l'entretien des biens, la rédaction des contrats de location, ainsi que la gestion des litiges entre locataires et propriétaires.
+      - heading "Trouver un professionnel à Cabourg" [level=3] [ref=f41e381]
+      - paragraph [ref=f41e382]: Notre annuaire en ligne vous permet de trouver facilement un administrateur de biens ou un syndic de copropriété à Cabourg. Grâce à une recherche simple et intuitive, vous pouvez consulter les profils des professionnels locaux, leurs compétences et les avis laissés par d'autres clients. Cela vous aide à faire un choix éclairé pour la gestion de vos biens immobiliers.
+      - paragraph [ref=f41e383]: N'attendez plus pour optimiser la gestion de votre patrimoine immobilier. Utilisez notre annuaire dès maintenant pour entrer en contact avec des experts près de chez vous !
+  - generic [ref=f41e384]:
+    - paragraph
+    - paragraph [ref=f41e385]:
+      - link "Paris" [ref=f41e386] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_ile-de-france/v_paris_75
+      - text: "-"
+      - link "Marseille" [ref=f41e387] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_provence-alpes-cote-d-azur/v_marseille_13
+      - text: "-"
+      - link "Lyon" [ref=f41e388] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_rhone-alpes/v_lyon_69
+      - text: "-"
+      - link "Toulouse" [ref=f41e389] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_midi-pyrenees/v_toulouse_31
+      - text: "-"
+      - link "Nice" [ref=f41e390] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_provence-alpes-cote-d-azur/v_nice_06
+      - text: "-"
+      - link "Nantes" [ref=f41e391] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_pays-de-la-loire/v_nantes_44
+      - text: "-"
+      - link "Strasbourg" [ref=f41e392] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_alsace/v_strasbourg_67
+      - text: "-"
+      - link "Montpellier" [ref=f41e393] [cursor=pointer]:
+        - /url: https://www.118000.fr/r_languedoc-roussillon/v_montpellier_34
+    - paragraph
+  - contentinfo [ref=f41e394]:
+    - list [ref=f41e396]:
+      - listitem [ref=f41e397]:
+        - strong [ref=f41e398]: à propos
+        - list [ref=f41e399]:
+          - listitem [ref=f41e400]:
+            - link "CGU" [ref=f41e401] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e402]:
+            - link "Tarifs 118 000" [ref=f41e403] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e404]:
+            - link "FAQ" [ref=f41e405] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e406]:
+            - link "Mentions légales" [ref=f41e407] [cursor=pointer]:
+              - /url: "#"
+      - listitem [ref=f41e408]:
+        - strong [ref=f41e409]: Découvrir
+        - list [ref=f41e410]:
+          - listitem [ref=f41e411]:
+            - link "Annuaire professionnels" [ref=f41e412] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e413]:
+            - link "Annuaire enseignes" [ref=f41e414] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e415]:
+            - link "Annuaire particuliers" [ref=f41e416] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f41e417]:
+            - link "Annuaire inversé" [ref=f41e418] [cursor=pointer]:
+              - /url: "#"
+      - listitem [ref=f41e419]:
+        - strong [ref=f41e420]: CONTACTER LE 118000.FR
+        - list [ref=f41e421]:
+          - listitem [ref=f41e422]:
+            - link " Email" [ref=f41e423] [cursor=pointer]:
+              - /url: "#"
+              - text: 
+              - generic [ref=f41e424]: Email
+          - listitem [ref=f41e425]:
+            - link " Facebook" [ref=f41e426] [cursor=pointer]:
+              - /url: "#"
+              - text: 
+              - generic [ref=f41e427]: Facebook
+        - list [ref=f41e428]:
+          - listitem [ref=f41e429]:
+            - list [ref=f41e430]:
+              - listitem [ref=f41e431]:
+                - link "118 000" [ref=f41e432] [cursor=pointer]:
+                  - /url: tel:118000
+              - listitem [aria-hidden] [ref=f41e433]
+              - listitem [ref=f41e434]:
+                - text: Service 3 € / appel
+                - generic [ref=f41e435]: + prix appel
+  - generic [ref=f41e437] [cursor=pointer]:
+    - img "Ouverture chatbot" [ref=f41e438]
+    - generic [ref=f41e439]: Contactez nous
+  - generic:
+    - generic:
+      - generic:
+        - dialog "Manage your personal data and privacy choices" [ref=f41e441]:
+          - generic [ref=f41e446]:
+            - generic [ref=f41e447]:
+              - heading "Welcome" [active] [level=2] [ref=f41e449]
+              - generic [ref=f41e450]:
+                - paragraph [ref=f41e452]:
+                  - text: With our 224
+                  - strong [ref=f41e453] [cursor=pointer]: partners
+                  - text: ", we wish to store and access information on your devices (cookies, pixels in emails, etc.), combine and share your personal data with our partners, whether collected on this website or in our emails, already held by some of us, or obtained later, including in other contexts."
+                - paragraph [ref=f41e455]: Processing this data (identifiers, browsing, preferences, purchases, loyalty programs, IP, postal addresses and emails, phone, precise geolocation, etc.) allows developing and offering you services, content, commercial offers and ads across your devices and screens (including by email, post, SMS, phone, audio, and video), personalising them, measuring their performance, and analysing audiences.
+                - paragraph [ref=f41e456]: You can "accept all" and withdraw your consent at any time via the "cookie" icon, or "continue without accepting" trackers and activities subject to consent. You can also "set detailed preferences" and object to processing activities not subject to consent. These choices remain valid for 6 months.
+              - generic [ref=f41e457]:
+                - button "Do not accept" [ref=f41e458] [cursor=pointer]
+                - link "powered by Sirdata" [ref=f41e461] [cursor=pointer]:
+                  - /url: https://cmp.sirdata.com/
+                  - generic [ref=f41e462]: powered by
+                  - generic "Sirdata" [ref=f41e463]
+            - generic [ref=f41e465]:
+              - button "Set your choices" [ref=f41e466] [cursor=pointer]
+              - button "Accept all" [ref=f41e468] [cursor=pointer]
+        - generic "Cookies settings" [ref=f41e472]

@@ -1,0 +1,1401 @@
+- generic [ref=f78e1]:
+  - dialog "Bienvenue chez Societe.com Gestion du consentement" [ref=f78e4]:
+    - document [active] [ref=f78e5]:
+      - button "Continuer sans accepter" [ref=f78e6] [cursor=pointer]: Continuer sans accepter →
+      - heading "\"logo societe.com\"" [level=1] [ref=f78e8]
+      - generic [ref=f78e9]:
+        - paragraph [ref=f78e11]:
+          - text: Avec votre accord, nous et
+          - button "nos 488 partenaires" [ref=f78e12] [cursor=pointer]
+          - text: utilisons des cookies ou technologies similaires pour stocker, consulter et traiter des données personnelles telles que votre visite sur ce site internet, les adresses IP et les identifiants de cookie. Certains partenaires ne demandent pas votre consentement pour traiter vos données et se fondent sur leur intérêt commercial légitime. À tout moment, vous pouvez retirer votre consentement ou vous opposer au traitement des données fondé sur l'intérêt légitime en cliquant sur « En savoir plus » ou en allant dans notre politique de confidentialité sur ce site internet.
+        - paragraph [ref=f78e14]:
+          - heading "Vos données personnelles sont traitées pour les finalités suivantes:" [level=2] [ref=f78e15]
+          - generic [ref=f78e16]: Analyser activement les caractéristiques de l’appareil pour l’identification, Mesure d'audience, Publicités et contenu personnalisés, mesure de performance des publicités et du contenu, études d’audience et développement de services, Stocker et/ou accéder à des informations sur un appareil, Utiliser des données de géolocalisation précises
+      - generic [ref=f78e17]:
+        - button "En savoir plus" [ref=f78e18] [cursor=pointer]
+        - button "Accepter et Fermer" [ref=f78e19] [cursor=pointer]
+  - banner [ref=f78e21]:
+    - link "Page d'accueil Société.com" [ref=f78e23] [cursor=pointer]:
+      - /url: /
+    - text:        Nouveauté  
+    - search [ref=f78e26]:
+      - generic [ref=f78e27]:
+        - generic [aria-hidden] [ref=f78e28]: 
+        - textbox "Entreprise, dirigeant, SIREN..." [ref=f78e29]
+        - text: 
+    - list [ref=f78e30]:
+      - text:  
+      - listitem: 
+      - listitem [ref=f78e31]:
+        - button "Menu principal" [ref=f78e32] [cursor=pointer]
+  - main [ref=f78e35]:
+    - navigation "Breadcrumb" [ref=f78e36]:
+      - list [ref=f78e37]:
+        - listitem [ref=f78e38]:
+          - link "Entreprises françaises" [ref=f78e39] [cursor=pointer]:
+            - /url: /entreprises
+          - text: 
+        - listitem [ref=f78e41]:
+          - link "Seine-Saint-Denis" [ref=f78e42] [cursor=pointer]:
+            - /url: /entreprises/seine-saint-denis-93
+          - text: 
+        - listitem [ref=f78e44]:
+          - link "79 - Activités des agences de voyag..." [ref=f78e45] [cursor=pointer]:
+            - /url: /entreprises/seine-saint-denis-93/activites-des-agences-de-voyage-voyagistes-services-de-reservation-et-activites-connexes
+          - text: 
+        - listitem [ref=f78e46]:
+          - link "7912Z - Activités des voyagistes" [ref=f78e47] [cursor=pointer]:
+            - /url: /entreprises/seine-saint-denis-93/activites-des-voyagistes-7912Z
+          - text: 
+        - listitem [ref=f78e48]:
+          - generic [ref=f78e49]: TOURISME ORGANISATION PRODUCTI...
+    - generic [ref=f78e51]:
+      - generic [ref=f78e52]:
+        - generic [ref=f78e53]:
+          - img "France" [ref=f78e56] [cursor=pointer]
+          - heading "TOURISME ORGANISATION PRODUCTION" [level=1] [ref=f78e57]
+        - generic [ref=f78e58]:
+          - generic [ref=f78e59]:
+            - generic [aria-hidden] [ref=f78e60]: 
+            - text: Active
+          - generic [ref=f78e61]:
+            - generic [aria-hidden] [ref=f78e62]: 
+            - text: Vérifiée
+          - generic [ref=f78e63]: 20 à 49 salariés
+      - generic [ref=f78e66]:
+        - button "Solvabilité" [ref=f78e67] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e68]: 
+        - button "Appeler" [ref=f78e72] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e73]: 
+        - button "Surveiller" [ref=f78e75] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e76]: 
+      - text:  OU
+    - generic [ref=f78e81]:
+      - generic [ref=f78e82]:
+        - generic [ref=f78e83]:
+          - term [ref=f78e84]: SIREN
+          - definition [ref=f78e85]:
+            - text: 419 234 141
+            - button "Copier le numéro SIREN" [ref=f78e86] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e87]: 
+        - generic [ref=f78e88]:
+          - term [ref=f78e89]: SIRET DU SIEGE SOCIAL
+          - definition [ref=f78e90]:
+            - text: 419 234 141 00028
+            - button "Copier le numéro SIRET" [ref=f78e91] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e92]: 
+        - generic [ref=f78e93]:
+          - term [ref=f78e94]: NUMÉRO DE TVA
+          - definition [ref=f78e95]:
+            - text: FR47419234141
+            - button "Copier le numéro de TVA Intracommunautaire" [ref=f78e96] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e97]: 
+        - generic [ref=f78e98]:
+          - term [ref=f78e99]: DATE DE CREATION
+          - definition [ref=f78e100]: 11 juillet 2017
+        - generic [ref=f78e101]:
+          - term [ref=f78e102]: ACTIVITÉ (NAF / APE)
+          - definition [ref=f78e103]:
+            - text: Activités des voyagistes - 7912Z
+            - button "Copier le code NAF ou APE" [ref=f78e104] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e105]: 
+        - generic [ref=f78e106]:
+          - term [ref=f78e107]: FORME JURIDIQUE
+          - definition [ref=f78e108]:
+            - text: Société anonyme à conseil d'administration
+            - button "Copier la forme juridique" [ref=f78e109] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e110]: 
+        - generic [ref=f78e111]:
+          - term [ref=f78e112]: ADRESSE
+          - definition [ref=f78e113]:
+            - text: 3 RUE FRANKLIN IMMEUBLE CITYSCOPE, 93100 MONTREUIL
+            - button "Copier l'adresse principale de l'entreprise" [ref=f78e114] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e115]: 
+        - generic [ref=f78e116]:
+          - term [ref=f78e117]: DIRIGEANTS
+          - definition [ref=f78e118]:
+            - link "Helmut STUCKELSCHWEIGER" [ref=f78e119] [cursor=pointer]:
+              - /url: /manager/Helmut.STUCKELSCHWEIGER.5Hr-zVhdnQk.html
+            - link "+ 3 autres dirigeants" [ref=f78e120] [cursor=pointer]:
+              - /url: "#__managers"
+        - generic [ref=f78e121]:
+          - term [ref=f78e122]: SOURCES & MISES À JOUR LE 11/09/2026
+          - definition [ref=f78e123]:
+            - generic [ref=f78e124]:
+              - link "Insee" [ref=f78e125] [cursor=pointer]:
+                - /url: https://www.insee.fr/fr/accueil
+              - text: ","
+            - link "RNE" [ref=f78e127] [cursor=pointer]:
+              - /url: https://registre.entreprises.gouv.fr/
+      - generic [ref=f78e129]:
+        - button "Mentions légales" [ref=f78e130] [cursor=pointer]
+        - button "Statuts à jour" [ref=f78e131] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e132]: 
+        - button "Obtenir le rapport" [ref=f78e134] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e135]: 
+    - generic [ref=f78e137]:
+      - navigation [ref=f78e138]:
+        - list [ref=f78e139]:
+          - listitem [ref=f78e140]:
+            - link "Kbis" [ref=f78e141] [cursor=pointer]:
+              - /url: "#__infos"
+              - generic [aria-hidden] [ref=f78e142]: 
+              - text: Kbis
+          - listitem [ref=f78e143]:
+            - link "Contact" [ref=f78e144] [cursor=pointer]:
+              - /url: "#__contact"
+              - generic [aria-hidden] [ref=f78e145]: 
+              - text: Contact
+          - listitem [ref=f78e146]:
+            - link "Établissements" [ref=f78e147] [cursor=pointer]:
+              - /url: "#__establishments"
+              - generic [aria-hidden] [ref=f78e148]: 
+              - text: Établissements
+          - listitem [ref=f78e149]:
+            - link "Dirigeants" [ref=f78e150] [cursor=pointer]:
+              - /url: "#__managers"
+              - generic [aria-hidden] [ref=f78e151]: 
+              - text: Dirigeants
+          - listitem [ref=f78e152]:
+            - link "Finances" [ref=f78e153] [cursor=pointer]:
+              - /url: "#__financial"
+              - generic [aria-hidden] [ref=f78e154]: 
+              - text: Finances
+          - listitem [ref=f78e155]:
+            - link "Documents" [ref=f78e156] [cursor=pointer]:
+              - /url: "#__documents"
+              - generic [aria-hidden] [ref=f78e157]: 
+              - text: Documents
+          - listitem [ref=f78e158]:
+            - link "Annonces" [ref=f78e159] [cursor=pointer]:
+              - /url: "#__legalNotices"
+              - generic [aria-hidden] [ref=f78e160]: 
+              - text: Annonces
+          - listitem [ref=f78e161]:
+            - link "Extra-financier" [ref=f78e162] [cursor=pointer]:
+              - /url: "#__xfinancial"
+              - generic [aria-hidden] [ref=f78e163]: 
+              - text: Extra-financier
+          - listitem [ref=f78e164]:
+            - link "Juridique" [ref=f78e165] [cursor=pointer]:
+              - /url: "#__legal"
+              - generic [aria-hidden] [ref=f78e166]: 
+              - text: Juridique
+          - listitem [ref=f78e167]:
+            - link "Historique" [ref=f78e168] [cursor=pointer]:
+              - /url: "#__history"
+              - generic [aria-hidden] [ref=f78e169]: 
+              - text: Historique
+      - generic [ref=f78e171]:
+        - button "Menu des sections" [ref=f78e172] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e173]: 
+        - link "Recherche IA" [ref=f78e174] [cursor=pointer]:
+          - /url: /ia
+          - generic [aria-hidden] [ref=f78e175]: 
+        - list [ref=f78e177]:
+          - listitem [ref=f78e178]:
+            - link "Kbis" [ref=f78e179] [cursor=pointer]:
+              - /url: "#__infos"
+              - generic [aria-hidden] [ref=f78e180]: 
+              - text: Kbis
+          - listitem [ref=f78e181]:
+            - link "Contact" [ref=f78e182] [cursor=pointer]:
+              - /url: "#__contact"
+              - generic [aria-hidden] [ref=f78e183]: 
+              - text: Contact
+          - listitem [ref=f78e184]:
+            - link "Établissements" [ref=f78e185] [cursor=pointer]:
+              - /url: "#__establishments"
+              - generic [aria-hidden] [ref=f78e186]: 
+              - text: Établissements
+          - listitem [ref=f78e187]:
+            - link "Dirigeants" [ref=f78e188] [cursor=pointer]:
+              - /url: "#__managers"
+              - generic [aria-hidden] [ref=f78e189]: 
+              - text: Dirigeants
+          - listitem [ref=f78e190]:
+            - link "Finances" [ref=f78e191] [cursor=pointer]:
+              - /url: "#__financial"
+              - generic [aria-hidden] [ref=f78e192]: 
+              - text: Finances
+          - listitem [ref=f78e193]:
+            - link "Documents" [ref=f78e194] [cursor=pointer]:
+              - /url: "#__documents"
+              - generic [aria-hidden] [ref=f78e195]: 
+              - text: Documents
+          - listitem [ref=f78e196]:
+            - link "Annonces" [ref=f78e197] [cursor=pointer]:
+              - /url: "#__legalNotices"
+              - generic [aria-hidden] [ref=f78e198]: 
+              - text: Annonces
+          - listitem [ref=f78e199]:
+            - link "Extra-financier" [ref=f78e200] [cursor=pointer]:
+              - /url: "#__xfinancial"
+              - generic [aria-hidden] [ref=f78e201]: 
+              - text: Extra-financier
+          - listitem [ref=f78e202]:
+            - link "Juridique" [ref=f78e203] [cursor=pointer]:
+              - /url: "#__legal"
+              - generic [aria-hidden] [ref=f78e204]: 
+              - text: Juridique
+          - listitem [ref=f78e205]:
+            - link "Historique" [ref=f78e206] [cursor=pointer]:
+              - /url: "#__history"
+              - generic [aria-hidden] [ref=f78e207]: 
+              - text: Historique
+    - generic [ref=f78e208]:
+      - list [ref=f78e209]:
+        - listitem [ref=f78e210]:
+          - heading " Finances" [level=2] [ref=f78e211]:
+            - generic [ref=f78e212]: 
+            - text: Finances
+          - list [ref=f78e213]:
+            - listitem [ref=f78e214] [cursor=pointer]: Etude de solvabilité Disponible
+            - listitem [ref=f78e215] [cursor=pointer]: États des dettes Disponible
+            - listitem [ref=f78e216] [cursor=pointer]: Valeur de l'entreprise Disponible
+      - list [ref=f78e217]:
+        - listitem [ref=f78e218]:
+          - heading " Extra-financier" [level=2] [ref=f78e219]:
+            - generic [ref=f78e220]: 
+            - text: Extra-financier
+          - list [ref=f78e221]:
+            - listitem [ref=f78e222] [cursor=pointer]:
+              - text: Bilan carbone®
+              - generic [ref=f78e223]: 
+              - text: Non déposé
+            - listitem [ref=f78e225] [cursor=pointer]:
+              - text: Rapport d'impact
+              - generic [ref=f78e226]: 
+              - text: Non déposé
+            - listitem [ref=f78e228] [cursor=pointer]:
+              - text: Score de souveraineté
+              - generic [ref=f78e229]: 
+              - text: Non déposé
+      - list [ref=f78e231]:
+        - listitem [ref=f78e232]:
+          - heading " Conformité" [level=2] [ref=f78e233]:
+            - generic [ref=f78e234]: 
+            - text: Conformité
+          - list [ref=f78e235]:
+            - listitem [ref=f78e236] [cursor=pointer]: Extrait Kbis Disponible
+            - listitem [ref=f78e237] [cursor=pointer]:
+              - text: Assurance RC PRO
+              - generic [ref=f78e238]: 
+              - text: Non déposé
+            - listitem [ref=f78e240] [cursor=pointer]:
+              - text: Attestation URSSAF
+              - generic [ref=f78e241]: 
+              - text: Non déposé
+    - article [ref=f78e243]:
+      - generic [ref=f78e244]:
+        - generic [ref=f78e245]:
+          - generic [aria-hidden] [ref=f78e246]: 
+          - text: Nouveau • Espace Pro
+        - generic [ref=f78e247]: 100% Gratuit
+      - generic [ref=f78e248]:
+        - heading "Vous travaillez pour TOURISME ORGANISATION PRODUCTION ? Prenez-en le contrôle." [level=2] [ref=f78e249]:
+          - text: Vous travaillez pour TOURISME ORGANISATION PRODUCTION ?
+          - generic [ref=f78e250]: Prenez-en le contrôle.
+        - button "Associer à mon compte" [ref=f78e251] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f78e252]: 
+    - generic [ref=f78e255]:
+      - article [ref=f78e257]:
+        - heading "Rapport complet officiel" [level=2] [ref=f78e259]
+        - generic "Rapport complet officiel" [ref=f78e260]:
+          - list [ref=f78e261]:
+            - listitem [ref=f78e262]:
+              - generic [ref=f78e263]:
+                - time [ref=f78e264]: 12/09/2026
+                - button "Obtenir le rapport" [ref=f78e266] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e267]: 
+                - generic [ref=f78e269]:
+                  - generic [aria-hidden] [ref=f78e271]: 
+                  - generic [ref=f78e273]:
+                    - heading "Solvabilité, Actionnaires, Conformité ..." [level=3] [ref=f78e274]
+                    - paragraph [ref=f78e275]:
+                      - text: Accédez à une synthèse de toutes les informations en notre possession pour cette entreprise sur les aspects
+                      - strong [ref=f78e276]: légaux, juridiques, financiers, actionnariats et de conformité
+                      - text: . Utilisez le rapport complet officiel pour analyser une entreprise à partir d'un seul et même document.
+                      - link "Voir un exemple" [ref=f78e277] [cursor=pointer]:
+                        - /url: /docs/rapport-complet-officiel-societe-com-exemple.pdf
+      - generic [ref=f78e280]:
+        - heading "Informations Légales" [level=2] [ref=f78e282]
+        - article [ref=f78e283]:
+          - generic [ref=f78e284]:
+            - generic [ref=f78e285]:
+              - term [ref=f78e286]: Activité principale déclarée
+              - definition [ref=f78e287]:
+                - text: COMMERCIALISATION AUPRES DE TOUTES AGENCES, PRODUCTION, PREPARATION ET ORGANISATION DE TOUS CIRCUITS OU VOYAGES INDIVIDUELS OU COLLECTIFS, A CARACTERE TOURISTIQUE, CULTUREL OU PROFESSIONNEL, ORGANISATION DE TOUT VOYAGE A THEME OU NON ET DES PRESTATIONS DE SERVICE DE TOUTE NATURE POUVANT ETRE FOURNIE A CETTE OCCASION, EXPLOITATION DE TOUTES AGENCES DE VOYAGES ET TOUTES OPERATIONS FINANCIERES S'Y RATTACHANT
+                - button "Copier l'activité principale de l'entreprise" [ref=f78e288] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e289]: 
+            - generic [ref=f78e290]:
+              - term [ref=f78e291]: Convention collective déduite
+              - definition [ref=f78e292]:
+                - text: Agences de voyages (1710)
+                - button "Copier l'intitulé de la convention collective déduite de l'entreprise" [ref=f78e293] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e294]: 
+            - generic [ref=f78e295]:
+              - term [ref=f78e296]: Capital social
+              - definition [ref=f78e297]:
+                - generic [ref=f78e298]: 456 000,00 €
+                - button "Copier le capital de l'entreprise" [ref=f78e299] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e300]: 
+            - generic [ref=f78e301]:
+              - term [ref=f78e302]: Noms commerciaux
+              - definition [ref=f78e303]:
+                - text: TOURISME ORGANISATION PRODUCTION
+                - button "Copier les noms commerciaux de l'entreprise" [ref=f78e304] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e305]: 
+            - generic [ref=f78e306]:
+              - generic [ref=f78e307]:
+                - term [ref=f78e308]: Statut RCS
+                - definition [ref=f78e309]:
+                  - generic [ref=f78e310]: Inscrite
+                  - generic [ref=f78e311]: le 11 juillet 2017
+                  - button "Télécharger Situation RCS" [ref=f78e312] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f78e313]: 
+              - generic [ref=f78e314]:
+                - term [ref=f78e315]: Statut INSEE
+                - definition [ref=f78e316]:
+                  - generic [ref=f78e317]: Inscrite
+                  - generic [ref=f78e318]: le 12 juin 1998
+                  - button "Télécharger Situation SIRENE" [ref=f78e319] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f78e320]: 
+              - generic [ref=f78e321]:
+                - generic [ref=f78e322]:
+                  - term [ref=f78e323]: Statut RNE
+                  - definition [ref=f78e324]:
+                    - generic [ref=f78e325]: Inscrite
+                    - generic [ref=f78e326]: le 11 juillet 2017
+                    - button "Télécharger Situation RCS" [ref=f78e327] [cursor=pointer]:
+                      - generic [aria-hidden] [ref=f78e328]: 
+                - generic [ref=f78e330]:
+                  - button "Voir les 8 observations des Greffes" [ref=f78e331] [cursor=pointer]
+                  - generic [ref=f78e332]:
+                    - generic [ref=f78e333]:
+                      - text: Observations RNE
+                      - generic [ref=f78e334] [cursor=pointer]: 
+                    - list [ref=f78e336]:
+                      - listitem [ref=f78e337]:
+                        - paragraph [ref=f78e338]: 14 octobre 2021
+                        - list [ref=f78e339]:
+                          - listitem [ref=f78e340]: Continuation de la société malgré un actif net devenu inférieur à la moitié du capital social. Décision du 05/10/2021
+                      - listitem [ref=f78e341]:
+                        - paragraph [ref=f78e342]: 21 juillet 2017
+                        - list [ref=f78e343]:
+                          - listitem [ref=f78e344]: "RADIATION : ENTREPRISE DESORMAIS IMMATRICULEE AU RCS DE Bobigny SOUS LE NUMERO 2017B6657"
+                      - listitem [ref=f78e345]:
+                        - paragraph [ref=f78e346]: 11 juillet 2017
+                        - list [ref=f78e347]:
+                          - listitem [ref=f78e348]: La société ne conserve aucune activité à son ancien siège 01/07/2017
+                          - listitem [ref=f78e349]: En application de l'article R 123-96 du code de commerce, l'activité de agence de voyage est sous condition suspensive de la délivrance de l'autorisation par l'autorité compétente. La pièce justificative doit être fournie au Greffe dans les quinze jours de sa délivrance par l'autorité compétente. Faute pour l'assujetti de respecter ce délai, le greffier procède comme il est dit au 2ème alinéa de l'article R 123-100 du code de commerce.
+                      - listitem [ref=f78e350]:
+                        - paragraph [ref=f78e351]: 29 janvier 2004
+                        - list [ref=f78e352]:
+                          - listitem [ref=f78e353]: MISE EN HARMONIE DES STATUTS AVEC LA LOI 2001-420 DU 15 MAI 2001
+                          - listitem [ref=f78e354]: Mise en harmonie des statuts avec la loi 2001-420 du 15 mai 2001 MISE EN HARMONIE DES STATUTS AVEC LA LOI 2001-420 DU 15 MAI 2001
+                      - listitem [ref=f78e355]:
+                        - paragraph [ref=f78e356]: 1 janvier 2002
+                        - list [ref=f78e357]:
+                          - listitem [ref=f78e358]: CONVERSION DU CAPITAL SOCIAL EN EUROS EFFECTUEE D'OFFICE PAR LE GREFFIER DU TRIBUNAL DE COMMERCE EN APPLICATION DU DECRET N°2001-474 DU 30 MAI 2001
+                          - listitem [ref=f78e359]: Conversion du capital social en euros effectuée d'office par le greffier du tribunal de commerce en application du décret N° 2001-474 du 30 mai 2001 CONVERSION DU CAPITAL SOCIAL EN EUROS EFFECTUEE D'OFFICE PAR LE GREFFIER DU TRIBUNAL DE COMMERCE EN APPLICATION DU DECRET N°2001-474 DU 30 MAI 2001
+          - generic [ref=f78e361]:
+            - button "Avis situation SIRENE" [ref=f78e362] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e363]: 
+            - button "Extrait RNE" [ref=f78e365] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e366]: 
+            - button "Extrait Kbis" [ref=f78e368] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f78e369]: 
+      - generic [ref=f78e371]:
+        - article [ref=f78e372]:
+          - heading "Contacter TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e374]
+          - generic [ref=f78e376]:
+            - generic [ref=f78e377]:
+              - term [ref=f78e378]: Téléphone
+              - definition [ref=f78e379] [cursor=pointer]:
+                - link "Appeler" [ref=f78e381]:
+                  - /url: ""
+                  - generic [aria-hidden] [ref=f78e382]: 
+                  - generic [ref=f78e383]: Afficher le numéro
+            - generic [ref=f78e384]:
+              - term [ref=f78e385]: Mail de contact
+              - definition [ref=f78e386]: Email de contact indisponible
+        - article [ref=f78e387]:
+          - heading "Prospecter Activités des voyagistes en Seine-Saint-Denis" [level=2] [ref=f78e389]
+          - generic [ref=f78e391]:
+            - generic [ref=f78e392]: 2 885 emails disponibles
+            - generic [ref=f78e398]:
+              - generic [ref=f78e399]: 748 Direction / Encadrement
+              - generic [ref=f78e402]: 212 Commercial / Ventes
+              - generic [ref=f78e405]: 88 Marketing / Communication
+              - generic [ref=f78e408]: 1 837 Autres
+          - link "Exporter les contacts" [ref=f78e413] [cursor=pointer]:
+            - /url: /fichier?ftAnaf=7912Z&ftLplace=93
+            - generic [aria-hidden] [ref=f78e414]: 
+      - generic [ref=f78e416]:
+        - heading "Établissements" [level=2] [ref=f78e418]
+        - generic [ref=f78e419]:
+          - list [ref=f78e420]:
+            - listitem [ref=f78e421]:
+              - list [ref=f78e422]:
+                - listitem [ref=f78e423]:
+                  - article [ref=f78e424]:
+                    - generic [ref=f78e425]:
+                      - heading "TOURISME ORGANISATION PRODUCTION - 93100" [level=3] [ref=f78e426]:
+                        - paragraph [ref=f78e427]:
+                          - generic [aria-hidden] [ref=f78e428]:  
+                          - generic [ref=f78e429]: TOURISME ORGANISATION PRODUCTION - 93100
+                      - paragraph [ref=f78e430]: Siège social depuis le 11 juillet 2017 (9 ans)
+                    - generic [ref=f78e431]:
+                      - generic [ref=f78e432]:
+                        - term [ref=f78e433]: SIRET
+                        - definition [ref=f78e434]:
+                          - text: 419 234 141 00028
+                          - button "Copier le numéro SIRET" [ref=f78e435] [cursor=pointer]:
+                            - generic [aria-hidden] [ref=f78e436]: 
+                      - generic [ref=f78e437]:
+                        - term [ref=f78e438]: Activité
+                        - definition [ref=f78e439]: Activités des voyagistes - 7912Z
+                      - generic [ref=f78e440]:
+                        - term [ref=f78e441]: Adresse
+                        - definition [ref=f78e442]:
+                          - link "3 RUE FRANKLIN IMMEUBLE CITYSCOPE, 93100 MONTREUIL" [ref=f78e443] [cursor=pointer]:
+                            - /url: /maps/?siret=41923414100028
+                            - generic [aria-hidden] [ref=f78e444]: 
+                            - text: 3 RUE FRANKLIN IMMEUBLE CITYSCOPE, 93100 MONTREUIL
+                  - complementary [ref=f78e445]:
+                    - generic [ref=f78e446]:
+                      - button "Appeler" [ref=f78e449] [cursor=pointer]:
+                        - generic [aria-hidden] [ref=f78e450]: 
+                      - button " Dossier d'urbanisme" [ref=f78e452] [cursor=pointer]:
+                        - generic [ref=f78e453]: 
+                        - generic [ref=f78e454]: Dossier d'urbanisme
+            - text:    
+          - generic [ref=f78e456]:
+            - button "Afficher les 2 établissements" [ref=f78e459] [cursor=pointer]
+            - generic [ref=f78e460]:
+              - generic [ref=f78e461]:
+                - text: Établissements
+                - generic [ref=f78e462] [cursor=pointer]: 
+              - list [ref=f78e464]:
+                - listitem [ref=f78e465]:
+                  - button "Tous" [ref=f78e466] [cursor=pointer]
+                - listitem [ref=f78e467]:
+                  - button "Ouvert" [ref=f78e468] [cursor=pointer]
+                - listitem [ref=f78e469]:
+                  - button "Fermé" [ref=f78e470] [cursor=pointer]
+      - generic [ref=f78e473]:
+        - generic [ref=f78e475]:
+          - heading "Dirigeants de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e477]
+          - list [ref=f78e478]:
+            - listitem [ref=f78e479]:
+              - list [ref=f78e480]:
+                - listitem [ref=f78e481]:
+                  - article [ref=f78e482]:
+                    - heading [level=3] [ref=f78e484]:
+                      - link "Helmut STUCKELSCHWEIGER" [ref=f78e485] [cursor=pointer]:
+                        - /url: /manager/Helmut.STUCKELSCHWEIGER.5Hr-zVhdnQk.html
+                        - generic [aria-hidden] [ref=f78e486]:  
+                    - generic [ref=f78e488]:
+                      - generic [ref=f78e489]:
+                        - term [ref=f78e490]: Né en
+                        - definition [ref=f78e491]: 1957 (69 ans)
+                      - generic [ref=f78e492]:
+                        - term [ref=f78e493]: Mandat
+                        - definition [ref=f78e494]: Président du conseil d'administration depuis le 10 février 2004 (22 ans)
+                  - complementary [ref=f78e495]:
+                    - link "Voir la fiche" [ref=f78e496] [cursor=pointer]:
+                      - /url: /manager/Helmut.STUCKELSCHWEIGER.5Hr-zVhdnQk.html
+                - listitem [ref=f78e497]:
+                  - article [ref=f78e498]:
+                    - heading [level=3] [ref=f78e500]:
+                      - link "Helmut STUCKELSCHWEIGER" [ref=f78e501] [cursor=pointer]:
+                        - /url: /manager/Helmut.STUCKELSCHWEIGER.5Hr-zVhdnQk.html
+                        - generic [aria-hidden] [ref=f78e502]:  
+                    - generic [ref=f78e504]:
+                      - generic [ref=f78e505]:
+                        - term [ref=f78e506]: Né en
+                        - definition [ref=f78e507]: 1957 (69 ans)
+                      - generic [ref=f78e508]:
+                        - term [ref=f78e509]: Mandat
+                        - definition [ref=f78e510]: Président-directeur général depuis le (-1 an)
+                  - complementary [ref=f78e511]:
+                    - link "Voir la fiche" [ref=f78e512] [cursor=pointer]:
+                      - /url: /manager/Helmut.STUCKELSCHWEIGER.5Hr-zVhdnQk.html
+                - text:          
+            - text:              
+          - generic [ref=f78e514]:
+            - button "Afficher les 14 dirigeants" [ref=f78e517] [cursor=pointer]
+            - generic [ref=f78e518]:
+              - generic [ref=f78e519]:
+                - text: Dirigeants
+                - generic [ref=f78e520] [cursor=pointer]: 
+              - list [ref=f78e522]:
+                - listitem [ref=f78e523]:
+                  - button "Tous" [ref=f78e524] [cursor=pointer]
+                - listitem [ref=f78e525]:
+                  - button "Actuels" [ref=f78e526] [cursor=pointer]
+                - listitem [ref=f78e527]:
+                  - button "Anciens" [ref=f78e528] [cursor=pointer]
+        - article [ref=f78e531]:
+          - heading "Structure capitalistique" [level=2] [ref=f78e533]
+          - generic "Structure capitalistique" [ref=f78e534]:
+            - list [ref=f78e535]:
+              - listitem [ref=f78e536]:
+                - generic [ref=f78e537]:
+                  - time [ref=f78e538]: 12/09/2026
+                  - button "Liste des actionnaires" [ref=f78e540] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f78e541]: 
+                  - generic [ref=f78e543]:
+                    - generic [aria-hidden] [ref=f78e545]: 
+                    - generic [ref=f78e547]:
+                      - heading "Actionnaires, têtes de groupe, filiales ..." [level=3] [ref=f78e548]
+                      - paragraph [ref=f78e549]:
+                        - text: Identifiez l'ensemble des entités ayant un lien capitalistique avec cette entreprise.
+                        - link "Voir un exemple" [ref=f78e550] [cursor=pointer]:
+                          - /url: /docs/liste-des-actionnaires-societe-com-exemple.pdf
+        - article [ref=f78e552]:
+          - generic [ref=f78e553]:
+            - heading "Obtenir la liste des bénéficiaires effectifs" [level=2] [ref=f78e555]
+            - generic [ref=f78e556]:
+              - paragraph [ref=f78e557]: Depuis le 31 juillet 2024, pour avoir accès aux Registre des bénéficiaires effectifs (RBE) vous devez être habilité.
+              - link "Formulaire d'accès aux bénéficiaires effectifs" [ref=f78e558] [cursor=pointer]:
+                - /url: https://blog.societe.com/acces-aux-beneficiaires-effectifs
+                - text: Formulaire d'accès
+      - generic [ref=f78e559]:
+        - generic [ref=f78e560]:
+          - heading "Finances" [level=2] [ref=f78e562]
+          - generic [ref=f78e564]:
+            - img "Graphique scrollable des indicateurs clés" [ref=f78e565]:
+              - generic [ref=f78e566]:
+                - generic [ref=f78e572]:
+                  - generic [ref=f78e574]: "2004"
+                  - generic [ref=f78e576]: "2005"
+                  - generic [ref=f78e578]: "2006"
+                  - generic [ref=f78e580]: "2007"
+                  - generic [ref=f78e582]: "2008"
+                  - generic [ref=f78e584]: "2009"
+                  - generic [ref=f78e586]: "2010"
+                  - generic [ref=f78e588]: "2011"
+                  - generic [ref=f78e590]: "2012"
+                  - generic [ref=f78e592]: "2013"
+                  - generic [ref=f78e594]: "2014"
+                  - generic [ref=f78e596]: "2015"
+                  - generic [ref=f78e598]: "2016"
+                  - generic [ref=f78e600]: "2017"
+                  - generic [ref=f78e602]: "2018"
+                  - generic [ref=f78e604]: "2019"
+                  - generic [ref=f78e606]: "2020"
+                  - generic [ref=f78e608]: "2021"
+                  - generic [ref=f78e610]: "2023"
+                  - generic [ref=f78e612]: "2024"
+                  - generic [ref=f78e614]: "2025"
+                - generic [ref=f78e698]:
+                  - generic [ref=f78e700]: "-20 M€"
+                  - generic [ref=f78e702]: 0 €
+                  - generic [ref=f78e704]: 20 M€
+                  - generic [ref=f78e706]: 40 M€
+                  - generic [ref=f78e708]: 60 M€
+                  - generic [ref=f78e710]: 80 M€
+                - generic [ref=f78e712]:
+                  - generic [ref=f78e714]: "0"
+                  - generic [ref=f78e716]: "20"
+                  - generic [ref=f78e718]: "40"
+              - application [ref=f78e721]
+            - generic [ref=f78e722]:
+              - button "Chiffre d'affaires" [ref=f78e723] [cursor=pointer]
+              - button "Résultat net" [ref=f78e726] [cursor=pointer]
+              - button "Total bilan" [ref=f78e729] [cursor=pointer]
+              - button "Effectif" [ref=f78e732] [cursor=pointer]
+          - list [ref=f78e737]:
+            - listitem [ref=f78e738]:
+              - generic [ref=f78e739]:
+                - time [ref=f78e740]: 12/09/2026
+                - button "Solvabilité" [ref=f78e742] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e743]: 
+                - generic [ref=f78e745]:
+                  - generic [aria-hidden] [ref=f78e747]: 
+                  - generic [ref=f78e749]:
+                    - heading "Notation financière, risque de défaillance, historique..." [level=3] [ref=f78e750]
+                    - paragraph [ref=f78e751]:
+                      - text: Anticipez la défaillance d'un tiers d'ici 12 mois avec l'étude de sovabilité et évitez de mettre en risque votre entreprise.
+                      - link "Voir un exemple" [ref=f78e752] [cursor=pointer]:
+                        - /url: /docs/score-de-solvabilite-societe-com-exemple.pdf
+          - list [ref=f78e755]:
+            - listitem [ref=f78e756]:
+              - generic [ref=f78e757]:
+                - time [ref=f78e758]: 12/09/2026
+                - button "Dettes" [ref=f78e760] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e761]: 
+                - generic [ref=f78e763]:
+                  - generic [aria-hidden] [ref=f78e765]: 
+                  - generic [ref=f78e767]:
+                    - heading "Endettement, risques financiers..." [level=3] [ref=f78e768]
+                    - paragraph [ref=f78e769]:
+                      - text: Accédez aux dettes, sûretés, privilèges et inscriptions financières certifiés par les greffiers des tribunaux de commerce.
+                      - link "Voir un exemple" [ref=f78e770] [cursor=pointer]:
+                        - /url: /docs/etat-endettement-societe-com-exemple.pdf
+          - list [ref=f78e773]:
+            - listitem [ref=f78e774]:
+              - generic [ref=f78e775]:
+                - time [ref=f78e776]: 12/09/2026
+                - button "Valorisation" [ref=f78e778] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e779]: 
+                - generic [ref=f78e781]:
+                  - generic [aria-hidden] [ref=f78e783]: 
+                  - generic [ref=f78e785]:
+                    - heading "Valorisation" [level=3] [ref=f78e786]
+                    - paragraph [ref=f78e787]: Valeur économique calculée à partir de sa rentabilité, sa structure financière, ses perspectives de croissance et son environnement de marché.
+        - article [ref=f78e788]:
+          - generic [ref=f78e789]:
+            - generic [ref=f78e791]:
+              - combobox [ref=f78e792]:
+                - option "2025" [selected]
+                - option "2024"
+                - option "2023"
+                - option "2021"
+                - option "2020"
+                - option "2019"
+                - option "2018"
+                - option "2017"
+                - option "2016"
+                - option "2015"
+                - option "2014"
+                - option "2013"
+                - option "2012"
+                - option "2011"
+                - option "2010"
+                - option "2009"
+                - option "2008"
+                - option "2007"
+                - option "2006"
+                - option "2005"
+                - option "2004"
+              - text: 
+            - generic [ref=f78e794]:
+              - combobox [ref=f78e795]:
+                - option "2025"
+                - option "2024" [selected]
+                - option "2023"
+                - option "2021"
+                - option "2020"
+                - option "2019"
+                - option "2018"
+                - option "2017"
+                - option "2016"
+                - option "2015"
+                - option "2014"
+                - option "2013"
+                - option "2012"
+                - option "2011"
+                - option "2010"
+                - option "2009"
+                - option "2008"
+                - option "2007"
+                - option "2006"
+                - option "2005"
+                - option "2004"
+              - text: 
+            - generic [ref=f78e796]: Variations
+          - generic [ref=f78e798]:
+            - heading "Performance de l'entreprise" [level=3] [ref=f78e799]
+            - list [ref=f78e800]:
+              - listitem [ref=f78e801]:
+                - generic [ref=f78e802]: Résultats net
+                - generic [ref=f78e803]: "-599,10 k€"
+                - generic [ref=f78e805]: 865,70 k€
+                - generic [ref=f78e807]:  -169 %
+            - text: Masquer 
+            - region "État financier Masquer détails" [ref=f78e809]:
+              - listitem [ref=f78e810]:
+                - generic [ref=f78e811]: Dettes + 1 an
+                - generic [ref=f78e812]: 0 €
+                - generic [ref=f78e814]: 0 €
+                - generic [ref=f78e816]: "-"
+              - listitem [ref=f78e818]:
+                - generic [ref=f78e819]: BFR
+                - generic [ref=f78e820]: "-619,50 k€"
+                - generic [ref=f78e822]: 1,16 M€
+                - generic [ref=f78e824]:  -153 %
+              - listitem [ref=f78e826]:
+                - generic [ref=f78e827]: Trésorerie
+                - generic [ref=f78e828]: 0 €
+                - generic [ref=f78e830]: 2,29 M€
+                - generic [ref=f78e832]:  -100 %
+              - listitem [ref=f78e834]:
+                - generic [ref=f78e835]: Endettement
+                - generic [ref=f78e836]: 7,72 M€
+                - generic [ref=f78e838]: 8,10 M€
+                - generic [ref=f78e840]:  -4 %
+              - listitem [ref=f78e842]:
+                - generic [ref=f78e843]: Rentabilité
+                - generic [ref=f78e844]: "-76.83 %"
+                - generic [ref=f78e846]: 39.73 %
+                - generic [ref=f78e848]:  -293 %
+        - article [ref=f78e850]:
+          - heading "Comptes de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e852]
+          - generic [ref=f78e853]:
+            - list [ref=f78e854]:
+              - listitem [ref=f78e855]:
+                - generic [ref=f78e856]:
+                  - time [ref=f78e857]: 31/10/2019
+                  - generic [ref=f78e858]:
+                    - text: 
+                    - button "Télécharger le PDF" [ref=f78e859] [cursor=pointer]
+                    - button "Télécharger le XLS" [ref=f78e860] [cursor=pointer]
+                  - generic [ref=f78e861]:
+                    - generic [ref=f78e862]:
+                      - generic [aria-hidden] [ref=f78e863]: 
+                      - generic [aria-hidden] [ref=f78e864]: 
+                    - generic [ref=f78e866]:
+                      - heading "Comptes annuels - complet" [level=3] [ref=f78e867]
+                      - paragraph [ref=f78e868]: Bilan, annexes, rapport de gestions, rapport du CAC…
+              - listitem [ref=f78e869]:
+                - generic [ref=f78e870]:
+                  - time [ref=f78e871]: 31/10/2018
+                  - generic [ref=f78e872]:
+                    - text: 
+                    - button "Télécharger le XLS" [ref=f78e873] [cursor=pointer]
+                  - generic [ref=f78e874]:
+                    - generic [aria-hidden] [ref=f78e876]: 
+                    - generic [ref=f78e878]:
+                      - heading "Comptes annuels - complet" [level=3] [ref=f78e879]
+                      - paragraph [ref=f78e880]: Bilan, annexes, rapport de gestions, rapport du CAC…
+              - listitem [ref=f78e881]:
+                - generic [ref=f78e882]:
+                  - time [ref=f78e883]: 31/10/2017
+                  - generic [ref=f78e884]:
+                    - text: 
+                    - button "Télécharger le PDF" [ref=f78e885] [cursor=pointer]
+                    - button "Télécharger le XLS" [ref=f78e886] [cursor=pointer]
+                  - generic [ref=f78e887]:
+                    - generic [ref=f78e888]:
+                      - generic [aria-hidden] [ref=f78e889]: 
+                      - generic [aria-hidden] [ref=f78e890]: 
+                    - generic [ref=f78e892]:
+                      - heading "Comptes annuels - complet" [level=3] [ref=f78e893]
+                      - paragraph [ref=f78e894]: Bilan, annexes, rapport de gestions, rapport du CAC…
+              - text:          
+            - generic [ref=f78e896]:
+              - button "Afficher les 8 documents" [ref=f78e899] [cursor=pointer]
+              - generic [ref=f78e901]:
+                - text: 8 Documents officiels
+                - generic [ref=f78e902] [cursor=pointer]: 
+        - article [ref=f78e904]:
+          - generic [ref=f78e905]:
+            - generic [ref=f78e906]: "2019"
+            - generic [ref=f78e907]: "2018"
+            - generic [ref=f78e908]: "2017"
+          - generic [ref=f78e909]:
+            - heading "Équilibre bilan" [level=3] [ref=f78e910]
+            - list [ref=f78e911]:
+              - listitem [ref=f78e912]:
+                - generic [ref=f78e913]: Capitalisation
+                - generic [ref=f78e914]: 9,84 %
+                - generic [ref=f78e916]: 10,74 %
+                - generic [ref=f78e918]: 13,94 %
+              - listitem [ref=f78e920]:
+                - generic [ref=f78e921]: Endettement
+                - generic [ref=f78e922]: 5,53 %
+                - generic [ref=f78e924]: 14,34 %
+                - generic [ref=f78e926]: 30,55 %
+              - listitem [ref=f78e928]:
+                - generic [ref=f78e929]: Fonds de roulement
+                - generic [ref=f78e930]: 152,90 k€
+                - generic [ref=f78e932]: 650 k€
+                - generic [ref=f78e934]: 154,20 k€
+            - button [ref=f78e936] [cursor=pointer]:
+              - heading "Performance Voir détails" [level=3] [ref=f78e937]:
+                - text: Performance
+                - generic [ref=f78e938]: Voir détails
+              - generic [aria-hidden] [ref=f78e939]: 
+            - button [ref=f78e940] [cursor=pointer]:
+              - heading "Coûts de production Voir détails" [level=3] [ref=f78e941]:
+                - text: Coûts de production
+                - generic [ref=f78e942]: Voir détails
+              - generic [aria-hidden] [ref=f78e943]: 
+            - button [ref=f78e944] [cursor=pointer]:
+              - heading "Poids de la dette Voir détails" [level=3] [ref=f78e945]:
+                - text: Poids de la dette
+                - generic [ref=f78e946]: Voir détails
+              - generic [aria-hidden] [ref=f78e947]: 
+            - button [ref=f78e948] [cursor=pointer]:
+              - heading "Gestion BFR Voir détails" [level=3] [ref=f78e949]:
+                - text: Gestion BFR
+                - generic [ref=f78e950]: Voir détails
+              - generic [aria-hidden] [ref=f78e951]: 
+            - button [ref=f78e952] [cursor=pointer]:
+              - heading "Liquidité Voir détails" [level=3] [ref=f78e953]:
+                - text: Liquidité
+                - generic [ref=f78e954]: Voir détails
+              - generic [aria-hidden] [ref=f78e955]: 
+      - article [ref=f78e957]:
+        - heading "Documents de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e959]
+        - generic [ref=f78e960]:
+          - list [ref=f78e961]:
+            - listitem [ref=f78e962] [cursor=pointer]:
+              - generic [ref=f78e963]:
+                - time [ref=f78e964]: 05/05/2023
+                - generic [ref=f78e965]:
+                  - button "Résumé IA" [ref=f78e966]:
+                    - generic [aria-hidden] [ref=f78e967]: 
+                  - button "Consulter" [ref=f78e968]:
+                    - generic [aria-hidden] [ref=f78e969]: 
+                  - button "Télécharger" [ref=f78e970]:
+                    - generic [aria-hidden] [ref=f78e971]: 
+                - generic [ref=f78e972]:
+                  - generic [aria-hidden] [ref=f78e974]: 
+                  - generic [ref=f78e976]:
+                    - heading "Procès-verbal d'assemblée" [level=3] [ref=f78e977]
+                    - paragraph [ref=f78e978]: Changement de commissaire aux comptes titulaire - Reconstitution de l'actif net
+            - listitem [ref=f78e979] [cursor=pointer]:
+              - generic [ref=f78e980]:
+                - time [ref=f78e981]: 05/05/2023
+                - generic [ref=f78e982]:
+                  - button "Résumé IA" [ref=f78e983]:
+                    - generic [aria-hidden] [ref=f78e984]: 
+                  - button "Consulter" [ref=f78e985]:
+                    - generic [aria-hidden] [ref=f78e986]: 
+                  - button "Télécharger" [ref=f78e987]:
+                    - generic [aria-hidden] [ref=f78e988]: 
+                - generic [ref=f78e989]:
+                  - generic [aria-hidden] [ref=f78e991]: 
+                  - generic [ref=f78e993]:
+                    - heading "Procès-verbal d'assemblée" [level=3] [ref=f78e994]
+                    - paragraph [ref=f78e995]: Reconstitution de l'actif net - Changement de commissaire aux comptes titulaire
+            - listitem [ref=f78e996] [cursor=pointer]:
+              - generic [ref=f78e997]:
+                - time [ref=f78e998]: 14/10/2021
+                - generic [ref=f78e999]:
+                  - button "Résumé IA" [ref=f78e1000]:
+                    - generic [aria-hidden] [ref=f78e1001]: 
+                  - button "Consulter" [ref=f78e1002]:
+                    - generic [aria-hidden] [ref=f78e1003]: 
+                  - button "Télécharger" [ref=f78e1004]:
+                    - generic [aria-hidden] [ref=f78e1005]: 
+                - generic [ref=f78e1006]:
+                  - generic [aria-hidden] [ref=f78e1008]: 
+                  - generic [ref=f78e1010]:
+                    - heading "Procès-verbal d'assemblée générale extraordinaire" [level=3] [ref=f78e1011]
+                    - paragraph [ref=f78e1012]: Poursuite d'activité malgré un actif net devenu inférieur à la moitié du capital social
+            - text:                                                            
+          - generic [ref=f78e1014]:
+            - generic [ref=f78e1016]:
+              - button "Rechercher dans les documents" [ref=f78e1017] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f78e1018]: 
+              - button "Afficher les 18 documents" [ref=f78e1020] [cursor=pointer]
+            - generic [ref=f78e1022]:
+              - text: 18 Documents officiels
+              - generic [ref=f78e1023] [cursor=pointer]: 
+      - generic [ref=f78e1027]:
+        - heading "Annonces légales de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e1029]
+        - article [ref=f78e1030]:
+          - generic [ref=f78e1031]:
+            - text: 
+            - paragraph [ref=f78e1032]:
+              - text: Publiez votre annonce légale avec Societe.com et recevez votre attestation de parution dans les 10 min
+              - link "Commencer à publier" [ref=f78e1033] [cursor=pointer]:
+                - /url: /services/annonces-legales
+          - list [ref=f78e1034]:
+            - listitem [ref=f78e1035] [cursor=pointer]:
+              - generic [ref=f78e1036]:
+                - time [ref=f78e1037]: 31/10/2025
+                - generic [ref=f78e1038]:
+                  - button [ref=f78e1039]:
+                    - generic [aria-hidden] [ref=f78e1040]: 
+                  - button [ref=f78e1041]:
+                    - generic [aria-hidden] [ref=f78e1042]: 
+                - generic [ref=f78e1043]:
+                  - generic [aria-hidden] [ref=f78e1045]: 
+                  - heading "Annonce BODACC - Comptes annuels et rapports" [level=3] [ref=f78e1048]
+            - listitem [ref=f78e1049] [cursor=pointer]:
+              - generic [ref=f78e1050]:
+                - time [ref=f78e1051]: 31/10/2024
+                - generic [ref=f78e1052]:
+                  - button [ref=f78e1053]:
+                    - generic [aria-hidden] [ref=f78e1054]: 
+                  - button [ref=f78e1055]:
+                    - generic [aria-hidden] [ref=f78e1056]: 
+                - generic [ref=f78e1057]:
+                  - generic [aria-hidden] [ref=f78e1059]: 
+                  - heading "Annonce BODACC - Comptes annuels et rapports" [level=3] [ref=f78e1062]
+            - listitem [ref=f78e1063] [cursor=pointer]:
+              - generic [ref=f78e1064]:
+                - time [ref=f78e1065]: 31/10/2023
+                - generic [ref=f78e1066]:
+                  - button [ref=f78e1067]:
+                    - generic [aria-hidden] [ref=f78e1068]: 
+                  - button [ref=f78e1069]:
+                    - generic [aria-hidden] [ref=f78e1070]: 
+                - generic [ref=f78e1071]:
+                  - generic [aria-hidden] [ref=f78e1073]: 
+                  - heading "Annonce BODACC - Comptes annuels et rapports" [level=3] [ref=f78e1076]
+            - text:                                                                        
+          - generic [ref=f78e1078]:
+            - generic [ref=f78e1080]:
+              - link "Publier maintenant" [ref=f78e1081] [cursor=pointer]:
+                - /url: /services/annonces-legales
+              - button "Afficher les 27 annonces" [ref=f78e1082] [cursor=pointer]
+            - generic [ref=f78e1084]:
+              - text: 27 Annonces
+              - generic [ref=f78e1085] [cursor=pointer]: 
+      - generic [ref=f78e1089]:
+        - generic [ref=f78e1090]:
+          - heading "Bilan carbone" [level=2] [ref=f78e1092]
+          - paragraph [ref=f78e1093]: Le bilan carbone est un ensemble de méthodes permettant de mesurer et de suivre la quantité de gaz à effet de serre (GES) qu'une organisation émet du fait de son activité.
+          - generic [ref=f78e1094]:  Aucun bilan carbone disponible pour cette entreprise
+          - link "Calculer mon bilan carbone" [ref=f78e1097] [cursor=pointer]:
+            - /url: /solutions/bilan-carbone
+            - generic [aria-hidden] [ref=f78e1099]: 
+        - generic [ref=f78e1100]:
+          - heading "Score de souveraineté" [level=2] [ref=f78e1102]
+          - paragraph [ref=f78e1103]: Le score de souveraineté représente la dépendance de l'entreprise vis à vis de l'ensemble de ses partenaires. Le score apprécie la capacité de l'entreprise à contracter avec des partenaires réduisant ses risques en cas de tensions, conflits ou mesures extérieures à son pays domestique.
+          - generic [ref=f78e1104]:
+            - generic [ref=f78e1105]:
+              - generic [ref=f78e1108]: 74/100
+              - generic [ref=f78e1109] [cursor=pointer]:
+                - text: Score sectoriel
+                - generic [ref=f78e1110]: 
+            - list [ref=f78e1111]:
+              - listitem [ref=f78e1112]: Gouvernance
+              - listitem [ref=f78e1113]: Dépendance commerciale
+              - listitem [ref=f78e1114]: Souveraineté numérique
+              - listitem [ref=f78e1115]: Achats & approvisionnements
+            - img "Graphique score de souveraineté" [ref=f78e1116]
+          - button "Voir détails" [ref=f78e1130] [cursor=pointer]:
+            - text: Voir détails
+            - generic [aria-hidden] [ref=f78e1131]: 
+          - link "Obtenir mon score de souveraineté" [ref=f78e1134] [cursor=pointer]:
+            - /url: /rendez-vous?id=ddea0b13f549087525da10897d8b3936&type=sovereignty
+            - generic [aria-hidden] [ref=f78e1136]: 
+        - generic [ref=f78e1137]:
+          - heading "Score d'impact" [level=2] [ref=f78e1139]
+          - paragraph [ref=f78e1140]: Le score extra-financier d'impact évalue sur une année la performance d'une entreprise en matière sociale, fiscale et territoriale.
+          - generic [ref=f78e1141]:
+            - combobox "Année" [ref=f78e1142]:
+              - option "2026"
+              - option "2025"
+              - option "2024" [selected]
+              - option "2023"
+              - option "2022"
+              - option "2021"
+              - option "2020"
+              - option "2019"
+              - option "2018"
+              - option "2017"
+              - option "2016"
+            - text: 
+          - generic [ref=f78e1143]:
+            - generic [ref=f78e1144]:
+              - paragraph [ref=f78e1145]: Score 2024
+              - generic [ref=f78e1146]: D
+              - generic [ref=f78e1147]:  0
+              - list [ref=f78e1148]:
+                - listitem [ref=f78e1149]: A
+                - listitem [ref=f78e1150]: B
+                - listitem [ref=f78e1151]: C
+                - listitem [ref=f78e1152]: D
+                - listitem [ref=f78e1153]: E
+            - list [ref=f78e1154]:
+              - listitem [ref=f78e1155]:
+                - button [ref=f78e1157] [cursor=pointer]:
+                  - heading "Score territorial D" [level=3] [ref=f78e1158]:
+                    - text: Score territorial D
+                    - generic [aria-hidden] [ref=f78e1159]: 
+              - listitem [ref=f78e1160]:
+                - button [ref=f78e1162] [cursor=pointer]:
+                  - heading "Score social D" [level=3] [ref=f78e1163]:
+                    - text: Score social D
+                    - generic [aria-hidden] [ref=f78e1164]: 
+              - listitem [ref=f78e1165]:
+                - button [ref=f78e1167] [cursor=pointer]:
+                  - heading "Score fiscal E" [level=3] [ref=f78e1168]:
+                    - text: Score fiscal E
+                    - generic [aria-hidden] [ref=f78e1169]: 
+              - listitem [ref=f78e1170]:
+                - link "Compléter son score extra-financier" [ref=f78e1172] [cursor=pointer]:
+                  - /url: https://simulation.in-france.fr?siren=419234141
+                  - generic [aria-hidden] [ref=f78e1174]: 
+      - generic [ref=f78e1175]:
+        - heading "Cartographie de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e1177]
+        - generic [ref=f78e1179]:
+          - link [ref=f78e1180] [cursor=pointer]:
+            - /url: https://carto.societe.com/?siren=419234141
+            - img "Cartographie gratuite de TOURISME ORGANISATION PRODUCTION" [ref=f78e1181]
+          - link "Explorer la cartographie" [ref=f78e1183] [cursor=pointer]:
+            - /url: https://carto.societe.com/?siren=419234141
+      - article [ref=f78e1184]:
+        - heading "Entreprises liées" [level=2] [ref=f78e1186]
+        - generic [ref=f78e1187]:
+          - list [ref=f78e1188]:
+            - listitem [ref=f78e1189]:
+              - article [ref=f78e1190]:
+                - generic [ref=f78e1191]:
+                  - heading "PKF ARSILON COMMISSARIAT AUX COMPTES Nature déduite du lien CABINET COMPTABLE" [level=3] [ref=f78e1192]:
+                    - link "PKF ARSILON COMMISSARIAT AUX COMPTES" [ref=f78e1193] [cursor=pointer]:
+                      - /url: /societe/pkf-arsilon-commissariat-aux-comptes-811599406.html
+                      - generic [aria-hidden] [ref=f78e1194]: 
+                    - generic [ref=f78e1196]: Nature déduite du lien CABINET COMPTABLE
+                  - paragraph [ref=f78e1197]: Cité 2 fois en 2023
+                - list [ref=f78e1198]:
+                  - listitem [ref=f78e1199]:
+                    - generic [ref=f78e1200]: SIREN
+                    - generic [ref=f78e1201]: 811 599 406
+                    - button "Copier le numéro SIREN" [ref=f78e1202] [cursor=pointer]:
+                      - generic [aria-hidden] [ref=f78e1203]: 
+                - button [ref=f78e1204] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e1206]: 
+                  - heading "2 Documents liés" [level=3] [ref=f78e1207]
+                  - generic [aria-hidden] [ref=f78e1208]: 
+                - text:      
+            - listitem [ref=f78e1209]:
+              - article [ref=f78e1210]:
+                - generic [ref=f78e1211]:
+                  - heading [level=3] [ref=f78e1212]:
+                    - link "PARFUMS DU MONDE" [ref=f78e1213] [cursor=pointer]:
+                      - /url: /societe/parfums-du-monde-391684701.html
+                      - generic [aria-hidden] [ref=f78e1214]: 
+                  - paragraph [ref=f78e1216]: Cité 1 fois en 2004
+                - list [ref=f78e1217]:
+                  - listitem [ref=f78e1218]:
+                    - generic [ref=f78e1219]: SIREN
+                    - generic [ref=f78e1220]: 391 684 701
+                    - button "Copier le numéro SIREN" [ref=f78e1221] [cursor=pointer]:
+                      - generic [aria-hidden] [ref=f78e1222]: 
+                  - listitem [ref=f78e1223]:
+                    - text: Dirigeants
+                    - link "Michel JEAN RICHARD" [ref=f78e1224] [cursor=pointer]:
+                      - /url: /manager/Michel.JEAN-RICHARD.sYSia2gAQF2.html
+                    - text: ","
+                    - link "Valentine JEAN-RICHARD" [ref=f78e1225] [cursor=pointer]:
+                      - /url: /manager/Valentine.JEAN-RICHARD.yFVX8fXR-Hw.html
+                    - text: ","
+                    - link "PRAXOR AUDIT" [ref=f78e1226] [cursor=pointer]:
+                      - /url: /societe/praxor-audit-308238393.html
+                    - text: ","
+                    - link "Henri GRILLET" [ref=f78e1227] [cursor=pointer]:
+                      - /url: /manager/Henri.GRILLET.3zOdbAqeYjz.html
+                - list [ref=f78e1228]:
+                  - listitem [ref=f78e1229] [cursor=pointer]:
+                    - generic [ref=f78e1230]:
+                      - time [ref=f78e1231]: 29/01/2004
+                      - generic [ref=f78e1232]:
+                        - button "Consulter" [ref=f78e1233]:
+                          - generic [aria-hidden] [ref=f78e1234]: 
+                        - button "Télécharger" [ref=f78e1235]:
+                          - generic [aria-hidden] [ref=f78e1236]: 
+                      - generic [ref=f78e1237]:
+                        - generic [aria-hidden] [ref=f78e1239]: 
+                        - generic [ref=f78e1241]:
+                          - heading "Procès-verbal du conseil d'administration" [level=3] [ref=f78e1242]
+                          - paragraph [ref=f78e1243]: Nomination(s) d'administrateur(s)
+            - text:     
+          - generic [ref=f78e1245]:
+            - button "Afficher les 3 liens" [ref=f78e1248] [cursor=pointer]
+            - generic [ref=f78e1250]:
+              - text: Entreprises liées
+              - generic [ref=f78e1251] [cursor=pointer]: 
+      - article [ref=f78e1256]:
+        - heading "Marques déposées" [level=2] [ref=f78e1258]
+        - generic [ref=f78e1259]:
+          - list [ref=f78e1260]:
+            - listitem [ref=f78e1261]:
+              - article [ref=f78e1262]:
+                - generic [ref=f78e1263]:
+                  - heading "top of travel Des voyages qui rapprochent" [level=3] [ref=f78e1264]
+                  - paragraph [ref=f78e1265]:
+                    - generic [aria-hidden] [ref=f78e1266]: 
+                    - text: Marque enregistrée
+                    - generic [aria-hidden] [ref=f78e1267]: 
+                    - text: Marque en vigueur
+                - list [ref=f78e1268]:
+                  - listitem [ref=f78e1269]:
+                    - generic [ref=f78e1270]: "Date de dépôt :"
+                    - strong [ref=f78e1272]:
+                      - time [ref=f78e1273]: 11 mai 2023
+                  - listitem [ref=f78e1274]:
+                    - generic [ref=f78e1275]: "Date d'expiration :"
+                    - strong [ref=f78e1277]:
+                      - time [ref=f78e1278]: 11 mai 2033
+                - paragraph [ref=f78e1279]: Expire dans 6 années, 7 mois et 30 jours
+                - paragraph [ref=f78e1280]:
+                  - text: "Classes :"
+                  - button "Transport ; emballage et entreposage de marchandises ; organisation de voyages" [ref=f78e1281] [cursor=pointer]: "39"
+                  - button "Services de restauration (alimentation) ; hébergement temporaire" [ref=f78e1282] [cursor=pointer]: "43"
+              - complementary [ref=f78e1283]:
+                - generic [ref=f78e1284]:
+                  - button "Télécharger l'image" [ref=f78e1285] [cursor=pointer]:
+                    - generic [ref=f78e1286]: 
+                  - img "top of travel Des voyages qui rapprochent_logo"
+            - listitem [ref=f78e1287]:
+              - article [ref=f78e1288]:
+                - generic [ref=f78e1289]:
+                  - heading "Tourisme Organisation Production" [level=3] [ref=f78e1290]
+                  - paragraph [ref=f78e1291]:
+                    - generic [aria-hidden] [ref=f78e1292]: 
+                    - text: Marque enregistrée
+                    - generic [aria-hidden] [ref=f78e1293]: 
+                    - text: Marque en vigueur
+                - list [ref=f78e1294]:
+                  - listitem [ref=f78e1295]:
+                    - generic [ref=f78e1296]: "Date de dépôt :"
+                    - strong [ref=f78e1298]:
+                      - time [ref=f78e1299]: 11 mai 2023
+                  - listitem [ref=f78e1300]:
+                    - generic [ref=f78e1301]: "Date d'expiration :"
+                    - strong [ref=f78e1303]:
+                      - time [ref=f78e1304]: 11 mai 2033
+                - paragraph [ref=f78e1305]: Expire dans 6 années, 7 mois et 30 jours
+                - paragraph [ref=f78e1306]:
+                  - text: "Classes :"
+                  - button "Transport ; emballage et entreposage de marchandises ; organisation de voyages" [ref=f78e1307] [cursor=pointer]: "39"
+                  - button "Services de restauration (alimentation) ; hébergement temporaire" [ref=f78e1308] [cursor=pointer]: "43"
+              - complementary [ref=f78e1309]:
+                - generic [ref=f78e1310]:
+                  - button "Télécharger l'image" [ref=f78e1311] [cursor=pointer]:
+                    - generic [ref=f78e1312]: 
+                  - img "Tourisme Organisation Production_logo"
+            - listitem [ref=f78e1313]:
+              - article [ref=f78e1314]:
+                - generic [ref=f78e1315]:
+                  - heading "top clubs" [level=3] [ref=f78e1316]
+                  - paragraph [ref=f78e1317]:
+                    - generic [aria-hidden] [ref=f78e1318]: 
+                    - text: Marque enregistrée
+                    - generic [aria-hidden] [ref=f78e1319]: 
+                    - text: Marque en vigueur
+                - list [ref=f78e1320]:
+                  - listitem [ref=f78e1321]:
+                    - generic [ref=f78e1322]: "Date de dépôt :"
+                    - strong [ref=f78e1324]:
+                      - time [ref=f78e1325]: 11 mai 2023
+                  - listitem [ref=f78e1326]:
+                    - generic [ref=f78e1327]: "Date d'expiration :"
+                    - strong [ref=f78e1329]:
+                      - time [ref=f78e1330]: 11 mai 2033
+                - paragraph [ref=f78e1331]: Expire dans 6 années, 7 mois et 30 jours
+                - paragraph [ref=f78e1332]:
+                  - text: "Classes :"
+                  - button "Transport ; emballage et entreposage de marchandises ; organisation de voyages" [ref=f78e1333] [cursor=pointer]: "39"
+                  - button "Services de restauration (alimentation) ; hébergement temporaire" [ref=f78e1334] [cursor=pointer]: "43"
+              - complementary [ref=f78e1335]:
+                - generic [ref=f78e1336]:
+                  - button "Télécharger l'image" [ref=f78e1337] [cursor=pointer]:
+                    - generic [ref=f78e1338]: 
+                  - img "top clubs_logo"
+            - text: " : :   : :   : :   : :   : :   : :   : :   : :   : :  : :  : :  : :  : :  : :  : :  : :  : :  : :  : :  : : "
+          - generic [ref=f78e1340]:
+            - button "Afficher les 23 marques" [ref=f78e1343] [cursor=pointer]
+            - generic [ref=f78e1345]:
+              - text: Marques déposées
+              - generic [ref=f78e1346] [cursor=pointer]: 
+      - generic [ref=f78e1348]:
+        - heading "Historique de TOURISME ORGANISATION PRODUCTION" [level=2] [ref=f78e1350]
+        - article [ref=f78e1351]:
+          - heading "10 événements depuis 2004" [level=3] [ref=f78e1353]
+          - generic [ref=f78e1354]:
+            - generic [ref=f78e1355]:
+              - generic [ref=f78e1356]:
+                - button "2019 2 événements" [expanded] [ref=f78e1357] [cursor=pointer]:
+                  - generic [ref=f78e1358]:
+                    - generic [ref=f78e1359]: "2019"
+                    - generic [ref=f78e1360]: 2 événements
+                  - generic [aria-hidden] [ref=f78e1361]: 
+                - list [ref=f78e1362]:
+                  - listitem [ref=f78e1363]:
+                    - paragraph [ref=f78e1364]: lundi 28 mai 2019
+                    - list [ref=f78e1365]:
+                      - listitem [ref=f78e1366]:
+                        - generic [aria-hidden] [ref=f78e1367]: 
+                        - paragraph [ref=f78e1368]:
+                          - link "L.C.C." [ref=f78e1369] [cursor=pointer]:
+                            - /url: /societe/l-c-c-847516069.html
+                          - text: prend le relais de
+                          - link "Cesare YAMMINE" [ref=f78e1370] [cursor=pointer]:
+                            - /url: /manager/Cesare.YAMMINE.1jL_zU2ppzB.html
+                          - text: en tant qu'administrateur.
+                      - listitem [ref=f78e1371]:
+                        - generic [aria-hidden] [ref=f78e1372]: 
+                        - paragraph [ref=f78e1373]:
+                          - link "L.C.C." [ref=f78e1374] [cursor=pointer]:
+                            - /url: /societe/l-c-c-847516069.html
+                          - text: succède à
+                          - link "Cesare YAMMINE" [ref=f78e1375] [cursor=pointer]:
+                            - /url: /manager/Cesare.YAMMINE.1jL_zU2ppzB.html
+                          - text: en tant qu'administrateur.
+              - generic [ref=f78e1376]:
+                - button "2018 1 événement" [ref=f78e1377] [cursor=pointer]:
+                  - generic [ref=f78e1378]:
+                    - generic [ref=f78e1379]: "2018"
+                    - generic [ref=f78e1380]: 1 événement
+                  - generic [aria-hidden] [ref=f78e1381]: 
+                - list:
+                  - listitem [ref=f78e1382]:
+                    - paragraph [ref=f78e1383]: mercredi 8 mars 2018
+                    - list [ref=f78e1384]:
+                      - listitem [ref=f78e1385]:
+                        - generic [aria-hidden] [ref=f78e1386]: 
+                        - paragraph [ref=f78e1387]:
+                          - link "Thierry HEUZE" [ref=f78e1388] [cursor=pointer]:
+                            - /url: /manager/Thierry.HEUZE.3jpW688w__b.html
+                          - text: démissionne de son poste d'administrateur.
+              - text:         
+            - text: ...
+            - generic [ref=f78e1390]:
+              - button "Parcourir tout l'historique" [ref=f78e1393] [cursor=pointer]
+              - generic [ref=f78e1394]:
+                - generic [ref=f78e1395]:
+                  - text: Historique
+                  - generic [ref=f78e1396] [cursor=pointer]: 
+                - paragraph [ref=f78e1398]: 10 événements ont marqué le parcours de TOURISME ORGANISATION PRODUCTION depuis 2004
+      - article [ref=f78e1399]:
+        - heading "Étude de marché du secteur de l'entreprise" [level=2] [ref=f78e1401]
+        - generic "Étude de marché du secteur de l'entreprise" [ref=f78e1402]:
+          - list [ref=f78e1403]:
+            - listitem [ref=f78e1404]:
+              - generic [ref=f78e1405]:
+                - time [ref=f78e1406]: 25/01/2021
+                - button "Obtenir l'étude" [ref=f78e1408] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f78e1409]: 
+                - generic [ref=f78e1411]:
+                  - generic [aria-hidden] [ref=f78e1413]: 
+                  - generic [ref=f78e1415]:
+                    - heading "Le marché du tourisme à vélo - France" [level=3] [ref=f78e1416]
+                    - paragraph [ref=f78e1417]:
+                      - text: "Cette étude présente une analyse détaillée du marché du tourisme à vélo en France : importance du secteur dans l'économie touristique nationale, rôle clé de l'hébergement et de la restauration, popularité auprès des touristes étrangers, diversité des acteurs (hôtels, restaurants, offices de tourisme, loueurs de vélos, réparateurs, gestionnaires de pistes cyclables), impact des certifications comme \"Accueil Vélo\", typologie des pistes cyclables, et retombées économiques significatives des itinéraires EuroVelo, en particulier la Vélodyssée. Un document pour comprendre les enjeux d'un marché en plein essor, sans obstacles technologiques ou législatifs, porté par la passion du vélo et le désir de découvrir les territoires de manière durable et active."
+                      - link "Voir un exemple" [ref=f78e1418] [cursor=pointer]:
+                        - /url: /docs/etude-marche-exemple.pdf
+      - generic [ref=f78e1419]:
+        - heading "Nos services pour les Société anonyme à conseil d'administration" [level=3] [ref=f78e1420]
+        - list [ref=f78e1421]:
+          - listitem [ref=f78e1422]:
+            - img "logo LegalPlace" [ref=f78e1423]
+            - paragraph [ref=f78e1424]: Créer son entreprise
+            - link "En savoir plus à propos du partenariat LegalPlace" [ref=f78e1425] [cursor=pointer]:
+              - /url: https://www.legalplace.fr/creation/creation-entreprise-2
+              - generic [ref=f78e1426]: 
+          - listitem [ref=f78e1427]:
+            - img "logo Revolut" [ref=f78e1428]
+            - paragraph [ref=f78e1429]: Ouvrir un compte bancaire pro
+            - link "En savoir plus à propos du partenariat Revolut" [ref=f78e1430] [cursor=pointer]:
+              - /url: https://revolutbusiness.ngih.net/c/7333184/3925468/9943
+              - generic [ref=f78e1431]: 
+          - listitem [ref=f78e1432]:
+            - img "logo ComptaPlace by LegalPlace" [ref=f78e1433]
+            - paragraph [ref=f78e1434]: Gérer sa comptabilité
+            - link "En savoir plus à propos du partenariat Comptaplace" [ref=f78e1435] [cursor=pointer]:
+              - /url: https://www.comptaplace.fr/?utm_source=partner&utm_campaign=societe
+              - generic [ref=f78e1436]: 
+          - listitem [ref=f78e1437]:
+            - img "logo Impayés.com" [ref=f78e1438]
+            - paragraph [ref=f78e1439]: Récupérer ses impayés
+            - link "En savoir plus à propos du partenariat Impayés.com" [ref=f78e1440] [cursor=pointer]:
+              - /url: https://www.impayes.com/lp-partenaire-societecom.html
+              - generic [ref=f78e1441]: 
+          - listitem [ref=f78e1442]:
+            - img "logo Pennylane" [ref=f78e1443]
+            - paragraph [ref=f78e1444]: Gérer sa facture électronique
+            - link "En savoir plus à propos du partenariat Pennylane" [ref=f78e1445] [cursor=pointer]:
+              - /url: https://www.pennylane.com/fr/facture-electronique-societe?utm_source=societe&utm_medium=paid&ae=381
+              - generic [ref=f78e1446]: 
+      - generic [ref=f78e1447]:
+        - heading "Ces entreprises peuvent vous intéresser" [level=3] [ref=f78e1449]
+        - list [ref=f78e1450]:
+          - listitem [ref=f78e1451]:
+            - link [ref=f78e1452] [cursor=pointer]:
+              - /url: /societe/foncia-courcelles-672049681.html
+              - heading "FONCIA COURCELLES" [level=4] [ref=f78e1453]
+              - paragraph [ref=f78e1454]: "SIREN: 672 049 681"
+          - listitem [ref=f78e1455]:
+            - link [ref=f78e1456] [cursor=pointer]:
+              - /url: /societe/axedia-542620059.html
+              - heading "AXEDIA" [level=4] [ref=f78e1457]
+              - paragraph [ref=f78e1458]: "SIREN: 542 620 059"
+          - listitem [ref=f78e1459]:
+            - link [ref=f78e1460] [cursor=pointer]:
+              - /url: /societe/thassalia-803971506.html
+              - heading "THASSALIA" [level=4] [ref=f78e1461]
+              - paragraph [ref=f78e1462]: "SIREN: 803 971 506"
+          - listitem [ref=f78e1463]:
+            - link [ref=f78e1464] [cursor=pointer]:
+              - /url: /societe/sci-montreuil-les-reservoirs-boulevard-de-la-boissiere-480556042.html
+              - heading "SCI MONTREUIL LES RESERVOIRS - BOULEVARD DE LA BOISSIERE" [level=4] [ref=f78e1465]
+              - paragraph [ref=f78e1466]: "SIREN: 480 556 042"
+          - listitem [ref=f78e1467]:
+            - link [ref=f78e1468] [cursor=pointer]:
+              - /url: /societe/biogroup-aura-519586226.html
+              - heading "BIOGROUP AURA" [level=4] [ref=f78e1469]
+              - paragraph [ref=f78e1470]: "SIREN: 519 586 226"
+  - contentinfo [ref=f78e1471]:
+    - generic "Footer Navigation" [ref=f78e1472]:
+      - generic [ref=f78e1473]:
+        - link "Retour à l'accueil" [ref=f78e1474] [cursor=pointer]:
+          - /url: /
+        - list [ref=f78e1475]:
+          - listitem [ref=f78e1476]:
+            - heading "Offres et services" [level=2] [ref=f78e1477]
+            - list [ref=f78e1478]:
+              - listitem [ref=f78e1479]:
+                - link "Offres" [ref=f78e1480] [cursor=pointer]:
+                  - /url: /offres.html
+              - listitem [ref=f78e1481]:
+                - link "Fichiers" [ref=f78e1482] [cursor=pointer]:
+                  - /url: https://fichier.societe.com/pages/fichier-entreprises.html
+              - listitem [ref=f78e1483]:
+                - link "Annuaire" [ref=f78e1484] [cursor=pointer]:
+                  - /url: /entreprises
+              - listitem [ref=f78e1485]:
+                - link "API" [ref=f78e1486] [cursor=pointer]:
+                  - /url: /solutions/api
+          - listitem [ref=f78e1487]:
+            - heading "Aide et contact" [level=2] [ref=f78e1488]
+            - list [ref=f78e1489]:
+              - listitem [ref=f78e1490]:
+                - link "Contact Societe.com" [ref=f78e1491] [cursor=pointer]:
+                  - /url: /ia?contact
+              - listitem [ref=f78e1492]:
+                - link "Glossaire" [ref=f78e1493] [cursor=pointer]:
+                  - /url: /glossaire/index.html
+          - listitem [ref=f78e1494]:
+            - heading "Actualité" [level=2] [ref=f78e1495]
+            - list [ref=f78e1496]:
+              - listitem [ref=f78e1497]:
+                - link "Blog Societe" [ref=f78e1498] [cursor=pointer]:
+                  - /url: https://blog.societe.com/
+              - listitem [ref=f78e1499]:
+                - heading "Suivez-nous" [level=2] [ref=f78e1500]
+                - list [ref=f78e1501]:
+                  - listitem [ref=f78e1502]:
+                    - link "Suivez-nous sur LinkedIn" [ref=f78e1503] [cursor=pointer]:
+                      - /url: https://fr.linkedin.com/company/societe.com
+                      - generic [aria-hidden] [ref=f78e1504]: 
+                  - listitem [ref=f78e1505]:
+                    - link "X (anciennement Twitter)" [ref=f78e1506] [cursor=pointer]:
+                      - /url: https://twitter.com/Societe_com
+                      - generic [aria-hidden] [ref=f78e1507]: 
+                  - listitem [ref=f78e1509]:
+                    - link "Visualisez nos vidéos et podcasts sur Youtube" [ref=f78e1510] [cursor=pointer]:
+                      - /url: https://www.youtube.com/@Soci%C3%A9t%C3%A9_FR
+                      - generic [aria-hidden] [ref=f78e1511]: 
+                  - listitem [ref=f78e1512]:
+                    - link "Retrouvez nos vidéos et podcasts sur TikTok" [ref=f78e1513] [cursor=pointer]:
+                      - /url: https://www.tiktok.com/@societe.com
+                      - generic [aria-hidden] [ref=f78e1514]: 
+    - generic [ref=f78e1516]:
+      - paragraph [ref=f78e1517]: ©2026 SOCIETE SAS
+      - list [ref=f78e1518]:
+        - listitem [ref=f78e1519]:
+          - link "À propos" [ref=f78e1520] [cursor=pointer]:
+            - /url: /pages/a-propos.html
+        - listitem [ref=f78e1521]:
+          - link "CGU & CGV" [ref=f78e1522] [cursor=pointer]:
+            - /url: /pages/cgu-cgv.html
+        - listitem [ref=f78e1523]:
+          - link "Gestion des cookies" [ref=f78e1524] [cursor=pointer]:
+            - /url: javascript:Didomi.preferences.show()
+        - listitem [ref=f78e1525]:
+          - link "Politique de confidentialité" [ref=f78e1526] [cursor=pointer]:
+            - /url: /pages/politique-de-protection-des-donnees-personnelles.html
+        - listitem [ref=f78e1527]:
+          - link "Mentions Légales" [ref=f78e1528] [cursor=pointer]:
+            - /url: /pages/mentions-legales.html

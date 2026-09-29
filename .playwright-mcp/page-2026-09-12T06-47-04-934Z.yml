@@ -1,0 +1,137 @@
+- generic [ref=f29e2]:
+  - generic [ref=f29e3]:
+    - link "DuckDuckGo" [ref=f29e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f29e5]:
+      - generic [ref=f29e6]:
+        - textbox [ref=f29e7]: "\"ROLAND-GOSSELIN\" linkedin company immobilier Paris"
+        - button "Submit" [ref=f29e8] [cursor=pointer]
+      - combobox [ref=f29e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f29e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f29e15]:
+    - generic [ref=f29e17]:
+      - heading [level=2] [ref=f29e18]:
+        - link "Cabinet ROLAND-GOSSELIN - LinkedIn" [ref=f29e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Droland%2Dgosselin&rut=864060608e5095d15c4509f2d130e9544c1ed91b4691145cdda2801e54133550
+      - generic [ref=f29e21]:
+        - link [ref=f29e23] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Droland%2Dgosselin&rut=864060608e5095d15c4509f2d130e9544c1ed91b4691145cdda2801e54133550
+        - link "fr.linkedin.com/company/cabinet-roland-gosselin" [ref=f29e24] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Droland%2Dgosselin&rut=864060608e5095d15c4509f2d130e9544c1ed91b4691145cdda2801e54133550
+      - link "Cabinet ROLAND-GOSSELIN | 157 abonnés sur LinkedIn. Suite au rapprochement de deux acteurs référents de l'administration de biens, nous allions l'histoire et l'expérience d'un cabinet parisien qui exerce depuis 1830 et celle d'un spécialiste reconnu de la gestion immobilière de bureaux et de commerces" [ref=f29e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Droland%2Dgosselin&rut=864060608e5095d15c4509f2d130e9544c1ed91b4691145cdda2801e54133550
+    - generic [ref=f29e27]:
+      - heading [level=2] [ref=f29e28]:
+        - link "Vincent Morin - Cabinet ROLAND-GOSSELIN | LinkedIn" [ref=f29e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fvincent%2Dmorin%2De419&rut=8bf57f705f4501d9157e162e270aefa653d4c9eeb81f7839a4be9dc0c2482c05
+      - generic [ref=f29e31]:
+        - link [ref=f29e33] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fvincent%2Dmorin%2De419&rut=8bf57f705f4501d9157e162e270aefa653d4c9eeb81f7839a4be9dc0c2482c05
+        - link "fr.linkedin.com/in/vincent-morin-e419" [ref=f29e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fvincent%2Dmorin%2De419&rut=8bf57f705f4501d9157e162e270aefa653d4c9eeb81f7839a4be9dc0c2482c05
+      - 'link "De formation juridique orientée immobilier, j''ai acquis dans mon métier des compétences… · Expérience : Cabinet ROLAND-GOSSELIN · Formation : l''Ecole Supérieure de l''Immobilier · Lieu : Paris et périphérie · 264 relations sur LinkedIn. Consultez le profil de Vincent Morin sur LinkedIn, une communauté professionnelle d''un milliard de membres." [ref=f29e35] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fvincent%2Dmorin%2De419&rut=8bf57f705f4501d9157e162e270aefa653d4c9eeb81f7839a4be9dc0c2482c05
+    - generic [ref=f29e37]:
+      - heading [level=2] [ref=f29e38]:
+        - link "70+ \"Roland-gosselin\" profiles | LinkedIn" [ref=f29e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FRoland%2Dgosselin%2Ffr%2D0%2DFrance&rut=ce78e6d239dfae04d119bee27a33400e0e9633e6d8b2f6f8947b4864a2240448
+      - generic [ref=f29e41]:
+        - link [ref=f29e43] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FRoland%2Dgosselin%2Ffr%2D0%2DFrance&rut=ce78e6d239dfae04d119bee27a33400e0e9633e6d8b2f6f8947b4864a2240448
+        - link "www.linkedin.com/pub/dir/+/Roland-gosselin/fr-0-France" [ref=f29e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FRoland%2Dgosselin%2Ffr%2D0%2DFrance&rut=ce78e6d239dfae04d119bee27a33400e0e9633e6d8b2f6f8947b4864a2240448
+      - link "Marie Roland-Gosselin Operational Marketing for cosmetic brands Paris NAOS (Bioderma - Institut Esthederm - Etat Pur), +6 more IESEG School of Management, +1 more" [ref=f29e45] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2B%2FRoland%2Dgosselin%2Ffr%2D0%2DFrance&rut=ce78e6d239dfae04d119bee27a33400e0e9633e6d8b2f6f8947b4864a2240448
+    - generic [ref=f29e47]:
+      - heading [level=2] [ref=f29e48]:
+        - link "90+ \"Roland-gosselin\" profiles | LinkedIn" [ref=f29e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2520%2FRoland%2Dgosselin&rut=8b8e0c09eb4287a9a1ec0bdb620251362e3e4a84e2a2d694c16f97d142ee2839
+      - generic [ref=f29e51]:
+        - link [ref=f29e53] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2520%2FRoland%2Dgosselin&rut=8b8e0c09eb4287a9a1ec0bdb620251362e3e4a84e2a2d694c16f97d142ee2839
+        - link "www.linkedin.com/pub/dir/ /Roland-gosselin" [ref=f29e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2520%2FRoland%2Dgosselin&rut=8b8e0c09eb4287a9a1ec0bdb620251362e3e4a84e2a2d694c16f97d142ee2839
+      - link "View the profiles of professionals named &quot;Roland-gosselin&quot; on LinkedIn. There are 100+ professionals named &quot;Roland-gosselin&quot;, who use LinkedIn to exchange information, ideas ..." [ref=f29e55] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpub%2Fdir%2F%2520%2FRoland%2Dgosselin&rut=8b8e0c09eb4287a9a1ec0bdb620251362e3e4a84e2a2d694c16f97d142ee2839
+    - generic [ref=f29e57]:
+      - heading [level=2] [ref=f29e58]:
+        - link "MAURICE ROLAND-GOSSELIN SA - LinkedIn" [ref=f29e59] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fmauricerolandgosselin&rut=4e8fbf8f2baf482a0ea7ec56649164f5c4cb5873c28ac4228342540406f3ea7b
+      - generic [ref=f29e61]:
+        - link [ref=f29e63] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fmauricerolandgosselin&rut=4e8fbf8f2baf482a0ea7ec56649164f5c4cb5873c28ac4228342540406f3ea7b
+        - link "fr.linkedin.com/company/mauricerolandgosselin" [ref=f29e64] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fmauricerolandgosselin&rut=4e8fbf8f2baf482a0ea7ec56649164f5c4cb5873c28ac4228342540406f3ea7b
+      - link "MAURICE ROLAND-GOSSELIN SA | 25 abonnés sur LinkedIn." [ref=f29e65] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fmauricerolandgosselin&rut=4e8fbf8f2baf482a0ea7ec56649164f5c4cb5873c28ac4228342540406f3ea7b
+    - link "Feedback" [ref=f29e67] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

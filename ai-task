@@ -4,9 +4,13 @@
 # Usage:
 #   ai-task [--runner NAME] [task.md]   Launch a task. With no file argument,
 #                                       picks the oldest inbox task that is
-#                                       unblocked AND belongs to this runner.
+#                                       unblocked, using its configured runner.
 #   ai-task [--runner NAME] --dry-run   Show what the picker would claim and
 #                                       exit. Claims nothing, launches nothing.
+#   ai-task --unblock SLUG              Move a task out of review/ back into
+#                                       inbox/ and reset ## Retries to 0. Run
+#                                       it AFTER fixing whatever sent it there.
+#                                       Names the tasks it unblocks.
 #   ai-task --run FILE [--runner NAME]  Internal mode used by tmux. Do not call
 #                                       directly.
 #
@@ -25,7 +29,7 @@ SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 source "$SCRIPT_DIR/lib.sh"
 
 usage() {
-    sed -n '3,12p' "$(realpath "$0")" | sed 's/^# \{0,1\}//'
+    sed -n '3,16p' "$(realpath "$0")" | sed 's/^# \{0,1\}//'
 }
 
 # ── Argument parsing ───────────────────────────────────────────────────────
@@ -35,6 +39,7 @@ MODE=launch
 RUNNER_FLAG=""
 TASK_ARG=""
 DRY_RUN=0
+UNBLOCK_SLUG=""
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -53,6 +58,16 @@ while [ $# -gt 0 ]; do
             ;;
         --dry-run)
             DRY_RUN=1
+            shift
+            ;;
+        --unblock)
+            MODE=unblock
+            UNBLOCK_SLUG="${2:?--unblock requires a task slug}"
+            shift 2
+            ;;
+        --unblock=*)
+            MODE=unblock
+            UNBLOCK_SLUG="${1#*=}"
             shift
             ;;
         -h|--help)
@@ -290,6 +305,99 @@ $(cat "$RESULT_FILE")" \
 }
 
 # ═══════════════════════════════════════════════════════════════════════════
+# Unblock mode: review/ → inbox/
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# The one supported way out of review/. A task lands there because a human has
+# to look at it — a failed evaluation, or a criterion no correct run could
+# satisfy — and everything downstream of it stops dead, because dep_satisfied
+# accepts only done/*_<slug>.task.md.
+#
+# This does NOT judge whether the task was repaired: it cannot. The human edits
+# the file first; an untouched criterion simply comes back to review/ on the
+# next grade. What it does is make the requeue correct — the retry counter is
+# reset, so a task that burned max_retries before a human fixed its criterion
+# gets a full budget rather than landing straight back in review/ on its first
+# FAIL.
+#
+# It makes no agent call and loads no provider: it is a file move.
+if [ "$MODE" = "unblock" ]; then
+    mkdir -p "$INBOX" "$REVIEW_DIR" "$LOCK_DIR"
+
+    # Strip every path component and the extension, so the argument can never
+    # steer the move outside review/ (same rule as ai-brief's filenames).
+    SLUG=$(basename "${UNBLOCK_SLUG%.md}")
+    if [ -z "$SLUG" ]; then
+        echo "--unblock requires a task slug." >&2
+        exit 1
+    fi
+
+    MATCHES=$(find "$REVIEW_DIR" -maxdepth 1 -type f \
+                   \( -name "${SLUG}.md" -o -name "*_${SLUG}.md" \) 2>/dev/null | sort)
+    MATCH_COUNT=$(printf '%s\n' "$MATCHES" | grep -c . || true)
+
+    if [ "$MATCH_COUNT" -eq 0 ]; then
+        echo "No task matching '$SLUG' in $REVIEW_DIR." >&2
+        WHERE=$(locate_dep_slug "$SLUG")
+        case "$WHERE" in
+            missing) echo "That slug is nowhere in the pipeline." >&2 ;;
+            *)       echo "It is currently in: $WHERE/" >&2 ;;
+        esac
+        exit 1
+    fi
+
+    # Two files for one slug means two dated attempts of the same task. Picking
+    # one silently would requeue an arbitrary half of the history, so name them
+    # and let the human say which.
+    if [ "$MATCH_COUNT" -gt 1 ]; then
+        echo "Ambiguous: '$SLUG' matches $MATCH_COUNT files in $REVIEW_DIR." >&2
+        printf '%s\n' "$MATCHES" | sed 's/^/  - /' >&2
+        echo "Pass the full basename instead." >&2
+        exit 1
+    fi
+
+    REVIEW_FILE="$MATCHES"
+    REVIEW_BASE=$(basename "$REVIEW_FILE")
+
+    # Collected BEFORE the move: afterwards the dep resolves to inbox/ and
+    # these tasks read as ordinary waiting, which is exactly the outcome, but
+    # it would leave nothing to report.
+    UNBLOCKED=""
+    while IFS=$'\t' read -r b_task b_dep b_loc; do
+        [ -n "$b_task" ] || continue
+        [ "$b_loc" = "review" ] || continue
+        [ "$b_dep" = "$SLUG" ] || continue
+        UNBLOCKED="${UNBLOCKED}
+  - ${b_task}"
+    done < <(blocked_inbox_tasks)
+
+    OLD_RETRIES=$(retries_from_task "$REVIEW_FILE")
+    OLD_RETRIES=${OLD_RETRIES:-0}
+    set_retries "$REVIEW_FILE" 0
+
+    # The same lock every other write into inbox/ takes. It is held for the
+    # move only, and a launcher mid-selection is unaffected either way.
+    (
+        exec 8>"$LOCK_DIR/inbox.lock"
+        flock -w "$INBOX_LOCK_WAIT_SEC" 8 || exit 3
+        mv "$REVIEW_FILE" "$INBOX/$REVIEW_BASE"
+    ) || {
+        echo "Could not take the inbox lock (waited ${INBOX_LOCK_WAIT_SEC}s). Nothing moved." >&2
+        exit 1
+    }
+
+    echo "Unblocked: $REVIEW_BASE"
+    echo "  review/ → inbox/"
+    echo "  ## Retries reset: $OLD_RETRIES → 0"
+    if [ -n "$UNBLOCKED" ]; then
+        echo "  also unblocks:$UNBLOCKED"
+    fi
+    echo "Note: nothing here checked the task file. If the reason it reached"
+    echo "review/ is still in it, the next evaluation sends it straight back."
+    exit 0
+fi
+
+# ═══════════════════════════════════════════════════════════════════════════
 # Internal execution mode
 # ═══════════════════════════════════════════════════════════════════════════
 if [ "$MODE" = "run" ]; then
@@ -459,6 +567,13 @@ PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_
                     WORKDIR="$WD"
                 fi
             fi
+        fi
+
+        PROJECT_INSTRUCTIONS=$(project_instructions "$PROJECT")
+        if [ -n "$PROJECT_INSTRUCTIONS" ]; then
+            PREAMBLE="$PREAMBLE
+
+$PROJECT_INSTRUCTIONS"
         fi
 
         EXTRA=$(ai_preamble_extra "$TASK_FILE" || true)
@@ -734,13 +849,7 @@ $(cat "$TASK_FILE")" \
                 printf "\n"
             } >> "$TASK_FILE"
 
-            if grep -q "^## Retries" "$TASK_FILE"; then
-                awk -v n="$NEW_RETRIES" \
-                    '/^## Retries/{print; getline; print n; next} {print}' \
-                    "$TASK_FILE" > "${TASK_FILE}.tmp" && mv "${TASK_FILE}.tmp" "$TASK_FILE"
-            else
-                printf "\n## Retries\n%s\n" "$NEW_RETRIES" >> "$TASK_FILE"
-            fi
+            set_retries "$TASK_FILE" "$NEW_RETRIES"
 
             # Strategy pass from the second failure on: the same approach has
             # now failed twice, so ask for a different one before requeueing.
@@ -850,40 +959,37 @@ fi
 # ═══════════════════════════════════════════════════════════════════════════
 mkdir -p "$INBOX" "$RUN_DIR" "$DONE_DIR" "$REVIEW_DIR" "$LOCK_DIR"
 
-# The runner this invocation acts AS: the --runner flag, else default_runner.
-# It decides which inbox tasks are even visible to this invocation and which
-# cooldown marker gates it.
-if ! INVOCATION_RUNNER=$(resolve_runner ""); then
-    echo "No runner: pass --runner NAME or set default_runner in $SCRIPT_DIR/config" >&2
-    exit 1
+# Without --runner, dispatch each task using its own runner. An explicit flag
+# restricts queue selection; named files still allow overriding their runner.
+INVOCATION_RUNNER=""
+if [ -n "$RUNNER_FLAG" ]; then
+    INVOCATION_RUNNER=$(resolve_runner "") || exit 1
+    ( load_provider "$INVOCATION_RUNNER" >/dev/null ) || exit 1
 fi
 
-# Validate the adapter before anything is claimed, in a subshell so the
-# launcher's own shell stays clean. A typo in --runner would otherwise just
-# match no task and report an empty queue, or — for a task that literally names
-# the bad runner — claim the file and strand it in run/ when the child died.
-if ! ( load_provider "$INVOCATION_RUNNER" >/dev/null ); then
-    exit 1
-fi
+runner_available() {
+    local marker
+    marker=$(cooldown_path "$1") || return 1
+    [ -f "$marker" ] || return 0
+    if find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+        return 1
+    fi
+    return 0
+}
 
-# ── Auth cooldown guard (per runner) ───────────────────────────────────────
-# A recent auth failure pauses only THIS runner's unattended queue; another
-# runner sharing the tree keeps working. An explicit task argument bypasses the
-# guard so the user can kick a task manually right after re-authenticating.
-COOLDOWN_FILE=$(cooldown_path "$INVOCATION_RUNNER")
-if [ -z "$TASK_ARG" ] && [ -f "$COOLDOWN_FILE" ] \
-    && find "$COOLDOWN_FILE" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+# Keep the explicit runner's cooldown message. Automatic selection checks
+# cooldowns per candidate so a paused provider cannot stop another queue.
+# Named files bypass cooldowns for manual retries after re-authentication.
+if [ -z "$TASK_ARG" ] && [ -n "$INVOCATION_RUNNER" ] \
+    && ! runner_available "$INVOCATION_RUNNER"; then
     echo "Auth cooldown active for runner '$INVOCATION_RUNNER' (last failure < ${AUTH_COOLDOWN_MIN}m ago). Skipping."
-    echo "Re-authenticate, then run a task manually or: rm $COOLDOWN_FILE"
+    echo "Re-authenticate, then run a task manually or: rm $(cooldown_path "$INVOCATION_RUNNER")"
     exit 0
 fi
 
 # ── Eligibility ────────────────────────────────────────────────────────────
-# NEW: the picker only sees tasks belonging to this runner. One tree now serves
-# several runners, so a task whose resolved runner (## Runner, else
-# default_runner) is not this invocation's runner must be left for the
-# invocation that owns it — never picked up and never silently retargeted.
 runner_matches() {
+    [ -z "$INVOCATION_RUNNER" ] && return 0
     local r
     r=$(runner_from_task "$1") || return 1
     [ "$r" = "$INVOCATION_RUNNER" ]
@@ -918,19 +1024,114 @@ inbox_by_age() {
 }
 
 select_candidate() {
-    local f
+    local f r
     while IFS= read -r f; do
         [ -n "$f" ] && [ -f "$f" ] || continue
         dep_satisfied "$f" || continue
         runner_matches "$f" || continue
+        r=$(runner_from_task "$f") || {
+            echo "No runner for '$f': set ## Runner or default_runner." >&2
+            continue
+        }
+        ( load_provider "$r" >/dev/null ) || continue
+        runner_available "$r" || continue
         grader_available "$f" || continue
         # An existing session for this name means a previous attempt is still
         # in flight; leave the file alone rather than run it twice.
-        tmux has-session -t "$(session_name "$INVOCATION_RUNNER" "$(basename "$f" .md)")" 2>/dev/null && continue
+        tmux has-session -t "$(session_name "$r" "$(basename "$f" .md)")" 2>/dev/null && continue
         printf '%s\n' "$f"
         return 0
     done < <(inbox_by_age)
     return 1
+}
+
+# ── Blocked-chain reporting ────────────────────────────────────────────────
+#
+# select_candidate skips a blocked task in silence and claims the next eligible
+# one, so a queue holding any other runnable work never mentions the block. The
+# dependent sits in inbox/ looking healthy while its parent is in review/ and
+# nothing will ever satisfy it.
+#
+# The dep classification comes from blocked_inbox_tasks in lib.sh, which dtask
+# also reads. One classifier, so the dashboard and the launcher cannot drift
+# into disagreeing about which tasks are blocked.
+#
+# Two modes:
+#   full       every category, plus the critical notifications. Used on the
+#              "nothing eligible" branch, where this text is the only thing the
+#              sweep produces.
+#   dead-only  the permanently-blocked categories, no notification. Used after
+#              a successful claim: work IS happening, so the sweep already has
+#              something to say, and a chain that will still be dead in fifteen
+#              minutes must not fire a critical notification on every sweep.
+#              That volume is how a real alert gets muted.
+report_blocked_chains() {
+    local mode="${1:-full}" f name d loc
+    local dead="" missing="" waiting="" other=""
+
+    while IFS=$'\t' read -r name d loc; do
+        [ -n "$name" ] || continue
+        [ -f "$INBOX/${name}.md" ] || continue
+        # A task belonging to another runner is that runner's business, and is
+        # reported as such (full mode only), never as a blocked chain.
+        runner_matches "$INBOX/${name}.md" || continue
+        case "$loc" in
+            review)
+                dead="${dead}
+  - ${name} → dep '${d}' is in review/ (failed)"
+                ;;
+            missing)
+                missing="${missing}
+  - ${name} → dep '${d}' is not in inbox/, run/, done/, or review/"
+                ;;
+            *)
+                waiting="${waiting}
+  - ${name} → dep '${d}' ($loc)"
+                ;;
+        esac
+    done < <(blocked_inbox_tasks)
+
+    if [ "$mode" = "dead-only" ]; then
+        if [ -n "$dead" ]; then
+            echo "Dead dependency chains (dependency failed to review/):$dead"
+            echo "Clear one with: ai-task --unblock <parent-slug> (after fixing the parent)."
+        fi
+        if [ -n "$missing" ]; then
+            echo "Missing dependencies (slug was never created):$missing"
+        fi
+        return 0
+    fi
+
+    while IFS= read -r f; do
+        [ -n "$f" ] && [ -f "$f" ] || continue
+        runner_matches "$f" && continue
+        other="${other}
+  - $(basename "$f" .md) → runner '$(runner_from_task "$f" || echo unresolved)'"
+    done < <(inbox_by_age)
+
+    if [ -n "$other" ]; then
+        echo "Belongs to another runner (left untouched):$other"
+    fi
+    if [ -n "$dead" ]; then
+        echo "Dead dependency chains (dependency failed to review/):$dead"
+        echo "Clear one with: ai-task --unblock <parent-slug> (after fixing the parent)."
+        notify -u critical "ai-task [${INVOCATION_RUNNER:-automatic}]: Tasks Permanently Blocked" \
+            "One or more inbox tasks depend on a task that failed to review/."
+    fi
+    if [ -n "$missing" ]; then
+        echo "Missing dependencies (slug was never created):$missing"
+        notify -u critical "ai-task [${INVOCATION_RUNNER:-automatic}]: Tasks Permanently Blocked" \
+            "One or more inbox tasks depend on a task that does not exist."
+    fi
+    if [ -n "$waiting" ]; then
+        echo "Waiting on other queued tasks:$waiting"
+    fi
+    if [ -z "$dead" ] && [ -z "$missing" ] && [ -n "$waiting" ]; then
+        echo "No runnable root: every task waits on another still-queued task (possible cycle)."
+        notify -u critical "ai-task [${INVOCATION_RUNNER:-automatic}]: Tasks Permanently Blocked" \
+            "Inbox has no runnable root (possible dependency cycle)."
+    fi
+    return 0
 }
 
 # ── Dry run: selection only, claims nothing ────────────────────────────────
@@ -940,11 +1141,11 @@ if [ "$DRY_RUN" -eq 1 ]; then
         exit 1
     fi
     if PICK=$(select_candidate); then
-        echo "runner: $INVOCATION_RUNNER"
+        echo "runner: $(resolve_runner "$PICK")"
         echo "would claim: $PICK"
         exit 0
     fi
-    echo "runner: $INVOCATION_RUNNER"
+    echo "runner: ${INVOCATION_RUNNER:-automatic}"
     echo "would claim: (nothing eligible)"
     exit 1
 fi
@@ -961,7 +1162,7 @@ fi
 # call below. It must never wrap the run itself, or it would serialise all work
 # across the whole queue.
 claim() {
-    local f dest task_name session
+    local f dest task_name session file_runner
     if [ -n "$TASK_ARG" ]; then
         f="$TASK_ARG"
         [ -f "$f" ] || { echo "Task file not found: $f" >&2; return 4; }
@@ -971,7 +1172,6 @@ claim() {
         # An explicitly named file is run as asked: the runner filter is a
         # queue-picking rule, not a permission check.
         task_name=$(basename "$f" .md)
-        local file_runner
         file_runner=$(resolve_runner "$f") || return 6
         ( load_provider "$file_runner" >/dev/null ) || return 10
         session=$(session_name "$file_runner" "$task_name")
@@ -991,13 +1191,14 @@ claim() {
     fi
 
     f=$(select_candidate) || return 1
+    file_runner=$(resolve_runner "$f") || return 6
     task_name=$(basename "$f" .md)
     dest="$RUN_DIR/$(basename "$f")"
     [ -e "$dest" ] && return 9
     mv "$f" "$dest" || return 8
-    session=$(session_name "$INVOCATION_RUNNER" "$task_name")
-    write_run_state "$task_name" "$INVOCATION_RUNNER" "$session"
-    printf '%s\n%s\n' "$dest" "$INVOCATION_RUNNER"
+    session=$(session_name "$file_runner" "$task_name")
+    write_run_state "$task_name" "$file_runner" "$session"
+    printf '%s\n%s\n' "$dest" "$file_runner"
     return 0
 }
 
@@ -1038,58 +1239,12 @@ case "$CLAIM_STATUS" in
         # Nothing eligible for this runner: explain why, from outside the lock.
         if find "$INBOX" -maxdepth 1 -type f -name '*.md' 2>/dev/null | grep -q .; then
             BLOCKED_COUNT=$(find "$INBOX" -maxdepth 1 -type f -name '*.md' 2>/dev/null | wc -l)
-            DEAD=""
-            MISSING=""
-            WAITING=""
-            OTHER_RUNNER=""
-            while IFS= read -r f; do
-                [ -n "$f" ] && [ -f "$f" ] || continue
-                if ! runner_matches "$f"; then
-                    OTHER_RUNNER="${OTHER_RUNNER}
-  - $(basename "$f" .md) → runner '$(runner_from_task "$f" || echo unresolved)'"
-                    continue
-                fi
-                d=$(depends_on_from_task "$f")
-                d="${d%.md}"
-                [ -z "$d" ] && continue
-                loc=$(locate_dep_slug "$d")
-                case "$loc" in
-                    review)
-                        DEAD="${DEAD}
-  - $(basename "$f" .md) → dep '${d}' is in review/ (failed)"
-                        ;;
-                    missing)
-                        MISSING="${MISSING}
-  - $(basename "$f" .md) → dep '${d}' is not in inbox/, run/, done/, or review/"
-                        ;;
-                    inbox|run|backlog)
-                        WAITING="${WAITING}
-  - $(basename "$f" .md) → dep '${d}' ($loc)"
-                        ;;
-                esac
-            done < <(inbox_by_age)
-            echo "Nothing runnable for runner '$INVOCATION_RUNNER' among $BLOCKED_COUNT task(s) in $INBOX."
-            if [ -n "$OTHER_RUNNER" ]; then
-                echo "Belongs to another runner (left untouched):$OTHER_RUNNER"
+            if [ -n "$INVOCATION_RUNNER" ]; then
+                echo "Nothing runnable for runner '$INVOCATION_RUNNER' among $BLOCKED_COUNT task(s) in $INBOX."
+            else
+                echo "Nothing runnable among $BLOCKED_COUNT task(s) in $INBOX (checked each task's runner)."
             fi
-            if [ -n "$DEAD" ]; then
-                echo "Dead dependency chains (dependency failed to review/):$DEAD"
-                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
-                    "One or more inbox tasks depend on a task that failed to review/."
-            fi
-            if [ -n "$MISSING" ]; then
-                echo "Missing dependencies (slug was never created):$MISSING"
-                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
-                    "One or more inbox tasks depend on a task that does not exist."
-            fi
-            if [ -n "$WAITING" ]; then
-                echo "Waiting on other queued tasks:$WAITING"
-            fi
-            if [ -z "$DEAD" ] && [ -z "$MISSING" ] && [ -n "$WAITING" ]; then
-                echo "No runnable root: every task waits on another still-queued task (possible cycle)."
-                notify -u critical "ai-task [$INVOCATION_RUNNER]: Tasks Permanently Blocked" \
-                    "Inbox has no runnable root (possible dependency cycle)."
-            fi
+            report_blocked_chains full
         else
             echo "Usage: ai-task [--runner NAME] [task.md]"
             echo "No .md task file found in $INBOX"
@@ -1105,6 +1260,14 @@ fi
 
 TASK_NAME=$(basename "$TASK_FILE" .md)
 SESSION=$(session_name "$EFFECTIVE_RUNNER" "$TASK_NAME")
+
+# A claim succeeded, but the rest of the inbox may still hold chains that can
+# never run. Reported here so cron.log carries them on EVERY sweep, not only on
+# the sweeps that happen to find nothing eligible — with other runnable work
+# present, the idle branch above is never reached and a dead chain stays
+# invisible indefinitely. Dead-only and deliberately without a notification:
+# see report_blocked_chains.
+report_blocked_chains dead-only
 
 SELF_BIN="$HOME/bin/ai-task"
 if [ ! -x "$SELF_BIN" ]; then

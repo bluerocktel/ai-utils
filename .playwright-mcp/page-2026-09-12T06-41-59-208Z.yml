@@ -1,0 +1,603 @@
+- generic [active] [ref=f69e1]:
+  - generic [ref=f69e2]:
+    - banner [ref=f69e4]:
+      - text:        
+      - generic [ref=f69e5]:
+        - generic [ref=f69e9]:
+          - link "FR" [ref=f69e10] [cursor=pointer]:
+            - /url: /
+          - text: "|"
+          - link "EN" [ref=f69e11] [cursor=pointer]:
+            - /url: /en
+        - generic [ref=f69e13]:
+          - link "CDS" [ref=f69e17] [cursor=pointer]:
+            - /url: https://www.cdsgroupe.com
+          - generic [ref=f69e19]:
+            - link "" [ref=f69e21] [cursor=pointer]:
+              - /url: https://travelroom.cdsgroupe.com/
+            - generic [ref=f69e24]:
+              - text:  
+              - link "" [ref=f69e25] [cursor=pointer]:
+                - /url: "#"
+      - text:    
+    - generic [ref=f69e33]:
+      - generic [ref=f69e37]:
+        - generic [ref=f69e39]:
+          - heading "Your Hotel & Payment solution for Business Travel" [level=1] [ref=f69e40]
+          - paragraph [ref=f69e41]: Acteur européen de référence, nous innovons en continu pour anticiper les besoins des entreprises et réinventer l’expérience du voyage d’affaires.
+        - link "Demander une démonstration" [ref=f69e43] [cursor=pointer]:
+          - /url: /contact/
+      - figure [ref=f69e50]:
+        - link [ref=f69e51] [cursor=pointer]:
+          - /url: https://www.iftm.fr/en-gb/register.html?code=1739581213800706-4PJ
+      - generic:               
+      - generic [ref=f69e55]:
+        - heading "Nos solutions" [level=2] [ref=f69e56]
+        - paragraph [ref=f69e59]:
+          - generic [ref=f69e60]: L’ensemble de nos solutions est développé pour vous accompagner au quotidien et répondre à vos attentes
+        - generic [ref=f69e61]:
+          - generic [ref=f69e63]:
+            - generic [ref=f69e68]:
+              - figure [ref=f69e71]
+              - heading [level=3] [ref=f69e74]: Fournisseurs technologiques
+              - link [ref=f69e77] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/fournisseurs-technologiques/
+                - text: Je découvre
+                - generic [ref=f69e78]: 
+            - tabpanel [ref=f69e79]:
+              - generic [ref=f69e83]:
+                - figure [ref=f69e86]
+                - heading "Entreprises Corporates" [level=3] [ref=f69e89]
+                - link "Je découvre " [ref=f69e92] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/nos-solutions/entreprises-corporates/
+                  - text: Je découvre
+                  - generic [ref=f69e93]: 
+            - tabpanel [aria-hidden] [ref=f69e94]:
+              - generic [ref=f69e98]:
+                - figure [ref=f69e101]
+                - heading [level=3] [ref=f69e104]: Travel Management Company
+                - link [ref=f69e107] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/nos-solutions/agences-de-voyages/
+                  - text: Je découvre
+                  - generic [ref=f69e108]: 
+            - tabpanel [aria-hidden] [ref=f69e109]:
+              - generic [ref=f69e113]:
+                - figure [ref=f69e116]
+                - heading [level=3] [ref=f69e119]: Marchés Publics
+                - link [ref=f69e122] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/nos-solutions/marches-publics/
+                  - text: Je découvre
+                  - generic [ref=f69e123]: 
+            - tabpanel [aria-hidden] [ref=f69e124]:
+              - generic [ref=f69e128]:
+                - figure [ref=f69e131]
+                - heading [level=3] [ref=f69e134]: Hôteliers
+                - link [ref=f69e137] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/nos-solutions/hoteliers/
+                  - text: Je découvre
+                  - generic [ref=f69e138]: 
+            - tabpanel [aria-hidden] [ref=f69e139]:
+              - generic [ref=f69e143]:
+                - figure [ref=f69e146]
+                - heading [level=3] [ref=f69e149]: Fournisseurs technologiques
+                - link [ref=f69e152] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/nos-solutions/fournisseurs-technologiques/
+                  - text: Je découvre
+                  - generic [ref=f69e153]: 
+            - generic [ref=f69e158]:
+              - figure [ref=f69e161]
+              - heading [level=3] [ref=f69e164]: Entreprises Corporates
+              - link [ref=f69e167] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/entreprises-corporates/
+                - text: Je découvre
+                - generic [ref=f69e168]: 
+            - generic [ref=f69e173]:
+              - figure [ref=f69e176]
+              - heading [level=3] [ref=f69e179]: Travel Management Company
+              - link [ref=f69e182] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/agences-de-voyages/
+                - text: Je découvre
+                - generic [ref=f69e183]: 
+            - generic [ref=f69e188]:
+              - figure [ref=f69e191]
+              - heading [level=3] [ref=f69e194]: Marchés Publics
+              - link [ref=f69e197] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/marches-publics/
+                - text: Je découvre
+                - generic [ref=f69e198]: 
+            - generic [ref=f69e203]:
+              - figure [ref=f69e206]
+              - heading [level=3] [ref=f69e209]: Hôteliers
+              - link [ref=f69e212] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/hoteliers/
+                - text: Je découvre
+                - generic [ref=f69e213]: 
+            - generic [ref=f69e218]:
+              - figure [ref=f69e221]
+              - heading [level=3] [ref=f69e224]: Fournisseurs technologiques
+              - link [ref=f69e227] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/nos-solutions/fournisseurs-technologiques/
+                - text: Je découvre
+                - generic [ref=f69e228]: 
+          - tablist [ref=f69e229]:
+            - generic [ref=f69e230] [cursor=pointer]: 
+            - generic [ref=f69e231] [cursor=pointer]: 
+            - generic [ref=f69e232] [cursor=pointer]: 
+            - generic [ref=f69e233] [cursor=pointer]: 
+            - generic [ref=f69e234] [cursor=pointer]: 
+      - generic [ref=f69e238]:
+        - heading "Les chiffres clés du groupe" [level=2] [ref=f69e239]
+        - paragraph [ref=f69e242]:
+          - link "JE DÉCOUVRE LE GROUPE" [ref=f69e243] [cursor=pointer]:
+            - /url: /le-groupe/
+        - generic [ref=f69e244]:
+          - generic [ref=f69e249]:
+            - img "null" [ref=f69e254]
+            - heading "N°1" [level=3] [ref=f69e256]
+            - generic [ref=f69e257]: Leader en Europe sur le marché des HBT
+          - generic [ref=f69e262]:
+            - img "null" [ref=f69e267]
+            - heading "5 Milliards €" [level=3] [ref=f69e269]
+            - generic [ref=f69e270]: Réservations d’hôtels
+        - generic [ref=f69e271]:
+          - generic [ref=f69e276]:
+            - img "null" [ref=f69e281]
+            - heading "700" [level=3] [ref=f69e283]
+            - generic [ref=f69e284]: Experts
+          - generic [ref=f69e289]:
+            - img "null" [ref=f69e294]
+            - heading "+2M" [level=3] [ref=f69e296]
+            - generic [ref=f69e297]: De solutions d’hébergement disponibles
+      - generic [ref=f69e298]:
+        - generic [ref=f69e301]:
+          - heading "Le Baromètre de l’hôtellerie d’affaires" [level=2] [ref=f69e302]
+          - paragraph [ref=f69e305]:
+            - text: Téléchargez les dernières tendances de l’hôtellerie d’affaires en partenariat avec
+            - strong [ref=f69e306]: MKG Consulting
+          - link "Consultez le baromètre" [ref=f69e308] [cursor=pointer]:
+            - /url: /barometre-de-lhotellerie-daffaires/
+        - figure [ref=f69e313]
+      - generic:       
+      - generic [ref=f69e318]:
+        - heading "Les dernières actualités" [level=2] [ref=f69e319]
+        - generic [ref=f69e321]:
+          - paragraph [ref=f69e322]: Découvrez les dernières nouveautés et mises à jour de CDS
+          - paragraph [ref=f69e323]:
+            - link "TOUTES NOS ACTUALITÉS" [ref=f69e324] [cursor=pointer]:
+              - /url: /la-redaction/
+        - generic [ref=f69e325]:
+          - generic [ref=f69e327]:
+            - generic [ref=f69e332]:
+              - figure [ref=f69e335]
+              - heading [level=3] [ref=f69e338]: CDS renforce son partenariat avec CYTRIC
+              - paragraph [ref=f69e342]: CDS et Amadeus renforcent leur partenariat pour le bénéfice des entreprises et des TMC en intégrant la solution CDS et ses services associés au sein de l’outil en ligne de réservation et de gestion des déplacements Cytric by Amadeus.
+              - link [ref=f69e345] [cursor=pointer]:
+                - /url: /les-communiques-de-presse/cds-groupe-renforce-son-partenariat-avec-cytric/
+                - text: En savoir plus
+            - tabpanel [ref=f69e346]:
+              - generic [ref=f69e350]:
+                - figure [ref=f69e353]
+                - heading "Trevium by S4BT et Pliant lancent une nouvelle génération de paiements pour les déplacements professionnels, au service de la performance des équipes Finance" [level=3] [ref=f69e356]
+                - paragraph [ref=f69e360]: Pour les entreprises, le défi de la gestion des déplacements professionnels ne se limite plus à l’exécution des paiements. Il réside désormais dans leur traitement fluide, fiable et automatisé par les équipes Finance.
+                - link "En savoir plus" [ref=f69e363] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/trevium-by-s4bt-et-pliant-lancent-une-nouvelle-generation-de-paiements-pour-les-deplacements-professionnels/
+            - tabpanel [aria-hidden] [ref=f69e364]:
+              - generic [ref=f69e368]:
+                - figure [ref=f69e371]
+                - heading [level=3] [ref=f69e374]: "Facturation électronique : pourquoi il est temps de passer de l'information à l'action"
+                - paragraph [ref=f69e378]:
+                  - text: À l’occasion de notre webinaire organisé avec l’
+                  - strong [ref=f69e379]: UGAP
+                  - text: ","
+                  - strong [ref=f69e380]: Vairon Voyages Selectour
+                  - text: ","
+                  - strong [ref=f69e381]: Cegid
+                  - text: ","
+                  - strong [ref=f69e382]: Goelett
+                  - text: et
+                  - strong [ref=f69e383]: CDS
+                  - text: ", plusieurs experts ont partagé leur vision de cette réforme majeure, répondu aux nombreuses questions des entreprises et apporté des recommandations concrètes pour réussir cette transition."
+                - link [ref=f69e386] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds/facturation-electronique-pourquoi-il-est-temps-de-passer-de-linformation-a-laction/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e387]:
+              - generic [ref=f69e391]:
+                - figure [ref=f69e394]
+                - heading [level=3] [ref=f69e397]: Rapport de Durabilité 2026
+                - paragraph [ref=f69e401]: Découvrez notre Rapport de Durabilité, reflet des engagements et des actions concrètes que nous menons chaque jour pour construire un avenir plus responsable.
+                - link [ref=f69e404] [cursor=pointer]:
+                  - /url: ""
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e405]:
+              - generic [ref=f69e409]:
+                - figure [ref=f69e412]
+                - heading [level=3] [ref=f69e415]: CDS propulse le Business Travel à l’ère des assistants IA
+                - paragraph [ref=f69e419]: CDS devient l’une des premières plateformes mondiales de Business Travel à connecter ses services à l’écosystème mondial de l’intelligence artificielle, de ChatGPT et Claude aux agents IA d’entreprise.
+                - link [ref=f69e422] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/cds-propulse-le-business-travel-a-lere-des-assistants-ia/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e423]:
+              - generic [ref=f69e427]:
+                - figure [ref=f69e430]
+                - heading [level=3] [ref=f69e433]: S4BT s’associe à SQUAKE pour structurer et déployer une stratégie globale de reporting et de décarbonation des voyages d’affaires
+                - paragraph [ref=f69e437]: S4BT et SQUAKE annoncent aujourd’hui un partenariat stratégique visant à accompagner les clients de S4BT dans le pilotage, le reporting et la réduction des émissions de CO₂ liées à l’ensemble de leurs programmes de voyages d’affaires.
+                - link [ref=f69e440] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-sassocie-a-squake-pour-structurer-et-deployer-une-strategie-globale-de-reporting-et-de-decarbonation-des-voyages-daffaires/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e441]:
+              - generic [ref=f69e445]:
+                - figure [ref=f69e448]
+                - heading [level=3] [ref=f69e451]: S4BT acquiert HotelHub et devient un acteur de référence mondiale du business travel
+                - paragraph [ref=f69e455]: S4BT – Solutions for Business Travel, groupe européen réunissant CDS, Goelett, CRC, TMS, SIAP, Methodica et Trevium, élargit son empreinte et devient la plus grande plateforme mondiale de réservation hôtelière corporate grâce à l’acquisition de Travel Centric Technology, société mère londonienne d’HotelHub
+                - link [ref=f69e458] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-acquiert-hotelhub-et-devient-un-acteur-de-reference-mondiale-du-business-travel/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e459]:
+              - generic [ref=f69e463]:
+                - figure [ref=f69e466]
+                - heading [level=3] [ref=f69e469]: S4BT rejoint l’Alliance France Tourisme
+                - paragraph [ref=f69e473]: "À l’occasion de son assemblée générale, l’Alliance France Tourisme a annoncé l’adhésion de trois nouveaux groupes majeurs du secteur du tourisme : AIR FRANCE, COMEXPOSIUM ET S4BT."
+                - link [ref=f69e476] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/air-france-comexposium-et-s4bt-rejoignent-lalliance-france-tourisme/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e477]:
+              - generic [ref=f69e481]:
+                - figure [ref=f69e484]
+                - heading [level=3] [ref=f69e487]: S4BT poursuit sa dynamique d’innovation avec la création de Trevium
+                - paragraph [ref=f69e491]: Trevium remplace les outils financiers hérités et déconnectés utilisés dans le domaine des voyages d’affaires par une infrastructure financière unique.
+                - link [ref=f69e494] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-poursuit-sa-dynamique-dinnovation-avec-la-creation-de-trevium-une-solution-financiere-innovante-dediee-aux-deplacements-professionnels/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e495]:
+              - generic [ref=f69e499]:
+                - figure [ref=f69e502]
+                - heading [level=3] [ref=f69e505]: Olivier Mouchet prend la direction de la Division Hotel Procurement & Chain Supply de S4BT
+                - paragraph [ref=f69e509]: S4BT – Solutions for Business Travel annonce la nomination d’Olivier Mouchet à la tête de sa Division Hotel Procurement & Chain Supply, en succession de Nicolas Besse.
+                - link [ref=f69e512] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/olivier-mouchet-prend-la-direction-de-la-division-hotel-procurement-chain-supply-de-s4bt-solutions-for-business-travel/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e513]:
+              - generic [ref=f69e517]:
+                - figure [ref=f69e520]
+                - heading [level=3] [ref=f69e523]: "Le voyage d’affaires à l’heure de la durabilité : un engagement de CDS"
+                - paragraph [ref=f69e527]: Dans un monde en quête d’équilibre entre mobilité et impact environnemental, CDS franchit une étape décisive avec la publication de son premier rapport de durabilité.
+                - link [ref=f69e530] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds/rapport-de-durabilite-2024/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e531]:
+              - generic [ref=f69e535]:
+                - figure [ref=f69e538]
+                - heading [level=3] [ref=f69e541]: Une étape structurante, et le début d’une nouvelle phase
+                - paragraph [ref=f69e545]: Le lancement de S4BT marque une nouvelle phase de développement, avec d’autres projets d’acquisition déjà à l’étude pour renforcer la présence globale du groupe.
+                - link [ref=f69e548] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-solutions-for-business-travel/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e549]:
+              - generic [ref=f69e553]:
+                - figure [ref=f69e556]
+                - heading [level=3] [ref=f69e559]: CDS Groupe devient Ami de la GBTA Foundation
+                - paragraph [ref=f69e563]:
+                  - strong [ref=f69e564]: CDS est fier de devenir Ami de la Fondation GBTA
+                  - text: ", un engagement qui traduit notre volonté d’accompagner activement les évolutions du voyage d’affaires, en France comme à l’international."
+                - link [ref=f69e567] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds/cds-devient-ami-de-la-gbta-foundation/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e568]:
+              - generic [ref=f69e572]:
+                - figure [ref=f69e575]
+                - heading [level=3] [ref=f69e578]: Christopher Hecht rejoint le groupe CDS (S4BT) pour accélérer l'innovation et la transformation des paiements dans le voyage d'affaires
+                - paragraph [ref=f69e582]: Le groupe CDS (S4BT) leader en France et acteur clé en Europe des solutions de réservation et de paiement pour le voyage d’affaires, annonce l’arrivée de Christopher Hecht au sein du groupe.
+                - link [ref=f69e585] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/christopher-hecht-rejoint-le-groupe-cds-s4bt-pour-accelerer-linnovation-et-la-transformation-des-paiements-dans-le-voyage-daffaires/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e586]:
+              - generic [ref=f69e590]:
+                - figure [ref=f69e593]
+                - heading [level=3] [ref=f69e596]: Andera Partners investit aux côtés du fondateur et des actionnaires historiques du Groupe CDS
+                - paragraph [ref=f69e600]:
+                  - text: Accompagné depuis 2020 par l’IDI, le Groupe CDS, acteur majeur européen offrant à ses clients
+                  - emphasis [ref=f69e601]: corporate
+                  - text: et agences de voyages des solutions pour les voyages d’affaires, accueille à son capital Andera Partners. Cette réorganisation du capital du groupe permet à Ziad Minkara de reprendre la majorité des parts de la société.
+                - link [ref=f69e604] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/andera-partners-investit-aux-cotes-du-fondateur-et-des-actionnaires-historiques-du-groupe-cds/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e605]:
+              - generic [ref=f69e609]:
+                - figure [ref=f69e612]
+                - heading [level=3] [ref=f69e615]: CDS renforce sa position de leader européen des solutions pour le voyage d’affaires grâce à l’acquisition de SIAP en Italie
+                - paragraph [ref=f69e619]: SIAP, premier fournisseur italien de solutions ERP pour les TMC, au service de plus de 1 000 clients, rejoint CDS dirigé par sa holding S4BT- Solutions for Business Travel.
+                - link [ref=f69e622] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-communiques-de-presse/cds-groupe-renforce-sa-position-de-leader-europeen-des-solutions-pour-le-voyage-daffaires-grace-a-lacquisition-de-siap-en-italie/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e623]:
+              - generic [ref=f69e627]:
+                - figure [ref=f69e630]
+                - heading [level=3] [ref=f69e633]: "IFTM : Ce que CDS a concocté pour la rentrée des agences de voyages"
+                - paragraph [ref=f69e637]: Performance outil, efficacité, productivité… Trois objectifs qui sous-tendent les missions d’Hugo Vicherat arrivé depuis bientôt deux ans chez CDS.
+                - link [ref=f69e640] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/iftm-ce-que-cds-groupe-a-concocte-pour-la-rentree-des-agences-de-voyages/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e641]:
+              - generic [ref=f69e645]:
+                - figure [ref=f69e648]
+                - heading [level=3] [ref=f69e651]: CDS étend son partenariat avec Amadeus à la suite de son expansion en Europe
+                - paragraph [ref=f69e655]: CDS, Goelett et Corporate Rates Club (CRC) accéderont au vaste contenu hôtelier d’Amadeus.
+                - link [ref=f69e658] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/cds-groupe-etend-son-partenariat-avec-amadeus-a-la-suite-de-son-expansion-en-europe/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e659]:
+              - generic [ref=f69e663]:
+                - figure [ref=f69e666]
+                - heading [level=3] [ref=f69e669]: CDS intègre avec succès la dernière version de l’API Booking.com
+                - paragraph [ref=f69e673]: Paris, avril 2024 – CDS, la marketplace de l’hôtellerie d’affaires intègre la dernière version de l’API de Booking.com (version 3.1).
+                - link [ref=f69e676] [cursor=pointer]:
+                  - /url: /les-communiques-de-presse/cds-groupe-integre-avec-succes-la-derniere-version-de-lapi-booking-com/
+                  - text: En savoir plus
+            - tabpanel [aria-hidden] [ref=f69e677]:
+              - generic [ref=f69e681]:
+                - figure [ref=f69e684]
+                - heading [level=3] [ref=f69e687]: CDS renforce son partenariat avec CYTRIC
+                - paragraph [ref=f69e691]: CDS et Amadeus renforcent leur partenariat pour le bénéfice des entreprises et des TMC en intégrant la solution CDS et ses services associés au sein de l’outil en ligne de réservation et de gestion des déplacements Cytric by Amadeus.
+                - link [ref=f69e694] [cursor=pointer]:
+                  - /url: /les-communiques-de-presse/cds-groupe-renforce-son-partenariat-avec-cytric/
+                  - text: En savoir plus
+            - generic [ref=f69e699]:
+              - figure [ref=f69e702]
+              - heading [level=3] [ref=f69e705]: Trevium by S4BT et Pliant lancent une nouvelle génération de paiements pour les déplacements professionnels, au service de la performance des équipes Finance
+              - paragraph [ref=f69e709]: Pour les entreprises, le défi de la gestion des déplacements professionnels ne se limite plus à l’exécution des paiements. Il réside désormais dans leur traitement fluide, fiable et automatisé par les équipes Finance.
+              - link [ref=f69e712] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/trevium-by-s4bt-et-pliant-lancent-une-nouvelle-generation-de-paiements-pour-les-deplacements-professionnels/
+                - text: En savoir plus
+            - generic [ref=f69e717]:
+              - figure [ref=f69e720]
+              - heading [level=3] [ref=f69e723]: "Facturation électronique : pourquoi il est temps de passer de l'information à l'action"
+              - paragraph [ref=f69e727]:
+                - text: À l’occasion de notre webinaire organisé avec l’
+                - strong [ref=f69e728]: UGAP
+                - text: ","
+                - strong [ref=f69e729]: Vairon Voyages Selectour
+                - text: ","
+                - strong [ref=f69e730]: Cegid
+                - text: ","
+                - strong [ref=f69e731]: Goelett
+                - text: et
+                - strong [ref=f69e732]: CDS
+                - text: ", plusieurs experts ont partagé leur vision de cette réforme majeure, répondu aux nombreuses questions des entreprises et apporté des recommandations concrètes pour réussir cette transition."
+              - link [ref=f69e735] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds/facturation-electronique-pourquoi-il-est-temps-de-passer-de-linformation-a-laction/
+                - text: En savoir plus
+            - generic [ref=f69e740]:
+              - figure [ref=f69e743]
+              - heading [level=3] [ref=f69e746]: Rapport de Durabilité 2026
+              - paragraph [ref=f69e750]: Découvrez notre Rapport de Durabilité, reflet des engagements et des actions concrètes que nous menons chaque jour pour construire un avenir plus responsable.
+              - link [ref=f69e753] [cursor=pointer]:
+                - /url: ""
+                - text: En savoir plus
+            - generic [ref=f69e758]:
+              - figure [ref=f69e761]
+              - heading [level=3] [ref=f69e764]: CDS propulse le Business Travel à l’ère des assistants IA
+              - paragraph [ref=f69e768]: CDS devient l’une des premières plateformes mondiales de Business Travel à connecter ses services à l’écosystème mondial de l’intelligence artificielle, de ChatGPT et Claude aux agents IA d’entreprise.
+              - link [ref=f69e771] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/cds-propulse-le-business-travel-a-lere-des-assistants-ia/
+                - text: En savoir plus
+            - generic [ref=f69e776]:
+              - figure [ref=f69e779]
+              - heading [level=3] [ref=f69e782]: S4BT s’associe à SQUAKE pour structurer et déployer une stratégie globale de reporting et de décarbonation des voyages d’affaires
+              - paragraph [ref=f69e786]: S4BT et SQUAKE annoncent aujourd’hui un partenariat stratégique visant à accompagner les clients de S4BT dans le pilotage, le reporting et la réduction des émissions de CO₂ liées à l’ensemble de leurs programmes de voyages d’affaires.
+              - link [ref=f69e789] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-sassocie-a-squake-pour-structurer-et-deployer-une-strategie-globale-de-reporting-et-de-decarbonation-des-voyages-daffaires/
+                - text: En savoir plus
+            - generic [ref=f69e794]:
+              - figure [ref=f69e797]
+              - heading [level=3] [ref=f69e800]: S4BT acquiert HotelHub et devient un acteur de référence mondiale du business travel
+              - paragraph [ref=f69e804]: S4BT – Solutions for Business Travel, groupe européen réunissant CDS, Goelett, CRC, TMS, SIAP, Methodica et Trevium, élargit son empreinte et devient la plus grande plateforme mondiale de réservation hôtelière corporate grâce à l’acquisition de Travel Centric Technology, société mère londonienne d’HotelHub
+              - link [ref=f69e807] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-acquiert-hotelhub-et-devient-un-acteur-de-reference-mondiale-du-business-travel/
+                - text: En savoir plus
+            - generic [ref=f69e812]:
+              - figure [ref=f69e815]
+              - heading [level=3] [ref=f69e818]: S4BT rejoint l’Alliance France Tourisme
+              - paragraph [ref=f69e822]: "À l’occasion de son assemblée générale, l’Alliance France Tourisme a annoncé l’adhésion de trois nouveaux groupes majeurs du secteur du tourisme : AIR FRANCE, COMEXPOSIUM ET S4BT."
+              - link [ref=f69e825] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/air-france-comexposium-et-s4bt-rejoignent-lalliance-france-tourisme/
+                - text: En savoir plus
+            - generic [ref=f69e830]:
+              - figure [ref=f69e833]
+              - heading [level=3] [ref=f69e836]: S4BT poursuit sa dynamique d’innovation avec la création de Trevium
+              - paragraph [ref=f69e840]: Trevium remplace les outils financiers hérités et déconnectés utilisés dans le domaine des voyages d’affaires par une infrastructure financière unique.
+              - link [ref=f69e843] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-poursuit-sa-dynamique-dinnovation-avec-la-creation-de-trevium-une-solution-financiere-innovante-dediee-aux-deplacements-professionnels/
+                - text: En savoir plus
+            - generic [ref=f69e848]:
+              - figure [ref=f69e851]
+              - heading [level=3] [ref=f69e854]: Olivier Mouchet prend la direction de la Division Hotel Procurement & Chain Supply de S4BT
+              - paragraph [ref=f69e858]: S4BT – Solutions for Business Travel annonce la nomination d’Olivier Mouchet à la tête de sa Division Hotel Procurement & Chain Supply, en succession de Nicolas Besse.
+              - link [ref=f69e861] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/olivier-mouchet-prend-la-direction-de-la-division-hotel-procurement-chain-supply-de-s4bt-solutions-for-business-travel/
+                - text: En savoir plus
+            - generic [ref=f69e866]:
+              - figure [ref=f69e869]
+              - heading [level=3] [ref=f69e872]: "Le voyage d’affaires à l’heure de la durabilité : un engagement de CDS"
+              - paragraph [ref=f69e876]: Dans un monde en quête d’équilibre entre mobilité et impact environnemental, CDS franchit une étape décisive avec la publication de son premier rapport de durabilité.
+              - link [ref=f69e879] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds/rapport-de-durabilite-2024/
+                - text: En savoir plus
+            - generic [ref=f69e884]:
+              - figure [ref=f69e887]
+              - heading [level=3] [ref=f69e890]: Une étape structurante, et le début d’une nouvelle phase
+              - paragraph [ref=f69e894]: Le lancement de S4BT marque une nouvelle phase de développement, avec d’autres projets d’acquisition déjà à l’étude pour renforcer la présence globale du groupe.
+              - link [ref=f69e897] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/s4bt-solutions-for-business-travel/
+                - text: En savoir plus
+            - generic [ref=f69e902]:
+              - figure [ref=f69e905]
+              - heading [level=3] [ref=f69e908]: CDS Groupe devient Ami de la GBTA Foundation
+              - paragraph [ref=f69e912]:
+                - strong [ref=f69e913]: CDS est fier de devenir Ami de la Fondation GBTA
+                - text: ", un engagement qui traduit notre volonté d’accompagner activement les évolutions du voyage d’affaires, en France comme à l’international."
+              - link [ref=f69e916] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds/cds-devient-ami-de-la-gbta-foundation/
+                - text: En savoir plus
+            - generic [ref=f69e921]:
+              - figure [ref=f69e924]
+              - heading [level=3] [ref=f69e927]: Christopher Hecht rejoint le groupe CDS (S4BT) pour accélérer l'innovation et la transformation des paiements dans le voyage d'affaires
+              - paragraph [ref=f69e931]: Le groupe CDS (S4BT) leader en France et acteur clé en Europe des solutions de réservation et de paiement pour le voyage d’affaires, annonce l’arrivée de Christopher Hecht au sein du groupe.
+              - link [ref=f69e934] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/christopher-hecht-rejoint-le-groupe-cds-s4bt-pour-accelerer-linnovation-et-la-transformation-des-paiements-dans-le-voyage-daffaires/
+                - text: En savoir plus
+            - generic [ref=f69e939]:
+              - figure [ref=f69e942]
+              - heading [level=3] [ref=f69e945]: Andera Partners investit aux côtés du fondateur et des actionnaires historiques du Groupe CDS
+              - paragraph [ref=f69e949]:
+                - text: Accompagné depuis 2020 par l’IDI, le Groupe CDS, acteur majeur européen offrant à ses clients
+                - emphasis [ref=f69e950]: corporate
+                - text: et agences de voyages des solutions pour les voyages d’affaires, accueille à son capital Andera Partners. Cette réorganisation du capital du groupe permet à Ziad Minkara de reprendre la majorité des parts de la société.
+              - link [ref=f69e953] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/andera-partners-investit-aux-cotes-du-fondateur-et-des-actionnaires-historiques-du-groupe-cds/
+                - text: En savoir plus
+            - generic [ref=f69e958]:
+              - figure [ref=f69e961]
+              - heading [level=3] [ref=f69e964]: CDS renforce sa position de leader européen des solutions pour le voyage d’affaires grâce à l’acquisition de SIAP en Italie
+              - paragraph [ref=f69e968]: SIAP, premier fournisseur italien de solutions ERP pour les TMC, au service de plus de 1 000 clients, rejoint CDS dirigé par sa holding S4BT- Solutions for Business Travel.
+              - link [ref=f69e971] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/les-communiques-de-presse/cds-groupe-renforce-sa-position-de-leader-europeen-des-solutions-pour-le-voyage-daffaires-grace-a-lacquisition-de-siap-en-italie/
+                - text: En savoir plus
+            - generic [ref=f69e976]:
+              - figure [ref=f69e979]
+              - heading [level=3] [ref=f69e982]: "IFTM : Ce que CDS a concocté pour la rentrée des agences de voyages"
+              - paragraph [ref=f69e986]: Performance outil, efficacité, productivité… Trois objectifs qui sous-tendent les missions d’Hugo Vicherat arrivé depuis bientôt deux ans chez CDS.
+              - link [ref=f69e989] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/iftm-ce-que-cds-groupe-a-concocte-pour-la-rentree-des-agences-de-voyages/
+                - text: En savoir plus
+            - generic [ref=f69e994]:
+              - figure [ref=f69e997]
+              - heading [level=3] [ref=f69e1000]: CDS étend son partenariat avec Amadeus à la suite de son expansion en Europe
+              - paragraph [ref=f69e1004]: CDS, Goelett et Corporate Rates Club (CRC) accéderont au vaste contenu hôtelier d’Amadeus.
+              - link [ref=f69e1007] [cursor=pointer]:
+                - /url: https://www.cdsgroupe.com/lactualite-de-cds-groupe/cds-groupe-etend-son-partenariat-avec-amadeus-a-la-suite-de-son-expansion-en-europe/
+                - text: En savoir plus
+            - generic [ref=f69e1012]:
+              - figure [ref=f69e1015]
+              - heading [level=3] [ref=f69e1018]: CDS intègre avec succès la dernière version de l’API Booking.com
+              - paragraph [ref=f69e1022]: Paris, avril 2024 – CDS, la marketplace de l’hôtellerie d’affaires intègre la dernière version de l’API de Booking.com (version 3.1).
+              - link [ref=f69e1025] [cursor=pointer]:
+                - /url: /les-communiques-de-presse/cds-groupe-integre-avec-succes-la-derniere-version-de-lapi-booking-com/
+                - text: En savoir plus
+            - generic [ref=f69e1030]:
+              - figure [ref=f69e1033]
+              - heading [level=3] [ref=f69e1036]: CDS renforce son partenariat avec CYTRIC
+              - paragraph [ref=f69e1040]: CDS et Amadeus renforcent leur partenariat pour le bénéfice des entreprises et des TMC en intégrant la solution CDS et ses services associés au sein de l’outil en ligne de réservation et de gestion des déplacements Cytric by Amadeus.
+              - link [ref=f69e1043] [cursor=pointer]:
+                - /url: /les-communiques-de-presse/cds-groupe-renforce-son-partenariat-avec-cytric/
+                - text: En savoir plus
+          - tablist [ref=f69e1044]:
+            - generic [ref=f69e1045] [cursor=pointer]: 
+            - generic [ref=f69e1046] [cursor=pointer]: 
+            - generic [ref=f69e1047] [cursor=pointer]: 
+            - generic [ref=f69e1048] [cursor=pointer]: 
+            - generic [ref=f69e1049] [cursor=pointer]: 
+            - generic [ref=f69e1050] [cursor=pointer]: 
+            - generic [ref=f69e1051] [cursor=pointer]: 
+            - generic [ref=f69e1052] [cursor=pointer]: 
+            - generic [ref=f69e1053] [cursor=pointer]: 
+            - generic [ref=f69e1054] [cursor=pointer]: 
+            - generic [ref=f69e1055] [cursor=pointer]: 
+            - generic [ref=f69e1056] [cursor=pointer]: 
+            - generic [ref=f69e1057] [cursor=pointer]: 
+            - generic [ref=f69e1058] [cursor=pointer]: 
+            - generic [ref=f69e1059] [cursor=pointer]: 
+            - generic [ref=f69e1060] [cursor=pointer]: 
+            - generic [ref=f69e1061] [cursor=pointer]: 
+            - generic [ref=f69e1062] [cursor=pointer]: 
+            - generic [ref=f69e1063] [cursor=pointer]: 
+      - generic [ref=f69e1067]:
+        - heading "Demandez une démonstration personnalisée !" [level=2] [ref=f69e1068]
+        - paragraph [ref=f69e1071]: Découvrez comment nos solutions peuvent vous accompagner et améliorer vos déplacements professionnels. Contactez nos experts pour en savoir plus !
+        - link "CONTACTEZ-NOUS" [ref=f69e1073] [cursor=pointer]:
+          - /url: /contact/
+      - generic [ref=f69e1077]:
+        - generic [ref=f69e1078]:
+          - generic [ref=f69e1081]:
+            - heading "Les cahiers du voyage d’affaires" [level=2] [ref=f69e1082]
+            - generic [ref=f69e1084]:
+              - paragraph [ref=f69e1085]: Juin 2026
+              - paragraph [ref=f69e1086]:
+                - strong [ref=f69e1087]: "Facturation électronique : Entre contrainte réglementaire et levier de productivité"
+              - paragraph [ref=f69e1088]: Pour la 6e année consécutive, le Grand Live du Voyage d’Affaires, organisé par CDS en partenariat avec l’IFTM, a réuni les acteurs clés du voyage d’affaires.
+              - paragraph [ref=f69e1089]:
+                - link "Lire la suite" [ref=f69e1090] [cursor=pointer]:
+                  - /url: https://www.cdsgroupe.com/les-cahiers-du-voyage-daffaires/facturation-electronique-entre-contrainte-reglementaire-et-levier-de-productivite/
+          - figure [ref=f69e1095]
+        - link "Découvrez tous nos cahiers" [ref=f69e1098] [cursor=pointer]:
+          - /url: https://www.cdsgroupe.com/les-cahiers-du-voyage-daffaires/
+    - contentinfo [ref=f69e1099]:
+      - generic [ref=f69e1103]:
+        - img "CDS" [ref=f69e1104]
+        - img "Goelett" [ref=f69e1105]
+        - img "CRC" [ref=f69e1106]
+        - img "TMS" [ref=f69e1107]
+        - img "SIAP" [ref=f69e1108]
+        - img "Methodica" [ref=f69e1109]
+        - img "Trevium" [ref=f69e1110]
+        - img "HotelHub" [ref=f69e1111]
+      - generic [ref=f69e1113]:
+        - complementary [ref=f69e1115]
+        - complementary [ref=f69e1117]:
+          - list [ref=f69e1118]:
+            - listitem [ref=f69e1119]:
+              - link "Qui sommes-nous ?" [ref=f69e1120] [cursor=pointer]:
+                - /url: /qui-sommes-nous
+            - listitem [ref=f69e1121]:
+              - link "Nos solutions" [ref=f69e1122] [cursor=pointer]:
+                - /url: /nos-solutions
+            - listitem [ref=f69e1123]:
+              - link "La rédaction" [ref=f69e1124] [cursor=pointer]:
+                - /url: /la-redaction/
+            - listitem [ref=f69e1125]:
+              - link "HBTtv" [ref=f69e1126] [cursor=pointer]:
+                - /url: /le-replay/
+        - complementary [ref=f69e1128]:
+          - heading "Nous trouver" [level=4] [ref=f69e1129]
+          - list [ref=f69e1130]:
+            - listitem [ref=f69e1131]: Allemagne
+            - listitem [ref=f69e1132]: Croatie
+            - listitem [ref=f69e1133]: France
+            - listitem [ref=f69e1134]: Italy
+            - listitem [ref=f69e1135]: Pologne
+        - generic [ref=f69e1136]:
+          - complementary [ref=f69e1137]:
+            - heading "Inscrivez-vous à la newslettter" [level=4] [ref=f69e1138]
+          - complementary [ref=f69e1139]:
+            - group "Subscription Form FR" [ref=f69e1143]:
+              - generic [ref=f69e1144]:
+                - textbox "Inscrivez-vous à notre newsletter Business Travel" [ref=f69e1148]:
+                  - /placeholder: Votre adresse email
+                - button "Je m'inscris" [ref=f69e1151] [cursor=pointer]
+          - complementary [ref=f69e1152]:
+            - link [ref=f69e1153] [cursor=pointer]:
+              - /url: https://sforbt.com/
+      - generic [ref=f69e1156]:
+        - generic [ref=f69e1158]:
+          - link "Mentions légales" [ref=f69e1159] [cursor=pointer]:
+            - /url: /mentions-legales
+          - link "Politique de confidentialité" [ref=f69e1160] [cursor=pointer]:
+            - /url: /politique-de-confidentialite
+          - generic [ref=f69e1161]:
+            - text: Réalisation par
+            - link "ADMAKER" [ref=f69e1162] [cursor=pointer]:
+              - /url: https://admaker.fr/
+        - list
+  - generic [ref=f69e1163]:
+    - link "" [ref=f69e1165] [cursor=pointer]:
+      - /url: "#"
+    - link "Fr " [ref=f69e1169] [cursor=pointer]:
+      - /url: "#"
+      - img "Fr" [ref=f69e1170]
+      - generic [ref=f69e1171]: 
+    - list
+  - link "" [ref=f69e1172] [cursor=pointer]:
+    - /url: ""
+  - iframe [ref=f69e1176]:
+    - generic [ref=f70e6]:
+      - text: protected by
+      - strong [ref=f70e7]: reCAPTCHA

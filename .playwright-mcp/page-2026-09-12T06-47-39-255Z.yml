@@ -1,0 +1,197 @@
+- generic [ref=f36e2]:
+  - generic [ref=f36e3]:
+    - link "DuckDuckGo" [ref=f36e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f36e5]:
+      - generic [ref=f36e6]:
+        - textbox [ref=f36e7]: linkedin test
+        - button "Submit" [ref=f36e8] [cursor=pointer]
+      - combobox [ref=f36e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f36e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f36e15]:
+    - generic [ref=f36e17]:
+      - heading [level=2] [ref=f36e18]:
+        - link "LinkedIn Skill Assessments" [ref=f36e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fhelp%2Flinkedin%2Fanswer%2Fa507663%2Flinkedin%2Dskill%2Dassessments%3Flang%3Den&rut=b3c6fe9205d9442249a91b374d7ad5ebebdafab145dd29e46593a14f86ece658
+      - generic [ref=f36e21]:
+        - link [ref=f36e23] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fhelp%2Flinkedin%2Fanswer%2Fa507663%2Flinkedin%2Dskill%2Dassessments%3Flang%3Den&rut=b3c6fe9205d9442249a91b374d7ad5ebebdafab145dd29e46593a14f86ece658
+        - link "www.linkedin.com/help/linkedin/answer/a507663/linkedin-skill-assessments?lang=en" [ref=f36e24] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fhelp%2Flinkedin%2Fanswer%2Fa507663%2Flinkedin%2Dskill%2Dassessments%3Flang%3Den&rut=b3c6fe9205d9442249a91b374d7ad5ebebdafab145dd29e46593a14f86ece658
+      - link "Learn how to demonstrate your skills on LinkedIn by completing assessments produced by experts and leaders. Find out how to get skill badges, display them on your profile, and access related courses and opportunities." [ref=f36e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fhelp%2Flinkedin%2Fanswer%2Fa507663%2Flinkedin%2Dskill%2Dassessments%3Flang%3Den&rut=b3c6fe9205d9442249a91b374d7ad5ebebdafab145dd29e46593a14f86ece658
+    - generic [ref=f36e27]:
+      - heading [level=2] [ref=f36e28]:
+        - link "How to Take LinkedIn Skill Assessments to Boost Your Profile" [ref=f36e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fhow%2Dtake%2Dlinkedin%2Dskill%2Dassessments%2Dboost%2Dyour%2Dprofile%2Djoshua%2Db%2Dlee&rut=b7232cc73b34e0a51021ec0b4d01078c80053e673c3e50571e259dea83267482
+      - generic [ref=f36e31]:
+        - link [ref=f36e33] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fhow%2Dtake%2Dlinkedin%2Dskill%2Dassessments%2Dboost%2Dyour%2Dprofile%2Djoshua%2Db%2Dlee&rut=b7232cc73b34e0a51021ec0b4d01078c80053e673c3e50571e259dea83267482
+        - link "www.linkedin.com/pulse/how-take-linkedin-skill-assessments-boost-your-profile-joshua-b-lee" [ref=f36e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fhow%2Dtake%2Dlinkedin%2Dskill%2Dassessments%2Dboost%2Dyour%2Dprofile%2Djoshua%2Db%2Dlee&rut=b7232cc73b34e0a51021ec0b4d01078c80053e673c3e50571e259dea83267482
+      - link "What Are LinkedIn Skill Assessments? On your LinkedIn profile, the Skills section allows you to write out your best soft or hard skill sets." [ref=f36e35] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fhow%2Dtake%2Dlinkedin%2Dskill%2Dassessments%2Dboost%2Dyour%2Dprofile%2Djoshua%2Db%2Dlee&rut=b7232cc73b34e0a51021ec0b4d01078c80053e673c3e50571e259dea83267482
+    - generic [ref=f36e37]:
+      - heading [level=2] [ref=f36e38]:
+        - link "How to take skill assessment on LinkedIn? - clrn.org" [ref=f36e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.clrn.org%2Fhow%2Dto%2Dtake%2Dskill%2Dassessment%2Don%2Dlinkedin%2F&rut=ac6afa4137de0501f67a8e9a9aee4548cf80dadceabe3e5dd3224c2595863ce4
+      - generic [ref=f36e41]:
+        - link [ref=f36e43] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.clrn.org%2Fhow%2Dto%2Dtake%2Dskill%2Dassessment%2Don%2Dlinkedin%2F&rut=ac6afa4137de0501f67a8e9a9aee4548cf80dadceabe3e5dd3224c2595863ce4
+        - link "www.clrn.org/how-to-take-skill-assessment-on-linkedin/" [ref=f36e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.clrn.org%2Fhow%2Dto%2Dtake%2Dskill%2Dassessment%2Don%2Dlinkedin%2F&rut=ac6afa4137de0501f67a8e9a9aee4548cf80dadceabe3e5dd3224c2595863ce4
+        - text: 2025-07-02T00:00:00.0000000
+      - link "LinkedIn Skill Assessments provide a mechanism for professionals to validate their proficiency in various technical and soft skills. These assessments, rigorously developed and peer-reviewed, offer a standardized method for demonstrating expertise to potential employers, collaborators, and the broader professional network. This article provides a comprehensive guide on leveraging LinkedIn ..." [ref=f36e45] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.clrn.org%2Fhow%2Dto%2Dtake%2Dskill%2Dassessment%2Don%2Dlinkedin%2F&rut=ac6afa4137de0501f67a8e9a9aee4548cf80dadceabe3e5dd3224c2595863ce4
+    - generic [ref=f36e47]:
+      - heading [level=2] [ref=f36e48]:
+        - link "Everything You Need To Know About LinkedIn Skill Assessment" [ref=f36e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fleaddelta.com%2Fblog%2Flinkedin%2Dskill%2Dassessment&rut=527d488884b1dc51d107bce6226ce152fb653f92e538b4afa1d074518a5b22f0
+      - generic [ref=f36e51]:
+        - link [ref=f36e53] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fleaddelta.com%2Fblog%2Flinkedin%2Dskill%2Dassessment&rut=527d488884b1dc51d107bce6226ce152fb653f92e538b4afa1d074518a5b22f0
+        - link "leaddelta.com/blog/linkedin-skill-assessment" [ref=f36e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fleaddelta.com%2Fblog%2Flinkedin%2Dskill%2Dassessment&rut=527d488884b1dc51d107bce6226ce152fb653f92e538b4afa1d074518a5b22f0
+      - link "Learn what are LinkedIn skill assessments, how to take and pass them, and how they affect your LinkedIn profile." [ref=f36e55] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fleaddelta.com%2Fblog%2Flinkedin%2Dskill%2Dassessment&rut=527d488884b1dc51d107bce6226ce152fb653f92e538b4afa1d074518a5b22f0
+    - generic [ref=f36e57]:
+      - heading [level=2] [ref=f36e58]:
+        - 'link "LinkedIn Skills Assessment Test: Prepare & Succeed!" [ref=f36e59] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dskills%2Dassessment%2Dtest&rut=03b7db6198c065b6aa76dfd8f1833026c7bd7bc2915269ec61c743e898468b6d
+      - generic [ref=f36e61]:
+        - link [ref=f36e63] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dskills%2Dassessment%2Dtest&rut=03b7db6198c065b6aa76dfd8f1833026c7bd7bc2915269ec61c743e898468b6d
+        - link "www.proprofs.com/quiz-school/quizzes/linkedin-skills-assessment-test" [ref=f36e64] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dskills%2Dassessment%2Dtest&rut=03b7db6198c065b6aa76dfd8f1833026c7bd7bc2915269ec61c743e898468b6d
+        - text: 2025-06-03T00:00:00.0000000
+      - link "Get ready to succeed in the LinkedIn Skills Assessment test with our in-depth practice quiz! Designed to help you evaluate and improve your skills across a variety of subjects, this quiz covers essential topics commonly featured in LinkedIn's skills assessments. If you're focused on technical, analytical, or professional skills, this quiz will help you assess your strengths and identify areas ..." [ref=f36e65] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dskills%2Dassessment%2Dtest&rut=03b7db6198c065b6aa76dfd8f1833026c7bd7bc2915269ec61c743e898468b6d
+    - generic [ref=f36e67]:
+      - heading [level=2] [ref=f36e68]:
+        - link "How To Take & Pass Skill Assessment On LinkedIn - YouTube" [ref=f36e69] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D54PZmu87WtY&rut=d0b9878429500d21d7972cf17f7a13134065de53fcaec9bdd994e764c646ec16
+      - generic [ref=f36e71]:
+        - link [ref=f36e73] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D54PZmu87WtY&rut=d0b9878429500d21d7972cf17f7a13134065de53fcaec9bdd994e764c646ec16
+        - link "www.youtube.com/watch?v=54PZmu87WtY" [ref=f36e74] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D54PZmu87WtY&rut=d0b9878429500d21d7972cf17f7a13134065de53fcaec9bdd994e764c646ec16
+        - text: 2025-07-10T00:00:00.0000000
+      - link "How To Take & Pass Skill Assessment on LinkedIn (2025 GUIDE) 🎯📘 | Step-by-Step Certification Boost Tutorial Want to ace LinkedIn Skill Assessments in 2025 and showcase verified badges on ..." [ref=f36e75] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D54PZmu87WtY&rut=d0b9878429500d21d7972cf17f7a13134065de53fcaec9bdd994e764c646ec16
+    - generic [ref=f36e77]:
+      - heading [level=2] [ref=f36e78]:
+        - 'link "I Took (and Passed) Four LinkedIn Assessment Tests: My Experience" [ref=f36e79] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdev.to%2Falvyynm%2Fi%2Dtook%2Dand%2Dpassed%2Dfour%2Dlinkedin%2Dassessment%2Dtests%2Dmy%2Dexperience%2D541o&rut=5335a4bd285d21e54a20792e5d0b3073c61e143a6099df8b609691fe61871cab
+      - generic [ref=f36e81]:
+        - link [ref=f36e83] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdev.to%2Falvyynm%2Fi%2Dtook%2Dand%2Dpassed%2Dfour%2Dlinkedin%2Dassessment%2Dtests%2Dmy%2Dexperience%2D541o&rut=5335a4bd285d21e54a20792e5d0b3073c61e143a6099df8b609691fe61871cab
+        - link "dev.to/alvyynm/i-took-and-passed-four-linkedin-assessment-tests-my-experience-541o" [ref=f36e84] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdev.to%2Falvyynm%2Fi%2Dtook%2Dand%2Dpassed%2Dfour%2Dlinkedin%2Dassessment%2Dtests%2Dmy%2Dexperience%2D541o&rut=5335a4bd285d21e54a20792e5d0b3073c61e143a6099df8b609691fe61871cab
+      - link "My Experience with LinkedIn Skill Assessment Tests The same day I bumped into LinkedIn Skill Assessment tests; I did four tests; HTML/CSS, Frontend web development, React.js, and JavaScript." [ref=f36e85] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdev.to%2Falvyynm%2Fi%2Dtook%2Dand%2Dpassed%2Dfour%2Dlinkedin%2Dassessment%2Dtests%2Dmy%2Dexperience%2D541o&rut=5335a4bd285d21e54a20792e5d0b3073c61e143a6099df8b609691fe61871cab
+    - generic [ref=f36e87]:
+      - heading [level=2] [ref=f36e88]:
+        - 'link "LinkedIn Assessment Test: Can You Pass? - Quiz & Trivia" [ref=f36e89] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dassessment%2Dtest&rut=90d3ac3f5bd49f030d937fa742df3cae426664e18074f6619711bce58c8bee86
+      - generic [ref=f36e91]:
+        - link [ref=f36e93] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dassessment%2Dtest&rut=90d3ac3f5bd49f030d937fa742df3cae426664e18074f6619711bce58c8bee86
+        - link "www.proprofs.com/quiz-school/quizzes/linkedin-assessment-test" [ref=f36e94] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dassessment%2Dtest&rut=90d3ac3f5bd49f030d937fa742df3cae426664e18074f6619711bce58c8bee86
+        - text: 2025-06-09T00:00:00.0000000
+      - link "Looking to ace the LinkedIn assessment test? Our expertly crafted quiz is designed to help you assess your skills and prepare for the test with confidence. If you're aiming for a new job or looking to improve your LinkedIn profile, this quiz covers key areas tested in the LinkedIn assessments. With questions designed to challenge your knowledge, enhance your problem-solving abilities, and ..." [ref=f36e95] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.proprofs.com%2Fquiz%2Dschool%2Fquizzes%2Flinkedin%2Dassessment%2Dtest&rut=90d3ac3f5bd49f030d937fa742df3cae426664e18074f6619711bce58c8bee86
+    - generic [ref=f36e97]:
+      - heading [level=2] [ref=f36e98]:
+        - link "Linkedin Skill Assessment Answers - Geektonight" [ref=f36e99] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.geektonight.com%2Flinkedin%2Dskill%2Dassessment%2Danswers%2F&rut=dfbe79a0bbbdf1419b2b3fb485e3d2b9e90cc96a7a1d01543af845cf878288f1
+      - generic [ref=f36e101]:
+        - link [ref=f36e103] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.geektonight.com%2Flinkedin%2Dskill%2Dassessment%2Danswers%2F&rut=dfbe79a0bbbdf1419b2b3fb485e3d2b9e90cc96a7a1d01543af845cf878288f1
+        - link "www.geektonight.com/linkedin-skill-assessment-answers/" [ref=f36e104] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.geektonight.com%2Flinkedin%2Dskill%2Dassessment%2Danswers%2F&rut=dfbe79a0bbbdf1419b2b3fb485e3d2b9e90cc96a7a1d01543af845cf878288f1
+      - link "Here, We see all LinkedIn Skill Assessment Answers and a list of all available skill assessments on LinkedIn." [ref=f36e105] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.geektonight.com%2Flinkedin%2Dskill%2Dassessment%2Danswers%2F&rut=dfbe79a0bbbdf1419b2b3fb485e3d2b9e90cc96a7a1d01543af845cf878288f1
+    - generic [ref=f36e107]:
+      - heading [level=2] [ref=f36e108]:
+        - link "LinkedIn Text Formatter - Typegrow" [ref=f36e109] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ftypegrow.com%2Ftools%2Flinkedin%2Dtext%2Dformatter&rut=3b7524ebd240410bf4c03aa3a8fa405bc4ea774297dd496a3db8dbd98491d8fc
+      - generic [ref=f36e111]:
+        - link [ref=f36e113] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ftypegrow.com%2Ftools%2Flinkedin%2Dtext%2Dformatter&rut=3b7524ebd240410bf4c03aa3a8fa405bc4ea774297dd496a3db8dbd98491d8fc
+        - link "typegrow.com/tools/linkedin-text-formatter" [ref=f36e114] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ftypegrow.com%2Ftools%2Flinkedin%2Dtext%2Dformatter&rut=3b7524ebd240410bf4c03aa3a8fa405bc4ea774297dd496a3db8dbd98491d8fc
+      - link "Easily format the text of your LinkedIn post with bold, italic, underlined, or other text styles. Online, free, and no registration required." [ref=f36e115] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ftypegrow.com%2Ftools%2Flinkedin%2Dtext%2Dformatter&rut=3b7524ebd240410bf4c03aa3a8fa405bc4ea774297dd496a3db8dbd98491d8fc
+    - button "Next" [ref=f36e118] [cursor=pointer]
+    - link "Feedback" [ref=f36e120] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

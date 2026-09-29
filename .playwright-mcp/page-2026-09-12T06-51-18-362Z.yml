@@ -1,0 +1,204 @@
+- generic [ref=f34e2]:
+  - generic [ref=f34e3]:
+    - link "DuckDuckGo" [ref=f34e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f34e5]:
+      - generic [ref=f34e6]:
+        - textbox [ref=f34e7]: t
+        - button "Submit" [ref=f34e8] [cursor=pointer]
+      - combobox [ref=f34e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f34e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f34e14]:
+    - heading [level=1] [ref=f34e15]:
+      - link "T" [ref=f34e16] [cursor=pointer]:
+        - /url: https://en.wikipedia.org/wiki/T
+    - generic [ref=f34e17]:
+      - link:
+        - /url: https://en.wikipedia.org/wiki/T
+      - text: T is the twentieth letter of the Latin alphabet, used in the modern English alphabet, the alphabets of other western European languages and others worldwide. Its name in English is tee, plural tees. It is derived from the Semitic Taw 𐤕 of the Phoenician and Paleo-Hebrew script via the Greek letter τ. In English, it is most commonly used to represent the voiceless alveolar plosive, a sound it also denotes in the International Phonetic Alphabet.
+      - link "More at Wikipedia" [ref=f34e18] [cursor=pointer]:
+        - /url: https://en.wikipedia.org/wiki/T
+  - generic [ref=f34e21]:
+    - generic [ref=f34e23]:
+      - heading [level=2] [ref=f34e24]:
+        - link "TikTok - Make Your Day" [ref=f34e25] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ft.tiktok.com%2F&rut=b16984504a2cee557c977b7fe290002c34ce15c5cd188db885c0c94d6ef78211
+      - generic [ref=f34e27]:
+        - link [ref=f34e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ft.tiktok.com%2F&rut=b16984504a2cee557c977b7fe290002c34ce15c5cd188db885c0c94d6ef78211
+        - link "t.tiktok.com" [ref=f34e30] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ft.tiktok.com%2F&rut=b16984504a2cee557c977b7fe290002c34ce15c5cd188db885c0c94d6ef78211
+      - link "TikTok - trends start here. On a device or on the web, viewers can watch and discover millions of personalized short videos. Download the app to get started." [ref=f34e31] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ft.tiktok.com%2F&rut=b16984504a2cee557c977b7fe290002c34ce15c5cd188db885c0c94d6ef78211
+    - generic [ref=f34e33]:
+      - heading [level=2] [ref=f34e34]:
+        - link "T - Wikipedia" [ref=f34e35] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FT&rut=fcde0cb3e27239b79b5b78e0e2c9addc7f596e5d84c21a36d615e5c960f47573
+      - generic [ref=f34e37]:
+        - link [ref=f34e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FT&rut=fcde0cb3e27239b79b5b78e0e2c9addc7f596e5d84c21a36d615e5c960f47573
+        - link "en.wikipedia.org/wiki/T" [ref=f34e40] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FT&rut=fcde0cb3e27239b79b5b78e0e2c9addc7f596e5d84c21a36d615e5c960f47573
+      - 'link "T (minuscule: t) is the twentieth letter of the Latin alphabet, used in the modern English alphabet, the alphabets of other western European languages and others worldwide. Its name in English is tee (pronounced / ˈtiː / ⓘ), plural tees. [1] It is derived from the Semitic Taw 𐤕 of the Phoenician and Paleo-Hebrew script (Aramaic and Hebrew Taw ת/𐡕/, Syriac Taw ܬ, and Arabic ت Tāʼ ..." [ref=f34e41] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FT&rut=fcde0cb3e27239b79b5b78e0e2c9addc7f596e5d84c21a36d615e5c960f47573
+    - generic [ref=f34e43]:
+      - heading [level=2] [ref=f34e44]:
+        - link "t' - Wiktionary, the free dictionary" [ref=f34e45] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Ft%2527&rut=2e55c0d27a4c78bf0fe22d78e0409b418b62a7da2826990c85f95b908c4a1b5c
+      - generic [ref=f34e47]:
+        - link [ref=f34e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Ft%2527&rut=2e55c0d27a4c78bf0fe22d78e0409b418b62a7da2826990c85f95b908c4a1b5c
+        - link "en.wiktionary.org/wiki/t'" [ref=f34e50] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Ft%2527&rut=2e55c0d27a4c78bf0fe22d78e0409b418b62a7da2826990c85f95b908c4a1b5c
+        - text: 2026-09-12T00:00:00.0000000
+      - 'link "t'' is sometimes not pronounced at all, having no glottal stop, resulting in a slight pause or lengthening of the preceding sound. This still remains distinct from the form without a definite article: compare in t'' woods [ɪnː ˈwʊdz] with in woods [ɪn ˈwʊdz]." [ref=f34e51] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Ft%2527&rut=2e55c0d27a4c78bf0fe22d78e0409b418b62a7da2826990c85f95b908c4a1b5c
+    - generic [ref=f34e53]:
+      - heading [level=2] [ref=f34e54]:
+        - link "T-Mobile® Official Site | Best 5G Network & Unlimited Data Plans" [ref=f34e55] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.t%2Dmobile.com%2F&rut=f21f002a62cfa1414d3cb53782c5c93afd10d5d5dde50be9cfa723caa4d332b6
+      - generic [ref=f34e57]:
+        - link [ref=f34e59] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.t%2Dmobile.com%2F&rut=f21f002a62cfa1414d3cb53782c5c93afd10d5d5dde50be9cfa723caa4d332b6
+        - link "www.t-mobile.com" [ref=f34e60] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.t%2Dmobile.com%2F&rut=f21f002a62cfa1414d3cb53782c5c93afd10d5d5dde50be9cfa723caa4d332b6
+      - link "Discover America's Best Network with T-Mobile! Get unbeatable deals, unlimited 5G plans, and T-Satellite coverage that keeps you connected while saving big." [ref=f34e61] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.t%2Dmobile.com%2F&rut=f21f002a62cfa1414d3cb53782c5c93afd10d5d5dde50be9cfa723caa4d332b6
+    - generic [ref=f34e63]:
+      - heading [level=2] [ref=f34e64]:
+        - 'link "Wireless Plans: Our Most Affordable Cell Phone Plans | AT&T" [ref=f34e65] [cursor=pointer]':
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2Fplans%2Fwireless%2F&rut=599f8470a81663a7e668658ea52ed0280f7e66767db0a367ccf73f337bc0aa36
+      - generic [ref=f34e67]:
+        - link [ref=f34e69] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2Fplans%2Fwireless%2F&rut=599f8470a81663a7e668658ea52ed0280f7e66767db0a367ccf73f337bc0aa36
+        - link "www.att.com/plans/wireless/" [ref=f34e70] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2Fplans%2Fwireless%2F&rut=599f8470a81663a7e668658ea52ed0280f7e66767db0a367ccf73f337bc0aa36
+      - link "Explore AT&T wireless plans, including unlimited data and 5G options. Compare features and find the right plan for your needs—shop and sign up online." [ref=f34e71] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2Fplans%2Fwireless%2F&rut=599f8470a81663a7e668658ea52ed0280f7e66767db0a367ccf73f337bc0aa36
+    - generic [ref=f34e73]:
+      - heading [level=2] [ref=f34e74]:
+        - link "Investor Relations | AT&T" [ref=f34e75] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finvestors.att.com%2F&rut=0ec52d841767c538fd6a5746bb54269897122d8de23bceb2f8f8ccdef09c2f41
+      - generic [ref=f34e77]:
+        - link [ref=f34e79] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finvestors.att.com%2F&rut=0ec52d841767c538fd6a5746bb54269897122d8de23bceb2f8f8ccdef09c2f41
+        - link "investors.att.com" [ref=f34e80] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finvestors.att.com%2F&rut=0ec52d841767c538fd6a5746bb54269897122d8de23bceb2f8f8ccdef09c2f41
+      - 'link "AT&T Intellectual Property - Investor Relations September 3, 2026 125 Years on the New York Stock Exchange: A legacy built for the future of connectivity" [ref=f34e81] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Finvestors.att.com%2F&rut=0ec52d841767c538fd6a5746bb54269897122d8de23bceb2f8f8ccdef09c2f41
+    - generic [ref=f34e83]:
+      - heading [level=2] [ref=f34e84]:
+        - link "T Stock Quote Price and Forecast | CNN" [ref=f34e85] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cnn.com%2Fmarkets%2Fstocks%2FT&rut=63eef4caaca714edd752f8f2a8090528c77849c7df38ff29089ac35542a9fbee
+      - generic [ref=f34e87]:
+        - link [ref=f34e89] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cnn.com%2Fmarkets%2Fstocks%2FT&rut=63eef4caaca714edd752f8f2a8090528c77849c7df38ff29089ac35542a9fbee
+        - link "www.cnn.com/markets/stocks/T" [ref=f34e90] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cnn.com%2Fmarkets%2Fstocks%2FT&rut=63eef4caaca714edd752f8f2a8090528c77849c7df38ff29089ac35542a9fbee
+      - link "View AT&T Inc T stock quote prices, financial information, real-time forecasts, and company news from CNN." [ref=f34e91] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.cnn.com%2Fmarkets%2Fstocks%2FT&rut=63eef4caaca714edd752f8f2a8090528c77849c7df38ff29089ac35542a9fbee
+    - generic [ref=f34e93]:
+      - heading [level=2] [ref=f34e94]:
+        - link "Mens T-Shirts | Nordstrom" [ref=f34e95] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.nordstrom.com%2Fbrowse%2Fmen%2Fclothing%2Fshirts%2Ftshirts&rut=96c25b8a50f3644f2b7376181423ad2ddd78e23c77c858287e9366cf3007a455
+      - generic [ref=f34e97]:
+        - link [ref=f34e99] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.nordstrom.com%2Fbrowse%2Fmen%2Fclothing%2Fshirts%2Ftshirts&rut=96c25b8a50f3644f2b7376181423ad2ddd78e23c77c858287e9366cf3007a455
+        - link "www.nordstrom.com/browse/men/clothing/shirts/tshirts" [ref=f34e100] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.nordstrom.com%2Fbrowse%2Fmen%2Fclothing%2Fshirts%2Ftshirts&rut=96c25b8a50f3644f2b7376181423ad2ddd78e23c77c858287e9366cf3007a455
+      - link "Find a great selection of Mens T-Shirts at Nordstrom.com. Find long and short sleeved t-shirts, graphic, athletic t-shirts, and more. Shop from top brands like Nike, Vans, and more." [ref=f34e101] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.nordstrom.com%2Fbrowse%2Fmen%2Fclothing%2Fshirts%2Ftshirts&rut=96c25b8a50f3644f2b7376181423ad2ddd78e23c77c858287e9366cf3007a455
+    - generic [ref=f34e103]:
+      - heading [level=2] [ref=f34e104]:
+        - link "AT&T Official Site | Our Best Wireless & Internet Service" [ref=f34e105] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2F&rut=8fe222936e83fdb795700019ffa079040c5877aab43bc0cb45f25e30705756ad
+      - generic [ref=f34e107]:
+        - link [ref=f34e109] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2F&rut=8fe222936e83fdb795700019ffa079040c5877aab43bc0cb45f25e30705756ad
+        - link "www.att.com" [ref=f34e110] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2F&rut=8fe222936e83fdb795700019ffa079040c5877aab43bc0cb45f25e30705756ad
+      - link "Get our best deals on phones and internet, backed by the AT&T Guarantee. Shop the latest devices, get 24/7 support, and manage your account online." [ref=f34e111] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.att.com%2F&rut=8fe222936e83fdb795700019ffa079040c5877aab43bc0cb45f25e30705756ad
+    - generic [ref=f34e113]:
+      - heading [level=2] [ref=f34e114]:
+        - link "Alphabet Songs - The Letter T - YouTube" [ref=f34e115] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKlN7w90utho&rut=e14f95df08d1977b4463c164fe131c7b694211a5b6c5c8748b30685171a25787
+      - generic [ref=f34e117]:
+        - link [ref=f34e119] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKlN7w90utho&rut=e14f95df08d1977b4463c164fe131c7b694211a5b6c5c8748b30685171a25787
+        - link "www.youtube.com/watch?v=KlN7w90utho" [ref=f34e120] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKlN7w90utho&rut=e14f95df08d1977b4463c164fe131c7b694211a5b6c5c8748b30685171a25787
+      - link "Alphabet Songs - The Letter TAfter the success of our alphabet songs we have now started on videos teaching words for each letter. We're proud to present the..." [ref=f34e121] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKlN7w90utho&rut=e14f95df08d1977b4463c164fe131c7b694211a5b6c5c8748b30685171a25787
+    - button "Next" [ref=f34e124] [cursor=pointer]
+    - link "Feedback" [ref=f34e126] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

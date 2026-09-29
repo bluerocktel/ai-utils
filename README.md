@@ -50,7 +50,8 @@ Deferrals (auth failure, project lock timeout, interrupt, timeout, empty
 result) requeue to `inbox/` **unchanged** and burn **no** retry. Only a real
 FAIL verdict costs a retry.
 
-`dtask` renders this whole picture, read-only, across every runner.
+`dtask` renders this whole picture, read-only, across every runner, including
+the tasks blocked behind a dependency that failed (see Dead dependency chains).
 
 Everything above is the **pull** side: work happens only because a file is
 sitting in `inbox/`. `ai-scheduled` is the **push** side, and it feeds the same
@@ -82,7 +83,7 @@ it into `inbox/` yourself.
 | `ai-briefs` | `ai-briefs` | fan out `ai-brief` over every brief in `briefs/`. |
 | `ai-scheduled` | `ai-scheduled` | the push side: dispatch the recurring jobs in `scheduled/` that are due. |
 | `ai-agent` | `ai-agent` | read-only view of the agent layer: list, show, validate, and print the publish plan. Reads the definitions root resolved from `agents_root`. Writes nothing, so it is safe against the live tree. |
-| `dtask` | `dtask` | read-only dashboard across every runner. It owns the bare name as of 2026-08-25; see Step 3 under Cutover. |
+| `dtask` | `dtask` | read-only dashboard across every runner, including dead dependency chains. It owns the bare name as of 2026-08-25; see Step 3 under Cutover. |
 | `lib.sh` | — | shared helpers, sourced. Provider-neutral by contract. |
 | `providers/<runner>.sh` | — | the only files allowed to name a vendor. |
 
@@ -223,18 +224,20 @@ result, and either archives it to `done/`, requeues it to `inbox/`, or parks it
 in `review/`.
 
 ```sh
-ai-task                          # pick the oldest eligible inbox task for the default runner
+ai-task                          # pick the oldest eligible inbox task using its configured runner
 ai-task --runner grok            # ... acting as a specific runner
 ai-task path/to/task.md          # run one named file (skips the queue filter)
 ai-task --runner grok --dry-run  # show what would be claimed; claims nothing, launches nothing
+ai-task --unblock SLUG           # move a task out of review/ back to inbox/, resetting ## Retries
 ai-task --run FILE               # internal mode used by tmux; do not call directly
 ```
 
 ### The `--runner` flag
 
 `--runner NAME` sets the runner this invocation *acts as*. It must match a
-provider file name (`providers/NAME.sh`). Without the flag, the invocation acts
-as `default_runner` from `config`.
+provider file name (`providers/NAME.sh`). Without the flag, the picker considers
+all runners and dispatches the selected task using its own `## Runner`, falling
+back to `default_runner` only when the task does not specify one.
 
 Resolution order for the runner a task actually runs under:
 
@@ -248,12 +251,14 @@ the same tree can never collide on a session name.
 
 ### New behaviour 1: runner filtering in the picker
 
-The queue picker now selects the oldest inbox task that is unblocked **and**
-whose resolved runner matches this invocation's runner. A task belonging to
-another runner is left in the inbox untouched, never picked up and never
-silently retargeted; the "nothing runnable" report lists those separately so a
-misfiled `## Runner` is visible rather than mysterious.
+The queue picker selects the oldest unblocked inbox task whose runner is
+available. It checks provider validation, auth cooldowns, and existing tmux
+sessions against each task's runner. An unavailable runner does not prevent
+other runners' tasks from being selected.
 
+With `--runner NAME`, selection is restricted to tasks whose resolved runner
+matches NAME; other tasks stay in the inbox and are listed separately in the
+"nothing runnable" report.
 Naming a task file explicitly bypasses the filter: an explicit path is a direct
 instruction, not a queue-picking decision.
 
@@ -658,15 +663,17 @@ not.
 
 ### Acceptance criteria must be measured, not predicted
 
-An acceptance criterion naming a count, an absence or a git state is a claim
-about a repository — and `ai-brief` decomposes a brief **inside that
-repository's working directory**, so the agent writing the criterion can check
-it. `MEASURE BEFORE YOU ASSERT` requires exactly that: run the command, then
-write the criterion, and record both in a `## Criteria Baseline` section that is
-emitted just above `## Acceptance Criteria`, one line per criterion, as
-`command` -> the value observed *before* any of the work exists. A criterion its
-own baseline already contradicts was false before the task started, and gets
-rewritten as a delta the task owns.
+`ai-brief` decomposes a brief inside the project's working directory. Safe,
+read-only checks should record their command, observed output and exit status
+in `## Criteria Baseline`. Checks against future artifacts or predecessor
+outputs are marked `DEFERRED`, with the prerequisite and eventual check.
+Exploration must not run migrations or other mutating acceptance commands.
+
+A baseline is historical evidence, not an execution precondition. Failing before
+implementation is normal when the task is supposed to change that behavior.
+The planner must explain how its task steps make the criterion pass, and rewrite
+checks that require unrelated work. Git working-tree cleanliness remains
+forbidden regardless of the measured baseline.
 
 This rule governs the shape rules below it. Of the 21 tasks that have reached
 `review/`, **16 were blocked by a bad criterion and exactly 1 by a wrong
@@ -680,8 +687,8 @@ The baseline earns its place twice more. A human reading the review queue sees
 the measured value directly above the assertion that depends on it, which is
 what makes a bad criterion obvious at promotion time rather than three runs
 later. And `ai-eval` hands the **whole** task file to the evaluator, so the
-baseline lands in the grading prompt for free — it is precisely the
-command-and-output evidence that condition 1 of UNSATISFIABLE demands.
+baseline lands in the grading prompt for free. Historical values help diagnose
+conflicts, but claims of current impossibility still need current evidence.
 
 ### Acceptance criteria must be scoped to the task
 
@@ -727,6 +734,33 @@ script and `header.tex`, so nothing a correct run could do would move the wrap.
 Piping the extraction through `tr '\n' ' '` first returns `1`. Its sibling
 `2026-09-17_agm-agenda-pdf` carried four more of the same shape and had to be
 fixed by hand in `backlog-for-review/`.
+
+Before extraction, `ai-brief` now validates the draft and requests **one repair
+pass** when it recognizes a problematic criterion: a clean Git-state assertion
+(including `git -C` and multiline checklist items), a phrase search on wrapped
+extracted text, an abbreviated command containing an ellipsis, or a missing
+acceptance checklist. Malformed task delimiters also trigger repair. The repair
+uses the same provider and model, includes the brief, draft and findings, and
+shares the original `brief_timeout_min` budget. Ordinary valid drafts still
+require only one provider call.
+
+If repair fails, still triggers validation, or changes task filenames, no tasks
+are extracted. The brief returns to `briefs/`, with the draft and findings saved
+in a `.raw` file under `run/`. Authentication failures also set that provider's
+cooldown. A successful repair proceeds through the existing runner stamping,
+dependency validation, and human review gate. This is a check for known risky
+patterns, not a proof that every criterion is satisfiable.
+
+The prompt distinguishes current measurements from future requirements. Checks
+for new artifacts or predecessor outputs are deferred until those artifacts
+exist. Exploration may run only safe read-only baseline checks. Preservation
+checks use execution-time before/after evidence, negative checks are required
+only for actual removals, and commands must state their complete target and
+expected output or exit status. The planner must review each criterion against
+its owning task step and the rest of the dependency chain before emitting it.
+
+Offline regressions: `python3 -m unittest discover -s tests -v` and
+`bash tests/test_criteria_lint.sh`. These use fake providers and temporary queues.
 
 Some of these shapes are also checked mechanically. `lint_task_criteria`
 in `ai-brief` appends a `## Criteria Warnings` section to every emitted task
@@ -778,6 +812,93 @@ This is a prompt-level constraint because nothing downstream can catch a
 violation: `repair_brief_task_graph` detects cycles and a missing root, but a
 join simply reads as a single dependency and the second parent is silently
 discarded, and the task would then start before work it needs has finished.
+
+### Dead dependency chains
+
+`dep_satisfied` accepts exactly one thing: `done/*_<slug>.task.md`. A parent
+that reached `review/` — a failed evaluation, or an unsatisfiable criterion —
+never produces one, so **every task downstream of it waits forever**.
+
+Nothing about that is visible from the queue. `select_candidate` skips a
+blocked task silently and claims the next eligible one, so as long as the inbox
+holds any other runnable work the block is never mentioned. The dependent sits
+in `inbox/` looking perfectly healthy.
+
+`dtask` now reports it. `blocked_inbox_tasks` (in `lib.sh`) classifies every
+`inbox/` task whose `## Depends-on` is unsatisfied by where the dep actually
+is, which splits blocks into two kinds that need opposite responses:
+
+| Dep is in | Kind | What it means |
+|---|---|---|
+| `review/` | **dead** | The parent failed. Nothing will satisfy this dep until a human fixes the parent and requeues it. |
+| nowhere | **dead** | The slug was never created — a typo, or a brief whose batch was trimmed. |
+| `inbox/`, `run/`, `backlog-for-review/` | waiting | Ordinary queue order. Resolves on its own; not reported. |
+
+Only dead blocks are rendered, under **NEEDS ATTENTION** and in the count on
+the pipeline line:
+
+```
+⚑  NEEDS ATTENTION
+  2 item(s) require your input
+
+  ● flex-zero-allowance-fix                   [claude]  (failed, needs review)
+  ⊘ flex-rerate-credit-proposal               [claude]  (blocked: dep 'flex-zero-allowance-fix' is in review/)
+
+  PIPELINE
+  briefs(0) → prep-review(0) → inbox(5) → running(1) → review(1)   ⊘ blocked(1)
+```
+
+`blocked` is not a pipeline stage: those tasks are inside `inbox/` and are
+already counted there. It sits on that line because that is where a reader is
+looking when they wonder why the inbox count is not going down.
+
+`dep_satisfied` is deliberately **not** loosened to accept a parent in
+`review/`: a dep that failed evaluation genuinely is not done, and letting a
+dependent run on it would build on work that did not pass.
+
+The helper is not runner-aware, and must stay that way: `runner_matches` is
+scoped to one invocation's `--runner`, while the dashboard reports across every
+runner at once.
+
+`ai-task` reports dead chains too, on **every** sweep. Previously the report
+lived only on the "nothing eligible" branch, so a queue with any other runnable
+work never printed it — the block could sit in `cron.log`'s blind spot
+indefinitely. After a successful claim the report is dead-categories-only and
+fires **no** notification: the chain will still be dead in fifteen minutes, and
+a critical notification on every sweep is how a real alert gets muted. The idle
+branch keeps its notifications, and its output is otherwise unchanged.
+
+### Clearing a dead chain: `ai-task --unblock`
+
+```sh
+$ ai-task --unblock flex-zero-allowance-fix
+Unblocked: 2026-09-18_flex-zero-allowance-fix.md
+  review/ → inbox/
+  ## Retries reset: 3 → 0
+  also unblocks:
+  - 2026-09-18_flex-rerate-credit-proposal
+Note: nothing here checked the task file. If the reason it reached
+review/ is still in it, the next evaluation sends it straight back.
+```
+
+The one supported way out of `review/`. It makes no agent call, loads no
+provider, and takes `.locks/inbox.lock` for the move like every other write
+into `inbox/`.
+
+**Fix the task file first.** `--unblock` cannot tell whether you did — it moves
+the file and resets the counter, nothing more. What it buys you is a *correct*
+requeue: resetting `## Retries` to `0` means a task that burned `max_retries`
+before a human repaired its criterion gets a full budget, instead of landing
+back in `review/` on its first FAIL. The counter is written by `set_retries`
+in `lib.sh`, shared with `ai-task`'s FAIL path so a bump and a reset cannot
+drift apart.
+
+| Situation | Behaviour |
+|---|---|
+| slug is in `review/` | moved to `inbox/`, `## Retries` reset to `0`, dependents it frees are named |
+| slug is elsewhere in the pipeline | refused, and the message says which directory it is in |
+| slug matches two files in `review/` | refused, both named. Two dated attempts of one task; picking one silently would requeue an arbitrary half of the history |
+| argument contains a path | every path component is stripped before the lookup, so it can never steer the move out of `review/` |
 
 ### `repair_brief_task_graph`
 
@@ -1228,8 +1349,15 @@ is safe and writing is not.
 
 ```sh
 dtask       # render once
-dtask -w    # live refresh every 30s (exec's `watch -n 30`)
+dtask -w    # scrollable live view, refreshed every 30s
 ```
+
+In the live view, use Up/Down or j/k to scroll, Page Up/Page Down (or b/Space)
+to move a page, Home/End (or g/G) to jump, and Left/Right to read wide lines.
+Press r to refresh immediately and q to quit. Resizing and automatic refresh
+preserve your scroll position. The live viewer uses Python 3 with its standard
+`curses` module; redirected `dtask -w` output is a single plain snapshot.
+RECENT ACTIVITY appears before AGENTS, which is the final section.
 
 One `~/tasks/` tree now serves every runner, so every listed task shows its
 resolved runner in `[brackets]`: the ⚑ NEEDS ATTENTION and RUNNING sections
@@ -1376,9 +1504,8 @@ Three things changed on purpose:
   cutover day. Each invocation only ever claims tasks whose resolved runner
   matches its `--runner`; a task belonging to the other runner is left in the
   inbox untouched, never silently retargeted.
-- **`--runner` is not optional here.** Without it an invocation acts as
-  `default_runner`, so both lines would poll as `claude` and the Grok queue
-  would never drain.
+- **`--runner` pins these separate schedules.** Without it either invocation
+  can dispatch tasks for any configured runner.
 - **Both log to `$HOME/tasks/cron.log`.** There is one tree now, so
   `$HOME/tasks-grok/cron.log` stops being written. Leave the old
   `~/tasks-grok/` directory alone until you have satisfied yourself the new

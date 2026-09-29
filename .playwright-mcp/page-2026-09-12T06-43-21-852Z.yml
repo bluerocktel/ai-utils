@@ -1,0 +1,2022 @@
+- generic [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - generic [ref=f4e5]: NOUVEAU !
+        - heading "La création d’entreprise la plus rapide du marché est disponible chez Pappers !" [level=3] [ref=f4e6]
+        - list [ref=f4e8]:
+          - listitem [ref=f4e9]: Démarche simple et rapide, formulaire bouclé en moins de 10 minutes
+          - listitem [ref=f4e10]: Dépôt sur le Guichet Unique et suivi jusqu’à l’obtention du Kbis
+          - listitem [ref=f4e11]: Génération à la demande des statuts et de tous les autres documents annexes
+        - link "Créer mon entreprise dès maintenant" [ref=f4e12] [cursor=pointer]:
+          - /url: https://services.pappers.fr/creation-entreprise?utm_source=pe&utm_medium=bandeau-page-entreprise&utm_campaign=creation-entreprise
+      - img "Pappers Services" [ref=f4e14]
+      - button "" [ref=f4e16] [cursor=pointer]
+    - banner [ref=f4e19]:
+      - generic [ref=f4e20]:
+        - link [ref=f4e21] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e30]:
+          - img "Recherche" [ref=f4e31]
+          - searchbox "Entreprise, N° SIREN, Dirigeant, Mot-clé..." [ref=f4e32]
+        - dialog [ref=f4e34]:
+          - generic [active] [ref=f4e35]:
+            - banner [ref=f4e36]:
+              - generic [ref=f4e37]:
+                - generic [ref=f4e38]:
+                  - heading "Nos différentes solutions selon vos besoins" [level=3] [ref=f4e39]
+                  - generic [ref=f4e40]: Découvrez les autres services Pappers
+                - generic [ref=f4e41]: 
+            - generic [ref=f4e44]:
+              - generic [ref=f4e45]:
+                - generic [ref=f4e46]: 
+                - generic [ref=f4e47]:
+                  - heading "Formalités d’entreprise" [level=3] [ref=f4e48]
+                  - text: Annonces légales, création d'entreprise, registres dématérialisés
+                - link "Pappers Services" [ref=f4e49] [cursor=pointer]:
+                  - /url: https://services.pappers.fr/
+              - generic [ref=f4e50]:
+                - generic [ref=f4e51]: 
+                - generic [ref=f4e52]:
+                  - heading "L'actualité institutionnelle" [level=3] [ref=f4e53]
+                  - text: Textes de lois, amendements, questions et députés
+                - link "Pappers Politique" [ref=f4e54] [cursor=pointer]:
+                  - /url: https://politique.pappers.fr/
+              - generic [ref=f4e55]:
+                - generic [ref=f4e56]: 
+                - generic [ref=f4e57]:
+                  - heading "Votre veille juridique" [level=3] [ref=f4e58]: Votreveille juridique
+                  - text: Consultez la jurisprudence et activez une veille personnalisée
+                - link "Pappers Justice" [ref=f4e59] [cursor=pointer]:
+                  - /url: https://justice.pappers.fr/
+              - generic [ref=f4e60]:
+                - generic [ref=f4e61]: 
+                - generic [ref=f4e62]:
+                  - heading "Toute la donnée immobilière" [level=3] [ref=f4e63]
+                  - text: Prospectez et détecter des opportunités immobilières
+                - link "Pappers Immobilier" [ref=f4e64] [cursor=pointer]:
+                  - /url: https://immobilier.pappers.fr/
+        - list [ref=f4e66]:
+          - listitem [ref=f4e67]:
+            - link "Nos offres " [ref=f4e68] [cursor=pointer]:
+              - /url: /fonctionnalites
+              - text: Nos offres
+              - generic [ref=f4e69]: 
+            - text:                                                                                    
+          - listitem [ref=f4e70]:
+            - generic [ref=f4e71] [cursor=pointer]:
+              - text: Nos sites
+              - generic [ref=f4e72]: 
+            - text:     
+          - listitem [ref=f4e73]:
+            - link "Connexion" [ref=f4e74] [cursor=pointer]:
+              - /url: /connexion?redirect=https://www.pappers.fr/entreprise/foncia-paris-est-518931340
+    - generic [ref=f4e75]:
+      - generic [ref=f4e77]:
+        - generic [ref=f4e78]:
+          - generic [ref=f4e79]: "Mise à jour RCS : le 12/09/2026"
+          - generic [ref=f4e80]: "Mise à jour RNE : le 12/09/2026"
+          - generic [ref=f4e81]: "Mise à jour INSEE : le 11/09/2026"
+        - generic [ref=f4e82]:
+          - generic [ref=f4e83]:
+            - heading "FONCIA PARIS EST (CPGES CONSEIL / CPGES)" [level=1] [ref=f4e84]:
+              - text: FONCIA PARIS EST
+              - generic [ref=f4e85]: (CPGES CONSEIL / CPGES)
+            - generic [ref=f4e86]:
+              - text: 518 931 340 ·
+              - generic [ref=f4e88]:
+                - text: Active
+                - generic [ref=f4e89]: 
+              - link "Une alerte enregistrée" [ref=f4e91] [cursor=pointer]:
+                - /url: "#sanctions"
+                - generic [aria-hidden] [ref=f4e92]: 
+                - text: Une alerte enregistrée
+          - generic [ref=f4e93]:
+            - table [ref=f4e95]:
+              - rowgroup [ref=f4e96]:
+                - row [ref=f4e97]:
+                  - rowheader "Adresse :" [ref=f4e98]
+                  - cell "200 RUE RAYMOND LOSSERAND, 75014 PARIS " [ref=f4e99]:
+                    - text: 200 RUE RAYMOND LOSSERAND, 75014 PARIS
+                    - generic [ref=f4e100] [cursor=pointer]: 
+                - row [ref=f4e101]:
+                  - rowheader "Activité :" [ref=f4e102]
+                  - cell "Administration d'immeubles et autres biens immobiliers" [ref=f4e103]
+                - row [ref=f4e104]:
+                  - rowheader "Effectif :" [ref=f4e105]
+                  - cell "Entre 50 et 99 salariés (donnée 2023)" [ref=f4e106]
+                - row [ref=f4e107]:
+                  - rowheader "Création :" [ref=f4e108]
+                  - cell "01/01/2010" [ref=f4e109]
+                - row [ref=f4e110]:
+                  - rowheader "Dirigeant :" [ref=f4e111]
+                  - cell [ref=f4e112]:
+                    - link "Squillaci Michel" [ref=f4e113] [cursor=pointer]:
+                      - /url: /dirigeant/michel_squillaci_1978-05
+            - generic [ref=f4e114]:
+              - link " Suivre cette entreprise" [ref=f4e116] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=f4e117]: 
+                - generic [ref=f4e118]: Suivre cette entreprise
+              - link " Voir les statuts" [ref=f4e119] [cursor=pointer]:
+                - /url: foncia-paris-est-518931340/documents/FONCIA%20PARIS%20EST - Copie%20des%20statuts%20mis%20%C3%A0%20jour 19-02-2026.pdf
+                - generic [ref=f4e120]: 
+                - paragraph [ref=f4e121]: Voir les statuts
+              - link " Voir les comptes" [ref=f4e122] [cursor=pointer]:
+                - /url: foncia-paris-est-518931340/comptes/FONCIA%20PARIS%20EST - Comptes sociaux 2025 06-08-2026.pdf
+                - generic [ref=f4e123]: 
+                - paragraph [ref=f4e124]: Voir les comptes
+              - button " Solvabilité" [ref=f4e125] [cursor=pointer]:
+                - generic [ref=f4e126]:
+                  - generic [ref=f4e127]: 
+                  - paragraph [ref=f4e128]: Solvabilité
+      - generic [ref=f4e129]:
+        - button "" [ref=f4e131] [cursor=pointer]
+        - generic [ref=f4e133]:
+          - generic [ref=f4e134]:
+            - generic [ref=f4e135]:
+              - heading "Informations juridiques de FONCIA PARIS EST" [level=2] [ref=f4e136]
+              - link [ref=f4e138] [cursor=pointer]:
+                - /url: "#"
+            - generic [ref=f4e148]:
+              - table [ref=f4e149]:
+                - rowgroup [ref=f4e150]:
+                  - row [ref=f4e151]:
+                    - rowheader "SIREN :" [ref=f4e152]
+                    - cell "518 931 340 " [ref=f4e153]:
+                      - text: 518 931 340
+                      - generic [ref=f4e154] [cursor=pointer]: 
+                  - row [ref=f4e155]:
+                    - rowheader "SIRET (siège) :" [ref=f4e156]
+                    - cell "518 931 340 00112 " [ref=f4e157]:
+                      - text: 518 931 340 00112
+                      - generic [ref=f4e158] [cursor=pointer]: 
+                  - row [ref=f4e159]:
+                    - rowheader "Forme juridique :" [ref=f4e160]
+                    - cell "SAS, société par actions simplifiée" [ref=f4e161]
+                  - row [ref=f4e162]:
+                    - rowheader "Numéro de TVA :" [ref=f4e163]
+                    - cell "FR01518931340  " [ref=f4e164]:
+                      - generic [ref=f4e165]:
+                        - text: FR01518931340
+                        - link "" [ref=f4e166] [cursor=pointer]:
+                          - /url: https://ec.europa.eu/taxation_customs/vies/?locale=fr
+                        - generic [ref=f4e168] [cursor=pointer]: 
+                  - row [ref=f4e169]:
+                    - rowheader "Inscription au RCS :" [ref=f4e170]
+                    - cell "INSCRIT  (au greffe de PARIS , le 06/01/2010 )" [ref=f4e171]:
+                      - generic [ref=f4e172]:
+                        - text: INSCRIT
+                        - generic [ref=f4e173]: 
+                      - text: (au greffe de PARIS , le 06/01/2010 )
+                  - row [ref=f4e174]:
+                    - rowheader "Inscription au RNE :" [ref=f4e175]
+                    - cell "INSCRIT  (le 06/01/2010)" [ref=f4e176]:
+                      - generic [ref=f4e177]:
+                        - text: INSCRIT
+                        - generic [ref=f4e178]: 
+                      - text: (le 06/01/2010)
+                  - row [ref=f4e179]:
+                    - rowheader "Numéro RCS :" [ref=f4e180]
+                    - cell "518 931 340 R.C.S. Paris " [ref=f4e181]:
+                      - text: 518 931 340 R.C.S. Paris
+                      - generic [ref=f4e182] [cursor=pointer]: 
+                  - row [ref=f4e183]:
+                    - rowheader "Capital social :" [ref=f4e184]
+                    - cell "5 010 000,00 €" [ref=f4e185]
+              - generic [ref=f4e186]:
+                - button " Avis situation SIRENE " [ref=f4e189] [cursor=pointer]:
+                  - generic [ref=f4e190]: 
+                  - paragraph [ref=f4e191]: Avis situation SIRENE
+                  - generic [ref=f4e192]: 
+                - link " Extrait INPI" [ref=f4e193] [cursor=pointer]:
+                  - /url: https://data.inpi.fr/export/companies?format=pdf&ids=[%22518931340%22]
+                  - generic [ref=f4e194]: 
+                  - paragraph [ref=f4e195]: Extrait INPI
+                - link " Extrait Pappers" [ref=f4e197] [cursor=pointer]:
+                  - /url: foncia-paris-est-518931340/FONCIA%20PARIS%20EST - Extrait d'immatriculation.pdf
+                  - generic [ref=f4e198]: 
+                  - paragraph [ref=f4e199]: Extrait Pappers
+          - generic [ref=f4e200]:
+            - heading "Activité de FONCIA PARIS EST" [level=2] [ref=f4e202]
+            - generic [ref=f4e203]:
+              - table [ref=f4e204]:
+                - rowgroup [ref=f4e205]:
+                  - row [ref=f4e206]:
+                    - rowheader "Activité principale déclarée :" [ref=f4e207]
+                    - cell "Transaction, location, gestion, syndic de copropriété et administration immobilière." [ref=f4e208]
+                  - row [ref=f4e210]:
+                    - rowheader "Code NAF ou APE :" [ref=f4e211]
+                    - cell "68.32A  (Administration d'immeubles et autres biens immobiliers)" [ref=f4e212]:
+                      - generic [ref=f4e213]:
+                        - text: 68.32A
+                        - generic [ref=f4e214] [cursor=pointer]: 
+                        - text: (Administration d'immeubles et autres biens immobiliers)
+                  - row [ref=f4e215]:
+                    - rowheader "Domaine d’activité :" [ref=f4e216]
+                    - cell "Activités immobilières" [ref=f4e217]
+                  - row [ref=f4e218]:
+                    - rowheader "Forme d'exercice :" [ref=f4e219]
+                    - cell "Commerciale" [ref=f4e220]
+                  - row [ref=f4e221]:
+                    - rowheader "Convention collective :" [ref=f4e222]
+                    - cell [ref=f4e223]:
+                      - link "Immobilier - IDCC 1527" [ref=f4e225] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/conventions-collectives/de-limmobilier
+                  - row [ref=f4e226]:
+                    - rowheader "Date de clôture d'exercice comptable :" [ref=f4e227]
+                    - cell "31/12/2026" [ref=f4e228]
+                  - row [ref=f4e229]:
+                    - rowheader "Inscriptions à l'ORIAS, sous le numéro 16003059  :" [ref=f4e230]:
+                      - text: Inscriptions à l'ORIAS, sous le numéro 16003059
+                      - generic [ref=f4e231] [cursor=pointer]: 
+                      - text: ":"
+                    - 'cell "Mandataire d''Intermédiaire en Assurance (MIA) avec maniement de fonds : INSCRIT  depuis le 29/04/2020" [ref=f4e232]':
+                      - list [ref=f4e233]:
+                        - listitem [ref=f4e235]:
+                          - text: Mandataire d'Intermédiaire en Assurance (MIA) avec maniement de fonds :INSCRIT
+                          - generic [ref=f4e236]: 
+                          - text: depuis le 29/04/2020
+                  - row [ref=f4e237]:
+                    - rowheader "Inscriptions au fichier des professionnels de l'immobilier, sous le numéro CPI75012015000001903  :" [ref=f4e238]:
+                      - text: Inscriptions au fichier des professionnels de l'immobilier, sous le numéro
+                      - generic [ref=f4e239]:
+                        - generic [ref=f4e240]:
+                          - text: CPI75012015000001903
+                          - generic [ref=f4e241] [cursor=pointer]: 
+                        - text: ":"
+                    - 'cell "Transaction Gestion immobilière Syndic INSCRIT  (à la CCI Paris Île-de-France) Garantie financière : 48 160 000 € Voir plus" [ref=f4e242]':
+                      - list [ref=f4e243]:
+                        - listitem [ref=f4e244]: Transaction
+                        - listitem [ref=f4e245]: Gestion immobilière
+                        - listitem [ref=f4e246]: Syndic
+                      - text: INSCRIT
+                      - generic [ref=f4e247]: 
+                      - text: "(à la CCI Paris Île-de-France) Garantie financière : 48 160 000 €"
+                      - link "Voir plus" [ref=f4e249] [cursor=pointer]:
+                        - /url: "#"
+              - generic [ref=f4e250]:
+                - img "Logo Coover" [ref=f4e251]
+                - link "Découvrir les offres de Coover, courtier spécialisé dans l’assurance professionnelle des professions réglementées " [ref=f4e252] [cursor=pointer]:
+                  - /url: https://www.coover.fr/?utm_source=pe
+                  - text: Découvrir les offres de Coover, courtier spécialisé dans l’assurance professionnelle des professions réglementées
+                  - generic [ref=f4e253]: 
+          - generic [ref=f4e255]:
+            - generic [ref=f4e256]:
+              - heading "Domiciliez votre entreprise dès 14,90 € ht/mois." [level=2] [ref=f4e257]
+              - link "Domicilier mon entreprise" [ref=f4e258] [cursor=pointer]:
+                - /url: https://www.lestricolores.fr/?utm_source=pappers
+            - img "Image Les Tricolores" [ref=f4e260]
+            - generic [ref=f4e261]:
+              - generic [ref=f4e262]: Publicité
+              - generic [ref=f4e263] [cursor=pointer]:
+                - text: Devenir partenaire de Pappers
+                - generic [ref=f4e264]: 
+          - generic [ref=f4e266]:
+            - generic [ref=f4e267]:
+              - generic [ref=f4e268]:
+                - heading "Etablissements de l'entreprise FONCIA PARIS EST" [level=2] [ref=f4e270]
+                - list [ref=f4e272]:
+                  - listitem [ref=f4e273]:
+                    - generic [ref=f4e274]:
+                      - generic [ref=f4e275]:
+                        - generic [ref=f4e276]: 
+                        - generic [ref=f4e277]:
+                          - text: Siège et établissement principal
+                          - paragraph [ref=f4e278]:
+                            - text: En activité
+                            - generic [ref=f4e279]: 
+                      - generic [ref=f4e280]:
+                        - text: 518 931 340 00112
+                        - generic [ref=f4e281] [cursor=pointer]: 
+                        - link "" [ref=f4e282] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000112
+                    - generic [ref=f4e284]:
+                      - generic [ref=f4e285]:
+                        - text: "Adresse : 200 RUE RAYMOND LOSSERAND 75014 PARIS"
+                        - generic [ref=f4e286] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e288] [cursor=pointer]:
+                        - /url: "#coords-51893134000112"
+                      - generic [ref=f4e289]: "Date de création : 08/02/2026"
+                      - generic [ref=f4e290]: "Nom commercial : CPGES CONSEIL / CPGES"
+                  - listitem [ref=f4e291]:
+                    - generic [ref=f4e292]:
+                      - generic [ref=f4e293]:
+                        - generic [ref=f4e294]: 
+                        - generic [ref=f4e295]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e296]:
+                            - text: En activité
+                            - generic [ref=f4e297]: 
+                      - generic [ref=f4e298]:
+                        - text: 518 931 340 00104
+                        - generic [ref=f4e299] [cursor=pointer]: 
+                        - link "" [ref=f4e300] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000104
+                    - generic [ref=f4e302]:
+                      - generic [ref=f4e303]:
+                        - text: "Adresse : 1 RUE DE MONTEMPOIVRE 75012 PARIS"
+                        - generic [ref=f4e304] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e306] [cursor=pointer]:
+                        - /url: "#coords-51893134000104"
+                      - generic [ref=f4e307]: "Date de création : 02/02/2026"
+                      - generic [ref=f4e308]: "Activité distincte : Agences immobilières (68.31Z)"
+                  - listitem [ref=f4e309]:
+                    - generic [ref=f4e310]:
+                      - generic [ref=f4e311]:
+                        - generic [ref=f4e312]: 
+                        - generic [ref=f4e313]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e314]:
+                            - text: En activité
+                            - generic [ref=f4e315]: 
+                      - generic [ref=f4e316]:
+                        - text: 518 931 340 00096
+                        - generic [ref=f4e317] [cursor=pointer]: 
+                        - link "" [ref=f4e318] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000096
+                    - generic [ref=f4e320]:
+                      - generic [ref=f4e321]:
+                        - text: "Adresse : 100 RUE DE MENILMONTANT 75020 PARIS"
+                        - generic [ref=f4e322] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e324] [cursor=pointer]:
+                        - /url: "#coords-51893134000096"
+                      - generic [ref=f4e325]: "Date de création : 24/09/2024"
+                      - generic [ref=f4e326]: "Activité distincte : Agences immobilières (68.31Z)"
+                  - listitem [ref=f4e327]:
+                    - generic [ref=f4e328]:
+                      - generic [ref=f4e329]:
+                        - generic [ref=f4e330]: 
+                        - generic [ref=f4e331]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e332]:
+                            - text: En activité
+                            - generic [ref=f4e333]: 
+                      - generic [ref=f4e334]:
+                        - text: 518 931 340 00088
+                        - generic [ref=f4e335] [cursor=pointer]: 
+                        - link "" [ref=f4e336] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000088
+                    - generic [ref=f4e338]:
+                      - generic [ref=f4e339]:
+                        - text: "Adresse : 139 AVENUE JEAN JAURES 75019 PARIS"
+                        - generic [ref=f4e340] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e342] [cursor=pointer]:
+                        - /url: "#coords-51893134000088"
+                      - generic [ref=f4e343]: "Date de création : 01/04/2023"
+                      - generic [ref=f4e344]: "Activité distincte : Agences immobilières (68.31Z)"
+                  - listitem [ref=f4e345]:
+                    - generic [ref=f4e346]:
+                      - generic [ref=f4e347]:
+                        - generic [ref=f4e348]: 
+                        - generic [ref=f4e349]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e350]:
+                            - text: En activité
+                            - generic [ref=f4e351]: 
+                      - generic [ref=f4e352]:
+                        - text: 518 931 340 00070
+                        - generic [ref=f4e353] [cursor=pointer]: 
+                        - link "" [ref=f4e354] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000070
+                    - generic [ref=f4e356]:
+                      - generic [ref=f4e357]:
+                        - text: "Adresse : 74 BOULEVARD DE REUILLY 75012 PARIS"
+                        - generic [ref=f4e358] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e360] [cursor=pointer]:
+                        - /url: "#coords-51893134000070"
+                      - generic [ref=f4e361]: "Date de création : 01/02/2023"
+                      - generic [ref=f4e362]: "Nom commercial : CPGES CONSEIL / CPGES"
+                  - listitem [ref=f4e363]:
+                    - generic [ref=f4e364]:
+                      - generic [ref=f4e365]:
+                        - generic [ref=f4e366]: 
+                        - generic [ref=f4e367]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e368]:
+                            - text: En activité
+                            - generic [ref=f4e369]: 
+                      - generic [ref=f4e370]:
+                        - text: 518 931 340 00054
+                        - generic [ref=f4e371] [cursor=pointer]: 
+                        - link "" [ref=f4e372] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000054
+                    - generic [ref=f4e374]:
+                      - generic [ref=f4e375]:
+                        - text: "Adresse : 27-29 27 RUE DE PROVENCE 75009 PARIS"
+                        - generic [ref=f4e376] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e378] [cursor=pointer]:
+                        - /url: "#coords-51893134000054"
+                      - generic [ref=f4e379]: "Date de création : 01/02/2022"
+                      - generic [ref=f4e380]: "Activité distincte : Agences immobilières (68.31Z)"
+                  - listitem [ref=f4e381]:
+                    - generic [ref=f4e382]:
+                      - generic [ref=f4e383]:
+                        - generic [ref=f4e384]: 
+                        - generic [ref=f4e385]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e386]:
+                            - text: En activité
+                            - generic [ref=f4e387]: 
+                      - generic [ref=f4e388]:
+                        - text: 518 931 340 00013
+                        - generic [ref=f4e389] [cursor=pointer]: 
+                        - link "" [ref=f4e390] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000013
+                    - generic [ref=f4e392]:
+                      - generic [ref=f4e393]:
+                        - text: "Adresse : 24-28 24 RUE HENRI POINCARE 75020 PARIS"
+                        - generic [ref=f4e394] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e396] [cursor=pointer]:
+                        - /url: "#coords-51893134000013"
+                      - generic [ref=f4e397]: "Date de création : 01/01/2010"
+                  - listitem [ref=f4e398]:
+                    - generic [ref=f4e399]:
+                      - generic [ref=f4e400]:
+                        - generic [ref=f4e401]: 
+                        - generic [ref=f4e402]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e403]:
+                            - text: Fermé
+                            - generic [ref=f4e404]: 
+                      - generic [ref=f4e405]:
+                        - text: 518 931 340 00062
+                        - generic [ref=f4e406] [cursor=pointer]: 
+                        - link "" [ref=f4e407] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000062
+                    - generic [ref=f4e409]:
+                      - generic [ref=f4e410]:
+                        - text: "Adresse : 98 AVENUE DE SAINT-MANDE 75012 PARIS"
+                        - generic [ref=f4e411] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e413] [cursor=pointer]:
+                        - /url: "#coords-51893134000062"
+                      - generic [ref=f4e414]: "Date de création : 01/01/2023"
+                      - generic [ref=f4e415]: "Date de clôture : 31/12/2025"
+                      - generic [ref=f4e416]: "Activité distincte : Agences immobilières (68.31Z)"
+                  - listitem [ref=f4e417]:
+                    - generic [ref=f4e418]:
+                      - generic [ref=f4e419]:
+                        - generic [ref=f4e420]: 
+                        - generic [ref=f4e421]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e422]:
+                            - text: Fermé
+                            - generic [ref=f4e423]: 
+                      - generic [ref=f4e424]:
+                        - text: 518 931 340 00039
+                        - generic [ref=f4e425] [cursor=pointer]: 
+                        - link "" [ref=f4e426] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000039
+                    - generic [ref=f4e428]:
+                      - generic [ref=f4e429]:
+                        - text: "Adresse : 14 RUE DE ROUEN 75019 PARIS"
+                        - generic [ref=f4e430] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e432] [cursor=pointer]:
+                        - /url: "#coords-51893134000039"
+                      - generic [ref=f4e433]: "Date de création : 01/06/2021"
+                      - generic [ref=f4e434]: "Date de clôture : 31/12/2022"
+                  - listitem [ref=f4e435]:
+                    - generic [ref=f4e436]:
+                      - generic [ref=f4e437]:
+                        - generic [ref=f4e438]: 
+                        - generic [ref=f4e439]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e440]:
+                            - text: Fermé
+                            - generic [ref=f4e441]: 
+                      - generic [ref=f4e442]:
+                        - text: 518 931 340 00047
+                        - generic [ref=f4e443] [cursor=pointer]: 
+                        - link "" [ref=f4e444] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000047
+                    - generic [ref=f4e446]:
+                      - generic [ref=f4e447]:
+                        - text: "Adresse : 52 RUE DE LA PY 75020 PARIS"
+                        - generic [ref=f4e448] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e450] [cursor=pointer]:
+                        - /url: "#coords-51893134000047"
+                      - generic [ref=f4e451]: "Date de création : 30/04/2021"
+                      - generic [ref=f4e452]: "Date de clôture : 31/12/2022"
+                  - listitem [ref=f4e453]:
+                    - generic [ref=f4e454]:
+                      - generic [ref=f4e455]:
+                        - generic [ref=f4e456]: 
+                        - generic [ref=f4e457]:
+                          - text: Établissement secondaire
+                          - paragraph [ref=f4e458]:
+                            - text: Fermé
+                            - generic [ref=f4e459]: 
+                      - generic [ref=f4e460]:
+                        - text: 518 931 340 00021
+                        - generic [ref=f4e461] [cursor=pointer]: 
+                        - link "" [ref=f4e462] [cursor=pointer]:
+                          - /url: https://api-avis-situation-sirene.insee.fr/identification/pdf/51893134000021
+                    - generic [ref=f4e464]:
+                      - generic [ref=f4e465]:
+                        - text: "Adresse : 28 RUE LEON FROT 75011 PARIS"
+                        - generic [ref=f4e466] [cursor=pointer]: 
+                      - link "Voir sur la carte" [ref=f4e468] [cursor=pointer]:
+                        - /url: "#coords-51893134000021"
+                      - generic [ref=f4e469]: "Date de création : 01/11/2020"
+                      - generic [ref=f4e470]: "Date de clôture : 31/12/2025"
+                      - generic [ref=f4e471]: "Activité distincte : Location de terrains et d'autres biens immobiliers (68.20B)"
+              - text:       
+            - generic [ref=f4e472]:
+              - generic [ref=f4e473]: Etablissements (11)
+              - generic [ref=f4e475] [cursor=pointer]: Carte
+          - generic [ref=f4e477]:
+            - heading "Finances de FONCIA PARIS EST" [level=2] [ref=f4e479]
+            - generic [ref=f4e481]:
+              - generic [ref=f4e486]:
+                - generic [ref=f4e487]: Chiffre d'affaires
+                - generic [ref=f4e488]: Résultat net
+                - generic [ref=f4e489]: Effectif
+              - table [ref=f4e494]:
+                - rowgroup [ref=f4e495]:
+                  - row [ref=f4e496]:
+                    - columnheader "Performance" [ref=f4e497]
+                    - columnheader "2025" [ref=f4e498]
+                    - columnheader "2024" [ref=f4e499]
+                    - columnheader "2023" [ref=f4e500]
+                    - columnheader "2022" [ref=f4e501]
+                  - row [ref=f4e502]:
+                    - rowheader "Chiffre d'affaires (€)" [ref=f4e503]
+                    - cell "5,02M" [ref=f4e504]
+                    - cell "5,84M" [ref=f4e505]
+                    - cell "7,66M" [ref=f4e506]
+                    - cell "4,04M" [ref=f4e507]
+                  - row [ref=f4e508]:
+                    - rowheader "Marge brute (€)" [ref=f4e509]
+                    - cell "5,24M" [ref=f4e510]
+                    - cell "5,92M" [ref=f4e511]
+                    - cell "7,8M" [ref=f4e512]
+                    - cell "4,06M" [ref=f4e513]
+                  - row [ref=f4e514]:
+                    - rowheader "EBITDA - EBE (€)" [ref=f4e515]
+                    - cell "-1,02M" [ref=f4e516]
+                    - cell "-1,8M" [ref=f4e517]
+                    - cell "-333K" [ref=f4e518]
+                    - cell "-252K" [ref=f4e519]
+                  - row [ref=f4e520]:
+                    - rowheader "Résultat d'exploitation (€)" [ref=f4e521]
+                    - cell "-2,93M" [ref=f4e522]
+                    - cell "-1,85M" [ref=f4e523]
+                    - cell "-352K" [ref=f4e524]
+                    - cell "-270K" [ref=f4e525]
+                  - row [ref=f4e526]:
+                    - rowheader "Résultat net (€)" [ref=f4e527]
+                    - cell "-4,81M" [ref=f4e528]
+                    - cell "-2,17M" [ref=f4e529]
+                    - cell "-647K" [ref=f4e530]
+                    - cell "-336K" [ref=f4e531]
+                  - row [ref=f4e532]:
+                    - columnheader "Croissance" [ref=f4e533]
+                    - columnheader "2025" [ref=f4e534]
+                    - columnheader "2024" [ref=f4e535]
+                    - columnheader "2023" [ref=f4e536]
+                    - columnheader "2022" [ref=f4e537]
+                  - row [ref=f4e538]:
+                    - rowheader "Taux de croissance du CA (%)" [ref=f4e539]
+                    - cell "-14,2" [ref=f4e540]
+                    - cell "-23,7" [ref=f4e541]
+                    - cell "89,6" [ref=f4e542]
+                    - cell "6,8" [ref=f4e543]
+                  - row [ref=f4e544]:
+                    - rowheader "Taux de croissance de l'effectif (%)" [ref=f4e545]
+                    - cell "-17,7" [ref=f4e546]
+                    - cell [ref=f4e547]
+                    - cell [ref=f4e548]
+                    - cell "22,9" [ref=f4e549]
+                  - row [ref=f4e550]:
+                    - rowheader "Taux de marge brute (%)" [ref=f4e551]
+                    - cell "105" [ref=f4e552]
+                    - cell "101" [ref=f4e553]
+                    - cell "102" [ref=f4e554]
+                    - cell "101" [ref=f4e555]
+                  - row [ref=f4e556]:
+                    - rowheader "Taux de marge d'EBITDA (%)" [ref=f4e557]
+                    - cell "-20,4" [ref=f4e558]
+                    - cell "-30,8" [ref=f4e559]
+                    - cell "-4,4" [ref=f4e560]
+                    - cell "-6,2" [ref=f4e561]
+                  - row [ref=f4e562]:
+                    - rowheader "Taux de marge opérationnelle (%)" [ref=f4e563]
+                    - cell "-58,4" [ref=f4e564]
+                    - cell "-31,6" [ref=f4e565]
+                    - cell "-4,6" [ref=f4e566]
+                    - cell "-6,7" [ref=f4e567]
+                  - row [ref=f4e568]:
+                    - columnheader "Gestion BFR" [ref=f4e569]
+                    - columnheader "2025" [ref=f4e570]
+                    - columnheader "2024" [ref=f4e571]
+                    - columnheader "2023" [ref=f4e572]
+                    - columnheader "2022" [ref=f4e573]
+                  - row [ref=f4e574]:
+                    - rowheader "BFR (€)" [ref=f4e575]
+                    - cell "-1,17M" [ref=f4e576]
+                    - cell "-1,27M" [ref=f4e577]
+                    - cell "-1,55M" [ref=f4e578]
+                    - cell "-231K" [ref=f4e579]
+                  - row [ref=f4e580]:
+                    - rowheader "BFR exploitation (€)" [ref=f4e581]
+                    - cell "-520K" [ref=f4e582]
+                    - cell "1,05M" [ref=f4e583]
+                    - cell "-336K" [ref=f4e584]
+                    - cell "504K" [ref=f4e585]
+                  - row [ref=f4e586]:
+                    - rowheader "BFR hors exploitation (€)" [ref=f4e587]
+                    - cell "-653K" [ref=f4e588]
+                    - cell "-2,32M" [ref=f4e589]
+                    - cell "-1,22M" [ref=f4e590]
+                    - cell "-735K" [ref=f4e591]
+                  - row [ref=f4e592]:
+                    - rowheader "BFR (j de CA)" [ref=f4e593]
+                    - cell "-85,3" [ref=f4e594]
+                    - cell "-79,4" [ref=f4e595]
+                    - cell "-74,1" [ref=f4e596]
+                    - cell "-20,9" [ref=f4e597]
+                  - row [ref=f4e598]:
+                    - rowheader "BFR exploitation (j de CA)" [ref=f4e599]
+                    - cell "-37,8" [ref=f4e600]
+                    - cell "65,6" [ref=f4e601]
+                    - cell "-16" [ref=f4e602]
+                    - cell "45,5" [ref=f4e603]
+                  - row [ref=f4e604]:
+                    - rowheader "BFR hors exploitation (j de CA)" [ref=f4e605]
+                    - cell "-47,5" [ref=f4e606]
+                    - cell "-145" [ref=f4e607]
+                    - cell "-58,1" [ref=f4e608]
+                    - cell "-66,4" [ref=f4e609]
+                  - row [ref=f4e610]:
+                    - rowheader "Délai de paiement clients (j)" [ref=f4e611]
+                    - cell "68,8" [ref=f4e612]
+                    - cell "186" [ref=f4e613]
+                    - cell "54,8" [ref=f4e614]
+                    - cell "78,8" [ref=f4e615]
+                  - row [ref=f4e616]:
+                    - rowheader "Délai de paiement fournisseurs (j)" [ref=f4e617]
+                    - cell "307" [ref=f4e618]
+                    - cell "325" [ref=f4e619]
+                    - cell "281" [ref=f4e620]
+                    - cell "160" [ref=f4e621]
+                  - row [ref=f4e622]:
+                    - rowheader "Ratio des stocks / CA (j)" [ref=f4e623]
+                    - cell "0" [ref=f4e624]
+                    - cell "0" [ref=f4e625]
+                    - cell "0" [ref=f4e626]
+                    - cell "0" [ref=f4e627]
+                  - row [ref=f4e628]:
+                    - columnheader "Autonomie financière" [ref=f4e629]
+                    - columnheader "2025" [ref=f4e630]
+                    - columnheader "2024" [ref=f4e631]
+                    - columnheader "2023" [ref=f4e632]
+                    - columnheader "2022" [ref=f4e633]
+                  - row [ref=f4e634]:
+                    - rowheader "Capacité d'autofinancement (€)" [ref=f4e635]
+                    - cell "-1,32M" [ref=f4e636]
+                    - cell "-2,04M" [ref=f4e637]
+                    - cell "-578K" [ref=f4e638]
+                    - cell "-301K" [ref=f4e639]
+                  - row [ref=f4e640]:
+                    - rowheader "Capacité d'autofinancement / CA (%)" [ref=f4e641]
+                    - cell "-26,2" [ref=f4e642]
+                    - cell "-35" [ref=f4e643]
+                    - cell "-7,5" [ref=f4e644]
+                    - cell "-7,4" [ref=f4e645]
+                  - row [ref=f4e646]:
+                    - rowheader "Fonds de roulement net global (€)" [ref=f4e647]
+                    - cell "-676K" [ref=f4e648]
+                    - cell "-843K" [ref=f4e649]
+                    - cell "-828K" [ref=f4e650]
+                    - cell "308K" [ref=f4e651]
+                  - row [ref=f4e652]:
+                    - rowheader "Couverture du BFR" [ref=f4e653]
+                    - cell "0,6" [ref=f4e654]
+                    - cell "0,7" [ref=f4e655]
+                    - cell "0,5" [ref=f4e656]
+                    - cell "-1,3" [ref=f4e657]
+                  - row [ref=f4e658]:
+                    - rowheader "Trésorerie (€)" [ref=f4e659]
+                    - cell "497K" [ref=f4e660]
+                    - cell "428K" [ref=f4e661]
+                    - cell "727K" [ref=f4e662]
+                    - cell "540K" [ref=f4e663]
+                  - row [ref=f4e664]:
+                    - rowheader "Dettes financières (€)" [ref=f4e665]
+                    - cell "10,5M" [ref=f4e666]
+                    - cell "8,67M" [ref=f4e667]
+                    - cell "6,43M" [ref=f4e668]
+                    - cell "5,39M" [ref=f4e669]
+                  - row [ref=f4e670]:
+                    - rowheader "Capacité de remboursement" [ref=f4e671]
+                    - cell "-7,6" [ref=f4e672]
+                    - cell "-4" [ref=f4e673]
+                    - cell "-9,9" [ref=f4e674]
+                    - cell "-16,1" [ref=f4e675]
+                  - row [ref=f4e676]:
+                    - rowheader "Ratio d'endettement (Gearing)" [ref=f4e677]
+                    - cell "-1,2" [ref=f4e678]
+                    - cell "-2,6" [ref=f4e679]
+                    - cell "-5,5" [ref=f4e680]
+                    - cell "-12,3" [ref=f4e681]
+                  - row [ref=f4e682]:
+                    - rowheader "Autonomie financière (%)" [ref=f4e683]
+                    - cell "-146" [ref=f4e684]
+                    - cell "-28,6" [ref=f4e685]
+                    - cell "-11,6" [ref=f4e686]
+                    - cell "-5,6" [ref=f4e687]
+                  - row [ref=f4e688]:
+                    - rowheader "Taux de levier (DFN/EBITDA)" [ref=f4e689]
+                    - cell "-9,7" [ref=f4e690]
+                    - cell "-4,6" [ref=f4e691]
+                    - cell "-17,1" [ref=f4e692]
+                    - cell "-19,3" [ref=f4e693]
+                  - row [ref=f4e694]:
+                    - columnheader "Solvabilité" [ref=f4e695]
+                    - columnheader "2025" [ref=f4e696]
+                    - columnheader "2024" [ref=f4e697]
+                    - columnheader "2023" [ref=f4e698]
+                    - columnheader "2022" [ref=f4e699]
+                  - row [ref=f4e700]:
+                    - rowheader "État des dettes à 1 an au plus (€)" [ref=f4e701]
+                    - cell "10,1M" [ref=f4e702]
+                    - cell "7,33M" [ref=f4e703]
+                    - cell "9,95M" [ref=f4e704]
+                    - cell "7,42M" [ref=f4e705]
+                  - row [ref=f4e706]:
+                    - rowheader "Liquidité générale" [ref=f4e707]
+                    - cell "0,2" [ref=f4e708]
+                    - cell "0,6" [ref=f4e709]
+                    - cell "0,3" [ref=f4e710]
+                    - cell "0,3" [ref=f4e711]
+                  - row [ref=f4e712]:
+                    - rowheader "Couverture des dettes" [ref=f4e713]
+                    - cell "0,3" [ref=f4e714]
+                    - cell "0,8" [ref=f4e715]
+                    - cell "1,1" [ref=f4e716]
+                    - cell "1" [ref=f4e717]
+                  - row [ref=f4e718]:
+                    - rowheader "Fonds propres (€)" [ref=f4e719]
+                    - cell "-8,02M" [ref=f4e720]
+                    - cell "-3,22M" [ref=f4e721]
+                    - cell "-1,04M" [ref=f4e722]
+                    - cell "-396K" [ref=f4e723]
+                  - row [ref=f4e724]:
+                    - columnheader "Rentabilité" [ref=f4e725]
+                    - columnheader "2025" [ref=f4e726]
+                    - columnheader "2024" [ref=f4e727]
+                    - columnheader "2023" [ref=f4e728]
+                    - columnheader "2022" [ref=f4e729]
+                  - row [ref=f4e730]:
+                    - rowheader "Marge nette (%)" [ref=f4e731]
+                    - cell "-95,8" [ref=f4e732]
+                    - cell "-37,2" [ref=f4e733]
+                    - cell "-8,4" [ref=f4e734]
+                    - cell "-8,3" [ref=f4e735]
+                  - row [ref=f4e736]:
+                    - rowheader "Rentabilité sur fonds propres (%)" [ref=f4e737]
+                    - cell "59,9" [ref=f4e738]
+                    - cell "67,6" [ref=f4e739]
+                    - cell "62" [ref=f4e740]
+                    - cell "84,9" [ref=f4e741]
+                  - row [ref=f4e742]:
+                    - rowheader "Rentabilité économique (%)" [ref=f4e743]
+                    - cell "-87,7" [ref=f4e744]
+                    - cell "-19,4" [ref=f4e745]
+                    - cell "-7,2" [ref=f4e746]
+                    - cell "-4,7" [ref=f4e747]
+                  - row [ref=f4e748]:
+                    - rowheader "Valeur ajoutée (€)" [ref=f4e749]
+                    - cell "3M" [ref=f4e750]
+                    - cell "3,08M" [ref=f4e751]
+                    - cell "5,38M" [ref=f4e752]
+                    - cell "2,81M" [ref=f4e753]
+                  - row [ref=f4e754]:
+                    - rowheader "Valeur ajoutée / CA (%)" [ref=f4e755]
+                    - cell "59,8" [ref=f4e756]
+                    - cell "52,8" [ref=f4e757]
+                    - cell "70,2" [ref=f4e758]
+                    - cell "69,7" [ref=f4e759]
+                  - row [ref=f4e760]:
+                    - columnheader "Structure d'activité" [ref=f4e761]
+                    - columnheader "2025" [ref=f4e762]
+                    - columnheader "2024" [ref=f4e763]
+                    - columnheader "2023" [ref=f4e764]
+                    - columnheader "2022" [ref=f4e765]
+                  - row [ref=f4e766]:
+                    - rowheader "Effectif" [ref=f4e767]
+                    - cell "51" [ref=f4e768]
+                    - cell "62" [ref=f4e769]
+                    - cell [ref=f4e770]
+                    - cell "43" [ref=f4e771]
+                  - row [ref=f4e772]:
+                    - rowheader "Salaires et charges sociales (€)" [ref=f4e773]
+                    - cell "3,18M" [ref=f4e774]
+                    - cell "3,91M" [ref=f4e775]
+                    - cell "4,78M" [ref=f4e776]
+                    - cell "2,49M" [ref=f4e777]
+                  - row [ref=f4e778]:
+                    - rowheader "Salaires / CA (%)" [ref=f4e779]
+                    - cell "63,4" [ref=f4e780]
+                    - cell "67" [ref=f4e781]
+                    - cell "62,4" [ref=f4e782]
+                    - cell "61,6" [ref=f4e783]
+                  - row [ref=f4e784]:
+                    - rowheader "Impôts et taxes (€)" [ref=f4e785]
+                    - cell "129K" [ref=f4e786]
+                    - cell "162K" [ref=f4e787]
+                    - cell "183K" [ref=f4e788]
+                    - cell "117K" [ref=f4e789]
+                  - row [ref=f4e790]:
+                    - rowheader "Chiffre d'affaires à l'export (€)" [ref=f4e791]
+                    - cell "0" [ref=f4e792]
+                    - cell "0" [ref=f4e793]
+                    - cell "0" [ref=f4e794]
+                    - cell "0" [ref=f4e795]
+          - generic [ref=f4e799]:
+            - heading "Dirigeants et représentants de FONCIA PARIS EST" [level=2] [ref=f4e801]
+            - list [ref=f4e802]:
+              - generic [ref=f4e803]:
+                - listitem [ref=f4e804]:
+                  - generic [ref=f4e805]:
+                    - link "Squillaci Michel" [ref=f4e807] [cursor=pointer]:
+                      - /url: /dirigeant/michel_squillaci_1978-05
+                    - generic [ref=f4e808]: Président
+                    - generic [ref=f4e809]: 48 ans - 05/1978
+                  - generic [ref=f4e810]:
+                    - generic [ref=f4e811]: Depuis le 01/07/2025
+                    - link " Suivre" [ref=f4e813] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e814]: 
+                      - generic [ref=f4e815]: Suivre
+                - listitem [ref=f4e816]:
+                  - generic [ref=f4e817]:
+                    - link "PRICEWATERHOUSECOOPERS AUDIT" [ref=f4e819] [cursor=pointer]:
+                      - /url: pricewaterhousecoopers-audit-672006483
+                    - generic [ref=f4e820]: Commissaire aux comptes titulaire
+                    - generic [ref=f4e822]:
+                      - text: "SIREN :"
+                      - link "672006483" [ref=f4e823] [cursor=pointer]:
+                        - /url: pricewaterhousecoopers-audit-672006483
+                  - generic [ref=f4e824]:
+                    - generic [ref=f4e825]: Depuis le 01/10/2018
+                    - link " Suivre" [ref=f4e827] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e828]: 
+                      - generic [ref=f4e829]: Suivre
+              - generic [ref=f4e830]: Anciens dirigeants
+              - generic [ref=f4e833]:
+                - listitem [ref=f4e834]:
+                  - generic [ref=f4e835]:
+                    - link "Dupuis Stephane" [ref=f4e837] [cursor=pointer]:
+                      - /url: /dirigeant/stephane_dupuis_1978-08
+                    - generic [ref=f4e838]: Ancien président
+                    - generic [ref=f4e839]: 48 ans - 08/1978
+                  - generic [ref=f4e840]:
+                    - generic [ref=f4e841]: Du 18/11/2021 au 02/09/2025
+                    - link " Suivre" [ref=f4e843] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e844]: 
+                      - generic [ref=f4e845]: Suivre
+                - listitem [ref=f4e846]:
+                  - generic [ref=f4e847]:
+                    - link "Plouhinec Michel" [ref=f4e849] [cursor=pointer]:
+                      - /url: /dirigeant/michel_plouhinec_1967-12
+                    - generic [ref=f4e850]: Ancien président
+                    - generic [ref=f4e851]: 58 ans - 12/1967
+                  - generic [ref=f4e852]:
+                    - generic [ref=f4e853]: Du 23/10/2018 au 18/11/2021
+                    - link " Suivre" [ref=f4e855] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e856]: 
+                      - generic [ref=f4e857]: Suivre
+                - listitem [ref=f4e858]:
+                  - generic [ref=f4e859]:
+                    - link "Lesage Bruno" [ref=f4e861] [cursor=pointer]:
+                      - /url: /dirigeant/bruno_lesage_1971-11
+                    - generic [ref=f4e862]: Ancien directeur général
+                    - generic [ref=f4e863]: 54 ans - 11/1971
+                  - generic [ref=f4e864]:
+                    - generic [ref=f4e865]: Du 06/12/2018 au 22/10/2021
+                    - link " Suivre" [ref=f4e867] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e868]: 
+                      - generic [ref=f4e869]: Suivre
+                - listitem [ref=f4e870]:
+                  - generic [ref=f4e871]:
+                    - link "AUDIT BUGEAUD" [ref=f4e873] [cursor=pointer]:
+                      - /url: audit-bugeaud-418234274
+                    - generic [ref=f4e874]: Ancien commissaire aux comptes titulaire
+                    - generic [ref=f4e876]:
+                      - text: "SIREN :"
+                      - link "418234274" [ref=f4e877] [cursor=pointer]:
+                        - /url: audit-bugeaud-418234274
+                  - generic [ref=f4e878]:
+                    - generic [ref=f4e879]: Du 05/08/2015 au 18/02/2020
+                    - link " Suivre" [ref=f4e881] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e882]: 
+                      - generic [ref=f4e883]: Suivre
+                - listitem [ref=f4e884]:
+                  - generic [ref=f4e885]:
+                    - link "Berthou Benoit" [ref=f4e887] [cursor=pointer]:
+                      - /url: /dirigeant/benoit_berthou_1965-08
+                    - generic [ref=f4e888]: Ancien commissaire aux comptes suppléant
+                    - generic [ref=f4e889]: 61 ans - 08/1965
+                  - generic [ref=f4e890]:
+                    - generic [ref=f4e891]: Du 05/08/2015 au 18/02/2020
+                    - link " Suivre" [ref=f4e893] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e894]: 
+                      - generic [ref=f4e895]: Suivre
+                - listitem [ref=f4e896]:
+                  - generic [ref=f4e897]:
+                    - link "IMMO GEST CONSULTING" [ref=f4e899] [cursor=pointer]:
+                      - /url: immo-gest-consulting-811874981
+                    - generic [ref=f4e900]: Ancien président
+                    - generic [ref=f4e902]:
+                      - text: "SIREN :"
+                      - link "811874981" [ref=f4e903] [cursor=pointer]:
+                        - /url: immo-gest-consulting-811874981
+                  - generic [ref=f4e904]:
+                    - generic [ref=f4e905]: Du 05/08/2015 au 23/10/2018
+                    - link " Suivre" [ref=f4e907] [cursor=pointer]:
+                      - /url: "#"
+                      - generic [ref=f4e908]: 
+                      - generic [ref=f4e909]: Suivre
+          - generic [ref=f4e910]:
+            - heading "Actionnaires et bénéficiaires effectifs de FONCIA PARIS EST" [level=2] [ref=f4e912]
+            - generic [ref=f4e914]:
+              - generic [ref=f4e915]:
+                - generic [ref=f4e916]: 
+                - generic [ref=f4e917]: Accès restreint aux données des bénéficiaires effectifs
+              - paragraph [ref=f4e918]:
+                - text: Les données liées aux bénéficiaires effectifs (identité des actionnaires, parts, droits de vote, etc.) sont
+                - link "réservées aux personnes habilitées " [ref=f4e919] [cursor=pointer]:
+                  - /url: /acces-beneficiaires-effectifs
+                  - text: réservées aux personnes habilitées
+                  - generic [ref=f4e920]: 
+                - text: .
+              - link "Faire une demande d'accès " [ref=f4e921] [cursor=pointer]:
+                - /url: /acces-beneficiaires-effectifs
+                - text: Faire une demande d'accès
+                - generic [ref=f4e922]: 
+          - generic [ref=f4e923]:
+            - generic [ref=f4e924]:
+              - heading "Documents juridiques de FONCIA PARIS EST" [level=2] [ref=f4e925]
+              - generic [ref=f4e926] [cursor=pointer]: 
+            - generic [ref=f4e929]:
+              - button "Filtrer par type de document " [ref=f4e931] [cursor=pointer]:
+                - text: Filtrer par type de document
+                - generic [ref=f4e932]: 
+              - list [ref=f4e934]:
+                - listitem [ref=f4e935]:
+                  - generic [ref=f4e936]:
+                    - list [ref=f4e937]:
+                      - listitem [ref=f4e938]:
+                        - text: Le projet de fusion (intranationale ou transfrontalière)
+                        - list
+                    - generic [ref=f4e939]: 18/05/2026
+                  - link "Télécharger le document" [ref=f4e942] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e943]: 
+                - listitem [ref=f4e944]:
+                  - generic [ref=f4e945]:
+                    - list [ref=f4e946]:
+                      - listitem [ref=f4e947]:
+                        - text: Copie des statuts mis à jour
+                        - list
+                    - generic [ref=f4e948]: 19/02/2026
+                  - link "Télécharger le document" [ref=f4e951] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e952]: 
+                - listitem [ref=f4e953]:
+                  - generic [ref=f4e954]:
+                    - list [ref=f4e955]:
+                      - listitem [ref=f4e956]:
+                        - text: Décision de modification certifiée conforme par le représentant légal
+                        - list
+                    - generic [ref=f4e957]: 19/02/2026
+                  - link "Télécharger le document" [ref=f4e960] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e961]: 
+                - listitem [ref=f4e962]:
+                  - generic [ref=f4e963]:
+                    - list [ref=f4e964]:
+                      - listitem [ref=f4e965]:
+                        - text: PV ayant décidé et constaté la modification enregistrée, certifié conforme par le représentant légal
+                        - list
+                    - generic [ref=f4e966]: 19/02/2026
+                  - link "Télécharger le document" [ref=f4e969] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e970]: 
+                - listitem [ref=f4e971]:
+                  - generic [ref=f4e972]:
+                    - list [ref=f4e973]:
+                      - listitem [ref=f4e974]:
+                        - text: Décision de modification certifiée conforme par le représentant légal
+                        - list
+                    - generic [ref=f4e975]: 11/07/2025
+                  - link "Télécharger le document" [ref=f4e978] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e979]: 
+                - listitem [ref=f4e980]:
+                  - generic [ref=f4e981]:
+                    - list [ref=f4e982]:
+                      - listitem [ref=f4e983]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f4e984]:
+                          - listitem [ref=f4e985]: Modification(s) statutaire(s)
+                          - listitem [ref=f4e986]: Transfert du siège social
+                      - listitem [ref=f4e987]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f4e988]: 03/05/2023
+                  - link "Télécharger le document" [ref=f4e991] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e992]: 
+                - listitem [ref=f4e993]:
+                  - generic [ref=f4e994]:
+                    - list [ref=f4e995]:
+                      - listitem [ref=f4e996]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f4e997]:
+                          - listitem [ref=f4e998]: Nomination de président
+                    - generic [ref=f4e999]: 18/11/2021
+                  - link "Télécharger le document" [ref=f4e1002] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1003]: 
+                - listitem [ref=f4e1004]:
+                  - generic [ref=f4e1005]:
+                    - list [ref=f4e1006]:
+                      - listitem [ref=f4e1007]:
+                        - text: Procès-verbal
+                        - list [ref=f4e1008]:
+                          - listitem [ref=f4e1009]: Démission de directeur général
+                    - generic [ref=f4e1010]: 22/10/2021
+                  - link "Télécharger le document" [ref=f4e1013] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1014]: 
+                - listitem [ref=f4e1015]:
+                  - generic [ref=f4e1016]:
+                    - list [ref=f4e1017]:
+                      - listitem [ref=f4e1018]:
+                        - text: Décision(s) de l'associé unique
+                        - list [ref=f4e1019]:
+                          - listitem [ref=f4e1020]: Fin de mission de commissaire aux comptes suppléant
+                          - listitem [ref=f4e1021]: Fin de mission de commissaire aux comptes titulaire
+                    - generic [ref=f4e1022]: 18/02/2020
+                  - link "Télécharger le document" [ref=f4e1025] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1026]: 
+                - listitem [ref=f4e1027]:
+                  - generic [ref=f4e1028]:
+                    - list [ref=f4e1029]:
+                      - listitem [ref=f4e1030]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f4e1031]:
+                          - listitem [ref=f4e1032]: Changement de la dénomination sociale
+                          - listitem [ref=f4e1033]: Modification(s) statutaire(s)
+                      - listitem [ref=f4e1034]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f4e1035]: 26/03/2019
+                  - link "Télécharger le document" [ref=f4e1038] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1039]: 
+                - listitem [ref=f4e1040]:
+                  - generic [ref=f4e1041]:
+                    - list [ref=f4e1042]:
+                      - listitem [ref=f4e1043]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f4e1044]:
+                          - listitem [ref=f4e1045]: Nomination de directeur général
+                    - generic [ref=f4e1046]: 06/12/2018
+                  - link "Télécharger le document" [ref=f4e1049] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1050]: 
+                - listitem [ref=f4e1051]:
+                  - generic [ref=f4e1052]:
+                    - list [ref=f4e1053]:
+                      - listitem [ref=f4e1054]:
+                        - text: Extrait de procès-verbal
+                        - list [ref=f4e1055]:
+                          - listitem [ref=f4e1056]: Nomination de commissaire aux comptes titulaire
+                          - listitem [ref=f4e1057]: Changement de président
+                          - listitem [ref=f4e1058]: Modification(s) statutaire(s)
+                      - listitem [ref=f4e1059]:
+                        - text: Statuts mis à jour
+                        - list
+                    - generic [ref=f4e1060]: 23/10/2018
+                  - link "Télécharger le document" [ref=f4e1063] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1064]: 
+                - listitem [ref=f4e1065]:
+                  - generic [ref=f4e1066]:
+                    - list [ref=f4e1067]:
+                      - listitem [ref=f4e1068]:
+                        - text: Décision(s) de l'actionnaire unique
+                        - list [ref=f4e1069]:
+                          - listitem [ref=f4e1070]: Nomination de commissaire aux comptes titulaire et suppléant
+                          - listitem [ref=f4e1071]: Changement de président
+                    - generic [ref=f4e1072]: 05/08/2015
+                  - link "Télécharger le document" [ref=f4e1075] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1076]: 
+                - listitem [ref=f4e1077]:
+                  - generic [ref=f4e1078]:
+                    - list [ref=f4e1079]:
+                      - listitem [ref=f4e1080]:
+                        - text: Certificat
+                        - list
+                      - listitem [ref=f4e1081]:
+                        - text: Procès-verbal d'assemblée constitutive
+                        - list [ref=f4e1082]:
+                          - listitem [ref=f4e1083]: Nomination de président
+                      - listitem [ref=f4e1084]:
+                        - text: Statuts constitutifs
+                        - list
+                    - generic [ref=f4e1085]: 06/01/2010
+                  - link "Télécharger le document" [ref=f4e1088] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1089]: 
+                - listitem [ref=f4e1090]:
+                  - generic [ref=f4e1091]:
+                    - list [ref=f4e1092]:
+                      - listitem [ref=f4e1093]:
+                        - text: Certificat
+                        - list
+                      - listitem [ref=f4e1094]:
+                        - text: Procès-verbal d'assemblée constitutive
+                        - list [ref=f4e1095]:
+                          - listitem [ref=f4e1096]: Nomination de président
+                      - listitem [ref=f4e1097]:
+                        - text: Statuts constitutifs
+                        - list
+                    - generic [ref=f4e1098]: 06/01/2010
+                  - link "Télécharger le document" [ref=f4e1101] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1102]: 
+                - listitem [ref=f4e1103]:
+                  - generic [ref=f4e1104]:
+                    - list [ref=f4e1105]:
+                      - listitem [ref=f4e1106]:
+                        - text: Certificat
+                        - list
+                      - listitem [ref=f4e1107]:
+                        - text: Procès-verbal d'assemblée constitutive
+                        - list [ref=f4e1108]:
+                          - listitem [ref=f4e1109]: Nomination de président
+                      - listitem [ref=f4e1110]:
+                        - text: Statuts constitutifs
+                        - list
+                    - generic [ref=f4e1111]: 06/01/2010
+                  - link "Télécharger le document" [ref=f4e1114] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1115]: 
+            - generic [ref=f4e1116] [cursor=pointer]:
+              - text: Rechercher dans les documents
+              - generic [ref=f4e1117]: 
+            - link [ref=f4e1119] [cursor=pointer]:
+              - /url: https://services.pappers.fr/registres-dematerialises?utm_source=pappers&utm_medium=bloc-document&utm_campaign=registres-dematerialises
+              - img "Ouverture de registre" [ref=f4e1120]
+              - text: Ouvrez et tenez vos registres dématérialisés sur Pappers Services
+          - generic [ref=f4e1121]:
+            - generic [ref=f4e1122]:
+              - heading "Comptes annuels de FONCIA PARIS EST" [level=2] [ref=f4e1123]
+              - generic [ref=f4e1124] [cursor=pointer]: 
+            - list [ref=f4e1128]:
+              - listitem [ref=f4e1129]:
+                - generic [ref=f4e1130]:
+                  - strong [ref=f4e1131]: Comptes sociaux 2025
+                  - generic [ref=f4e1132]: 06/08/2026
+                - generic [ref=f4e1133]:
+                  - link "Télécharger le document" [ref=f4e1135] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1136]: 
+                  - link "Télécharger le document" [ref=f4e1138] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1139]: 
+              - listitem [ref=f4e1140]:
+                - generic [ref=f4e1141]:
+                  - strong [ref=f4e1142]: Comptes sociaux 2024
+                  - generic [ref=f4e1143]: 20/02/2026
+                - generic [ref=f4e1144]:
+                  - link "Télécharger le document" [ref=f4e1146] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1147]: 
+                  - link "Télécharger le document" [ref=f4e1149] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1150]: 
+              - listitem [ref=f4e1151]:
+                - generic [ref=f4e1152]:
+                  - strong [ref=f4e1153]: Comptes sociaux 2023
+                  - generic [ref=f4e1154]: 12/08/2024
+                - generic [ref=f4e1155]:
+                  - link "Télécharger le document" [ref=f4e1157] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1158]: 
+                  - link "Télécharger le document" [ref=f4e1160] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1161]: 
+              - listitem [ref=f4e1162]:
+                - generic [ref=f4e1163]:
+                  - strong [ref=f4e1164]: Comptes sociaux 2022
+                  - generic [ref=f4e1165]: 31/07/2023
+                - generic [ref=f4e1166]:
+                  - link "Télécharger le document" [ref=f4e1168] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1169]: 
+                  - link "Télécharger le document" [ref=f4e1171] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1172]: 
+              - listitem [ref=f4e1173]:
+                - generic [ref=f4e1174]:
+                  - strong [ref=f4e1175]: Comptes sociaux 2021
+                  - generic [ref=f4e1176]: 23/09/2022
+                - generic [ref=f4e1177]:
+                  - link "Télécharger le document" [ref=f4e1179] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1180]: 
+                  - link "Télécharger le document" [ref=f4e1182] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1183]: 
+              - listitem [ref=f4e1184]:
+                - generic [ref=f4e1185]:
+                  - strong [ref=f4e1186]: Comptes sociaux 2020
+                  - generic [ref=f4e1187]: 14/10/2021
+                - generic [ref=f4e1188]:
+                  - link "Télécharger le document" [ref=f4e1190] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1191]: 
+                  - link "Télécharger le document" [ref=f4e1193] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1194]: 
+              - listitem [ref=f4e1195]:
+                - generic [ref=f4e1196]:
+                  - strong [ref=f4e1197]: Comptes sociaux 2019
+                  - generic [ref=f4e1198]: 10/12/2020
+                - generic [ref=f4e1199]:
+                  - link "Télécharger le document" [ref=f4e1201] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1202]: 
+                  - link "Télécharger le document" [ref=f4e1204] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1205]: 
+              - listitem [ref=f4e1206]:
+                - generic [ref=f4e1207]:
+                  - strong [ref=f4e1208]: Comptes sociaux 2018
+                  - generic [ref=f4e1209]: 29/08/2019
+                - generic [ref=f4e1210]:
+                  - link "Télécharger le document" [ref=f4e1212] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1213]: 
+                  - link "Télécharger le document" [ref=f4e1215] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1216]: 
+              - listitem [ref=f4e1217]:
+                - generic [ref=f4e1218]:
+                  - strong [ref=f4e1219]: Comptes sociaux 2017
+                  - generic [ref=f4e1220]: 08/08/2018
+                - generic [ref=f4e1221]:
+                  - link "Télécharger le document" [ref=f4e1223] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1224]: 
+                  - link "Télécharger le document" [ref=f4e1226] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1227]: 
+              - listitem [ref=f4e1228]:
+                - generic [ref=f4e1229]:
+                  - strong [ref=f4e1230]: Comptes sociaux 2016
+                  - generic [ref=f4e1231]: 28/09/2017
+                - generic [ref=f4e1232]:
+                  - link "Télécharger le document" [ref=f4e1234] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1235]: 
+                  - link "Télécharger le document" [ref=f4e1237] [cursor=pointer]:
+                    - /url: "#_"
+                    - generic [ref=f4e1238]: 
+          - generic [ref=f4e1240]:
+            - generic [ref=f4e1241]:
+              - generic [ref=f4e1242]:
+                - heading "Conformité de FONCIA PARIS EST" [level=2] [ref=f4e1244]
+                - generic [ref=f4e1246]:
+                  - generic [ref=f4e1247]: 0 procédure collective
+                  - generic [ref=f4e1249]:
+                    - generic [ref=f4e1250]:
+                      - generic [ref=f4e1251]: 
+                      - text: 12 contentieux
+                    - generic [ref=f4e1252]:
+                      - generic [ref=f4e1253]: En savoir plus
+                      - generic [ref=f4e1254]: 
+                  - generic [ref=f4e1255]:
+                    - generic [ref=f4e1256]:
+                      - generic [ref=f4e1257]: 
+                      - text: 1 alerte
+                    - generic [ref=f4e1258]:
+                      - generic [ref=f4e1259]: En savoir plus
+                      - generic [ref=f4e1260]: 
+                - link "Tester la conformité de son entreprise " [ref=f4e1262] [cursor=pointer]:
+                  - /url: https://services.pappers.fr/conformite
+                  - text: Tester la conformité de son entreprise
+                  - generic [ref=f4e1263]: 
+                - generic [ref=f4e1264]:
+                  - link "Les alertes complètes sont disponibles via notre offre Pappers Pro. Découvrez toutes les fonctionnalités de la plateforme " [ref=f4e1265] [cursor=pointer]:
+                    - /url: https://www.pappers.fr/pappers-pro
+                    - text: Les alertes complètes sont disponibles via notre offre Pappers Pro. Découvrez toutes les fonctionnalités de la plateforme
+                    - generic [ref=f4e1266]: 
+                  - img "Logo Pappers Pro" [ref=f4e1267]
+              - text:              
+            - generic [ref=f4e1268]:
+              - generic [ref=f4e1269]: Résumé
+              - generic [ref=f4e1271] [cursor=pointer]: Alertes
+              - generic [ref=f4e1273] [cursor=pointer]: Procédures collectives
+              - generic [ref=f4e1275] [cursor=pointer]: Contentieux
+          - generic [ref=f4e1280]:
+            - heading "Annonces BODACC de FONCIA PARIS EST" [level=2] [ref=f4e1282]
+            - generic [ref=f4e1283]:
+              - button "Filtrer par type d'annonce " [ref=f4e1285] [cursor=pointer]:
+                - text: Filtrer par type d'annonce
+                - generic [ref=f4e1286]: 
+              - list [ref=f4e1288]:
+                - listitem [ref=f4e1289]:
+                  - generic [ref=f4e1290]:
+                    - generic [ref=f4e1291]:
+                      - generic [ref=f4e1292]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1293]: 23/08/2026
+                    - generic [ref=f4e1294]: RCS de Paris
+                  - generic [ref=f4e1295]:
+                    - generic [ref=f4e1296]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1297]: "Date de clôture : 31/12/2025"
+                    - generic [ref=f4e1298]: "Adresse : 200 rue Raymond Losserand 75014 Paris"
+                  - link "Bodacc C n°20260160, annonce n°2920 " [ref=f4e1299] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20260160/2920
+                    - text: Bodacc C n°20260160, annonce n°2920
+                    - generic [ref=f4e1300]: 
+                - listitem [ref=f4e1301]:
+                  - generic [ref=f4e1303]:
+                    - generic [ref=f4e1304]: MODIFICATION AUTRE
+                    - generic [ref=f4e1306]: 17/07/2026
+                  - generic [ref=f4e1307]:
+                    - generic [ref=f4e1308]: "Dénomination : FAIDHERBE COPROPRIETES, SAS"
+                    - generic [ref=f4e1309]: "Journal : mesinfos.fr/affiches-parisiennes"
+                  - text: "Absorbante : FONCIA PARIS EST, SAS au capital de 5 010 000 €, 200, rue Raymond Losserand, 75014 Paris, 518931340 R.C.S. Paris Absorbée : FAIDHERBE COPROPRIETES, SAS au capital de 42 000 €, 24-28 rue Henri Poincaré, 75020 Paris, 809538853 R.C.S. Paris Aux termes du projet de traité de fusion du 13/05/2026, prévoyant la fusion absorption de la société FAIDHERBE COPROPRIETES par la société FONCIA PARIS EST, il résulte que la réalisation définitive de la fusion est à effet juridique au 30/06/2026, la société absorbée se trouve dissoute sans liquidation. Radiation et mention au RCS de PARIS."
+                - listitem [ref=f4e1310]:
+                  - generic [ref=f4e1311]:
+                    - generic [ref=f4e1312]:
+                      - generic [ref=f4e1313]: VENTE
+                      - generic [ref=f4e1314]: 21/05/2026
+                    - generic [ref=f4e1315]: RCS de Paris
+                  - generic [ref=f4e1316]:
+                    - generic [ref=f4e1317]: "Adresse : 200 rue Raymond Losserand 75014 Paris"
+                    - generic [ref=f4e1318]: "Catégorie vente : Autre achat, apport, attribution (immatriculation d'une personne morale, uniquement)"
+                    - generic [ref=f4e1319]:
+                      - text: "Ancien propriétaire :"
+                      - link "FAIDHERBE COPROPRIETES" [ref=f4e1320] [cursor=pointer]:
+                        - /url: faidherbe-coproprietes-809538853
+                  - link "Bodacc A n°20260095, annonce n°1879 " [ref=f4e1321] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/A/20260095/1879
+                    - text: Bodacc A n°20260095, annonce n°1879
+                    - generic [ref=f4e1322]: 
+                - listitem [ref=f4e1323]:
+                  - generic [ref=f4e1324]:
+                    - generic [ref=f4e1325]:
+                      - generic [ref=f4e1326]: MODIFICATION
+                      - generic [ref=f4e1327]: 20/05/2026
+                    - generic [ref=f4e1328]: RCS de Paris
+                  - generic [ref=f4e1329]:
+                    - generic [ref=f4e1330]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1331]: "Capital : 5 010 000,00 €"
+                    - generic [ref=f4e1332]: "Adresse : 200 rue Raymond Losserand 75014 Paris"
+                    - generic [ref=f4e1333]: "Description : modification survenue sur le capital (augmentation) et l'adresse du siège"
+                  - link "Bodacc B n°20260094, annonce n°968 " [ref=f4e1334] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20260094/968
+                    - text: Bodacc B n°20260094, annonce n°968
+                    - generic [ref=f4e1335]: 
+                - listitem [ref=f4e1336]:
+                  - generic [ref=f4e1337]:
+                    - generic [ref=f4e1338]:
+                      - generic [ref=f4e1339]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1340]: 10/03/2026
+                    - generic [ref=f4e1341]: RCS de Paris
+                  - generic [ref=f4e1342]:
+                    - generic [ref=f4e1343]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1344]: "Date de clôture : 31/12/2024"
+                    - generic [ref=f4e1345]: "Adresse : 74 boulevard de Reuilly 75012 Paris"
+                  - link "Bodacc C n°20260047, annonce n°5800 " [ref=f4e1346] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20260047/5800
+                    - text: Bodacc C n°20260047, annonce n°5800
+                    - generic [ref=f4e1347]: 
+                - listitem [ref=f4e1348]:
+                  - generic [ref=f4e1349]:
+                    - generic [ref=f4e1350]:
+                      - generic [ref=f4e1351]: MODIFICATION
+                      - generic [ref=f4e1352]: 24/10/2025
+                    - generic [ref=f4e1353]: RCS de Paris
+                  - generic [ref=f4e1354]:
+                    - generic [ref=f4e1355]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1356]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1357]: "Adresse : 74 boulevard de Reuilly 75012 Paris"
+                    - generic [ref=f4e1358]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1359]: "Administration : Président partant : Dupuis, Stéphane ; nomination du Président : Squillaci, Michel"
+                  - link "Bodacc B n°20250205, annonce n°2719 " [ref=f4e1360] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20250205/2719
+                    - text: Bodacc B n°20250205, annonce n°2719
+                    - generic [ref=f4e1361]: 
+                - listitem [ref=f4e1362]:
+                  - generic [ref=f4e1363]:
+                    - generic [ref=f4e1364]:
+                      - generic [ref=f4e1365]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1366]: 30/09/2024
+                    - generic [ref=f4e1367]: RCS de Paris
+                  - generic [ref=f4e1368]:
+                    - generic [ref=f4e1369]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1370]: "Date de clôture : 31/12/2023"
+                    - generic [ref=f4e1371]: "Adresse : 74 boulevard de Reuilly 75012 Paris"
+                  - link "Bodacc C n°20240190, annonce n°5909 " [ref=f4e1372] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20240190/5909
+                    - text: Bodacc C n°20240190, annonce n°5909
+                    - generic [ref=f4e1373]: 
+                - listitem [ref=f4e1374]:
+                  - generic [ref=f4e1375]:
+                    - generic [ref=f4e1376]:
+                      - generic [ref=f4e1377]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1378]: 07/09/2023
+                    - generic [ref=f4e1379]: RCS de Paris
+                  - generic [ref=f4e1380]:
+                    - generic [ref=f4e1381]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1382]: "Date de clôture : 31/12/2022"
+                    - generic [ref=f4e1383]: "Adresse : 74 boulevard de Reuilly 75012 Paris"
+                  - link "Bodacc C n°20230172, annonce n°3773 " [ref=f4e1384] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20230172/3773
+                    - text: Bodacc C n°20230172, annonce n°3773
+                    - generic [ref=f4e1385]: 
+                - listitem [ref=f4e1386]:
+                  - generic [ref=f4e1387]:
+                    - generic [ref=f4e1388]:
+                      - generic [ref=f4e1389]: MODIFICATION
+                      - generic [ref=f4e1390]: 12/05/2023
+                    - generic [ref=f4e1391]: RCS de Paris
+                  - generic [ref=f4e1392]:
+                    - generic [ref=f4e1393]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1394]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1395]: "Adresse : 74 boulevard de Reuilly 75012 Paris"
+                    - generic [ref=f4e1396]: "Description : modification survenue sur l'adresse du siège"
+                  - link "Bodacc B n°20230092, annonce n°1391 " [ref=f4e1397] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20230092/1391
+                    - text: Bodacc B n°20230092, annonce n°1391
+                    - generic [ref=f4e1398]: 
+                - listitem [ref=f4e1399]:
+                  - generic [ref=f4e1400]:
+                    - generic [ref=f4e1401]:
+                      - generic [ref=f4e1402]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1403]: 11/10/2022
+                    - generic [ref=f4e1404]: RCS de Paris
+                  - generic [ref=f4e1405]:
+                    - generic [ref=f4e1406]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1407]: "Date de clôture : 31/12/2021"
+                    - generic [ref=f4e1408]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20220197, annonce n°5859 " [ref=f4e1409] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20220197/5859
+                    - text: Bodacc C n°20220197, annonce n°5859
+                    - generic [ref=f4e1410]: 
+                - listitem [ref=f4e1411]:
+                  - generic [ref=f4e1412]:
+                    - generic [ref=f4e1413]:
+                      - generic [ref=f4e1414]: MODIFICATION
+                      - generic [ref=f4e1415]: 28/11/2021
+                    - generic [ref=f4e1416]: RCS de Paris
+                  - generic [ref=f4e1417]:
+                    - generic [ref=f4e1418]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1419]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1420]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1421]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1422]: "Administration : Président partant : Plouhinec, Michel ; nomination du Président : Dupuis, Stéphane"
+                  - link "Bodacc B n°20210231, annonce n°1742 " [ref=f4e1423] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20210231/1742
+                    - text: Bodacc B n°20210231, annonce n°1742
+                    - generic [ref=f4e1424]: 
+                - listitem [ref=f4e1425]:
+                  - generic [ref=f4e1426]:
+                    - generic [ref=f4e1427]:
+                      - generic [ref=f4e1428]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1429]: 14/11/2021
+                    - generic [ref=f4e1430]: RCS de Paris
+                  - generic [ref=f4e1431]:
+                    - generic [ref=f4e1432]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1433]: "Date de clôture : 31/12/2020"
+                    - generic [ref=f4e1434]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20210221, annonce n°4059 " [ref=f4e1435] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20210221/4059
+                    - text: Bodacc C n°20210221, annonce n°4059
+                    - generic [ref=f4e1436]: 
+                - listitem [ref=f4e1437]:
+                  - generic [ref=f4e1438]:
+                    - generic [ref=f4e1439]:
+                      - generic [ref=f4e1440]: MODIFICATION
+                      - generic [ref=f4e1441]: 02/11/2021
+                    - generic [ref=f4e1442]: RCS de Paris
+                  - generic [ref=f4e1443]:
+                    - generic [ref=f4e1444]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1445]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1446]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1447]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1448]: "Administration : Directeur général partant : Lesage, Bruno"
+                  - link "Bodacc B n°20210214, annonce n°3166 " [ref=f4e1449] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20210214/3166
+                    - text: Bodacc B n°20210214, annonce n°3166
+                    - generic [ref=f4e1450]: 
+                - listitem [ref=f4e1451]:
+                  - generic [ref=f4e1452]:
+                    - generic [ref=f4e1453]:
+                      - generic [ref=f4e1454]: VENTE
+                      - generic [ref=f4e1455]: 08/07/2021
+                    - generic [ref=f4e1456]: RCS de Paris
+                  - generic [ref=f4e1457]:
+                    - generic [ref=f4e1458]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1459]: "Catégorie vente : Achat d'un fonds par une personne morale (insertion provisoire)"
+                    - generic [ref=f4e1460]: "Origine des fonds : Fonds acquis par achat au prix stipulé de 23915,00 euros."
+                    - generic [ref=f4e1461]:
+                      - text: "Ancien propriétaire :"
+                      - link "FONTENOY IMMOBILIER REPUBLIQUE" [ref=f4e1462] [cursor=pointer]:
+                        - /url: fontenoy-immobilier-republique-440438265
+                  - link "Bodacc A n°20210132, annonce n°1410 " [ref=f4e1463] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/A/20210132/1410
+                    - text: Bodacc A n°20210132, annonce n°1410
+                    - generic [ref=f4e1464]: 
+                - listitem [ref=f4e1465]:
+                  - generic [ref=f4e1466]:
+                    - generic [ref=f4e1467]:
+                      - generic [ref=f4e1468]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1469]: 29/12/2020
+                    - generic [ref=f4e1470]: RCS de Paris
+                  - generic [ref=f4e1471]:
+                    - generic [ref=f4e1472]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1473]: "Date de clôture : 31/12/2019"
+                    - generic [ref=f4e1474]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20200252, annonce n°6962 " [ref=f4e1475] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20200252/6962
+                    - text: Bodacc C n°20200252, annonce n°6962
+                    - generic [ref=f4e1476]: 
+                - listitem [ref=f4e1477]:
+                  - generic [ref=f4e1478]:
+                    - generic [ref=f4e1479]:
+                      - generic [ref=f4e1480]: MODIFICATION
+                      - generic [ref=f4e1481]: 27/02/2020
+                    - generic [ref=f4e1482]: RCS de Paris
+                  - generic [ref=f4e1483]:
+                    - generic [ref=f4e1484]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1485]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1486]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1487]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1488]: "Administration : Commissaire aux comptes titulaire partant : AUDIT BUGEAUD ; Commissaire aux comptes suppléant partant : Berthou, Benoit"
+                  - link "Bodacc B n°20200041, annonce n°3522 " [ref=f4e1489] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20200041/3522
+                    - text: Bodacc B n°20200041, annonce n°3522
+                    - generic [ref=f4e1490]: 
+                - listitem [ref=f4e1491]:
+                  - generic [ref=f4e1492]:
+                    - generic [ref=f4e1493]:
+                      - generic [ref=f4e1494]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1495]: 15/09/2019
+                    - generic [ref=f4e1496]: RCS de Paris
+                  - generic [ref=f4e1497]:
+                    - generic [ref=f4e1498]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1499]: "Date de clôture : 31/12/2018"
+                    - generic [ref=f4e1500]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20190178, annonce n°5191 " [ref=f4e1501] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20190178/5191
+                    - text: Bodacc C n°20190178, annonce n°5191
+                    - generic [ref=f4e1502]: 
+                - listitem [ref=f4e1503]:
+                  - generic [ref=f4e1504]:
+                    - generic [ref=f4e1505]:
+                      - generic [ref=f4e1506]: MODIFICATION
+                      - generic [ref=f4e1507]: 04/04/2019
+                    - generic [ref=f4e1508]: RCS de Paris
+                  - generic [ref=f4e1509]:
+                    - generic [ref=f4e1510]: "Dénomination : FONCIA PARIS EST"
+                    - generic [ref=f4e1511]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1512]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1513]: "Description : modification survenue sur la dénomination"
+                  - link "Bodacc B n°20190067, annonce n°4726 " [ref=f4e1514] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20190067/4726
+                    - text: Bodacc B n°20190067, annonce n°4726
+                    - generic [ref=f4e1515]: 
+                - listitem [ref=f4e1516]:
+                  - generic [ref=f4e1517]:
+                    - generic [ref=f4e1518]:
+                      - generic [ref=f4e1519]: MODIFICATION
+                      - generic [ref=f4e1520]: 16/12/2018
+                    - generic [ref=f4e1521]: RCS de Paris
+                  - generic [ref=f4e1522]:
+                    - generic [ref=f4e1523]: "Dénomination : CABINET POINCARE GESTION CONSEIL"
+                    - generic [ref=f4e1524]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1525]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1526]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1527]: "Administration : nomination du Directeur général : Lesage, Bruno"
+                  - link "Bodacc B n°20180240, annonce n°1232 " [ref=f4e1528] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20180240/1232
+                    - text: Bodacc B n°20180240, annonce n°1232
+                    - generic [ref=f4e1529]: 
+                - listitem [ref=f4e1530]:
+                  - generic [ref=f4e1531]:
+                    - generic [ref=f4e1532]:
+                      - generic [ref=f4e1533]: MODIFICATION
+                      - generic [ref=f4e1534]: 02/11/2018
+                    - generic [ref=f4e1535]: RCS de Paris
+                  - generic [ref=f4e1536]:
+                    - generic [ref=f4e1537]: "Dénomination : CABINET POINCARE GESTION CONSEIL"
+                    - generic [ref=f4e1538]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1539]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1540]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1541]: "Administration : Président partant : IMMO GEST CONSULTING ; nomination du Président : Plouhinec, Michel ; nomination du Commissaire aux comptes titulaire : PRICEWATERHOUSECOOPERS AUDIT"
+                  - link "Bodacc B n°20180209, annonce n°2037 " [ref=f4e1542] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20180209/2037
+                    - text: Bodacc B n°20180209, annonce n°2037
+                    - generic [ref=f4e1543]: 
+                - listitem [ref=f4e1544]:
+                  - generic [ref=f4e1545]:
+                    - generic [ref=f4e1546]:
+                      - generic [ref=f4e1547]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1548]: 11/09/2018
+                    - generic [ref=f4e1549]: RCS de Paris
+                  - generic [ref=f4e1550]:
+                    - generic [ref=f4e1551]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1552]: "Date de clôture : 31/12/2017"
+                    - generic [ref=f4e1553]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20180167, annonce n°7334 " [ref=f4e1554] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20180167/7334
+                    - text: Bodacc C n°20180167, annonce n°7334
+                    - generic [ref=f4e1555]: 
+                - listitem [ref=f4e1556]:
+                  - generic [ref=f4e1557]:
+                    - generic [ref=f4e1558]:
+                      - generic [ref=f4e1559]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1560]: 25/10/2017
+                    - generic [ref=f4e1561]: RCS de Paris
+                  - generic [ref=f4e1562]:
+                    - generic [ref=f4e1563]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1564]: "Date de clôture : 31/12/2016"
+                    - generic [ref=f4e1565]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20170107, annonce n°8142 " [ref=f4e1566] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20170107/8142
+                    - text: Bodacc C n°20170107, annonce n°8142
+                    - generic [ref=f4e1567]: 
+                - listitem [ref=f4e1568]:
+                  - generic [ref=f4e1569]:
+                    - generic [ref=f4e1570]:
+                      - generic [ref=f4e1571]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1572]: 17/11/2016
+                    - generic [ref=f4e1573]: RCS de Paris
+                  - generic [ref=f4e1574]:
+                    - generic [ref=f4e1575]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1576]: "Date de clôture : 31/12/2015"
+                    - generic [ref=f4e1577]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20160122, annonce n°9500 " [ref=f4e1578] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20160122/9500
+                    - text: Bodacc C n°20160122, annonce n°9500
+                    - generic [ref=f4e1579]: 
+                - listitem [ref=f4e1580]:
+                  - generic [ref=f4e1581]:
+                    - generic [ref=f4e1582]:
+                      - generic [ref=f4e1583]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1584]: 19/01/2016
+                    - generic [ref=f4e1585]: RCS de Paris
+                  - generic [ref=f4e1586]:
+                    - generic [ref=f4e1587]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1588]: "Date de clôture : 31/12/2014"
+                    - generic [ref=f4e1589]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20160006, annonce n°4751 " [ref=f4e1590] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20160006/4751
+                    - text: Bodacc C n°20160006, annonce n°4751
+                    - generic [ref=f4e1591]: 
+                - listitem [ref=f4e1592]:
+                  - generic [ref=f4e1593]:
+                    - generic [ref=f4e1594]:
+                      - generic [ref=f4e1595]: MODIFICATION
+                      - generic [ref=f4e1596]: 21/08/2015
+                    - generic [ref=f4e1597]: RCS de Paris
+                  - generic [ref=f4e1598]:
+                    - generic [ref=f4e1599]: "Dénomination : CABINET POINCARE GESTION CONSEIL"
+                    - generic [ref=f4e1600]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1601]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1602]: "Description : modification survenue sur l'administration"
+                    - generic [ref=f4e1603]: "Administration : Président partant : Pitoy, Thomas, nomination du Président : IMMO GEST CONSULTING, nomination du Commissaire aux comptes titulaire : AUDIT BUGEAUD, nomination du Commissaire aux comptes suppléant : Berthou, Benoit"
+                  - link "Bodacc B n°20150159, annonce n°853 " [ref=f4e1604] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/B/20150159/853
+                    - text: Bodacc B n°20150159, annonce n°853
+                    - generic [ref=f4e1605]: 
+                - listitem [ref=f4e1606]:
+                  - generic [ref=f4e1607]:
+                    - generic [ref=f4e1608]:
+                      - generic [ref=f4e1609]: DÉPÔT DES COMPTES
+                      - generic [ref=f4e1610]: 20/10/2014
+                    - generic [ref=f4e1611]: RCS de Paris
+                  - generic [ref=f4e1612]:
+                    - generic [ref=f4e1613]: "Type de dépôt : Comptes annuels et rapports"
+                    - generic [ref=f4e1614]: "Date de clôture : 31/12/2013"
+                    - generic [ref=f4e1615]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                  - link "Bodacc C n°20140079, annonce n°8271 " [ref=f4e1616] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/C/20140079/8271
+                    - text: Bodacc C n°20140079, annonce n°8271
+                    - generic [ref=f4e1617]: 
+                - listitem [ref=f4e1618]:
+                  - generic [ref=f4e1619]:
+                    - generic [ref=f4e1620]:
+                      - generic [ref=f4e1621]: CRÉATION
+                      - generic [ref=f4e1622]: 26/01/2010
+                    - generic [ref=f4e1623]: RCS de Paris
+                  - generic [ref=f4e1624]:
+                    - generic [ref=f4e1625]: "Dénomination : CABINET POINCARE GESTION CONSEIL"
+                    - generic [ref=f4e1626]: "Capital : 10 000,00 €"
+                    - generic [ref=f4e1627]: "Adresse : 24-28 rue Henri Poincaré 75020 Paris"
+                    - generic [ref=f4e1628]: "Activité : Transaction, location, gestion, syndic de copropriété et administration immobilière."
+                    - generic [ref=f4e1629]: "Administration : Président : Pitoy, Thomas."
+                  - link "Bodacc A n°20100017, annonce n°642 " [ref=f4e1630] [cursor=pointer]:
+                    - /url: https://www.bodacc.fr/annonce/detail-annonce/A/20100017/642
+                    - text: Bodacc A n°20100017, annonce n°642
+                    - generic [ref=f4e1631]: 
+          - generic [ref=f4e1633]:
+            - generic [ref=f4e1634]:
+              - heading "Cartographie de FONCIA PARIS EST" [level=2] [ref=f4e1635]
+              - generic [ref=f4e1636]:
+                - link "" [ref=f4e1638] [cursor=pointer]:
+                  - /url: "#"
+                - link "" [ref=f4e1640] [cursor=pointer]:
+                  - /url: "#"
+            - generic [ref=f4e1643]: 
+          - generic [ref=f4e1645]:
+            - heading "Comment contacter FONCIA PARIS EST ?" [level=2] [ref=f4e1647]
+            - generic [ref=f4e1648]:
+              - table [ref=f4e1649]:
+                - rowgroup [ref=f4e1650]:
+                  - row [ref=f4e1651]:
+                    - rowheader "Téléphone :" [ref=f4e1652]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f4e1653]
+                  - row [ref=f4e1654]:
+                    - rowheader "Email :" [ref=f4e1655]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f4e1656]
+                  - row [ref=f4e1657]:
+                    - rowheader "Site internet :" [ref=f4e1658]
+                    - cell "Réservé aux utilisateurs connectés" [ref=f4e1659]
+                  - row [ref=f4e1660]:
+                    - rowheader "Réseaux sociaux :" [ref=f4e1661]
+                    - cell "  " [ref=f4e1662]:
+                      - generic [ref=f4e1663]: 
+                      - generic [ref=f4e1665]: 
+                      - generic [ref=f4e1667]: 
+                  - row [ref=f4e1669]:
+                    - rowheader "Adresse complète :" [ref=f4e1670]
+                    - cell "200 RUE RAYMOND LOSSERAND 75014 PARIS " [ref=f4e1671]:
+                      - generic [ref=f4e1672]:
+                        - text: 200 RUE RAYMOND LOSSERAND 75014 PARIS
+                        - generic [ref=f4e1673] [cursor=pointer]: 
+              - generic [ref=f4e1676] [cursor=pointer]:
+                - text: Délégué à la protection des données
+                - generic [ref=f4e1677]: 
+              - generic [ref=f4e1679]:
+                - generic [ref=f4e1680]: 
+                - generic [ref=f4e1681]: Cette entreprise s'est opposée à l'utilisation de ses données à des fins de prospection.
+          - generic [ref=f4e1682]:
+            - heading "Services recommandés pour les SAS" [level=2] [ref=f4e1684]
+            - generic [ref=f4e1686]:
+              - table [ref=f4e1687]:
+                - rowgroup [ref=f4e1688]:
+                  - row [ref=f4e1689]:
+                    - columnheader "Prestataire" [ref=f4e1690]
+                    - columnheader "Service" [ref=f4e1691]
+                - rowgroup [ref=f4e1692]:
+                  - row [ref=f4e1693]:
+                    - cell [ref=f4e1694]:
+                      - img "Logo B.Conseil" [ref=f4e1695]
+                    - cell "Financement innovation" [ref=f4e1696]
+                    - cell [ref=f4e1697]:
+                      - link "En savoir plus" [ref=f4e1698] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/bconseil
+                        - text: En savoir plus 
+                  - row [ref=f4e1699]:
+                    - cell [ref=f4e1700]:
+                      - img "Logo Sofradom" [ref=f4e1701]
+                    - cell "Domiciliation" [ref=f4e1702]
+                    - cell [ref=f4e1703]:
+                      - link "En savoir plus" [ref=f4e1704] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/sofradom
+                        - text: En savoir plus 
+                  - row [ref=f4e1705]:
+                    - cell [ref=f4e1706]:
+                      - img "Logo Pennylane" [ref=f4e1707]
+                    - cell "Comptabilité" [ref=f4e1708]
+                    - cell [ref=f4e1709]:
+                      - link "En savoir plus" [ref=f4e1710] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/pennylanesarl
+                        - text: En savoir plus 
+                  - row [ref=f4e1711]:
+                    - cell [ref=f4e1712]:
+                      - img "Logo Axonaut" [ref=f4e1713]
+                    - cell "Logiciel de gestion français" [ref=f4e1714]
+                    - cell [ref=f4e1715]:
+                      - link "En savoir plus" [ref=f4e1716] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/axonaut
+                        - text: En savoir plus 
+                  - row [ref=f4e1717]:
+                    - cell [ref=f4e1718]:
+                      - img "Logo Kase" [ref=f4e1719]
+                    - cell "Courtier grossiste" [ref=f4e1720]
+                    - cell [ref=f4e1721]:
+                      - link "En savoir plus" [ref=f4e1722] [cursor=pointer]:
+                        - /url: https://www.pappers.fr/redirection/kase
+                        - text: En savoir plus 
+              - generic [ref=f4e1723]: Voir notre méthodologie
+          - generic [ref=f4e1725]:
+            - heading "Entreprises citées de FONCIA PARIS EST" [level=2] [ref=f4e1727]
+            - list [ref=f4e1729]:
+              - listitem [ref=f4e1730]:
+                - generic [ref=f4e1731]:
+                  - link "IMMO GEST CONSULTING (811 874 981)" [ref=f4e1732] [cursor=pointer]:
+                    - /url: immo-gest-consulting-811874981
+                  - generic [ref=f4e1733]: Cité 4 fois entre 2015 et 2022
+                - generic [ref=f4e1734]:
+                  - generic [ref=f4e1735]:
+                    - generic [ref=f4e1736]:
+                      - generic [ref=f4e1737]:
+                        - text: Nature
+                        - generic [ref=f4e1738]:
+                          - text: supposée
+                          - generic [ref=f4e1739]: 
+                        - text: "de la relation :"
+                      - text: Avocat
+                    - generic [ref=f4e1740]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "Thomas Pitoy" [ref=f4e1741] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Thomas+Pitoy&date_de_naissance_beneficiaire_min=13-09-1984&date_de_naissance_beneficiaire_max=13-09-1984
+                      - text: ","
+                      - link "Yves Villeneuve" [ref=f4e1742] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Yves+Villeneuve&date_de_naissance_beneficiaire_min=04-12-1960&date_de_naissance_beneficiaire_max=04-12-1960
+                  - link "En savoir plus" [ref=f4e1744] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f4e1745]:
+                - generic [ref=f4e1746]:
+                  - link "SOCIETE DE GESTION IMMOBILIERE VALORISEE - SGIV (379 880 602)" [ref=f4e1747] [cursor=pointer]:
+                    - /url: societe-de-gestion-immobiliere-valorisee-sgiv-379880602
+                  - generic [ref=f4e1748]: Cité 1 fois en 2019
+                - generic [ref=f4e1749]:
+                  - generic [ref=f4e1750]:
+                    - generic [ref=f4e1751]:
+                      - generic [ref=f4e1752]:
+                        - text: Nature
+                        - generic [ref=f4e1753]:
+                          - text: supposée
+                          - generic [ref=f4e1754]: 
+                        - text: "de la relation :"
+                      - text: Fusion
+                    - generic [ref=f4e1755]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "Benoit Berthou" [ref=f4e1756] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Benoit+Berthou&date_de_naissance_beneficiaire_min=15-08-1965&date_de_naissance_beneficiaire_max=15-08-1965
+                      - text: ","
+                      - link "AUDIT BUGEAUD" [ref=f4e1757] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=418234274
+                      - text: ","
+                      - link "Michel Plouhinec" [ref=f4e1758] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=Michel+Plouhinec&date_de_naissance_beneficiaire_min=19-12-1967&date_de_naissance_beneficiaire_max=19-12-1967
+                      - text: et 2 autres
+                  - link "En savoir plus" [ref=f4e1760] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f4e1761]:
+                - generic [ref=f4e1762]:
+                  - link "AUDIT BUGEAUD (418 234 274)" [ref=f4e1763] [cursor=pointer]:
+                    - /url: audit-bugeaud-418234274
+                  - generic [ref=f4e1764]: Cité 1 fois en 2015
+                - generic [ref=f4e1765]:
+                  - generic [ref=f4e1767]:
+                    - generic [ref=f4e1768]:
+                      - text: Nature
+                      - generic [ref=f4e1769]:
+                        - text: supposée
+                        - generic [ref=f4e1770]: 
+                      - text: "de la relation :"
+                    - text: Commissaire aux comptes
+                  - link "En savoir plus" [ref=f4e1772] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f4e1773]:
+                - generic [ref=f4e1774]:
+                  - link "20EME APPART (793 355 371)" [ref=f4e1775] [cursor=pointer]:
+                    - /url: 20eme-appart-793355371
+                  - generic [ref=f4e1776]: Cité 1 fois en 2013
+                - generic [ref=f4e1777]:
+                  - generic [ref=f4e1778]:
+                    - generic [ref=f4e1779]:
+                      - generic [ref=f4e1780]:
+                        - text: Nature
+                        - generic [ref=f4e1781]:
+                          - text: supposée
+                          - generic [ref=f4e1782]: 
+                        - text: "de la relation :"
+                      - text: Avocat
+                    - generic [ref=f4e1783]:
+                      - text: "Dirigeants et bénéficiaires effectifs :"
+                      - link "PITOY HOLDING" [ref=f4e1784] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=851317172
+                      - text: ","
+                      - link "YVES VILLENEUVE" [ref=f4e1785] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=YVES+VILLENEUVE&date_de_naissance_beneficiaire_min=01-12-1960&date_de_naissance_beneficiaire_max=01-12-1960
+                      - text: ","
+                      - link "THOMAS PITOY" [ref=f4e1786] [cursor=pointer]:
+                        - /url: /recherche-beneficiaires?q=THOMAS+PITOY&date_de_naissance_beneficiaire_min=01-09-1984&date_de_naissance_beneficiaire_max=01-09-1984
+                  - link "En savoir plus" [ref=f4e1788] [cursor=pointer]:
+                    - /url: "#"
+              - listitem [ref=f4e1789]:
+                - generic [ref=f4e1790]:
+                  - link "CREDIT DU NORD (456 504 851)" [ref=f4e1791] [cursor=pointer]:
+                    - /url: credit-du-nord-456504851
+                  - generic [ref=f4e1792]: Cité 1 fois en 2010
+                - generic [ref=f4e1793]:
+                  - generic [ref=f4e1795]:
+                    - generic [ref=f4e1796]:
+                      - text: Nature
+                      - generic [ref=f4e1797]:
+                        - text: supposée
+                        - generic [ref=f4e1798]: 
+                      - text: "de la relation :"
+                    - text: Banque
+                  - link "En savoir plus" [ref=f4e1800] [cursor=pointer]:
+                    - /url: "#"
+          - text: 
+          - generic [ref=f4e1801]:
+            - generic [ref=f4e1802]:
+              - generic [ref=f4e1803]: 
+              - heading "Prospecter dans ce secteur" [level=2] [ref=f4e1805]
+            - generic [ref=f4e1807]:
+              - generic [ref=f4e1808]: 74 074 entreprises exercent la même activité de Administration d'immeubles et autres biens immobiliers que FONCIA PARIS EST
+              - generic [ref=f4e1809]:
+                - button " Exporter la liste" [ref=f4e1810] [cursor=pointer]:
+                  - generic [ref=f4e1811]: 
+                  - text: Exporter la liste
+                - button " Créer une veille sur ce secteur" [ref=f4e1812] [cursor=pointer]:
+                  - generic [ref=f4e1813]: 
+                  - text: Créer une veille sur ce secteur
+    - contentinfo [ref=f4e1814]:
+      - generic [ref=f4e1815]:
+        - generic [ref=f4e1816]:
+          - link [ref=f4e1818] [cursor=pointer]:
+            - /url: /
+            - img "Logo Pappers Entreprises" [ref=f4e1819]
+          - generic [ref=f4e1820]:
+            - link "LinkedIn" [ref=f4e1821] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/pappers/
+              - generic [ref=f4e1822]: 
+            - link "Partager sur Facebook" [ref=f4e1823] [cursor=pointer]:
+              - /url: http://www.facebook.com/sharer.php?u=https://www.pappers.fr/
+              - generic [ref=f4e1824]: 
+            - link "Twitter" [ref=f4e1825] [cursor=pointer]:
+              - /url: https://twitter.com/get_pappers
+              - generic [ref=f4e1826]: 
+        - list [ref=f4e1828]:
+          - listitem [ref=f4e1829]:
+            - text: Ressources
+            - paragraph [ref=f4e1830]:
+              - link "Presse" [ref=f4e1831] [cursor=pointer]:
+                - /url: /presse
+            - paragraph [ref=f4e1832]:
+              - link "Classements " [ref=f4e1833] [cursor=pointer]:
+                - /url: /classements
+                - text: Classements
+                - generic [ref=f4e1834]: 
+            - paragraph [ref=f4e1835]:
+              - link "Blog" [ref=f4e1836] [cursor=pointer]:
+                - /url: /guide
+          - listitem [ref=f4e1837]:
+            - text: Informations légales
+            - paragraph [ref=f4e1838]:
+              - link "Données personnelles" [ref=f4e1839] [cursor=pointer]:
+                - /url: /protection-des-donnees
+            - paragraph [ref=f4e1840]:
+              - link "Mentions légales" [ref=f4e1841] [cursor=pointer]:
+                - /url: /mentions-legales
+          - listitem [ref=f4e1842]:
+            - text: Nous connaître
+            - paragraph [ref=f4e1843]:
+              - link "A propos" [ref=f4e1844] [cursor=pointer]:
+                - /url: /a-propos
+            - paragraph [ref=f4e1845]:
+              - link "FAQ" [ref=f4e1846] [cursor=pointer]:
+                - /url: /faq
+            - paragraph [ref=f4e1847]:
+              - link "Contact" [ref=f4e1848] [cursor=pointer]:
+                - /url: /contact
+        - list [ref=f4e1850]:
+          - paragraph [ref=f4e1851]: Nos données sont constamment actualisées, entièrement gratuites et proviennent de l'INSEE, l'INPI et du BODACC.
+          - generic [ref=f4e1852]:
+            - paragraph [ref=f4e1853]: "Inscrivez-vous à la newsletter mensuelle :"
+            - group [ref=f4e1854]:
+              - textbox "E-mail" [ref=f4e1855]
+              - button "" [disabled] [ref=f4e1856] [cursor=pointer]
+            - group [ref=f4e1858]:
+              - checkbox "En vous inscrivant, vous acceptez la Politique générale de Protection des Données." [ref=f4e1859]
+              - generic [ref=f4e1860]:
+                - text: En vous inscrivant, vous acceptez la
+                - link "Politique générale de Protection des Données" [ref=f4e1861] [cursor=pointer]:
+                  - /url: /protection-des-donnees
+                - text: .
+  - generic:  

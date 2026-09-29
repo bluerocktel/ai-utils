@@ -1,0 +1,53 @@
+- generic [active] [ref=f86e1]:
+  - banner [ref=f86e2]:
+    - button "Passer au contenu" [ref=f86e3] [cursor=pointer]
+    - button "Commentaires sur l’accessibilité" [ref=f86e6] [cursor=pointer]
+    - generic [ref=f86e9]:
+      - link [ref=f86e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Retour à la recherche Bing" [level=1] [ref=f86e11]
+      - search [ref=f86e12]:
+        - button "Rechercher" [ref=f86e15] [cursor=pointer]
+        - searchbox "Entrez votre recherche ici - Les suggestions de recherche s’affichera au fur et à mesure de la frappe" [ref=f86e16]: "\"le monde a la carte\" voyages Sevres"
+        - generic [ref=f86e17] [cursor=pointer]
+        - button "Rechercher à l’aide d’une image" [ref=f86e21] [cursor=pointer]
+    - complementary "Récompenses et préférences du compte" [ref=f86e23]:
+      - button "Microsoft Rewards" [ref=f86e24] [cursor=pointer]
+      - link "Connexion" [ref=f86e25] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Filtre de recherche" [ref=f86e27]:
+      - list [ref=f86e28]:
+        - listitem [ref=f86e29]:
+          - link "Tout" [ref=f86e30] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=f86e31]:
+          - link "Rechercher" [ref=f86e32] [cursor=pointer]:
+            - /url: /copilotsearch?q=%22le+monde+a+la+carte%22+voyages+Sevres&FORM=CSSCOP
+        - listitem [ref=f86e35]:
+          - link "Images" [ref=f86e36] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=204483e7e4fd6ac5275e64ca03d4a873bb9825fc4be76142365d0c544226abf8JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT0lMjJsZSttb25kZSthK2xhK2NhcnRlJTIyK3ZveWFnZXMrU2V2cmVzJkZPUk09SERSU0My&ntb=1
+        - listitem [ref=f86e37]:
+          - link "Vidéos" [ref=f86e38] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=2d7bfa32701b32d277d9cb1c67ebaf9780251e8d73ea7187fdd4f01f544645d7JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT0lMjJsZSttb25kZSthK2xhK2NhcnRlJTIyK3ZveWFnZXMrU2V2cmVzJkZPUk09SERSU0Mz&ntb=1
+        - listitem [ref=f86e39]:
+          - link "Cartes" [ref=f86e40] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=38f7947469779aa92bd35a139f29580af07f22cc28e805dabe03f84746f4420eJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT0lMjJsZSttb25kZSthK2xhK2NhcnRlJTIyK3ZveWFnZXMrU2V2cmVzJkZPUk09SERSU0M0&ntb=1
+        - listitem [ref=f86e41]:
+          - link "Actualités" [ref=f86e42] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=ccab114f80cd289b2ff4e0684b9ca7470ca75a5ecdfedb8e7bde19cf00e7159dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9JTIybGUrbW9uZGUrYStsYStjYXJ0ZSUyMit2b3lhZ2VzK1NldnJlcyZGT1JNPUhEUlNDNg&ntb=1
+        - listitem [ref=f86e43]:
+          - button [ref=f86e44] [cursor=pointer]
+        - listitem [ref=f86e48]:
+          - link [ref=f86e51] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: À propos des résultats de recherche
+            - img "À propos des résultats de recherche" [ref=f86e53]
+  - contentinfo [ref=f86e54]:
+    - generic [ref=f86e55]:
+      - list:
+        - listitem [ref=f86e56]:
+          - link "Confidentialité" [ref=f86e57] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=f86e58]:
+          - link "Conditions générales" [ref=f86e59] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

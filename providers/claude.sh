@@ -123,13 +123,37 @@ ai_usage_table() {
 # This is the circuit breaker: a hit means NO WORK HAPPENED, so the task is
 # requeued without burning a retry and only this runner's queue is paused. The
 # pattern set is deliberately broad, because a false negative burns retries on
-# a task that never ran, while a false positive only costs a cooldown.
+# a task that never ran.
+#
+# TIERED, because the pattern set is scanned against the CLI's stdout capture
+# too, and that capture holds the AGENT'S OWN REPORT. A task whose job was to
+# test COLT's API quoted COLT's 401 body ("Authentication error") in a results
+# table; the broad scan matched it and paused the whole runner queue. That cost
+# three full re-runs of a 25-turn task, not "only a cooldown" as the note here
+# used to claim. So:
+#   strong  patterns only this CLI's own auth layer emits -> scanned everywhere.
+#   broad   generic 401/authorisation wording ANY third-party API can emit ->
+#           scanned only when the capture is NOT a completed result envelope.
+# A non-empty .result proves the CLI authenticated and the agent ran, so auth
+# wording inside it is the agent quoting someone else. stderr and an empty or
+# absent .result still get the full set: a real failure produces no result.
 ai_is_auth_failure() {
     local file="${1:-}"
     [ -f "$file" ] || return 1
-    grep -qiE \
-        'API Error: 401|HTTP 401|status.?401|Invalid authentication|authentication (failed|error|required)|Failed to authenticate|not authenticated|Unauthorized|OAuth token( has)? expired|OAuth token revoked|credentials? (expired|invalid|missing)|please run .?claude login|ANTHROPIC_API_KEY' \
-        "$file"
+
+    local strong='API Error: 401|please run .?claude login|OAuth token( has)? expired|OAuth token revoked|ANTHROPIC_API_KEY'
+    local broad='HTTP 401|status.?401|Invalid authentication|authentication (failed|error|required)|Failed to authenticate|not authenticated|Unauthorized|credentials? (expired|invalid|missing)'
+
+    if grep -qiE "$strong" "$file"; then
+        return 0
+    fi
+
+    if command -v jq >/dev/null 2>&1 \
+       && [ -n "$(jq -r '.result // ""' "$file" 2>/dev/null)" ]; then
+        return 1
+    fi
+
+    grep -qiE "$broad" "$file"
 }
 
 # ── 5. ai_model_alias ────────────────────────────────────────────────────────
@@ -149,11 +173,15 @@ ai_is_auth_failure() {
 #
 # An unrecognised value is echoed back unchanged, not an error: a task may name
 # any model id the CLI accepts without this table having to know it.
+#
+# Matching is case-insensitive ('Fable' is 'fable'): a capitalised alias used to
+# fall through and reach the CLI verbatim. The fall-through still echoes RAW, so
+# an explicit model id keeps its exact spelling.
 ai_model_alias() {
     local raw="${1:-}"
-    case "$raw" in
+    case "${raw,,}" in
         opus)               printf '%s\n' 'opus' ;;
-        opus1m)             printf '%s\n' 'claude-opus-5[1m]' ;;
+        opus1m)             printf '%s\n' 'claude-opus-5-5[1m]' ;;
         sonnet)             printf '%s\n' 'sonnet' ;;
         haiku)              printf '%s\n' 'haiku' ;;
         fable)              printf '%s\n' 'fable' ;;

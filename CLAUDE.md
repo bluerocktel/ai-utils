@@ -541,6 +541,41 @@ error body could plausibly contain is **broad**, not strong.
   unquoted, bash treats it as a glob, and a file in the task's working
   directory can silently rewrite the flag to that filename. Verified
   reproducible in the fork.
+- **A task in `review/` permanently blocks everything downstream of it, and
+  `blocked_inbox_tasks` in `lib.sh` is the ONE place that decides what counts as
+  blocked.** `dep_satisfied` accepts only `done/*_<slug>.task.md`, which a
+  parent in `review/` never produces, and `select_candidate` skips the
+  dependent in silence — so with any other runnable work in the queue the block
+  is invisible. `dtask` and `ai-task` both read the helper. Do not give either
+  one its own copy of the classification: a dashboard calling a task blocked
+  while the launcher is claiming it is worse than neither reporting anything.
+  Three things to keep right:
+  - **The helper is not runner-aware and must stay that way.** `runner_matches`
+    is scoped to one invocation's `--runner`; `dtask` reports across every
+    runner at once. `ai-task` layers its own runner partition on top, inside
+    `report_blocked_chains`.
+  - **`report_blocked_chains dead-only` must never notify.** It runs after a
+    successful claim, on every sweep. A chain that is dead now will still be
+    dead in fifteen minutes, so a `notify -u critical` there fires every cron
+    interval until a human acts, and gets muted long before they do. The `full`
+    mode on the idle branch keeps the notifications, and its output is
+    byte-identical to before the extraction apart from one added hint line.
+  - **`dep_satisfied` stays strict.** Accepting a parent in `review/` would
+    "fix" the block by letting dependents build on work that failed evaluation.
+    The block is correct; only its invisibility was the defect.
+- **`ai-task --unblock` is the only supported way out of `review/`, and it
+  deliberately does not inspect the task file.** It moves the file and resets
+  `## Retries` to `0`; whether the criterion was actually repaired is the
+  human's business, and an untouched one simply returns to `review/` on the
+  next grade. The reset is the point: without it a task that burned
+  `max_retries` before a human fixed its criterion lands back in `review/` on
+  its first FAIL. Two things not to change. The counter is written by
+  `set_retries` in `lib.sh`, **shared with the FAIL path** so a bump and a reset
+  cannot drift into writing the section differently. And an ambiguous slug (two
+  dated attempts of one task in `review/`) is **refused, never resolved**:
+  picking one would requeue an arbitrary half of the history. It makes no agent
+  call, loads no provider, and takes `.locks/inbox.lock` for the move like every
+  other write into `inbox/`.
 - **`dtask` is the only script here safe to run against the live tree,** because
   it is read-only: no agent call, no file move, no write into `$TASKS_DIR`.
 

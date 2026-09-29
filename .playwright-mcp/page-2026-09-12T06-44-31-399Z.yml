@@ -1,0 +1,378 @@
+- generic [ref=e1]:
+  - link [ref=e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=e10]:
+      - generic [ref=e12]:
+        - img "Google" [ref=e13]
+        - generic [ref=e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=e16] [cursor=pointer]':
+            - generic [ref=e17]: fr
+          - link "Se connecter" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=e21]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=e25]:
+              - listitem [ref=e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=e30]:
+              - listitem [ref=e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - button "Tout refuser" [ref=e40] [cursor=pointer]
+          - button "Tout accepter" [ref=e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=e44]: Plus d'options
+      - generic [ref=e45]:
+        - link "Confidentialité" [ref=e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=e47]: ·
+        - link "Conditions d'utilisation" [ref=e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=e53]:
+    - search [ref=e54]:
+      - generic [ref=e56]:
+        - link [ref=e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQPHoECAYQZA
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - combobox [ref=e70]: "\"CABINET BALZANO\" syndic Paris contact \"CABINET BALZANO\" syndic Paris contact"
+            - generic [ref=e71]:
+              - button [ref=e73] [cursor=pointer]
+              - generic [ref=e78]:
+                - button [ref=e79] [cursor=pointer]
+                - button [ref=e82] [cursor=pointer]
+          - button [ref=e85] [cursor=pointer]
+    - generic [ref=e90]:
+      - button [ref=e92] [cursor=pointer]
+      - button [ref=e93] [cursor=pointer]
+      - generic [ref=e99]:
+        - button [ref=e101] [cursor=pointer]
+        - link [ref=e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522CABINET%2BBALZANO%2522%2Bsyndic%2BParis%2Bcontact%26hl%3Dfr%26num%3D20&ec=futura_srp_og_si_72236_p
+          - generic [ref=e107]: Connexion
+  - generic [ref=e109]:
+    - navigation [ref=e115]:
+      - list [ref=e118]:
+        - listitem [ref=e119]:
+          - link [ref=e122] [cursor=pointer]:
+            - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ2J8OegQICxAD
+            - generic [ref=e123]: Mode IA
+        - listitem [ref=e126]:
+          - link [disabled] [ref=e127]:
+            - generic [ref=e128]: Tous
+        - listitem [ref=e130]:
+          - link [ref=e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22CABINET+BALZANO%22+syndic+Paris+contact&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQtKgLegQIHxAB
+            - generic [ref=e132]: Images
+        - listitem [ref=e134]:
+          - link [ref=e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22CABINET+BALZANO%22+syndic+Paris+contact&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQtKgLegQIHhAB
+            - generic [ref=e136]: Vidéos
+        - listitem [ref=e138]:
+          - link [ref=e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22CABINET+BALZANO%22+syndic+Paris+contact&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQs6gLegQIHBAB
+            - generic [ref=e140]: Vidéos courtes
+        - listitem [ref=e142]:
+          - link [ref=e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22CABINET+BALZANO%22+syndic+Paris+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ0pQJegQIGxAB
+            - generic [ref=e144]: Actualités
+        - listitem [ref=e146]:
+          - link [ref=e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7xwShlEYwzU8cAgob7gBz7BC8IKqgODZXGx3Mi4V1WWncpW9wMB0tsI1tofu_hBjdBoJ2HRtLBnoVx_PrR9lbWBTHSV3aOv1nNbtD_7A5BmumgU1aHqkeRphiK6y2GxOU_bDWs&q=%22CABINET+BALZANO%22+syndic+Paris+contact&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQs6gLegQIFxAB
+            - generic [ref=e148]: Web
+        - listitem [ref=e150]:
+          - button [ref=e151] [cursor=pointer]:
+            - generic [ref=e152]: Plus
+    - heading [level=1] [ref=e158]: Résultats de recherche
+    - generic [ref=e159]:
+      - generic [ref=e160]:
+        - generic [ref=e168]:
+          - heading [level=2] [ref=e169]:
+            - generic [ref=e176]: Paris
+          - generic [ref=e178]:
+            - text: ∙
+            - button [ref=e179] [cursor=pointer]: Choisir une zone
+          - button [ref=e182] [cursor=pointer]
+        - generic [ref=e201]:
+          - heading [level=2] [ref=e205]:
+            - generic [ref=e206]:
+              - generic [ref=e207]: Raisonnement…
+              - generic [ref=e209]: Recherche en cours…
+              - generic [ref=e219]: Réfléchit un peu plus longtemps…
+          - progressbar [ref=e222]
+      - main [ref=e273]:
+        - generic [ref=e277]:
+          - generic [ref=e278]:
+            - generic [ref=e281]:
+              - generic [ref=e285]:
+                - generic [ref=e293]:
+                  - link [ref=e299] [cursor=pointer]:
+                    - /url: /local/place/fid/0x47e6727ca03210e1:0xb975c326a185234e/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3Dmd14ml8OGMliiiUZ4E-pCQ%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D266.77734%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFm1kMTRtbDhPR01saWlpVVo0RS1wQ1E%3D&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQpx96BAg1EAU
+                    - generic [ref=e301]: Extérieur
+                  - link [ref=e305] [cursor=pointer]:
+                    - /url: /maps/place/Balzano+Alexandra/data=!4m2!3m1!1s0x0:0xb975c326a185234e?sa=X&ved=1t:2428&hl=fr&ictx=111
+                - heading [level=2] [ref=e314]:
+                  - link [ref=e315] [cursor=pointer]:
+                    - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Balzano+Alexandra&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0RArqCio09tQ-AkQnBx8kdTD_NSe6Q6LWv90l91atzdAHRua-BliUBUfXnponCJU3PHQGDvNYjvBwUnW0Yy8KOx6qCoO&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ_coHegQILRAB
+                    - text: Balzano Alexandra
+                - generic [ref=e322]:
+                  - generic [ref=e330]:
+                    - button [ref=e338] [cursor=pointer]:
+                      - generic [ref=e339]: Définitivement fermé
+                    - generic [ref=e352]:
+                      - button [ref=e357] [cursor=pointer]:
+                        - generic [ref=e360]: Enregistrer
+                      - button [ref=e363] [cursor=pointer]:
+                        - generic [ref=e364]: Partager
+                      - button [ref=e370] [cursor=pointer]:
+                        - generic [ref=e371]: Appeler
+                  - generic [ref=e380]:
+                    - generic [ref=e383]:
+                      - generic [ref=e384]:
+                        - link [ref=e385] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=balzano+alexandra+paris+adresse&ludocid=13363802039977845582&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ6BN6BAgvEAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 75 Av. du Dr Arnold Netter, 75012 Paris
+                    - generic [ref=e390]:
+                      - link [ref=e393] [cursor=pointer]:
+                        - /url: "#"
+                        - text: Suggérer une modification
+                      - text: ·
+                      - link [ref=e394] [cursor=pointer]:
+                        - /url: https://business.google.com/create?hl=fr&getstarted&authuser=0&fp=13363802039977845582&gmbsrc=fr-fr-et-ip-z-gmb-s-z-l~skp%7Cclaimbz%7Cu&ppsrc=GMBSI
+                        - text: Vous êtes le propriétaire de cet établissement ?
+                  - generic [ref=e399]:
+                    - generic [ref=e405]:
+                      - generic [ref=e406]: Les publications sont actuellement désactivées
+                      - button [ref=e417]:
+                        - generic [ref=e420]: Détails
+                    - generic [ref=e424]:
+                      - generic [ref=e426]:
+                        - generic [ref=e427]: Les avis ne sont pas vérifiés
+                        - button [ref=e430] [cursor=pointer]
+                      - link [ref=e471] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rnV1wcNbhFQZBahdORcmeRKVb2v1z8sL1njwhuAH02s8GD7D9HvqOqytVq8SdHDTCXT3y-1TJQgKum-hdQFRdNnoUCpRkja0S44-SupTDQh8ZOR-8vn6x25gb1uCHqsiYvxmgrgeX-ZWF3yjN0cCgH4BE3djft4v-F_NSh_nkIP8DObBQ&q=Balzano+Alexandra+Avis&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_xsbfnGD37YSWJboChEk_CgvglfPZsXx48m56rgmlLLEPUS3f1jQPFbW5H5bP3ft7MzRNUeH06DBTv5zEraU6vgJOKTh&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ_4MLegQINxAH
+                        - generic [ref=e472]: Afficher tous les avis
+                  - generic [ref=e483]:
+                    - heading [level=3] [ref=e484]:
+                      - link [ref=e485] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Balzano+Alexandra+Paris&stick=H4sIAAAAAAAAAONgFuLVT9c3NEwyS0k3LavMVULlagkGZ6aklidWFvulVpQEl6QWFC9iFXdKzKlKzMtXcMxJrUjMSylKVAhILMos3sHKCAC_gQkMUAAAAA&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQMSgAegQIOBAB
+                        - text: Recherches associées
+                    - generic [ref=e486]:
+                      - link [ref=e488] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Cabinet+Jh+Immobilier&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0UXkPZ-EKXqrGq4jkZ4bPE1K8HWu60xqmLjDLM1me5bMBGP9BeqXfFFYnmOAH0V-gTM0-_AeaJXPqPGe9wNeZRngy6hsRWLuaByUz_-s9T5chp2jlhoVN_0CyEmclpUXlj55k7GUQR-vTG3J1A5VHz0D8iMNt2wLUUYhjQ7yEUui9H_qcUyt4ASKT_8tlgWlH1ZIE2CdtRxO2Pm7Kc6SaxD8bnPLCM-t4T0syC-TIWWv6iX1w_H24SV0XIJeCcm2LCzifPXlVcsMtHx5VOQB4rrPwvi_4gVy1hSElhFAw9kmsVU49g%3D%3D&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQxA16BAg4EAQ
+                        - generic [ref=e492]: Cabinet Jh Immobilier
+                      - link [ref=e494] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Claret+Immobilier&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0YGsE_yu8G9UV10DCKLCYwNUmEFmqENXABnvGr8qrbJXDV4TF_T9inyO-uHNRD3cAe3STKQ1pjje97RJlKMHZvyIEsfo-sT-JtbtSrUSS6XZYJPDa_tH0kc-UBs-X-NAfhiNGxNXdDXSMbN7O21WY4Gzn62mUc6zPdUSS86ZuuHWaiPuqEk-UVQqf2BFvRVNC2-XCnkcdPyhrWrGQPrPgXYYKRudzmW01qUIL4jMo_4rrCYfG9BXsV5CjjXtGZgOWp5MgLFJVCvmG3p-0H-mxtGAxjEG&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQxA16BAg4EAc
+                        - generic [ref=e498]: Claret Immobilier
+                      - link [ref=e500] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=ActiSyndic&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0TgZDABV8Ei11AtXZTPoRNjbuvN_MqQfrtKlMTsiwqKhe2twbCIqW-fO2qRLZJhk9IEimUuRx4LqRQMbTMIVaOdwfiby8717swZXBjUgOzZdrAFpy1NSF4Fo1_NyQfZikL8CR5WPM85UsRKK2t3f1Alr6MyKEGEWye1_u8uOQ_aNW7pIBJXOoYhMI8Q2orwav2eoL6ekOOC0VLuValpDR15ssksqrx2K13KFBXc9LLlllPBlqP5DnS--17weFT5giKWXeQwqgYWTewnyF1uBW7AwrKPo&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQxA16BAg4EAo
+                        - generic [ref=e504]: ActiSyndic
+                      - link [ref=e506] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Agence+Arago&si=APenkKllX05q7xl66dAosm6nb1iuMgV7Bv8meTZS-zIzIS3OM9QFm0Vv1pepg-DtqX-p64HFdEILFmmQgNBJrmRbcqQeZe-1yxgerDZxp_FdXy2uJjxq8cDzX622X3zPhCzwImI4CeX2a3YOhectZZqf0UxMErJ6LCB9BxrbCeUHuhtMimjimLIGaf1PY6nHsPwABmS8ORzbbiK3PNxTgJRzXB-ijxptOGUWgyQWe4qq_m4n3dkQJ-vn0MsrIX4tGVEy7q8_c8-uw_q6nMCGYZsrlH-a1juBu_WxL4p1EWDcmwJglCx0TNlciUqUa4vMR2EbhSLBUt0w&sa=X&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQxA16BAg4EA0
+                        - generic [ref=e510]: Agence Arago
+              - link [ref=e512] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=e514]:
+              - heading [level=2] [ref=e515]: Résultats Web
+              - generic [ref=e516]:
+                - generic [ref=e519]:
+                  - link [ref=e521] [cursor=pointer]:
+                    - /url: /goto?url=CAESVwHrOzAVPiW5ICsa8a3BJ6XXvFPrwkJIXQl8xrxx0Fqe8VN0ds6bbeoq94z82yzRCs7MgcQCDFZa1An38_64zz56g72CWlHLfij1fRRCxVvL1h-I3adM2g
+                    - heading [level=3] [ref=e522]: Cabinet Balzano — Syndic de Copropriété & Gestion ...
+                    - generic [ref=e528]:
+                      - generic [ref=e529]: Cabinet Balzano
+                      - generic [ref=e531]: https://www.cabinet-balzano.fr
+                  - button [ref=e537] [cursor=pointer]
+                - generic [ref=e544]:
+                  - emphasis [ref=e545]: Cabinet Balzano
+                  - text: ","
+                  - emphasis [ref=e546]: syndic
+                  - text: de copropriété et gestionnaire immobilier indépendant à
+                  - emphasis [ref=e547]: Paris
+                  - text: depuis 1978. Gestion locative,
+                  - emphasis [ref=e548]: syndic
+                  - text: professionnel, espace client en ...
+          - generic [ref=e552]:
+            - generic [ref=e555]:
+              - link [ref=e557] [cursor=pointer]:
+                - /url: /goto?url=CAESYAHrOzAVbOF-uIfD0-_82li-vcpt8g9miYm-UialbLFyWIkY04HIotPIJRZCqAfz3oakVOqj3DcumTANYOFWxhxDwu-lbv3knsbZdzmzWb5JTYAckSm1wy9hD_K8w2FKLQ
+                - heading [level=3] [ref=e558]: Cabinet Balzano à Paris - Syndics de copropriétés
+                - generic [ref=e564]:
+                  - generic [ref=e565]: Pages Jaunes
+                  - generic [ref=e567]: https://www.pagesjaunes.fr › pros
+              - button [ref=e573] [cursor=pointer]
+            - generic [ref=e580]:
+              - text: Quelle est l'adresse de
+              - emphasis [ref=e581]: Cabinet Balzano
+              - text: "?"
+              - emphasis [ref=e582]: Cabinet Balzano
+              - text: est situé au 77 rue Père Corentin 75014
+              - emphasis [ref=e583]: Paris
+              - text: . Ouvrir dans l'application ! Ouvrir dans l ...
+          - generic [ref=e588]:
+            - heading [level=2] [ref=e590]: Autres questions
+            - generic [ref=e591]:
+              - button [ref=e597] [cursor=pointer]:
+                - generic [ref=e598]: Comment contacter le cabinet CBT Balzano ?
+              - button [ref=e611] [cursor=pointer]:
+                - generic [ref=e612]: Quels sont les avis sur le cabinet Balzano à Paris ?
+              - button [ref=e625] [cursor=pointer]:
+                - generic [ref=e626]: Comment contacter son syndic de copropriété ?
+              - button [ref=e639] [cursor=pointer]:
+                - generic [ref=e640]: Comment trouver les coordonnées d'un syndic de copropriété ?
+          - generic [ref=e649]:
+            - heading [level=2] [ref=e650]: Résultats Web
+            - generic [ref=e651]:
+              - generic [ref=e654]:
+                - link [ref=e656] [cursor=pointer]:
+                  - /url: /goto?url=CAESaQHrOzAV0om1CNd0ooj3SlTjgGOr88qhx24zkTHzMCdjFwX1TGvHAhY7MBwy8CTz5bf_iFIsYAGRtCq6r8BAifWVIoNadSzYnPwacvQ4bla0KZabrfag28xI7rEnkJfn_VLvyw-xzDU50g
+                  - heading [level=3] [ref=e657]: Cabinet Balzano - Syndic de copropriétés, 77 r Père ...
+                  - generic [ref=e663]:
+                    - generic [ref=e664]: Mappy
+                    - generic [ref=e666]: https://fr.mappy.com › poi
+                - button [ref=e672] [cursor=pointer]
+              - generic [ref=e679]:
+                - text: Découvrez
+                - emphasis [ref=e680]: Cabinet Balzano
+                - text: (77 r Père Corentin, 75014
+                - emphasis [ref=e681]: Paris
+                - text: ") avec toutes les photos du quartier, le plan d'accès, les avis et les infos pratiques : horaires, ..."
+          - generic [ref=e685]:
+            - generic [ref=e688]:
+              - link [ref=e690] [cursor=pointer]:
+                - /url: /goto?url=CAESdwHrOzAVNXEfxATa8RGgkORTIKMOsMind6pPvqMAOkgkiXBf4eqVJRT2vzdzgTmNByZFqjo4WQHnvmgGKEyLlPdraLeCUN25pVNx-z7H7m7EiZuameSu8YHj7VOc0RY0tE-agMoo81ttqeu7gwjr0X8lh2hZuhnf
+                - heading [level=3] [ref=e691]: Contacter le syndic CABINET BALZANO à Paris 14
+                - generic [ref=e697]:
+                  - generic [ref=e698]: Vicinorum
+                  - generic [ref=e700]: https://www.vicinorum.com › ... › Syndics Paris 14
+              - button [ref=e706] [cursor=pointer]
+            - generic [ref=e713]:
+              - text: Les 17 copropriétés gérées par le
+              - emphasis [ref=e714]: syndic CABINET BALZANO
+              - text: ; IMM. 144/190 GRENELLE · 190 rue de grenelle 75007
+              - emphasis [ref=e715]: Paris
+              - text: ", 153 ; TOUR ONYX · 10 Rue ..."
+          - generic [ref=e719]:
+            - generic [ref=e722]:
+              - link [ref=e724] [cursor=pointer]:
+                - /url: /goto?url=CAESfgHrOzAVytI5dg2zln9RBi9ZrGfPN4dcxVzEEi3Ztc_LLLOVVyfASxlKUQ-3Wl5UCKbA6IKEInb70wmrzYAFjMSbRm609D45vR0pTzmi_zLOyrMYVo4Omh-s18vG1-I-mx39NY-AgY-cSqTk0ecsBrMYSjmdkqW4JyuGnpe4Uw
+                - heading [level=3] [ref=e725]: Siège social - CABINET BALZANO à 75014 PARIS
+                - generic [ref=e731]:
+                  - generic [ref=e732]: data.gouv.fr
+                  - generic [ref=e734]: https://annuaire-entreprises.data.gouv.fr › etablissement
+              - button [ref=e740] [cursor=pointer]
+            - generic [ref=e747]:
+              - text: 75-77 75 RUE DU PERE CORENTIN 75014
+              - emphasis [ref=e748]: PARIS
+              - text: . Information légales de l'établissement
+              - emphasis [ref=e749]: CABINET BALZANO
+              - text: à
+              - emphasis [ref=e750]: PARIS
+              - text: . INSEE. DGFiP. Dénomination de la société.
+              - emphasis [ref=e751]: CABINET
+              - text: ...
+          - generic [ref=e755]:
+            - generic [ref=e758]:
+              - link [ref=e760] [cursor=pointer]:
+                - /url: /goto?url=CAESjAEB6zswFd-1sDA4KJcNRui5cYaRXU_VXI6wtTsK5Wdr1K92aMgZ01QqM8h_9okRDRmgBxgUrcn714bsHAcBkSnkE9Pc6hqIgl-iATvPBXwpRlr-avHcA9lcxY5j0HJ9E_6W6Es1egzT2EyOrj7CGu03pD5o8BNa1N09Jcwq-AhlC7i5dFp436rEiz8rEA
+                - heading [level=3] [ref=e761]: Syndic professionnel « CABINET BALZANO » de PARIS
+                - generic [ref=e767]:
+                  - generic [ref=e768]: annuairedescoproprietes.fr
+                  - generic [ref=e770]: https://annuairedescoproprietes.fr › Syndic › PARIS
+              - button [ref=e776] [cursor=pointer]
+            - generic [ref=e783]:
+              - text: Type de
+              - emphasis [ref=e784]: syndic
+              - text: ", professionnel."
+              - emphasis [ref=e785]: Syndic
+              - text: coopératif, non. SIRET, 31510388700032. Code APE, 6832A. Dénomination officielle (INSEE),
+              - emphasis [ref=e786]: CABINET BALZANO
+              - text: .
+          - generic [ref=e790]:
+            - generic [ref=e793]:
+              - link [ref=e795] [cursor=pointer]:
+                - /url: /goto?url=CAESaAHrOzAV1zShU0Rqnt15dycXkIahnKkoEPO6ZKF35Uay-GvafcjQjYHBFLV7hSugqzqn8NmujqcHtUuQH0d-bKmvO3mi2J5TKeP5I3SDNrnz1X-bMddbvZeuQLvmhNX9JBU5oWZxw76K
+                - heading [level=3] [ref=e796]: Cabinet Balzano à Paris
+                - generic [ref=e802]:
+                  - generic [ref=e803]: L'annuaire 118 712
+                  - generic [ref=e805]: https://www.118712.fr › syndics de copropriétés
+              - button [ref=e811] [cursor=pointer]
+            - generic [ref=e818]:
+              - text: 220 av Maine 75014
+              - emphasis [ref=e819]: Paris
+              - text: . agences immobilières. Afficher le n° numéro de téléphone. Professionnel ranké.
+              - emphasis [ref=e820]: Contacter
+              - text: .
+              - emphasis [ref=e821]: Cabinet Balzano
+              - text: .
+              - emphasis [ref=e822]: syndics
+              - text: de copropriétés , ...
+          - generic [ref=e826]:
+            - generic [ref=e829]:
+              - link [ref=e831] [cursor=pointer]:
+                - /url: /goto?url=CAEScQHrOzAVXMFe1MkBY4q8bmPHFi23ytMTKoFOtxIr3DtsAyIo4U9ibjlAhe9u-AU9GJEBdy3qakGMGoR99snHcsaF0fofcBy8NfhQjmBY6MT_ECKYnSbGy-tVzOd3HiM5q61hB_xNn7PJscwsLScJ0rec
+                - heading [level=3] [ref=e832]: CABINET BALZANO à Paris (adresse, téléphone)
+                - generic [ref=e838]:
+                  - generic [ref=e839]: E-PRO Immobilier
+                  - generic [ref=e841]: https://immobilier.e-pro.fr › cabinet-balzano_f266569
+              - button [ref=e847] [cursor=pointer]
+            - generic [ref=e854]:
+              - text: Informations administratives de
+              - emphasis [ref=e855]: CABINET BALZANO
+              - text: ; Code postal, 75014 ; Ville,
+              - emphasis [ref=e856]: Paris
+              - text: ; Coordonées GPS (lat, lng), 48.8227468, 2.3280792 ; Téléphone, 01 46 54 24 62.
+          - generic [ref=e860]:
+            - generic [ref=e863]:
+              - link [ref=e865] [cursor=pointer]:
+                - /url: /goto?url=CAESkwEB6zswFfbLy91EpqgKZtK3UWAybmiddRhrvcOydN9YuiTQqcJDEG4cL2nasOeF6MpKXY-qwbvNnUOJgyT3EF_0Xdn2mWHDYg2qZ2fTq5YELgr-lLdvdCXk_vW34Ibh-QqNbvBt8zBXLp7IWEwLFSw2LVaJeEngoXpTccCAPPGZo8yQnxGx8_SUwdvoR_xYhowUjls
+                - heading [level=3] [ref=e866]: Syndic CABINET BALZANO à PARIS
+                - generic [ref=e872]:
+                  - generic [ref=e873]: MeilleureCopro
+                  - generic [ref=e875]: https://www.meilleurecopro.com › cabinet › cabinet-balz...
+              - button [ref=e881] [cursor=pointer]
+            - generic [ref=e888]:
+              - emphasis [ref=e889]: CABINET BALZANO
+              - text: ". SIRET: 31510388700032. Adresse. 75 Rue DU PERE CORENTIN 75014"
+              - emphasis [ref=e890]: PARIS
+              - text: ", France. Localisation ..."
+        - navigation [ref=e893]:
+          - heading [level=1] [ref=e894]: Navigation par pages
+          - text: "1"
+          - link [ref=e897] [cursor=pointer]:
+            - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=zvSkas6yJe3l7M8P5vDDkAU&start=10&sa=N&sstk=AS6-VmLObUmSEJFH4vwgtJbJ-LRdLtIIS7alQDrosNqds2huE_GmsgXIEnLYbcgKcFBeLEi4YlOnNYubAYPWknhQXALo9lr6GqeiCg&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ8tMDegQIRxAE
+            - text: "2"
+          - link [ref=e899] [cursor=pointer]:
+            - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=zvSkas6yJe3l7M8P5vDDkAU&start=20&sa=N&sstk=AS6-VmLObUmSEJFH4vwgtJbJ-LRdLtIIS7alQDrosNqds2huE_GmsgXIEnLYbcgKcFBeLEi4YlOnNYubAYPWknhQXALo9lr6GqeiCg&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ8tMDegQIRxAG
+            - text: "3"
+          - link [ref=e901] [cursor=pointer]:
+            - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=zvSkas6yJe3l7M8P5vDDkAU&start=30&sa=N&sstk=AS6-VmLObUmSEJFH4vwgtJbJ-LRdLtIIS7alQDrosNqds2huE_GmsgXIEnLYbcgKcFBeLEi4YlOnNYubAYPWknhQXALo9lr6GqeiCg&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ8tMDegQIRxAI
+            - text: "4"
+          - heading [level=2] [ref=e903]:
+            - link [ref=e904] [cursor=pointer]:
+              - /url: /search?q=%22CABINET+BALZANO%22+syndic+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=zvSkas6yJe3l7M8P5vDDkAU&start=10&sa=N&sstk=AS6-VmLObUmSEJFH4vwgtJbJ-LRdLtIIS7alQDrosNqds2huE_GmsgXIEnLYbcgKcFBeLEi4YlOnNYubAYPWknhQXALo9lr6GqeiCg&ved=2ahUKEwjO0dbDuOiWAxXtMvsDHWb4EFIQ8NMDegQIRxAK
+              - generic [ref=e906]: Suivant
+      - complementary [ref=e907]:
+        - heading [level=2] [ref=e908]: Résultats complémentaires
+    - contentinfo [ref=e909]:
+      - heading [level=1] [ref=e910]: Liens de pied de page

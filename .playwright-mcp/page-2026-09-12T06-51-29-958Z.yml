@@ -1,0 +1,193 @@
+- generic [ref=f36e2]:
+  - generic [ref=f36e3]:
+    - link "DuckDuckGo" [ref=f36e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f36e5]:
+      - generic [ref=f36e6]:
+        - textbox [ref=f36e7]: s
+        - button "Submit" [ref=f36e8] [cursor=pointer]
+      - combobox [ref=f36e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f36e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f36e15]:
+    - generic [ref=f36e17]:
+      - heading [level=2] [ref=f36e18]:
+        - link "S - Wikipedia" [ref=f36e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FS&rut=22fc3f0fbb715138b15a9d92ababa3104facb1782b87119c826a82a1c17a95c2
+      - generic [ref=f36e21]:
+        - link [ref=f36e23] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FS&rut=22fc3f0fbb715138b15a9d92ababa3104facb1782b87119c826a82a1c17a95c2
+        - link "en.wikipedia.org/wiki/S" [ref=f36e24] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FS&rut=22fc3f0fbb715138b15a9d92ababa3104facb1782b87119c826a82a1c17a95c2
+      - 'link "S (minuscule: s) is the nineteenth letter of the Latin alphabet, used in the English alphabet, the alphabets of other western European languages and other Latin alphabets worldwide. Its name in English is ess[a] (pronounced / ˈɛs / ⓘ), plural esses. [1]" [ref=f36e25] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FS&rut=22fc3f0fbb715138b15a9d92ababa3104facb1782b87119c826a82a1c17a95c2
+    - generic [ref=f36e27]:
+      - heading [level=2] [ref=f36e28]:
+        - link "S - Simple English Wikipedia, the free encyclopedia" [ref=f36e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FS&rut=6df0e7923d9273d3574823e7f9a14767a026dfeaabfef2eeb9553bccaff47091
+      - generic [ref=f36e31]:
+        - link [ref=f36e33] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FS&rut=6df0e7923d9273d3574823e7f9a14767a026dfeaabfef2eeb9553bccaff47091
+        - link "simple.wikipedia.org/wiki/S" [ref=f36e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FS&rut=6df0e7923d9273d3574823e7f9a14767a026dfeaabfef2eeb9553bccaff47091
+      - link "On calendars, S is most times the short letter for Saturday or Sunday, or the month September. In chemistry, S is the symbol for sulphur. In Wheel of Fortune, S is one of the six letters given to any contestant participating in the \"Bonus Round.\" S is the letter onomotopeically used to characterize the hissing noise known to be made by snakes, e.g. \"sssssss...\" Hebrew people also consider \"S ..." [ref=f36e35] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FS&rut=6df0e7923d9273d3574823e7f9a14767a026dfeaabfef2eeb9553bccaff47091
+    - generic [ref=f36e37]:
+      - heading [level=2] [ref=f36e38]:
+        - link "%s - Wikipedia" [ref=f36e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%2525s&rut=c8ecab9af237a2b75d1635a88f074f368690e8c4fa04e8eadca18b0b29dde0b5
+      - generic [ref=f36e41]:
+        - link [ref=f36e43] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%2525s&rut=c8ecab9af237a2b75d1635a88f074f368690e8c4fa04e8eadca18b0b29dde0b5
+        - link "en.wikipedia.org/wiki/%s" [ref=f36e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%2525s&rut=c8ecab9af237a2b75d1635a88f074f368690e8c4fa04e8eadca18b0b29dde0b5
+      - link "This disambiguation page lists articles associated with the title %s. If an internal link incorrectly led you here, you may wish to change the link to point directly to the intended article." [ref=f36e45] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%2525s&rut=c8ecab9af237a2b75d1635a88f074f368690e8c4fa04e8eadca18b0b29dde0b5
+    - generic [ref=f36e47]:
+      - heading [level=2] [ref=f36e48]:
+        - link "S - Wikipedia, la enciclopedia libre" [ref=f36e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FS&rut=393b1edb92c6a2b3242694cf1cb2796aad0308571dfc0bbe2a431b45dbe1757b
+      - generic [ref=f36e51]:
+        - link [ref=f36e53] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FS&rut=393b1edb92c6a2b3242694cf1cb2796aad0308571dfc0bbe2a431b45dbe1757b
+        - link "es.wikipedia.org/wiki/S" [ref=f36e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FS&rut=393b1edb92c6a2b3242694cf1cb2796aad0308571dfc0bbe2a431b45dbe1757b
+      - link "La s es la vigésima letra y la decimosexta consonante del alfabeto español, y la decimonovena letra del alfabeto latino básico. Su origen, historia, fonética y variaciones se explican en este artículo de Wikipedia." [ref=f36e55] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FS&rut=393b1edb92c6a2b3242694cf1cb2796aad0308571dfc0bbe2a431b45dbe1757b
+    - generic [ref=f36e57]:
+      - heading [level=2] [ref=f36e58]:
+        - link "Letter S | Sing and Learn the Letters of the Alphabet - YouTube" [ref=f36e59] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dh28NzLw649w&rut=fc80cb35047e4e252177017aed8d1b29d598aed315c4ac22c86e645c94f662e0
+      - generic [ref=f36e61]:
+        - link [ref=f36e63] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dh28NzLw649w&rut=fc80cb35047e4e252177017aed8d1b29d598aed315c4ac22c86e645c94f662e0
+        - link "www.youtube.com/watch?v=h28NzLw649w" [ref=f36e64] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dh28NzLw649w&rut=fc80cb35047e4e252177017aed8d1b29d598aed315c4ac22c86e645c94f662e0
+      - link "Letter S song.This alphabet song will help your children learn letter recognition and the sign language for the letter S. This super-catchy and clear alphabe..." [ref=f36e65] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dh28NzLw649w&rut=fc80cb35047e4e252177017aed8d1b29d598aed315c4ac22c86e645c94f662e0
+    - generic [ref=f36e67]:
+      - heading [level=2] [ref=f36e68]:
+        - link "The Letter S | Alphabet A-Z | Jack Hartmann Alphabet Song" [ref=f36e69] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DvniciwSnfH8&rut=250ee3efa6b0532e86833a27cd086cd9f528e9892fc1fd07b7b5374f87ce4421
+      - generic [ref=f36e71]:
+        - link [ref=f36e73] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DvniciwSnfH8&rut=250ee3efa6b0532e86833a27cd086cd9f528e9892fc1fd07b7b5374f87ce4421
+        - link "www.youtube.com/watch?v=vniciwSnfH8" [ref=f36e74] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DvniciwSnfH8&rut=250ee3efa6b0532e86833a27cd086cd9f528e9892fc1fd07b7b5374f87ce4421
+      - link "This Jack Hartmann's Alphabet A-Z series for the letter S s. Learn about the Letter S.Learn that S is a consonant in the alphabet. Learn to recognize the upp..." [ref=f36e75] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DvniciwSnfH8&rut=250ee3efa6b0532e86833a27cd086cd9f528e9892fc1fd07b7b5374f87ce4421
+    - generic [ref=f36e77]:
+      - heading [level=2] [ref=f36e78]:
+        - link "The Letter \"S\" in the English Alphabet LanGeek" [ref=f36e79] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flangeek.co%2Fen%2Fgrammar%2Fcourse%2F906%2Fthe%2Dletter%2Ds&rut=2ccabcec485515e22d790812a0db86fbf0c1a061ff8ff540eef903b03ce94c74
+      - generic [ref=f36e81]:
+        - link [ref=f36e83] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flangeek.co%2Fen%2Fgrammar%2Fcourse%2F906%2Fthe%2Dletter%2Ds&rut=2ccabcec485515e22d790812a0db86fbf0c1a061ff8ff540eef903b03ce94c74
+        - link "langeek.co/en/grammar/course/906/the-letter-s" [ref=f36e84] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flangeek.co%2Fen%2Fgrammar%2Fcourse%2F906%2Fthe%2Dletter%2Ds&rut=2ccabcec485515e22d790812a0db86fbf0c1a061ff8ff540eef903b03ce94c74
+      - link "\" S \" is the nineteenth letter in the English alphabet. It is a consonant." [ref=f36e85] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Flangeek.co%2Fen%2Fgrammar%2Fcourse%2F906%2Fthe%2Dletter%2Ds&rut=2ccabcec485515e22d790812a0db86fbf0c1a061ff8ff540eef903b03ce94c74
+    - generic [ref=f36e87]:
+      - heading [level=2] [ref=f36e88]:
+        - link "S | Letter, History, Etymology, & Pronunciation | Britannica" [ref=f36e89] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.britannica.com%2Ftopic%2FS%2Dletter&rut=580dda2329ccdfbd7604e353e93560fcef456f6ab0d749058a28c8a3b2cde165
+      - generic [ref=f36e91]:
+        - link [ref=f36e93] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.britannica.com%2Ftopic%2FS%2Dletter&rut=580dda2329ccdfbd7604e353e93560fcef456f6ab0d749058a28c8a3b2cde165
+        - link "www.britannica.com/topic/S-letter" [ref=f36e94] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.britannica.com%2Ftopic%2FS%2Dletter&rut=580dda2329ccdfbd7604e353e93560fcef456f6ab0d749058a28c8a3b2cde165
+      - link "S, nineteenth letter of the modern Latin alphabet. It corresponds to the Semitic sin \"tooth.\" The Greek treatment of the sibilants that occur in the Semitic alphabet is somewhat complicated. The Semitic samech appears in Greek as Ξ (xi) with the value in early times of /ss/, later and more" [ref=f36e95] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.britannica.com%2Ftopic%2FS%2Dletter&rut=580dda2329ccdfbd7604e353e93560fcef456f6ab0d749058a28c8a3b2cde165
+    - generic [ref=f36e97]:
+      - heading [level=2] [ref=f36e98]:
+        - link "Île-de-France Mobilités | Transports en commun sur Paris, sa région" [ref=f36e99] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.iledefrance%2Dmobilites.fr%2F&rut=b1031b686c246485324dc433cfbfbbb22415cf40aa39022448d5f1ac96a94d56
+      - generic [ref=f36e101]:
+        - link [ref=f36e103] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.iledefrance%2Dmobilites.fr%2F&rut=b1031b686c246485324dc433cfbfbbb22415cf40aa39022448d5f1ac96a94d56
+        - link "www.iledefrance-mobilites.fr" [ref=f36e104] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.iledefrance%2Dmobilites.fr%2F&rut=b1031b686c246485324dc433cfbfbbb22415cf40aa39022448d5f1ac96a94d56
+      - 'link "Île-de-France Mobilités vous accompagne dans tous vos déplacements en Île-de-France : fédération de tous les acteurs, investissements et innovations." [ref=f36e105] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.iledefrance%2Dmobilites.fr%2F&rut=b1031b686c246485324dc433cfbfbbb22415cf40aa39022448d5f1ac96a94d56
+    - generic [ref=f36e107]:
+      - heading [level=2] [ref=f36e108]:
+        - link "Spotify - Web Player" [ref=f36e109] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fopen.spotify.com%2Fhome&rut=9cb42a8fe545ce92b4644b074f7c1248ea500c0227e57200746eed8ff1ea0c35
+      - generic [ref=f36e111]:
+        - link [ref=f36e113] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fopen.spotify.com%2Fhome&rut=9cb42a8fe545ce92b4644b074f7c1248ea500c0227e57200746eed8ff1ea0c35
+        - link "open.spotify.com/home" [ref=f36e114] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fopen.spotify.com%2Fhome&rut=9cb42a8fe545ce92b4644b074f7c1248ea500c0227e57200746eed8ff1ea0c35
+      - link "Spotify's web player lets you listen to millions of songs and podcasts online." [ref=f36e115] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fopen.spotify.com%2Fhome&rut=9cb42a8fe545ce92b4644b074f7c1248ea500c0227e57200746eed8ff1ea0c35
+    - button "Next" [ref=f36e118] [cursor=pointer]
+    - link "Feedback" [ref=f36e120] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

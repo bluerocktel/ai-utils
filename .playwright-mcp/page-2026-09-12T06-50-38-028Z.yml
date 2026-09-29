@@ -1,0 +1,212 @@
+- generic [ref=f22e2]:
+  - generic [ref=f22e3]:
+    - link "DuckDuckGo" [ref=f22e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f22e5]:
+      - generic [ref=f22e6]:
+        - textbox [ref=f22e7]: u
+        - button "Submit" [ref=f22e8] [cursor=pointer]
+      - combobox [ref=f22e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f22e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f22e15]:
+    - generic [ref=f22e17]:
+      - heading [level=2] [ref=f22e18]:
+        - link "Magasin U Fouesnant - Préparez vos Achats chez U" [ref=f22e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dmagasins%252Du.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DprXoD2UkKE0AiLGeDmfQLuRckvywNO7b6WryAugw0DIWDtkhIngpoBCacfNXGMpeK2gltydGHgzfKZq0f34m%252D7ep%252D2fnANKhmcEWA995vJJr37%252D3JHvbYklPCLNC3XR8OdM5t87LluwLsdT0y8yrV%252DsP9bffeE6aup3LLgUjTK8.ClKYLt3qGZDAGVD1qsIxdw%26rut%3Da12709bf654187b55e923dc864544daf6a2305f9f5ce161aa61c316abe561b57%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8iLEOG9hALReSwHsiz1rl2TVUCUzxFNX8cjGpDcni6TNgQLjgtIINSBhxKLp1J2c6iiUdiz0N0EcNiuBJVYFRPBJP6HEUgn1roc2UQiCADrE7OckvDE6xnUSZTzT6HHrKQ6Suk8JvkepyWQpiLT7U8UPXEjwHxHbZwnj3lMvSGY7ScLCnHiNljj7KpD6O6Gq50jxWNUpX1NUZFaK7Nm2_tT2neOA%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cubWFnYXNpbnMtdS5jb20lMmZhbm51YWlyZS1tYWdhc2luJTNmdXRtX2NhbXBhaWduJTNkc2VhLW1hZ2FzaW5zdS12aWxsZSUyNnV0bV9tZWRpdW0lM2RjcGMlMjZ1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jb250ZW50JTNkc2VhcmNoJTI2dXRtX3Rlcm0lM2RtYWdhc2luc3UtdmlsbGUlMjZtc2Nsa2lkJTNkYTVlYWFiNmY2ZGZlMTFjODI0ODNjMWNiOWJjMzUxOTA%2526rlid%253Da5eaab6f6dfe11c82483c1cb9bc35190%26vqd%3D4%2D149717697148420095862937602981640720849%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5037.1&rut=399731c983bd2ba4c08bc38e13b6e17161e17dcfa6cded15cce3671a40aaf62b
+        - button "Ad" [ref=f22e21]
+      - link "magasins-u.com" [ref=f22e24] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dmagasins%252Du.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DprXoD2UkKE0AiLGeDmfQLuRckvywNO7b6WryAugw0DIWDtkhIngpoBCacfNXGMpeK2gltydGHgzfKZq0f34m%252D7ep%252D2fnANKhmcEWA995vJJr37%252D3JHvbYklPCLNC3XR8OdM5t87LluwLsdT0y8yrV%252DsP9bffeE6aup3LLgUjTK8.ClKYLt3qGZDAGVD1qsIxdw%26rut%3Da12709bf654187b55e923dc864544daf6a2305f9f5ce161aa61c316abe561b57%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8iLEOG9hALReSwHsiz1rl2TVUCUzxFNX8cjGpDcni6TNgQLjgtIINSBhxKLp1J2c6iiUdiz0N0EcNiuBJVYFRPBJP6HEUgn1roc2UQiCADrE7OckvDE6xnUSZTzT6HHrKQ6Suk8JvkepyWQpiLT7U8UPXEjwHxHbZwnj3lMvSGY7ScLCnHiNljj7KpD6O6Gq50jxWNUpX1NUZFaK7Nm2_tT2neOA%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cubWFnYXNpbnMtdS5jb20lMmZhbm51YWlyZS1tYWdhc2luJTNmdXRtX2NhbXBhaWduJTNkc2VhLW1hZ2FzaW5zdS12aWxsZSUyNnV0bV9tZWRpdW0lM2RjcGMlMjZ1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jb250ZW50JTNkc2VhcmNoJTI2dXRtX3Rlcm0lM2RtYWdhc2luc3UtdmlsbGUlMjZtc2Nsa2lkJTNkYTVlYWFiNmY2ZGZlMTFjODI0ODNjMWNiOWJjMzUxOTA%2526rlid%253Da5eaab6f6dfe11c82483c1cb9bc35190%26vqd%3D4%2D149717697148420095862937602981640720849%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5037.1&rut=399731c983bd2ba4c08bc38e13b6e17161e17dcfa6cded15cce3671a40aaf62b
+      - link "Profitez d'économies sur une sélection de Produits U du quotidien & d'avantages fidélités. De nombreux Produits à Bas Prix. Découvrez-les dans votre Magasin U !" [ref=f22e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dmagasins%252Du.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DprXoD2UkKE0AiLGeDmfQLuRckvywNO7b6WryAugw0DIWDtkhIngpoBCacfNXGMpeK2gltydGHgzfKZq0f34m%252D7ep%252D2fnANKhmcEWA995vJJr37%252D3JHvbYklPCLNC3XR8OdM5t87LluwLsdT0y8yrV%252DsP9bffeE6aup3LLgUjTK8.ClKYLt3qGZDAGVD1qsIxdw%26rut%3Da12709bf654187b55e923dc864544daf6a2305f9f5ce161aa61c316abe561b57%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8iLEOG9hALReSwHsiz1rl2TVUCUzxFNX8cjGpDcni6TNgQLjgtIINSBhxKLp1J2c6iiUdiz0N0EcNiuBJVYFRPBJP6HEUgn1roc2UQiCADrE7OckvDE6xnUSZTzT6HHrKQ6Suk8JvkepyWQpiLT7U8UPXEjwHxHbZwnj3lMvSGY7ScLCnHiNljj7KpD6O6Gq50jxWNUpX1NUZFaK7Nm2_tT2neOA%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cubWFnYXNpbnMtdS5jb20lMmZhbm51YWlyZS1tYWdhc2luJTNmdXRtX2NhbXBhaWduJTNkc2VhLW1hZ2FzaW5zdS12aWxsZSUyNnV0bV9tZWRpdW0lM2RjcGMlMjZ1dG1fc291cmNlJTNkYmluZyUyNnV0bV9jb250ZW50JTNkc2VhcmNoJTI2dXRtX3Rlcm0lM2RtYWdhc2luc3UtdmlsbGUlMjZtc2Nsa2lkJTNkYTVlYWFiNmY2ZGZlMTFjODI0ODNjMWNiOWJjMzUxOTA%2526rlid%253Da5eaab6f6dfe11c82483c1cb9bc35190%26vqd%3D4%2D149717697148420095862937602981640720849%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5037.1&rut=399731c983bd2ba4c08bc38e13b6e17161e17dcfa6cded15cce3671a40aaf62b
+    - generic [ref=f22e27]:
+      - heading [level=2] [ref=f22e28]:
+        - link "Vos courses U en ligne - Votre magasin U" [ref=f22e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dcoursesu.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DVY1PU7d1MfhmxCPP%252DjElNd0Jj4SijpMZ_OFACu65JCzrFG3oRqS_UAFctJ4jfmcWTfbkqQrxlgUMcPt2Q6vyVHARc6rF2GXbR3LBRSO5ZIeb%252DmTzeHtEAoanmLcpIV6Pl057sjPyVmf6p3jQQ3zGIqpayUgVy3xADoRuRdanRRE.hB%252DyRvtiDUiYOxDo2tqDmQ%26rut%3D6e80c9c12d4bd477702a08d6b333ab08948f11de0253b23e5572bcfed9524b3e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8hKhRj7_DPNfMW30IFpiR8jVUCUwOtiNtZ_r0JJ1m1YPp73RCDd1Cif5jONUOiwki0pN%252DaHuZvugntsmmu%252Db170AA%252D0wFQ_rDTTY8rvkxZkpLb48DUaxwVVPVi0BzwD_Ipd6aokv3aoXi53OtFh3HN0PQ6nBEmJ6P1FNm_kJz2ee62hCcwDsxHoTG63aE01AQALF%252D3w4NMUcAC_ClBVOs_WPW60s%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cuY291cnNlc3UuY29tJTNmdXRtX21lZGl1bSUzZGNwYyUyNnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX2NhbXBhaWduJTNkUGVyZl9CR19Db252X0t3X0JyYW5kX2NkcF9taXhfRkxSX01hcnF1ZV9QdXJlJTI2dXRtX2FkZ3JvdXAlM2RCR19jZHBfbWl4X01hcnF1ZVUlMjZtc2Nsa2lkJTNkY2Q2YmYwOWU0Y2YwMTFiMzVkZWM5YTNhYmFjZDk0MTA%2526rlid%253Dcd6bf09e4cf011b35dec9a3abacd9410%26vqd%3D4%2D6061149311048447677266446275628077900%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5042.1&rut=e35adbb37570f294901738450a4bd28d035d8a57c06f9582ea7d82f579ac304e
+        - button "Ad" [ref=f22e31]
+      - link "coursesu.com" [ref=f22e32] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dcoursesu.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DVY1PU7d1MfhmxCPP%252DjElNd0Jj4SijpMZ_OFACu65JCzrFG3oRqS_UAFctJ4jfmcWTfbkqQrxlgUMcPt2Q6vyVHARc6rF2GXbR3LBRSO5ZIeb%252DmTzeHtEAoanmLcpIV6Pl057sjPyVmf6p3jQQ3zGIqpayUgVy3xADoRuRdanRRE.hB%252DyRvtiDUiYOxDo2tqDmQ%26rut%3D6e80c9c12d4bd477702a08d6b333ab08948f11de0253b23e5572bcfed9524b3e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8hKhRj7_DPNfMW30IFpiR8jVUCUwOtiNtZ_r0JJ1m1YPp73RCDd1Cif5jONUOiwki0pN%252DaHuZvugntsmmu%252Db170AA%252D0wFQ_rDTTY8rvkxZkpLb48DUaxwVVPVi0BzwD_Ipd6aokv3aoXi53OtFh3HN0PQ6nBEmJ6P1FNm_kJz2ee62hCcwDsxHoTG63aE01AQALF%252D3w4NMUcAC_ClBVOs_WPW60s%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cuY291cnNlc3UuY29tJTNmdXRtX21lZGl1bSUzZGNwYyUyNnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX2NhbXBhaWduJTNkUGVyZl9CR19Db252X0t3X0JyYW5kX2NkcF9taXhfRkxSX01hcnF1ZV9QdXJlJTI2dXRtX2FkZ3JvdXAlM2RCR19jZHBfbWl4X01hcnF1ZVUlMjZtc2Nsa2lkJTNkY2Q2YmYwOWU0Y2YwMTFiMzVkZWM5YTNhYmFjZDk0MTA%2526rlid%253Dcd6bf09e4cf011b35dec9a3abacd9410%26vqd%3D4%2D6061149311048447677266446275628077900%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5042.1&rut=e35adbb37570f294901738450a4bd28d035d8a57c06f9582ea7d82f579ac304e
+      - link "Faites vos courses en ligne 24h/24 parmi un large choix de produits. En drive ou livraison. Courses U, facilite la corvée des courses. Simple et rapide, retrait drive ou livraison." [ref=f22e33] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fduckduckgo.com%2Fy.js%3Fad_domain%3Dcoursesu.com%26ad_provider%3Dbingv7aa%26ad_type%3Dtxad%26click_metadata%3DVY1PU7d1MfhmxCPP%252DjElNd0Jj4SijpMZ_OFACu65JCzrFG3oRqS_UAFctJ4jfmcWTfbkqQrxlgUMcPt2Q6vyVHARc6rF2GXbR3LBRSO5ZIeb%252DmTzeHtEAoanmLcpIV6Pl057sjPyVmf6p3jQQ3zGIqpayUgVy3xADoRuRdanRRE.hB%252DyRvtiDUiYOxDo2tqDmQ%26rut%3D6e80c9c12d4bd477702a08d6b333ab08948f11de0253b23e5572bcfed9524b3e%26u3%3Dhttps%253A%252F%252Fwww.bing.com%252Faclick%253Fld%253De8hKhRj7_DPNfMW30IFpiR8jVUCUwOtiNtZ_r0JJ1m1YPp73RCDd1Cif5jONUOiwki0pN%252DaHuZvugntsmmu%252Db170AA%252D0wFQ_rDTTY8rvkxZkpLb48DUaxwVVPVi0BzwD_Ipd6aokv3aoXi53OtFh3HN0PQ6nBEmJ6P1FNm_kJz2ee62hCcwDsxHoTG63aE01AQALF%252D3w4NMUcAC_ClBVOs_WPW60s%2526u%253DaHR0cHMlM2ElMmYlMmZ3d3cuY291cnNlc3UuY29tJTNmdXRtX21lZGl1bSUzZGNwYyUyNnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX2NhbXBhaWduJTNkUGVyZl9CR19Db252X0t3X0JyYW5kX2NkcF9taXhfRkxSX01hcnF1ZV9QdXJlJTI2dXRtX2FkZ3JvdXAlM2RCR19jZHBfbWl4X01hcnF1ZVUlMjZtc2Nsa2lkJTNkY2Q2YmYwOWU0Y2YwMTFiMzVkZWM5YTNhYmFjZDk0MTA%2526rlid%253Dcd6bf09e4cf011b35dec9a3abacd9410%26vqd%3D4%2D6061149311048447677266446275628077900%26iurl%3D%257B1%257DIG%253DC03CF6480CBE463895CA0AD202052721%2526CID%253D3B54F885212769D1152BEF572001689D%2526ID%253DDevEx%252C5042.1&rut=e35adbb37570f294901738450a4bd28d035d8a57c06f9582ea7d82f579ac304e
+    - generic [ref=f22e35]:
+      - heading [level=2] [ref=f22e36]:
+        - link "YouTube" [ref=f22e37] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2F&rut=dcb8c24269fd26f7414b47b32d7faf5b823e4d3c95996c7eae05baf17378de2c
+      - generic [ref=f22e39]:
+        - link [ref=f22e41] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2F&rut=dcb8c24269fd26f7414b47b32d7faf5b823e4d3c95996c7eae05baf17378de2c
+        - link "www.youtube.com" [ref=f22e42] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2F&rut=dcb8c24269fd26f7414b47b32d7faf5b823e4d3c95996c7eae05baf17378de2c
+      - link "Explore and share videos, music, and more on YouTube, the leading platform for online video streaming and sharing." [ref=f22e43] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2F&rut=dcb8c24269fd26f7414b47b32d7faf5b823e4d3c95996c7eae05baf17378de2c
+    - generic [ref=f22e45]:
+      - heading [level=2] [ref=f22e46]:
+        - link "YouTube - YouTube" [ref=f22e47] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fyoutube%2Fu%2F0&rut=ff844bed4556bbce9b08ab0ce6c0a7277b0cd3ab2acfc779ea3079f506fa3ba7
+      - generic [ref=f22e49]:
+        - link [ref=f22e51] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fyoutube%2Fu%2F0&rut=ff844bed4556bbce9b08ab0ce6c0a7277b0cd3ab2acfc779ea3079f506fa3ba7
+        - link "www.youtube.com/youtube/u/0" [ref=f22e52] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fyoutube%2Fu%2F0&rut=ff844bed4556bbce9b08ab0ce6c0a7277b0cd3ab2acfc779ea3079f506fa3ba7
+      - link "YouTube's official YouTube channel You found us. Welcome to the official YouTube channel - a home for the biggest moments, the smallest obsessions, and everything in between. Whatever you're ..." [ref=f22e53] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.youtube.com%2Fyoutube%2Fu%2F0&rut=ff844bed4556bbce9b08ab0ce6c0a7277b0cd3ab2acfc779ea3079f506fa3ba7
+    - generic [ref=f22e55]:
+      - heading [level=2] [ref=f22e56]:
+        - link "U - Wikipedia" [ref=f22e57] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU&rut=ee11a41286676aaa9540f0674993c2cb58a2b8a5d42e7a1446ddf9e5ddeb60be
+      - generic [ref=f22e59]:
+        - link [ref=f22e61] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU&rut=ee11a41286676aaa9540f0674993c2cb58a2b8a5d42e7a1446ddf9e5ddeb60be
+        - link "en.wikipedia.org/wiki/U" [ref=f22e62] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU&rut=ee11a41286676aaa9540f0674993c2cb58a2b8a5d42e7a1446ddf9e5ddeb60be
+      - 'link "U (minuscule: u) is the twenty-first letter and the fifth vowel letter of the Latin alphabet, used in the modern English alphabet and the alphabets of other western European languages and others worldwide. Its name in English is u (pronounced / ˈjuː / ⓘ), plural ues. [1][2] [full citation needed][3][a]" [ref=f22e63] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU&rut=ee11a41286676aaa9540f0674993c2cb58a2b8a5d42e7a1446ddf9e5ddeb60be
+    - generic [ref=f22e65]:
+      - heading [level=2] [ref=f22e66]:
+        - link "U - Watch FREE On Demand | Drama | Comedy | Entertainment" [ref=f22e67] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=http%3A%2F%2Fu.co.uk%2F&rut=5fa07e3a0b70e33fbb9e099e26113899f762321263fc89404668111e92a51b33
+      - generic [ref=f22e69]:
+        - link [ref=f22e71] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=http%3A%2F%2Fu.co.uk%2F&rut=5fa07e3a0b70e33fbb9e099e26113899f762321263fc89404668111e92a51b33
+        - link "u.co.uk" [ref=f22e72] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=http%3A%2F%2Fu.co.uk%2F&rut=5fa07e3a0b70e33fbb9e099e26113899f762321263fc89404668111e92a51b33
+      - link "U is the on demand home of U&Dave, U&Drama, U&W & U&Yesterday. Stream thousands of hours of the best comedy, drama, entertainment & documentaries for free." [ref=f22e73] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=http%3A%2F%2Fu.co.uk%2F&rut=5fa07e3a0b70e33fbb9e099e26113899f762321263fc89404668111e92a51b33
+    - generic [ref=f22e75]:
+      - heading [level=2] [ref=f22e76]:
+        - link "U (disambiguation) - Wikipedia" [ref=f22e77] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU_(disambiguation)&rut=a1c9c662efa6aac0d8afb5b59144917c73419d9c0dd55a1f935494f52e8dc8b8
+      - generic [ref=f22e79]:
+        - link [ref=f22e81] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU_(disambiguation)&rut=a1c9c662efa6aac0d8afb5b59144917c73419d9c0dd55a1f935494f52e8dc8b8
+        - link "en.wikipedia.org/wiki/U_(disambiguation)" [ref=f22e82] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU_(disambiguation)&rut=a1c9c662efa6aac0d8afb5b59144917c73419d9c0dd55a1f935494f52e8dc8b8
+      - link "Toggle the table of contents U (disambiguation)" [ref=f22e83] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FU_(disambiguation)&rut=a1c9c662efa6aac0d8afb5b59144917c73419d9c0dd55a1f935494f52e8dc8b8
+    - generic [ref=f22e85]:
+      - heading [level=2] [ref=f22e86]:
+        - link "U - Simple English Wikipedia, the free encyclopedia" [ref=f22e87] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FU&rut=08edd740a2ab7db8946632ecdea232923416cbffbb77ee30bd3f8f66afe6066e
+      - generic [ref=f22e89]:
+        - link [ref=f22e91] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FU&rut=08edd740a2ab7db8946632ecdea232923416cbffbb77ee30bd3f8f66afe6066e
+        - link "simple.wikipedia.org/wiki/U" [ref=f22e92] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FU&rut=08edd740a2ab7db8946632ecdea232923416cbffbb77ee30bd3f8f66afe6066e
+      - link "U (u) is the twenty-first (number 21) letter in the English alphabet. It is pronounced \"yoo\"." [ref=f22e93] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FU&rut=08edd740a2ab7db8946632ecdea232923416cbffbb77ee30bd3f8f66afe6066e
+    - generic [ref=f22e95]:
+      - heading [level=2] [ref=f22e96]:
+        - link "u - Wiktionary, the free dictionary" [ref=f22e97] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Fu&rut=f443d4e4ae93198e509f2d379ca1eaed72b5b04e4a4db20ea746a7be8a2e8702
+      - generic [ref=f22e99]:
+        - link [ref=f22e101] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Fu&rut=f443d4e4ae93198e509f2d379ca1eaed72b5b04e4a4db20ea746a7be8a2e8702
+        - link "en.wiktionary.org/wiki/u" [ref=f22e102] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Fu&rut=f443d4e4ae93198e509f2d379ca1eaed72b5b04e4a4db20ea746a7be8a2e8702
+      - link "u is a letter, a pronoun, an adjective, and a symbol in various languages and systems. Learn about its etymology, pronunciation, usage, and related terms in different contexts and fields." [ref=f22e103] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fen.wiktionary.org%2Fwiki%2Fu&rut=f443d4e4ae93198e509f2d379ca1eaed72b5b04e4a4db20ea746a7be8a2e8702
+    - generic [ref=f22e105]:
+      - heading [level=2] [ref=f22e106]:
+        - link "U, u | definition in the Cambridge English Dictionary" [ref=f22e107] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdictionary.cambridge.org%2Fus%2Fdictionary%2Fenglish%2Fu&rut=8d14fa8460770514ab1c2d0680056fabb69a02b18470ecfec804cee2c9117e33
+      - generic [ref=f22e109]:
+        - link [ref=f22e111] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdictionary.cambridge.org%2Fus%2Fdictionary%2Fenglish%2Fu&rut=8d14fa8460770514ab1c2d0680056fabb69a02b18470ecfec804cee2c9117e33
+        - link "dictionary.cambridge.org/us/dictionary/english/u" [ref=f22e112] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdictionary.cambridge.org%2Fus%2Fdictionary%2Fenglish%2Fu&rut=8d14fa8460770514ab1c2d0680056fabb69a02b18470ecfec804cee2c9117e33
+      - 'link "U, u meaning: 1. the 21st letter of the English alphabet 2. abbreviation for universal: in the UK, a film or a…. Learn more." [ref=f22e113] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fdictionary.cambridge.org%2Fus%2Fdictionary%2Fenglish%2Fu&rut=8d14fa8460770514ab1c2d0680056fabb69a02b18470ecfec804cee2c9117e33
+    - generic [ref=f22e115]:
+      - heading [level=2] [ref=f22e116]:
+        - link "Type U with Accent Ú, Ù, Û, Ũ, Ü or ú, ù, û, ũ, ü - ILIFEHACKS" [ref=f22e117] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Filifehacks.com%2Fu%2Dwith%2Daccent%2F&rut=ecbad8ec92ac4e555c45047003d041c3e30af851dc5ae76b4ebdb43626b2474c
+      - generic [ref=f22e119]:
+        - link [ref=f22e121] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Filifehacks.com%2Fu%2Dwith%2Daccent%2F&rut=ecbad8ec92ac4e555c45047003d041c3e30af851dc5ae76b4ebdb43626b2474c
+        - link "ilifehacks.com/u-with-accent/" [ref=f22e122] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Filifehacks.com%2Fu%2Dwith%2Daccent%2F&rut=ecbad8ec92ac4e555c45047003d041c3e30af851dc5ae76b4ebdb43626b2474c
+        - text: 2026-08-09T00:00:00.0000000
+      - link "Learn how to type U with accent marks (Ú, Ù, Û, Ũ, Ü, or ú, ù, û, ũ, ü) on Windows, Mac, Google Docs and Word. Find out types of accents, alt codes, shortcuts." [ref=f22e123] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Filifehacks.com%2Fu%2Dwith%2Daccent%2F&rut=ecbad8ec92ac4e555c45047003d041c3e30af851dc5ae76b4ebdb43626b2474c
+    - generic [ref=f22e125]:
+      - heading [level=2] [ref=f22e126]:
+        - link "YouTube" [ref=f22e127] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fstudio.youtube.com%2F&rut=29c6f7afd641fe8f95df4d425c126ce69a77e360764562ba35f264c910aa4ec0
+      - generic [ref=f22e129]:
+        - link [ref=f22e131] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fstudio.youtube.com%2F&rut=29c6f7afd641fe8f95df4d425c126ce69a77e360764562ba35f264c910aa4ec0
+        - link "studio.youtube.com" [ref=f22e132] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fstudio.youtube.com%2F&rut=29c6f7afd641fe8f95df4d425c126ce69a77e360764562ba35f264c910aa4ec0
+      - link "Share your videos with friends, family, and the world." [ref=f22e133] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fstudio.youtube.com%2F&rut=29c6f7afd641fe8f95df4d425c126ce69a77e360764562ba35f264c910aa4ec0
+    - button "Next" [ref=f22e136] [cursor=pointer]
+    - link "Feedback" [ref=f22e138] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

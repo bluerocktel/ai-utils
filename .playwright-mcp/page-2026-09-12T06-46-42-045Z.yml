@@ -1,0 +1,160 @@
+- generic [ref=f24e2]:
+  - generic [ref=f24e3]:
+    - link "DuckDuckGo" [ref=f24e4] [cursor=pointer]:
+      - /url: /html/
+    - generic [ref=f24e5]:
+      - generic [ref=f24e6]:
+        - textbox [ref=f24e7]: "\"Cabinet LOUIS-PORCHERET\" linkedin"
+        - button "Submit" [ref=f24e8] [cursor=pointer]
+      - combobox [ref=f24e10] [cursor=pointer]:
+        - option "All Regions" [selected]
+        - option "Argentina"
+        - option "Australia"
+        - option "Austria"
+        - option "Belgium (fr)"
+        - option "Belgium (nl)"
+        - option "Brazil"
+        - option "Bulgaria"
+        - option "Canada (en)"
+        - option "Canada (fr)"
+        - option "Catalonia"
+        - option "Chile"
+        - option "China"
+        - option "Colombia"
+        - option "Croatia"
+        - option "Czech Republic"
+        - option "Denmark"
+        - option "Estonia"
+        - option "Finland"
+        - option "France"
+        - option "Germany"
+        - option "Greece"
+        - option "Hong Kong"
+        - option "Hungary"
+        - option "Iceland"
+        - option "India (en)"
+        - option "Indonesia (en)"
+        - option "Ireland"
+        - option "Israel (en)"
+        - option "Italy"
+        - option "Japan"
+        - option "Korea"
+        - option "Latvia"
+        - option "Lithuania"
+        - option "Malaysia (en)"
+        - option "Mexico"
+        - option "Netherlands"
+        - option "New Zealand"
+        - option "Norway"
+        - option "Pakistan (en)"
+        - option "Peru"
+        - option "Philippines (en)"
+        - option "Poland"
+        - option "Portugal"
+        - option "Romania"
+        - option "Russia"
+        - option "Saudi Arabia"
+        - option "Singapore"
+        - option "Slovakia"
+        - option "Slovenia"
+        - option "South Africa"
+        - option "Spain (ca)"
+        - option "Spain (es)"
+        - option "Sweden"
+        - option "Switzerland (de)"
+        - option "Switzerland (fr)"
+        - option "Taiwan"
+        - option "Thailand (en)"
+        - option "Turkey"
+        - option "US (English)"
+        - option "US (Spanish)"
+        - option "Ukraine"
+        - option "United Kingdom"
+        - option "Vietnam (en)"
+      - combobox [ref=f24e12] [cursor=pointer]:
+        - option "Any Time" [selected]
+        - option "Past Day"
+        - option "Past Week"
+        - option "Past Month"
+        - option "Past Year"
+  - generic [ref=f24e15]:
+    - generic [ref=f24e17]:
+      - heading [level=2] [ref=f24e18]:
+        - link "Cabinet LOUIS-PORCHERET - LinkedIn" [ref=f24e19] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Dlouis%2Dporcheret&rut=31b64a286982c3dce281b1ffdfc942e0ff243bceaf7b47dd884967b585f785d0
+      - generic [ref=f24e21]:
+        - link [ref=f24e23] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Dlouis%2Dporcheret&rut=31b64a286982c3dce281b1ffdfc942e0ff243bceaf7b47dd884967b585f785d0
+        - link "fr.linkedin.com/company/cabinet-louis-porcheret" [ref=f24e24] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Dlouis%2Dporcheret&rut=31b64a286982c3dce281b1ffdfc942e0ff243bceaf7b47dd884967b585f785d0
+      - link "Cabinet LOUIS-PORCHERET | 215 abonnés sur LinkedIn. Agence Immobilière Familiale sur 3 générations depuis 1947 spécialiste de l&#39;Est parisien. VENTE LOCATION GESTION SYNDIC | Nous proposons 4 activités principales des métiers de l&#39;immobilier, le syndic d&#39;immeubles, la gestion de biens résidentiels et professionnels, la location et la transaction. Nous sommes une société ..." [ref=f24e25] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fcompany%2Fcabinet%2Dlouis%2Dporcheret&rut=31b64a286982c3dce281b1ffdfc942e0ff243bceaf7b47dd884967b585f785d0
+    - generic [ref=f24e27]:
+      - heading [level=2] [ref=f24e28]:
+        - link "Cabinet Louis-porcheret" [ref=f24e29] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.porcheret.fr%2F&rut=02d551ad0728afcbeea4a47032f9e80a635c4e3db72849296df30b14e750c7e3
+      - generic [ref=f24e31]:
+        - link [ref=f24e33] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.porcheret.fr%2F&rut=02d551ad0728afcbeea4a47032f9e80a635c4e3db72849296df30b14e750c7e3
+        - link "www.porcheret.fr" [ref=f24e34] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.porcheret.fr%2F&rut=02d551ad0728afcbeea4a47032f9e80a635c4e3db72849296df30b14e750c7e3
+      - link "Puis en 1962, le Cabinet LOUIS-PORCHERET commence à s'occuper de la copropriété avec une structure appropriée en s'installant au 73 avenue du Président Wilson, toujours à Montreuil. Il signe d'ailleurs sa première construction en tant que promoteur, ouvrant la voie à une vingtaine d'immeubles." [ref=f24e35] [cursor=pointer]:
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.porcheret.fr%2F&rut=02d551ad0728afcbeea4a47032f9e80a635c4e3db72849296df30b14e750c7e3
+    - generic [ref=f24e37]:
+      - heading [level=2] [ref=f24e38]:
+        - link "Alexandre LONGEAU - Directeur Commercial et Associé du ... - LinkedIn" [ref=f24e39] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Falexandre%2Dlongeau%2D07b71435&rut=bdfdabab72965d7c7d04053fe9d726cf4850474fc0031ff6f02f6fde518d5bee
+      - generic [ref=f24e41]:
+        - link [ref=f24e43] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Falexandre%2Dlongeau%2D07b71435&rut=bdfdabab72965d7c7d04053fe9d726cf4850474fc0031ff6f02f6fde518d5bee
+        - link "fr.linkedin.com/in/alexandre-longeau-07b71435" [ref=f24e44] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Falexandre%2Dlongeau%2D07b71435&rut=bdfdabab72965d7c7d04053fe9d726cf4850474fc0031ff6f02f6fde518d5bee
+      - 'link "Directeur Commercial et Associé du Cabinet LOUIS-PORCHERET Président de l''Association AMANDA (ex-AMEPI) sur l''Alpha Est Parisien Trésorier de l''Association des commerçants de FONTENAY-SOUS-BOIS Expert immobilier · Expérience : Cabinet LOUIS-PORCHERET · Formation : ITG Val de Beauté · Lieu : Montreuil · 355 relations sur LinkedIn. Consultez le profil de Alexandre LONGEAU sur ..." [ref=f24e45] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Falexandre%2Dlongeau%2D07b71435&rut=bdfdabab72965d7c7d04053fe9d726cf4850474fc0031ff6f02f6fde518d5bee
+    - generic [ref=f24e47]:
+      - heading [level=2] [ref=f24e48]:
+        - link "Annick LONGEAU - Gérante chez Cabinet LOUIS-PORCHERET | LinkedIn" [ref=f24e49] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fannick%2Dlongeau%2Db9a41566&rut=ab6abf7d02826c5ee1636eb2f0be926f662fec194ad97a55401674b79eb2d051
+      - generic [ref=f24e51]:
+        - link [ref=f24e53] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fannick%2Dlongeau%2Db9a41566&rut=ab6abf7d02826c5ee1636eb2f0be926f662fec194ad97a55401674b79eb2d051
+        - link "fr.linkedin.com/in/annick-longeau-b9a41566" [ref=f24e54] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fannick%2Dlongeau%2Db9a41566&rut=ab6abf7d02826c5ee1636eb2f0be926f662fec194ad97a55401674b79eb2d051
+      - 'link "Gérante chez Cabinet LOUIS-PORCHERET · Expérience : Cabinet LOUIS-PORCHERET · Lieu : France · 7 relations sur LinkedIn. Consultez le profil de Annick LONGEAU sur LinkedIn, une communauté professionnelle d''un milliard de membres." [ref=f24e55] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fannick%2Dlongeau%2Db9a41566&rut=ab6abf7d02826c5ee1636eb2f0be926f662fec194ad97a55401674b79eb2d051
+    - generic [ref=f24e57]:
+      - heading [level=2] [ref=f24e58]:
+        - link "Mathilde Thibout - Responsable comptable et financier chez ... - LinkedIn" [ref=f24e59] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fmathilde%2Dthibout%2D574a18122&rut=ab9b8b983ac6084b06bf2e8ec66968b8d1e84f8bd7ac57ef17c02839444adf97
+      - generic [ref=f24e61]:
+        - link [ref=f24e63] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fmathilde%2Dthibout%2D574a18122&rut=ab9b8b983ac6084b06bf2e8ec66968b8d1e84f8bd7ac57ef17c02839444adf97
+        - link "fr.linkedin.com/in/mathilde-thibout-574a18122" [ref=f24e64] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fmathilde%2Dthibout%2D574a18122&rut=ab9b8b983ac6084b06bf2e8ec66968b8d1e84f8bd7ac57ef17c02839444adf97
+      - 'link "Responsable comptable et financier chez Cabinet LOUIS-PORCHERET · Expérience : Cabinet LOUIS-PORCHERET · Lieu : Versailles · 1 relation sur LinkedIn. Consultez le profil de Mathilde Thibout sur LinkedIn, une communauté professionnelle d''un milliard de membres." [ref=f24e65] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fmathilde%2Dthibout%2D574a18122&rut=ab9b8b983ac6084b06bf2e8ec66968b8d1e84f8bd7ac57ef17c02839444adf97
+    - generic [ref=f24e67]:
+      - heading [level=2] [ref=f24e68]:
+        - link "Manager en Immobilier résidentiel et tertiaire - LinkedIn" [ref=f24e69] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjonathan%2Dsmits%2Db2371490&rut=891c7e35039373db912bb6643679fffe8351361bf7ed28290fcb7cd403813432
+      - generic [ref=f24e71]:
+        - link [ref=f24e73] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjonathan%2Dsmits%2Db2371490&rut=891c7e35039373db912bb6643679fffe8351361bf7ed28290fcb7cd403813432
+        - link "fr.linkedin.com/in/jonathan-smits-b2371490" [ref=f24e74] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjonathan%2Dsmits%2Db2371490&rut=891c7e35039373db912bb6643679fffe8351361bf7ed28290fcb7cd403813432
+      - 'link "Manager en Immobilier résidentiel et tertiaire · Cabinet LOUIS-PORCHERET Agence familiale depuis 1947 - Achat-Vente-Location-Gestion-Syndic-Viager-Promotion- · Expérience : Cabinet LOUIS-PORCHERET · Formation : IMSI · Lieu : Vincennes · 500 relations ou plus sur LinkedIn. Consultez le profil de Jonathan SMITS sur LinkedIn, une communauté professionnelle d''un milliard de membres." [ref=f24e75] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fjonathan%2Dsmits%2Db2371490&rut=891c7e35039373db912bb6643679fffe8351361bf7ed28290fcb7cd403813432
+    - generic [ref=f24e77]:
+      - heading [level=2] [ref=f24e78]:
+        - link "Agence immobilière Cabinet LOUIS-PORCHERET (94120) - SeLoger" [ref=f24e79] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.seloger.com%2Fprofessionnels%2Dimmobilier%2F7pL4aw9SYvhiMgpiLvr5ei&rut=42fb3cf3d4ff00da08858c63bbc1c1c894fc272f95fc274566a15f251dde55a1
+      - generic [ref=f24e81]:
+        - link [ref=f24e83] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.seloger.com%2Fprofessionnels%2Dimmobilier%2F7pL4aw9SYvhiMgpiLvr5ei&rut=42fb3cf3d4ff00da08858c63bbc1c1c894fc272f95fc274566a15f251dde55a1
+        - link "www.seloger.com/professionnels-immobilier/7pL4aw9SYvhiMgpiLvr5ei" [ref=f24e84] [cursor=pointer]:
+          - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.seloger.com%2Fprofessionnels%2Dimmobilier%2F7pL4aw9SYvhiMgpiLvr5ei&rut=42fb3cf3d4ff00da08858c63bbc1c1c894fc272f95fc274566a15f251dde55a1
+      - 'link "Découvrez Cabinet LOUIS-PORCHERET, Agence immobilière 4 rue Mauconseil, (94120) Fontenay-sous-Bois: derniers biens vendus ou loués, annonces, avis clients, présentation de l''équipe" [ref=f24e85] [cursor=pointer]':
+        - /url: //duckduckgo.com/l/?uddg=https%3A%2F%2Fwww.seloger.com%2Fprofessionnels%2Dimmobilier%2F7pL4aw9SYvhiMgpiLvr5ei&rut=42fb3cf3d4ff00da08858c63bbc1c1c894fc272f95fc274566a15f251dde55a1
+    - button "Next" [ref=f24e88] [cursor=pointer]
+    - link "Feedback" [ref=f24e90] [cursor=pointer]:
+      - /url: //duckduckgo.com/feedback.html

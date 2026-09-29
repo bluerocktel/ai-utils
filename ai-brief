@@ -294,6 +294,63 @@ lint_task_criteria() {
     return 0
 }
 
+# Inspect draft text as data, never execute model-generated checks. Return notes
+# for policy violations that warrant regeneration, not a proof of satisfiability.
+brief_criteria_issues() {
+    local draft="$1" name criterion
+    awk '
+        function flush() {
+            if (item != "") { print name "\t" item; count++; item="" }
+        }
+        /^===TASK_FILE_BEGIN: / {
+            if (active) print name "\tINVALID_TASK_DELIMITERS"
+            begins++
+            name=$0; sub(/^===TASK_FILE_BEGIN: /,"",name); sub(/===$/,"",name)
+            active=1; criteria=0; count=0; item=""; next
+        }
+        /^===TASK_FILE_END===/ {
+            if (!active) print "draft\tINVALID_TASK_DELIMITERS"
+            flush()
+            if (active && count==0) print name "\tMISSING_ACCEPTANCE_CRITERIA"
+            active=0; criteria=0; next
+        }
+        !active {next}
+        /^## Acceptance Criteria[[:space:]]*$/ {criteria=1; next}
+        /^## / {flush(); criteria=0; next}
+        criteria && /^[[:space:]]*([-*+] |[0-9]+[.)] )/ {flush(); item=$0; next}
+        criteria && item!="" && /[^[:space:]]/ {item=item " " $0}
+        END {
+            if (active || !begins) print "draft\tINVALID_TASK_DELIMITERS"
+        }
+    ' "$draft" | while IFS=$'\t' read -r name criterion; do
+        if [ "$criterion" = INVALID_TASK_DELIMITERS ]; then
+            printf '%s: missing or malformed task delimiters.\n' "$name"
+        fi
+        if [ "$criterion" = MISSING_ACCEPTANCE_CRITERIA ]; then
+            printf '%s: missing nonempty acceptance checklist.\n' "$name"
+        fi
+        # Include git -C/--git-dir variants and multiline checklist items.
+        # Merely saying "report" must not hide a simultaneous clean-tree demand.
+        if printf '%s' "$criterion" | grep -qE '\bgit[[:space:]][^`|;]*(diff|status|ls-files)\b' \
+           && { { { ! printf '%s' "$criterion" | grep -qE '\|[[:space:]]*grep\b' \
+                     || printf '%s' "$criterion" | grep -qE '\bgit[[:space:]][^`|;]*status\b'; } \
+                  && printf '%s' "$criterion" | grep -qiE 'is clean|must be clean|lists nothing|no output|returns nothing|is empty|shows no change|unchanged|byte-identical|diff[^`]*--(quiet|exit-code)[^`]*`[^`]*(exits? (with )?`?0|succeeds)'; } \
+                || { printf '%s' "$criterion" | grep -qE '\|[[:space:]]*wc[[:space:]]+-l' \
+                     && printf '%s' "$criterion" | grep -qiE 'returns?|equals?|must|==|exactly'; }; }; then
+            printf '%s: git working-tree assertion; use execution-time preservation evidence or task-owned content checks.\n  %s\n' "$name" "$criterion"
+        fi
+        if printf '%s' "$criterion" | grep -qE '`[^`]*[[:space:]]\.\.\.([[:space:]`]|$)'; then
+            printf '%s: abbreviated command; provide the complete command and explicit target path.\n  %s\n' "$name" "$criterion"
+        fi
+        if printf '%s' "$criterion" | grep -qE '\b(pdftotext|catdoc|antiword)\b.*\|[[:space:]]*grep\b' \
+           && ! printf '%s' "$criterion" | grep -qE '\btr[^|]*\\n|\bpaste[[:space:]]+-sd|\bgrep[^|]*[[:space:]]-[A-Za-z]*z|\bawk[^|]*RS=|\bsed[^|]*[[:space:]]-[A-Za-z]*z' \
+           && printf '%s' "$criterion" | sed 's/.*|[[:space:]]*grep/grep/' \
+                | grep -qE "'[^']*[[:space:]][^']*'|\"[^\"]*[[:space:]][^\"]*\""; then
+            printf '%s: phrase search on wrapped extracted text; normalize whitespace before matching.\n  %s\n' "$name" "$criterion"
+        fi
+    done
+}
+
 # ── Internal execution mode ────────────────────────────────────────────────
 if [ "$MODE" = run ]; then
     BRIEF_FILE="$BRIEF_ARG"
@@ -386,7 +443,7 @@ Your job, in order:
 
 1. Read the brief and find the ## Project field. Read $PROJECTS_DIR/{alias}.md to learn the working directory, stack, and conventions.
 
-2. Explore the codebase with tools: grep and glob to find the specific files, line numbers, class names, and patterns the work touches. Exclude vendor/, node_modules/, storage/framework/ from all searches. Embed exact paths in every task you produce. Do not invent file paths. While you are in the working directory, RUN every check you intend to turn into an acceptance criterion and note what it returns right now: step 5 requires those observed values, and a criterion you never ran is a guess.
+2. Explore the codebase with tools: grep and glob to find the specific files, line numbers, class names, and patterns the work touches. Exclude vendor/, node_modules/, storage/framework/ from all searches. Embed exact paths in every task you produce. Do not invent file paths. During exploration, run only safe read-only baseline checks. Never run a future acceptance command that writes data, changes files, invokes a migration, or requires a deliverable that does not exist yet. Record such checks as deferred until execution, with the prerequisite and expected behavior; never invent an observed result.
 
 3. Decide how many task files to create. Split when:
    - Changes are in different areas and could be reviewed or rolled back independently
@@ -411,10 +468,10 @@ ${BRIEF_ARCHIVE}
 {Numbered concrete instructions. Exact strings to find/replace when relevant.}
 
 ## Criteria Baseline
-{One line per acceptance criterion that asserts a count, an absence, or a git state, in the form 'exact command' -> observed value, recording what that command returns NOW, before any of this work exists. Run them; do not predict them. Write NONE when no criterion needs one. This section is what lets the executing agent and the evaluator tell a criterion that has merely not been met yet from one that was already false when the task was written.}
+{For each safe baseline check: exact command, observed output and exit status. For future artifacts or predecessor outputs: DEFERRED, prerequisite, and the check to run once available. Baselines are historical observations, never execution preconditions. Write NONE when no baseline is relevant. Never fabricate a measurement.}
 
 ## Acceptance Criteria
-{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Scope every check to what THIS task creates or changes, following the ACCEPTANCE CRITERIA rules below. Every count, absence or git-state check you write here must have its measured line in ## Criteria Baseline above. Always end with a negative check confirming the old thing is gone.}
+{Bulleted checklist of verifiable pass/fail items. Prefer shell-command-checkable criteria. Scope every check to what THIS task creates or changes, following the ACCEPTANCE CRITERIA rules below. Give complete commands with explicit paths, expected output and exit status; no ellipsis placeholders. Add a negative check only when this task actually removes or replaces something, scoped to the exact artifact or behavior it owns.}
 ===TASK_FILE_END===
 
 Replace SLUG with a short lowercase description specific to that task (not the whole brief).
@@ -423,7 +480,10 @@ Use ${TODAY} as the date prefix for all filenames.
 TARGET RUNNER: every task in this batch will be executed by the runner named '${STAMP_RUNNER}'. Write for that runner: assume only the tools and conventions it actually has. Do NOT write a ## Runner section yourself. ai-brief stamps ## Runner ${STAMP_RUNNER} on every emitted file, and a hand-written one is discarded.
 
 ACCEPTANCE CRITERIA — only write checks that a correct implementation can actually pass:
-- MEASURE BEFORE YOU ASSERT. This rule governs every rule below it. A criterion naming a count, an absence, or a git state is a claim about a repository you have open in front of you, so RUN the exact command before you write the criterion and put the command and what it returned in ## Criteria Baseline. A criterion its own baseline already contradicts is false before the task starts: rewrite it as a delta this task owns. Three that reached execution unmeasured, each costing every retry the task had: 'grep -c ... returns 1' on a file that already contained 1 before the step that adds another; 'git diff --name-only A...B lists only the six files' on a range that already listed 73; 'grep -rn <address> over app/ ... tests/ returns no match' where two pre-existing matches were never in the task's scope. One command each would have caught all three. The rules below name the shapes that have gone wrong so far; measuring is what catches the ones nobody has named yet.
+- DISTINGUISH CURRENT EVIDENCE FROM FUTURE REQUIREMENTS. A check may correctly fail before implementation. Do not weaken it merely because its baseline fails. Explain how the task will make it pass. If the target is a new artifact or a predecessor output, defer measuring it until it exists. Never guess counts or claim to have measured future outputs.
+- OUTPUT IS NOT EXIT STATUS. For grep, no matches normally means exit status 1 even when grep -c prints 0. State which is being checked, handle expected absence explicitly, and distinguish errors from no matches. For exact counts, count semantic entities rather than matching lines when one line can contain several entities.
+- REVIEW THE COMPLETE BATCH BEFORE EMITTING IT. For every criterion, identify the owning task step, exact target, prerequisites, and a plausible passing result after those steps. Check that predecessor changes cannot invalidate it. Resolve contradictions between Tasks, Context, and Acceptance Criteria without removing requested behavior or expanding scope. Do not substitute documentation of a failure for fixing requested behavior.
+- PRESERVATION CHECKS use measurements taken at execution start and end, with the exact command and both results recorded in the final report. Never compare against HEAD or a decomposition-time hash. Limit coverage to the protected paths and explain exclusions. If another writer changes them, report the interference without reverting its work or pretending a match.
 - SCOPE EVERY CHECK TO WHAT THIS TASK CREATES OR CHANGES. Assert against a provenance marker the task itself writes: a comment or tag column, a filename pattern, a config key, a specific commit. Never assert on the state of a whole table, a whole directory, or a whole codebase that existed before this task.
 - NEVER write an absolute total that is a baseline you measured during exploration plus a delta you predicted. 'TOTAL == 439 + 143' breaks two ways: the baseline moves if anything else touches the data before the task runs, and the 143 is a guess that exploration cannot fully verify — a case-insensitive collation folding two labels into one row, a value that turns out to already exist, a dedupe or upsert rule. Write '142 rows carrying marker M exist' instead: the task creates those rows, so the task can guarantee them.
 - NEVER assert a global invariant the task does not own. 'No duplicate X anywhere' fails on pre-existing duplicates the task did not create, and the only way to make it pass is to mutate data the task was never asked to touch. Scope it: 'no duplicate X among the rows this task created'.
@@ -497,6 +557,7 @@ $PROJECT_INSTRUCTIONS"
     # including 124 for a timeout. stdout and stderr land in two SEPARATE files;
     # merging them corrupts the JSON and silently blanks the extraction.
     set +e
+    DECOMPOSITION_DEADLINE=$(( $(date +%s) + BRIEF_TIMEOUT_MIN * 60 ))
     ai_run "${PREAMBLE}
 
 $(cat "$BRIEF_FILE")" \
@@ -559,6 +620,79 @@ $(cat "$BRIEF_FILE")" \
         echo "Empty output. Brief restored. Debug: $RAW_FILE"
         exit 1
     fi
+
+    # Validate before extraction: rejected drafts never appear in the review
+    # queue. One repair call shares the original timeout budget and provider.
+    CRITERIA_DRAFT=$(mktemp)
+    printf '%s\n' "$RESULT_TEXT" > "$CRITERIA_DRAFT"
+    CRITERIA_ISSUES=$(brief_criteria_issues "$CRITERIA_DRAFT")
+    if [ -n "$CRITERIA_ISSUES" ]; then
+        echo "Acceptance criteria need repair:"
+        printf '%s\n' "$CRITERIA_ISSUES"
+        ORIGINAL_DRAFT="$RESULT_TEXT"
+        ORIGINAL_ISSUES="$CRITERIA_ISSUES"
+        REPAIR_REMAINING=$(( DECOMPOSITION_DEADLINE - $(date +%s) ))
+        REPAIR_STATUS=124
+        if [ "$REPAIR_REMAINING" -gt 0 ]; then
+            set +e
+            ai_run "${PREAMBLE}
+
+SOURCE BRIEF:
+$(cat "$BRIEF_FILE")
+
+REPAIR PASS: The draft below failed deterministic criteria validation.
+Return the FULL corrected batch in the same task delimiters, with the SAME task
+filenames and dependencies. Preserve every requested deliverable and meaningful
+acceptance requirement. Repair the checks and corresponding task instructions;
+do not delete requirements just to silence validation. Do not implement tasks.
+For preservation, require fresh execution-time before/after evidence in the final
+result. Do not demand a clean Git diff or use historical fingerprints as targets.
+
+VALIDATION FINDINGS:
+${CRITERIA_ISSUES}
+
+DRAFT:
+${ORIGINAL_DRAFT}" "$MODEL_ID" "$WORKDIR" "$REPAIR_REMAINING" "$JSON_TMP" "$ERR_TMP"
+            REPAIR_STATUS=$?
+            set -e
+        fi
+        REPAIR_AUTH=0
+        if ai_is_auth_failure "$JSON_TMP" || ai_is_auth_failure "$ERR_TMP"; then
+            touch "$COOLDOWN_FILE"
+            REPAIR_AUTH=1
+        fi
+        if [ "$REPAIR_STATUS" -eq 0 ] && [ "$REPAIR_AUTH" -eq 0 ]; then
+            RESULT_TEXT=$(ai_json_text "$JSON_TMP")
+            RESULT_TEXT=$(printf '%s' "$RESULT_TEXT" | tr -d '\r')
+            printf '%s\n' "$RESULT_TEXT" > "$CRITERIA_DRAFT"
+            CRITERIA_ISSUES=$(brief_criteria_issues "$CRITERIA_DRAFT")
+            ORIGINAL_NAMES=$(printf '%s\n' "$ORIGINAL_DRAFT" | grep '^===TASK_FILE_BEGIN: ' | sort || true)
+            REPAIRED_NAMES=$(printf '%s\n' "$RESULT_TEXT" | grep '^===TASK_FILE_BEGIN: ' | sort || true)
+            if [ -z "$RESULT_TEXT" ] || [ "$ORIGINAL_NAMES" != "$REPAIRED_NAMES" ]; then
+                CRITERIA_ISSUES="Repair returned empty output or changed the batch's task filenames.
+$CRITERIA_ISSUES"
+            fi
+        else
+            CRITERIA_ISSUES="Criteria repair failed (exit $REPAIR_STATUS, auth failure $REPAIR_AUTH)."
+            ai_json_text "$JSON_TMP" > "$CRITERIA_DRAFT" || true
+        fi
+        if [ -n "$CRITERIA_ISSUES" ]; then
+            write_raw "$ORIGINAL_DRAFT"
+            {
+                printf '\n## Initial criteria validation\n%s\n' "$ORIGINAL_ISSUES"
+                printf '\n## Criteria repair validation\n%s\n' "$CRITERIA_ISSUES"
+                printf '\n## Repair output\n%s\n' "$(cat "$CRITERIA_DRAFT")"
+            } >> "$RAW_FILE"
+            restore_brief
+            rm -f "$CRITERIA_DRAFT" "$JSON_TMP" "$ERR_TMP"
+            notify -u critical "ai-brief [$DECOMP_RUNNER]: Criteria Need Review" \
+                "$BRIEF_NAME: criteria repair did not pass. Brief restored. See $RAW_FILE"
+            echo "Criteria validation failed. No tasks published. Brief restored. Debug: $RAW_FILE"
+            exit 1
+        fi
+        echo "Acceptance criteria repair passed validation."
+    fi
+    rm -f "$CRITERIA_DRAFT"
 
     echo "Runner finished (exit $STATUS). Extracting task files..."
 

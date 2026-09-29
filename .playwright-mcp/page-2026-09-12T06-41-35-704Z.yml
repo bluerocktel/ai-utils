@@ -1,0 +1,53 @@
+- generic [active] [ref=f48e1]:
+  - banner [ref=f48e2]:
+    - button "Passer au contenu" [ref=f48e3] [cursor=pointer]
+    - button "Commentaires sur l’accessibilité" [ref=f48e6] [cursor=pointer]
+    - generic [ref=f48e9]:
+      - link [ref=f48e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Retour à la recherche Bing" [level=1] [ref=f48e11]
+      - search [ref=f48e12]:
+        - button "Rechercher" [ref=f48e15] [cursor=pointer]
+        - searchbox "Entrez votre recherche ici - Les suggestions de recherche s’affichera au fur et à mesure de la frappe" [ref=f48e16]: "\"Foncia Paris Est\" syndic \"200 rue Raymond Losserand\" telephone"
+        - generic [ref=f48e17] [cursor=pointer]
+        - button "Rechercher à l’aide d’une image" [ref=f48e21] [cursor=pointer]
+    - complementary "Récompenses et préférences du compte" [ref=f48e23]:
+      - button "Microsoft Rewards" [ref=f48e24] [cursor=pointer]
+      - link "Connexion" [ref=f48e25] [cursor=pointer]:
+        - /url: javascript:void(0)
+    - navigation "Filtre de recherche" [ref=f48e27]:
+      - list [ref=f48e28]:
+        - listitem [ref=f48e29]:
+          - link "Tout" [ref=f48e30] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=f48e31]:
+          - link "Rechercher" [ref=f48e32] [cursor=pointer]:
+            - /url: /copilotsearch?q=%22Foncia+Paris+Est%22+syndic+%22200+rue+Raymond+Losserand%22+telephone&FORM=CSSCOP
+        - listitem [ref=f48e35]:
+          - link "Images" [ref=f48e36] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d6b3ce13aa39b65e7b0015ece09309c0841946aaff9cfd5ef03b7f298c540d0bJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L2ltYWdlcy9zZWFyY2g_cT0lMjJGb25jaWErUGFyaXMrRXN0JTIyK3N5bmRpYyslMjIyMDArcnVlK1JheW1vbmQrTG9zc2VyYW5kJTIyK3RlbGVwaG9uZSZGT1JNPUhEUlNDMg&ntb=1
+        - listitem [ref=f48e37]:
+          - link "Vidéos" [ref=f48e38] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=08a805f69fe687e899532e0d9bf42c8e87bd13dc4dfba8f2d75b42a82c40e0d8JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L3ZpZGVvcy9zZWFyY2g_cT0lMjJGb25jaWErUGFyaXMrRXN0JTIyK3N5bmRpYyslMjIyMDArcnVlK1JheW1vbmQrTG9zc2VyYW5kJTIyK3RlbGVwaG9uZSZGT1JNPUhEUlNDMw&ntb=1
+        - listitem [ref=f48e39]:
+          - link "Cartes" [ref=f48e40] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=333f142eb00eda5b6e94f0378ea696b6dafdebc4f51f28b8d77db8ea1c189694JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L21hcHM_cT0lMjJGb25jaWErUGFyaXMrRXN0JTIyK3N5bmRpYyslMjIyMDArcnVlK1JheW1vbmQrTG9zc2VyYW5kJTIyK3RlbGVwaG9uZSZGT1JNPUhEUlNDNA&ntb=1
+        - listitem [ref=f48e41]:
+          - link "Actualités" [ref=f48e42] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=965d2d1d0addab415b0435d5322d021ce31e672bdc3a0c51f5b9c7aca77adcccJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1L25ld3Mvc2VhcmNoP3E9JTIyRm9uY2lhK1BhcmlzK0VzdCUyMitzeW5kaWMrJTIyMjAwK3J1ZStSYXltb25kK0xvc3NlcmFuZCUyMit0ZWxlcGhvbmUmRk9STT1IRFJTQzY&ntb=1
+        - listitem [ref=f48e43]:
+          - button [ref=f48e44] [cursor=pointer]
+        - listitem [ref=f48e48]:
+          - link [ref=f48e51] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d0fcbfa0bbf975ab8825fafed909d3bd6de7404daae6e316a0dd458e6be45e52JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cHM6Ly9oZWxwLmJpbmcubWljcm9zb2Z0LmNvbS8jYXBleC8xOC9mci8xMDAyMC8tMQ&ntb=1
+            - text: À propos des résultats de recherche
+            - img "À propos des résultats de recherche" [ref=f48e53]
+  - contentinfo [ref=f48e54]:
+    - generic [ref=f48e55]:
+      - list:
+        - listitem [ref=f48e56]:
+          - link "Confidentialité" [ref=f48e57] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=762ee8d9029a918f6255d8108d7fd878ef3154a0a7517a1c44fa4e0130ae2a1dJmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=f48e58]:
+          - link "Conditions générales" [ref=f48e59] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=37c92c62a0d0daee8b4f3e80553d715a91c84855569f25cb54c983981ec860d9JmltdHM9MTc4OTA4NDgwMA&ptn=3&ver=2&hsh=4&fclid=0a7446e6-0963-6c52-3dc3-513408fd6d19&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

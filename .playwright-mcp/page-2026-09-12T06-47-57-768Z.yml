@@ -1,0 +1,489 @@
+- generic [ref=f39e1]:
+  - link [ref=f39e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f39e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f39e10]:
+      - generic [ref=f39e12]:
+        - img "Google" [ref=f39e13]
+        - generic [ref=f39e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f39e16] [cursor=pointer]':
+            - generic [ref=f39e17]: fr
+          - link "Se connecter" [ref=f39e19] [cursor=pointer]
+      - generic [ref=f39e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f39e21]
+        - generic [ref=f39e22]:
+          - generic [ref=f39e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f39e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f39e25]:
+              - listitem [ref=f39e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f39e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f39e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f39e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f39e30]:
+              - listitem [ref=f39e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f39e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f39e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f39e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f39e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f39e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f39e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f39e38]:
+        - generic [ref=f39e39]:
+          - button "Tout refuser" [ref=f39e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f39e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f39e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f39e44]: Plus d'options
+      - generic [ref=f39e45]:
+        - link "Confidentialité" [ref=f39e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f39e47]: ·
+        - link "Conditions d'utilisation" [ref=f39e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f39e53]:
+    - search [ref=f39e54]:
+      - generic [ref=f39e56]:
+        - link [ref=f39e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQPHoECAYQZA
+        - generic [ref=f39e66]:
+          - generic [ref=f39e67]:
+            - combobox [ref=f39e70]: "\"LOGIS INTERNATIONAL SERVICES\" \"83 avenue d'Italie\" OR 345210058 \"LOGIS INTERNATIONAL SERVICES\" \"83 avenue d'Italie\" OR 345210058"
+            - generic [ref=f39e71]:
+              - button [ref=f39e73] [cursor=pointer]
+              - generic [ref=f39e78]:
+                - button [ref=f39e79] [cursor=pointer]
+                - button [ref=f39e82] [cursor=pointer]
+          - button [ref=f39e85] [cursor=pointer]
+    - generic [ref=f39e90]:
+      - button [ref=f39e92] [cursor=pointer]
+      - button [ref=f39e93] [cursor=pointer]
+      - generic [ref=f39e99]:
+        - button [ref=f39e101] [cursor=pointer]
+        - link [ref=f39e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522LOGIS%2BINTERNATIONAL%2BSERVICES%2522%2B%252283%2Bavenue%2Bd%2527Italie%2522%2BOR%2B345210058%26hl%3Dfr%26num%3D20&ec=futura_srp_og_si_72236_p
+          - generic [ref=f39e107]: Connexion
+  - generic [ref=f39e109]:
+    - navigation [ref=f39e115]:
+      - list [ref=f39e118]:
+        - listitem [ref=f39e119]:
+          - link [ref=f39e122] [cursor=pointer]:
+            - /url: /search?q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ2J8OegQICRAD
+            - generic [ref=f39e123]: Mode IA
+        - listitem [ref=f39e126]:
+          - link [disabled] [ref=f39e127]:
+            - generic [ref=f39e128]: Tous
+        - listitem [ref=f39e130]:
+          - link [ref=f39e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQtKgLegQIEBAB
+            - generic [ref=f39e132]: Images
+        - listitem [ref=f39e134]:
+          - link [ref=f39e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQs6gLegQIDxAB
+            - generic [ref=f39e136]: Vidéos courtes
+        - listitem [ref=f39e138]:
+          - link [ref=f39e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQtKgLegQIDhAB
+            - generic [ref=f39e140]: Vidéos
+        - listitem [ref=f39e142]:
+          - link [ref=f39e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ0pQJegQIDRAB
+            - generic [ref=f39e144]: Actualités
+        - listitem [ref=f39e146]:
+          - link [ref=f39e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQs6gLegQIDBAB
+            - generic [ref=f39e148]: Web
+        - listitem [ref=f39e150]:
+          - button [ref=f39e151] [cursor=pointer]:
+            - generic [ref=f39e152]: Plus
+    - heading [level=1] [ref=f39e158]: Résultats de recherche
+    - generic [ref=f39e159]:
+      - main [ref=f39e160]:
+        - generic [ref=f39e164]:
+          - generic [ref=f39e165]:
+            - generic [ref=f39e168]:
+              - generic [ref=f39e172]:
+                - generic [ref=f39e180]:
+                  - button [ref=f39e184] [cursor=pointer]:
+                    - generic [ref=f39e185]: Voir les photos
+                  - generic [ref=f39e188]:
+                    - link [ref=f39e191] [cursor=pointer]:
+                      - /url: /maps/place/Logis+H%C3%B4tels/data=!4m2!3m1!1s0x0:0x12a8c0289ff630a8?sa=X&ved=1t:2428&hl=fr&ictx=111
+                    - link [ref=f39e201] [cursor=pointer]:
+                      - /url: /local/place/fid/0x47e6718f0e997131:0x12a8c0289ff630a8/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3D6zHboWjJLuiXf--ZMnN_eQ%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D71.37307%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFjZ6SGJvV2pKTHVpWGYtLVpNbk5fZVE%3D&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQpx96BAhKEBI
+                      - generic [ref=f39e203]: Extérieur
+                - generic [ref=f39e206]:
+                  - heading [level=2] [ref=f39e209]:
+                    - link [ref=f39e210] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Logis+H%C3%B4tels&si=APenkKllX05q7xl66dAosm6nb1iuMgV7Bv8meTZS-zIzIS3OMwxHiWh3bamsC5Je83kh4EMucZG9Fuo5KPUAVcGiDRW4sTmKaQengSN2Lza_UOYSdTXQLrM%3D&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ_coHegQIMRAB
+                      - text: Logis Hôtels
+                  - generic [ref=f39e213]:
+                    - text: 4,1
+                    - link [ref=f39e217] [cursor=pointer]:
+                      - /url: /travel/search?g2lb=4965990,72471280,72559352,72573224,72647020,72686036,72803964,72882230,73064764,121529350,121608706,121738283,121762713,121921501,121951222,121954664,122040837&hl=fr-FR&gl=fr&ssta=1&q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d'Italie%22+OR+345210058&ts=CAEaRwopEicyJTB4NDdlNjcxOGYwZTk5NzEzMToweDEyYThjMDI4OWZmNjMwYTgSGhIUCgcI6g8QCRgUEgcI6g8QCRgVGAEyAhAA&qs=CAEyE0Nnb0lxT0hZXzRtRnNOUVNFQUU4AkIJCagw9p8owKgSQgkJqDD2nyjAqBI&ap=ugEHcmV2aWV3cw&ictx=111&ved=1t:1250
+                      - text: 16 avis Google
+                    - button [ref=f39e221] [cursor=pointer]
+                    - text: Siège social
+                - generic [ref=f39e231]:
+                  - generic [ref=f39e241]:
+                    - link [ref=f39e243] [cursor=pointer]:
+                      - /url: https://www.logishotels.com/?partid=661
+                      - generic [ref=f39e244]: Site Web
+                    - link [ref=f39e250]:
+                      - generic [ref=f39e251] [cursor=pointer]: Itinéraire
+                    - button [ref=f39e263] [cursor=pointer]:
+                      - generic [ref=f39e266]: Enregistrer
+                    - button [ref=f39e269] [cursor=pointer]:
+                      - generic [ref=f39e270]: Partager
+                    - button [ref=f39e276] [cursor=pointer]:
+                      - generic [ref=f39e277]: Appeler
+                    - generic [ref=f39e282]: Vérifier la disponibilité
+                  - generic [ref=f39e297]:
+                    - generic [ref=f39e300]:
+                      - text: "Emplacement :"
+                      - link [ref=f39e301] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=StartWay+Paris+13+Coworking+et+bureaux&ludocid=4058992818641638152&lsig=AB86z5VfrnicXB_qQZUVm4qmTRnI&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ8G0oAHoECDkQAQ
+                        - text: StartWay Paris 13 Coworking et bureaux
+                    - generic [ref=f39e304]:
+                      - generic [ref=f39e305]:
+                        - link [ref=f39e306] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=logis+international+services+adresse&ludocid=1344535769485029544&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ6BN6BAg2EAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 83 Av. d'Italie, 75013 Paris
+                    - generic [ref=f39e310]:
+                      - generic [ref=f39e311]:
+                        - link [ref=f39e312] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=logis+international+services+t%C3%A9l%C3%A9phone&ludocid=1344535769485029544&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ6BN6BAg4EAI
+                          - text: Téléphone
+                        - text: ":"
+                      - link [ref=f39e315] [cursor=pointer]:
+                        - /url: "#"
+                        - text: 01 45 84 83 84
+                    - generic [ref=f39e317]:
+                      - generic [ref=f39e318]:
+                        - link [ref=f39e319] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=logis+international+services+horaires&ludocid=1344535769485029544&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQ6BN6BAg3EBY
+                          - text: Horaires
+                        - text: ":"
+                      - button [ref=f39e321]:
+                        - generic [ref=f39e322]: Fermé · Ouvre à 09:00 lun.
+                        - text: · Plus d'horaires
+                    - generic [ref=f39e333]:
+                      - heading [level=2] [ref=f39e334]:
+                        - generic [ref=f39e335]: Comparer les prix
+                      - generic [ref=f39e338]:
+                        - generic [ref=f39e340]:
+                          - status
+                          - button [ref=f39e342] [cursor=pointer]:
+                            - generic [ref=f39e347]: dim. 20 sept.
+                          - button [ref=f39e349] [cursor=pointer]:
+                            - generic [ref=f39e354]: lun. 21 sept.
+                        - button [ref=f39e358] [cursor=pointer]: "2"
+                        - generic [ref=f39e364]: Contacter cet établissement pour connaître les tarifs et la disponibilité
+                  - generic [ref=f39e377]:
+                    - generic [ref=f39e378]:
+                      - heading [level=3] [ref=f39e379]: Avis
+                      - generic [ref=f39e380]:
+                        - button [ref=f39e384] [cursor=pointer]:
+                          - generic [ref=f39e385]: Donner un avis
+                        - button [ref=f39e389] [cursor=pointer]:
+                          - generic [ref=f39e390]: Ajouter des photos
+                    - generic [ref=f39e393]:
+                      - text: 4,1
+                      - button [ref=f39e399] [cursor=pointer]: 16 avis Google
+                    - generic [ref=f39e400]:
+                      - text: Les avis ne sont pas vérifiés
+                      - button [ref=f39e404] [cursor=pointer]
+                  - generic [ref=f39e416]:
+                    - generic [ref=f39e417]:
+                      - heading [level=3] [ref=f39e418]: "Source : Logis Hôtels"
+                      - button [ref=f39e420]
+                    - generic [ref=f39e424]:
+                      - text: "\"Logis Hôtels – Plus de 2000 hôtels-restaurants indépendants en France et en Europe Pour vos séjours en France ou en Europe, choisissez l'authenticité, le confort et la gastronomie locale avec Logis Hôtels. Première chaîne volontaire..."
+                      - button [ref=f39e425] [cursor=pointer]: Plus
+                  - generic [ref=f39e434]:
+                    - heading [level=3] [ref=f39e435]: Informations fournies par Logis Hôtels
+                    - generic [ref=f39e436]: Consulter les précédentes informations sur Google
+                  - generic [ref=f39e443]:
+                    - heading [level=3] [ref=f39e444]: Profils
+                    - generic [ref=f39e445]:
+                      - link [ref=f39e449] [cursor=pointer]:
+                        - /url: /goto?url=CAESXQHrOzAVSFVlV_-fyTVyojdriI5rvtfEqm2ShMWOoOR4dnHijVoVAukt5IfM04N7XjXC3XxecllHnOXkEXnyq5_P8J8OkbrJI6wjXrZosFa7vfV-sXrzz6shK0uiBQ
+                        - generic [ref=f39e450]: Facebook
+                      - link [ref=f39e459] [cursor=pointer]:
+                        - /url: /goto?url=CAEScAHrOzAVIyVHq0xT87wPU6_YQf-O7sN-kyhfAk7Kk3TPc20WcLBW1KI-t0WhHBKwgrGefqgwDiXrzmBf4Q4vTW9pqnmpavVpiZr4QcvzYGEfNSwHmDMTcnDsDdyGGXOfRzEeig5O6RpdMAttoUUu6pQ
+                        - generic [ref=f39e460]: YouTube
+                      - link [ref=f39e469] [cursor=pointer]:
+                        - /url: /goto?url=CAESXgHrOzAVq91i5NrVmnaFGGCXRd1LhgZiESGeuJT-i48YPVaZ95WLq9yP_ksDioMsN9xNv8ZcQ4ZP2s_jSA8W7P-kSzAeq0HaTIk-o_vh9Rl2fBtdPyWWkUZ4RvYCIEg
+                        - generic [ref=f39e470]: Instagram
+                      - link [ref=f39e479] [cursor=pointer]:
+                        - /url: /goto?url=CAESYwHrOzAVswmCNoJ4TSlF7sdfgE3olBccfIoUk7e9ecCIm3cdCCq6Ajwe1jOSTxAQ2YGtvBiXVy0mBSDK0KnrZ1rZbFU72ElyencnckSGtfignfh1vyOT4aFQBFKNwKisHHgk7A
+                        - generic [ref=f39e480]: LinkedIn
+                  - generic [ref=f39e493]:
+                    - heading [level=2] [ref=f39e496]: Aidez-nous à améliorer la précision
+                    - generic [ref=f39e497]:
+                      - generic [ref=f39e498]: Envoyer des commentaires
+                      - generic [ref=f39e500]:
+                        - link [ref=f39e503] [cursor=pointer]:
+                          - /url: "#"
+                          - text: Suggérer une modification
+                        - text: ·
+                        - link [ref=f39e504] [cursor=pointer]:
+                          - /url: https://business.google.com/create?hl=fr&getstarted&authuser=0&fp=1344535769485029544&gmbsrc=fr-fr-et-ip-z-gmb-s-z-l~skp%7Cclaimbz_aoc_a%7Cu&ppsrc=GMBSI
+                          - text: Vous êtes le propriétaire de cet établissement ?
+              - link [ref=f39e506] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=f39e508]:
+              - heading [level=2] [ref=f39e509]: Résultats Web
+              - generic [ref=f39e510]:
+                - generic [ref=f39e513]:
+                  - link [ref=f39e515] [cursor=pointer]:
+                    - /url: /goto?url=CAESdgHrOzAVv_XQTtXIxLy0dMzl179SM6BxPeJd7h5oKQojDgpXsHWFZNJAGAxkRVf-BhqtKAzEqEmtDJeKLCJaujJOhY0RiJJ3SoYDtgpg4l0lcqbC6KmOap2Z4z3OLrzqiAytD9weY3bP_RTt_9TvJG46vXXloF8
+                    - heading [level=3] [ref=f39e516]: Société LOGIS INTERNATIONAL SERVICES à 75013 PARIS
+                    - generic [ref=f39e522]:
+                      - generic [ref=f39e523]: data.gouv.fr
+                      - generic [ref=f39e525]: https://annuaire-entreprises.data.gouv.fr › ... › 79.12Z
+                  - button [ref=f39e531] [cursor=pointer]
+                - generic [ref=f39e538]:
+                  - text: ...
+                  - emphasis [ref=f39e539]: LOGIS INTERNATIONAL SERVICES
+                  - text: ","
+                  - emphasis [ref=f39e540]: 83 AVENUE D'ITALIE
+                  - text: "75013 PARIS : SIREN, SIRET ... LOGIS INTERNATIONAL SERVICES. Unité légale ‣ 345 210 058 en activité. 1 ..."
+          - generic [ref=f39e544]:
+            - generic [ref=f39e547]:
+              - link [ref=f39e549] [cursor=pointer]:
+                - /url: /goto?url=CAESgAEB6zswFQmhhLEsZ-yXdGlbL2e-uqbk4j_9VIJYnbRlDOz9rykwLD_VgaqAHjNKcIvGNXltX_2XWYqZukQuXn31NmikpJcIbOtiHJfDYpr3qMmGiHujDRKJnjSxsnPrzcHQ3dXHKNF3nxuJ4qENijsfgrZ2JFCJ0hbnNYibQYffHQ
+                - heading [level=3] [ref=f39e550]: Société LOGIS INTERNATIONAL SERVICES
+                - generic [ref=f39e556]:
+                  - generic [ref=f39e557]: Pappers
+                  - generic [ref=f39e559]: https://www.pappers.fr › entreprise › logis-international...
+              - button [ref=f39e565] [cursor=pointer]
+            - generic [ref=f39e572]:
+              - emphasis [ref=f39e573]: LOGIS INTERNATIONAL SERVICES
+              - text: (LOGIS DE FRANCE) ;
+              - emphasis [ref=f39e574]: 83 AVENUE D'ITALIE
+              - text: ", 75013 PARIS · Activités des voyagistes · Entre 10 et 19 salariés (donnée 2022) · 02/04/1988."
+          - generic [ref=f39e578]:
+            - generic [ref=f39e581]:
+              - link [ref=f39e583] [cursor=pointer]:
+                - /url: /goto?url=CAESgwEB6zswFQet3ki4dvwi8HHXztOrDZ2VBe1BeynNsRgzMfoclEfCZnXcGT0SY_4mH3mS-9ZLJAZdTuvLYmbYU7eOnroz1b-OSRHLu9yQ9ppOja_ormHCV1ZR_1w7pDQ0vDTsKNlkFBMhPPPGtMG8oxQ0pVu1p5qpmP7yJdKR0QERulThIw
+                - heading [level=3] [ref=f39e584]: Société LOGIS INTERNATIONAL SERVICES à PARIS ...
+                - generic [ref=f39e590]:
+                  - generic [ref=f39e591]: Societe.com
+                  - generic [ref=f39e593]: https://www.societe.com › ... › Activités des voyagistes
+              - button [ref=f39e599] [cursor=pointer]
+            - generic [ref=f39e606]:
+              - emphasis [ref=f39e607]: LOGIS INTERNATIONAL SERVICES
+              - text: à PARIS (
+              - emphasis [ref=f39e608]: "345210058"
+              - text: ). RCS, K-BIS, RNE, SIREN ...
+              - emphasis [ref=f39e609]: 83 AVENUE D'ITALIE
+              - text: ", 75013 PARIS. DIRIGEANTS: Maria-Lourdes LOPEZ PEREZ."
+          - generic [ref=f39e613]:
+            - generic [ref=f39e616]:
+              - link [ref=f39e618] [cursor=pointer]:
+                - /url: /goto?url=CAESaQHrOzAVQAed-Pqz51fhDdjfl08qU4vN2PDoGAndKFHvo9ucfPpMMWAnWqh-tQzCoE0aC5hgXEnCRtr8WGds2uBJLLoX4gfb9NB7HdiGr6xx72C1zUx8cyJddcfoNSLbcuwpYMc807P67Q
+                - heading [level=3] [ref=f39e619]: Mentions légalesSinguliers Hôtels
+                - generic [ref=f39e625]:
+                  - generic [ref=f39e626]: Singuliers Hotels
+                  - generic [ref=f39e628]: https://www.singuliershotels.com › mentions-legales
+              - button [ref=f39e634] [cursor=pointer]
+            - generic [ref=f39e641]:
+              - text: ...
+              - emphasis [ref=f39e642]: Logis International Services 83 avenue d'Italie
+              - text: F– 75013 PARIS et représentée par en sa qualité de gérant. Logis International Services EURL RCS Paris B 345 ...
+          - generic [ref=f39e646]:
+            - generic [ref=f39e649]:
+              - link [ref=f39e651] [cursor=pointer]:
+                - /url: /goto?url=CAESfgHrOzAVUwmz4vpK34pwApUweZIRtyFxz9WXoO1WRGHYh6Dq8BSFYzVxZ35lsE4yZ_qS96iK10rB_0ZBrpq5jO8lNWvK-BfLJ1B6geKRAf7_gLFHdnAnQZcJz3Lw8vSnAbhlpscCVVc4d4XlCNx7LH--WZFzFYVNZ_vI_3bUgw
+                - heading [level=3] [ref=f39e652]: LOGIS INTERNATIONAL SERVICES à 75013 PARIS - SIRET ...
+                - generic [ref=f39e658]:
+                  - generic [ref=f39e659]: data.gouv.fr
+                  - generic [ref=f39e661]: https://annuaire-entreprises.data.gouv.fr › etablissement
+              - button [ref=f39e667] [cursor=pointer]
+            - generic [ref=f39e674]:
+              - text: ...
+              - emphasis [ref=f39e675]: LOGIS INTERNATIONAL SERVICES
+              - text: ","
+              - emphasis [ref=f39e676]: 83 AVENUE D'ITALIE
+              - text: "75013 PARIS : SIREN, SIRET ... Établissement LOGIS INTERNATIONAL SERVICES à PARIS. 345 210 058 00029 en ..."
+          - generic [ref=f39e680]:
+            - generic [ref=f39e683]:
+              - link [ref=f39e685] [cursor=pointer]:
+                - /url: /goto?url=CAESYAHrOzAVqYBx18XmgJPIIAnLu9uPrbOqxkBPHsYvtjtGrXUA5RI_DdpZi4UkA5EM7GuVQ2pol7ZDCQqmFhrj9zWQYSTg5Khy9VMpaXMIUClxn-nDcaJodEJ7RFYtO3vXTw
+                - heading [level=3] [ref=f39e686]: Logis Le à Paris - Agence de voyages (adresse, horaires)
+                - generic [ref=f39e692]:
+                  - generic [ref=f39e693]: Pages Jaunes
+                  - generic [ref=f39e695]: https://www.pagesjaunes.fr › pros
+              - button [ref=f39e701] [cursor=pointer]
+            - generic [ref=f39e708]:
+              - emphasis [ref=f39e709]: "345210058"
+              - text: "; Forme juridique: Société à responsabilité limitée (sans autre ..."
+              - emphasis [ref=f39e710]: LOGIS INTERNATIONAL SERVICES
+              - text: . Données issues de la société Solvabilité ...
+          - generic [ref=f39e714]:
+            - generic [ref=f39e717]:
+              - link [ref=f39e719] [cursor=pointer]:
+                - /url: /goto?url=CAESbgHrOzAVgyRt1Dv0yAZY06ZzIPPuAQ34r3dmCnKduUwWSEibRPT02El2EF10mA6KmaGfwtpc-LWv_uAUJ14LD7bU-uwpcSZj339wSbTKgOE3ZdjCLtdAGX14JypaItza6M6YYWhxIUdsoMgMsy7-
+                - heading [level=3] [ref=f39e720]: Mentions légales
+                - generic [ref=f39e726]:
+                  - generic [ref=f39e727]: Logis Hotels
+                  - generic [ref=f39e729]: https://www.logishotels.com › Accueil › Footer
+              - button [ref=f39e735] [cursor=pointer]
+            - generic [ref=f39e741]:
+              - generic [ref=f39e742]: 8 sept. 2014 —
+              - generic [ref=f39e743]:
+                - text: "83 avenue d'Italie. F-75013 Paris. Tél : +33 (0)1 45 84 70 00. 1. DROITS D ..."
+                - emphasis [ref=f39e744]: Logis International Services
+                - text: ","
+                - emphasis [ref=f39e745]: 83 Avenue d'Italie
+                - text: ", 75013 PARIS."
+          - generic [ref=f39e749]:
+            - generic [ref=f39e752]:
+              - link [ref=f39e754] [cursor=pointer]:
+                - /url: /goto?url=CAESigEB6zswFaS_ucDRS1mKeN00uECWYdIj5WQP6zZXm99shfbmM_ngm9XQUgwLv8u9IyrDSXvxHCtuuwDa43tmBimDAGlBpFRqud2MKWoF8nuKabTkWtGyRliALNKwDN0eVIspcyW0kZxWX-6PT4CkfUwFxn_cjXwCdPOVjL88Ags9M7vx8uTapzxefBk
+                - heading [level=3] [ref=f39e755]: Logis International Services, Paris - Agence de voyage
+                - generic [ref=f39e761]:
+                  - generic [ref=f39e762]: Cylex Recherche Locale
+                  - generic [ref=f39e764]: https://www.cylex-locale.fr › ... › Agence de voyage
+              - button [ref=f39e770] [cursor=pointer]
+            - generic [ref=f39e777]:
+              - text: Voir
+              - emphasis [ref=f39e778]: Logis International Services
+              - text: à Paris,
+              - emphasis [ref=f39e779]: 83, Avenue D'italie
+              - text: sur Cylex et ... 13,
+              - emphasis [ref=f39e780]: 83, Avenue D'italie
+              - text: ", 75013 Paris. Téléphone. 01 45 84 70 00 · Téléphone."
+          - generic [ref=f39e784]:
+            - generic [ref=f39e787]:
+              - link [ref=f39e789] [cursor=pointer]:
+                - /url: /goto?url=CAES4QEB6zswFQScXsPzrYWnB07tMH08NcNjTFOHYySziz6zoboORQJDHVS_-LEyTi8kxBgwOdMie7cfaMxk1vf5lSpnQiznHZTeBU-PqOIoAhLR8LUAT19ZcRAXimS4iqLtOlgBQOZj1iMhily2bsiYxYcEdH_uOk1gXrkcPAiRj8Vb3d2G9iF5MDaro33UfPL3wN7Ayc5nVdzZ_87weWkyuHl86Fm8S2IqRvIGLglJLIPUeE5_XEN3xhlHi__Iz31f8ZeUaAOo_f1d0fIxGKAMCNDeG14jphsE4fxct0IDhdj9m0M
+                - heading [level=3] [ref=f39e790]: LOGIS INTERNATIONAL SERVICES
+                - generic [ref=f39e796]:
+                  - generic [ref=f39e797]: Pappers
+                  - generic [ref=f39e799]: https://www.pappers.fr › entreprise › documents
+              - generic [ref=f39e801]: PDF
+              - button [ref=f39e806] [cursor=pointer]
+            - generic [ref=f39e813]:
+              - emphasis [ref=f39e814]: LOGIS INTERNATIONAL SERVICES
+              - text: ". Société à Responsabilité Limitée. Au capital de 7.622,45€. Siège social:"
+              - emphasis [ref=f39e815]: 83 avenue d'Italie
+              - text: "- 75013 PARIS. 345 210 058 RCS PARIS."
+          - generic [ref=f39e819]:
+            - generic [ref=f39e822]:
+              - link [ref=f39e824] [cursor=pointer]:
+                - /url: /goto?url=CAESiAEB6zswFcEC8Qsqiwq4PXUzlqNEB8JrQmXx7wy7Ka6MUx49W5w-ZwK6PCcreQK_OWEONOzM7zQJ3_72gnHHpxR97m1OSXp6qCjvFLK2SCvqrhSBXwu82qhscj0kV5wZbQlEuzmr1cjoXdi_k66n8BnKTiwLVb2wAEhc3sFsnyMCI6EPwTwfuddP
+                - heading [level=3] [ref=f39e825]: Terms and Conditions of Sale
+                - generic [ref=f39e831]:
+                  - generic [ref=f39e832]: Logis Hôtel*** Restaurant Au Vieux Morvan
+                  - generic [ref=f39e834]: https://www.auvieuxmorvan.com › ...
+              - generic [ref=f39e836]:
+                - generic [ref=f39e837]: ·
+                - link [ref=f39e838] [cursor=pointer]:
+                  - /url: /goto?url=CAES0gEB6zswFQ0ky5uS5SPuyAmfTLlGQntd74YA4vOXKF37ErvHkRHAkunraa9UYzndFYiQpHlOAIdfApwZ1vU7mbwDqirHlneFS5-nCxhLzi0NrDq3nZtwmbxLdlIrXgYjJLURjfTJMHfJ-emf_b7uyPGe5ZkhQaEeYfa8XLWN5jBpnEYiDbmXl215nGrw9rWaDiI4e3wmt1Bzyo4UzpN02kYdq8N3Gc6txSkvBb-fpYITyBeHIzexdtXba_J3DcsN0U95otBQN1TANfvC4PGizkG0NO4
+                  - text: Traduire cette page
+              - button [ref=f39e843] [cursor=pointer]
+            - generic [ref=f39e850]:
+              - text: ...
+              - emphasis [ref=f39e851]: Logis International Services
+              - text: "Reservation Center:"
+              - emphasis [ref=f39e852]: 83, avenue d'Italie
+              - text: ", 75013 - Paris or send an email to the address dpo@logishotels.com. For your perfect ..."
+        - generic [ref=f39e854]:
+          - generic [ref=f39e859]:
+            - generic [ref=f39e861]:
+              - generic [ref=f39e863]:
+                - heading [level=2] [ref=f39e864]: Hôtels semblables à Logis Hôtels
+                - button [ref=f39e869]
+              - list [ref=f39e875]:
+                - listitem [ref=f39e876]:
+                  - generic [ref=f39e881]:
+                    - link [ref=f39e882] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=Amiral+Hotel&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAARFbymClomMQQ&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQxN4EegQIbhAK
+                    - generic [ref=f39e886]:
+                      - heading [level=3] [aria-hidden] [ref=f39e887]:
+                        - generic [ref=f39e888]: Amiral Hotel
+                      - generic [aria-hidden] [ref=f39e889]:
+                        - img [ref=f39e891]: 3,5(535)
+                        - generic [ref=f39e895]: À 0,1 km
+                      - generic [ref=f39e899]: 134 €
+                - listitem [ref=f39e900]:
+                  - generic [ref=f39e905]:
+                    - link [ref=f39e906] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=Appart'h%C3%B4tel+East+Paris+Suite&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAARwmpyPmpsjRU&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQxN4EegQIbhAS
+                    - generic [ref=f39e910]:
+                      - heading [level=3] [aria-hidden] [ref=f39e911]:
+                        - generic [ref=f39e912]: Appart'hôtel East Paris Suite
+                      - generic [aria-hidden] [ref=f39e913]:
+                        - img [ref=f39e915]: 3,6(129)
+                        - generic [ref=f39e919]: À 0,2 km
+                      - generic [ref=f39e923]: 233 €
+                - listitem [ref=f39e924]:
+                  - generic [ref=f39e929]:
+                    - link [ref=f39e930] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=La+Maison+Blanche&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAAR5ZjKLszWfC0&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQxN4EegQIbhAa
+                    - generic [ref=f39e934]:
+                      - heading [level=3] [aria-hidden] [ref=f39e935]:
+                        - generic [ref=f39e936]: La Maison Blanche
+                      - generic [aria-hidden] [ref=f39e937]:
+                        - img [ref=f39e939]: 3,8(17)
+                        - generic [ref=f39e943]: À 0,2 km
+            - generic [ref=f39e948]:
+              - generic [ref=f39e950]:
+                - heading [level=2] [ref=f39e951]: Hôtels populaires – Paris
+                - button [ref=f39e956]
+              - list [ref=f39e962]:
+                - listitem [ref=f39e963]:
+                  - generic [ref=f39e968]:
+                    - link [ref=f39e969] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=Pullman+Paris+Tour+Eiffel&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAARxXrv3IVGdrc&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQi6wFegQIbhA_
+                    - generic [ref=f39e973]:
+                      - heading [level=3] [aria-hidden] [ref=f39e974]:
+                        - generic [ref=f39e975]: Pullman Paris Tour Eiffel
+                      - generic [aria-hidden] [ref=f39e976]:
+                        - img [ref=f39e978]: 4,6(17 k)
+                        - generic [ref=f39e982]: À 5,9 km
+                      - generic [ref=f39e986]: 443 €
+                - listitem [ref=f39e987]:
+                  - generic [ref=f39e992]:
+                    - link [ref=f39e993] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=Four+Seasons+H%C3%B4tel+George+V,+Paris&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAAR7EQ_IeMZp8c&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQi6wFegQIbhBH
+                    - generic [ref=f39e997]:
+                      - heading [level=3] [aria-hidden] [ref=f39e998]:
+                        - generic [ref=f39e999]: Four Seasons Hôtel George V, Paris
+                      - generic [aria-hidden] [ref=f39e1000]:
+                        - img [ref=f39e1002]: 4,8(7,4 k)
+                        - generic [ref=f39e1006]: À 6,5 km
+                      - generic [ref=f39e1010]: 2 562 €
+                - listitem [ref=f39e1011]:
+                  - generic [ref=f39e1016]:
+                    - link [ref=f39e1017] [cursor=pointer]:
+                      - /url: https://search.google.com/local/places/hotel/navigational?q=Ritz+Paris&hotel_dates=2026-09-20,2026-09-21&placeid=ChIJAAAAAAAAAAARmaCCdrMCfk4&sca_esv=ead2612d6155db9a&hl=fr&sa=X&ved=2ahUKEwiOh_OlueiWAxUIMvsDHdyBO8cQi6wFegQIbhBP
+                    - generic [ref=f39e1021]:
+                      - heading [level=3] [aria-hidden] [ref=f39e1022]:
+                        - generic [ref=f39e1023]: Ritz Paris
+                      - generic [aria-hidden] [ref=f39e1024]:
+                        - img [ref=f39e1026]: 4,6(4,6 k)
+                        - generic [ref=f39e1030]: À 5,3 km
+                      - generic [ref=f39e1034]: 2 336 €
+          - generic [ref=f39e1036]:
+            - heading [level=2] [ref=f39e1037]: Remarques sur les résultats filtrés
+            - paragraph [ref=f39e1039]:
+              - generic [ref=f39e1040]:
+                - text: Afin d'afficher les résultats les plus pertinents, nous avons omis quelques entrées qui sont très similaires aux 10 entrées actuelles. Si vous le souhaitez, vous pouvez
+                - link [ref=f39e1041] [cursor=pointer]:
+                  - /url: /search?q=%22LOGIS+INTERNATIONAL+SERVICES%22+%2283+avenue+d%27Italie%22+OR+345210058&sca_esv=ead2612d6155db9a&hl=fr&filter=0
+                  - text: relancer la recherche pour inclure les résultats omis
+                - text: .
+      - complementary [ref=f39e1042]:
+        - heading [level=2] [ref=f39e1043]: Résultats complémentaires
+    - contentinfo [ref=f39e1044]:
+      - heading [level=1] [ref=f39e1045]: Liens de pied de page

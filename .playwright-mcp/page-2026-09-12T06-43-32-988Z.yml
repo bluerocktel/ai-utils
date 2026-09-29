@@ -1,0 +1,298 @@
+- generic [ref=f7e1]:
+  - link [ref=f7e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f7e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f7e10]:
+      - generic [ref=f7e12]:
+        - img "Google" [ref=f7e13]
+        - generic [ref=f7e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f7e16] [cursor=pointer]':
+            - generic [ref=f7e17]: fr
+          - link "Se connecter" [ref=f7e19] [cursor=pointer]
+      - generic [ref=f7e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f7e21]
+        - generic [ref=f7e22]:
+          - generic [ref=f7e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f7e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f7e25]:
+              - listitem [ref=f7e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f7e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f7e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f7e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f7e30]:
+              - listitem [ref=f7e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f7e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f7e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f7e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f7e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f7e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f7e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f7e38]:
+        - generic [ref=f7e39]:
+          - button "Tout refuser" [ref=f7e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f7e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f7e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f7e44]: Plus d'options
+      - generic [ref=f7e45]:
+        - link "Confidentialité" [ref=f7e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f7e47]: ·
+        - link "Conditions d'utilisation" [ref=f7e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f7e53]:
+    - search [ref=f7e54]:
+      - generic [ref=f7e56]:
+        - link [ref=f7e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQPHoECAYQZA
+        - generic [ref=f7e66]:
+          - generic [ref=f7e67]:
+            - combobox [ref=f7e70]: "\"Cabinet Louis Porcheret\" Montreuil syndic contact \"Cabinet Louis Porcheret\" Montreuil syndic contact"
+            - generic [ref=f7e71]:
+              - button [ref=f7e73] [cursor=pointer]
+              - generic [ref=f7e78]:
+                - button [ref=f7e79] [cursor=pointer]
+                - button [ref=f7e82] [cursor=pointer]
+          - button [ref=f7e85] [cursor=pointer]
+    - generic [ref=f7e90]:
+      - button [ref=f7e92] [cursor=pointer]
+      - button [ref=f7e93] [cursor=pointer]
+      - generic [ref=f7e99]:
+        - button [ref=f7e101] [cursor=pointer]
+        - link [ref=f7e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Cabinet%2BLouis%2BPorcheret%2522%2BMontreuil%2Bsyndic%2Bcontact%26hl%3Dfr&ec=futura_srp_og_si_72236_p
+          - generic [ref=f7e107]: Connexion
+  - generic [ref=f7e109]:
+    - navigation [ref=f7e115]:
+      - list [ref=f7e118]:
+        - listitem [ref=f7e119]:
+          - link [ref=f7e122] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ2J8OegQIExAD
+            - generic [ref=f7e123]: Mode IA
+        - listitem [ref=f7e126]:
+          - link [disabled] [ref=f7e127]:
+            - generic [ref=f7e128]: Tous
+        - listitem [ref=f7e130]:
+          - link [ref=f7e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQtKgLegQIHBAB
+            - generic [ref=f7e132]: Images
+        - listitem [ref=f7e134]:
+          - link [ref=f7e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ0pQJegQIGBAB
+            - generic [ref=f7e136]: Actualités
+        - listitem [ref=f7e138]:
+          - link [ref=f7e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQtKgLegQIGhAB
+            - generic [ref=f7e140]: Vidéos
+        - listitem [ref=f7e142]:
+          - link [ref=f7e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQs6gLegQIGRAB
+            - generic [ref=f7e144]: Vidéos courtes
+        - listitem [ref=f7e146]:
+          - link [ref=f7e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZcx03T_c-sxlWNSQGlFlWDknwWQhu248SP6Defsqge3KAAIlGtex4bApITV-76CXoUK1aJU01GCjx3P-iz8sFrL4jFVrdOU7lbQkbGqeQVWFlt34jLaGndp4kp6-YMjWmLSTKA6RPYt6SqWMA64DaOTzAvTiu&q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sa=X&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQs6gLegQIGxAB
+            - generic [ref=f7e148]: Web
+        - listitem [ref=f7e150]:
+          - button [ref=f7e151] [cursor=pointer]:
+            - generic [ref=f7e152]: Plus
+    - heading [level=1] [ref=f7e158]: Résultats de recherche
+    - generic [ref=f7e159]:
+      - generic [ref=f7e176]:
+        - heading [level=2] [ref=f7e180]:
+          - generic [ref=f7e181]:
+            - generic [ref=f7e182]: Raisonnement…
+            - generic [ref=f7e184]: Recherche en cours…
+            - generic [ref=f7e194]: Réfléchit un peu plus longtemps…
+        - progressbar [ref=f7e197]
+      - main [ref=f7e248]:
+        - generic [ref=f7e252]:
+          - generic [ref=f7e255]:
+            - heading [level=2] [ref=f7e256]: Résultats Web
+            - generic [ref=f7e257]:
+              - generic [ref=f7e260]:
+                - link [ref=f7e262] [cursor=pointer]:
+                  - /url: /goto?url=CAESbgHrOzAVXPw8QmCl0Di3qXStyKk9JgUvmHWppSV8EnwGaAv8UFMhhrpb4FfWl9Eq2N6MWLxz_VVpZ-ZsUyeO7guKc3RJbCAvoXloRLYkyhUwEE5uS8kPUxczRZCGWyKJSkhzFlUunLrphALnR0dN
+                  - heading [level=3] [ref=f7e263]: Syndic | CABINET LOUIS-PORCHERET
+                  - generic [ref=f7e269]:
+                    - generic [ref=f7e270]: cabinet louis-porcheret
+                    - generic [ref=f7e272]: https://www.porcheret.fr › Syndic
+                - button [ref=f7e278] [cursor=pointer]
+              - generic [ref=f7e285]:
+                - text: ...
+                - emphasis [ref=f7e286]: CABINET LOUIS-PORCHERET contact
+                - text: "@porcheret.fr. Nous vous informons de l'existence de la liste d'opposition au démarchage téléphonique « Bloctel », sur ..."
+              - link [aria-hidden] [ref=f7e289] [cursor=pointer]:
+                - /url: /goto?url=CAESbgHrOzAVXPw8QmCl0Di3qXStyKk9JgUvmHWppSV8EnwGaAv8UFMhhrpb4FfWl9Eq2N6MWLxz_VVpZ-ZsUyeO7guKc3RJbCAvoXloRLYkyhUwEE5uS8kPUxczRZCGWyKJSkhzFlUunLrphALnR0dN
+          - generic [ref=f7e295]:
+            - generic [ref=f7e298]:
+              - link [ref=f7e300] [cursor=pointer]:
+                - /url: /goto?url=CAESYAHrOzAVahOoL99pg_i0D73JyMLeMsHWEGy0tAPDdQElVtfPTHfy_oeW58uMD7auOcrHoEPUXZNCx7n9iud6pN_OztNs9zIVT4p_x6-yZr_JZOvoACMoudWpIxnWjBnQOQ
+                - heading [level=3] [ref=f7e301]: Cabinet LOUIS-PORCHERET Syndic-Gestion à Montreuil
+                - generic [ref=f7e307]:
+                  - generic [ref=f7e308]: Pages Jaunes
+                  - generic [ref=f7e310]: https://www.pagesjaunes.fr › pros
+              - button [ref=f7e316] [cursor=pointer]
+            - generic [ref=f7e323]:
+              - text: Quelle est l'adresse de
+              - emphasis [ref=f7e324]: Cabinet LOUIS-PORCHERET Syndic
+              - text: "-Gestion ?"
+              - emphasis [ref=f7e325]: Cabinet LOUIS-PORCHERET Syndic
+              - text: "-Gestion est situé au 92 avenue Prés Wilson 93100"
+              - emphasis [ref=f7e326]: Montreuil
+              - text: .
+            - generic [ref=f7e329]:
+              - img [ref=f7e331]: 3,0(98)
+              - button [ref=f7e337]
+          - generic [ref=f7e344]:
+            - generic [ref=f7e347]:
+              - link [ref=f7e349] [cursor=pointer]:
+                - /url: /goto?url=CAESawHrOzAV6vlPDSqCFauHCjkQe3NWO3QUuInPbg27dCLlPNaNR79yAqxY6B4sBqvxikzuRD6FPSheCqgYhyvJ6FItWbltyPGzIDBAd4MQHQlkdkHyaLPBq5otHHVhk7h45V6vUzR-DEzmQom2
+                - heading [level=3] [ref=f7e350]: Nos agences | CABINET LOUIS-PORCHERET
+                - generic [ref=f7e356]:
+                  - generic [ref=f7e357]: cabinet louis-porcheret
+                  - generic [ref=f7e359]: https://www.porcheret.fr › Nos agences
+              - button [ref=f7e365] [cursor=pointer]
+            - generic [ref=f7e372]:
+              - emphasis [ref=f7e373]: Cabinet LOUIS-PORCHERET
+              - text: SIEGE - Location / Gestion /
+              - emphasis [ref=f7e374]: Syndic
+              - text: . 92, Avenue du Président Wilson 93100
+              - emphasis [ref=f7e375]: MONTREUIL
+              - text: "Tél. : 01.48.58.42.00. Mail :"
+              - emphasis [ref=f7e376]: contact
+              - text: "@porcheret."
+          - generic [ref=f7e381]:
+            - heading [level=2] [ref=f7e383]: Autres questions
+            - button [ref=f7e390] [cursor=pointer]:
+              - generic [ref=f7e391]: Quels sont les avis sur le cabinet Louis Porcheret Syndic-Gestion ?
+          - generic [ref=f7e400]:
+            - heading [level=2] [ref=f7e401]: Résultats Web
+            - generic [ref=f7e402]:
+              - generic [ref=f7e405]:
+                - link [ref=f7e407] [cursor=pointer]:
+                  - /url: /goto?url=CAESaQHrOzAVRxRUp35iS2fW5vlQ7dGD2Lxlm_Ut0kbon7DVfzePDd0Be8jI-uxVJN-qiOXIuAS4RjtoWTGa75Gwpw476hd-IA71e1xHKqBMS1KQvifoLolZRwCn2ldNMtr2BnB3mNt0bD4wXA
+                  - heading [level=3] [ref=f7e408]: Cabinet LOUIS-PORCHERET Syndic-Gestion
+                  - generic [ref=f7e414]:
+                    - generic [ref=f7e415]: Mappy
+                    - generic [ref=f7e417]: https://fr.mappy.com › poi
+                - button [ref=f7e423] [cursor=pointer]
+              - generic [ref=f7e430]:
+                - emphasis [ref=f7e431]: Cabinet LOUIS-PORCHERET Syndic
+                - text: "-Gestion. Administrateur de biens. 92 av Prés Wilson, 93100"
+                - emphasis [ref=f7e432]: Montreuil
+                - text: . Itinéraires Téléphone Site web. Partager. Enregistrer.
+          - generic [ref=f7e436]:
+            - generic [ref=f7e439]:
+              - link [ref=f7e441] [cursor=pointer]:
+                - /url: /goto?url=CAESdgHrOzAV0GQkwn73xxUg_1YH_wgEqwTpETqDH1Csw3CUWZTFnPAaLprlpTVIpNoMK-mopT9ub34ywen-9se-WZy66LoXFGT6AkyD7rd7qoodsTnEDrnCLyTu6mn9cv1fKvGyj7-RsrQY2bX_2sgb64CPAYkQXkI
+                - heading [level=3] [ref=f7e442]: Société CABINET LOUIS PORCHERET à 93100 MONTREUIL
+                - generic [ref=f7e448]:
+                  - generic [ref=f7e449]: data.gouv.fr
+                  - generic [ref=f7e451]: https://annuaire-entreprises.data.gouv.fr › ... › 68.32A
+              - button [ref=f7e457] [cursor=pointer]
+            - generic [ref=f7e464]:
+              - text: Siège social de
+              - emphasis [ref=f7e465]: CABINET LOUIS PORCHERET
+              - text: ; Adresse. 92 AVENUE DU PRESIDENT WILSON 93100
+              - emphasis [ref=f7e466]: MONTREUIL
+              - text: ; SIRET. 562 035 840 00015 ; Clef NIC. 00015 ; Activité principale ...
+          - generic [ref=f7e470]:
+            - generic [ref=f7e473]:
+              - link [ref=f7e475] [cursor=pointer]:
+                - /url: /goto?url=CAESUQHrOzAVwEF4R_NL8ZRHQOQaztU5icyY5HrfvYtLl5O1i-DN6rnjnl7FHKHTuWgWgPDw-v7QAwFrpBg-G1dK88P5gcdlgkUdAZPtpNYXfigw2A
+                - heading [level=3] [ref=f7e476]: immobilier Bagnolet, Vincennes, Montreuil, Joinville-le-Pont ...
+                - generic [ref=f7e482]:
+                  - generic [ref=f7e483]: cabinet louis-porcheret
+                  - generic [ref=f7e485]: https://www.porcheret.fr
+              - button [ref=f7e491] [cursor=pointer]
+            - generic [ref=f7e498]:
+              - text: Le
+              - emphasis [ref=f7e499]: Cabinet LOUIS-PORCHERET
+              - text: a été créé en 1947 par Monsieur Charles PORCHERET et Madame Lucienne LOUIS-PORCHERET. Ils s'installent au 26 rue Lebour à
+              - emphasis [ref=f7e500]: MONTREUIL
+              - text: ( ...
+          - generic [ref=f7e504]:
+            - generic [ref=f7e507]:
+              - link [ref=f7e509] [cursor=pointer]:
+                - /url: /goto?url=CAEScQHrOzAVJG_rYNmV-Pam1-XcEa4Z4VaaLSRJnD98hcKni7_AG100V1oKorut9Uq78KnL7zeuU0itfu7mpackT9PBPnb-7nnCPfBBFAbevjGckbiwhWPNyEAL2GRZvvxIN4223QMCVb92KXyOhLRY3kNk
+                - heading [level=3] [ref=f7e510]: Cabinet Louis-porcheret – Agence immobilière à Montreuil ...
+                - generic [ref=f7e516]:
+                  - generic [ref=f7e517]: Monbien
+                  - generic [ref=f7e519]: https://www.monbien.fr › cabinet-louis-porcheret-0148...
+              - button [ref=f7e525] [cursor=pointer]
+            - generic [ref=f7e532]:
+              - text: ...
+              - emphasis [ref=f7e533]: Cabinet Louis-porcheret
+              - text: à
+              - emphasis [ref=f7e534]: Montreuil
+              - text: vous propose de découvrir 28 annonces immobilières actuellement. Elle est située 17 Boulevard Rouget de Lisle,
+              - emphasis [ref=f7e535]: Montreuil
+              - text: .
+          - generic [ref=f7e539]:
+            - generic [ref=f7e542]:
+              - link [ref=f7e544] [cursor=pointer]:
+                - /url: /goto?url=CAESugEB6zswFeKnxoPrtkGPPabPdEdzh5HTBXY4wLNGgtoflGeZo2aP3WILg9yOhNXMyblXvVHDyJzjxZ1AwnZ5a1Fh5J1D8dckCzWbTUhoATsOazBLX0t2qFskR0_7mT9lNqpJE9Aym--kVHp-l1-pU4WGxYaHMmAKqKfv6R5ElOKN_9G6zsKgJpPW_Y6RJek9cVmHm2CwGlKN4RniuCmUj2IerUjL4m36ce7TL9bPwm2O7LhaqVSwvKO6x6E
+                - heading [level=3] [ref=f7e545]: Cabinet LOUIS-PORCHERET Syndic-Gestion à Montreuil
+                - generic [ref=f7e551]:
+                  - generic [ref=f7e552]: 118 712
+                  - generic [ref=f7e554]: https://www.118712.fr › administrateurs de biens
+              - button [ref=f7e560] [cursor=pointer]
+            - generic [ref=f7e567]:
+              - emphasis [ref=f7e568]: Cabinet LOUIS-PORCHERET Syndic
+              - text: "-Gestion. administrateurs de biens , syndics de copropriétés , agences immobilières , gestion locative , mandataires ..."
+          - generic [ref=f7e572]:
+            - generic [ref=f7e575]:
+              - link [ref=f7e577] [cursor=pointer]:
+                - /url: /goto?url=CAESmwEB6zswFY2xIeA3UZRYtOojWsZMv-J_7387_jEDceyU8E-Gwd4Sxor9PmhofgCH7H1Zu8XZLJwyGvxXWoNr9d05Hu8RETR-RJg6ZB2O-XPpH6OylGCnsuEJuUaAIrfAnr2AkWxnV7jxRrhLMHRrmZf6vXx7_89GLMX3cp_D2GLJ1E6LPM7J0xUCHkzR83hw9NZfbYi8gZ5ffh1q6g
+                - heading [level=3] [ref=f7e578]: Syndic CABINET LOUIS PORCHERET à MONTREUIL
+                - generic [ref=f7e584]:
+                  - generic [ref=f7e585]: MeilleureCopro
+                  - generic [ref=f7e587]: https://www.meilleurecopro.com › cabinet › cabinet-loui...
+              - button [ref=f7e593] [cursor=pointer]
+            - generic [ref=f7e600]:
+              - text: Les copropriétés gérées par
+              - emphasis [ref=f7e601]: CABINET LOUIS PORCHERET
+              - text: "; Nombre de lots : 113. 89 Rue des Caillots 93100"
+              - emphasis [ref=f7e602]: Montreuil
+              - text: "; Nombre de lots : 70. 2 r anatole france 94300 ..."
+        - navigation [ref=f7e605]:
+          - heading [level=1] [ref=f7e606]: Navigation par pages
+          - text: "1"
+          - link [ref=f7e609] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=10&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAE
+            - text: "2"
+          - link [ref=f7e611] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=20&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAG
+            - text: "3"
+          - link [ref=f7e613] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=30&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAI
+            - text: "4"
+          - link [ref=f7e615] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=40&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAK
+            - text: "5"
+          - link [ref=f7e617] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=50&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAM
+            - text: "6"
+          - link [ref=f7e619] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=60&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAO
+            - text: "7"
+          - link [ref=f7e621] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=70&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAQ
+            - text: "8"
+          - link [ref=f7e623] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=80&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAS
+            - text: "9"
+          - link [ref=f7e625] [cursor=pointer]:
+            - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=90&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8tMDegQIKBAU
+            - text: "10"
+          - heading [level=2] [ref=f7e627]:
+            - link [ref=f7e628] [cursor=pointer]:
+              - /url: /search?q=%22Cabinet+Louis+Porcheret%22+Montreuil+syndic+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=lPSkariWGe3-7M8PqZ2usAE&start=10&sa=N&sstk=AS6-VmLbq7di8w81pJCqlxJbKidapAeyCj4UBzi9DEkdvqX69KW-4pNbqdMfXBKZh8gP7creqVp5WBpGSD2Gtxg7j8dRK4IeVVC9kA&ved=2ahUKEwi4sPanuOiWAxVtP_sDHamOCxYQ8NMDegQIKBAW
+              - generic [ref=f7e630]: Suivant
+    - contentinfo [ref=f7e631]:
+      - heading [level=1] [ref=f7e632]: Liens de pied de page

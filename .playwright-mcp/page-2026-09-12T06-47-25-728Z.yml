@@ -1,0 +1,340 @@
+- generic [ref=f33e1]:
+  - link [ref=f33e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f33e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f33e10]:
+      - generic [ref=f33e12]:
+        - img "Google" [ref=f33e13]
+        - generic [ref=f33e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f33e16] [cursor=pointer]':
+            - generic [ref=f33e17]: fr
+          - link "Se connecter" [ref=f33e19] [cursor=pointer]
+      - generic [ref=f33e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f33e21]
+        - generic [ref=f33e22]:
+          - generic [ref=f33e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f33e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f33e25]:
+              - listitem [ref=f33e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f33e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f33e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f33e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f33e30]:
+              - listitem [ref=f33e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f33e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f33e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f33e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f33e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f33e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f33e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f33e38]:
+        - generic [ref=f33e39]:
+          - button "Tout refuser" [ref=f33e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f33e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f33e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f33e44]: Plus d'options
+      - generic [ref=f33e45]:
+        - link "Confidentialité" [ref=f33e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f33e47]: ·
+        - link "Conditions d'utilisation" [ref=f33e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f33e53]:
+    - search [ref=f33e54]:
+      - generic [ref=f33e56]:
+        - link [ref=f33e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8QPHoECAYQZA
+        - generic [ref=f33e66]:
+          - generic [ref=f33e67]:
+            - combobox [ref=f33e70]: "\"Rail Europe\" \"52 rue de la Victoire\" Paris mentions legales contact \"Rail Europe\" \"52 rue de la Victoire\" Paris mentions legales contact"
+            - generic [ref=f33e71]:
+              - button [ref=f33e73] [cursor=pointer]
+              - generic [ref=f33e78]:
+                - button [ref=f33e79] [cursor=pointer]
+                - button [ref=f33e82] [cursor=pointer]
+          - button [ref=f33e85] [cursor=pointer]
+    - generic [ref=f33e90]:
+      - button [ref=f33e92] [cursor=pointer]
+      - button [ref=f33e93] [cursor=pointer]
+      - generic [ref=f33e99]:
+        - button [ref=f33e101] [cursor=pointer]
+        - link [ref=f33e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Rail%2BEurope%2522%2B%252252%2Brue%2Bde%2Bla%2BVictoire%2522%2BParis%2Bmentions%2Blegales%2Bcontact%26hl%3Dfr%26num%3D20&ec=futura_srp_og_si_72236_p
+          - generic [ref=f33e107]: Connexion
+  - generic [ref=f33e109]:
+    - navigation [ref=f33e115]:
+      - list [ref=f33e118]:
+        - listitem [ref=f33e119]:
+          - link [ref=f33e122] [cursor=pointer]:
+            - /url: /search?q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q2J8OegQIDhAD
+            - generic [ref=f33e123]: Mode IA
+        - listitem [ref=f33e126]:
+          - link [disabled] [ref=f33e127]:
+            - generic [ref=f33e128]: Tous
+        - listitem [ref=f33e130]:
+          - link [ref=f33e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8QtKgLegQIJRAB
+            - generic [ref=f33e132]: Images
+        - listitem [ref=f33e134]:
+          - link [ref=f33e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Qs6gLegQIKBAB
+            - generic [ref=f33e136]: Vidéos courtes
+        - listitem [ref=f33e138]:
+          - link [ref=f33e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8QtKgLegQIJhAB
+            - generic [ref=f33e140]: Vidéos
+        - listitem [ref=f33e142]:
+          - link [ref=f33e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q0pQJegQIJBAB
+            - generic [ref=f33e144]: Actualités
+        - listitem [ref=f33e146]:
+          - link [ref=f33e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=web&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc2YynYX1IYTff9gmCpUOwEKj7uMHWN-f2-kaTXrl8btoj9voxuT3xhDjUDcxLBijTgWpnXeJNzxbThVgGqtUDV7UFMJIrXoo-PD588Ja5FKtEvu6KARSTmQj1e7Hq7f8-1WeiU_avm5mAb-XgpTH-eK9tRjR&q=%22Rail+Europe%22+%2252+rue+de+la+Victoire%22+Paris+mentions+legales+contact&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Qs6gLegQIIRAB
+            - generic [ref=f33e148]: Web
+        - listitem [ref=f33e150]:
+          - button [ref=f33e151] [cursor=pointer]:
+            - generic [ref=f33e152]: Plus
+    - heading [level=1] [ref=f33e158]: Résultats de recherche
+    - generic [ref=f33e159]:
+      - generic [ref=f33e176]:
+        - heading [level=2] [ref=f33e180]:
+          - generic [ref=f33e181]: Raisonnement…
+        - progressbar [ref=f33e183]
+      - main [ref=f33e185]:
+        - generic [ref=f33e189]:
+          - generic [ref=f33e190]:
+            - generic [ref=f33e193]:
+              - generic [ref=f33e197]:
+                - generic [ref=f33e205]:
+                  - button [ref=f33e209] [cursor=pointer]:
+                    - generic [ref=f33e210]: Voir les photos
+                  - generic [ref=f33e213]:
+                    - link [ref=f33e216] [cursor=pointer]:
+                      - /url: /maps/place/Rail+Europe/data=!4m2!3m1!1s0x0:0xee6060efe135dc19?sa=X&ved=1t:2428&hl=fr&ictx=111
+                    - link [ref=f33e226] [cursor=pointer]:
+                      - /url: /local/place/fid/0x47e66fda3b6e935b:0xee6060efe135dc19/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3DHqUFntz0EEQQ_WziV51HSA%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D8.002908%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFkhxVUZudHowRUVRUV9XemlWNTFIU0E%3D&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Qpx96BAg_EBI
+                      - generic [ref=f33e228]: Extérieur
+                - generic [ref=f33e231]:
+                  - heading [level=2] [ref=f33e234]:
+                    - link [ref=f33e235] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Rail+Europe&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0eJN2LOBGYYZr7vpGyg48tYXbFoeTzCKynf2P0xv05EfkmPdDAVnddBAAgZt2-AWE4S4xag%3D&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q_coHegQILBAB
+                      - text: Rail Europe
+                  - generic [ref=f33e238]:
+                    - text: 2,8
+                    - button [ref=f33e244] [cursor=pointer]: 10 avis Google
+                    - button [ref=f33e248] [cursor=pointer]
+                    - text: Siège social à Paris
+                - generic [ref=f33e258]:
+                  - generic [ref=f33e271]:
+                    - link [ref=f33e273] [cursor=pointer]:
+                      - /url: https://www.raileurope.com/
+                      - generic [ref=f33e274]: Site Web
+                    - link [ref=f33e280]:
+                      - generic [ref=f33e281] [cursor=pointer]: Itinéraire
+                    - button [ref=f33e290] [cursor=pointer]:
+                      - generic [ref=f33e291]: Rédiger un avis
+                    - button [ref=f33e301] [cursor=pointer]:
+                      - generic [ref=f33e304]: Enregistrer
+                    - button [ref=f33e307] [cursor=pointer]:
+                      - generic [ref=f33e308]: Partager
+                  - generic [ref=f33e317]:
+                    - generic [ref=f33e320]:
+                      - text: "Emplacement :"
+                      - link [ref=f33e321] [cursor=pointer]:
+                        - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=Centre+d'Affaires+Paris+Victoire&ludocid=5831841031640173302&lsig=AB86z5U8PiJI9YFtVXn2K6MkFWzN&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q8G0oAHoECDMQAQ
+                        - text: Centre d'Affaires Paris Victoire
+                    - generic [ref=f33e324]:
+                      - generic [ref=f33e325]:
+                        - link [ref=f33e326] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=rail+europe+paris+adresse&ludocid=17176835562182925337&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q6BN6BAgxEAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 52 Rue de la Victoire, 75009 Paris
+                    - generic [ref=f33e328]:
+                      - generic [ref=f33e329]:
+                        - link [ref=f33e330] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=rail+europe+paris+horaires&ludocid=17176835562182925337&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q6BN6BAgyEAI
+                          - text: Horaires
+                        - text: ":"
+                      - button [ref=f33e332]:
+                        - generic [ref=f33e333]: Fermé · Ouvre à 09:00 lun.
+                    - generic [ref=f33e343]:
+                      - generic [ref=f33e344]:
+                        - link [ref=f33e347] [cursor=pointer]:
+                          - /url: "#"
+                          - text: Suggérer une modification
+                        - text: ·
+                        - link [ref=f33e348] [cursor=pointer]:
+                          - /url: https://business.google.com/create?hl=fr&getstarted&authuser=0&fp=17176835562182925337&gmbsrc=fr-fr-et-ip-z-gmb-s-z-l~skp%7Cclaimbz_aoc_a%7Cu&ppsrc=GMBSI
+                          - text: Vous êtes le propriétaire de cet établissement ?
+                      - generic [ref=f33e349]:
+                        - generic [ref=f33e350]: Ajouter les informations manquantes
+                        - link [ref=f33e351] [cursor=pointer]: Ajouter le numéro de téléphone du lieu
+                  - generic [ref=f33e360]:
+                    - generic [ref=f33e362]:
+                      - generic [ref=f33e363]: Les avis ne sont pas vérifiés
+                      - button [ref=f33e366] [cursor=pointer]
+                    - button [ref=f33e375] [cursor=pointer]:
+                      - generic [ref=f33e376]:
+                        - generic [ref=f33e377]: Google
+                        - list [ref=f33e384]:
+                          - listitem [ref=f33e385]: 2,8/5
+                          - listitem [ref=f33e386]: 10 avis
+                    - button [ref=f33e388]:
+                      - generic [ref=f33e389] [cursor=pointer]: Ajouter un avis
+                    - link [ref=f33e433] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rs1JZszoHjatVzV-Fv0TTEGMGxAlep5meBr6N54wZC8MYycUvX8yhk67sSlQ4nuvTT82qb8nbwRB4ZtYhyvNEAAi3gerrOtXrEGET1OqPjnd3_YB3Z8PlYOUWisqyjfyR5j7Wa9L1q8FXWkJVvLlTPVuSO1-Ddj8JEHmlTVEcYV7L0EJOewGvC6jVYWbbSO6uHEZgQg&q=Rail+Europe+Avis&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_50-MSvscSpzgUC3-2vpCvklWRMk2-DoiWWnQM2Zu9-qwijFeZg5bpITQwwQkEaQLEW5vNbrss9yghnSEyd4ziK-g56O&sa=X&ved=2ahUKEwj189-WueiWAxXFVaQEHRntHC8Q_4MLegQIQRAO
+                      - generic [ref=f33e434]: Afficher tous les avis
+                  - generic [ref=f33e447]:
+                    - generic [ref=f33e448]:
+                      - heading [level=3] [ref=f33e449]: "Source : Rail Europe"
+                      - button [ref=f33e451]
+                    - generic [ref=f33e454]: "\"Site de réservation de billets de train dans toute l'Europe.\""
+                  - generic [ref=f33e460]:
+                    - heading [level=3] [ref=f33e461]: Profils
+                    - generic [ref=f33e462]:
+                      - link [ref=f33e466] [cursor=pointer]:
+                        - /url: /goto?url=CAESVgHrOzAVNzdbKIOkZvRkF0E_zOKQigMY2kRcBlQ30LIMwFbf-GkbVGKIAAEGTyMwsQ56egq-CcfDsMbN7HUxWACFYjW_oSGaV2_vJG2IJK5PjSh8vN_f
+                        - generic [ref=f33e467]: X (Twitter)
+                      - link [ref=f33e476] [cursor=pointer]:
+                        - /url: /goto?url=CAESWwHrOzAVrhPoyVj32Z8VO3vPcqlmQy818YuwHVT06vjnyhog9sPR_D8iGJtXLUPjSZEV55OTSMNasg0lQ1NZGtdnR5GZip5RhcmbrFJBMXR5raa7x9FTdZF0vDk
+                        - generic [ref=f33e477]: Facebook
+                      - link [ref=f33e486] [cursor=pointer]:
+                        - /url: /goto?url=CAESXQHrOzAVN4Gp9lI37JWcvcXrdvDXnb9TJsH1InSZM5td4O3jChm-COSdUCxA7sV2yf5p9G6m2SoyA_NiaM6HnG7wSmhjeNsaohPmnWqNjLW5J3ZkPwjJY-i5ROGV4w
+                        - generic [ref=f33e487]: Instagram
+              - link [ref=f33e494] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=f33e496]:
+              - heading [level=2] [ref=f33e497]: Résultats Web
+              - generic [ref=f33e498]:
+                - generic [ref=f33e501]:
+                  - link [ref=f33e503] [cursor=pointer]:
+                    - /url: /goto?url=CAESdgHrOzAVnXRQRnhYtxkWZd4uRfPMQYWwsDifeEbE1L2IzwCvJJSiddyDgRtQhswxqxthPYLohE4RM7TrhiqqGaUEBaQ8Ipyo_bOMQiaPTkSAouvj1Le8Z0h1v3zj6QMfcbl9ClirdIBFmFAFaem4z9MjVqHvjIc
+                    - heading [level=3] [ref=f33e504]: Société RAIL EUROPE (RE4A) à 75009 PARIS
+                    - generic [ref=f33e510]:
+                      - generic [ref=f33e511]: data.gouv.fr
+                      - generic [ref=f33e513]: https://annuaire-entreprises.data.gouv.fr › ... › 79.11Z
+                  - button [ref=f33e519] [cursor=pointer]
+                - generic [ref=f33e526]:
+                  - text: Siège social de
+                  - emphasis [ref=f33e527]: RAIL EUROPE
+                  - text: (RE4A) ; Adresse. CENTRE D'AFFAIRES
+                  - emphasis [ref=f33e528]: PARIS
+                  - text: VICTOIRE
+                  - emphasis [ref=f33e529]: 52 RUE DE LA VICTOIRE
+                  - text: "75009"
+                  - emphasis [ref=f33e530]: PARIS
+                  - text: ; SIRET. 401 714 993 00060 ; Clef NIC. 00060.
+          - generic [ref=f33e534]:
+            - generic [ref=f33e537]:
+              - link [ref=f33e539] [cursor=pointer]:
+                - /url: /goto?url=CAEScgHrOzAV84phM7qfOR0QIr_Zl0Y4MDe-E_EsHYBNJkyza9sG_8rYqO-8Cjq31fbulSyndxRBcTJRlJGJmw-Axsx1Lbupr3-6wc2zVv7Ln4zmYTuGjsZr9L-Ki0gA9IqWENUw0THrVwcm1HauuruE6xIrHA
+                - heading [level=3] [ref=f33e540]: Société RAIL EUROPE (401714993) à PARIS (75009).
+                - generic [ref=f33e546]:
+                  - generic [ref=f33e547]: Societe.com
+                  - generic [ref=f33e549]: https://www.societe.com › societe › rail-europe-401714...
+              - button [ref=f33e555] [cursor=pointer]
+            - generic [ref=f33e562]:
+              - text: "ADRESSE:"
+              - emphasis [ref=f33e563]: 52 RUE DE LA VICTOIRE
+              - text: CENTRE D'AFFAIRES
+              - emphasis [ref=f33e564]: PARIS
+              - text: VICTOIRE, 75009
+              - emphasis [ref=f33e565]: PARIS
+              - text: ". DIRIGEANTS:"
+              - emphasis [ref=f33e566]: RAIL EUROPE
+              - text: HOLDING + 1 autre dirigeant. SOURCES & MISES À JOUR LE 09 ...
+          - generic [ref=f33e570]:
+            - generic [ref=f33e573]:
+              - link [ref=f33e575] [cursor=pointer]:
+                - /url: /goto?url=CAESdwHrOzAV0an2fGY25bQCbNQRV09LHyarHnyMjCtUbpL0IMW6bqAtr_alkEBJ6lxLRIkBmEKG4QdjauUv7jvXYm7OhqN3aQckubnL8wNDLvyLMfZKhuYrtyquCb74ateLBKE8U-cwexdRxovItMHjdUZxvc6A9O-R
+                - heading [level=3] [ref=f33e576]: "Société RAIL EUROPE HOLDING : Chiffre d'affaires, statuts ..."
+                - generic [ref=f33e582]:
+                  - generic [ref=f33e583]: Pappers
+                  - generic [ref=f33e585]: https://www.pappers.fr › entreprise › rail-europe-holdin...
+              - button [ref=f33e591] [cursor=pointer]
+            - generic [ref=f33e598]:
+              - emphasis [ref=f33e599]: RAIL EUROPE
+              - text: "HOLDING. 900 908 054 ·Active. Adresse : CTRE. D AFFAIRES"
+              - emphasis [ref=f33e600]: PARIS
+              - text: VICTOIRE,
+              - emphasis [ref=f33e601]: 52 RUE DE LA VICTOIRE
+              - text: ", 75009"
+              - emphasis [ref=f33e602]: PARIS
+              - text: ". Activité : Activités des sociétés ..."
+          - generic [ref=f33e606]:
+            - generic [ref=f33e609]:
+              - link [ref=f33e611] [cursor=pointer]:
+                - /url: /goto?url=CAESdQHrOzAVBvUfzzkroPAgm253kYxuedKbKfDpEcIPlVzz2tbclzlGlk5k5NHusAftDmsWNGmMDHmkL3mThn6EM409BSdK5oPrbJT__mh2Ss8UX-RGtX0HuO99C753rdVsuP5PdiyWyxpRnfaYe4x2M4FwtJd6bg
+                - heading [level=3] [ref=f33e612]: "Société RAIL EUROPE TOPCO : Chiffre d'affaires, statuts, ..."
+                - generic [ref=f33e618]:
+                  - generic [ref=f33e619]: Pappers
+                  - generic [ref=f33e621]: https://www.pappers.fr › rail-europe-topco-909487043
+              - button [ref=f33e627] [cursor=pointer]
+            - generic [ref=f33e634]:
+              - emphasis [ref=f33e635]: RAIL EUROPE
+              - text: "TOPCO. 909 487 043 ·Active Une alerte enregistrée. Adresse : CTRE. D AFFAIRES"
+              - emphasis [ref=f33e636]: PARIS
+              - text: VICTOIRE,
+              - emphasis [ref=f33e637]: 52 RUE DE LA VICTOIRE
+              - text: ", 75009"
+              - emphasis [ref=f33e638]: PARIS
+              - text: . Activité ...
+          - generic [ref=f33e642]:
+            - generic [ref=f33e645]:
+              - link [ref=f33e647] [cursor=pointer]:
+                - /url: /goto?url=CAESiAEB6zswFbQyoakh_4_nbw2e-G0ZoNHBQgEyNYysztE_T-3fH8iA2uAe-ItP3_UpxNXaF4DA8R147o6XLO1XNUEUPlbClF5H0SDze2yM7dsMwvWfZw-5Wraw6esrccrILOKK4RzHRrznLLsvM_mxcat84HLuM-xCOm0VEDTyIFXkyu1S59hgpBg0
+                - heading [level=3] [ref=f33e648]: Les entreprises 52 Rue De La Victoire 75009 Paris sur ...
+                - generic [ref=f33e654]:
+                  - generic [ref=f33e655]: Societe.com
+                  - generic [ref=f33e657]: https://www.societe.com › ... › Paris › Rue De La Victoire
+              - button [ref=f33e663] [cursor=pointer]
+            - generic [ref=f33e670]:
+              - emphasis [ref=f33e671]: 52 Rue De La Victoire
+              - text: . 75009
+              - emphasis [ref=f33e672]: PARIS
+              - text: .
+              - emphasis [ref=f33e673]: RAIL EUROPE
+              - text: "HOLDING. Activités des sociétés holding (6420Z). SIREN : 900 908 054."
+              - emphasis [ref=f33e674]: 52 Rue De La Victoire
+              - text: . 75009
+              - emphasis [ref=f33e675]: PARIS
+              - text: . VIMANA ...
+          - generic [ref=f33e679]:
+            - generic [ref=f33e682]:
+              - link [ref=f33e684] [cursor=pointer]:
+                - /url: /goto?url=CAESdQHrOzAVDXJw3v2a25EQSPMGOaNTHw-qaXXXQydPUne_1BghGupDmPX8pG_TDOLT3eYOK5m9w4Th6RQVq6ZWHlUxuuPdoI_JUvMZs7ehY6AYoEc97m_GBy7MJkp48ZauCgvROsB_9_t2uNgCChqmLr4AkG98nQ
+                - heading [level=3] [ref=f33e685]: "Rail Europe : avis 2026, contact & infos pratiques"
+                - generic [ref=f33e691]:
+                  - generic [ref=f33e692]: Avygeo
+                  - generic [ref=f33e694]: https://www.avygeo.com › trains-et-autocars › 3681-rai...
+              - button [ref=f33e700] [cursor=pointer]
+            - generic [ref=f33e706]:
+              - generic [ref=f33e707]: 10 janv. 2024 —
+              - generic [ref=f33e708]:
+                - emphasis [ref=f33e709]: Rail Europe
+                - text: ": Avis 2026,"
+                - emphasis [ref=f33e710]: contact
+                - text: et infos pratiques. +10. recos. +10 -0. Score ... Adresse du siège
+                - emphasis [ref=f33e711]: 52 rue de la Victoire
+                - text: ", 75009"
+                - emphasis [ref=f33e712]: Paris
+                - text: ", France ..."
+            - generic [ref=f33e715]:
+              - img [ref=f33e717]: 4,5(2)
+              - button [ref=f33e723]
+          - generic [ref=f33e731]:
+            - heading [level=2] [ref=f33e733]: Autres questions
+            - button [ref=f33e740] [cursor=pointer]:
+              - generic [ref=f33e741]: Quels sont les avis des clients sur Rail Europe ?
+      - complementary [ref=f33e748]:
+        - heading [level=2] [ref=f33e749]: Résultats complémentaires
+    - contentinfo [ref=f33e750]:
+      - heading [level=1] [ref=f33e751]: Liens de pied de page

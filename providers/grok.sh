@@ -126,13 +126,37 @@ ai_usage_table() {
 # covers the API-key variable, 401 wording in both HTTP and prose form, and the
 # session-start failure this CLI emits when credentials are refused before any
 # request goes out. Deliberately broad, because a false negative burns retries
-# on a task that never ran, while a false positive only costs a cooldown.
+# on a task that never ran.
+#
+# TIERED, because the pattern set is scanned against the CLI's stdout capture
+# too, and that capture holds the AGENT'S OWN REPORT. A task whose job was to
+# test COLT's API quoted COLT's 401 body ("Authentication error") in a results
+# table; the broad scan matched it and paused the whole runner queue. That cost
+# three full re-runs of a 25-turn task, not "only a cooldown" as the note here
+# used to claim. So:
+#   strong  patterns only this CLI's own auth layer emits -> scanned everywhere.
+#   broad   generic 401/authorisation wording ANY third-party API can emit ->
+#           scanned only when the capture is NOT a completed result envelope.
+# A non-empty .result proves the CLI authenticated and the agent ran, so auth
+# wording inside it is the agent quoting someone else. stderr and an empty or
+# absent .result still get the full set: a real failure produces no result.
 ai_is_auth_failure() {
     local file="${1:-}"
     [ -f "$file" ] || return 1
-    grep -qiE \
-        'API Error: 401|HTTP 401|status.?401|Invalid authentication|authentication (failed|error|required)|Failed to authenticate|not authenticated|Unauthorized|OAuth token|XAI_API_KEY|invalid.?api.?key|missing.?api.?key|auth.*(expired|invalid)|couldn.?t (start|create) session' \
-        "$file"
+
+    local strong='API Error: 401|XAI_API_KEY|couldn.?t (start|create) session'
+    local broad='HTTP 401|status.?401|Invalid authentication|authentication (failed|error|required)|Failed to authenticate|not authenticated|Unauthorized|OAuth token|invalid.?api.?key|missing.?api.?key|auth.*(expired|invalid)'
+
+    if grep -qiE "$strong" "$file"; then
+        return 0
+    fi
+
+    if command -v jq >/dev/null 2>&1 \
+       && [ -n "$(jq -r '.result // ""' "$file" 2>/dev/null)" ]; then
+        return 1
+    fi
+
+    grep -qiE "$broad" "$file"
 }
 
 # ── 5. ai_model_alias ────────────────────────────────────────────────────────

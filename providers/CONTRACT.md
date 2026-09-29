@@ -4,7 +4,25 @@ Every runner is one file: `providers/<runner>.sh`, sourced by `ai-task` / `ai-ev
 / `ai-brief` after `lib.sh` and after `load_config`. The runner name comes from
 `runner_from_task` (a `## Runner` section on the task, defaulting to
 `default_runner` in `config`), so the file name **is** the runner name:
-`providers/claude.sh` → runner `claude`, `providers/grok.sh` → runner `grok`.
+`providers/claude.sh` → runner `claude`, `providers/grok.sh` → runner `grok`,
+`providers/codex.sh` → runner `codex`.
+
+### JSONL providers
+
+The raw capture may be a JSON Lines event stream rather than one JSON document.
+Only the adapter interprets it; callers still use the same six functions.
+Codex uses `codex exec --json`, passes the prompt on stdin, and preserves raw
+stdout separately from stderr. Its extractor returns the last agent message
+only after `turn.completed`; a failed, interrupted, or malformed stream yields
+empty text. Its usage table reads the last completion's cumulative usage, with
+unreported model and dollar cost marked `n/a` rather than estimated.
+
+For structured event streams, auth detection inspects CLI `error` and
+`turn.failed` messages only. Agent messages and command output may quote
+third-party authentication errors and must not trip the circuit breaker.
+Plain stderr still receives authentication-pattern detection. An empty model
+means no model flag, and all nonempty model strings pass through unchanged.
+The Codex preamble extra is empty, preserving each caller's output contract.
 
 A provider file must define exactly these six functions and nothing else that
 the callers rely on. It must not read task files, move files, write to
@@ -151,9 +169,9 @@ echoed back unchanged, so a task can name any model id the CLI accepts without
 the alias table having to know it.
 
 This is where the fork-specific tables move to. Claude's:
-`opus`→`opus`, `opus1m`→`claude-opus-5[1m]`, `sonnet`→`sonnet`,
+`opus`→`opus`, `opus1m`→`claude-opus-5-5[1m]`, `sonnet`→`sonnet`,
 `haiku`→`haiku`, `fable`→`fable`, empty→`opus` (Claude always passes an
-explicit `--model`). Grok's: `build`→`grok-build`, empty→empty (no `--model`
+explicit `--model`; aliases match case-insensitively). Grok's: `build`→`grok-build`, empty→empty (no `--model`
 flag at all, let the CLI pick). Note the two differ on the empty case, which is
 exactly why the caller must not special-case it.
 

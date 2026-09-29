@@ -1,0 +1,293 @@
+- generic [ref=f5e1]:
+  - link [ref=f5e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f5e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f5e10]:
+      - generic [ref=f5e12]:
+        - img "Google" [ref=f5e13]
+        - generic [ref=f5e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f5e16] [cursor=pointer]':
+            - generic [ref=f5e17]: fr
+          - link "Se connecter" [ref=f5e19] [cursor=pointer]
+      - generic [ref=f5e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f5e21]
+        - generic [ref=f5e22]:
+          - generic [ref=f5e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f5e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f5e25]:
+              - listitem [ref=f5e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f5e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f5e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f5e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f5e30]:
+              - listitem [ref=f5e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f5e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f5e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f5e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f5e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f5e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f5e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f5e38]:
+        - generic [ref=f5e39]:
+          - button "Tout refuser" [ref=f5e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f5e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f5e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f5e44]: Plus d'options
+      - generic [ref=f5e45]:
+        - link "Confidentialité" [ref=f5e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f5e47]: ·
+        - link "Conditions d'utilisation" [ref=f5e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f5e53]:
+    - search [ref=f5e54]:
+      - generic [ref=f5e56]:
+        - link [ref=f5e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQPHoECAYQZA
+        - generic [ref=f5e66]:
+          - generic [ref=f5e67]:
+            - combobox [ref=f5e70]: site:linkedin.com/company ("Valière Cortez" OR "Cabinet Michau" OR "Craunot" OR "Louis-Porcheret" OR "Roland Gosselin" OR "Lodgis" OR "Paref Gestion") site:linkedin.com/company ("Valière Cortez" OR "Cabinet Michau" OR "Craunot" OR "Louis-Porcheret" OR "Roland Gosselin" OR "Lodgis" OR "Paref Gestion")
+            - generic [ref=f5e71]:
+              - button [ref=f5e73] [cursor=pointer]
+              - generic [ref=f5e78]:
+                - button [ref=f5e79] [cursor=pointer]
+                - button [ref=f5e82] [cursor=pointer]
+          - button [ref=f5e85] [cursor=pointer]
+    - generic [ref=f5e90]:
+      - button [ref=f5e92] [cursor=pointer]
+      - button [ref=f5e93] [cursor=pointer]
+      - generic [ref=f5e99]:
+        - button [ref=f5e101] [cursor=pointer]
+        - link [ref=f5e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Alinkedin.com%252Fcompany%2B(%2522Vali%25C3%25A8re%2BCortez%2522%2BOR%2B%2522Cabinet%2BMichau%2522%2BOR%2B%2522Craunot%2522%2BOR%2B%2522Louis-Porcheret%2522%2BOR%2B%2522Roland%2BGosselin%2522%2BOR%2B%2522Lodgis%2522%2BOR%2B%2522Paref%2BGestion%2522)%26hl%3Dfr%26num%3D30&ec=futura_srp_og_si_72236_p
+          - generic [ref=f5e107]: Connexion
+  - generic [ref=f5e109]:
+    - navigation [ref=f5e115]:
+      - list [ref=f5e118]:
+        - listitem [ref=f5e119]:
+          - link [ref=f5e122] [cursor=pointer]:
+            - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ2J8OegQIERAD
+            - generic [ref=f5e123]: Mode IA
+        - listitem [ref=f5e126]:
+          - link [disabled] [ref=f5e127]:
+            - generic [ref=f5e128]: Tous
+        - listitem [ref=f5e130]:
+          - link [ref=f5e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQtKgLegQIFRAB
+            - generic [ref=f5e132]: Images
+        - listitem [ref=f5e134]:
+          - link [ref=f5e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=7&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQtKgLegQIFxAB
+            - generic [ref=f5e136]: Vidéos
+        - listitem [ref=f5e138]:
+          - link [ref=f5e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=3&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQs6gLegQIGBAB
+            - generic [ref=f5e140]: Produits
+        - listitem [ref=f5e142]:
+          - link [ref=f5e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ0pQJegQIGRAB
+            - generic [ref=f5e144]: Actualités
+        - listitem [ref=f5e146]:
+          - link [ref=f5e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDDuwRa4um-2LNhBFWIpqZc7ZL_t3iAe0lB1D4hb_Ohp7yg8FO-XwZ7R-ba4YefvIQCF4Ra4wbUNQStQ8dVc6IK2vWHoXbgHLwJobq4HTNMksBhYHBmxw2hK9Sa4pHAI3I2Ovzox54EiEId7q7IoMJRkRlr-XDezqDqx33xDsZIWuHy-a_vqoqDlYrhNBbNeVEP9MwaA&q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sa=X&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQs6gLegQIFhAB
+            - generic [ref=f5e148]: Vidéos courtes
+        - listitem [ref=f5e150]:
+          - button [ref=f5e151] [cursor=pointer]:
+            - generic [ref=f5e152]: Plus
+    - heading [level=1] [ref=f5e158]: Résultats de recherche
+    - main [ref=f5e160]:
+      - generic [ref=f5e164]:
+        - generic [ref=f5e167]:
+          - heading [level=2] [ref=f5e168]: Résultats Web
+          - generic [ref=f5e169]:
+            - generic [ref=f5e172]:
+              - link [ref=f5e174] [cursor=pointer]:
+                - /url: /goto?url=CAESawHrOzAVkBdSPREtDnT1FVpVRfAJ1vjfVWioD5KyGS6oOAuR8__j9ojihssaQmBTMGcaPQCYsoECMQnuYrmCN_k3Nl7pOM6hQeUxVgtkwBOUshHROoXr0QwwXLygw5HGYzqSBorbf--1NYke
+                - heading [level=3] [ref=f5e175]: Valière Cortez
+                - generic [ref=f5e181]:
+                  - generic [ref=f5e182]: LinkedIn · Valière Cortez
+                  - generic [ref=f5e184]: Plus de 120 abonnés
+              - button [ref=f5e190] [cursor=pointer]
+            - generic [ref=f5e197]:
+              - emphasis [ref=f5e198]: Valière Cortez
+              - text: est une entreprise familiale et indépendante qui développe une vision singulière de l'immobilier et de son administration depuis près de 30 ...
+        - generic [ref=f5e202]:
+          - generic [ref=f5e205]:
+            - link [ref=f5e207] [cursor=pointer]:
+              - /url: /goto?url=CAESbwHrOzAVfTdLmGY_uorZza_LKxWlNEGtaQz1N11NTSCIlwJhyJSCxtt2DJEbmCMq3ibIQuRhhK3PoLs_11DugjyccY_8CEiEd3tm11b21fTd-hsp_2cfYX4DHRE2Vez7Y3TGGJLHeBTTNiPU02E3Xg
+              - heading [level=3] [ref=f5e208]: Cabinet ROLAND-GOSSELIN
+              - generic [ref=f5e214]:
+                - generic [ref=f5e215]: LinkedIn · Cabinet ROLAND-GOSSELIN
+                - generic [ref=f5e217]: Plus de 150 abonnés
+            - button [ref=f5e223] [cursor=pointer]
+          - generic [ref=f5e230]:
+            - text: "Site web: http://www.rolandgosselin.fr. Lien externe pour Cabinet"
+            - emphasis [ref=f5e231]: ROLAND-GOSSELIN
+            - text: "; Secteur: Immobilier ; Taille de l'entreprise: 11-50 employés ; Siège social ..."
+        - generic [ref=f5e235]:
+          - generic [ref=f5e238]:
+            - link [ref=f5e240] [cursor=pointer]:
+              - /url: /goto?url=CAESXwHrOzAVkbOFsquwvEZNlUHn2hl5oLLBniiOOhKMEPejHrz5XxMuxoNcsmIpjM99TjtvieaBAFGV8PChq89rMTeEO2ZSLS2nSa7xIEgMmybkV0Dlf1mvgAk8N4EdXIHo
+              - heading [level=3] [ref=f5e241]: Lodgis
+              - generic [ref=f5e247]:
+                - generic [ref=f5e248]: LinkedIn · Lodgis
+                - generic [ref=f5e250]: Plus de 4,8 k abonnés
+            - button [ref=f5e256] [cursor=pointer]
+          - generic [ref=f5e263]:
+            - emphasis [ref=f5e264]: Lodgis
+            - text: is a dynamic and innovative real estate agency that has specialized in furnished rentals in Paris since 1999.
+            - emphasis [ref=f5e265]: Lodgis
+            - text: is the simple, secure and ...
+        - generic [ref=f5e269]:
+          - generic [ref=f5e272]:
+            - link [ref=f5e274] [cursor=pointer]:
+              - /url: /goto?url=CAESbwHrOzAVkiBvyOPitzxjRBevkWzGx8IVfKDTmCfGdpajKKihtnoJxxvocVEahTPvg6SDumZUp0LIvRZ6X0OJlVOtsa0x21pb9Mc7i0TsMp_tuWTeTdrB-y40edTFQq-QCUU0aCsrnieYhIrQG1h76Q
+              - heading [level=3] [ref=f5e275]: Cabinet LOUIS-PORCHERET
+              - generic [ref=f5e281]:
+                - generic [ref=f5e282]: LinkedIn · Cabinet LOUIS-PORCHERET
+                - generic [ref=f5e284]: Plus de 210 abonnés
+            - button [ref=f5e290] [cursor=pointer]
+          - generic [ref=f5e297]:
+            - text: Cabinet
+            - emphasis [ref=f5e298]: LOUIS-PORCHERET
+            - text: . Immobilier. Agence Immobilière Familiale sur 3 générations depuis 1947 spécialiste de l'Est parisien. VENTE LOCATION GESTION SYNDIC.
+        - generic [ref=f5e302]:
+          - generic [ref=f5e305]:
+            - link [ref=f5e307] [cursor=pointer]:
+              - /url: /goto?url=CAESXwHrOzAVexj0ETqqqKiaVt1NrdPBE2cYQyjnotRKE0t4-4zdIrP8P_wr5pcVrIKAz8HRl-Px17BrSt4-m7suDHNq0nhGfJMXHn0v4GRd3_VZrngCW0-N3KNtVGy_JoG1
+              - heading [level=3] [ref=f5e308]: CRAUNOT
+              - generic [ref=f5e314]:
+                - generic [ref=f5e315]: LinkedIn · CRAUNOT
+                - generic [ref=f5e317]: Plus de 1,7 k abonnés
+            - button [ref=f5e323] [cursor=pointer]
+          - generic [ref=f5e330]:
+            - emphasis [ref=f5e331]: CRAUNOT
+            - text: SA gère à ce jour plus de 1000 immeubles sur Paris et la petite couronne. Nous sommes convaincus que la confiance et la reconnaissance des clients ...
+        - generic [ref=f5e335]:
+          - generic [ref=f5e338]:
+            - link [ref=f5e340] [cursor=pointer]:
+              - /url: /goto?url=CAEScQHrOzAVbOoQwPCEIjuNx_y9dA9tqRAas48ded9V33ePtZWIvn0CE2tHyWG7CctaZq6sjZG5Kd7B7vQqFm9VYiFyGtaXOxWWGQDR8n4MeDaEjPwVQlJLt-8qZ6CqDHCc0I86aVyrbJVJHmbr2FC3wXeJ
+              - heading [level=3] [ref=f5e341]: Cabinet ROLAND-GOSSELIN
+              - generic [ref=f5e347]:
+                - generic [ref=f5e348]: LinkedIn · Cabinet ROLAND-GOSSELIN
+                - generic [ref=f5e350]: Plus de 150 abonnés
+            - button [ref=f5e356] [cursor=pointer]
+          - generic [ref=f5e363]:
+            - text: "Website: http://www.rolandgosselin.fr. External link for Cabinet"
+            - emphasis [ref=f5e364]: ROLAND-GOSSELIN
+            - text: "; Industry: Real Estate ; Company size: 11-50 employees ; Headquarters: Paris, Île ..."
+        - generic [ref=f5e368]:
+          - generic [ref=f5e371]:
+            - link [ref=f5e373] [cursor=pointer]:
+              - /url: /goto?url=CAESXQHrOzAVahz_ZnNLQt3dDx1pFORFkzDQOtqEoGP6mEpYnCi0PY_gVRsLIQ6BbXMAe7auXM87uEj3yBP9am3gx5BztaMtssWhv-PO8u7TiQoq7ApamRuf-GePkg73Hg
+              - heading [level=3] [ref=f5e374]: Groupe PAREF
+              - generic [ref=f5e380]:
+                - generic [ref=f5e381]: LinkedIn · Groupe PAREF
+                - generic [ref=f5e383]: Plus de 26 k abonnés
+            - button [ref=f5e389] [cursor=pointer]
+          - generic [ref=f5e396]:
+            - text: ...
+            - emphasis [ref=f5e397]: PAREF Gestion
+            - text: ", Aodren aura pour mission de développer et renforcer les relations avec l'ensemble de nos ..."
+        - generic [ref=f5e401]:
+          - generic [ref=f5e404]:
+            - link [ref=f5e406] [cursor=pointer]:
+              - /url: /goto?url=CAESnAEB6zswFdrN_djyAH1_n9_70UA5UgWLtf1OcoctC364Rr-tLpRI7TqOw_5wwPqXiWw-1t54j7sSJUY5aoEjeb0IYoPx4JUY7yBIjfG4lC2CcMWLfaYZ5fju0yOU3vkvmChvBxNtZszxmoiDmUNGas_20wjifMv-kpRdfH2LsLgn2Kdfplk_brQ7xUXupMe-hWcdkrKdUz1B-7Zfp_8
+              - heading [level=3] [ref=f5e407]: Lodgis
+              - generic [ref=f5e413]:
+                - generic [ref=f5e414]: LinkedIn · Lodgis
+                - generic [ref=f5e416]: Plus de 4,8 k abonnés
+            - button [ref=f5e422] [cursor=pointer]
+          - generic [ref=f5e429]:
+            - emphasis [ref=f5e430]: Lodgis
+            - text: is a dynamic and innovative real estate agency that has specialized in furnished rentals in Paris since 1999.
+            - emphasis [ref=f5e431]: Lodgis
+            - text: is the simple, secure and ...
+        - generic [ref=f5e435]:
+          - generic [ref=f5e438]:
+            - link [ref=f5e440] [cursor=pointer]:
+              - /url: /goto?url=CAESXgHrOzAVDkMUFqE2OE_jGBDT2Wg9FuYvGlh4X5rc_ZAdRRcAciGjH7w_n2ucoAG-7VprPoXzxUJ9swuiiv2NG-0AvKwO05AOF35lrFP7TGFskB4vIVKfkPto4EzR-C8
+              - heading [level=3] [ref=f5e441]: PAREF Group
+              - generic [ref=f5e447]:
+                - generic [ref=f5e448]: LinkedIn · PAREF Group
+                - generic [ref=f5e450]: Plus de 26 k abonnés
+            - button [ref=f5e456] [cursor=pointer]
+          - generic [ref=f5e463]:
+            - text: ...
+            - emphasis [ref=f5e464]: PAREF Gestion
+            - text: ", Aodren aura pour mission de développer et renforcer les relations avec l'ensemble de nos ..."
+        - generic [ref=f5e468]:
+          - heading [level=2] [ref=f5e472]: Images
+          - generic [ref=f5e476]:
+            - generic [ref=f5e480] [cursor=pointer]:
+              - link [ref=f5e481]:
+                - /url: /goto?url=CAESXgHrOzAV9NFjzsJwO20Ey1V_RaDpsd0B6xrv4Jtzatn2rkwN3azyszlvRFmcF2xuYWLuCxFw1tSskBOJW2MkaoPbqF_KVMbDuu2hL7Gwl2v1j4lrCcZbGDcd5Wn_xwg
+              - button [ref=f5e483]
+              - generic [ref=f5e487]:
+                - generic [ref=f5e489]: Lodgis | LinkedIn
+                - generic [ref=f5e490]:
+                  - generic [ref=f5e492]: LinkedIn
+                  - button [ref=f5e502]
+            - generic [ref=f5e510] [cursor=pointer]:
+              - link [ref=f5e511]:
+                - /url: /goto?url=CAESXwHrOzAVexj0ETqqqKiaVt1NrdPBE2cYQyjnotRKE0t4-4zdIrP8P_wr5pcVrIKAz8HRl-Px17BrSt4-m7suDHNq0nhGfJMXHn0v4GRd3_VZrngCW0-N3KNtVGy_JoG1
+              - button [ref=f5e513]
+              - generic [ref=f5e517]:
+                - generic [ref=f5e519]: CRAUNOT | LinkedIn
+                - generic [ref=f5e520]:
+                  - generic [ref=f5e522]: LinkedIn
+                  - button [ref=f5e532]
+            - generic [ref=f5e540] [cursor=pointer]:
+              - link [ref=f5e541]:
+                - /url: /goto?url=CAEScwHrOzAVCFY6ZXsfMTHBn65YqGSQuc_NxuRkWnJmEL6p-KH1wkbUORPjGYT65fNizW5o0U-tekCOEApKMFtGEnpMo2c5qH9--ST7j7G7Xs7rDw9heFBO7IkjF7y8MfFROYkCx34x4zoDaMpIotzoTwQvstk
+              - button [ref=f5e543]
+              - generic [ref=f5e547]:
+                - generic [ref=f5e549]: Lodgis Hospitality Holdings | LinkedIn
+                - generic [ref=f5e550]:
+                  - generic [ref=f5e552]: LinkedIn Singapore
+                  - button [ref=f5e562]
+          - button [ref=f5e568] [cursor=pointer]:
+            - separator [aria-hidden] [ref=f5e569]
+            - generic [ref=f5e570]: Afficher plus d'images
+      - navigation [ref=f5e577]:
+        - heading [level=1] [ref=f5e578]: Navigation par pages
+        - text: "1"
+        - link [ref=f5e581] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=10&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAE
+          - text: "2"
+        - link [ref=f5e583] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=20&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAG
+          - text: "3"
+        - link [ref=f5e585] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=30&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAI
+          - text: "4"
+        - link [ref=f5e587] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=40&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAK
+          - text: "5"
+        - link [ref=f5e589] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=50&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAM
+          - text: "6"
+        - link [ref=f5e591] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=60&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAO
+          - text: "7"
+        - link [ref=f5e593] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=70&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAQ
+          - text: "8"
+        - link [ref=f5e595] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=80&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAS
+          - text: "9"
+        - link [ref=f5e597] [cursor=pointer]:
+          - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=90&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8tMDegQIPhAU
+          - text: "10"
+        - heading [level=2] [ref=f5e599]:
+          - link [ref=f5e600] [cursor=pointer]:
+            - /url: /search?q=site:linkedin.com/company+(%22Vali%C3%A8re+Cortez%22+OR+%22Cabinet+Michau%22+OR+%22Craunot%22+OR+%22Louis-Porcheret%22+OR+%22Roland+Gosselin%22+OR+%22Lodgis%22+OR+%22Paref+Gestion%22)&sca_esv=ead2612d6155db9a&hl=fr&ei=8vSkate9C_eakdUPtczTGQ&start=10&sa=N&sstk=AS6-VmL1Pbe6PD1TtraBP-V7so9drc9B9W6wnmBtyN6Il68T7v60LkiDV5NDDWklv0ga3Mlcvb4vkCZt-Oxr2FuQ2Txl0bXlpUOlBA&ved=2ahUKEwjX_tHUuOiWAxV3TaQEHTXmNAMQ8NMDegQIPhAW
+            - generic [ref=f5e602]: Suivant
+    - contentinfo [ref=f5e603]:
+      - heading [level=1] [ref=f5e604]: Liens de pied de page

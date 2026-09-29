@@ -1,0 +1,444 @@
+- generic [ref=f26e1]:
+  - link [ref=f26e2] [cursor=pointer]: Passer directement au contenu principal
+  - link [ref=f26e3] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=fr
+    - text: Aide sur l'accessibilité
+  - dialog "Avant d'accéder à la recherche Google" [active]:
+    - generic [ref=f26e10]:
+      - generic [ref=f26e12]:
+        - img "Google" [ref=f26e13]
+        - generic [ref=f26e14]:
+          - 'button "Langue : ‪Français (France)‬" [ref=f26e16] [cursor=pointer]':
+            - generic [ref=f26e17]: fr
+          - link "Se connecter" [ref=f26e19] [cursor=pointer]
+      - generic [ref=f26e20]:
+        - heading "Avant d'accéder à Google" [level=1] [ref=f26e21]
+        - generic [ref=f26e22]:
+          - generic [ref=f26e23]:
+            - text: Nous utilisons des
+            - link "cookies" [ref=f26e24] [cursor=pointer]:
+              - /url: https://policies.google.com/technologies/cookies?utm_source=ucbs&hl=fr
+            - text: "et des données, y compris des adresses IP, pour :"
+            - list [ref=f26e25]:
+              - listitem [ref=f26e26]: Proposer les services Google et s'assurer qu'ils fonctionnent correctement
+              - listitem [ref=f26e27]: Suivre les interruptions de service et protéger contre le spam, les fraudes et les abus
+              - listitem [ref=f26e28]: Mesurer l'engagement de l'audience et les statistiques des sites pour comprendre la façon dont nos services sont utilisés et pour améliorer leur qualité
+          - generic [ref=f26e29]:
+            - text: "Si vous sélectionnez \"Tout accepter\", nous utiliserons aussi des cookies et des données, y compris des adresses IP, pour :"
+            - list [ref=f26e30]:
+              - listitem [ref=f26e31]: Développer de nouveaux services et les améliorer
+              - listitem [ref=f26e32]: Diffuser des annonces et évaluer leur efficacité
+              - listitem [ref=f26e33]: Proposer des contenus personnalisés en fonction de vos paramètres
+              - listitem [ref=f26e34]: Afficher des annonces personnalisées en fonction de vos paramètres
+            - generic [ref=f26e35]: Si vous sélectionnez "Tout refuser", nous n'utiliserons pas de cookies ni d'adresses IP à ces fins supplémentaires.
+          - generic [ref=f26e36]: Les contenus non personnalisés dépendent, par exemple, du contenu du site que vous consultez, de l'activité de votre session de recherche en cours et de votre position. Les annonces non personnalisées dépendent du contenu du site que vous consultez et de votre position approximative. Les annonces et les contenus personnalisés peuvent aussi inclure des résultats plus pertinents, des recommandations et des annonces adaptées en fonction de votre activité passée sur ce navigateur, comme vos précédentes recherches sur Google. Le cas échéant, nous adaptons également l’expérience en fonction de l’âge de l’utilisateur à l'aide de cookies et de données.
+          - generic [ref=f26e37]: Cliquez sur "Plus d'options" pour afficher plus d'informations, y compris sur la manière de gérer vos paramètres de confidentialité. Vous pouvez aussi consulter la page g.co/privacytools à tout moment.
+      - generic [ref=f26e38]:
+        - generic [ref=f26e39]:
+          - button "Tout refuser" [ref=f26e40] [cursor=pointer]
+          - button "Tout accepter" [ref=f26e41] [cursor=pointer]
+        - link "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f26e43] [cursor=pointer]:
+          - generic "Plus d'options pour les paramètres de personnalisation et les cookies" [ref=f26e44]: Plus d'options
+      - generic [ref=f26e45]:
+        - link "Confidentialité" [ref=f26e46] [cursor=pointer]:
+          - /url: https://policies.google.com/privacy?hl=fr&fg=1&utm_source=ucbs
+        - generic [aria-hidden] [ref=f26e47]: ·
+        - link "Conditions d'utilisation" [ref=f26e48] [cursor=pointer]:
+          - /url: https://policies.google.com/terms?hl=fr&fg=1&utm_source=ucbs
+  - generic [ref=f26e53]:
+    - search [ref=f26e54]:
+      - generic [ref=f26e56]:
+        - link [ref=f26e58] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=fr&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQPHoECAYQZA
+        - generic [ref=f26e66]:
+          - generic [ref=f26e67]:
+            - combobox [ref=f26e70]: "\"Lafayette Travel\" agence voyages affaires Paris contact \"Lafayette Travel\" agence voyages affaires Paris contact"
+            - generic [ref=f26e71]:
+              - button [ref=f26e73] [cursor=pointer]
+              - generic [ref=f26e78]:
+                - button [ref=f26e79] [cursor=pointer]
+                - button [ref=f26e82] [cursor=pointer]
+          - button [ref=f26e85] [cursor=pointer]
+    - generic [ref=f26e90]:
+      - button [ref=f26e92] [cursor=pointer]
+      - button [ref=f26e93] [cursor=pointer]
+      - generic [ref=f26e99]:
+        - button [ref=f26e101] [cursor=pointer]
+        - link [ref=f26e106] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Lafayette%2BTravel%2522%2Bagence%2Bvoyages%2Baffaires%2BParis%2Bcontact%26hl%3Dfr%26num%3D20&ec=futura_srp_og_si_72236_p
+          - generic [ref=f26e107]: Connexion
+  - generic [ref=f26e109]:
+    - navigation [ref=f26e115]:
+      - list [ref=f26e118]:
+        - listitem [ref=f26e119]:
+          - link [ref=f26e122] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&udm=50&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&vsint=&aep=1&ntc=1&cs=0&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ2J8OegQICxAD
+            - generic [ref=f26e123]: Mode IA
+        - listitem [ref=f26e126]:
+          - link [disabled] [ref=f26e127]:
+            - generic [ref=f26e128]: Tous
+        - listitem [ref=f26e130]:
+          - link [ref=f26e131] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=8&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQs6gLegQIEhAB
+            - generic [ref=f26e132]: Emplois
+        - listitem [ref=f26e134]:
+          - link [ref=f26e135] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=10&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQs6gLegQIExAB
+            - generic [ref=f26e136]: Sites d'offres d'emploi
+        - listitem [ref=f26e138]:
+          - link [ref=f26e139] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=39&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQs6gLegQIFBAB
+            - generic [ref=f26e140]: Vidéos courtes
+        - listitem [ref=f26e142]:
+          - link [ref=f26e143] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&tbm=nws&source=lnms&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ0pQJegQIFxAB
+            - generic [ref=f26e144]: Actualités
+        - listitem [ref=f26e146]:
+          - link [ref=f26e147] [cursor=pointer]:
+            - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&udm=2&fbs=ABfTbFUDadgeu2mn4mYJ8iEZ1GUDGf4WSOb1BH813Y2_6nakkXxXJWWll_x8UdI0GtcTT7fnsBZki2B1V7dKU6B4SKLG5_8gnBxpIfFbxHkq7ZPfSCQjkFkVamrPsfC_MxySRAZUugFY7RheXc4rX54ZR5_Q4V8BLC2j1CDbhTGJDswOB0nAZZBHPErfvEZ524gu14e4h-scpEZG-Cj7MOBct21q-_UIoHAMSykEb-u14MjWGUoPDVc&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQtKgLegQIERAB
+            - generic [ref=f26e148]: Images
+        - listitem [ref=f26e150]:
+          - button [ref=f26e151] [cursor=pointer]:
+            - generic [ref=f26e152]: Plus
+    - heading [level=1] [ref=f26e158]: Résultats de recherche
+    - generic [ref=f26e159]:
+      - generic [ref=f26e160]:
+        - generic [ref=f26e168]:
+          - heading [level=2] [ref=f26e169]:
+            - generic [ref=f26e176]: Paris
+          - generic [ref=f26e178]:
+            - text: ∙
+            - button [ref=f26e179] [cursor=pointer]: Choisir une zone
+          - button [ref=f26e182] [cursor=pointer]
+        - generic [ref=f26e201]:
+          - heading [level=2] [ref=f26e205]:
+            - generic [ref=f26e206]: Raisonnement…
+          - progressbar [ref=f26e208]
+      - main [ref=f26e210]:
+        - generic [ref=f26e214]:
+          - generic [ref=f26e216]:
+            - generic [ref=f26e219]:
+              - generic [ref=f26e223]:
+                - generic [ref=f26e231]:
+                  - button [ref=f26e235] [cursor=pointer]:
+                    - generic [ref=f26e236]: Voir les photos
+                  - generic [ref=f26e239]:
+                    - link [ref=f26e242] [cursor=pointer]:
+                      - /url: /maps/place/VOYAGES+LAFAYETTE/data=!4m2!3m1!1s0x0:0x1a3d1fffa00823ea?sa=X&ved=1t:2428&hl=fr&ictx=111
+                    - link [ref=f26e252] [cursor=pointer]:
+                      - /url: /local/place/fid/0x47e66e7230bc0001:0x1a3d1fffa00823ea/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3DM6DES25SI-jPYG4QsUCIwQ%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D311.0986%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFk02REVTMjVTSS1qUFlHNFFzVUNJd1E%3D&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQpx96BAhAEBI
+                      - generic [ref=f26e254]: Extérieur
+                - generic [ref=f26e257]:
+                  - heading [level=2] [ref=f26e260]:
+                    - link [ref=f26e261] [cursor=pointer]:
+                      - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=VOYAGES+LAFAYETTE&si=APenkKmVGdgpMPDQZoEWS8RIAhsqXAKlNLP0B8DNkkiU9KPI0UhjXcEspQps9Uq0b-qfWdFIo6r9F_5f4Cexzkgsqjxt0M-WO4wr__uwpR4qj0iQWRFiWWB6OrY8syeQfJAqmlTgS4yn&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ_coHegQIKhAB
+                      - text: VOYAGES LAFAYETTE
+                  - generic [ref=f26e264]:
+                    - text: 4,4
+                    - link [ref=f26e268] [cursor=pointer]:
+                      - /url: /travel/search?g2lb=4965990,72471280,72559352,72573224,72647020,72686036,72803964,72882230,73064764,121529350,121608706,121738283,121762713,121921501,121951222,121954664,122040837&hl=fr-FR&gl=fr&ssta=1&q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&ts=CAEaKwopEicyJTB4NDdlNjZlNzIzMGJjMDAwMToweDFhM2QxZmZmYTAwODIzZWE&qs=CAEyE0Nnb0k2c2VnZ1ByX3g1NGFFQUU4Ag&ap=ugEHcmV2aWV3cw&ictx=111&ved=1t:1250
+                      - text: 28 avis Google
+                    - button [ref=f26e272] [cursor=pointer]
+                    - text: Agence de voyages
+                - generic [ref=f26e282]:
+                  - generic [ref=f26e295]:
+                    - link [ref=f26e297]:
+                      - generic [ref=f26e298] [cursor=pointer]: Itinéraire
+                    - button [ref=f26e307] [cursor=pointer]:
+                      - generic [ref=f26e308]: Rédiger un avis
+                    - button [ref=f26e318] [cursor=pointer]:
+                      - generic [ref=f26e321]: Enregistrer
+                    - button [ref=f26e324] [cursor=pointer]:
+                      - generic [ref=f26e325]: Partager
+                    - button [ref=f26e331] [cursor=pointer]:
+                      - generic [ref=f26e332]: Appeler
+                  - generic [ref=f26e341]:
+                    - generic [ref=f26e344]:
+                      - generic [ref=f26e345]:
+                        - link [ref=f26e346] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=voyages+lafayette+adresse&ludocid=1890702601327485930&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ6BN6BAguEAI
+                          - text: Adresse
+                        - text: ":"
+                      - text: 179 Rue La Fayette, 75010 Paris
+                    - generic [ref=f26e350]:
+                      - generic [ref=f26e351]:
+                        - link [ref=f26e352] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=voyages+lafayette+t%C3%A9l%C3%A9phone&ludocid=1890702601327485930&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ6BN6BAgvEAI
+                          - text: Téléphone
+                        - text: ":"
+                      - link [ref=f26e355] [cursor=pointer]:
+                        - /url: "#"
+                        - text: 01 42 45 71 26
+                    - generic [ref=f26e357]:
+                      - generic [ref=f26e358]:
+                        - link [ref=f26e359] [cursor=pointer]:
+                          - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=voyages+lafayette+horaires&ludocid=1890702601327485930&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ6BN6BAgtEAI
+                          - text: Horaires
+                        - text: ":"
+                      - button [ref=f26e361]:
+                        - generic [ref=f26e362]: Fermé · Ouvre à 10:00
+                  - generic [ref=f26e377]:
+                    - generic [ref=f26e378]:
+                      - heading [level=3] [ref=f26e379]: Avis
+                      - generic [ref=f26e380]:
+                        - button [ref=f26e384] [cursor=pointer]:
+                          - generic [ref=f26e385]: Donner un avis
+                        - button [ref=f26e389] [cursor=pointer]:
+                          - generic [ref=f26e390]: Ajouter des photos
+                    - generic [ref=f26e393]:
+                      - text: 4,4
+                      - button [ref=f26e399] [cursor=pointer]: 28 avis Google
+                    - generic [ref=f26e400]:
+                      - text: Les avis ne sont pas vérifiés
+                      - button [ref=f26e404] [cursor=pointer]
+                  - generic [ref=f26e416]:
+                    - generic [ref=f26e417]:
+                      - heading [level=3] [ref=f26e418]: "Source : VOYAGES LAFAYETTE"
+                      - button [ref=f26e420]
+                    - generic [ref=f26e423]: "\"Voyages Lafayette vous propose des vols secs, des croisières, des excursions, séjour sur mesure et combiné. Et également des excursions dans le monde entier\""
+                  - generic [ref=f26e432]:
+                    - heading [level=3] [ref=f26e433]: Informations fournies par VOYAGES LAFAYETTE
+                    - generic [ref=f26e434]: Consulter les précédentes informations sur Google
+                  - generic [ref=f26e441]:
+                    - heading [level=3] [ref=f26e442]: Profils
+                    - generic [ref=f26e443]:
+                      - link [ref=f26e447] [cursor=pointer]:
+                        - /url: /goto?url=CAESZAHrOzAVjqa0WH2Teo764hMwvhI1-hv7SXyHqKAUe2GIcnAlvnyeEeXYDxpnuDz6w9JY8IP6nYeXW0TlXGfjxGT5pxwMp4GDbE298QWTIhU5M-EyTvkhEyc4aoni9k4zYPpHpMQ
+                        - generic [ref=f26e448]: Instagram
+                      - link [ref=f26e457] [cursor=pointer]:
+                        - /url: /goto?url=CAESYQHrOzAVhYEGOxU7BFKG30moR2asX_XaiXor1QSFg1sP_4z-dewGngOD1i8FGwVh9WxRJh2vZ3NksFfwcKzk8xA4M4qTsWeW-WWDeVix1u8N2fB8zDLXXkZn-q0ZAngT6Fw
+                        - generic [ref=f26e458]: TikTok
+                      - link [ref=f26e467] [cursor=pointer]:
+                        - /url: /goto?url=CAESYgHrOzAVr3xIu1BXNuhvcYeDQQF-OrbDjECYlTn2H0Kv8jHCHLQAMWXf4uZcw7ykaLtDkEWeObb1vXqu1VYhOTVqrADeQ0o1xobTzkZfj-rRiYvrqmt0DkWLbIXCzcsLG53L
+                        - generic [ref=f26e468]: Facebook
+                  - generic [ref=f26e481]:
+                    - heading [level=2] [ref=f26e484]: Aidez-nous à améliorer la précision
+                    - generic [ref=f26e485]:
+                      - generic [ref=f26e486]: Envoyer des commentaires
+                      - generic [ref=f26e488]:
+                        - link [ref=f26e491] [cursor=pointer]:
+                          - /url: "#"
+                          - text: Suggérer une modification
+                        - text: ·
+                        - link [ref=f26e492] [cursor=pointer]:
+                          - /url: https://business.google.com/create?hl=fr&getstarted&authuser=0&fp=1890702601327485930&gmbsrc=fr-fr-et-ip-z-gmb-s-z-l~skp%7Cclaimbz_aoc_a%7Cu&ppsrc=GMBSI
+                          - text: Vous êtes le propriétaire de cet établissement ?
+              - link [ref=f26e494] [cursor=pointer]:
+                - /url: https://support.google.com/local-listings?p=how_google_sources
+                - text: À propos de ces données
+            - generic [ref=f26e504]:
+              - generic [ref=f26e505]:
+                - link [ref=f26e507] [cursor=pointer]:
+                  - /url: "#"
+                  - text: 01 42 45 71 26
+                - generic [ref=f26e508]: VOYAGES LAFAYETTE – Numéro de téléphone principal
+              - list [ref=f26e512]:
+                - button [ref=f26e513] [cursor=pointer]:
+                  - generic [ref=f26e514]: Appeler
+                - link [ref=f26e518] [cursor=pointer]:
+                  - /url: /maps/dir//VOYAGES+LAFAYETTE/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x47e66e7230bc0001:0x1a3d1fffa00823ea?sa=X&ved=1t:97007&hl=fr&ictx=111
+                  - generic [ref=f26e519]: Itinéraire
+                - button [ref=f26e528] [cursor=pointer]:
+                  - generic [ref=f26e529]:
+                    - text: Copier
+                    - textbox [aria-hidden] [ref=f26e536]: 01 42 45 71 26
+          - generic [ref=f26e539]:
+            - heading [level=2] [ref=f26e540]: Résultats Web
+            - generic [ref=f26e541]:
+              - generic [ref=f26e544]:
+                - link [ref=f26e546] [cursor=pointer]:
+                  - /url: /goto?url=CAESbQHrOzAVfr6tF44iAmYBWI8mxB1En_ueN8pRhcLMLnQqRqAJ9dOLDLzNhuyLDlaHrIJSFkZ6brgK94H0WCCusEcSVGyko5nw8DZMrpAG14Rgz_GyvhLO8e_Ca8nIYE4DPUSh-8tabVxMdyPYxoA
+                  - heading [level=3] [ref=f26e547]: Lafayette DMC - Activités de loisirs
+                  - generic [ref=f26e553]:
+                    - generic [ref=f26e554]: Paris Je t'aime - Office de Tourisme
+                    - generic [ref=f26e556]: https://parisjetaime.com › activite › lafayette-dmc-p2949
+                - button [ref=f26e562] [cursor=pointer]
+              - generic [ref=f26e569]:
+                - text: Informations pratiques · info@
+                - emphasis [ref=f26e570]: lafayette-travel
+                - text: .com · +33 (0) 1 55 04 79 79 · www.lafayettedmc.com.
+          - generic [ref=f26e574]:
+            - generic [ref=f26e577]:
+              - link [ref=f26e579] [cursor=pointer]:
+                - /url: /goto?url=CAEShgEB6zswFYnAIvSmHbWsZjQkNaFDkmBi20xnugCDZnV52fmyjT092wf-63SB0U_5V-uR0FEaTxg56fL6OXUTHeH1ozuMq6KMFP8TLR1R3IPKLpKO8jcL-6yP_u494dEepdNFZG9CPYZfvx0Bi9KYUUstsRPT3fhFAlbP8_KobrGEl5RWQLKdBg
+                - heading [level=3] [ref=f26e580]: Lafayette Travel Paris 9e (75009) – Horaires & contact
+                - generic [ref=f26e586]:
+                  - generic [ref=f26e587]: Telephone City
+                  - generic [ref=f26e589]: https://www.telephone.city › ... › Paris 9e
+              - button [ref=f26e595] [cursor=pointer]
+            - generic [ref=f26e602]:
+              - text: Quels sont les
+              - emphasis [ref=f26e603]: horaires
+              - text: de
+              - emphasis [ref=f26e604]: Lafayette Travel
+              - text: "? Les"
+              - emphasis [ref=f26e605]: horaires
+              - text: d'ouverture de
+              - emphasis [ref=f26e606]: Lafayette Travel
+              - text: "sont les suivants : Lundi : 9h – 18h; Mardi : 9h – 18h; Mercredi : 9h ..."
+          - generic [ref=f26e610]:
+            - generic [ref=f26e613]:
+              - link [ref=f26e615] [cursor=pointer]:
+                - /url: /goto?url=CAEShQEB6zswFUwzF4MAtmWR3UX-7qT4CL-4Xqg07LKgKmnlnn9pD8q_1YUcG8yLIcpTYKXeqUt_-rfImz83hl13M_NxYI1vTKqFVZTIxwztUlYuD_R9e3WT0YRYOgNcR8O_2Fga5HcRF02zi1laQtADQWpjCi3llkRctgtkaqVb5TqXWwMRlbot
+                - heading [level=3] [ref=f26e616]: Meilleures agences de voyages à Rue Caumartin, Paris 75
+                - generic [ref=f26e622]:
+                  - generic [ref=f26e623]: Pages Jaunes
+                  - generic [ref=f26e625]: https://www.pagesjaunes.fr › annuaire › agences-de-vo...
+              - button [ref=f26e631] [cursor=pointer]
+            - generic [ref=f26e638]:
+              - text: 8 rue St Augustin 75002
+              - emphasis [ref=f26e639]: Paris
+              - text: . Découvrez
+              - emphasis [ref=f26e640]: Lafayette Travel
+              - text: ", votre partenaire idéal pour des"
+              - emphasis [ref=f26e641]: voyages
+              - text: mémorables en France et à Monaco. Nos agences, implantées à ...
+          - generic [ref=f26e645]:
+            - generic [ref=f26e648]:
+              - link [ref=f26e650] [cursor=pointer]:
+                - /url: /goto?url=CAESdAHrOzAVd-hDD_ccMf5X7xShNJtDN0cjVwRbxDcHszbFe1d7-NfB4txDsIBzszI8H65aIIz0D7mzxoWuf4AZMs9_XLBoW3J5aP8NUBmvmUrH2gQJ9Yqph2PMWQZz6yaQqx_VRaamAN7wqN370bUVxEWQBtHH
+                - heading [level=3] [ref=f26e651]: "Société LAFAYETTE TRAVEL : Chiffre d'affaires, statuts, ..."
+                - generic [ref=f26e657]:
+                  - generic [ref=f26e658]: Pappers
+                  - generic [ref=f26e660]: https://www.pappers.fr › lafayette-travel-340776244
+              - button [ref=f26e666] [cursor=pointer]
+            - generic [ref=f26e673]:
+              - emphasis [ref=f26e674]: LAFAYETTE TRAVEL
+              - text: ; 8 RUE SAINT-AUGUSTIN, 75002
+              - emphasis [ref=f26e675]: PARIS
+              - text: · Activités des
+              - emphasis [ref=f26e676]: agences de voyage
+              - text: · Entre 10 et 19 salariés (donnée 2022) · 01/04/1987 · N C 2 A G , JAY ...
+          - generic [ref=f26e680]:
+            - generic [ref=f26e683]:
+              - link [ref=f26e685] [cursor=pointer]:
+                - /url: /goto?url=CAESdwHrOzAVxJYiEU8dGEfKEbmpQ-NsPWOX3aVvM9j80o2nIqnJiEh6yzDgTVg5ZU5XQXSDMarZsnMpMSVGAYvLJrm3FvDoUf8dT6YDD2bFe3W3_gSXKPoNgWPeyXUTNWB7xmpbXXOTjy-Y_fsqO2fo8NjSmmUTyhdr
+                - heading [level=3] [ref=f26e686]: Société LAFAYETTE TRAVEL à PARIS (75002). ...
+                - generic [ref=f26e692]:
+                  - generic [ref=f26e693]: Societe.com
+                  - generic [ref=f26e695]: https://www.societe.com › lafayette-travel-340776244
+              - button [ref=f26e701] [cursor=pointer]
+            - generic [ref=f26e708]:
+              - emphasis [ref=f26e709]: Contacter LAFAYETTE TRAVEL
+              - text: . Téléphone. Afficher le numéro. Mail de
+              - emphasis [ref=f26e710]: contact
+              - text: ": Email de"
+              - emphasis [ref=f26e711]: contact
+              - text: indisponible. Prospecter Activités des
+              - emphasis [ref=f26e712]: agences de voyage
+              - text: à
+              - emphasis [ref=f26e713]: Paris
+              - text: .
+          - generic [ref=f26e717]:
+            - generic [ref=f26e720]:
+              - link [ref=f26e722] [cursor=pointer]:
+                - /url: /goto?url=CAESUQHrOzAVs7j5TaSOZZClVaGOcAJQ7tdwa3qm9j_xV7BGOVVLBDawLMEm_Lj8bL28aSz26_UWJrkU0vnpNVqz6x5tbHP7G9wS7RAXEZWbKNJM3w
+                - heading [level=3] [ref=f26e723]: Lafayette DMC – Destination Management Company in France
+                - generic [ref=f26e729]:
+                  - generic [ref=f26e730]: Lafayette DMC
+                  - generic [ref=f26e732]: https://lafayettedmc.com
+              - generic [ref=f26e734]:
+                - generic [ref=f26e735]: ·
+                - link [ref=f26e736] [cursor=pointer]:
+                  - /url: /goto?url=CAESmgEB6zswFTNQ6zVpjsKHrtthWSFX0fm4_p7Nmoo5XGF73RMVltn2WLrinJW9Vy-_juzcim2eG8Ws3zqR8QGpduviuiLU-64260wnDVHh4z1yeODEMoY9Fqn2MOXk7VUgZJz_rgwI6cJB8MpQKzgG35OVT12GTPJ_5IqhxVxz22J5vnuLABOJiUte5ZO9_LHsUUZ8AcUVVlLPJdXR
+                  - text: Traduire cette page
+              - button [ref=f26e741] [cursor=pointer]
+            - generic [ref=f26e746]: Lafayette DMC is a leading destination management company offering bespoke event planning, corporate travel, and incentive programs across France.
+            - generic [ref=f26e749]:
+              - text: "Termes manquants : affaires ‎| Afficher les résultats avec :"
+              - link [ref=f26e750] [cursor=pointer]:
+                - /url: /search?sca_esv=ead2612d6155db9a&hl=fr&q=%22Lafayette+Travel%22+agence+voyages+%22affaires%22+Paris+contact&sa=X&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ5t4CegQIdRAB
+                - text: affaires
+          - generic [ref=f26e755]:
+            - heading [level=2] [ref=f26e757]: Autres questions
+            - button [ref=f26e764] [cursor=pointer]:
+              - generic [ref=f26e765]: Quelle est l'adresse du siège social des Galeries Lafayette ?
+          - generic [ref=f26e774]:
+            - heading [level=2] [ref=f26e775]: Résultats Web
+            - generic [ref=f26e776]:
+              - generic [ref=f26e779]:
+                - link [ref=f26e781] [cursor=pointer]:
+                  - /url: /goto?url=CAESgAEB6zswFR8HnREwYSG33CkF056hKWSNqcU0z3-PxuTl1zpiS_mmx3C32KAMWpt7TRkSYlm4Sn3Ch1E1uY0ce1lzHPAlnFHKdIBPjhPh7r9KV5lITYSc1KNNTnEGsuyD0vJO45pQlN7PQcNw0v7xcdjuImRPthdTQAi9-SYXcYXMcQ
+                  - heading [level=3] [ref=f26e782]: "Lafayette Travel (75002) : siret, siren, TVA, bilan gratuit..."
+                  - generic [ref=f26e788]:
+                    - generic [ref=f26e789]: Figaro Entreprises
+                    - generic [ref=f26e791]: https://entreprises.lefigaro.fr › Paris
+                - button [ref=f26e797] [cursor=pointer]
+              - generic [ref=f26e803]:
+                - generic [ref=f26e804]: 30 oct. 2025 —
+                - generic [ref=f26e805]:
+                  - text: "Siren : 340776244."
+                  - emphasis [ref=f26e806]: LAFAYETTE TRAVEL
+                  - text: "SA au capital de 161.441,02 € Siege social : 8 rue Saint Augustin 75002"
+                  - emphasis [ref=f26e807]: PARIS
+                  - text: 340 776 244 R.C.S.
+                  - emphasis [ref=f26e808]: Paris
+                  - text: Aux ...
+          - generic [ref=f26e812]:
+            - generic [ref=f26e815]:
+              - link [ref=f26e817] [cursor=pointer]:
+                - /url: /goto?url=CAESbwHrOzAVN23Sig9T6r-awZThJxqMSAFk0ABnk77D-flpiV0abO8m7hzMILbWar_IJ-B2rYugUERrcd5bWYvQLx1WGl_j8K94UQIYfoQb9BzWpBDb0WLdWmyZgjlSOWqdELMrhuyZwn18Ulkh3X8o3g
+                - heading [level=3] [ref=f26e818]: LAFAYETTE TRAVEL à PARIS - Chiffre d'Affaires, Résultat et ...
+                - generic [ref=f26e824]:
+                  - generic [ref=f26e825]: SocieteInfo
+                  - generic [ref=f26e827]: https://societeinfo.com › app › recherche › societe
+              - button [ref=f26e833] [cursor=pointer]
+            - generic [ref=f26e840]:
+              - text: Créée le 3/4/1987,
+              - emphasis [ref=f26e841]: ‌LAFAYETTE TRAVEL
+              - text: est active depuis 39 années. Le siège de la société est basée à
+              - emphasis [ref=f26e842]: ‌PARIS
+              - text: 75002 et opère sous le code NAF 7911Z ...
+          - generic [ref=f26e846]:
+            - generic [ref=f26e849]:
+              - link [ref=f26e851] [cursor=pointer]:
+                - /url: /goto?url=CAESvQEB6zswFeiWqFCxWUCzpI8FXTPjS6oHPOBoAS8fNb30WLaxTiJ4qPrMglpfcBTI0eZGdWiv_Atke8LqJ-13-5AKarXfgY2e10H5QR6fld6u_ENnbqjIjLl3Z0Pj770QJZa5t12qkQtSL-M4mKRRfq-un3uDUW0fzcVAc1IP2obtaxuYN5WcXPyIBI53Ia6nyO4fu8yH20czmWFgqdAj2ayhY66E1yMo6qD6d-KG5ka7wXAD_KNPMbZKrrOMueQ
+                - heading [level=3] [ref=f26e852]: Chef de Projet MICE – Tourisme d'Affaires/Evènementiel H/F
+                - generic [ref=f26e858]:
+                  - generic [ref=f26e859]: tourmag.com
+                  - generic [ref=f26e861]: https://www.tourmag.com › classifieds › LAFAYETTE-T...
+              - button [ref=f26e867] [cursor=pointer]
+            - generic [ref=f26e873]:
+              - generic [ref=f26e874]: 28 févr. 2016 —
+              - generic [ref=f26e875]:
+                - text: ...
+                - emphasis [ref=f26e876]: LAFAYETTE TRAVEL
+                - text: "- Chef de Projet MICE – Tourisme d'"
+                - emphasis [ref=f26e877]: Affaires
+                - text: ...
+                - emphasis [ref=f26e878]: Agence
+                - text: créé en 1986, Lafayette
+                - emphasis [ref=f26e879]: Paris
+                - text: est aujourd'hui un DMC leader ...
+        - navigation [ref=f26e882]:
+          - heading [level=1] [ref=f26e883]: Navigation par pages
+          - text: "1"
+          - link [ref=f26e886] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=10&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAE
+            - text: "2"
+          - link [ref=f26e888] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=20&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAG
+            - text: "3"
+          - link [ref=f26e890] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=30&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAI
+            - text: "4"
+          - link [ref=f26e892] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=40&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAK
+            - text: "5"
+          - link [ref=f26e894] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=50&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAM
+            - text: "6"
+          - link [ref=f26e896] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=60&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAO
+            - text: "7"
+          - link [ref=f26e898] [cursor=pointer]:
+            - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=70&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8tMDegQIXxAQ
+            - text: "8"
+          - heading [level=2] [ref=f26e900]:
+            - link [ref=f26e901] [cursor=pointer]:
+              - /url: /search?q=%22Lafayette+Travel%22+agence+voyages+affaires+Paris+contact&sca_esv=ead2612d6155db9a&hl=fr&ei=XvWkavXPAYGpkdUPo6_hiQY&start=10&sa=N&sstk=AS6-VmIHnvWei6R9Wu5AZfKpyVUqH4iRFvDKsfu6ZZhrjKcIXpWD6tWg9llateXzE7IF2rsKCaIP0mBXI0NlAsqf_iSgugEX77L2cQ&ved=2ahUKEwj19oeIueiWAxWBVKQEHaNXOGEQ8NMDegQIXxAS
+              - generic [ref=f26e903]: Suivant
+      - complementary [ref=f26e904]:
+        - heading [level=2] [ref=f26e905]: Résultats complémentaires
+    - contentinfo [ref=f26e906]:
+      - heading [level=1] [ref=f26e907]: Liens de pied de page
