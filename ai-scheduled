@@ -31,6 +31,8 @@
 #                             agent routine — see agents/CONTRACT.md)
 #   ## Permission: read | propose | act
 #                             (agent routines only; absent means propose)
+#   ## Routes: message, brief (agent monitors at propose/act only; opt-in, so
+#                             no routine gains a route without its own edit)
 #
 #   <Markdown body>
 #
@@ -120,6 +122,17 @@ PLAN_AHEAD_MAX=${plan_ahead_max:-$PLAN_AHEAD_MAX}
 AGENT_MEMORY_LINES=${agent_memory_lines:-$AGENT_MEMORY_LINES}
 BRAIN_ROOT="${brain_root:-$HOME/Brain}"
 
+# Operator routes for agent routines (see operator_routes_spec below). An unset
+# agent_mail_to disables the message route entirely; the brief route needs no
+# configuration. The caps bound what a single run can push at the operator.
+AGENT_MAIL_TO="${agent_mail_to:-}"
+AGENT_MAIL_REPLY_TO="${agent_mail_reply_to:-}"
+AGENT_MAIL_CMD="${agent_mail_cmd:-s-nail}"
+AGENT_MESSAGES_MAX="${agent_messages_max:-3}"
+AGENT_BRIEFS_MAX="${agent_briefs_max:-2}"
+case "$AGENT_MESSAGES_MAX" in ''|*[!0-9]*) AGENT_MESSAGES_MAX=3 ;; esac
+case "$AGENT_BRIEFS_MAX" in ''|*[!0-9]*) AGENT_BRIEFS_MAX=2 ;; esac
+
 # The bound is fed straight to `tail -n`, so a non-numeric or zero value from
 # config would either error out mid-prompt or feed an empty memory. Fall back
 # rather than fail: a typo in one key must not disable every agent routine.
@@ -145,7 +158,7 @@ log() { echo "ai-scheduled: $*"; }
 job_body() {
     awk '
         BEGIN { inmeta = 1 }
-        inmeta && /^##[[:space:]]+(Kind|Schedule|Project|Model|Runner|Agent|Permission)([:[:space:]]|$)/ { next }
+        inmeta && /^##[[:space:]]+(Kind|Schedule|Project|Model|Runner|Agent|Permission|Routes)([:[:space:]]|$)/ { next }
         inmeta && /^[[:space:]]*$/ { next }
         { inmeta = 0; print }
     ' "$1"
@@ -274,6 +287,200 @@ append_agent_memory() {
     fi
 }
 
+# ── Agent layer: operator routes (===MESSAGE=== and ===BRIEF===) ───────────
+# Two output routes beyond the suggestion stub, for a MONITOR that is an agent
+# routine at 'propose' or 'act'. Both are delivered by this engine, never by the
+# model, which keeps them inside 'propose':
+#
+#   MESSAGE  an email to ONE fixed recipient, agent_mail_to in config: the
+#            operator. The model writes the subject and the body and nothing
+#            else, so no routine can ever mail a customer. Unset key, no route.
+#   BRIEF    a file in briefs/. A brief is not work: ai-brief decomposes it into
+#            backlog-for-review/, and every task still passes the human gate.
+#            Never overwrites, and never writes into inbox/.
+#
+# Same gate as the permission block: a plain job gets an empty spec (its prompt
+# stays byte-identical) and its output is never scanned for these blocks. On top
+# of that, each route is OPT-IN per routine through ## Routes: a routine already
+# running at 'propose' must not gain a way to email or to write briefs because
+# the engine learned one. The blast radius of granting a route is one file.
+#
+# routes_from_job <file>  →  the recognised routes, one per line (message,
+# brief), nothing for an absent header. Unknown words are ignored, not fatal:
+# they can only ever grant less.
+routes_from_job() {
+    field_from_task Routes "$1" | tr ',[:upper:]' ' [:lower:]' | tr -s '[:space:]' '\n' \
+        | grep -xE 'message|brief' | sort -u || true
+}
+
+operator_routes_spec() {
+    local agent="${1:-}" perm="${2:-}" routes="${3:-}" msg_spec brief_spec
+    [ -n "$agent" ] || return 0
+    case "$perm" in propose|act) ;; *) return 0 ;; esac
+    [ -n "$routes" ] || return 0
+
+    if ! printf '%s\n' "$routes" | grep -qx message; then
+        msg_spec="a) This routine has no message route. Do NOT output a ===MESSAGE=== block: it would be refused."
+    elif [ -n "$AGENT_MAIL_TO" ]; then
+        msg_spec="a) A MESSAGE to the operator, the human who owns this pipeline. The engine emails it to one fixed address from its own configuration. You cannot choose, name or change the recipient: never write a message as if anyone other than the operator will read it. At most $AGENT_MESSAGES_MAX per run; any beyond that are dropped.
+===MESSAGE===
+subject: <one line>
+---
+<plain-text body>
+===END==="
+    else
+        msg_spec="a) No message route is configured for this engine. Do NOT output a ===MESSAGE=== block: it would be refused."
+    fi
+
+    if printf '%s\n' "$routes" | grep -qx brief; then
+        brief_spec="b) A BRIEF into the brief queue. A brief is decomposed into tasks later, and every resulting task still passes the human review gate. A name that already exists in the brief queue or its archive is refused, never overwritten. At most $AGENT_BRIEFS_MAX per run; any beyond that are dropped.
+===BRIEF===
+slug: <kebab-case-name>
+---
+<brief body, in Markdown>
+===END==="
+    else
+        brief_spec="b) This routine has no brief route. Do NOT output a ===BRIEF=== block: it would be refused."
+    fi
+
+    printf '\n\n%s' "5. OPERATOR ROUTES. Two more block types are open to this agent routine. Unlike the suggestion stub they do NOT depend on the signal: emit them whenever the routine body says to, whether signal is yes or no. The engine delivers them after your run. You never send a message or write a file yourself, and the permission contract still forbids you from doing either directly. What was delivered is recorded in your PRIOR RUNS memory: never deliver the same thing twice.
+
+$msg_spec
+
+$brief_spec"
+}
+
+# Split every block opened by MARKER from stdin into DIR/b-001, b-002, ...
+# extract_block only returns the first, and these routes allow several.
+split_blocks() {
+    awk -v start="$1" -v dir="$2" '
+        $0 == start { n++; cur = sprintf("%s/b-%03d", dir, n); inblk = 1; next }
+        inblk && /^===END===/ { inblk = 0; close(cur); next }
+        inblk { print > cur }
+    '
+}
+
+# Header value of a block (subject:, slug:), and its body after the first '---'.
+block_field() { awk -v k="$1" -F': *' '$1 == k { sub(/^[^:]*: */, ""); print; exit }' "$2"; }
+block_body()  { awk 'p { print } /^---$/ { p = 1 }' "$1"; }
+
+# One email to the operator. The recipient comes from config and never from the
+# model. s-nail syntax (the mailx on most Linux systems): -S sets the Reply-To,
+# and -. ends the options so the address is never read as one. The exit status
+# is meaningful when the mail command waits for the relay (s-nail: sendwait).
+send_operator_message() {
+    local subject="$1" body="$2"
+    local -a cmd=("$AGENT_MAIL_CMD" -s "$subject")
+    [ -n "$AGENT_MAIL_REPLY_TO" ] && cmd+=(-S "reply-to=$AGENT_MAIL_REPLY_TO")
+    cmd+=(-. "$AGENT_MAIL_TO")
+    printf '%s\n' "$body" | "${cmd[@]}" >/dev/null 2>&1
+}
+
+# Deliver the operator routes of one conclusive run. Messages first, and a
+# failed send makes the WHOLE run inconclusive (return 1): the caller writes no
+# snapshot, no memory and no state stamp, so the next run regenerates the
+# conversation instead of believing the operator was told. Briefs are written
+# only once every message has gone. Appends what it did to ROUTES_OUTCOME.
+ROUTES_OUTCOME=""
+deliver_operator_routes() {
+    local slug="$1" agent="$2" perm="$3" routes="$4" text="$5"
+    local parse b subject body name dest tmp n=0 sent=0 written=0 names=""
+    ROUTES_OUTCOME=""
+
+    if [ "$perm" = "read" ]; then
+        if printf '%s\n' "$text" | grep -qxE '===(MESSAGE|BRIEF)==='; then
+            log "job '$slug': permission 'read' — ===MESSAGE===/===BRIEF=== blocks refused"
+        fi
+        return 0
+    fi
+    # Enforced here, not only by leaving the spec out of the prompt: a block for
+    # a route the routine was not granted is refused even if the model writes it.
+    if ! printf '%s\n' "$routes" | grep -qx message \
+        && printf '%s\n' "$text" | grep -qx '===MESSAGE==='; then
+        log "job '$slug': no 'message' in ## Routes — ===MESSAGE=== blocks refused"
+    fi
+    if ! printf '%s\n' "$routes" | grep -qx brief \
+        && printf '%s\n' "$text" | grep -qx '===BRIEF==='; then
+        log "job '$slug': no 'brief' in ## Routes — ===BRIEF=== blocks refused"
+    fi
+
+    parse=$(mktemp -d)
+    mkdir -p "$parse/msg" "$parse/brief"
+    printf '%s\n' "$routes" | grep -qx message \
+        && printf '%s\n' "$text" | split_blocks '===MESSAGE===' "$parse/msg"
+    printf '%s\n' "$routes" | grep -qx brief \
+        && printf '%s\n' "$text" | split_blocks '===BRIEF===' "$parse/brief"
+
+    for b in "$parse"/msg/b-*; do
+        [ -f "$b" ] || continue
+        n=$((n + 1))
+        if [ -z "$AGENT_MAIL_TO" ]; then
+            log "job '$slug': message refused — no agent_mail_to configured"
+            continue
+        fi
+        if [ "$n" -gt "$AGENT_MESSAGES_MAX" ]; then
+            log "job '$slug': message $n dropped (cap $AGENT_MESSAGES_MAX)"
+            continue
+        fi
+        subject=$(block_field subject "$b" | tr -d '\r' | cut -c1-200)
+        body=$(block_body "$b")
+        if [ -z "$subject" ] || [ -z "${body//[[:space:]]/}" ]; then
+            log "job '$slug': message $n had no subject or an empty body — not sent"
+            continue
+        fi
+        subject="[$agent] $subject"
+        if send_operator_message "$subject" "$body"; then
+            sent=$((sent + 1))
+            log "job '$slug': message sent to the operator — $subject"
+        else
+            log "job '$slug': message FAILED to send — run treated as inconclusive (no snapshot, no state write)"
+            notify -u critical "ai-scheduled: message failed" "$slug: could not email the operator; the run will be retried."
+            rm -rf "$parse"
+            return 1
+        fi
+    done
+
+    n=0
+    for b in "$parse"/brief/b-*; do
+        [ -f "$b" ] || continue
+        n=$((n + 1))
+        if [ "$n" -gt "$AGENT_BRIEFS_MAX" ]; then
+            log "job '$slug': brief $n dropped (cap $AGENT_BRIEFS_MAX)"
+            continue
+        fi
+        # The name becomes a path: strip every directory component and keep
+        # [A-Za-z0-9._-] only, as ai-brief does, so no output can steer a write
+        # out of briefs/. A leading dot would make it a hidden, unswept file.
+        name=$(block_field slug "$b")
+        name=$(basename "${name:-x}" | tr -cd 'A-Za-z0-9._-' | sed 's/^\.*//; s/\.md$//; s/-brief$//')
+        body=$(block_body "$b")
+        if [ -z "$name" ] || [ -z "${body//[[:space:]]/}" ]; then
+            log "job '$slug': brief $n had no usable slug or an empty body — not written"
+            continue
+        fi
+        dest="$BRIEFS_DIR/${name}-brief.md"
+        if [ -e "$dest" ] || [ -e "$BRIEFS_DONE_DIR/${name}-brief.md" ]; then
+            log "job '$slug': brief '${name}-brief.md' already exists — refused, not overwritten"
+            continue
+        fi
+        # Written under a hidden temporary name and renamed, so a brief sweep
+        # running at the same moment never picks up half a file.
+        mkdir -p "$BRIEFS_DIR"
+        tmp=$(mktemp "$BRIEFS_DIR/.${name}.XXXXXX")
+        printf '%s\n' "$body" > "$tmp"
+        mv "$tmp" "$dest"
+        written=$((written + 1))
+        names="${names:+$names,}$name"
+        log "job '$slug': wrote brief → $dest"
+    done
+    rm -rf "$parse"
+
+    [ "$written" -gt 0 ] && notify "ai-scheduled: new brief" "$written brief(s) in briefs/ (from '$slug')."
+    [ "$sent" -gt 0 ] && ROUTES_OUTCOME="messages=$sent"
+    [ "$written" -gt 0 ] && ROUTES_OUTCOME="${ROUTES_OUTCOME:+$ROUTES_OUTCOME, }briefs=$names"
+    return 0
+}
+
 # ── Prompt inspection (--dry-run --show-prompt) ─────────────────────────────
 # Prints what would have been sent, so permission enforcement and the
 # byte-identity of a plain job's prompt are both checkable without spending an
@@ -337,7 +544,7 @@ dispatch_monitor() {
     local snapfile prev body nostub stub_spec perm_block mem_block prompt
     local model_id json err rc text
     local snapshot snap_note signal sigword report journal report_path stub
-    local stub_slug mem_outcome=""
+    local stub_slug mem_outcome="" routes routes_spec
 
     if cooldown_active "$runner"; then
         log "job '$slug': skipped, runner '$runner' is in auth cooldown — retries once it lapses"
@@ -384,6 +591,8 @@ Raised by the '$slug' monitor on a scheduled run (signal detected).
     # byte-identical to the pre-agent-layer one.
     perm_block=$(permission_block "$agent" "$perm")
     mem_block=$(agent_memory_block "$slug" "$agent")
+    routes=$(routes_from_job "$job")
+    routes_spec=$(operator_routes_spec "$agent" "$perm" "$routes")
 
     prompt="MONITOR MODE: You are an agentic watcher. Perform the watch described below SYNCHRONOUSLY: use whatever tools you need and BLOCK on their results. This is a single headless run with NO event loop — never park on an asynchronous event, a scheduled wakeup or a notification, because none of them will ever fire and the run will simply be killed. Do all the work in this one pass.$perm_block
 
@@ -410,7 +619,7 @@ Output ONLY the machine-parseable structure below. No preamble, no closing remar
 
 4. $stub_spec
 
-If signal is no: output the snapshot and signal blocks ONLY. No report, no suggestion.
+If signal is no: output the snapshot and signal blocks ONLY. No report, no suggestion.$routes_spec
 
 --- WATCH INSTRUCTIONS (the job body) ---
 $body
@@ -458,6 +667,14 @@ $prev$mem_block"
         return 0
     fi
 
+    # Operator routes BEFORE the snapshot: a message that failed to send makes
+    # the run inconclusive, and the snapshot must not then record the
+    # conversation as having moved on. Agent routines only.
+    if [ -n "$agent" ]; then
+        deliver_operator_routes "$slug" "$agent" "$perm" "$routes" "$text" || return 0
+        mem_outcome="$ROUTES_OUTCOME"
+    fi
+
     # Refresh the snapshot on every conclusive run, signal or not: the diff is
     # against the LAST RUN, not against the last signal, or a change that
     # reverts would be reported twice.
@@ -482,7 +699,7 @@ $prev$mem_block"
             report_path="$journal/monitor-${slug}-$(date +%Y-%m-%d).md"
             printf '%s\n' "$report" > "$report_path"
             log "job '$slug': SIGNAL — report → $report_path"
-            mem_outcome="report=$(basename "$report_path")"
+            mem_outcome="${mem_outcome:+$mem_outcome, }report=$(basename "$report_path")"
         else
             log "job '$slug': SIGNAL but no ===REPORT=== block returned"
         fi

@@ -210,6 +210,10 @@ empty `config` still runs.
 | `scheduled_timeout_min` | `30` | Hard cap on one agentic scheduled run (`monitor` or `planner`). The `template` kind makes no agent call and ignores it. |
 | `plan_ahead_max` | `5` | Cap on suggestion stubs one `planner` run may write. A run that hits the cap logs what it dropped. |
 | `agent_memory_lines` | `40` | How many lines of an agent routine's memory ledger (`scheduled/.state/<slug>.memory.md`) are fed back into its prompt, and the length the ledger is trimmed to after each conclusive run. Bounded on purpose: an unbounded ledger grows the prompt until the routine can no longer see its own recent history. Only a job carrying `## Agent` has a memory; a plain job ignores this. |
+| `agent_mail_to` | unset (commented out) | Recipient of an agent routine's `===MESSAGE===` blocks: the operator, and only the operator. Unset disables the message route. See Operator routes. |
+| `agent_mail_reply_to` | unset | Reply-To on those messages. Give it its own address so replies can be filtered out of the inbox and read back by the routine. |
+| `agent_mail_cmd` | `s-nail` | Mail command, called with s-nail syntax (`-s`, `-S reply-to=`, `-.`). A non-zero exit makes the run inconclusive. The sender is the command's own configured `from`. |
+| `agent_messages_max` / `agent_briefs_max` | `3` / `2` | Per-run caps on messages and briefs; the excess is dropped and logged. |
 | `agents_root` | unset (commented out) | Root holding the agent-layer **definitions**, the charters and routine files. Unset means this repository's own `agents/`. Point it at a separate repository to keep definitions out of this one: this repository is public, and a charter names a real business domain. Only `ai-agent` and `dtask` read it; the engine runs the *published* copy in `scheduled/`, so it is never consulted during a run. Set but not a directory warns and lists nothing, never a silent fallback to `agents/`. |
 | `brain_root` | `$HOME/Brain` | Root of the notes tree a `monitor` writes dated reports into (`<brain_root>/personal/journal/`). |
 | `eval_timeout_min` | unset (commented out) | Cap on the evaluator's own agent call. Unset, it inherits `task_timeout_min`, then a built-in `45`, because grading is the same kind of headless call as the work. Set it only to make grading time out sooner than the task it grades. |
@@ -1197,6 +1201,7 @@ which is why publishing one is a copy and nothing else.
 ## Project: <alias>        (optional)
 ## Model: <alias|id>       (optional)
 ## Runner: <name>          (optional; unset means default_runner)
+## Routes: message, brief  (optional; monitors at propose/act only)
 
 <Markdown body>
 ```
@@ -1206,6 +1211,7 @@ which is why publishing one is a copy and nothing else.
 | `## Kind:` | `template` \| `monitor` \| `planner`, unchanged from any other job file | yes |
 | `## Agent:` | the owning `<agent>` directory name | **yes** |
 | `## Permission:` | `read` \| `propose` \| `act` | no, default `propose` |
+| `## Routes:` | `message`, `brief` | no; absent grants neither (see Operator routes) |
 
 `## Agent` is what marks a job file as agent-layer, and every agent-layer
 behaviour is gated on it. A job file without it produces exactly the prompt,
@@ -1224,7 +1230,7 @@ A level is defined by what the routine may **cause**, not by what it may read.
 | Level | May cause |
 |---|---|
 | `read` | nothing. Observe and report only: no file written, no record created, no suggestion stub, no externally visible action. The whole output is a report a human reads. |
-| `propose` | `read`, plus structured work into the **existing** pipeline through the **existing** routes: a suggestion stub into `suggestions/`, or a rendered task into `backlog-for-review/`. Everything it proposes still passes the human review gate. Nothing externally visible. |
+| `propose` | `read`, plus structured work into the **existing** pipeline through the **existing** routes: a suggestion stub into `suggestions/`, a rendered task into `backlog-for-review/`, and, for a monitor that opts in with `## Routes`, a message to the operator or a brief into `briefs/`. Everything it proposes still passes the human review gate. Nothing externally visible. |
 | `act` | `propose`, plus the specific external actions **its own body names explicitly**. Nothing implied, nothing by analogy. If the action is not written in the routine file, the routine may not take it. |
 
 A new routine is `propose`: an absent `## Permission` means `propose`, and that
@@ -1254,6 +1260,52 @@ The level is enforced in two places:
   no-suggestion spec even when it declares a `## Project`, and a planner at
   `read` is skipped before the agent call, since proposing is its only output
   route.
+
+### Operator routes
+
+A monitor at `propose` or `act` whose file says `## Routes: message, brief` can
+talk to the operator and file a brief, which is what lets a routine replace a
+chat session: read a customer email, mail the operator a draft brief with its
+open questions, read the replies on later runs, and write the brief into
+`briefs/` once the operator says go. The engine does the delivery; the model
+only emits blocks:
+
+```
+===MESSAGE===
+subject: <one line>
+---
+<plain-text body>
+===END===
+
+===BRIEF===
+slug: <kebab-case-name>
+---
+<brief body>
+===END===
+```
+
+- A **message** is emailed with `agent_mail_cmd` (default `s-nail`) to
+  `agent_mail_to`, with `agent_mail_reply_to` as Reply-To and `[<agent>]`
+  prefixed to the subject. The recipient comes from `config`, never from the
+  model, so a routine cannot mail a customer. Unset `agent_mail_to` and the
+  route is withdrawn from the prompt and refused in code.
+- A **brief** is written to `briefs/<slug>-brief.md`, slug stripped to
+  `[A-Za-z0-9._-]`. An existing name in `briefs/` or `briefs/done/` is refused,
+  never overwritten. Nothing reaches `inbox/`.
+- Routes are **opt-in per routine** and refused in code when not granted, at
+  `read`, or for a plain job (whose prompt and output handling are unchanged
+  byte for byte).
+- A **failed send** makes the run inconclusive: no snapshot, memory line, state
+  stamp or brief, so the next run tries again from the same state.
+- At most `agent_messages_max` (3) messages and `agent_briefs_max` (2) briefs
+  per run; the rest are dropped and logged.
+
+To keep replies out of the inbox, give `agent_mail_reply_to` its own address
+(for example a `+agents` plus-address) and file it under a label with a mail
+filter. The routine reads that address, read-only, to pick up the replies.
+
+`tests/test_operator_routes.py` covers the gating, delivery, caps, refusals and
+the inconclusive path offline, with a stub provider and a stub mail command.
 
 ### The memory ledger
 

@@ -702,7 +702,7 @@ description. The layer adds **no engine**: `ai-scheduled` already owns the
 trigger, the kinds, the state and the routes into the pipeline. What this layer
 adds is naming, a permission model and validation, so a routine file is an
 `ai-scheduled` job file plus `## Agent` and `## Permission`, and publishing one
-is a `cp`. Six things to keep right:
+is a `cp`. Seven things to keep right:
 
 1. **Every agent-layer behaviour is gated on `## Agent` being present.** A job
    file without it must produce a **byte-identical** prompt to the pre-agent
@@ -781,6 +781,23 @@ is a `cp`. Six things to keep right:
      an agent here to "have an example": the example in `CONTRACT.md` is
      synthetic on purpose, and it is extracted and run through
      `ai-agent --validate` to prove it is a legal routine.
+
+7. **The operator routes (`===MESSAGE===`, `===BRIEF===`) are opt-in per
+   routine, engine-delivered, and fixed-recipient.** Added 2026-10-05 so a
+   routine can hold a brief-drafting conversation with the operator by email.
+   A route exists only when the routine's own `## Routes` lists it, only for a
+   monitor at `propose`/`act`, and is refused **in code** otherwise: do not make
+   them implicit for `propose`, or every routine at that level gains a way to
+   send mail without its file changing. The recipient is `agent_mail_to` from
+   `config` and must never become a block field: that is the whole argument for
+   these routes being `propose` rather than `act`. Messages are delivered
+   **before** the snapshot is written and a failed send returns early, so the
+   run stamps nothing and writes no brief; reorder that and a conversation is
+   recorded as advanced when the operator was never told. Briefs go to
+   `briefs/` only, never `inbox/` (the review gate), never overwriting, name
+   sanitised like `ai-brief`'s. A plain job's prompt is byte-identical, and the
+   gate is checked by rendering `email-triage.md` with `--dry-run
+   --show-prompt` before and after. Tests: `tests/test_operator_routes.py`.
 
 The same reasoning as `ai-brief`: `ai-agent --validate` catches a routine whose
 `## Permission` exceeds its charter's `## Permission-Ceiling` **before** it can

@@ -90,6 +90,7 @@ Headers use the same inline `## Field: value` form.
 | `## Project:` | project alias, must match a file in `~/tasks/projects/` | no |
 | `## Model:` | model alias or id | no |
 | `## Runner:` | runner name, must match `providers/<runner>.sh` | no |
+| `## Routes:` | `message`, `brief`, comma-separated (see Operator routes) | no; absent grants neither |
 
 `## Kind` and `## Schedule` are the trigger mechanics, unchanged from any other
 `ai-scheduled` job file.
@@ -122,14 +123,48 @@ a report a human reads.
 
 **`propose`**: `read`, plus it may put structured work into the **existing**
 pipeline, through the **existing routes only**: a suggestion stub into
-`suggestions/`, or a rendered task into `backlog-for-review/`. It never causes
-an externally visible action. Everything it proposes still passes the human
-review gate before it becomes work.
+`suggestions/`, a rendered task into `backlog-for-review/`, and, for a monitor
+whose file opts in, the two operator routes below. It never causes an externally
+visible action. Everything it proposes still passes the human review gate before
+it becomes work.
 
 **`act`**: `propose`, plus the specific external actions **its own body names
 explicitly**. Nothing implied, nothing by analogy, nothing that a reasonable
 reading of the domain would suggest. If the action is not written in the
 routine file, the routine may not take it.
+
+### Operator routes (`## Routes`)
+
+Two routes that let a monitor hold a conversation with the operator and turn it
+into a brief. Both are **delivered by the engine** from blocks in the model's
+output; the model never sends or writes anything itself.
+
+| Route | Block | What the engine does |
+|---|---|---|
+| `message` | `===MESSAGE===` (`subject:`, `---`, body) | emails it to `agent_mail_to` from `config`, with `agent_mail_reply_to` as Reply-To. The recipient is configuration, never model output, so no routine can mail anyone but the operator. The subject is prefixed `[<agent>]`. |
+| `brief` | `===BRIEF===` (`slug:`, `---`, body) | writes `briefs/<slug>-brief.md`. The slug is stripped to `[A-Za-z0-9._-]`; an existing name in `briefs/` or `briefs/done/` is refused, never overwritten. Nothing is ever written into `inbox/`: a brief is decomposed by `ai-brief` into `backlog-for-review/`, so every task it becomes still passes the human gate. |
+
+They sit inside `propose` for those two reasons: the only person a message can
+reach is the operator, and a brief is not work until a human promotes what it
+decomposes into. Five rules:
+
+1. **Opt-in per routine.** A route exists only when the routine's own file
+   lists it in `## Routes`. A routine already at `propose` does not gain a
+   route because the engine learned one; granting it is an edit to that file.
+2. **Monitors only, and never at `read`.** A block for a route the routine was
+   not granted is refused and logged, in code, whatever the prompt said.
+3. **Independent of the signal.** A conversation moves on runs that report
+   nothing new about the world.
+4. **A failed send makes the whole run inconclusive**: no snapshot, no memory
+   line, no state stamp, and no brief written. Recording a conversation as
+   advanced when the operator was never told is the failure this prevents.
+5. **Capped** by `agent_messages_max` (3) and `agent_briefs_max` (2) per run;
+   anything over the cap is dropped and logged, never silently.
+
+What was delivered is appended to the memory ledger (`messages=N`,
+`briefs=<slugs>`), so the next run does not deliver it again. A routine that
+waits for the operator's reply keeps the open conversation in its snapshot and
+reads the replies itself, read-only, from the reply-to address.
 
 ### The progression rule
 

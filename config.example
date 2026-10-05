@@ -79,6 +79,21 @@ plan_ahead_max=5
 # (a job file carrying ## Agent) has a memory at all; a plain job ignores this.
 agent_memory_lines=40
 
+# Operator routes: an agent MONITOR at propose/act whose routine file opts in
+# with "## Routes: message, brief" may emit ===MESSAGE=== (emailed by the engine
+# to agent_mail_to, and to nobody else) and ===BRIEF=== (written into briefs/,
+# never overwriting). Unset agent_mail_to disables the message route; the brief
+# route needs no key. agent_mail_cmd must accept s-nail syntax (-s SUBJECT,
+# -S reply-to=ADDR, -. RECIPIENT) and exit non-zero on a failed send, which
+# makes the run inconclusive. The sender is the mail command's own "from".
+# Replies to agent_mail_reply_to are what a routine reads back: give it its own
+# address (a plus-address with a mail filter works) so they stay out of the inbox.
+# agent_mail_to=you@example.com
+# agent_mail_reply_to=you+agents@example.com
+# agent_mail_cmd=s-nail
+# agent_messages_max=3
+# agent_briefs_max=2
+
 # Where the agent-layer DEFINITIONS live: agents/<agent>/AGENT.md and
 # agents/<agent>/routines/<slug>.md. Unset means this repository's own agents/,
 # which is what a fresh clone gets. Point it at a separate git repository when
