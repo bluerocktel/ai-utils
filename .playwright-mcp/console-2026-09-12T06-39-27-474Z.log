@@ -1,2 +1,0 @@
-[    2019ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://encrypted-tbn0.gstatic.com/faviconV2?url=https://rothschild.aphp.fr&client=AIM&size=128&type=FAVICON&fallback_opts=TYPE,SIZE,URL:0
-[    2063ms] [WARNING] A speculation rule set was inserted into the document but will be ignored. This might happen, for example, if it was previously inserted into another document, or if it was created using the innerHTML setter. @ https://www.google.com/search?q=%22Fondation+Rothschild%22+%228+rue+de+Prague%22+t%C3%A9l%C3%A9phone+01&hl=fr:62
