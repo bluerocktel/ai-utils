@@ -734,6 +734,358 @@ project_instructions() {
     return 0
 }
 
+# ── Worktree isolation (opt-in per project) ────────────────────────────────
+#
+# A project file declaring "## Isolation: worktree" gets one git worktree per
+# task, on branch ai/<slug>, at <repo>/.ai-worktrees/<slug>/. Every other
+# project keeps the shared working tree exactly as before: the 2267 task files
+# with no notion of isolation must keep behaving as they do today.
+#
+# The worktree lives INSIDE the repository on purpose: a container that mounts
+# the repository (docker exec ... cd /var/www/<repo>) sees it without a new
+# mount, which is what lets existing ## Test Command lines keep working once
+# rewrite_workdir_paths has pointed them at it. It is hidden from git through
+# the repository's own info/exclude, never through a tracked .gitignore.
+#
+# These helpers move no task file and take no lock: that orchestration stays
+# in ai-task. Every git call's own output goes to stderr, because the callers
+# read a path from stdout.
+
+WORKTREE_DIRNAME=".ai-worktrees"
+
+# How a project's tasks are isolated: prints "shared" or "worktree".
+#
+# An absent or empty ## Isolation, a missing project file, or no project at all
+# is "shared", which is today's behaviour. An UNRECOGNISED value prints nothing
+# and returns 1: guessing "shared" would quietly put a task into a tree its
+# human meant to protect, and guessing "worktree" would hand a branch to a
+# project that never asked for one. Same rule as permission_from_job.
+project_isolation() {
+    local proj="${1:-}" file val
+    file="$PROJECTS_DIR/${proj}.md"
+    if [ -z "$proj" ] || [ ! -r "$file" ]; then
+        printf 'shared\n'
+        return 0
+    fi
+    val=$(field_from_task Isolation "$file" | tr -d '`' | tr '[:upper:]' '[:lower:]')
+    case "$val" in
+        ""|shared) printf 'shared\n' ;;
+        worktree)  printf 'worktree\n' ;;
+        *)
+            echo "project '$proj': unrecognised ## Isolation '$val' (expected worktree or shared)" >&2
+            return 1
+            ;;
+    esac
+}
+
+# One single-line field of a project file, backticks stripped.
+#   project_field brteladmin 'Base Branch'     ->  dev-2.x
+#   project_field brteladmin 'Container Path'  ->  /var/www/bluerockteladmin
+# Absent prints nothing and returns 0.
+project_field() {
+    local proj="${1:-}" field="$2"
+    [ -n "$proj" ] || return 0
+    field_from_task "$field" "$PROJECTS_DIR/${proj}.md" | tr -d '`'
+}
+
+# A task slug reduced to what is safe in both a path and a branch name.
+# Returns 1 on a value that sanitises away entirely, or that git would refuse
+# as a branch: there is no safe default worktree to fall back to.
+worktree_slug() {
+    local slug
+    slug=$(task_slug_from_name "${1:-}" | tr -cd '[:alnum:]._-')
+    slug="${slug#.}"
+    [ -n "$slug" ] || return 1
+    git check-ref-format --branch "ai/$slug" >/dev/null 2>&1 || return 1
+    printf '%s\n' "$slug"
+}
+
+# The ref a new task branch starts from:
+#   - the parent's ai/<parent-slug> branch when it exists and is not yet merged
+#     into the base, so a chain A -> B -> C builds on itself without a human
+#     merging in between;
+#   - otherwise the project's ## Base Branch;
+#   - otherwise the main tree's current HEAD.
+# Returns 1 when an explicitly named base branch does not resolve: branching a
+# task from somewhere else than the human wrote would be a silent guess.
+worktree_base_ref() {
+    local workdir="$1" parent="${2:-}" base="${3:-}" pslug pbranch
+    if [ -n "$base" ]; then
+        git -C "$workdir" rev-parse --verify --quiet "${base}^{commit}" >/dev/null || {
+            echo "base branch '$base' does not resolve in $workdir" >&2
+            return 1
+        }
+    else
+        base=HEAD
+    fi
+    if [ -n "$parent" ] && pslug=$(worktree_slug "$parent"); then
+        pbranch="ai/$pslug"
+        if git -C "$workdir" show-ref --verify --quiet "refs/heads/$pbranch" \
+            && ! git -C "$workdir" merge-base --is-ancestor "$pbranch" "$base" 2>/dev/null; then
+            printf '%s\n' "$pbranch"
+            return 0
+        fi
+    fi
+    printf '%s\n' "$base"
+}
+
+# True when <path> is a worktree git currently knows about in <repo-top>.
+worktree_registered() {
+    git -C "$1" worktree list --porcelain 2>/dev/null | grep -qxF "worktree $2"
+}
+
+# Create, or reuse, the worktree for one task. Prints the directory inside it
+# that corresponds to <workdir>: the worktree root when the project's working
+# directory is the repository top, the same subdirectory otherwise.
+#
+#   worktree_ensure <workdir> <task-name> [base-ref]
+#
+# REUSE IS THE NORMAL CASE, not an edge: a retry, a task moved back by
+# --unblock, and a grade-only resume all find their worktree already there,
+# with the previous attempt's changes in it, exactly as the shared tree kept
+# them. A branch that outlived its worktree is checked out again rather than
+# recreated, so committed work on it is never orphaned.
+#
+# A directory at the target path that git does NOT know as a worktree is
+# refused, never removed: it is somebody's files.
+#
+# --relative-paths keeps the worktree's .git link valid inside a container that
+# mounts the repository at another path.
+#
+# Exit: 0 ok, 1 not a git repository or bad slug, 3 git refused.
+worktree_ensure() {
+    local workdir="$1" name="$2" base="${3:-}" slug top prefix wt branch common excl
+    slug=$(worktree_slug "$name") || { echo "no usable worktree slug for '$name'" >&2; return 1; }
+    top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || {
+        echo "$workdir is not inside a git repository" >&2
+        return 1
+    }
+    prefix=$(git -C "$workdir" rev-parse --show-prefix)
+    wt="$top/$WORKTREE_DIRNAME/$slug"
+    branch="ai/$slug"
+
+    common=$(git -C "$top" rev-parse --path-format=absolute --git-common-dir) || return 3
+    excl="$common/info/exclude"
+    mkdir -p "$common/info"
+    grep -qxF "/$WORKTREE_DIRNAME/" "$excl" 2>/dev/null \
+        || printf '/%s/\n' "$WORKTREE_DIRNAME" >> "$excl"
+
+    # A worktree whose directory was deleted by hand is still registered and
+    # would block the add below.
+    git -C "$top" worktree prune >&2 2>/dev/null || true
+
+    if worktree_registered "$top" "$wt"; then
+        :
+    elif [ -e "$wt" ]; then
+        echo "refusing: $wt exists but is not a registered worktree" >&2
+        return 3
+    elif git -C "$top" show-ref --verify --quiet "refs/heads/$branch"; then
+        git -C "$top" worktree add --relative-paths "$wt" "$branch" >&2 || return 3
+    else
+        git -C "$top" worktree add --relative-paths -b "$branch" "$wt" "${base:-HEAD}" >&2 || return 3
+    fi
+    printf '%s\n' "${wt}${prefix:+/${prefix%/}}"
+}
+
+# Per-worktree bookkeeping lives in the worktree's own git directory
+# (.git/worktrees/<slug>/), never in the checkout, where it would show up as an
+# untracked file and end up in the task's commit.
+worktree_gitdir() {
+    git -C "$1" rev-parse --path-format=absolute --git-dir 2>/dev/null
+}
+
+# Run a project's ## Worktree Setup once per worktree (symlink vendor/, copy
+# .env, ...). The section is one bash script run with -e from <wt-dir>, with
+# AI_MAIN_WORKDIR and AI_WORKTREE exported; code fences are dropped.
+#
+#   worktree_setup <wt-dir> <main-workdir> <script> [timeout-sec]
+#
+# Whatever the setup leaves UNTRACKED is recorded, so worktree_commit and
+# worktree_dirty can tell a vendor symlink from the task's own work: a setup
+# artefact committed onto the task branch would be merged into the project.
+#
+# A failure leaves no marker, so the next claim runs the setup again.
+# Exit: 0 done (or nothing to do), 2 setup failed.
+worktree_setup() {
+    local wt="$1" main="$2" script="${3:-}" limit="${4:-600}" gitdir before after rc
+    gitdir=$(worktree_gitdir "$wt") || return 2
+    [ -f "$gitdir/ai-setup-done" ] && return 0
+    script=$(printf '%s\n' "$script" | grep -vE '^[[:space:]]*(```|~~~)' || true)
+    if [ -n "${script//[[:space:]]/}" ]; then
+        before=$(git -C "$wt" ls-files --others --exclude-standard --directory --full-name :/ 2>/dev/null | sort)
+        rc=0
+        ( cd "$wt" && AI_MAIN_WORKDIR="$main" AI_WORKTREE="$wt" \
+            timeout "$limit" bash -e -c "$script" ) >&2 || rc=$?
+        [ "$rc" -eq 0 ] || { echo "worktree setup failed (exit $rc) in $wt" >&2; return 2; }
+        after=$(git -C "$wt" ls-files --others --exclude-standard --directory --full-name :/ 2>/dev/null | sort)
+        comm -13 <(printf '%s\n' "$before") <(printf '%s\n' "$after") \
+            | sed -E 's#/$##' | grep -v '^$' > "$gitdir/ai-setup-paths" || true
+    fi
+    : > "$gitdir/ai-setup-done"
+}
+
+# Uncommitted changes in a worktree that are NOT setup artefacts, as
+# porcelain lines on stdout. Returns 0 when there are any (dirty), 1 when the
+# worktree holds nothing a removal would lose. An unreadable status counts as
+# dirty: the safe answer to "may I delete this?" is no.
+worktree_dirty() {
+    local wt="$1" gitdir st
+    gitdir=$(worktree_gitdir "$wt") || return 0
+    st=$(git -C "$wt" status --porcelain --untracked-files=normal 2>/dev/null) || return 0
+    if [ -s "$gitdir/ai-setup-paths" ]; then
+        st=$(printf '%s\n' "$st" | awk -v list="$gitdir/ai-setup-paths" '
+            BEGIN { while ((getline p < list) > 0) skip[p] = 1 }
+            { path = substr($0, 4); sub(/\/$/, "", path); if (!(path in skip)) print }')
+    fi
+    st=$(printf '%s\n' "$st" | grep -v '^$' || true)
+    [ -n "$st" ] || return 1
+    printf '%s\n' "$st"
+}
+
+# Commit everything the task changed in its worktree, setup artefacts excepted.
+#   worktree_commit <wt-dir> <message-file>
+# Nothing to commit is success. Hooks are NOT bypassed: a hook that rejects
+# the commit returns 1 and the worktree stays as it was, for a human to read.
+worktree_commit() {
+    local wt="$1" msg="$2" gitdir p
+    gitdir=$(worktree_gitdir "$wt") || return 1
+    git -C "$wt" add -A :/ >&2 || return 1
+    if [ -s "$gitdir/ai-setup-paths" ]; then
+        while IFS= read -r p; do
+            [ -n "$p" ] && git -C "$wt" reset -q -- ":(top)$p" >&2 2>/dev/null
+        done < "$gitdir/ai-setup-paths"
+    fi
+    git -C "$wt" diff --cached --quiet && return 0
+    git -C "$wt" commit -q -F "$msg" >&2
+}
+
+# Remove one task's worktree, keeping its branch. Refuses (returns 1) while
+# the worktree holds uncommitted work: --force is only ever used to clear the
+# setup artefacts worktree_dirty already ignores.
+#   worktree_remove <workdir> <task-name>
+worktree_remove() {
+    local workdir="$1" slug top wt
+    slug=$(worktree_slug "$2") || return 1
+    top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || return 1
+    wt="$top/$WORKTREE_DIRNAME/$slug"
+    worktree_registered "$top" "$wt" || return 0
+    if worktree_dirty "$wt" >/dev/null; then
+        echo "keeping $wt: it holds uncommitted changes" >&2
+        return 1
+    fi
+    git -C "$top" worktree remove --force "$wt" >&2
+}
+
+# Slugs of every task still in flight (inbox/, run/, review/), one per line,
+# reduced exactly as worktree_slug reduces them. A worktree whose slug is not
+# here belongs to a task that finished or was deleted.
+active_task_slugs() {
+    local dir f
+    for dir in "$INBOX" "$RUN_DIR" "$REVIEW_DIR"; do
+        [ -d "$dir" ] || continue
+        for f in "$dir"/*.md; do
+            [ -f "$f" ] || continue
+            worktree_slug "$f" 2>/dev/null || true
+        done
+    done
+}
+
+# Remove the worktrees of one repository whose task is no longer in flight.
+# Prints each removed slug. A dirty worktree is reported and kept: its changes
+# are the only copy. Branches are never deleted.
+#   worktree_prune <workdir>
+worktree_prune() {
+    local workdir="$1" top active d slug
+    top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || return 0
+    [ -d "$top/$WORKTREE_DIRNAME" ] || return 0
+    active=$(active_task_slugs)
+    for d in "$top/$WORKTREE_DIRNAME"/*/; do
+        [ -d "$d" ] || continue
+        slug=$(basename "$d")
+        printf '%s\n' "$active" | grep -qxF -- "$slug" && continue
+        worktree_registered "$top" "${d%/}" || continue
+        if worktree_remove "$top" "$slug"; then
+            printf '%s\n' "$slug"
+        fi
+    done
+    git -C "$top" worktree prune >&2 2>/dev/null || true
+}
+
+# Filter stdin to stdout, pointing every reference to a project's working
+# directory at a task's worktree instead.
+#
+#   rewrite_workdir_paths <workdir> <wt-dir> [container-path]
+#
+# This is what lets an existing task file, whose criteria and ## Test Command
+# say ~/Projects/<repo>/..., grade the worktree rather than the main tree. It
+# rewrites the ~/, $HOME/, ${HOME}/ and absolute spellings, plus, when the
+# project declares a ## Container Path, that path to the same place inside the
+# container (only when the working directory is the repository top: a mount
+# of a subdirectory cannot see .ai-worktrees/).
+#
+# A match must be a whole path component: ~/Projects/foo does not rewrite
+# ~/Projects/foo-old. A path already inside .ai-worktrees/ is left alone, so
+# the filter is idempotent.
+rewrite_workdir_paths() {
+    local workdir="${1%/}" wt="${2%/}" container="${3%/}" real rel froms="" tos="" sep=$'\034'
+    _rw_add_pair() { froms="${froms}${froms:+$sep}$1"; tos="${tos}${tos:+$sep}$2"; }
+
+    real=$(realpath -m "$workdir")
+    _rw_add_pair "$workdir" "$wt"
+    [ "$real" != "$workdir" ] && _rw_add_pair "$real" "$wt"
+    case "$workdir" in
+        "$HOME"/*)
+            rel="${workdir#"$HOME"/}"
+            _rw_add_pair "~/$rel" "$wt"
+            _rw_add_pair "\$HOME/$rel" "$wt"
+            _rw_add_pair "\${HOME}/$rel" "$wt"
+            ;;
+    esac
+    if [ -n "$container" ]; then
+        case "$wt" in
+            "$real"/*) _rw_add_pair "$container" "$container/${wt#"$real"/}" ;;
+            *) echo "## Container Path ignored: $workdir is not the repository top" >&2 ;;
+        esac
+    fi
+
+    RW_FROMS="$froms" RW_TOS="$tos" RW_GUARD="/$WORKTREE_DIRNAME/" awk '
+        BEGIN {
+            n = split(ENVIRON["RW_FROMS"], F, "\034")
+            split(ENVIRON["RW_TOS"], T, "\034")
+            guard = ENVIRON["RW_GUARD"]
+        }
+        # First position >= 1 where F[i] occurs as a whole path, or 0.
+        function find(s, i,    off, rest, p, ap, before, after) {
+            off = 0; rest = s
+            while ((p = index(rest, F[i])) > 0) {
+                ap = off + p
+                before = (ap > 1) ? substr(s, ap - 1, 1) : ""
+                after = substr(s, ap + length(F[i]), 1)
+                if (before !~ /[A-Za-z0-9._\/~$-]/ && after !~ /[A-Za-z0-9._-]/ \
+                    && substr(s, ap + length(F[i]), length(guard)) != guard)
+                    return ap
+                off = ap; rest = substr(s, ap + 1)
+            }
+            return 0
+        }
+        {
+            s = $0; out = ""
+            while (1) {
+                best = 0; bp = 0
+                for (i = 1; i <= n; i++) {
+                    p = find(s, i)
+                    if (p && (!bp || p < bp || (p == bp && length(F[i]) > length(F[best])))) {
+                        best = i; bp = p
+                    }
+                }
+                if (!best) { out = out s; break }
+                out = out substr(s, 1, bp - 1) T[best]
+                s = substr(s, bp + length(F[best]))
+            }
+            print out
+        }'
+}
+
 # ── Recurring jobs (ai-scheduled) ──────────────────────────────────────────
 
 # Is a job due to run?
