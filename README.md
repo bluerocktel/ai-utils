@@ -233,6 +233,7 @@ ai-task --runner grok            # ... acting as a specific runner
 ai-task path/to/task.md          # run one named file (skips the queue filter)
 ai-task --runner grok --dry-run  # show what would be claimed; claims nothing, launches nothing
 ai-task --unblock SLUG           # move a task out of review/ back to inbox/, resetting ## Retries
+ai-task --prune-worktrees        # remove worktrees of finished tasks (branches kept)
 ai-task --run FILE               # internal mode used by tmux; do not call directly
 ```
 
@@ -392,6 +393,80 @@ with no file in `~/tasks/projects/`, is refused and logged. A project declaring
 A task with no `## Project` produces nothing: there is no attribution for a
 stub and no relationship set to bound it by. Slugs already anywhere in the
 pipeline are skipped, the same check the scheduled planner uses.
+
+### Worktree isolation (`## Isolation: worktree`)
+
+By default every task of a project works in the project's one working
+directory, one task at a time under the project lock, next to whatever
+uncommitted work is already there. A project can opt into a **git worktree per
+task** instead:
+
+```markdown
+## Working Directory
+`~/Projects/demo/`
+
+## Isolation: worktree
+
+## Base Branch: main
+
+## Container Path: /var/www/demo
+
+## Worktree Setup
+ln -s ../../vendor vendor
+ln -s ../../.env .env
+```
+
+| Section | Meaning |
+|---|---|
+| `## Isolation` | `worktree` opts in. Absent or `shared` is today's behaviour. Any other value sends the task to `review/` (no retry burned) rather than guessing. |
+| `## Base Branch` | Where a new task branch starts. Unset: the main tree's current `HEAD`. A name that does not resolve is a misconfiguration, not a fallback. |
+| `## Container Path` | Where a container mounts the working directory, so `docker exec ... cd /var/www/demo` lines are pointed at the worktree too. Only honoured when the working directory is the repository top. |
+| `## Worktree Setup` | One bash script (run with `-e`, from the worktree, once per worktree) for what git does not carry: dependency folders, `.env`. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported. Whatever it leaves untracked is never committed. Prefer **relative** symlinks: an absolute one breaks inside a container. |
+
+What happens to a task in such a project:
+
+1. **Claim.** After the project lock, `ai-task` creates `<repo>/.ai-worktrees/<slug>/`
+   on branch `ai/<slug>`, or reuses it: a retry, an `--unblock` and a
+   grade-only resume all find the previous attempt's changes still there. A
+   task with a `## Depends-on` parent whose `ai/<parent>` branch is not yet
+   merged branches from that, so a chain builds on itself without a merge in
+   between. The folder is hidden through `.git/info/exclude`; no tracked file
+   in the project changes.
+2. **Run.** The agent works in the worktree. Every reference to the working
+   directory in the task text (`~/...`, `$HOME/...`, absolute, and the
+   container path) is rewritten to the worktree before the prompt is built,
+   and the prompt says so.
+3. **Grade.** `ai-eval` applies the same rewrite, runs `## Test Command` from
+   inside the worktree, and starts the grader there.
+4. **Land.** On PASS the work is committed on `ai/<slug>` with the report's
+   `## Suggested Commit Message` (plus an `AI-Task:` trailer), the worktree is
+   removed and **the branch is kept**. Nothing is merged: merging is yours.
+   A commit refused by a hook keeps the task PASSED, keeps the worktree, and
+   notifies you. The report and `DONE.md` carry a `**Branch:**` line.
+5. **Review / requeue.** The worktree is kept, for inspection or the next
+   attempt.
+
+A failed `## Worktree Setup` is a **deferral** (requeued, no retry burned),
+like a lock timeout. Every launcher sweep removes the worktrees of tasks no
+longer in `inbox/`, `run/` or `review/`, skipping any project whose lock is
+held and any worktree with uncommitted changes; `ai-task --prune-worktrees`
+does the same on demand. Branches are never deleted.
+
+Tasks of one isolated project still run **one at a time**: the project lock is
+unchanged, because a worktree isolates files, not the database, the container
+or the ports a test suite uses.
+
+Things to check before enabling it on a project:
+
+- Tools configured to scan `.` (static analysers, formatters) may now see the
+  copies under `.ai-worktrees/`; exclude that folder in their config.
+- A symlinked dependency folder is shared with the main tree. A task that
+  changes the dependency manifest needs a real install in its setup instead.
+- Requires git 2.48 or later (`git worktree add --relative-paths`).
+
+`dtask` shows a `WORKTREES` section for isolated projects: the `ai/*` branches
+waiting to be merged, and every worktree on disk with where its task is and
+whether it holds uncommitted changes.
 
 ### `## Awaiting-Eval`: never execute finished work twice
 

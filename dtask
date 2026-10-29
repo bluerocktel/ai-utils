@@ -351,6 +351,55 @@ else
     done
 fi
 
+# ── Worktrees (## Isolation: worktree projects only) ─────────────
+# Rendered only when some project opts in, so the dashboard of a tree with
+# none is unchanged. Two things a human acts on: task branches waiting to be
+# merged, and worktrees still on disk (a task in flight, in review/, or one
+# whose commit was refused and holds uncommitted work).
+#
+# Read-only like the rest of dtask: GIT_OPTIONAL_LOCKS=0 stops `git status`
+# from refreshing the index, which is a write into the repository.
+wt_out=""
+declare -A wt_seen
+if [ -d "$PROJECTS_DIR" ]; then
+    for pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$pf" ] || continue
+        proj=$(basename "$pf" .md)
+        [ "$(project_isolation "$proj" 2>/dev/null)" = worktree ] || continue
+        wd=$(project_working_dir "$proj") || continue
+        top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null) || continue
+        [ -z "${wt_seen[$top]:-}" ] || continue
+        wt_seen[$top]=1
+
+        base=$(project_field "$proj" 'Base Branch')
+        pending=$(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
+                    --no-merged "${base:-HEAD}" refs/heads/ai/ 2>/dev/null | tr '\n' ' ')
+        pending="${pending% }"
+        if [ -n "$pending" ]; then
+            wt_out+=$(printf '  %s%-20s%s  %sto merge:%s %s' "$BOLD" "$proj" "$RESET" "$YELLOW" "$RESET" "$pending")$'\n'
+        else
+            wt_out+=$(printf '  %s%-20s%s  %snothing to merge%s' "$BOLD" "$proj" "$RESET" "$DIM" "$RESET")$'\n'
+        fi
+
+        for d in "$top/$WORKTREE_DIRNAME"/*/; do
+            [ -d "$d" ] || continue
+            slug=$(basename "$d")
+            loc=$(locate_dep_slug "$slug")
+            if GIT_OPTIONAL_LOCKS=0 worktree_dirty "$d" >/dev/null; then
+                state="${YELLOW}uncommitted changes${RESET}"
+            else
+                state="${DIM}clean${RESET}"
+            fi
+            [ "$loc" = review ] && loc="${RED}review${RESET}"
+            wt_out+=$(printf '    %-43s  task in %b/  %b' "$slug" "$loc" "$state")$'\n'
+        done
+    done
+fi
+if [ -n "$wt_out" ]; then
+    _section "  WORKTREES"
+    printf '%s' "$wt_out"
+fi
+
 # ── Today's stats ────────────────────────────────────────────────
 _section "  TODAY  $(date '+%Y-%m-%d')"
 

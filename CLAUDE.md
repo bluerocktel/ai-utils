@@ -58,7 +58,7 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
 | `ai-brief` / `ai-briefs` | decompose a brief into a chain of tasks, into the review queue. |
 | `ai-scheduled` | the push side: dispatch the due recurring jobs in `scheduled/`. |
 | `ai-agent` | read-only view of the agent layer: list, show, validate, publish plan. Writes nothing, anywhere. |
-| `dtask` | read-only dashboard across every runner. |
+| `dtask` | read-only dashboard across every runner (plus a `WORKTREES` section when a project opts into worktree isolation). |
 | `agents/CONTRACT.md` | the agent-layer contract: layout, headers, the three permission levels, and a worked example. **The only thing under `agents/`:** this repo ships no agents, see The agent layer. |
 | `<agents-root>/<agent>/AGENT.md` | one agent's charter: `## Domain`, `## Sources`, `## Permission-Ceiling`. Lives wherever `agents_dir` resolves. |
 | `<agents-root>/<agent>/routines/<slug>.md` | one routine: an `ai-scheduled` job file plus `## Agent` and `## Permission`. |
@@ -578,6 +578,56 @@ error body could plausibly contain is **broad**, not strong.
   other write into `inbox/`.
 - **`dtask` is the only script here safe to run against the live tree,** because
   it is read-only: no agent call, no file move, no write into `$TASKS_DIR`.
+
+## Worktree isolation (`## Isolation: worktree`)
+
+Added 2026-10-29. A project file declaring `## Isolation: worktree` gets one git
+worktree per task at `<repo>/.ai-worktrees/<slug>/` on branch `ai/<slug>`; see
+the README section of the same name for the user-facing contract. The helpers
+are in `lib.sh` (`project_isolation` through `rewrite_workdir_paths`), the
+wiring in `ai-task`, `ai-eval` and `ai-brief`, the view in `dtask`, and the
+offline test is `tests/test_worktree.sh`. Eight things to keep right:
+
+1. **Everything is gated on the project opting in.** A shared project's
+   `ai-task` prompt, `ai-eval` prompt, `ai-brief` prompt and `dtask` output
+   are byte-identical to before. That was checked with `cmp` against the
+   previous scripts, and is worth re-checking after any edit here: 2267 task
+   files predate this and must not notice it. An unrecognised `## Isolation`
+   value is a hard refusal to `review/`, never a default, for the same reason
+   as an unrecognised `## Permission`.
+2. **The project lock is NOT relaxed.** A worktree isolates files; the database,
+   the container and the test ports are still shared, so gotcha 3 holds in
+   full. Parallel tasks within one project would be a separate change (lock
+   slots, plus per-slot databases), not a removal of the lock.
+3. **Worktree state is set OUTSIDE the work phase**, right after the project
+   lock, for the reason in Split grading point 5: a grade-only resume skips the
+   work phase and must still grade the worktree. `AI_WORKTREE`,
+   `AI_MAIN_WORKDIR` and `AI_CONTAINER_PATH` are exported there for `ai-eval`.
+4. **`ai-eval` never grades the main tree for an isolated task.** It reads a
+   rewritten COPY of the task file (`EVAL_TASK`), held in its own
+   `EVAL_TASK_TMP` so no cleanup path can ever name the real task file. A set
+   but missing `AI_WORKTREE` exits `2` rather than falling back.
+5. **The path rewrite is the compatibility layer, so keep its boundaries
+   strict.** It matches whole path components only (`~/Projects/demo` must not
+   rewrite `~/Projects/demo-old`), never rewrites a path already under
+   `.ai-worktrees/` (it must stay idempotent), and only rewrites the container
+   path when the working directory is the repository top. Each of these has a
+   case in `tests/test_worktree.sh`.
+6. **Removal never loses work.** `worktree_remove` and `worktree_prune` refuse
+   a worktree with uncommitted changes (setup artefacts excepted), branches are
+   never deleted, and a directory at the target path that git does not know as
+   a worktree is refused, never cleared. A commit refused by a hook keeps the
+   task PASSED and the worktree on disk. Do not add `--no-verify`.
+7. **Setup artefacts are recorded, not guessed.** `worktree_setup` records what
+   it left untracked in the worktree's own git dir (`ai-setup-paths`, next to
+   the `ai-setup-done` marker), and both `worktree_commit` and
+   `worktree_dirty` read that list. Keeping bookkeeping out of the checkout is
+   what stops it landing in the task's commit.
+8. **Nothing here merges.** Landing is commit-on-branch only; the main tree is
+   never touched by `ai-task`. The `ai-brief` criteria rules are deliberately
+   unchanged for isolated projects, including the ban on working-tree
+   assertions: relaxing them is a decision for after a pilot, and would need
+   `lint_task_criteria` changed with them.
 
 ## Split grading (`eval_runner`)
 
