@@ -36,7 +36,7 @@ git -C "$REPO" commit -q -m init
 
 # ── 1. project_isolation ───────────────────────────────────────────────────
 printf '## Working Directory\n`~/Projects/demo/`\n' > "$TASKS_DIR/projects/plain.md"
-printf '## Working Directory\n`~/Projects/demo/`\n\n## Isolation: worktree\n' > "$TASKS_DIR/projects/iso.md"
+printf '## Working Directory\n`~/Projects/demo/`\n\n## Aliases\n- `iso-alias`\n\n## Isolation: worktree\n' > "$TASKS_DIR/projects/iso.md"
 printf '## Isolation\n`Worktree`\n' > "$TASKS_DIR/projects/nextline.md"
 printf '## Isolation: sandbox\n' > "$TASKS_DIR/projects/bogus.md"
 [ "$(project_isolation plain)" = shared ] || fail "absent ## Isolation should be shared"
@@ -44,6 +44,10 @@ printf '## Isolation: sandbox\n' > "$TASKS_DIR/projects/bogus.md"
 [ "$(project_isolation nextline)" = worktree ] || fail "next-line, backticked, capitalised worktree not recognised"
 [ "$(project_isolation missing-project)" = shared ] || fail "missing project file should be shared"
 [ "$(project_isolation '')" = shared ] || fail "no project should be shared"
+# An alias has no project file of its own: callers must resolve it first,
+# exactly as the project lock does, or an alias-written task escapes isolation.
+[ "$(project_isolation iso-alias)" = shared ] || fail "raw alias unexpectedly found a project file"
+[ "$(project_isolation "$(canonical_project ISO-Alias)")" = worktree ] || fail "alias did not resolve to the isolated project"
 if out=$(project_isolation bogus 2>/dev/null); then fail "unknown ## Isolation must return 1"; fi
 [ -z "${out:-}" ] || fail "unknown ## Isolation must print nothing on stdout"
 

@@ -585,24 +585,30 @@ if [ "$MODE" = "run" ]; then
         } >> "$LOG"
         mv "$TASK_FILE" "$REVIEW_DIR/${TASK_NAME}.md"
         notify -u critical "ai-task [$RUNNER]: Worktree Misconfigured" \
-            "$TASK_NAME not run: $1. Fix projects/${PROJECT}.md, then ai-task --unblock."
+            "$TASK_NAME not run: $1. Fix projects/${ISO_PROJECT}.md, then ai-task --unblock."
         exit 1
     }
 
+    # Read from the CANONICAL project, the name the lock above already
+    # resolved: a task written with a declared alias takes the same lock as
+    # the canonical spelling, and must get the same isolation, or it would
+    # run in the main tree while its sibling tasks run in worktrees.
+    # $PROJECT keeps its raw value everywhere else (see gotcha 3).
+    ISO_PROJECT="${PROJECT_LOCK_NAME:-}"
     ISOLATION=shared
     if [ -n "$PROJECT" ]; then
-        ISOLATION=$(project_isolation "$PROJECT" 2>/dev/null) \
-            || isolation_refuse "unrecognised ## Isolation in project '$PROJECT'"
+        ISOLATION=$(project_isolation "$ISO_PROJECT" 2>/dev/null) \
+            || isolation_refuse "unrecognised ## Isolation in project '$ISO_PROJECT'"
     fi
 
     if [ "$ISOLATION" = worktree ]; then
-        MAIN_WORKDIR=$(project_working_dir "$PROJECT") \
-            || isolation_refuse "project '$PROJECT' has no ## Working Directory"
+        MAIN_WORKDIR=$(project_working_dir "$ISO_PROJECT") \
+            || isolation_refuse "project '$ISO_PROJECT' has no ## Working Directory"
         MAIN_WORKDIR="${MAIN_WORKDIR%/}"
         [ -d "$MAIN_WORKDIR" ] \
             || isolation_refuse "working directory $MAIN_WORKDIR does not exist"
         WT_BASE=$(worktree_base_ref "$MAIN_WORKDIR" "$(depends_on_from_task "$TASK_FILE")" \
-                    "$(project_field "$PROJECT" 'Base Branch')" 2>&1) \
+                    "$(project_field "$ISO_PROJECT" 'Base Branch')" 2>&1) \
             || isolation_refuse "$WT_BASE"
         WT_ERR=$(mktemp)
         WT_RC=0
@@ -614,10 +620,10 @@ if [ "$MODE" = "run" ]; then
         fi
         rm -f "$WT_ERR"
         WORKTREE_BRANCH="ai/$(worktree_slug "$TASK_NAME")"
-        CONTAINER_PATH=$(project_field "$PROJECT" 'Container Path')
+        CONTAINER_PATH=$(project_field "$ISO_PROJECT" 'Container Path')
 
         if ! worktree_setup "$WORKTREE" "$MAIN_WORKDIR" \
-                "$(section_from_task 'Worktree Setup' "$PROJECTS_DIR/${PROJECT}.md")" \
+                "$(section_from_task 'Worktree Setup' "$PROJECTS_DIR/${ISO_PROJECT}.md")" \
                 "$((TASK_TIMEOUT_MIN * 60))"; then
             {
                 echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
@@ -628,7 +634,7 @@ if [ "$MODE" = "run" ]; then
             } >> "$LOG"
             requeue_task
             notify -u critical "ai-task [$RUNNER]: Worktree Setup Failed" \
-                "$TASK_NAME deferred: ## Worktree Setup of project '$PROJECT' failed. Requeued, no retry burned."
+                "$TASK_NAME deferred: ## Worktree Setup of project '$ISO_PROJECT' failed. Requeued, no retry burned."
             exit 0
         fi
 
