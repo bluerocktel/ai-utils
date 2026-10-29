@@ -412,7 +412,7 @@ task** instead:
 ## Container Path: /var/www/demo
 
 ## Worktree Setup
-ln -s ../../vendor vendor
+cp -a "$AI_MAIN_WORKDIR/vendor" vendor
 ln -s ../../.env .env
 ```
 
@@ -421,7 +421,7 @@ ln -s ../../.env .env
 | `## Isolation` | `worktree` opts in. Absent or `shared` is today's behaviour. Any other value sends the task to `review/` (no retry burned) rather than guessing. |
 | `## Base Branch` | Where a new task branch starts. Unset: the main tree's current `HEAD`. A name that does not resolve is a misconfiguration, not a fallback. |
 | `## Container Path` | Where a container mounts the working directory, so `docker exec ... cd /var/www/demo` lines are pointed at the worktree too. Only honoured when the working directory is the repository top. |
-| `## Worktree Setup` | One bash script (run with `-e`, from the worktree, once per worktree) for what git does not carry: dependency folders, `.env`. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported. Whatever it leaves untracked is never committed. Prefer **relative** symlinks: an absolute one breaks inside a container. |
+| `## Worktree Setup` | One bash script (run with `-e`, from the worktree, once per worktree) for what git does not carry: dependency folders, `.env`. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported. Whatever it leaves untracked is never committed. **Copy** a dependency folder, never symlink it (see below). A symlink is fine for a plain file such as `.env`; make it **relative**, because an absolute one breaks inside a container. |
 
 What happens to a task in such a project:
 
@@ -460,8 +460,14 @@ Things to check before enabling it on a project:
 
 - Tools configured to scan `.` (static analysers, formatters) may now see the
   copies under `.ai-worktrees/`; exclude that folder in their config.
-- A symlinked dependency folder is shared with the main tree. A task that
-  changes the dependency manifest needs a real install in its setup instead.
+- **Never symlink a dependency folder into the worktree.** Composer's
+  autoloader locates the project from its own resolved path, so a symlinked
+  `vendor/` loads the MAIN checkout's classes and makes the worktree's code
+  invisible to its own tests (Pest also takes the main checkout as its root,
+  and fails with "A facade root has not been set"). This sank the first real
+  worktree run. Copy it instead (`cp -a`, about 2 s for 277 MB on ext4, freed
+  when the worktree is removed), or run a real install when the task changes
+  the dependency manifest.
 - Requires git 2.48 or later (`git worktree add --relative-paths`).
 
 `dtask` shows a `WORKTREES` section for isolated projects: the `ai/*` branches
