@@ -123,6 +123,35 @@ grep -q changed "$WT/file.txt" || fail "re-ensure did not check out the existing
 if worktree_base_ref "$REPO" '' no-such-branch >/dev/null 2>&1; then fail "missing base must return 1"; fi
 git -C "$REPO" merge -q --ff-only ai/alpha
 [ "$(worktree_base_ref "$REPO" alpha main)" = main ] || fail "merged parent should fall back to base"
+branch_unmerged "$REPO" ai/alpha main && fail "fast-forward merged branch reported unmerged"
+
+# ── 7b. merged by patch: a rebased merge counts, an altered one does not ──
+# Simulates `git pull --rebase` after merging: the task's commit lands on
+# main under a NEW hash, on top of a commit that arrived from elsewhere.
+git -C "$REPO" branch -q ai/rebased main
+git -C "$REPO" worktree add -q "$tmp/rb" ai/rebased
+echo rebased > "$tmp/rb/rebased.txt"
+git -C "$tmp/rb" add -A && git -C "$tmp/rb" commit -qm "task commit"
+branch_unmerged "$REPO" ai/rebased main || fail "unmerged branch reported merged"
+echo upstream > "$REPO/upstream.txt"
+git -C "$REPO" add upstream.txt && git -C "$REPO" commit -qm "someone else's commit"
+git -C "$REPO" cherry-pick ai/rebased >/dev/null
+git -C "$REPO" merge-base --is-ancestor ai/rebased main && fail "fixture: rebased copy should not be an ancestor"
+branch_unmerged "$REPO" ai/rebased main && fail "rebased merge (same patch, new hash) reported unmerged"
+[ "$(worktree_base_ref "$REPO" rebased main)" = main ] || fail "rebased-merged parent should fall back to base"
+
+# The same commit with its content changed on the way in stays unmerged.
+git -C "$REPO" branch -q ai/altered "$(git -C "$REPO" rev-parse 'main~2')"
+git -C "$REPO" worktree add -q "$tmp/alt" ai/altered
+echo original > "$tmp/alt/altered.txt"
+git -C "$tmp/alt" add -A && git -C "$tmp/alt" commit -qm "task commit"
+echo edited-while-merging > "$REPO/altered.txt"
+git -C "$REPO" add altered.txt && git -C "$REPO" commit -qm "task commit"
+branch_unmerged "$REPO" ai/altered main || fail "altered patch reported merged"
+[ "$(worktree_base_ref "$REPO" altered main)" = ai/altered ] || fail "altered parent should still be the base ref"
+branch_unmerged "$REPO" no/such/branch main || fail "git error must read as unmerged"
+git -C "$REPO" worktree remove --force "$tmp/rb"
+git -C "$REPO" worktree remove --force "$tmp/alt"
 
 # ── 8. worktree_prune ──────────────────────────────────────────────────────
 touch "$TASKS_DIR/review/2026-10-29_alpha.md"

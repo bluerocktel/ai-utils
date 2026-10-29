@@ -800,10 +800,31 @@ worktree_slug() {
     printf '%s\n' "$slug"
 }
 
+# True (0) when <branch> carries a change that <base> does not have yet.
+#   branch_unmerged <repo> <branch> <base>
+#
+# "Merged" means PATCH-EQUIVALENT, not ancestor. A human who merges a task
+# branch and then runs `git pull --rebase` replays the task's commit under a
+# new hash: ancestry then says "never merged" forever, and a dependent task
+# would branch from the stale ai/<parent> instead of the base. `git cherry`
+# compares patch ids, so a rebased or cherry-picked copy counts as merged,
+# and since the pipeline lands exactly one commit per task, so does a squash
+# merge of an untouched task branch.
+#
+# Conservative by design: a commit whose patch changed on the way in (a
+# conflict resolved differently, an amend) still reads as unmerged, and so
+# does any git error. Calling a branch merged when it is not would branch a
+# dependent task from the wrong place; the opposite costs a stale listing.
+branch_unmerged() {
+    local repo="$1" branch="$2" base="$3" out
+    out=$(git -C "$repo" cherry "$base" "$branch" 2>/dev/null) || return 0
+    printf '%s\n' "$out" | grep -q '^+'
+}
+
 # The ref a new task branch starts from:
 #   - the parent's ai/<parent-slug> branch when it exists and is not yet merged
-#     into the base, so a chain A -> B -> C builds on itself without a human
-#     merging in between;
+#     into the base (branch_unmerged: by patch, so a rebased merge counts), so
+#     a chain A -> B -> C builds on itself without a human merging in between;
 #   - otherwise the project's ## Base Branch;
 #   - otherwise the main tree's current HEAD.
 # Returns 1 when an explicitly named base branch does not resolve: branching a
@@ -821,7 +842,7 @@ worktree_base_ref() {
     if [ -n "$parent" ] && pslug=$(worktree_slug "$parent"); then
         pbranch="ai/$pslug"
         if git -C "$workdir" show-ref --verify --quiet "refs/heads/$pbranch" \
-            && ! git -C "$workdir" merge-base --is-ancestor "$pbranch" "$base" 2>/dev/null; then
+            && branch_unmerged "$workdir" "$pbranch" "$base"; then
             printf '%s\n' "$pbranch"
             return 0
         fi

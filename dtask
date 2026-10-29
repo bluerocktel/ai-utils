@@ -372,8 +372,17 @@ if [ -d "$PROJECTS_DIR" ]; then
         wt_seen[$top]=1
 
         base=$(project_field "$proj" 'Base Branch')
-        pending=$(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
-                    --no-merged "${base:-HEAD}" refs/heads/ai/ 2>/dev/null | tr '\n' ' ')
+        # Merged by PATCH, not by ancestry (branch_unmerged): after a
+        # `git pull --rebase` the merged commit has a new hash, and
+        # --no-merged would list the branch as pending forever.
+        pending=""
+        while IFS= read -r br; do
+            [ -n "$br" ] || continue
+            if GIT_OPTIONAL_LOCKS=0 branch_unmerged "$top" "$br" "${base:-HEAD}"; then
+                pending+="$br "
+            fi
+        done < <(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
+                    refs/heads/ai/ 2>/dev/null)
         pending="${pending% }"
         if [ -n "$pending" ]; then
             wt_out+=$(printf '  %s%-20s%s  %sto merge:%s %s' "$BOLD" "$proj" "$RESET" "$YELLOW" "$RESET" "$pending")$'\n'
