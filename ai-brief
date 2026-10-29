@@ -530,6 +530,14 @@ PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_
                 WORKDIR="$WD"
             fi
         fi
+        # Isolated projects only, so every other decomposition prompt stays
+        # byte-identical. The criteria rules above are NOT relaxed here: the
+        # worktree changes where a task runs, not what a criterion may assert.
+        if [ "$(project_isolation "$PROJECT" 2>/dev/null)" = worktree ]; then
+            PREAMBLE="$PREAMBLE
+
+WORKTREE PROJECT: each task of this project runs in its own git worktree on its own branch, and the pipeline rewrites every path under the Working Directory to point at that worktree, both for the executing agent and for the evaluator. Write paths, commands and criteria against the Working Directory exactly as usual, and never name a worktree directory or a task branch yourself. Measure any baseline in the Working Directory as usual: a task branch starts from the same commit, or from its parent task's branch when it has a Depends-on."
+        fi
     fi
 
     PROJECT_INSTRUCTIONS=$(project_instructions "$PROJECT")

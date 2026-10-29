@@ -160,6 +160,36 @@ min_to_sec() {
 
 TEST_TIMEOUT_SEC=$(min_to_sec "$TEST_TIMEOUT_MIN")
 
+# ── Worktree isolation ─────────────────────────────────────────────────────
+# ai-task exports AI_WORKTREE when the task ran in its own worktree (a project
+# declaring ## Isolation: worktree). The work under evaluation is THERE, not in
+# the project's main working directory, so everything below reads EVAL_TASK: a
+# copy of the task file with every reference to the main working directory
+# (and to ## Container Path) rewritten to the worktree. ## Test Command then
+# runs from inside the worktree, and the grader's own agent call starts there.
+#
+# Unset, EVAL_TASK is the task file itself and nothing below changes: the
+# prompt, the test commands and their working directory are exactly as before.
+#
+# Set but not a directory is a bad invocation (exit 2, like a missing task
+# file): grading the main tree instead would grade work the task never did.
+EVAL_TASK="$TASK_FILE"
+# The temp copy, kept in its own variable so no cleanup path can ever be
+# pointed at the real task file.
+EVAL_TASK_TMP=""
+WORKTREE="${AI_WORKTREE:-}"
+if [ -n "$WORKTREE" ]; then
+    if [ ! -d "$WORKTREE" ] || [ -z "${AI_MAIN_WORKDIR:-}" ]; then
+        echo "ai-eval: AI_WORKTREE=$WORKTREE is not a directory, or AI_MAIN_WORKDIR is unset" >&2
+        exit 2
+    fi
+    EVAL_TASK_TMP=$(mktemp)
+    trap 'rm -f "$EVAL_TASK_TMP"' EXIT
+    rewrite_workdir_paths "$AI_MAIN_WORKDIR" "$WORKTREE" "${AI_CONTAINER_PATH:-}" \
+        < "$TASK_FILE" > "$EVAL_TASK_TMP" 2>/dev/null
+    EVAL_TASK="$EVAL_TASK_TMP"
+fi
+
 # Write the verdict report to OUTPUT_FILE when one was named, else to stdout.
 emit() {
     if [ -n "$OUTPUT_FILE" ]; then
@@ -174,7 +204,7 @@ emit() {
 # FAIL and there is no point paying for a grading run to confirm it.
 TEST_PASSED=0
 
-if grep -q "^## Test Command" "$TASK_FILE"; then
+if grep -q "^## Test Command" "$EVAL_TASK"; then
     TEST_TMP=$(mktemp)
     TEST_EXIT=0
     TEST_RAN=0
@@ -183,8 +213,15 @@ if grep -q "^## Test Command" "$TASK_FILE"; then
     # Test output is human-readable text, not JSON, so merging stderr here is
     # correct and expected. (The separate-streams rule applies to the headless
     # JSON captures further down, which jq has to parse.)
+    # In a worktree, each command starts from the worktree, so a relative path
+    # or a bare `git diff` sees the task's work. Otherwise the inherited
+    # directory, as before.
     run_one_test() {
-        timeout "$TEST_TIMEOUT_SEC" bash -c "$1" >> "$TEST_TMP" 2>&1
+        if [ -n "$WORKTREE" ]; then
+            ( cd "$WORKTREE" && timeout "$TEST_TIMEOUT_SEC" bash -c "$1" ) >> "$TEST_TMP" 2>&1
+        else
+            timeout "$TEST_TIMEOUT_SEC" bash -c "$1" >> "$TEST_TMP" 2>&1
+        fi
     }
 
     timed_out() {
@@ -219,7 +256,7 @@ if grep -q "^## Test Command" "$TASK_FILE"; then
             TEST_FAILED_CMD="$cmd"
             break
         fi
-    done < <(awk '/^## Test Command/{found=1; next} found && /^## /{exit} found{print}' "$TASK_FILE")
+    done < <(awk '/^## Test Command/{found=1; next} found && /^## /{exit} found{print}' "$EVAL_TASK")
 
     # A section whose last line ends in a backslash leaves the final command in
     # the accumulator with nothing to terminate it; run it rather than drop it.
@@ -249,7 +286,7 @@ fi
 
 # No acceptance criteria: tests alone can carry a PASS; otherwise there is
 # nothing to grade and the run stands ungraded (exit 2).
-if ! grep -q "^## Acceptance Criteria" "$TASK_FILE"; then
+if ! grep -q "^## Acceptance Criteria" "$EVAL_TASK"; then
     if [ $TEST_PASSED -eq 1 ]; then
         exit 0
     fi
@@ -309,7 +346,7 @@ MODEL_ID=$(ai_model_alias "$MODEL_RAW")
 PROMPT_TMP=$(mktemp)
 JSON_TMP=$(mktemp)
 ERR_TMP=$(mktemp)
-cleanup() { rm -f "$PROMPT_TMP" "$JSON_TMP" "$ERR_TMP"; }
+cleanup() { rm -f "$PROMPT_TMP" "$JSON_TMP" "$ERR_TMP" ${EVAL_TASK_TMP:+"$EVAL_TASK_TMP"}; }
 trap cleanup EXIT
 
 {
@@ -344,8 +381,13 @@ Output format:
 ## TASK
 
 PREAMBLE
-    cat "$TASK_FILE"
+    cat "$EVAL_TASK"
     project_instructions "$(project_from_task "$TASK_FILE")"
+    # Isolated tasks only: a shared task's prompt stays byte-identical.
+    if [ -n "$WORKTREE" ]; then
+        printf '\nISOLATED WORKTREE: this task ran in its own git worktree, %s, and the work to evaluate is there, uncommitted. Verify every criterion in that directory, never in the main working directory %s, which does not contain this work. Paths in the task above have already been rewritten to point at the worktree.\n' \
+            "$WORKTREE" "$AI_MAIN_WORKDIR"
+    fi
     printf "\n---\n## RESULT\n\n"
     cat "$RESULT_FILE"
 } > "$PROMPT_TMP"
@@ -356,7 +398,7 @@ PREAMBLE
 set +e
 ai_run "$(cat "$PROMPT_TMP")" \
     "$MODEL_ID" \
-    "" \
+    "$WORKTREE" \
     "$(min_to_sec "$EVAL_TIMEOUT_MIN")" \
     "$JSON_TMP" \
     "$ERR_TMP"
