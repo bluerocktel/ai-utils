@@ -11,6 +11,9 @@
 #                                       inbox/ and reset ## Retries to 0. Run
 #                                       it AFTER fixing whatever sent it there.
 #                                       Names the tasks it unblocks.
+#   ai-task --prune-worktrees           Remove the worktrees of finished tasks
+#                                       in ## Isolation: worktree projects.
+#                                       Branches are kept; dirty trees are kept.
 #   ai-task --run FILE [--runner NAME]  Internal mode used by tmux. Do not call
 #                                       directly.
 #
@@ -29,7 +32,7 @@ SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 source "$SCRIPT_DIR/lib.sh"
 
 usage() {
-    sed -n '3,16p' "$(realpath "$0")" | sed 's/^# \{0,1\}//'
+    sed -n '3,19p' "$(realpath "$0")" | sed 's/^# \{0,1\}//'
 }
 
 # ── Argument parsing ───────────────────────────────────────────────────────
@@ -68,6 +71,10 @@ while [ $# -gt 0 ]; do
         --unblock=*)
             MODE=unblock
             UNBLOCK_SLUG="${1#*=}"
+            shift
+            ;;
+        --prune-worktrees)
+            MODE=prune
             shift
             ;;
         -h|--help)
@@ -168,6 +175,56 @@ dep_satisfied() {
     dep="${dep%.md}"
     find "$DONE_DIR" -maxdepth 1 -type f -name "*_${dep}.task.md" 2>/dev/null | grep -q .
 }
+
+# The body of a report's ## Suggested Commit Message, up to the next heading
+# or the closing --- rule, code fences and surrounding blank lines dropped.
+# Prints nothing when the report has no such section.
+commit_message_from_report() {
+    awk '
+        /^## Suggested Commit Message/ { found = 1; next }
+        found && (/^## / || /^---[[:space:]]*$/) { exit }
+        found && /^[[:space:]]*(```|~~~)/ { next }
+        found { lines[++n] = $0 }
+        END {
+            first = 1; while (first <= n && lines[first] ~ /^[[:space:]]*$/) first++
+            last = n;  while (last >= first && lines[last] ~ /^[[:space:]]*$/) last--
+            for (i = first; i <= last; i++) print lines[i]
+        }
+    ' "$1"
+}
+
+# Remove the worktrees of finished tasks in every ## Isolation: worktree
+# project (worktree_prune in lib.sh decides what is finished, and keeps any
+# worktree holding uncommitted changes). Branches are never deleted.
+#
+# Each project is pruned under its own project lock, taken WITHOUT waiting: a
+# project whose lock is held has a task running in it, and the sweep simply
+# leaves that project for the next one rather than queueing behind it.
+# Silent when there is nothing to remove, because it runs on every sweep.
+prune_isolated_worktrees() {
+    local file proj wd removed slug
+    [ -d "$PROJECTS_DIR" ] || return 0
+    mkdir -p "$LOCK_DIR"
+    for file in "$PROJECTS_DIR"/*.md; do
+        [ -f "$file" ] || continue
+        proj=$(basename "$file" .md)
+        [ "$(project_isolation "$proj" 2>/dev/null)" = worktree ] || continue
+        wd=$(project_working_dir "$proj") || continue
+        [ -d "$wd" ] || continue
+        removed=$(
+            exec 7>"$LOCK_DIR/$(canonical_project "$proj").lock"
+            flock -n 7 || exit 0
+            worktree_prune "$wd" 2>/dev/null
+        ) || true
+        while IFS= read -r slug; do
+            if [ -n "$slug" ]; then
+                echo "ai-task: pruned worktree $proj/$slug (branch ai/$slug kept)"
+            fi
+        done <<< "$removed"
+    done
+    return 0
+}
+
 # ── Per-task follow-up suggester ───────────────────────────────────────────
 # Called ONLY from the verified-success branch (the run completed AND passed
 # evaluation), and BEFORE the task file is archived, because it reads
@@ -398,6 +455,21 @@ if [ "$MODE" = "unblock" ]; then
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════
+# Worktree prune (explicit)
+# ═══════════════════════════════════════════════════════════════════════════
+# The same sweep the launcher runs quietly on every invocation, on demand. It
+# makes no agent call and loads no provider.
+if [ "$MODE" = "prune" ]; then
+    PRUNED=$(prune_isolated_worktrees)
+    if [ -n "$PRUNED" ]; then
+        printf '%s\n' "$PRUNED"
+    else
+        echo "No finished worktree to prune."
+    fi
+    exit 0
+fi
+
+# ═══════════════════════════════════════════════════════════════════════════
 # Internal execution mode
 # ═══════════════════════════════════════════════════════════════════════════
 if [ "$MODE" = "run" ]; then
@@ -485,6 +557,86 @@ if [ "$MODE" = "run" ]; then
         fi
     fi
 
+    # ── Worktree isolation (## Isolation: worktree projects only) ───────────
+    # Taken AFTER the project lock and held under it, so creating, reusing and
+    # setting up the worktree never races another task in the same repository.
+    # Everything here is skipped for a shared project: WORKTREE stays empty and
+    # every later step behaves exactly as it did before isolation existed.
+    #
+    # Set OUTSIDE the work phase on purpose (gotcha 5 of the split grading): a
+    # grade-only resume skips the work phase but still evaluates, and the
+    # evaluator must grade the worktree, not the main tree.
+    #
+    # A misconfiguration is a human's to fix, so it sends the task to review/
+    # with no retry burned; a failed ## Worktree Setup may be transient
+    # (a package mirror down), so it is a deferral like a lock timeout.
+    WORKTREE=""
+    WORKTREE_BRANCH=""
+    MAIN_WORKDIR=""
+    CONTAINER_PATH=""
+
+    isolation_refuse() {
+        {
+            echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+            echo ""
+            echo "**Runner:** $RUNNER"
+            echo "**Status:** NEEDS REVIEW (worktree isolation: $1 — no retry burned)"
+            echo ""
+        } >> "$LOG"
+        mv "$TASK_FILE" "$REVIEW_DIR/${TASK_NAME}.md"
+        notify -u critical "ai-task [$RUNNER]: Worktree Misconfigured" \
+            "$TASK_NAME not run: $1. Fix projects/${PROJECT}.md, then ai-task --unblock."
+        exit 1
+    }
+
+    ISOLATION=shared
+    if [ -n "$PROJECT" ]; then
+        ISOLATION=$(project_isolation "$PROJECT" 2>/dev/null) \
+            || isolation_refuse "unrecognised ## Isolation in project '$PROJECT'"
+    fi
+
+    if [ "$ISOLATION" = worktree ]; then
+        MAIN_WORKDIR=$(project_working_dir "$PROJECT") \
+            || isolation_refuse "project '$PROJECT' has no ## Working Directory"
+        MAIN_WORKDIR="${MAIN_WORKDIR%/}"
+        [ -d "$MAIN_WORKDIR" ] \
+            || isolation_refuse "working directory $MAIN_WORKDIR does not exist"
+        WT_BASE=$(worktree_base_ref "$MAIN_WORKDIR" "$(depends_on_from_task "$TASK_FILE")" \
+                    "$(project_field "$PROJECT" 'Base Branch')" 2>&1) \
+            || isolation_refuse "$WT_BASE"
+        WT_ERR=$(mktemp)
+        WT_RC=0
+        WORKTREE=$(worktree_ensure "$MAIN_WORKDIR" "$TASK_NAME" "$WT_BASE" 2>"$WT_ERR") || WT_RC=$?
+        if [ "$WT_RC" -ne 0 ]; then
+            WT_MSG=$(tail -n 1 "$WT_ERR")
+            rm -f "$WT_ERR"
+            isolation_refuse "${WT_MSG:-could not create the worktree (exit $WT_RC)}"
+        fi
+        rm -f "$WT_ERR"
+        WORKTREE_BRANCH="ai/$(worktree_slug "$TASK_NAME")"
+        CONTAINER_PATH=$(project_field "$PROJECT" 'Container Path')
+
+        if ! worktree_setup "$WORKTREE" "$MAIN_WORKDIR" \
+                "$(section_from_task 'Worktree Setup' "$PROJECTS_DIR/${PROJECT}.md")" \
+                "$((TASK_TIMEOUT_MIN * 60))"; then
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** DEFERRED (## Worktree Setup failed in $WORKTREE — not counted as retry)"
+                echo ""
+            } >> "$LOG"
+            requeue_task
+            notify -u critical "ai-task [$RUNNER]: Worktree Setup Failed" \
+                "$TASK_NAME deferred: ## Worktree Setup of project '$PROJECT' failed. Requeued, no retry burned."
+            exit 0
+        fi
+
+        # Read by ai-eval, which runs as a separate process.
+        export AI_WORKTREE="$WORKTREE" AI_MAIN_WORKDIR="$MAIN_WORKDIR" AI_CONTAINER_PATH="$CONTAINER_PATH"
+        echo "ai-task: worktree $WORKTREE on branch $WORKTREE_BRANCH (from $WT_BASE)"
+    fi
+
     # ── Grade-only resume ───────────────────────────────────────────────────
     # A task carrying ## Awaiting-Eval already RAN: its report is in done/ and
     # only the verdict is missing (the grader hit an auth failure last time).
@@ -569,6 +721,28 @@ PROJECT CONTEXT: Before doing anything else, read the project file at $PROJECTS_
             fi
         fi
 
+        # The task text as delivered. For a shared project it is the file
+        # verbatim, so the prompt stays byte-identical to before isolation
+        # existed. For an isolated one, every reference to the main working
+        # directory already points at the worktree, so the agent never has to
+        # translate a path itself.
+        TASK_TEXT=$(cat "$TASK_FILE")
+        if [ -n "$WORKTREE" ]; then
+            WORKDIR="$WORKTREE"
+            TASK_TEXT=$(rewrite_workdir_paths "$MAIN_WORKDIR" "$WORKTREE" "$CONTAINER_PATH" < "$TASK_FILE" 2>/dev/null)
+            CONTAINER_NOTE=""
+            if [ -n "$CONTAINER_PATH" ]; then
+                CONTAINER_WT=$(printf '%s\n' "$CONTAINER_PATH" \
+                    | rewrite_workdir_paths "$MAIN_WORKDIR" "$WORKTREE" "$CONTAINER_PATH" 2>/dev/null)
+                if [ "$CONTAINER_WT" != "$CONTAINER_PATH" ]; then
+                    CONTAINER_NOTE=" Inside a container that mounts the repository at $CONTAINER_PATH, the same working copy is $CONTAINER_WT."
+                fi
+            fi
+            PREAMBLE="$PREAMBLE
+
+ISOLATED WORKTREE: this task runs in its own git worktree, $WORKTREE, on branch $WORKTREE_BRANCH. That directory is your working copy and the only place you change files. Wherever the project file, its instructions or this task name the project working directory $MAIN_WORKDIR, in any spelling including one starting with ~/, use $WORKTREE instead; paths in the task below have already been rewritten that way. Never edit files under $MAIN_WORKDIR outside the worktree: other work lives there.${CONTAINER_NOTE} Do not commit, switch branches, create branches or remove the worktree: when the task passes evaluation, the pipeline commits this branch itself, using your ## Suggested Commit Message."
+        fi
+
         PROJECT_INSTRUCTIONS=$(project_instructions "$PROJECT")
         if [ -n "$PROJECT_INSTRUCTIONS" ]; then
             PREAMBLE="$PREAMBLE
@@ -595,7 +769,7 @@ $EXTRA"
         set +e
         ai_run "${PREAMBLE}
 
-$(cat "$TASK_FILE")" \
+${TASK_TEXT}" \
             "$MODEL_ID" \
             "$WORKDIR" \
             "$((TASK_TIMEOUT_MIN * 60))" \
@@ -923,11 +1097,43 @@ $(cat "$TASK_FILE")" \
 
     rm -f "$EVAL_OUTPUT"
 
+    # ── Land the worktree (isolated projects only) ──────────────────────────
+    # The task PASSED: commit its work on its own branch and remove the
+    # worktree, keeping the branch for the human to merge. Nothing is merged
+    # here, and the main working tree is never touched.
+    #
+    # A refused commit (a hook said no) does not un-pass the task: the work is
+    # correct, it is just not committed. The worktree is left exactly as it is,
+    # worktree_prune will not remove it while it is dirty, and the human is
+    # told where it is.
+    WORKTREE_NOTE=""
+    if [ -n "$WORKTREE" ]; then
+        COMMIT_MSG=$(mktemp)
+        commit_message_from_report "$RESULT_FILE" > "$COMMIT_MSG"
+        [ -s "$COMMIT_MSG" ] || printf 'ai-task: %s\n' "$TASK_NAME" > "$COMMIT_MSG"
+        printf '\nAI-Task: %s\n' "$TASK_NAME" >> "$COMMIT_MSG"
+        if worktree_commit "$WORKTREE" "$COMMIT_MSG" 2>/dev/null; then
+            WT_HEAD=$(git -C "$WORKTREE" rev-parse --short HEAD)
+            if worktree_remove "$MAIN_WORKDIR" "$TASK_NAME" 2>/dev/null; then
+                WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree removed)"
+            else
+                WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree kept: $WORKTREE)"
+            fi
+        else
+            WORKTREE_NOTE="$WORKTREE_BRANCH NOT COMMITTED (commit refused); the work is uncommitted in $WORKTREE"
+            notify -u critical "ai-task [$RUNNER]: Commit Refused" \
+                "$TASK_NAME passed, but its commit on $WORKTREE_BRANCH was refused. The work is in $WORKTREE."
+        fi
+        rm -f "$COMMIT_MSG"
+        printf '\n**Branch:** %s\n' "$WORKTREE_NOTE" >> "$RESULT_FILE"
+    fi
+
     {
         echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
         echo ""
         echo "**Runner:** $RUNNER"
         [ "$EVAL_RUNNER" != "$RUNNER" ] && echo "**Graded by:** $EVAL_RUNNER"
+        [ -n "$WORKTREE_NOTE" ] && echo "**Branch:** $WORKTREE_NOTE"
         if [ "$GRADE_ONLY" -eq 1 ]; then
             echo "**Status:** completed (graded on a later pass; execution not repeated)"
         elif [ "$STATUS" -eq 0 ]; then
@@ -1149,6 +1355,10 @@ if [ "$DRY_RUN" -eq 1 ]; then
     echo "would claim: (nothing eligible)"
     exit 1
 fi
+
+# Clear the worktrees of tasks that finished since the last sweep. After the
+# dry run on purpose: --dry-run claims nothing and must remove nothing either.
+prune_isolated_worktrees
 
 # ── Atomic claim ───────────────────────────────────────────────────────────
 # NEW: select-and-move happens under an exclusive lock on
