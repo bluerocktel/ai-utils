@@ -628,7 +628,10 @@ offline test is `tests/test_worktree.sh`. Eight things to keep right:
    the worktree's tests grade code the task never wrote. The first real run
    failed exactly this way (2026-10-29).
 8. **Nothing here merges.** Landing is commit-on-branch only; the main tree is
-   never touched by `ai-task`. The `ai-brief` criteria rules are deliberately
+   never touched by `ai-task`. "Merged", wherever the pipeline asks (`dtask`'s list, a
+   dependent task's base), means PATCH-equivalent via `branch_unmerged`, never
+   ancestry: the user merges and then pulls with `--rebase`, which rewrites the
+   hash. The `ai-brief` criteria rules are deliberately
    unchanged for isolated projects, including the ban on working-tree
    assertions: relaxing them is a decision for after a pilot, and would need
    `lint_task_criteria` changed with them.
