@@ -126,3 +126,18 @@ brain_root=$HOME/Brain
 # criteria, read the report, weigh the ## Test Command output. Unset, the
 # grader falls back to the task's ## Model, then default_model.
 # eval_model=sonnet
+
+# ── Project history (ai-history) ────────────────────────────────────────────
+
+# Runner that writes the WHERE THINGS STAND paragraph of `ai-history PROJECT`.
+# Unset means default_runner. The paragraph is cached in
+# $TASKS_DIR/.history/<project>.md and rewritten only when the project's tasks
+# have changed, so this costs one short call per change, not one per view.
+# An auth failure here shows the previous paragraph as stale and pauses
+# nothing: ai-history never touches a cooldown marker.
+# history_runner=claude
+
+# Model for that paragraph. It only rewrites a few report summaries, so a
+# small model is enough. Unset means the CLI's own default model (NOT
+# default_model, which is sized for doing the work).
+# history_model=haiku

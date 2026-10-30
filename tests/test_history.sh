@@ -21,7 +21,35 @@ mkdir -p "$HOME" "$T"/{projects,inbox,run,review,done,briefs/done,backlog-for-re
 
 FAILURES=0
 fail() { echo "FAIL: $*" >&2; FAILURES=$((FAILURES + 1)); }
-H() { "$REPO_DIR/ai-history" "$@"; }
+
+# A copy of the scripts with its own config: load_config reads the config
+# beside the script, and the repository's own config names a real runner.
+# The paragraph is written by a fake codex on PATH, so no test can reach a
+# real CLI; it records each call and answers from $EVENTS_IN.
+APP="$tmp/app"
+mkdir -p "$APP/providers" "$tmp/bin"
+cp "$REPO_DIR/ai-history" "$REPO_DIR/lib.sh" "$APP/"
+cp "$REPO_DIR/providers/codex.sh" "$APP/providers/"
+printf 'default_runner=nonexistent\nhistory_runner=codex\nauth_cooldown_min=30\n' > "$APP/config"
+cat > "$tmp/bin/codex" <<'FAKE'
+#!/bin/bash
+echo call >> "$CALLS"
+cat > "$PROMPT_OUT"
+printf '%s' "${FAKE_STDERR:-}" >&2
+[ -n "${FAKE_EMPTY:-}" ] || cat "$EVENTS_IN"
+exit "${FAKE_EXIT:-0}"
+FAKE
+chmod +x "$tmp/bin/codex"
+export PATH="$tmp/bin:$PATH" CALLS="$tmp/calls" PROMPT_OUT="$tmp/prompt" EVENTS_IN="$tmp/events"
+: > "$CALLS"
+answer() {
+    jq -cn --arg t "$1" '{type:"turn.started"},
+        {type:"item.completed", item:{type:"agent_message", text:$t}},
+        {type:"turn.completed", usage:{input_tokens:1, output_tokens:1}}' > "$EVENTS_IN"
+}
+answer "First paragraph. It says where demo stands."
+calls() { wc -l < "$CALLS" | tr -d ' '; }
+H() { "$APP/ai-history" "$@"; }
 
 # ── fixtures ───────────────────────────────────────────────────────────────
 printf '## Working Directory\n`~/Projects/demo/`\n\n## Aliases\n- `demo-alias`\n' > "$T/projects/demo.md"
@@ -58,17 +86,32 @@ printf '# r\n\n## Summary\nOther.\n' > "$T/done/2026-10-05_12-00_2026-10-05_else
 task "$T/done/2026-10-05_12-30_2026-10-05_stray.task.md" '../@@@'
 task "$T/done/2026-10-05_12-40_2026-10-05_unknown.task.md" not-a-project
 
+# A worktree project whose hotfix brief started from its own base branch.
+iso_repo="$HOME/Projects/iso"
+git init -q -b main "$iso_repo"
+git -C "$iso_repo" -c user.name=t -c user.email=t@t commit -q --allow-empty -m init
+git -C "$iso_repo" branch feature/x
+git -C "$iso_repo" checkout -q -b ai/iso-hotfix-brief feature/x
+git -C "$iso_repo" -c user.name=t -c user.email=t@t commit -q --allow-empty -m fix
+git -C "$iso_repo" checkout -q main
+printf '## Working Directory\n`~/Projects/iso/`\n\n## Isolation: worktree\n\n## Base Branch: main\n' > "$T/projects/iso.md"
+printf '# brief\n\n## Base Branch: feature/x\n' > "$T/briefs/done/iso-hotfix-brief.md"
+task "$T/done/2026-10-04_10-00_2026-10-04_hotfix.task.md" iso "~/${T#"$HOME"/}/briefs/done/iso-hotfix-brief.md"
+[ "${T#"$HOME"/}" != "$T" ] || task "$T/done/2026-10-04_10-00_2026-10-04_hotfix.task.md" iso "$T/briefs/done/iso-hotfix-brief.md"
+
 before=$(find "$T" -type f -printf '%p %s %T@\n' | sort | sha256sum)
 
 # ── every project ──────────────────────────────────────────────────────────
 OUT=$(H) || fail "listing exited non-zero"
 first=$(printf '%s\n' "$OUT" | sed -n 2p | awk '{print $1}')
 [ "$first" = other ] || fail "most recently active project should be listed first, got '$first'"
+printf '%s\n' "$OUT" | grep -qE '^iso +10-04 10:00 +0$' || fail "iso line wrong: $(printf '%s\n' "$OUT" | grep '^iso')"
 printf '%s\n' "$OUT" | grep -qE '^demo +10-02 09:30 +2$' || fail "demo line should show last done 10-02 09:30 and 2 open: $(printf '%s\n' "$OUT" | grep '^demo')"
 printf '%s\n' "$OUT" | grep -qE '^idle +never +0$' || fail "a project with no task should read never"
 
 # ── one project ────────────────────────────────────────────────────────────
-OUT=$(H demo) || fail "project view exited non-zero"
+OUT=$(H demo --facts) || fail "project view exited non-zero"
+printf '%s\n' "$OUT" | grep -q 'WHERE THINGS STAND' && fail "--facts must not show the paragraph"
 printf '%s\n' "$OUT" | grep -q 'queued 1 · in review 1 · awaiting your review 1 · suggestions 1' \
     || fail "NOW counts wrong: $(printf '%s\n' "$OUT" | grep queued)"
 printf '%s\n' "$OUT" | grep -q '✗ broken' || fail "review task not listed"
@@ -82,12 +125,16 @@ printf '%s\n' "$OUT" | grep -qE 'feature +2/3 done' || fail "brief progress shou
 [ "$(printf '%s\n' "$OUT" | grep -cE '[0-9]+/[0-9]+ done$')" -eq 1 ] \
     || fail "only the stamped brief may be listed: a free-text ## Brief is not a brief"
 printf '%s\n' "$OUT" | grep -q 'elsewhere' && fail "another project's task leaked in"
-[ "$(H demo -n 1 | grep -c '✓')" -eq 1 ] || fail "-n 1 should list one finished task"
-[ "$(H DEMO-ALIAS | head -1 | awk '{print $1}')" = demo ] || fail "an alias argument should open the project"
+[ "$(H demo --facts -n 1 | grep -c '✓')" -eq 1 ] || fail "-n 1 should list one finished task"
+[ "$(H DEMO-ALIAS --facts | head -1 | awk '{print $1}')" = demo ] || fail "an alias argument should open the project"
+
+OUT=$(H iso --facts)
+printf '%s\n' "$OUT" | grep -q 'ai/iso-hotfix-brief .*ready to merge into feature/x' \
+    || fail "a brief's own ## Base Branch should be the merge target: $(printf '%s\n' "$OUT" | grep branch)"
 
 # ── refusals ───────────────────────────────────────────────────────────────
 H no-such-project >/dev/null 2>&1 && fail "unknown project should exit non-zero"
-H demo -n 0 >/dev/null 2>&1 && fail "-n 0 should be refused"
+H demo --facts -n 0 >/dev/null 2>&1 && fail "-n 0 should be refused"
 H demo --bogus >/dev/null 2>&1 && fail "unknown option should be refused"
 
 # ── the alias table agrees with canonical_project ──────────────────────────
@@ -106,9 +153,62 @@ for tok in demo demo-alias DEMO-Alias other not-a-project '../@@@' '@@@' 'a/b/de
     [ "$got" = "$want" ] || fail "alias table says '$got' for '$tok', canonical_project says '$want'"
 done
 
-# ── read-only ──────────────────────────────────────────────────────────────
+# ── read-only without the paragraph ────────────────────────────────────────
 after=$(find "$T" -type f -printf '%p %s %T@\n' | sort | sha256sum)
-[ "$before" = "$after" ] || fail "ai-history wrote into TASKS_DIR"
+[ "$before" = "$after" ] || fail "ai-history --facts wrote into TASKS_DIR"
+[ "$(calls)" -eq 0 ] || fail "--facts and the listing must make no agent call"
+
+# ── WHERE THINGS STAND ─────────────────────────────────────────────────────
+CACHE="$T/.history/demo.md"
+touch "$tmp/mark"; sleep 0.01
+OUT=$(H demo) || fail "paragraph run exited non-zero"
+[ "$(calls)" -eq 1 ] || fail "first view should make one call, made $(calls)"
+printf '%s\n' "$OUT" | grep -q 'First paragraph. It says where demo stands.' || fail "paragraph not shown"
+printf '%s\n' "$OUT" | grep -q 'STALE' && fail "a fresh paragraph must not read stale"
+[ -f "$CACHE" ] || fail "paragraph not cached"
+grep -q 'demo: add the first step' "$PROMPT_OUT" || fail "prompt lacks the facts"
+grep -q 'long summary. More text.' "$PROMPT_OUT" || fail "prompt lacks the report summaries"
+grep -q 'elsewhere' "$PROMPT_OUT" && fail "prompt leaked another project"
+changed=$(find "$T" -type f -newer "$tmp/mark" ! -path "$T/.history/*" | head -1)
+[ -z "$changed" ] || fail "the paragraph run wrote outside .history/: $changed"
+
+H demo >/dev/null
+[ "$(calls)" -eq 1 ] || fail "an unchanged project must reuse the cache, calls=$(calls)"
+H demo --refresh >/dev/null
+[ "$(calls)" -eq 2 ] || fail "--refresh must call again"
+
+# A new finished task makes the paragraph stale and rewrites it.
+task "$T/done/2026-10-06_10-00_2026-10-06_fourth-step.task.md" demo
+answer "Second paragraph."
+OUT=$(H demo)
+[ "$(calls)" -eq 3 ] || fail "a new finished task must trigger a rewrite"
+printf '%s\n' "$OUT" | grep -q 'Second paragraph.' || fail "rewritten paragraph not shown"
+
+# A failed refresh keeps the previous paragraph, marked stale, cache untouched.
+task "$T/done/2026-10-06_11-00_2026-10-06_fifth-step.task.md" demo
+cp "$CACHE" "$tmp/cache.before"
+OUT=$(FAKE_EXIT=1 FAKE_EMPTY=1 H demo) || fail "a failed call must not fail the view"
+printf '%s\n' "$OUT" | grep -q 'STALE' || fail "failed refresh should mark the paragraph stale"
+printf '%s\n' "$OUT" | grep -q 'Second paragraph.' || fail "failed refresh should keep the old paragraph"
+cmp -s "$CACHE" "$tmp/cache.before" || fail "failed refresh changed the cache"
+
+# An auth failure: stale, and NO cooldown marker (ai-history pauses nothing).
+OUT=$(FAKE_EMPTY=1 FAKE_STDERR='Please run codex login' H demo)
+printf '%s\n' "$OUT" | grep -q 'auth failure' || fail "auth failure not reported: $(printf '%s\n' "$OUT" | grep -i stale)"
+[ ! -e "$T/.auth-cooldown-codex" ] || fail "ai-history must not create a cooldown marker"
+
+# A runner already in cooldown is not called at all.
+touch "$T/.auth-cooldown-codex"
+n=$(calls)
+OUT=$(H demo)
+[ "$(calls)" -eq "$n" ] || fail "a runner in cooldown must not be called"
+printf '%s\n' "$OUT" | grep -q 'auth cooldown' || fail "cooldown skip not reported"
+rm -f "$T/.auth-cooldown-codex"
+
+# No cache and no answer: says so, exits 0.
+OUT=$(FAKE_EMPTY=1 H other) || fail "no-cache failure must exit 0"
+printf '%s\n' "$OUT" | grep -q 'no summary yet' || fail "missing paragraph not reported"
+[ ! -f "$T/.history/other.md" ] || fail "a failed first call must not create a cache"
 
 # ── empty tree ─────────────────────────────────────────────────────────────
 EMPTY="$tmp/empty"

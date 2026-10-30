@@ -3,16 +3,19 @@
 #
 # For a human coming back to a project after a while. Everything here is
 # rebuilt from the task tree on each run (done/, the queues, suggestions/ and
-# git), so there is nothing to keep in sync and nothing that can go stale.
+# git), so the facts are never out of date.
 #
-# Read-only: no agent call, no file moved, nothing written into $TASKS_DIR.
-# Tasks never see this output: no prompt reads it.
+# The one exception is WHERE THINGS STAND: a paragraph an agent writes from
+# those facts, cached in $TASKS_DIR/.history/<project>.md and rewritten only
+# when the project's tasks have changed. That cache is the only thing this
+# script writes, and no task prompt ever reads it.
 #
 # Usage:
-#   ai-history                  Every project, with its last activity
-#   ai-history PROJECT          One project: NOW, RECENT, BRIEFS
-#   ai-history PROJECT --facts  Same (the facts are all there is so far)
-#   ai-history PROJECT -n N     Show the last N finished tasks (default 15)
+#   ai-history                    Every project, with its last activity
+#   ai-history PROJECT            WHERE THINGS STAND, then NOW, RECENT, BRIEFS
+#   ai-history PROJECT --facts    Facts only: no agent call, nothing written
+#   ai-history PROJECT --refresh  Rewrite the paragraph even if nothing changed
+#   ai-history PROJECT -n N       Show the last N finished tasks (default 15)
 set -euo pipefail
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
@@ -26,9 +29,12 @@ usage() {
 
 PROJECT_ARG=""
 RECENT_N=15
+FACTS_ONLY=0
+REFRESH=0
 while [ $# -gt 0 ]; do
     case "$1" in
-        --facts) shift ;;
+        --facts) FACTS_ONLY=1; shift ;;
+        --refresh) REFRESH=1; shift ;;
         -n) RECENT_N="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
         -h|--help) usage; exit 0 ;;
         -*) echo "ai-history: unknown option '$1'" >&2; usage >&2; exit 2 ;;
@@ -105,7 +111,7 @@ _index() {
 # the answer cached. tests/test_history.sh checks the two agree.
 # Sets CANON_OUT rather than printing: a $(...) caller would run in a
 # subshell and the cache would never fill.
-declare -A CANON ALIAS_OF
+declare -A CANON=() ALIAS_OF=()
 if [ -d "$PROJECTS_DIR" ]; then
     for pf in "$PROJECTS_DIR"/*.md; do
         [ -f "$pf" ] || continue
@@ -173,7 +179,7 @@ done < <([ -d "$SUGGEST_DIR" ] && find "$SUGGEST_DIR" -maxdepth 1 -type f -name 
 # ── No project: one line per project file ───────────────────────
 if [ -z "$PROJECT_ARG" ]; then
     [ -d "$PROJECTS_DIR" ] || exit 0
-    declare -A last_done n_open
+    declare -A last_done=() n_open=()
     for i in "${!ROW_P[@]}"; do
         p="${ROW_P[$i]}" where="${ROW_W[$i]}" file="${ROW_F[$i]}"
         case "$where" in
@@ -232,72 +238,7 @@ if [ "$iso" = worktree ]; then
 fi
 printf '%s%s%s   %s%s%s\n' "$BOLD" "$PROJECT" "$RESET" "$DIM" "$info" "$RESET"
 
-# ── NOW ──
-_section "NOW"
-printf '  queued %d · in review %d · awaiting your review %d · suggestions %d\n' \
-    "${#queued[@]}" "${#review[@]}" "${#backlog[@]}" "${#suggestions[@]}"
-for f in "${review[@]}"; do
-    printf '  %s✗%s %s  %s(failed, in review/)%s\n' "$RED" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
-done
-for f in "${queued[@]}"; do
-    case "$f" in "$RUN_DIR"/*) state="running" ;; *) state="queued" ;; esac
-    printf '  %s⏳%s %s  %s(%s)%s\n' "$DIM" "$RESET" "$(_display "$f")" "$DIM" "$state" "$RESET"
-done
-for f in "${backlog[@]}"; do
-    printf '  %s●%s %s  %s(waiting for your review in backlog-for-review/)%s\n' "$YELLOW" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
-done
-# Suggestions pile up (they wait for a human to promote or delete them), so
-# only the newest few are named.
-SUGGEST_SHOWN=5
-if [ "${#suggestions[@]}" -gt 0 ]; then
-    while IFS= read -r f; do
-        title=$(grep -m1 '^# ' "$f" 2>/dev/null | sed 's/^# //' || true)
-        printf '  %s›%s %s  %s(suggestion)%s\n' "$DIM" "$RESET" "${title:-$(basename "$f" .md)}" "$DIM" "$RESET"
-    done < <(ls -t "${suggestions[@]}" | head -n "$SUGGEST_SHOWN")
-    if [ "${#suggestions[@]}" -gt "$SUGGEST_SHOWN" ]; then
-        printf '  %s  … and %d more in %s%s\n' "$DIM" $(( ${#suggestions[@]} - SUGGEST_SHOWN )) \
-            "${SUGGEST_DIR/#"$HOME"/\~}/" "$RESET"
-    fi
-fi
-
-# Brief branches, with the same action rule dtask uses (worktree_action).
-if [ "$iso" = worktree ] && [ -n "$wd" ]; then
-    top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null || true)
-    if [ -n "$top" ]; then
-        declare -A live rev
-        for f in "${queued[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && live[$k]=$(( ${live[$k]:-0} + 1 )); done
-        for f in "${review[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && rev[$k]=$(( ${rev[$k]:-0} + 1 )); done
-        while IFS= read -r key; do
-            [ -n "$key" ] || continue
-            action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$top" "$key" "${base:-HEAD}" \
-                "${live[$key]:-0}" "${rev[$key]:-0}")
-            case "$action" in
-                fix) text="${RED}✗ a task failed review${RESET}" ;;
-                commit) text="${YELLOW}⚠ uncommitted changes, no task left${RESET}" ;;
-                merge) text="${YELLOW}⇢ ready to merge into ${base:-HEAD}: git merge ai/$key${RESET}" ;;
-                prune) text="${DIM}· finished, worktree removed by the next sweep${RESET}" ;;
-                wait) text="${DIM}⏳ tasks still to run${RESET}" ;;
-                *) continue ;;
-            esac
-            printf '  branch %s  %b\n' "ai/$key" "$text"
-        done < <(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
-                    refs/heads/ai/ 2>/dev/null | sed 's|^ai/||')
-    fi
-fi
-
-# ── RECENT ──
-_section "RECENT   (last $RECENT_N finished)"
-if [ "${#done_files[@]}" -eq 0 ]; then
-    printf '  %snothing finished yet%s\n' "$DIM" "$RESET"
-else
-    while IFS= read -r f; do
-        report="${f%.task.md}.md"
-        printf '  %s  %s✓%s %-44s  %s\n' "$(_when "$f")" "$GREEN" "$RESET" \
-            "$(_display "$f")" "$(_first_sentence "$report")"
-    done < <(printf '%s\n' "${done_files[@]}" | sort -r | head -n "$RECENT_N")
-fi
-
-# ── BRIEFS ──
+# ── Briefs of this project ──
 # A brief's tasks share its ## Brief path. Counted across every queue so a
 # brief reads "2/3 done" while its last task is still running.
 # One awk pass reads every ## Brief (inline or next-line form, as
@@ -305,18 +246,20 @@ fi
 # ai-brief stamps a path; older hand-written tasks carry free text there,
 # which is not a brief this view can group by, so only a first token ending
 # in .md counts.
-declare -A b_total b_done b_first
+declare -A b_total=() b_done=() b_first=() b_path=()
 while IFS=$'\t' read -r f br; do
     br="${br//\`/}"
     br="${br%%[[:space:]]*}"
     case "$br" in *.md) ;; *) continue ;; esac
+    br_path="${br/#\~\//$HOME/}"
     br="${br##*/}"; br="${br%.md}"
+    b_path[$br]="$br_path"
     b_total[$br]=$(( ${b_total[$br]:-0} + 1 ))
     case "$f" in "$DONE_DIR"/*) b_done[$br]=$(( ${b_done[$br]:-0} + 1 )) ;; esac
     b="${f##*/}"
     if [ -z "${b_first[$br]:-}" ] || [[ "$b" < "${b_first[$br]}" ]]; then b_first[$br]="$b"; fi
 done < <(printf '%s\0' "${done_files[@]}" "${queued[@]}" "${review[@]}" "${backlog[@]}" \
-            | xargs -0 -r awk '
+            | grep -zv '^$' | xargs -0 -r awk '
                 FNR == 1 { want = 0 }
                 tolower($0) ~ /^##[[:space:]]+brief[:[:space:]]*$/ { want = 1; next }
                 tolower($0) ~ /^##[[:space:]]+brief[:[:space:]]/ {
@@ -326,15 +269,244 @@ done < <(printf '%s\0' "${done_files[@]}" "${queued[@]}" "${review[@]}" "${backl
                 want && /^#/ { nextfile }
                 want && NF { print FILENAME "\t" $0; nextfile }
             ')
-if [ "${#b_total[@]}" -gt 0 ]; then
-    _section "BRIEFS"
-    for br in "${!b_total[@]}"; do
-        printf '%s\t%s\n' "${b_first[$br]}" "$br"
-    done | sort -r | head -n 10 | while IFS=$'\t' read -r first br; do
-        n=${b_done[$br]:-0} t=${b_total[$br]}
-        if [ "$n" -eq "$t" ]; then mark="${GREEN}${n}/${t} done${RESET}"; else mark="${YELLOW}${n}/${t} done${RESET}"; fi
-        name="${br#"$PROJECT"-}"
-        name="${name%-brief}"
-        printf '  %s  %-48s  %b\n' "$(_when "$first" | cut -c1-5)" "$name" "$mark"
+
+# The base a brief's branch started from: the brief's own ## Base Branch,
+# else the project's, as task_base_branch resolves it for ai-task. Without
+# this a brief started from a customer branch reads "ready to merge into" the
+# project's base, which is the wrong target.
+brief_base() {
+    local key="$1" b=""
+    [ -n "${b_path[$key]:-}" ] && b=$(field_from_task 'Base Branch' "${b_path[$key]}" | tr -d '`')
+    printf '%s' "${b:-${base:-HEAD}}"
+}
+
+# NOW, RECENT and BRIEFS. A function because it is rendered twice: in colour
+# for the reader, and plain as the input of the WHERE THINGS STAND paragraph.
+print_facts() {
+    # ── NOW ──
+    _section "NOW"
+    printf '  queued %d · in review %d · awaiting your review %d · suggestions %d\n' \
+        "${#queued[@]}" "${#review[@]}" "${#backlog[@]}" "${#suggestions[@]}"
+    for f in "${review[@]}"; do
+        printf '  %s✗%s %s  %s(failed, in review/)%s\n' "$RED" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
     done
+    for f in "${queued[@]}"; do
+        case "$f" in "$RUN_DIR"/*) state="running" ;; *) state="queued" ;; esac
+        printf '  %s⏳%s %s  %s(%s)%s\n' "$DIM" "$RESET" "$(_display "$f")" "$DIM" "$state" "$RESET"
+    done
+    for f in "${backlog[@]}"; do
+        printf '  %s●%s %s  %s(waiting for your review in backlog-for-review/)%s\n' "$YELLOW" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
+    done
+    # Suggestions pile up (they wait for a human to promote or delete them), so
+    # only the newest few are named.
+    SUGGEST_SHOWN=5
+    if [ "${#suggestions[@]}" -gt 0 ]; then
+        while IFS= read -r f; do
+            title=$(grep -m1 '^# ' "$f" 2>/dev/null | sed 's/^# //' || true)
+            printf '  %s›%s %s  %s(suggestion)%s\n' "$DIM" "$RESET" "${title:-$(basename "$f" .md)}" "$DIM" "$RESET"
+        done < <(ls -t "${suggestions[@]}" | head -n "$SUGGEST_SHOWN")
+        if [ "${#suggestions[@]}" -gt "$SUGGEST_SHOWN" ]; then
+            printf '  %s  … and %d more in %s%s\n' "$DIM" $(( ${#suggestions[@]} - SUGGEST_SHOWN )) \
+                "${SUGGEST_DIR/#"$HOME"/\~}/" "$RESET"
+        fi
+    fi
+
+    # Brief branches, with the same action rule dtask uses (worktree_action).
+    if [ "$iso" = worktree ] && [ -n "$wd" ]; then
+        top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null || true)
+        if [ -n "$top" ]; then
+            declare -A live=() rev=()
+            for f in "${queued[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && live[$k]=$(( ${live[$k]:-0} + 1 )); done
+            for f in "${review[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && rev[$k]=$(( ${rev[$k]:-0} + 1 )); done
+            while IFS= read -r key; do
+                [ -n "$key" ] || continue
+                kbase=$(brief_base "$key")
+                action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$top" "$key" "$kbase" \
+                    "${live[$key]:-0}" "${rev[$key]:-0}")
+                case "$action" in
+                    fix) text="${RED}✗ a task failed review${RESET}" ;;
+                    commit) text="${YELLOW}⚠ uncommitted changes, no task left${RESET}" ;;
+                    merge) text="${YELLOW}⇢ ready to merge into $kbase: git merge ai/$key${RESET}" ;;
+                    prune) text="${DIM}· finished, worktree removed by the next sweep${RESET}" ;;
+                    wait) text="${DIM}⏳ tasks still to run${RESET}" ;;
+                    *) continue ;;
+                esac
+                printf '  branch %s  %b\n' "ai/$key" "$text"
+            done < <(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
+                        refs/heads/ai/ 2>/dev/null | sed 's|^ai/||')
+        fi
+    fi
+
+    # ── RECENT ──
+    _section "RECENT   (last $RECENT_N finished)"
+    if [ "${#done_files[@]}" -eq 0 ]; then
+        printf '  %snothing finished yet%s\n' "$DIM" "$RESET"
+    else
+        while IFS= read -r f; do
+            report="${f%.task.md}.md"
+            printf '  %s  %s✓%s %-44s  %s\n' "$(_when "$f")" "$GREEN" "$RESET" \
+                "$(_display "$f")" "$(_first_sentence "$report")"
+        done < <(printf '%s\n' "${done_files[@]}" | sort -r | head -n "$RECENT_N")
+    fi
+
+    # ── BRIEFS (scanned before print_facts) ──
+    if [ "${#b_total[@]}" -gt 0 ]; then
+        _section "BRIEFS"
+        for br in "${!b_total[@]}"; do
+            printf '%s\t%s\n' "${b_first[$br]}" "$br"
+        done | sort -r | head -n 10 | while IFS=$'\t' read -r first br; do
+            n=${b_done[$br]:-0} t=${b_total[$br]}
+            if [ "$n" -eq "$t" ]; then mark="${GREEN}${n}/${t} done${RESET}"; else mark="${YELLOW}${n}/${t} done${RESET}"; fi
+            name="${br#"$PROJECT"-}"
+            name="${name%-brief}"
+            printf '  %s  %-48s  %b\n' "$(_when "$first" | cut -c1-5)" "$name" "$mark"
+        done
+    fi
+}
+
+# ── WHERE THINGS STAND ──────────────────────────────────────────
+# One paragraph written by an agent from the facts above plus the summaries of
+# the latest reports, for a reader who has forgotten the project. It is cached
+# in $HISTORY_DIR/<project>.md with a fingerprint of the project's task files
+# and branch states, and rewritten only when that fingerprint changes, so
+# opening an unchanged project costs nothing.
+#
+# The cache is read by this script and nothing else: no task prompt includes
+# it, by design (a paragraph that can be stale must not become an agent's
+# fact). A call that fails, times out, or hits an auth failure leaves the
+# previous paragraph in place, shown as stale; it never touches a cooldown
+# marker or a task file.
+HISTORY_DIR="$TASKS_DIR/.history"
+HISTORY_RUNNER="${history_runner:-${default_runner:-}}"
+HISTORY_MODEL="${history_model:-}"
+HISTORY_TIMEOUT_MIN=5
+HISTORY_REPORTS=8
+AUTH_COOLDOWN_MIN="${auth_cooldown_min:-30}"
+
+# Plain-text input of the prompt: the facts, then each recent report's
+# ## Summary (capped, so one long report cannot crowd out the rest).
+history_input() {
+    local f report slug
+    printf '%s\n' "$FACTS_PLAIN"
+    printf '\n=== LATEST REPORT SUMMARIES (newest first) ===\n'
+    while IFS= read -r f; do
+        [ -n "$f" ] || continue
+        report="${f%.task.md}.md"
+        printf '\n--- %s (%s) ---\n' "$(_display "$f")" "$(_when "$f")"
+        awk '/^## Summary/{s=1; next} s && /^## /{exit} s' "$report" 2>/dev/null | head -c 2500
+    done < <(printf '%s\n' "${done_files[@]}" | sort -r | head -n "$HISTORY_REPORTS")
+    for f in "${review[@]}"; do
+        slug=$(task_slug_from_name "$f")
+        report=$(ls "$DONE_DIR"/*_"$slug".md 2>/dev/null | sort | tail -n 1 || true)
+        [ -n "$report" ] || continue
+        printf '\n--- %s (FAILED, in review/) ---\n' "$slug"
+        awk '/^## Summary/{s=1; next} s && /^## /{exit} s' "$report" | head -c 2500
+    done
+}
+
+# Changes whenever a task of the project is added, moves between queues, or a
+# brief branch changes state; suggestions are left out, they arrive constantly
+# and do not change where the project stands.
+history_fingerprint() {
+    { printf '%s\n' "${done_files[@]}" "${queued[@]}" "${review[@]}" "${backlog[@]}" | sort
+      printf '%s\n' "$FACTS_PLAIN" | grep '^  branch ' || true
+    } | sha256sum | cut -d' ' -f1
+}
+
+cooldown_active() {
+    local marker
+    marker=$(cooldown_path "$1") || return 1
+    [ -f "$marker" ] || return 1
+    find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .
+}
+
+# Prints the paragraph on stdout, or nothing with the reason on stderr.
+history_generate() {
+    local prompt json err rc text workdir model_id
+    if [ -z "$HISTORY_RUNNER" ]; then
+        echo "no history_runner or default_runner in config" >&2; return 1
+    fi
+    if cooldown_active "$HISTORY_RUNNER"; then
+        echo "runner '$HISTORY_RUNNER' is in auth cooldown" >&2; return 1
+    fi
+    ( load_provider "$HISTORY_RUNNER" ) >/dev/null 2>&1 || {
+        echo "runner '$HISTORY_RUNNER' has no usable provider" >&2; return 1; }
+    load_provider "$HISTORY_RUNNER"
+    model_id=$(ai_model_alias "$HISTORY_MODEL")
+
+    prompt="You are writing a short status note for a person who comes back to the project '$PROJECT' after some time away and has forgotten where it stands. Below are the facts of the task pipeline for this project and the summaries of its latest finished tasks.
+
+Write ONE paragraph of at most 6 sentences and 120 words, in plain prose: no heading, no list, no markdown, no '—' character. Keep only what matters most: the person can read the full facts below your paragraph. Say, in this order: what was done most recently and why it mattered; what is in progress or queued; what is waiting on the person (a review, a merge, a decision, a command to run), naming the task or branch; and any open follow-up the summaries mention. Use task and brief names exactly as given. Use ONLY the information below: do not run commands, do not read files, do not guess. If nothing is in progress or waiting, say so plainly.
+
+$(history_input)"
+
+    workdir=$(mktemp -d); json=$(mktemp); err=$(mktemp)
+    # stdout and stderr to two SEPARATE files, never 2>&1 (gotcha 1). The
+    # working directory is empty on purpose: there is nothing to read there.
+    set +e
+    ai_run "$prompt" "$model_id" "$workdir" "$((HISTORY_TIMEOUT_MIN * 60))" "$json" "$err"
+    rc=$?
+    set -e
+    if ai_is_auth_failure "$json" || ai_is_auth_failure "$err"; then
+        rm -rf "$workdir" "$json" "$err"
+        echo "auth failure on runner '$HISTORY_RUNNER'" >&2; return 1
+    fi
+    text=$(ai_json_text "$json" 2>/dev/null || true)
+    rm -rf "$workdir" "$json" "$err"
+    if [ "$rc" -eq 124 ]; then
+        echo "timed out after ${HISTORY_TIMEOUT_MIN}m" >&2; return 1
+    fi
+    text=$(printf '%s' "$text" | sed -E '/^[[:space:]]*$/d' | tr '\n' ' ' | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//')
+    if [ -z "$text" ]; then
+        echo "empty answer (exit $rc)" >&2; return 1
+    fi
+    printf '%s\n' "$text"
+}
+
+# The cache file: a small header, a blank line, the paragraph.
+# A missing cache is the normal first run, not an error.
+cache_field() { [ -f "$2" ] || return 0; sed -n "s/^$1: //p; /^\$/q" "$2" | head -n 1; }
+cache_text() { [ -f "$1" ] || return 0; sed '1,/^$/d' "$1"; }
+
+show_where_things_stand() {
+    local cache="$HISTORY_DIR/${PROJECT}.md" fp old_fp text why="" note tmp errf
+    fp=$(history_fingerprint)
+    old_fp=$(cache_field fingerprint "$cache")
+    if [ "$REFRESH" -eq 1 ] || [ "$fp" != "$old_fp" ]; then
+        [ -t 2 ] && printf '%swriting the summary with %s...%s\n' "$DIM" "$HISTORY_RUNNER" "$RESET" >&2
+        errf=$(mktemp)
+        if text=$(history_generate 2>"$errf"); then
+            mkdir -p "$HISTORY_DIR"
+            tmp=$(mktemp "$HISTORY_DIR/.${PROJECT}.XXXXXX")
+            { printf 'fingerprint: %s\n' "$fp"
+              printf 'written: %s\n' "$(date '+%Y-%m-%d %H:%M')"
+              printf 'tasks: %d\n' "${#done_files[@]}"
+              printf 'runner: %s\n' "$HISTORY_RUNNER"
+              printf 'model: %s\n' "${HISTORY_MODEL:-default}"
+              printf '\n%s\n' "$text"; } > "$tmp"
+            mv "$tmp" "$cache"
+            old_fp="$fp"
+        else
+            why=$(tail -n 1 "$errf" 2>/dev/null || true)
+        fi
+        rm -f "$errf"
+    fi
+
+    _section "WHERE THINGS STAND"
+    if [ ! -f "$cache" ]; then
+        printf '  %sno summary yet: %s%s\n' "$YELLOW" "${why:-unknown error}" "$RESET"
+        return 0
+    fi
+    note="written $(cache_field written "$cache"), from $(cache_field tasks "$cache") finished tasks"
+    if [ "$old_fp" != "$fp" ]; then
+        note="${YELLOW}STALE${RESET}${DIM}, $note; could not refresh: ${why:-unknown error}"
+    fi
+    printf '  %s(%b)%s\n' "$DIM" "$note" "$RESET"
+    cache_text "$cache" | fold -s -w 78 | sed 's/^/  /'
+}
+
+if [ "$FACTS_ONLY" -eq 0 ]; then
+    FACTS_PLAIN=$(BOLD="" RED="" GREEN="" YELLOW="" CYAN="" DIM="" RESET=""; print_facts)
+    show_where_things_stand
 fi
+print_facts
