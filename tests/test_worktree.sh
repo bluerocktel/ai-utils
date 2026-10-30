@@ -188,6 +188,56 @@ WTS=$(worktree_ensure "$REPO/sub" delta 2>/dev/null) || fail "ensure from subdir
 out=$(printf 'cd /var/www/demo\n' | rewrite_workdir_paths "$REPO/sub" "$WTS" /var/www/demo 2>/dev/null)
 [ "$out" = 'cd /var/www/demo' ] || fail "container path rewritten for a subdirectory workdir"
 
+# ── 11. worktree_key: one branch per brief ─────────────────────────────────
+printf '## Project\niso\n\n## Brief\n/x/briefs/done/my-refactor-brief.md\n' > "$tmp/step1.md"
+printf '## Brief\n`/x/briefs/2026-09-12_08-15_dated-brief.md`\n' > "$tmp/dated.md"
+printf '## Project\niso\n' > "$tmp/2026-10-30_hand-written.md"
+printf '## Brief\n@@@\n' > "$tmp/2026-10-30_bad-brief.md"
+[ "$(worktree_key "$tmp/step1.md")" = my-refactor-brief ] || fail "brief key not used"
+[ "$(worktree_key "$tmp/2026-10-30_hand-written.md")" = hand-written ] || fail "task without ## Brief must keep its slug"
+[ "$(worktree_key "$tmp/2026-10-30_bad-brief.md")" = bad-brief ] || fail "unusable ## Brief must fall back to the task slug"
+k=$(worktree_key "$tmp/dated.md")
+[ "$(worktree_slug "$k")" = "$k" ] || fail "key is not a fixed point of worktree_slug: $k"
+
+# ── 12. worktree_claim / worktree_owner ────────────────────────────────────
+WB=$(worktree_ensure "$REPO" my-refactor-brief 2>/dev/null) || fail "brief ensure failed"
+worktree_claim "$WB" step-1 >/dev/null || fail "first claim refused"
+[ "$(worktree_owner "$WB")" = step-1 ] || fail "owner not recorded"
+echo step1 > "$WB/step1.txt"
+worktree_claim "$WB" step-1 >/dev/null || fail "owner's own retry refused"
+if out=$(worktree_claim "$WB" step-2); then fail "claim over another task's dirty work allowed"; fi
+[ "$out" = step-1 ] || fail "refusal did not name the owner: $out"
+[ -f "$WB/step1.txt" ] || fail "refused claim touched the worktree"
+printf 'Step 1\n' > "$tmp/msg1"
+worktree_commit "$WB" "$tmp/msg1" 2>/dev/null || fail "step-1 commit failed"
+[ -z "$(worktree_owner "$WB")" ] || fail "commit did not clear the owner"
+worktree_claim "$WB" step-2 >/dev/null || fail "claim after the owner landed refused"
+echo step2 > "$WB/step2.txt"
+printf 'Step 2\n' > "$tmp/msg2"
+worktree_commit "$WB" "$tmp/msg2" 2>/dev/null || fail "step-2 commit failed"
+[ "$(git -C "$REPO" log --format=%s main..ai/my-refactor-brief | tr '\n' ,)" = 'Step 2,Step 1,' ] \
+    || fail "brief branch is not one stack of per-task commits"
+# A stale owner over a clean tree (its changes were discarded) does not block.
+worktree_claim "$WB" step-3 >/dev/null
+worktree_claim "$WB" step-4 >/dev/null || fail "stale owner over a clean tree blocked a claim"
+
+# ── 13. a brief's worktree survives while any of its tasks is in flight ────
+rm -f "$TASKS_DIR"/review/*.md "$TASKS_DIR"/inbox/*.md
+cp "$tmp/step1.md" "$TASKS_DIR/inbox/2026-10-30_step-2.md"
+cp "$tmp/step1.md" "$TASKS_DIR/run/2026-10-30_step-1.md"
+printf '%s\n' "$(active_task_keys)" | grep -qx my-refactor-brief || fail "brief key not active"
+printf '%s\n' "$(active_task_keys "$TASKS_DIR/run/2026-10-30_step-1.md")" | grep -qx my-refactor-brief \
+    || fail "excluding one task hid its in-flight sibling"
+PRUNED=$(worktree_prune "$REPO" 2>/dev/null)
+printf '%s\n' "$PRUNED" | grep -qx my-refactor-brief && fail "in-flight brief worktree pruned"
+rm "$TASKS_DIR/inbox/2026-10-30_step-2.md"
+printf '%s\n' "$(active_task_keys "$TASKS_DIR/run/2026-10-30_step-1.md")" | grep -qx my-refactor-brief \
+    && fail "excluded task still counted"
+rm "$TASKS_DIR/run/2026-10-30_step-1.md"
+PRUNED=$(worktree_prune "$REPO" 2>/dev/null)
+printf '%s\n' "$PRUNED" | grep -qx my-refactor-brief || fail "finished brief worktree not pruned"
+git -C "$REPO" show-ref --verify --quiet refs/heads/ai/my-refactor-brief || fail "prune deleted the brief branch"
+
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"
     exit 0

@@ -800,6 +800,36 @@ worktree_slug() {
     printf '%s\n' "$slug"
 }
 
+# The worktree key of one task: the name of its worktree directory and, as
+# ai/<key>, of its branch. Every task decomposed from one brief shares ONE
+# branch, keyed on the basename of its ## Brief (stamped by ai-brief), so the
+# brief lands as one stack of per-task commits whether or not the decomposer
+# wrote a correct ## Depends-on chain. A task with no usable ## Brief (written
+# by hand) keeps its own slug, exactly as before.
+#
+#   worktree_key ~/tasks/inbox/2026-10-29_step-2.md   ->  my-refactor-brief
+#
+# The result is a fixed point of worktree_slug, because ai-task hands it to
+# worktree_ensure / worktree_remove, which slug their name argument again: a
+# brief named 2026-09-12_08-15_x.md would otherwise lose one date per pass.
+worktree_key() {
+    local file="$1" brief key next i
+    brief=$(field_from_task Brief "$file" | tr -d '`')
+    key=""
+    if [ -n "$brief" ]; then
+        key=$(worktree_slug "$(basename "$brief")" 2>/dev/null) || key=""
+    fi
+    if [ -z "$key" ]; then
+        key=$(worktree_slug "$file") || return 1
+    fi
+    for i in 1 2 3; do
+        next=$(worktree_slug "$key") || return 1
+        [ "$next" = "$key" ] && break
+        key="$next"
+    done
+    printf '%s\n' "$key"
+}
+
 # True (0) when <branch> carries a change that <base> does not have yet.
 #   branch_unmerged <repo> <branch> <base>
 #
@@ -976,8 +1006,39 @@ worktree_commit() {
             [ -n "$p" ] && git -C "$wt" reset -q -- ":(top)$p" >&2 2>/dev/null
         done < "$gitdir/ai-setup-paths"
     fi
-    git -C "$wt" diff --cached --quiet && return 0
-    git -C "$wt" commit -q -F "$msg" >&2
+    if ! git -C "$wt" diff --cached --quiet; then
+        git -C "$wt" commit -q -F "$msg" >&2 || return 1
+    fi
+    rm -f "$gitdir/ai-owner"
+}
+
+# The task whose uncommitted changes a shared (per-brief) worktree holds.
+# ai-owner, in the worktree's git dir, is written by worktree_claim when a task
+# starts working and removed by worktree_commit once its work has landed.
+#
+#   worktree_claim <wt-dir> <task-slug>
+#
+# Refused (1, the owner on stdout) only while ANOTHER task owns the worktree
+# AND it is still dirty: starting there would build on, and then commit, the
+# other task's unfinished work. A retry of the owner itself is the normal case
+# and is allowed. A stale owner over a clean tree (a human discarded its
+# changes) is simply replaced. Exit 2 when the git dir cannot be found.
+worktree_claim() {
+    local wt="$1" slug="$2" gitdir owner
+    gitdir=$(worktree_gitdir "$wt") || return 2
+    owner=$(cat "$gitdir/ai-owner" 2>/dev/null || true)
+    if [ -n "$owner" ] && [ "$owner" != "$slug" ] && worktree_dirty "$wt" >/dev/null; then
+        printf '%s\n' "$owner"
+        return 1
+    fi
+    printf '%s\n' "$slug" > "$gitdir/ai-owner"
+}
+
+# The current owner of a worktree, empty when none. Read-only, for dtask.
+worktree_owner() {
+    local gitdir
+    gitdir=$(worktree_gitdir "$1") || return 0
+    cat "$gitdir/ai-owner" 2>/dev/null || true
 }
 
 # Remove one task's worktree, keeping its branch. Refuses (returns 1) while
@@ -997,16 +1058,21 @@ worktree_remove() {
     git -C "$top" worktree remove --force "$wt" >&2
 }
 
-# Slugs of every task still in flight (inbox/, run/, review/), one per line,
-# reduced exactly as worktree_slug reduces them. A worktree whose slug is not
-# here belongs to a task that finished or was deleted.
-active_task_slugs() {
-    local dir f
+# Worktree keys of every task still in flight (inbox/, run/, review/), one per
+# line, computed exactly as worktree_key computes them. A worktree whose key
+# is not here belongs to tasks that all finished or were deleted; a brief's
+# worktree stays while any one of its tasks is still in flight.
+#   active_task_keys [exclude-file]
+# The optional file is left out, so a task can ask whether anything ELSE
+# still needs its worktree.
+active_task_keys() {
+    local exclude="${1:-}" dir f
     for dir in "$INBOX" "$RUN_DIR" "$REVIEW_DIR"; do
         [ -d "$dir" ] || continue
         for f in "$dir"/*.md; do
             [ -f "$f" ] || continue
-            worktree_slug "$f" 2>/dev/null || true
+            [ -n "$exclude" ] && [ "$f" -ef "$exclude" ] && continue
+            worktree_key "$f" 2>/dev/null || true
         done
     done
 }
@@ -1019,7 +1085,7 @@ worktree_prune() {
     local workdir="$1" top active d slug
     top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || return 0
     [ -d "$top/$WORKTREE_DIRNAME" ] || return 0
-    active=$(active_task_slugs)
+    active=$(active_task_keys)
     for d in "$top/$WORKTREE_DIRNAME"/*/; do
         [ -d "$d" ] || continue
         slug=$(basename "$d")
