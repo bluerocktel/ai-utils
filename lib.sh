@@ -1041,6 +1041,36 @@ worktree_owner() {
     cat "$gitdir/ai-owner" 2>/dev/null || true
 }
 
+# The ONE place that decides whether a queued task must wait for a sibling of
+# its brief: prints the owning task's slug and returns 0 when the task's
+# shared worktree holds another task's uncommitted changes, returns 1
+# otherwise. Read by ai-task's picker and by dtask, so the two cannot
+# disagree. The picker needs it as a starvation guard: worktree_claim would
+# defer such a task in seconds, and select_candidate returns the FIRST
+# eligible task, so without it the blocked task is claimed every sweep and
+# nothing behind it ever runs.
+#   worktree_blocker <task-file>
+# Cheap on the common path: a task without ## Brief, or outside an isolated
+# project, returns 1 before any git call.
+worktree_blocker() {
+    local f="$1" proj wd top key wt owner
+    [ -n "$(field_from_task Brief "$f")" ] || return 1
+    proj=$(project_from_task "$f")
+    [ -n "$proj" ] || return 1
+    proj=$(canonical_project "$proj")
+    [ "$(project_isolation "$proj" 2>/dev/null)" = worktree ] || return 1
+    wd=$(project_working_dir "$proj") || return 1
+    top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null) || return 1
+    key=$(worktree_key "$f") || return 1
+    wt="$top/$WORKTREE_DIRNAME/$key"
+    worktree_registered "$top" "$wt" || return 1
+    owner=$(worktree_owner "$wt")
+    [ -n "$owner" ] || return 1
+    [ "$owner" != "$(worktree_slug "$f")" ] || return 1
+    worktree_dirty "$wt" >/dev/null || return 1
+    printf '%s\n' "$owner"
+}
+
 # Remove one task's worktree, keeping its branch. Refuses (returns 1) while
 # the worktree holds uncommitted work: --force is only ever used to clear the
 # setup artefacts worktree_dirty already ignores.

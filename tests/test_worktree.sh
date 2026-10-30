@@ -238,6 +238,21 @@ PRUNED=$(worktree_prune "$REPO" 2>/dev/null)
 printf '%s\n' "$PRUNED" | grep -qx my-refactor-brief || fail "finished brief worktree not pruned"
 git -C "$REPO" show-ref --verify --quiet refs/heads/ai/my-refactor-brief || fail "prune deleted the brief branch"
 
+# ── 14. worktree_blocker: the picker's view of a shared worktree ───────────
+cp "$tmp/step1.md" "$TASKS_DIR/inbox/2026-10-30_step-1.md"
+cp "$tmp/step1.md" "$TASKS_DIR/inbox/2026-10-30_step-2.md"
+printf '## Project\nplain\n\n## Brief\n/x/my-refactor-brief.md\n' > "$TASKS_DIR/inbox/2026-10-30_shared.md"
+worktree_blocker "$TASKS_DIR/inbox/2026-10-30_step-2.md" >/dev/null && fail "blocked before any worktree exists"
+WB=$(worktree_ensure "$REPO" my-refactor-brief 2>/dev/null)
+worktree_claim "$WB" step-1 >/dev/null
+worktree_blocker "$TASKS_DIR/inbox/2026-10-30_step-2.md" >/dev/null && fail "blocked by a clean worktree"
+echo wip > "$WB/wip.txt"
+[ "$(worktree_blocker "$TASKS_DIR/inbox/2026-10-30_step-2.md")" = step-1 ] || fail "sibling not blocked by the owner's dirty work"
+worktree_blocker "$TASKS_DIR/inbox/2026-10-30_step-1.md" >/dev/null && fail "owner blocked by its own work"
+worktree_blocker "$TASKS_DIR/inbox/2026-10-30_shared.md" >/dev/null && fail "shared project task blocked"
+worktree_blocker "$TASKS_DIR/inbox/2026-10-30_hand-written.md" >/dev/null 2>&1 && fail "task without ## Brief blocked"
+rm "$WB/wip.txt" "$TASKS_DIR"/inbox/*.md
+
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"
     exit 0

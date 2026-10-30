@@ -607,20 +607,60 @@ if [ "$MODE" = "run" ]; then
         MAIN_WORKDIR="${MAIN_WORKDIR%/}"
         [ -d "$MAIN_WORKDIR" ] \
             || isolation_refuse "working directory $MAIN_WORKDIR does not exist"
-        WT_BASE=$(worktree_base_ref "$MAIN_WORKDIR" "$(depends_on_from_task "$TASK_FILE")" \
-                    "$(project_field "$ISO_PROJECT" 'Base Branch')" 2>&1) \
-            || isolation_refuse "$WT_BASE"
+        # One worktree and one ai/<key> branch per BRIEF (worktree_key): a
+        # task of a brief whose branch already exists simply checks it out,
+        # and the base below only matters to the brief's first task.
+        WT_KEY=$(worktree_key "$TASK_FILE") \
+            || isolation_refuse "no usable worktree name for '$TASK_NAME'"
+        # A parent decomposed from a brief lives on ai/<its brief key>; a
+        # parent that ran before branches were keyed by brief, or has no
+        # ## Brief, lives on ai/<its slug>. Try them in that order.
+        WT_DEP=$(depends_on_from_task "$TASK_FILE")
+        WT_BASE_BRANCH=$(project_field "$ISO_PROJECT" 'Base Branch')
+        WT_BASE=""
+        if [ -n "$WT_DEP" ]; then
+            WT_PFILE=$(find "$DONE_DIR" -maxdepth 1 -type f -name "*_${WT_DEP%.md}.task.md" 2>/dev/null | sort | tail -n 1)
+            WT_PKEY=""
+            [ -n "$WT_PFILE" ] && WT_PKEY=$(worktree_key "$WT_PFILE" 2>/dev/null || true)
+            if [ -n "$WT_PKEY" ]; then
+                WT_BASE=$(worktree_base_ref "$MAIN_WORKDIR" "$WT_PKEY" "$WT_BASE_BRANCH" 2>&1) \
+                    || isolation_refuse "$WT_BASE"
+                [ "$WT_BASE" = "ai/$WT_PKEY" ] || WT_BASE=""
+            fi
+        fi
+        if [ -z "$WT_BASE" ]; then
+            WT_BASE=$(worktree_base_ref "$MAIN_WORKDIR" "$WT_DEP" "$WT_BASE_BRANCH" 2>&1) \
+                || isolation_refuse "$WT_BASE"
+        fi
         WT_ERR=$(mktemp)
         WT_RC=0
-        WORKTREE=$(worktree_ensure "$MAIN_WORKDIR" "$TASK_NAME" "$WT_BASE" 2>"$WT_ERR") || WT_RC=$?
+        WORKTREE=$(worktree_ensure "$MAIN_WORKDIR" "$WT_KEY" "$WT_BASE" 2>"$WT_ERR") || WT_RC=$?
         if [ "$WT_RC" -ne 0 ]; then
             WT_MSG=$(tail -n 1 "$WT_ERR")
             rm -f "$WT_ERR"
             isolation_refuse "${WT_MSG:-could not create the worktree (exit $WT_RC)}"
         fi
         rm -f "$WT_ERR"
-        WORKTREE_BRANCH="ai/$(worktree_slug "$TASK_NAME")"
+        WORKTREE_BRANCH="ai/$WT_KEY"
         CONTAINER_PATH=$(project_field "$ISO_PROJECT" 'Container Path')
+
+        # A brief's worktree is shared, so it may hold a SIBLING task's
+        # uncommitted work (a failed attempt, or one in review/). Starting on
+        # top of it would build on, and then commit, unfinished work: defer,
+        # no retry burned. The picker skips such a task (worktree_blocker),
+        # so this only fires on a direct --run or a race.
+        WT_OWNER=$(worktree_claim "$WORKTREE" "$(worktree_slug "$TASK_NAME")") || {
+            {
+                echo "## $(date '+%Y-%m-%d %H:%M') - $TASK_NAME"
+                echo ""
+                echo "**Runner:** $RUNNER"
+                echo "**Status:** DEFERRED ($WORKTREE holds uncommitted work of ${WT_OWNER:-another task}, not counted as retry)"
+                echo ""
+            } >> "$LOG"
+            requeue_task
+            echo "ai-task: $TASK_NAME deferred: $WORKTREE_BRANCH holds uncommitted work of ${WT_OWNER:-another task}"
+            exit 0
+        }
 
         if ! worktree_setup "$WORKTREE" "$MAIN_WORKDIR" \
                 "$(section_from_task 'Worktree Setup' "$PROJECTS_DIR/${ISO_PROJECT}.md")" \
@@ -1120,7 +1160,13 @@ $(cat "$TASK_FILE")" \
         printf '\nAI-Task: %s\n' "$TASK_NAME" >> "$COMMIT_MSG"
         if worktree_commit "$WORKTREE" "$COMMIT_MSG" 2>/dev/null; then
             WT_HEAD=$(git -C "$WORKTREE" rev-parse --short HEAD)
-            if worktree_remove "$MAIN_WORKDIR" "$TASK_NAME" 2>/dev/null; then
+            # A brief's worktree stays while another of its tasks is in
+            # flight: the next one continues the same branch, and its
+            # ## Worktree Setup has already run.
+            WT_SIBLINGS=$(active_task_keys "$TASK_FILE" | grep -cxF -- "$WT_KEY" || true)
+            if [ "${WT_SIBLINGS:-0}" -gt 0 ]; then
+                WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree kept for $WT_SIBLINGS more task(s) of the brief)"
+            elif worktree_remove "$MAIN_WORKDIR" "$WT_KEY" 2>/dev/null; then
                 WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree removed)"
             else
                 WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree kept: $WORKTREE)"
@@ -1248,6 +1294,7 @@ select_candidate() {
         ( load_provider "$r" >/dev/null ) || continue
         runner_available "$r" || continue
         grader_available "$f" || continue
+        worktree_blocker "$f" >/dev/null && continue
         # An existing session for this name means a previous attempt is still
         # in flight; leave the file alone rather than run it twice.
         tmux has-session -t "$(session_name "$r" "$(basename "$f" .md)")" 2>/dev/null && continue
