@@ -141,3 +141,13 @@ brain_root=$HOME/Brain
 # small model is enough. Unset means the CLI's own default model (NOT
 # default_model, which is sized for doing the work).
 # history_model=haiku
+
+# ── Asking an agent (ai-ask) ────────────────────────────────────────────────
+# Runner that answers `ai-ask AGENT "question"`. Unset means default_runner.
+# One call per question, from the agent's charter and its routines' ledgers,
+# snapshots and reports; nothing is written. An auth failure is reported and
+# pauses nothing: ai-ask never touches a cooldown marker.
+# ask_runner=claude
+
+# Model for those answers. Unset means the CLI's own default model.
+# ask_model=sonnet

@@ -1,0 +1,190 @@
+#!/bin/bash
+# ai-ask: ask one agent a question about its own work.
+#
+# One agent call, answered from what the agent layer already keeps: the
+# agent's charter, and for each of its routines the definition, the memory
+# ledger, the last snapshot and the latest report. For a human who wants to
+# know what a routine saw, why it flagged something, or whether it is
+# running, without reading the state files by hand.
+#
+# Writes nothing anywhere, not even a cache. Like ai-history it makes its
+# call in an empty temporary directory and never touches a cooldown marker:
+# an auth failure here is reported and pauses nothing.
+#
+# Usage:
+#   ai-ask                        The agents you can ask
+#   ai-ask AGENT QUESTION...      Ask AGENT (the question may also come on stdin)
+#   ai-ask AGENT --context        Print what AGENT would be given; no agent call
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+load_config
+
+usage() {
+    sed -n '/^# Usage:/,/^set -euo/p' "$0" | sed '$d; s/^# \{0,1\}//'
+}
+
+AGENT=""
+CONTEXT_ONLY=0
+QUESTION=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --context) CONTEXT_ONLY=1; shift ;;
+        -h|--help) usage; exit 0 ;;
+        --) shift; QUESTION="${QUESTION:+$QUESTION }$*"; break ;;
+        -*) echo "ai-ask: unknown option '$1'" >&2; usage >&2; exit 2 ;;
+        *)
+            if [ -z "$AGENT" ]; then AGENT="$1"; else QUESTION="${QUESTION:+$QUESTION }$1"; fi
+            shift ;;
+    esac
+done
+
+ASK_RUNNER="${ask_runner:-${default_runner:-}}"
+ASK_MODEL="${ask_model:-}"
+ASK_TIMEOUT_MIN=5
+AUTH_COOLDOWN_MIN="${auth_cooldown_min:-30}"
+BRAIN_ROOT="${brain_root:-$HOME/Brain}"
+# Per-part caps, so one large snapshot or report cannot crowd out the rest.
+CAP_CHARTER=6000 CAP_ROUTINE=6000 CAP_SNAPSHOT=4000 CAP_REPORT=4000
+
+# A reader of the definitions, like ai-agent and dtask: it never runs a
+# routine, so where the definitions live cannot change what a run does.
+AGENTS_DIR="$(agents_dir)"
+
+# At most <n> bytes of a file, with a visible marker when cut.
+capped() {
+    local file="$1" n="$2" size
+    [ -f "$file" ] || { echo "(none)"; return 0; }
+    size=$(wc -c < "$file")
+    head -c "$n" "$file"
+    [ "$size" -le "$n" ] || printf '\n[truncated: %d of %d bytes shown]\n' "$n" "$size"
+}
+
+# ── No agent named: list them ───────────────────────────────────────────────
+if [ -z "$AGENT" ]; then
+    found=0
+    for charter in "$AGENTS_DIR"/*/AGENT.md; do
+        [ -f "$charter" ] || continue
+        found=1
+        name=$(basename "$(dirname "$charter")")
+        n_routines=0 n_pub=0
+        for r in "$AGENTS_DIR/$name"/routines/*.md; do
+            [ -f "$r" ] || continue
+            n_routines=$((n_routines + 1))
+            [ -f "$SCHEDULED_DIR/$(basename "$r")" ] && n_pub=$((n_pub + 1))
+        done
+        domain=$(field_from_task Domain "$charter" | head -n 1 | cut -c1-70)
+        printf '  %-22s %d routine(s), %d published  %s\n' "$name" "$n_routines" "$n_pub" "$domain"
+    done
+    [ "$found" -eq 1 ] || echo "No agents defined in $AGENTS_DIR."
+    echo
+    echo "Ask one with: ai-ask AGENT \"your question\""
+    exit 0
+fi
+
+# Agent names are directory names; nothing else may reach the path.
+case "$AGENT" in
+    *[!a-z0-9-]*|-*) echo "ai-ask: '$AGENT' is not an agent name" >&2; exit 2 ;;
+esac
+CHARTER="$AGENTS_DIR/$AGENT/AGENT.md"
+if [ ! -f "$CHARTER" ]; then
+    echo "ai-ask: no agent '$AGENT' in $AGENTS_DIR (run ai-ask to list them)" >&2
+    exit 2
+fi
+
+# ── The context: charter, then every routine with its state ────────────────
+ask_context() {
+    local r slug pub def mem report run_s
+    printf '=== CHARTER (%s) ===\n' "$AGENT"
+    capped "$CHARTER" "$CAP_CHARTER"
+    for r in "$AGENTS_DIR/$AGENT"/routines/*.md; do
+        [ -f "$r" ] || continue
+        slug=$(basename "$r" .md)
+        pub="$SCHEDULED_DIR/$slug.md"
+        printf '\n=== ROUTINE %s ===\n' "$slug"
+        if [ -f "$pub" ]; then
+            def="$pub"
+            run_s=$(head -n1 "$SCHED_STATE_DIR/$slug.run" 2>/dev/null | tr -dc '0-9' || true)
+            if [ -n "$run_s" ]; then
+                printf 'Status: published; last run %s\n' "$(date -d "@$run_s" '+%Y-%m-%d %H:%M')"
+            else
+                printf 'Status: published; never run\n'
+            fi
+        else
+            def="$r"
+            printf 'Status: NOT published (defined only; it does not run)\n'
+        fi
+        printf '\n--- definition ---\n'
+        capped "$def" "$CAP_ROUTINE"
+        printf '\n--- memory ledger (one line per conclusive run, oldest first) ---\n'
+        mem=$(agent_memory_path "$slug")
+        capped "$mem" 100000
+        printf '\n--- last snapshot ---\n'
+        capped "$SCHED_STATE_DIR/$slug.snapshot.md" "$CAP_SNAPSHOT"
+        report=""
+        [ -f "$mem" ] && report=$(grep -o 'report=[^,]*' "$mem" | tail -n 1 | sed 's/^report=//' || true)
+        if [ -n "$report" ]; then
+            printf '\n--- latest report (%s) ---\n' "$report"
+            capped "$BRAIN_ROOT/personal/journal/$(basename "$report")" "$CAP_REPORT"
+        fi
+    done
+}
+
+if [ "$CONTEXT_ONLY" -eq 1 ]; then
+    ask_context
+    exit 0
+fi
+
+if [ -z "$QUESTION" ] && [ ! -t 0 ]; then
+    QUESTION=$(cat)
+fi
+if [ -z "${QUESTION//[[:space:]]/}" ]; then
+    echo "ai-ask: no question for '$AGENT'" >&2
+    usage >&2
+    exit 2
+fi
+
+# ── The call ────────────────────────────────────────────────────────────────
+if [ -z "$ASK_RUNNER" ]; then
+    echo "ai-ask: no ask_runner or default_runner in config" >&2; exit 1
+fi
+marker=$(cooldown_path "$ASK_RUNNER") || marker=""
+if [ -n "$marker" ] && [ -f "$marker" ] \
+    && find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+    echo "ai-ask: runner '$ASK_RUNNER' is in auth cooldown, try again later" >&2; exit 1
+fi
+( load_provider "$ASK_RUNNER" ) >/dev/null 2>&1 || {
+    echo "ai-ask: runner '$ASK_RUNNER' has no usable provider" >&2; exit 1; }
+load_provider "$ASK_RUNNER"
+MODEL_ID=$(ai_model_alias "$ASK_MODEL")
+
+PROMPT="You are the agent '$AGENT'. Your operator is asking you a question about your own work. Below are your charter and, for each of your routines, its definition, its memory ledger (one line per run that completed), its last snapshot and its latest report.
+
+Answer the question using ONLY this material. When the answer depends on a run, give its date from the ledger. When the material does not contain the answer, say so plainly and say what would (a run that has not happened, a source you were not given). Do not run commands, read files or take any action, and do not offer to. Answer in plain text, briefly, without the character '—'.
+
+QUESTION: $QUESTION
+
+$(ask_context)"
+
+WORKDIR=$(mktemp -d); JSON=$(mktemp); ERR=$(mktemp)
+trap 'rm -rf "$WORKDIR" "$JSON" "$ERR"' EXIT
+[ -t 2 ] && printf 'asking %s (runner %s)...\n' "$AGENT" "$ASK_RUNNER" >&2
+# stdout and stderr to two SEPARATE files, never 2>&1 (gotcha 1). The working
+# directory is empty on purpose: everything the agent may use is in the prompt.
+set +e
+ai_run "$PROMPT" "$MODEL_ID" "$WORKDIR" "$((ASK_TIMEOUT_MIN * 60))" "$JSON" "$ERR"
+RC=$?
+set -e
+if ai_is_auth_failure "$JSON" || ai_is_auth_failure "$ERR"; then
+    echo "ai-ask: auth failure on runner '$ASK_RUNNER'" >&2; exit 1
+fi
+if [ "$RC" -eq 124 ]; then
+    echo "ai-ask: no answer within ${ASK_TIMEOUT_MIN}m" >&2; exit 1
+fi
+TEXT=$(ai_json_text "$JSON" 2>/dev/null || true)
+if [ -z "${TEXT//[[:space:]]/}" ]; then
+    echo "ai-ask: empty answer (exit $RC)" >&2; exit 1
+fi
+printf '%s\n' "$TEXT"
