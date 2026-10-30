@@ -353,16 +353,16 @@ fi
 
 # ── Worktrees (## Isolation: worktree projects only) ─────────────
 # Rendered only when some project opts in, so the dashboard of a tree with
-# none is unchanged. Two things a human acts on: task branches waiting to be
-# merged, and worktrees still on disk (a task in flight, in review/, or one
-# whose commit was refused and holds uncommitted work).
+# none is unchanged. One line per ai/<key> branch (or worktree left without
+# one), ending in the next human action, decided by worktree_action in
+# lib.sh. Merged branches are folded into one line past WT_DONE_SHOWN, since
+# the pipeline never deletes a branch and they only accumulate.
 #
 # Read-only like the rest of dtask: GIT_OPTIONAL_LOCKS=0 stops `git status`
 # from refreshing the index, which is a write into the repository.
+WT_DONE_SHOWN=3
 wt_out=""
 declare -A wt_seen
-wt_active=""
-wt_waiting=""
 wt_any=0
 if [ -d "$PROJECTS_DIR" ]; then
     for pf in "$PROJECTS_DIR"/*.md; do
@@ -371,14 +371,23 @@ if [ -d "$PROJECTS_DIR" ]; then
     done
 fi
 if [ "$wt_any" -eq 1 ]; then
-    wt_active=$(active_task_keys)
-    for f in "$INBOX"/*.md; do
-        [ -f "$f" ] || continue
-        GIT_OPTIONAL_LOCKS=0 worktree_blocker "$f" >/dev/null 2>&1 || continue
-        wt_waiting+="$(worktree_key "$f")"$'\n'
+    # Task keys still queued or running, and in review/, scanned once.
+    declare -A wt_live wt_review wt_owner_of
+    for dir in "$INBOX" "$RUN_DIR" "$REVIEW_DIR"; do
+        [ -d "$dir" ] || continue
+        for f in "$dir"/*.md; do
+            [ -f "$f" ] || continue
+            k=$(worktree_key "$f" 2>/dev/null) || continue
+            if [ "$dir" = "$REVIEW_DIR" ]; then
+                wt_review[$k]=$(( ${wt_review[$k]:-0} + 1 ))
+            else
+                wt_live[$k]=$(( ${wt_live[$k]:-0} + 1 ))
+            fi
+        done
     done
-fi
-if [ -d "$PROJECTS_DIR" ]; then
+
+    wt_rows=()
+    wt_w_proj=0 wt_w_branch=0
     for pf in "$PROJECTS_DIR"/*.md; do
         [ -f "$pf" ] || continue
         proj=$(basename "$pf" .md)
@@ -387,51 +396,61 @@ if [ -d "$PROJECTS_DIR" ]; then
         top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null) || continue
         [ -z "${wt_seen[$top]:-}" ] || continue
         wt_seen[$top]=1
-
         base=$(project_field "$proj" 'Base Branch')
-        # Merged by PATCH, not by ancestry (branch_unmerged): after a
-        # `git pull --rebase` the merged commit has a new hash, and
-        # --no-merged would list the branch as pending forever.
-        pending=""
-        while IFS= read -r br; do
-            [ -n "$br" ] || continue
-            if GIT_OPTIONAL_LOCKS=0 branch_unmerged "$top" "$br" "${base:-HEAD}"; then
-                pending+="$br "
-            fi
-        done < <(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
-                    refs/heads/ai/ 2>/dev/null)
-        pending="${pending% }"
-        if [ -n "$pending" ]; then
-            wt_out+=$(printf '  %s%-20s%s  %sto merge:%s %s' "$BOLD" "$proj" "$RESET" "$YELLOW" "$RESET" "$pending")$'\n'
-        else
-            wt_out+=$(printf '  %s%-20s%s  %snothing to merge%s' "$BOLD" "$proj" "$RESET" "$DIM" "$RESET")$'\n'
-        fi
 
-        # One worktree per brief (worktree_key), so a line names the worktree,
-        # the task whose changes it holds (ai-owner), how many tasks of the
-        # brief are still in flight, and how many are waiting on the owner
-        # (worktree_blocker, the same rule the picker skips them by).
-        for d in "$top/$WORKTREE_DIRNAME"/*/; do
-            [ -d "$d" ] || continue
-            key=$(basename "$d")
-            owner=$(worktree_owner "$d")
-            if [ -n "$owner" ]; then
-                loc=$(locate_dep_slug "$owner")
-                [ "$loc" = review ] && loc="${RED}review${RESET}"
-                who="owner ${owner} (${loc}/)"
-            else
-                who="${DIM}no owner${RESET}"
+        # Every branch, plus any worktree directory whose branch is gone.
+        keys=$(
+            GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
+                refs/heads/ai/ 2>/dev/null | sed 's|^ai/||'
+            for d in "$top/$WORKTREE_DIRNAME"/*/; do
+                [ -d "$d" ] && basename "$d"
+            done
+        )
+        n_done=0
+        while IFS= read -r key; do
+            [ -n "$key" ] || continue
+            action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$top" "$key" "${base:-HEAD}" \
+                "${wt_live[$key]:-0}" "${wt_review[$key]:-0}")
+            n_live=${wt_live[$key]:-0}
+            case "$action" in
+                fix)    color="$RED";    detail="${wt_review[$key]} in review/: --unblock it, or discard the worktree changes" ;;
+                wait)   color="$DIM";    detail="$n_live in flight" ;;
+                commit) color="$YELLOW"; detail="uncommitted changes, no task left: commit or discard" ;;
+                prune)  color="$DIM";    detail="clean worktree, removed by the next sweep" ;;
+                merge)  color="$YELLOW"; detail="into ${base:-HEAD}" ;;
+                *)      color="$DIM";    detail="merged, branch can be deleted"
+                        n_done=$((n_done + 1)) ;;
+            esac
+            if [ "$action" = wait ] || [ "$action" = fix ]; then
+                owner=$(worktree_owner "$top/$WORKTREE_DIRNAME/$key" 2>/dev/null || true)
+                [ -n "$owner" ] && detail+=", owner $owner ($(locate_dep_slug "$owner")/)"
             fi
-            n_flight=$(printf '%s\n' "$wt_active" | grep -cxF -- "$key" || true)
-            n_wait=$(printf '%s\n' "$wt_waiting" | grep -cxF -- "$key" || true)
-            if GIT_OPTIONAL_LOCKS=0 worktree_dirty "$d" >/dev/null; then
-                state="${YELLOW}uncommitted changes${RESET}"
-            else
-                state="${DIM}clean${RESET}"
-            fi
-            extra=""
-            [ "$n_wait" -gt 0 ] && extra="  ${RED}${n_wait} waiting on it${RESET}"
-            wt_out+=$(printf '    %-43s  %b  %s in flight  %b%b' "$key" "$who" "$n_flight" "$state" "$extra")$'\n'
+            wt_rows+=("$proj"$'\t'"ai/$key"$'\t'"$action"$'\t'"$color"$'\t'"$detail")
+            [ "${#proj}" -gt "$wt_w_proj" ] && wt_w_proj=${#proj}
+            [ "$((${#key} + 3))" -gt "$wt_w_branch" ] && wt_w_branch=$((${#key} + 3))
+        done < <(printf '%s\n' "$keys" | sort -u)
+        # Fold this repository's merged branches once there are too many.
+        if [ "$n_done" -gt "$WT_DONE_SHOWN" ]; then
+            kept=()
+            for r in "${wt_rows[@]}"; do
+                IFS=$'\t' read -r p _ a _ _ <<< "$r"
+                [ "$p" = "$proj" ] && [ "$a" = done ] && continue
+                kept+=("$r")
+            done
+            folded="+$n_done merged branches"
+            wt_rows=("${kept[@]}" "$proj"$'\t'"$folded"$'\t'"done"$'\t'"$DIM"$'\t'"git branch -d to remove them")
+            [ "${#folded}" -gt "$wt_w_branch" ] && wt_w_branch=${#folded}
+        fi
+    done
+
+    # Most urgent first: what blocks work, then what waits on a human, then
+    # what resolves on its own.
+    for want in fix commit merge prune wait done; do
+        for r in "${wt_rows[@]}"; do
+            IFS=$'\t' read -r proj branch action color detail <<< "$r"
+            [ "$action" = "$want" ] || continue
+            wt_out+=$(printf '  %-*s  %-*s  %s%-6s%s  %s' "$wt_w_proj" "$proj" \
+                "$wt_w_branch" "$branch" "$color$BOLD" "$action" "$RESET" "$detail")$'\n'
         done
     done
 fi

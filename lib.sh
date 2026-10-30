@@ -1133,6 +1133,36 @@ active_task_keys() {
     done
 }
 
+# The next human action for one ai/<key> branch and its worktree, as one word:
+#   fix     a task of the brief is in review/: --unblock it, or discard the
+#           worktree's changes (it blocks the brief's other tasks either way)
+#   wait    tasks of the brief are still in inbox/ or run/
+#   commit  uncommitted changes and no task left to make them: commit or
+#           discard them by hand
+#   prune   a clean worktree nothing needs: the next sweep removes it
+#   merge   the branch holds work its base does not have (branch_unmerged)
+#   done    merged; the branch can be deleted, which the pipeline never does
+# First match wins, in that order. The task counts are passed in rather than
+# recomputed because the caller scans the queue once for every branch.
+#   worktree_action <repo-top> <key> <base> <n-live> <n-review>
+worktree_action() {
+    local top="$1" key="$2" base="${3:-HEAD}" n_live="${4:-0}" n_review="${5:-0}"
+    local wt="$top/$WORKTREE_DIRNAME/$key" has_wt=0
+    worktree_registered "$top" "$wt" && has_wt=1
+    if [ "$n_review" -gt 0 ]; then echo fix; return 0; fi
+    if [ "$n_live" -gt 0 ]; then echo wait; return 0; fi
+    if [ "$has_wt" -eq 1 ]; then
+        if worktree_dirty "$wt" >/dev/null; then echo commit; else echo prune; fi
+        return 0
+    fi
+    if git -C "$top" show-ref --verify --quiet "refs/heads/ai/$key" \
+        && branch_unmerged "$top" "ai/$key" "$base"; then
+        echo merge
+        return 0
+    fi
+    echo done
+}
+
 # Remove the worktrees of one repository whose task is no longer in flight.
 # Prints each removed slug. A dirty worktree is reported and kept: its changes
 # are the only copy. Branches are never deleted.

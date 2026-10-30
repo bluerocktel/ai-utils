@@ -285,6 +285,22 @@ if worktree_base_ref "$REPO" '' "$(task_base_branch "$BT/2026-10-30_from-brief.m
 fi
 rm "$BT"/*.md "$HOME/home-brief.md"
 
+# ── worktree_action: one next step per branch, first match wins ────────────
+WA=$(worktree_ensure "$REPO" act-open 2>/dev/null) || fail "act-open ensure failed"
+[ "$(worktree_action "$REPO" act-open main 0 1)" = fix ] || fail "a task in review must be fix"
+[ "$(worktree_action "$REPO" act-open main 2 1)" = fix ] || fail "review must win over tasks in flight"
+[ "$(worktree_action "$REPO" act-open main 2 0)" = wait ] || fail "tasks in flight must be wait"
+[ "$(worktree_action "$REPO" act-open main 0 0)" = prune ] || fail "clean worktree, nothing left, must be prune"
+echo wip > "$WA/wip.txt"
+[ "$(worktree_action "$REPO" act-open main 0 0)" = commit ] || fail "dirty worktree, nothing left, must be commit"
+[ "$(worktree_action "$REPO" act-open main 1 0)" = wait ] || fail "dirty worktree with a task in flight must be wait"
+git -C "$WA" add wip.txt && git -C "$WA" commit -q -m wip
+git -C "$REPO" worktree remove "$WA"
+[ "$(worktree_action "$REPO" act-open main 0 0)" = merge ] || fail "unmerged branch without worktree must be merge"
+git -C "$REPO" cherry-pick ai/act-open >/dev/null
+[ "$(worktree_action "$REPO" act-open main 0 0)" = done ] || fail "patch-merged branch must be done"
+[ "$(worktree_action "$REPO" no-such-key main 0 0)" = done ] || fail "missing branch must be done"
+
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"
     exit 0
