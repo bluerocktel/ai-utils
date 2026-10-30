@@ -1,0 +1,340 @@
+#!/bin/bash
+# ai-history: what was done on a project, and where it stands now.
+#
+# For a human coming back to a project after a while. Everything here is
+# rebuilt from the task tree on each run (done/, the queues, suggestions/ and
+# git), so there is nothing to keep in sync and nothing that can go stale.
+#
+# Read-only: no agent call, no file moved, nothing written into $TASKS_DIR.
+# Tasks never see this output: no prompt reads it.
+#
+# Usage:
+#   ai-history                  Every project, with its last activity
+#   ai-history PROJECT          One project: NOW, RECENT, BRIEFS
+#   ai-history PROJECT --facts  Same (the facts are all there is so far)
+#   ai-history PROJECT -n N     Show the last N finished tasks (default 15)
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+load_config
+
+usage() {
+    sed -n '/^# Usage:/,/^set -euo/p' "$0" | sed '$d; s/^# \{0,1\}//'
+}
+
+PROJECT_ARG=""
+RECENT_N=15
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --facts) shift ;;
+        -n) RECENT_N="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
+        -h|--help) usage; exit 0 ;;
+        -*) echo "ai-history: unknown option '$1'" >&2; usage >&2; exit 2 ;;
+        *) PROJECT_ARG="$1"; shift ;;
+    esac
+done
+case "$RECENT_N" in ''|*[!0-9]*|0) echo "ai-history: -n needs a positive number" >&2; exit 2 ;; esac
+
+if [ -n "${NO_COLOR:-}" ] || [ ! -t 1 ]; then
+    BOLD="" RED="" GREEN="" YELLOW="" CYAN="" DIM="" RESET=""
+else
+    BOLD=$(tput bold 2>/dev/null || echo "")
+    RED=$(tput setaf 1 2>/dev/null || echo "")
+    GREEN=$(tput setaf 2 2>/dev/null || echo "")
+    YELLOW=$(tput setaf 3 2>/dev/null || echo "")
+    CYAN=$(tput setaf 6 2>/dev/null || echo "")
+    DIM=$(tput dim 2>/dev/null || tput setaf 8 2>/dev/null || echo "")
+    RESET=$(tput sgr0 2>/dev/null || echo "")
+fi
+
+_section() { printf '\n%s%s%s\n' "${BOLD}${CYAN}" "$1" "$RESET"; }
+
+# 2026-10-30_11-19_2026-10-30_some-task.task.md -> some-task
+_display() {
+    basename "$1" | sed -E 's/\.task\.md$|\.md$//; s/^[0-9]{4}-[0-9]{2}-[0-9]{2}_([0-9]{2}-[0-9]{2}_)?//; s/^[0-9]{4}-[0-9]{2}-[0-9]{2}_//'
+}
+
+# 2026-10-30_11-19_... -> "10-30 11:19"; a name without the time keeps the day.
+_when() {
+    basename "$1" | sed -nE 's/^[0-9]{4}-([0-9]{2}-[0-9]{2})_([0-9]{2})-([0-9]{2})_.*/\1 \2:\3/p; t; s/^[0-9]{4}-([0-9]{2}-[0-9]{2})_.*/\1      /p'
+}
+
+# One line saying what a finished task did: the subject of its report's
+# ## Suggested Commit Message (written to be exactly that), else the first
+# sentence of its ## Summary, flattened and shortened.
+_first_sentence() {
+    local report="$1" line
+    [ -r "$report" ] || return 0
+    line=$(awk '/^## Suggested Commit Message/{f=1; next}
+                f && /^## /{exit}
+                f && /^```/{next}
+                f && NF {print; exit}' "$report")
+    [ -n "$line" ] || line=$(awk '/^## Summary/{f=1; next} f && /^## /{exit} f && NF {print; exit}' "$report")
+    line=$(printf '%s' "$line" | sed -E 's/^[[:space:]]*([-*]|[0-9]+\.)[[:space:]]+//; s/\*\*//g; s/`//g')
+    line=$(printf '%s' "$line" | sed -E 's/([.!?])[[:space:]].*/\1/')
+    [ "${#line}" -gt 110 ] && line="${line:0:107}..."
+    printf '%s' "$line"
+}
+
+# One tab-separated line per task file that names a project:
+#   <file> \t <raw ## Project token>
+# A single awk pass over every file, because done/ holds thousands of them and
+# a process per file would take seconds. Same rule as project_from_task: the
+# first non-heading line under ## Project, first token, stopping at the next
+# heading.
+_index() {
+    local d
+    for d in "$@"; do
+        [ -d "$d" ] || continue
+        find "$d" -maxdepth 1 -type f -name '20*.md' -print0
+    done | xargs -0 -r awk '
+        FNR == 1 { found = 0 }
+        /^## Project/ { found = 1; next }
+        found && /^[^#]/ { print FILENAME "\t" $1; nextfile }
+        found && /^##/ { nextfile }
+    '
+}
+
+# Raw ## Project token -> canonical project, as canonical_project in lib.sh
+# decides it: sanitise, an existing project file wins, else a declared alias
+# matched case-insensitively, else the value unchanged. canonical_project
+# rescans every project file's aliases for each token that is not a file
+# name, and done/ is full of those, so the alias table is built ONCE here and
+# the answer cached. tests/test_history.sh checks the two agree.
+# Sets CANON_OUT rather than printing: a $(...) caller would run in a
+# subshell and the cache would never fill.
+declare -A CANON ALIAS_OF
+if [ -d "$PROJECTS_DIR" ]; then
+    for pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$pf" ] || continue
+        stem=$(basename "$pf" .md)
+        while IFS= read -r alias; do
+            [ -n "$alias" ] || continue
+            [ -n "${ALIAS_OF[$alias]+x}" ] || ALIAS_OF[$alias]="$stem"
+        done < <(section_from_task Aliases "$pf" \
+                    | sed -E 's/^[[:space:]]*-[[:space:]]*//; s/`//g; s/^[[:space:]]+//; s/[[:space:]]+$//' \
+                    | tr '[:upper:]' '[:lower:]')
+    done
+fi
+CANON_OUT=""
+_canon() {
+    local raw="$1" value
+    if [ -z "${CANON[$raw]+x}" ]; then
+        value="${raw##*/}"
+        value="${value//[^A-Za-z0-9._-]/}"
+        if [ -z "$value" ]; then
+            CANON[$raw]="_unnamed"
+        elif [ -f "$PROJECTS_DIR/${value}.md" ]; then
+            CANON[$raw]="$value"
+        else
+            CANON[$raw]="${ALIAS_OF[${value,,}]:-$value}"
+        fi
+    fi
+    CANON_OUT="${CANON[$raw]}"
+}
+
+# Every task file of the tree, as three parallel arrays (canonical project,
+# where it is, path): reading tab-joined rows back with a here-string costs a
+# temporary file per row, and there are well over a thousand rows.
+# Finished tasks are the done/*.task.md files only: the reports beside them
+# carry no ## Project, and a failed attempt leaves a report but no .task.md.
+ROW_P=() ROW_W=() ROW_F=()
+_add_row() { ROW_P+=("$CANON_OUT"); ROW_W+=("$1"); ROW_F+=("$2"); }
+while IFS=$'\t' read -r file raw; do
+    [ -n "$raw" ] || continue
+    case "$file" in
+        "$DONE_DIR"/*.task.md) where=done ;;
+        "$DONE_DIR"/*) continue ;;
+        "$INBOX"/*) where=inbox ;;
+        "$RUN_DIR"/*) where=run ;;
+        "$REVIEW_DIR"/*) where=review ;;
+        "$BACKLOG_REVIEW_DIR"/*) where=backlog ;;
+        "$SUGGEST_DIR"/*) where=suggestion ;;
+        *) continue ;;
+    esac
+    _canon "$raw"
+    _add_row "$where" "$file"
+done < <(_index "$DONE_DIR" "$INBOX" "$RUN_DIR" "$REVIEW_DIR" "$BACKLOG_REVIEW_DIR")
+# Suggestions are not date-prefixed, so they are indexed on their own.
+while IFS=$'\t' read -r file raw; do
+    [ -n "$raw" ] || continue
+    _canon "$raw"
+    _add_row suggestion "$file"
+done < <([ -d "$SUGGEST_DIR" ] && find "$SUGGEST_DIR" -maxdepth 1 -type f -name '*.md' -print0 \
+            | xargs -0 -r awk '
+                FNR == 1 { found = 0 }
+                /^## Project/ { found = 1; next }
+                found && /^[^#]/ { print FILENAME "\t" $1; nextfile }
+                found && /^##/ { nextfile }
+            ')
+
+# ── No project: one line per project file ───────────────────────
+if [ -z "$PROJECT_ARG" ]; then
+    [ -d "$PROJECTS_DIR" ] || exit 0
+    declare -A last_done n_open
+    for i in "${!ROW_P[@]}"; do
+        p="${ROW_P[$i]}" where="${ROW_W[$i]}" file="${ROW_F[$i]}"
+        case "$where" in
+            done)
+                b="${file##*/}"
+                [[ "$b" > "${last_done[$p]:-}" ]] && last_done[$p]="$b" ;;
+            inbox|run|review) n_open[$p]=$(( ${n_open[$p]:-0} + 1 )) ;;
+        esac
+    done
+    lines=()
+    for pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$pf" ] || continue
+        p=$(basename "$pf" .md)
+        last="${last_done[$p]:-}"
+        lines+=("${last:-0}"$'\t'"$p")
+    done
+    [ "${#lines[@]}" -gt 0 ] || exit 0
+    printf '%s%-24s  %-12s  %s%s\n' "$DIM" "PROJECT" "LAST DONE" "OPEN" "$RESET"
+    while IFS=$'\t' read -r last p; do
+        if [ "$last" = 0 ]; then when="never"; else when=$(_when "$last"); fi
+        open=${n_open[$p]:-0}
+        [ "$open" -gt 0 ] && open="${YELLOW}${open}${RESET}"
+        printf '%-24s  %-12s  %b\n' "$p" "$when" "$open"
+    done < <(printf '%s\n' "${lines[@]}" | sort -r)
+    exit 0
+fi
+
+# ── One project ─────────────────────────────────────────────────
+PROJECT=$(canonical_project "$PROJECT_ARG")
+PF="$PROJECTS_DIR/${PROJECT}.md"
+if [ ! -f "$PF" ]; then
+    echo "ai-history: no project file for '$PROJECT_ARG' in $PROJECTS_DIR" >&2
+    exit 1
+fi
+
+done_files=() queued=() review=() backlog=() suggestions=()
+for i in "${!ROW_P[@]}"; do
+    [ "${ROW_P[$i]}" = "$PROJECT" ] || continue
+    where="${ROW_W[$i]}" file="${ROW_F[$i]}"
+    case "$where" in
+        done) done_files+=("$file") ;;
+        inbox|run) queued+=("$file") ;;
+        review) review+=("$file") ;;
+        backlog) backlog+=("$file") ;;
+        suggestion) suggestions+=("$file") ;;
+    esac
+done
+
+# Header: name, working directory, isolation.
+wd=$(project_working_dir "$PROJECT" 2>/dev/null || true)
+iso=$(project_isolation "$PROJECT" 2>/dev/null || echo "?")
+base=$(project_field "$PROJECT" 'Base Branch')
+info="${wd/#"$HOME"/\~}"
+if [ "$iso" = worktree ]; then
+    info+="   worktree isolation${base:+, base $base}"
+fi
+printf '%s%s%s   %s%s%s\n' "$BOLD" "$PROJECT" "$RESET" "$DIM" "$info" "$RESET"
+
+# ── NOW ──
+_section "NOW"
+printf '  queued %d · in review %d · awaiting your review %d · suggestions %d\n' \
+    "${#queued[@]}" "${#review[@]}" "${#backlog[@]}" "${#suggestions[@]}"
+for f in "${review[@]}"; do
+    printf '  %s✗%s %s  %s(failed, in review/)%s\n' "$RED" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
+done
+for f in "${queued[@]}"; do
+    case "$f" in "$RUN_DIR"/*) state="running" ;; *) state="queued" ;; esac
+    printf '  %s⏳%s %s  %s(%s)%s\n' "$DIM" "$RESET" "$(_display "$f")" "$DIM" "$state" "$RESET"
+done
+for f in "${backlog[@]}"; do
+    printf '  %s●%s %s  %s(waiting for your review in backlog-for-review/)%s\n' "$YELLOW" "$RESET" "$(_display "$f")" "$DIM" "$RESET"
+done
+# Suggestions pile up (they wait for a human to promote or delete them), so
+# only the newest few are named.
+SUGGEST_SHOWN=5
+if [ "${#suggestions[@]}" -gt 0 ]; then
+    while IFS= read -r f; do
+        title=$(grep -m1 '^# ' "$f" 2>/dev/null | sed 's/^# //' || true)
+        printf '  %s›%s %s  %s(suggestion)%s\n' "$DIM" "$RESET" "${title:-$(basename "$f" .md)}" "$DIM" "$RESET"
+    done < <(ls -t "${suggestions[@]}" | head -n "$SUGGEST_SHOWN")
+    if [ "${#suggestions[@]}" -gt "$SUGGEST_SHOWN" ]; then
+        printf '  %s  … and %d more in %s%s\n' "$DIM" $(( ${#suggestions[@]} - SUGGEST_SHOWN )) \
+            "${SUGGEST_DIR/#"$HOME"/\~}/" "$RESET"
+    fi
+fi
+
+# Brief branches, with the same action rule dtask uses (worktree_action).
+if [ "$iso" = worktree ] && [ -n "$wd" ]; then
+    top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null || true)
+    if [ -n "$top" ]; then
+        declare -A live rev
+        for f in "${queued[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && live[$k]=$(( ${live[$k]:-0} + 1 )); done
+        for f in "${review[@]}"; do k=$(worktree_key "$f" 2>/dev/null) && rev[$k]=$(( ${rev[$k]:-0} + 1 )); done
+        while IFS= read -r key; do
+            [ -n "$key" ] || continue
+            action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$top" "$key" "${base:-HEAD}" \
+                "${live[$key]:-0}" "${rev[$key]:-0}")
+            case "$action" in
+                fix) text="${RED}✗ a task failed review${RESET}" ;;
+                commit) text="${YELLOW}⚠ uncommitted changes, no task left${RESET}" ;;
+                merge) text="${YELLOW}⇢ ready to merge into ${base:-HEAD}: git merge ai/$key${RESET}" ;;
+                prune) text="${DIM}· finished, worktree removed by the next sweep${RESET}" ;;
+                wait) text="${DIM}⏳ tasks still to run${RESET}" ;;
+                *) continue ;;
+            esac
+            printf '  branch %s  %b\n' "ai/$key" "$text"
+        done < <(GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
+                    refs/heads/ai/ 2>/dev/null | sed 's|^ai/||')
+    fi
+fi
+
+# ── RECENT ──
+_section "RECENT   (last $RECENT_N finished)"
+if [ "${#done_files[@]}" -eq 0 ]; then
+    printf '  %snothing finished yet%s\n' "$DIM" "$RESET"
+else
+    while IFS= read -r f; do
+        report="${f%.task.md}.md"
+        printf '  %s  %s✓%s %-44s  %s\n' "$(_when "$f")" "$GREEN" "$RESET" \
+            "$(_display "$f")" "$(_first_sentence "$report")"
+    done < <(printf '%s\n' "${done_files[@]}" | sort -r | head -n "$RECENT_N")
+fi
+
+# ── BRIEFS ──
+# A brief's tasks share its ## Brief path. Counted across every queue so a
+# brief reads "2/3 done" while its last task is still running.
+# One awk pass reads every ## Brief (inline or next-line form, as
+# field_from_task does); a process per task file took seconds here.
+# ai-brief stamps a path; older hand-written tasks carry free text there,
+# which is not a brief this view can group by, so only a first token ending
+# in .md counts.
+declare -A b_total b_done b_first
+while IFS=$'\t' read -r f br; do
+    br="${br//\`/}"
+    br="${br%%[[:space:]]*}"
+    case "$br" in *.md) ;; *) continue ;; esac
+    br="${br##*/}"; br="${br%.md}"
+    b_total[$br]=$(( ${b_total[$br]:-0} + 1 ))
+    case "$f" in "$DONE_DIR"/*) b_done[$br]=$(( ${b_done[$br]:-0} + 1 )) ;; esac
+    b="${f##*/}"
+    if [ -z "${b_first[$br]:-}" ] || [[ "$b" < "${b_first[$br]}" ]]; then b_first[$br]="$b"; fi
+done < <(printf '%s\0' "${done_files[@]}" "${queued[@]}" "${review[@]}" "${backlog[@]}" \
+            | xargs -0 -r awk '
+                FNR == 1 { want = 0 }
+                tolower($0) ~ /^##[[:space:]]+brief[:[:space:]]*$/ { want = 1; next }
+                tolower($0) ~ /^##[[:space:]]+brief[:[:space:]]/ {
+                    v = $0; sub(/^##[[:space:]]+[Bb][Rr][Ii][Ee][Ff][:[:space:]]*/, "", v)
+                    print FILENAME "\t" v; nextfile
+                }
+                want && /^#/ { nextfile }
+                want && NF { print FILENAME "\t" $0; nextfile }
+            ')
+if [ "${#b_total[@]}" -gt 0 ]; then
+    _section "BRIEFS"
+    for br in "${!b_total[@]}"; do
+        printf '%s\t%s\n' "${b_first[$br]}" "$br"
+    done | sort -r | head -n 10 | while IFS=$'\t' read -r first br; do
+        n=${b_done[$br]:-0} t=${b_total[$br]}
+        if [ "$n" -eq "$t" ]; then mark="${GREEN}${n}/${t} done${RESET}"; else mark="${YELLOW}${n}/${t} done${RESET}"; fi
+        name="${br#"$PROJECT"-}"
+        name="${name%-brief}"
+        printf '  %s  %-48s  %b\n' "$(_when "$first" | cut -c1-5)" "$name" "$mark"
+    done
+fi
