@@ -198,7 +198,7 @@ agents_root=$HOME/my-agents
 ```
 
 - Unset, `agents_root` means this repository's `agents/`.
-- Only `ai-agent` and `dtask` read it. The engine runs the **published copy**
+- Only `ai-agent`, `dtask` and `ai-ask` read it. The engine runs the **published copy**
   in `scheduled/`, so where a definition lives never affects a run.
 - Set but not a directory: a warning on stderr and an empty listing, never a
   fallback to `agents/`.
@@ -355,8 +355,10 @@ that `## Permission` parses and is within the ceiling, that `## Project` and
 not collide with a plain job already in `scheduled/`.
 
 `ai-agent` writes nothing: no agent call, no provider loaded, no file moved.
-`dtask` shows the same inventory in its AGENTS section, with when each
-published routine last ran.
+`dtask`'s AGENTS section shows what each published routine is doing
+(overdue, found something, quiet), and `ai-ask AGENT "question"` asks an agent
+about its own runs. See [reference: dtask](reference.md#the-agents-section)
+and [reference: ai-ask](reference.md#ai-ask).
 
 ### Publishing is a manual step
 

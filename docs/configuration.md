@@ -70,11 +70,18 @@ $EDITOR config                # at least set default_runner=
 | `history_runner` | unset | Runner that writes the WHERE THINGS STAND paragraph of `ai-history PROJECT`. Unset: `default_runner`. The paragraph is cached in `$TASKS_DIR/.history/<project>.md` and rewritten only when the project's tasks change. An auth failure shows the previous paragraph as stale and pauses nothing. | [reference: scripts](reference.md#scripts) |
 | `history_model` | unset | Model for that paragraph. Unset: the CLI's own default model, not `default_model`. A small model is enough. | |
 
+### Asking an agent (`ai-ask`)
+
+| Key | Default | What it controls | More |
+|---|---|---|---|
+| `ask_runner` | unset | Runner that answers `ai-ask AGENT "question"`. Unset: `default_runner`. One call per question; nothing is written. An auth failure is reported and pauses nothing. | [reference: ai-ask](reference.md#ai-ask) |
+| `ask_model` | unset | Model for those answers. Unset: the CLI's own default model. | |
+
 ### Agent layer
 
 | Key | Default | What it controls | More |
 |---|---|---|---|
-| `agents_root` | unset | Folder holding agent charters and routine files. Unset: this repository's `agents/`. Point it at a private repository to keep your definitions out of this public one. Only `ai-agent` and `dtask` read it. Set but not a directory: a warning and an empty listing, never a fallback. | [where definitions live](scheduled-jobs.md#where-definitions-live) |
+| `agents_root` | unset | Folder holding agent charters and routine files. Unset: this repository's `agents/`. Point it at a private repository to keep your definitions out of this public one. Only `ai-agent`, `dtask` and `ai-ask` read it. Set but not a directory: a warning and an empty listing, never a fallback. | [where definitions live](scheduled-jobs.md#where-definitions-live) |
 | `agent_memory_lines` | `40` | Lines of a routine's memory ledger fed back into its prompt, and the size the ledger is trimmed to. A non-numeric or zero value falls back to `40`. Only jobs with `## Agent` have a ledger. | [memory ledger](scheduled-jobs.md#the-memory-ledger) |
 | `agent_mail_to` | unset | The only recipient of a routine's `===MESSAGE===` blocks: you. Unset disables the message route. | [operator routes](scheduled-jobs.md#operator-routes) |
 | `agent_mail_reply_to` | unset | Reply-To on those messages. Give it its own address so replies can be filtered and read back by the routine. | [operator routes](scheduled-jobs.md#operator-routes) |

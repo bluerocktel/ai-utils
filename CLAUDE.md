@@ -58,7 +58,9 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
 | `ai-brief` / `ai-briefs` | decompose a brief into a chain of tasks, into the review queue. |
 | `ai-scheduled` | the push side: dispatch the due recurring jobs in `scheduled/`. |
 | `ai-agent` | read-only view of the agent layer: list, show, validate, publish plan. Writes nothing, anywhere. |
-| `dtask` | read-only dashboard across every runner (plus a `WORKTREES` section when a project opts into worktree isolation). |
+| `dtask` | read-only dashboard across every runner (plus a `WORKTREES` section when a project opts into worktree isolation, and an `AGENTS` section when routines are defined). |
+| `ai-history` | per-project history and current state. Facts rebuilt on each run; one cached agent paragraph in `$TASKS_DIR/.history/`, its only write. |
+| `ai-ask` | ask one agent about its own work, from its charter and its routines' state. One agent call, writes nothing. |
 | `agents/CONTRACT.md` | the agent-layer contract: layout, headers, the three permission levels, and a worked example. **The only thing under `agents/`:** this repo ships no agents, see The agent layer. |
 | `<agents-root>/<agent>/AGENT.md` | one agent's charter: `## Domain`, `## Sources`, `## Permission-Ceiling`. Lives wherever `agents_dir` resolves. |
 | `<agents-root>/<agent>/routines/<slug>.md` | one routine: an `ai-scheduled` job file plus `## Agent` and `## Permission`. |
@@ -76,7 +78,8 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
   edit:
   ```sh
   grep -rniE '\bgrok\b|\bclaude\b|\bxai\b|\banthropic\b' \
-      lib.sh init ai-task ai-eval ai-brief ai-briefs ai-scheduled dtask ai-agent
+      lib.sh init ai-task ai-eval ai-brief ai-briefs ai-scheduled dtask ai-agent \
+      ai-history ai-ask
   ```
   Hits in comments that describe the abstraction are acceptable; a hit in
   executed code is a bug.
@@ -862,7 +865,9 @@ is a `cp`. Seven things to keep right:
    repository and `agents/` here holds only `CONTRACT.md` and its worked
    example. Three consequences:
 
-   - **Only `ai-agent` and `dtask` may call `agents_dir`.** The engine must not:
+   - **Only the viewers (`ai-agent`, `dtask`, `ai-ask`) may call
+     `agents_dir`.** `ai-ask` makes an agent call but never runs a routine,
+     so it is a viewer here. The engine must not:
      `ai-scheduled` runs the **published copy** in `scheduled/`, which is what
      makes the location of a definition irrelevant to a run. A reader added to
      `ai-scheduled` or `ai-task` would couple execution to a repository that may
@@ -904,6 +909,43 @@ been acted on. `~/tasks/` gains no directory for any of this:
 `agent_memory_path` is an additive file in the existing `scheduled/.state/`, and
 definitions live in git where they can be diffed and reverted.
 
+## Views for the human (`ai-history`, `ai-ask`, dtask AGENTS)
+
+Added 2026-10-30. Three ways for the user to see what the pipeline and the
+agents did without reading state files. None of them feeds anything back into
+a run. Tests: `tests/test_history.sh`, `tests/test_ask.sh`,
+`tests/test_agents_view.sh`. Things to keep right:
+
+1. **The `.history/` cache is written only by `ai-history`, and no task or
+   routine prompt may read it.** The paragraph can be stale by design (it is
+   rewritten only when the fingerprint changes, and kept when a call fails), so
+   it must never become an agent's fact. The fingerprint leaves suggestions
+   out: they arrive constantly and do not change where a project stands.
+2. **Neither `ai-history` nor `ai-ask` touches a cooldown marker.** They are
+   conveniences; an auth failure in one must not pause a queue. Both skip a
+   runner that is already in cooldown, and both run their call in an empty
+   temporary directory with stdout and stderr captured separately (gotcha 1).
+3. **`ai-history` counts only `done/*.task.md` as finished,** and gives each
+   branch the base of its brief, like `task_base_branch`.
+4. **`ai-ask` writes nothing, and its read-only property is the empty
+   directory plus the prompt, not the provider.** Both providers run headless
+   with permissions bypassed. Do not describe it as more than that; a true
+   no-tools mode is a provider-contract change. It shows a routine's
+   PUBLISHED copy when there is one (that is what runs), caps each part of
+   the context so one large snapshot cannot crowd out the rest, and refuses
+   any agent name outside `[a-z0-9-]` before building a path.
+5. **dtask AGENTS judges the published copy and reads only existing state**
+   (`<slug>.run`, the memory ledger via `agent_memory_summary`). Overdue means
+   no run for two periods (`schedule_period_sec`) plus an hour. The ledger
+   records conclusive runs only, so a failing routine shows as overdue; adding
+   a "failed" state needs a new stamp written by `ai-scheduled`, not a guess
+   from `cron.log`. A tree with no routine must render byte-identically, which
+   the test checks against the previous `dtask`.
+6. **dtask rows are joined by `$US` (0x1f), not a tab.** A tab is IFS
+   whitespace, so `read` merges an empty field (the colour, under `NO_COLOR`)
+   with its neighbour and shifts every field after it. WORKTREES had exactly
+   this bug.
+
 ## Hard boundaries
 
 These are not style preferences. Each one exists because violating it damages
@@ -921,7 +963,9 @@ something live.
   scripts, which are not yet in cron.
 - **NEVER run `ai-task`, `ai-brief` or `ai-eval` against the live `~/tasks/`
   tree.** Smoke tests use a throwaway `TASKS_DIR` under `/tmp`. `dtask` and
-  `ai-agent` are the exceptions, being read-only.
+  `ai-agent` are the exceptions, being read-only. `ai-history` (writes only
+  its cache in `.history/`) and `ai-ask` (writes nothing) move no task either,
+  but each costs one agent call.
 - **THIS REPOSITORY IS PUBLISHED PUBLICLY.** Nothing added here may name a
   customer, a private path, a credential, or a business domain the user actually
   works in. That is why the agent definitions live elsewhere (see The agent

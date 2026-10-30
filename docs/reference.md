@@ -24,13 +24,17 @@ Requires `bash`, `tmux`, `jq`, `flock`, `timeout`, and each provider's CLI on
 | `ai-agent` | `ai-agent` | Read-only view of the agent layer: list, show, validate, print the publish command. | `--list`, `--show SLUG`, `--validate`, `--publish-plan [SLUG]` |
 | `dtask` | `dtask` | Read-only dashboard of the whole tree, across every runner. | `-w` |
 | `ai-history` | `ai-history` | What was done on a project and where it stands. Facts are rebuilt on each run; only the summary paragraph is written by an agent and cached. | `PROJECT`, `--facts`, `--refresh`, `-n N` |
+| `ai-ask` | `ai-ask` | Ask one agent a question about its own work, answered from its charter and its routines' state. Writes nothing. | `AGENT QUESTION`, `AGENT --context` |
 
 Supporting files: `lib.sh` (shared helpers, sourced, names no vendor) and
 `providers/<runner>.sh` (the only files that name a vendor).
 
-Only `init`, `dtask`, `ai-agent` and `ai-scheduled --dry-run` are safe to point
-at a tree you care about while testing: they make no agent call and move no
-task. For anything else, use a throwaway tree:
+Only `init`, `dtask`, `ai-agent`, `ai-history --facts` and
+`ai-scheduled --dry-run` are safe to point at a tree you care about while
+testing: they make no agent call and move no task. `ai-history` and `ai-ask`
+make one agent call but move no task either: `ai-history` writes only its
+cache in `.history/`, and `ai-ask` writes nothing. For anything else, use a
+throwaway tree:
 
 ```sh
 TASKS_DIR=$(mktemp -d) ./init
@@ -277,6 +281,61 @@ ai-agent --publish-plan [SLUG]  # print the cp command to publish; runs nothing
 Writes nothing, anywhere. Details in
 [scheduled jobs: ai-agent](scheduled-jobs.md#ai-agent).
 
+## ai-history
+
+```sh
+ai-history                    # every project, with its last activity
+ai-history PROJECT            # WHERE THINGS STAND, then NOW, RECENT, BRIEFS
+ai-history PROJECT --facts    # facts only: no agent call, nothing written
+ai-history PROJECT --refresh  # rewrite the paragraph even if nothing changed
+ai-history PROJECT -n N       # show the last N finished tasks (default 15)
+```
+
+For when you come back to a project after a while. Everything except the
+first paragraph is rebuilt from the tree on each run: finished tasks (from
+`done/`, with the subject of each report's suggested commit message), what is
+queued, running or in review, brief progress, and each `ai/` branch with
+whether it still has to be merged into its base.
+
+- **WHERE THINGS STAND** is a short paragraph an agent writes from those facts
+  and the latest report summaries. It is cached in
+  `$TASKS_DIR/.history/<project>.md` and rewritten only when the project's
+  tasks or branches change, so opening an unchanged project costs nothing.
+- A failed, timed-out or unauthenticated call shows the previous paragraph
+  marked stale, or no paragraph yet. It never touches a cooldown marker, so it
+  pauses no queue.
+- The cache is for you only: no task prompt ever reads it.
+- Runner and model: `history_runner`, `history_model`
+  ([configuration](configuration.md#project-history-ai-history)).
+
+## ai-ask
+
+```sh
+ai-ask                          # the agents you can ask
+ai-ask AGENT "your question"    # one question, one agent call
+echo "question" | ai-ask AGENT  # the question on stdin
+ai-ask AGENT --context          # print what AGENT is given; no agent call
+```
+
+Asks one agent about its own work: what a routine saw, why it flagged
+something, whether it is running. The answer comes only from what the agent
+layer already keeps, each part capped in size: the charter and, for every
+routine of the agent, its published copy (else its definition, marked not
+published), its memory ledger, its last snapshot and its latest report.
+
+- **Writes nothing**, not even a cache. The call runs in an empty temporary
+  directory.
+- **An auth failure, a timeout or an empty answer exits `1`** with the reason
+  on stderr. A runner in auth cooldown is not called. `ai-ask` never touches a
+  cooldown marker.
+- **An unknown agent, a name that is not a plain agent name, or no question
+  exits `2`** without a call.
+- **Read-only is enforced by the empty directory and the prompt**, not by the
+  provider, which runs with its usual permissions. Use `--context` to see
+  exactly what the agent is given.
+- Runner and model: `ask_runner`, `ask_model`
+  ([configuration](configuration.md#asking-an-agent-ai-ask)).
+
 ## dtask
 
 Read-only dashboard: no agent call, no file moved, nothing written.
@@ -296,14 +355,14 @@ Sections, top to bottom:
 | Section | Shows |
 |---|---|
 | auth cooldown banner | one line per runner currently paused, with minutes left |
-| NEEDS ATTENTION | tasks in `backlog-for-review/` and `review/`, dead dependency chains (`⊘`), and worktree branches ready to merge or holding orphaned changes |
+| NEEDS ATTENTION | tasks in `backlog-for-review/` and `review/`, dead dependency chains (`⊘`), worktree branches ready to merge or holding orphaned changes, and agent routines that will not run or are overdue |
 | PIPELINE | counts per stage, plus `⊘ blocked(N)` for dead chains (these tasks are also counted in `inbox/`) |
 | RUNNING | tasks in `run/`, with runner and tmux session from the `.state` sidecar |
 | WORKTREES | only when a project uses [worktree isolation](worktrees.md#the-worktrees-section-in-dtask) |
 | TODAY | completed, retried, deferred, failed and needs-review counts from `DONE.md` |
 | BY RUNNER / BY PROJECT | stage counts per runner and per project |
 | RECENT ACTIVITY | latest `DONE.md` entries, with a `[runner]` column |
-| AGENTS | agent routines with kind, schedule, permission (`act` coloured apart), published or not, and when each last ran; nothing when no routine is defined |
+| AGENTS | what each published agent routine is doing, one line each (see below); nothing when no routine is defined |
 
 - Every task shows its resolved runner in `[brackets]`; an unset `## Runner`
   shows as `default_runner`.
@@ -313,6 +372,27 @@ Sections, top to bottom:
   report's `**Runner:**` line, then `default_runner`.
 - A dead chain is a task whose `## Depends-on` parent is in `review/` or exists
   nowhere. A parent still queued is ordinary waiting and is not shown.
+
+### The AGENTS section
+
+One line per **published** routine, most urgent first:
+
+| Line | When |
+|---|---|
+| `✗ will not run` | the published file has a schedule or a permission `ai-scheduled` rejects |
+| `⚠ overdue` | no run for more than two periods plus an hour; usually `ai-scheduled` is not in cron |
+| `✉ found something` | a run in the last 7 days signalled, with what it produced (messages, briefs, report, suggestions) |
+| `⏳ waiting for its first run` | published, never run, not yet overdue |
+| `✓ nothing to report` | everything else, with the time of the last run |
+
+- After each line, `7d: N runs, K signals` counts the memory ledger's lines of
+  the last 7 days. The ledger keeps only its last `agent_memory_lines` lines,
+  so a busy routine shows `N+`.
+- The ledger records conclusive runs only, so a routine whose runs keep failing
+  shows as overdue, not as failed.
+- Routines defined but not published fold into one line.
+- Will not run and overdue also appear under NEEDS ATTENTION.
+- Kind, schedule and permission are in `ai-agent`'s listing.
 
 ## Task file fields
 
@@ -382,4 +462,7 @@ No API calls, no real tasks:
 python3 -m unittest discover -s tests -v   # codex provider, operator routes, brief criteria, dashboard, picker
 bash tests/test_criteria_lint.sh           # the criteria lint
 bash tests/test_worktree.sh                # worktree helpers
+bash tests/test_history.sh                 # ai-history
+bash tests/test_agents_view.sh             # dtask AGENTS section
+bash tests/test_ask.sh                     # ai-ask
 ```
