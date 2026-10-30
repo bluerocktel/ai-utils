@@ -788,6 +788,32 @@ project_field() {
     field_from_task "$field" "$PROJECTS_DIR/${proj}.md" | tr -d '`'
 }
 
+# The ## Base Branch a task's worktree starts from. First match wins:
+#   1. the task file's own ## Base Branch;
+#   2. the ## Base Branch of the brief it was decomposed from (its ## Brief
+#      path, stamped by ai-brief), so one line in a brief routes the whole
+#      batch without the decomposing model having to copy it into each task;
+#   3. the project's ## Base Branch.
+# Prints nothing when none is set (worktree_base_ref then uses HEAD). A brief
+# that cannot be read falls through to the project: the brief is archived
+# after decomposition and is metadata here, not something to refuse a task on.
+# A value that does not resolve is still refused, by worktree_base_ref.
+#
+#   task_base_branch ~/tasks/inbox/2026-10-30_fix.md brteladmin  ->  feature/0044
+task_base_branch() {
+    local file="$1" proj="${2:-}" base brief
+    base=$(field_from_task 'Base Branch' "$file" | tr -d '`')
+    if [ -z "$base" ]; then
+        brief=$(field_from_task Brief "$file" | tr -d '`')
+        case "$brief" in
+            "~/"*) brief="$HOME/${brief#"~/"}" ;;
+        esac
+        [ -n "$brief" ] && base=$(field_from_task 'Base Branch' "$brief" | tr -d '`')
+    fi
+    [ -n "$base" ] || base=$(project_field "$proj" 'Base Branch')
+    printf '%s\n' "$base"
+}
+
 # A task slug reduced to what is safe in both a path and a branch name.
 # Returns 1 on a value that sanitises away entirely, or that git would refuse
 # as a branch: there is no safe default worktree to fall back to.
@@ -855,7 +881,7 @@ branch_unmerged() {
 #   - the parent's ai/<parent-slug> branch when it exists and is not yet merged
 #     into the base (branch_unmerged: by patch, so a rebased merge counts), so
 #     a chain A -> B -> C builds on itself without a human merging in between;
-#   - otherwise the project's ## Base Branch;
+#   - otherwise the task's base branch (task_base_branch: task, brief, project);
 #   - otherwise the main tree's current HEAD.
 # Returns 1 when an explicitly named base branch does not resolve: branching a
 # task from somewhere else than the human wrote would be a silent guess.

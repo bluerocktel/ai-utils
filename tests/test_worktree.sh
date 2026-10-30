@@ -253,6 +253,38 @@ worktree_blocker "$TASKS_DIR/inbox/2026-10-30_shared.md" >/dev/null && fail "sha
 worktree_blocker "$TASKS_DIR/inbox/2026-10-30_hand-written.md" >/dev/null 2>&1 && fail "task without ## Brief blocked"
 rm "$WB/wip.txt" "$TASKS_DIR"/inbox/*.md
 
+# ── task_base_branch: task, then brief, then project ───────────────────────
+mkdir -p "$TASKS_DIR/briefs/done"
+printf '## Isolation: worktree\n\n## Base Branch: main\n' > "$TASKS_DIR/projects/based.md"
+printf '# brief\n\n## Base Branch: `feature/x`\n' > "$TASKS_DIR/briefs/done/based-brief.md"
+printf '# brief without a base\n' > "$TASKS_DIR/briefs/done/plain-brief.md"
+BT="$TASKS_DIR/inbox"
+printf '## Project\nbased\n\n## Base Branch\nfeature/task\n\n## Brief\n%s\n' \
+    "$TASKS_DIR/briefs/done/based-brief.md" > "$BT/2026-10-30_own.md"
+printf '## Project\nbased\n\n## Brief\n%s\n' \
+    "$TASKS_DIR/briefs/done/based-brief.md" > "$BT/2026-10-30_from-brief.md"
+cp "$TASKS_DIR/briefs/done/based-brief.md" "$HOME/home-brief.md"
+printf '## Project\nbased\n\n## Brief\n`~/home-brief.md`\n' > "$BT/2026-10-30_tilde.md"
+printf '## Project\nbased\n\n## Brief\n%s\n' \
+    "$TASKS_DIR/briefs/done/plain-brief.md" > "$BT/2026-10-30_plain.md"
+printf '## Project\nbased\n\n## Brief\n%s\n' \
+    "$TASKS_DIR/briefs/done/gone-brief.md" > "$BT/2026-10-30_gone.md"
+printf '## Project\nbased\n' > "$BT/2026-10-30_none.md"
+printf '## Project\nplain\n' > "$BT/2026-10-30_unset.md"
+[ "$(task_base_branch "$BT/2026-10-30_own.md" based)" = feature/task ] || fail "task's own base must win"
+[ "$(task_base_branch "$BT/2026-10-30_from-brief.md" based)" = feature/x ] || fail "brief's base not used"
+[ "$(task_base_branch "$BT/2026-10-30_tilde.md" based)" = feature/x ] || fail "~/ brief path not expanded"
+[ "$(task_base_branch "$BT/2026-10-30_plain.md" based)" = main ] || fail "brief without base must fall to project"
+[ "$(task_base_branch "$BT/2026-10-30_gone.md" based)" = main ] || fail "unreadable brief must fall to project"
+[ "$(task_base_branch "$BT/2026-10-30_none.md" based)" = main ] || fail "no brief must fall to project"
+[ -z "$(task_base_branch "$BT/2026-10-30_unset.md" plain)" ] || fail "unset everywhere must print nothing"
+# A brief naming a branch the repository lacks is refused downstream, never
+# replaced by the project's base.
+if worktree_base_ref "$REPO" '' "$(task_base_branch "$BT/2026-10-30_from-brief.md" based)" >/dev/null 2>&1; then
+    fail "unresolvable brief base must be refused"
+fi
+rm "$BT"/*.md "$HOME/home-brief.md"
+
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"
     exit 0

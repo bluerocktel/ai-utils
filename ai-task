@@ -616,7 +616,7 @@ if [ "$MODE" = "run" ]; then
         # parent that ran before branches were keyed by brief, or has no
         # ## Brief, lives on ai/<its slug>. Try them in that order.
         WT_DEP=$(depends_on_from_task "$TASK_FILE")
-        WT_BASE_BRANCH=$(project_field "$ISO_PROJECT" 'Base Branch')
+        WT_BASE_BRANCH=$(task_base_branch "$TASK_FILE" "$ISO_PROJECT")
         WT_BASE=""
         if [ -n "$WT_DEP" ]; then
             WT_PFILE=$(find "$DONE_DIR" -maxdepth 1 -type f -name "*_${WT_DEP%.md}.task.md" 2>/dev/null | sort | tail -n 1)

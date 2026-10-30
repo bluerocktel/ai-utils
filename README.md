@@ -419,9 +419,32 @@ ln -s ../../.env .env
 | Section | Meaning |
 |---|---|
 | `## Isolation` | `worktree` opts in. Absent or `shared` is today's behaviour. Any other value sends the task to `review/` (no retry burned) rather than guessing. |
-| `## Base Branch` | Where a new task branch starts. Unset: the main tree's current `HEAD`. A name that does not resolve is a misconfiguration, not a fallback. |
+| `## Base Branch` | Where a new task branch starts. Unset: the main tree's current `HEAD`. A name that does not resolve is a misconfiguration, not a fallback. A brief or a task can override it, see below. |
 | `## Container Path` | Where a container mounts the working directory, so `docker exec ... cd /var/www/demo` lines are pointed at the worktree too. Only honoured when the working directory is the repository top. |
 | `## Worktree Setup` | One bash script (run with `-e`, from the worktree, once per worktree) for what git does not carry: dependency folders, `.env`. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported. Whatever it leaves untracked is never committed. **Copy** a dependency folder, never symlink it (see below). A symlink is fine for a plain file such as `.env`; make it **relative**, because an absolute one breaks inside a container. |
+
+**Starting a brief from another branch.** A project's `## Base Branch` fits
+most work, but a fix for one customer may have to start from that customer's
+branch. Put the line in the brief instead of changing the project file:
+
+```markdown
+# demo task
+
+## Project
+demo
+
+## Base Branch: feature/customer-x
+```
+
+The first match wins: the task file's own `## Base Branch`, then the one in
+the brief named by its `## Brief` (stamped by `ai-brief`, so the decomposition
+does not have to copy the line into each task), then the project's. A brief
+that can no longer be read falls back to the project's value. A name that
+does not resolve still sends the task to `review/`, never to another branch.
+Since all tasks of a brief share one branch, the value only matters to the
+brief's first task. `dtask` still compares the branch against the
+project's `## Base Branch`, so it lists it as unmerged until the customer
+branch itself is merged there.
 
 What happens to a task in such a project:
 

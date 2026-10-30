@@ -587,7 +587,7 @@ the key is `worktree_key` (the `## Brief` file's name, else the task slug); see
 the README section of the same name for the user-facing contract. The helpers
 are in `lib.sh` (`project_isolation` through `rewrite_workdir_paths`), the
 wiring in `ai-task`, `ai-eval` and `ai-brief`, the view in `dtask`, and the
-offline test is `tests/test_worktree.sh`. Nine things to keep right:
+offline test is `tests/test_worktree.sh`. Ten things to keep right:
 
 1. **Everything is gated on the project opting in.** A shared project's
    `ai-task` prompt, `ai-eval` prompt, `ai-brief` prompt and `dtask` output
@@ -658,6 +658,22 @@ offline test is `tests/test_worktree.sh`. Nine things to keep right:
      a chain started then must keep finding them. `worktree_key` returns a
      fixed point of `worktree_slug`, because `worktree_ensure` and
      `worktree_remove` slug their argument again.
+10. **The base branch is resolved by `task_base_branch`, task then brief then
+    project.** Added 2026-10-30 for a customer fix that had to start from
+    that customer's branch rather than the project's base. Three things:
+    - **The brief is read through the task's `## Brief` path, so `ai-brief`
+      is untouched.** Relying on the decomposing model to copy the line into
+      every task is routing that silently regresses (same reason `ai-brief`
+      stamps `## Runner` itself).
+    - **An unreadable brief falls back to the project; an unresolvable name
+      does not.** The first is missing metadata, the second is a branch a
+      human named that does not exist, and `worktree_base_ref` refuses it
+      exactly as it refuses a bad project value. Do not add a fallback there.
+    - **`dtask` still reads the project's base** to decide what is merged. A
+      branch started from a customer branch therefore shows as pending until
+      that branch is merged. Fixing it means recording the base per branch
+      (for example beside `ai-owner` in the worktree's git dir); do not
+      re-resolve it from task files that may be archived.
 
 ## Split grading (`eval_runner`)
 
