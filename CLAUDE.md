@@ -582,11 +582,12 @@ error body could plausibly contain is **broad**, not strong.
 ## Worktree isolation (`## Isolation: worktree`)
 
 Added 2026-10-29. A project file declaring `## Isolation: worktree` gets one git
-worktree per task at `<repo>/.ai-worktrees/<slug>/` on branch `ai/<slug>`; see
+worktree per BRIEF at `<repo>/.ai-worktrees/<key>/` on branch `ai/<key>`, where
+the key is `worktree_key` (the `## Brief` file's name, else the task slug); see
 the README section of the same name for the user-facing contract. The helpers
 are in `lib.sh` (`project_isolation` through `rewrite_workdir_paths`), the
 wiring in `ai-task`, `ai-eval` and `ai-brief`, the view in `dtask`, and the
-offline test is `tests/test_worktree.sh`. Eight things to keep right:
+offline test is `tests/test_worktree.sh`. Nine things to keep right:
 
 1. **Everything is gated on the project opting in.** A shared project's
    `ai-task` prompt, `ai-eval` prompt, `ai-brief` prompt and `dtask` output
@@ -635,6 +636,28 @@ offline test is `tests/test_worktree.sh`. Eight things to keep right:
    unchanged for isolated projects, including the ban on working-tree
    assertions: relaxing them is a decision for after a pilot, and would need
    `lint_task_criteria` changed with them.
+9. **One branch per brief, and a shared worktree has ONE owner.** Keyed per
+   brief since 2026-10-30, after the first refactoring brief came back with
+   no `## Depends-on` at all: its seven per-task branches each started from
+   the base and refactored the same method four divergent ways. Keying on
+   `## Brief` stacks a brief's commits whatever the decomposer wrote. Three
+   things follow:
+   - **`worktree_claim` guards the shared tree.** `ai-owner` (in the
+     worktree's git dir, cleared by `worktree_commit`) names the task whose
+     uncommitted work it holds; another task of the brief is refused while
+     that tree is dirty, and a stale owner over a clean tree is replaced. Do
+     not drop the dirty condition: it is how a human releases a brief by
+     discarding a failed task's changes.
+   - **`worktree_blocker` is the ONE rule for "waiting on a sibling",** read
+     by the picker and by `dtask`, like `blocked_inbox_tasks`. The picker
+     needs it as a starvation guard (same reason as `grader_available`): the
+     claim would defer in seconds and `select_candidate` returns the first
+     eligible task, so without it nothing behind a blocked task would run.
+   - **A parent's branch is looked up by its key first, then by its slug.**
+     Branches created before the per-brief key are named after the task, and
+     a chain started then must keep finding them. `worktree_key` returns a
+     fixed point of `worktree_slug`, because `worktree_ensure` and
+     `worktree_remove` slug their argument again.
 
 ## Split grading (`eval_runner`)
 

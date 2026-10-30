@@ -399,7 +399,7 @@ pipeline are skipped, the same check the scheduled planner uses.
 By default every task of a project works in the project's one working
 directory, one task at a time under the project lock, next to whatever
 uncommitted work is already there. A project can opt into a **git worktree per
-task** instead:
+brief** instead (per task for a task written by hand):
 
 ```markdown
 ## Working Directory
@@ -425,30 +425,44 @@ ln -s ../../.env .env
 
 What happens to a task in such a project:
 
-1. **Claim.** After the project lock, `ai-task` creates `<repo>/.ai-worktrees/<slug>/`
-   on branch `ai/<slug>`, or reuses it: a retry, an `--unblock` and a
-   grade-only resume all find the previous attempt's changes still there. A
-   task with a `## Depends-on` parent whose `ai/<parent>` branch is not yet
-   merged branches from that, so a chain builds on itself without a merge in
-   between. The folder is hidden through `.git/info/exclude`; no tracked file
-   in the project changes.
+1. **Claim.** After the project lock, `ai-task` creates `<repo>/.ai-worktrees/<key>/`
+   on branch `ai/<key>`, or reuses it: a retry, an `--unblock` and a
+   grade-only resume all find the previous attempt's changes still there.
+   **The key is the brief:** every task carrying a `## Brief` (stamped by
+   `ai-brief`) uses the brief file's name, so all tasks of one brief stack
+   their commits on ONE branch, in the order they run, whether or not the
+   decomposition wrote a correct `## Depends-on` chain. A task with no
+   `## Brief` uses its own slug. The first task of a brief with a
+   `## Depends-on` parent whose branch is not yet merged starts from that
+   branch (the parent's brief branch, else its `ai/<parent-slug>`), so a
+   chain builds on itself without a merge in between. The folder is hidden
+   through `.git/info/exclude`; no tracked file in the project changes.
+   - **A brief's worktree has one owner at a time:** the task whose
+     uncommitted changes it holds. While the owner is unfinished (being
+     retried, or in `review/`), the brief's other tasks are skipped by the
+     picker and, on a direct run, deferred with no retry burned: starting
+     them would build on, and then commit, unfinished work. They resume once
+     the owner passes, or once you throw its changes away
+     (`git -C <worktree> checkout -- . && git -C <worktree> clean -fd`).
 2. **Run.** The agent works in the worktree. Every reference to the working
    directory in the task text (`~/...`, `$HOME/...`, absolute, and the
    container path) is rewritten to the worktree before the prompt is built,
    and the prompt says so.
 3. **Grade.** `ai-eval` applies the same rewrite, runs `## Test Command` from
    inside the worktree, and starts the grader there.
-4. **Land.** On PASS the work is committed on `ai/<slug>` with the report's
-   `## Suggested Commit Message` (plus an `AI-Task:` trailer), the worktree is
-   removed and **the branch is kept**. Nothing is merged: merging is yours.
+4. **Land.** On PASS the work is committed on `ai/<key>` with the report's
+   `## Suggested Commit Message` (plus an `AI-Task:` trailer naming the
+   task, so each commit of a brief branch is traceable), the worktree is
+   removed unless another task of the same brief is still in flight, and
+   **the branch is kept**. Nothing is merged: merging is yours.
    A commit refused by a hook keeps the task PASSED, keeps the worktree, and
    notifies you. The report and `DONE.md` carry a `**Branch:**` line.
 5. **Review / requeue.** The worktree is kept, for inspection or the next
    attempt.
 
 A failed `## Worktree Setup` is a **deferral** (requeued, no retry burned),
-like a lock timeout. Every launcher sweep removes the worktrees of tasks no
-longer in `inbox/`, `run/` or `review/`, skipping any project whose lock is
+like a lock timeout. Every launcher sweep removes the worktrees whose
+tasks are all gone from `inbox/`, `run/` and `review/`, skipping any project whose lock is
 held and any worktree with uncommitted changes; `ai-task --prune-worktrees`
 does the same on demand. Branches are never deleted.
 
@@ -471,8 +485,9 @@ Things to check before enabling it on a project:
 - Requires git 2.48 or later (`git worktree add --relative-paths`).
 
 `dtask` shows a `WORKTREES` section for isolated projects: the `ai/*` branches
-waiting to be merged, and every worktree on disk with where its task is and
-whether it holds uncommitted changes.
+waiting to be merged, and every worktree on disk with its owner and where
+that task is, how many tasks of the brief are in flight, whether it holds
+uncommitted changes, and how many tasks are waiting on it.
 
 ### `## Awaiting-Eval`: never execute finished work twice
 

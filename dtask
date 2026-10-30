@@ -361,6 +361,23 @@ fi
 # from refreshing the index, which is a write into the repository.
 wt_out=""
 declare -A wt_seen
+wt_active=""
+wt_waiting=""
+wt_any=0
+if [ -d "$PROJECTS_DIR" ]; then
+    for pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$pf" ] || continue
+        [ "$(project_isolation "$(basename "$pf" .md)" 2>/dev/null)" = worktree ] && { wt_any=1; break; }
+    done
+fi
+if [ "$wt_any" -eq 1 ]; then
+    wt_active=$(active_task_keys)
+    for f in "$INBOX"/*.md; do
+        [ -f "$f" ] || continue
+        GIT_OPTIONAL_LOCKS=0 worktree_blocker "$f" >/dev/null 2>&1 || continue
+        wt_waiting+="$(worktree_key "$f")"$'\n'
+    done
+fi
 if [ -d "$PROJECTS_DIR" ]; then
     for pf in "$PROJECTS_DIR"/*.md; do
         [ -f "$pf" ] || continue
@@ -390,17 +407,31 @@ if [ -d "$PROJECTS_DIR" ]; then
             wt_out+=$(printf '  %s%-20s%s  %snothing to merge%s' "$BOLD" "$proj" "$RESET" "$DIM" "$RESET")$'\n'
         fi
 
+        # One worktree per brief (worktree_key), so a line names the worktree,
+        # the task whose changes it holds (ai-owner), how many tasks of the
+        # brief are still in flight, and how many are waiting on the owner
+        # (worktree_blocker, the same rule the picker skips them by).
         for d in "$top/$WORKTREE_DIRNAME"/*/; do
             [ -d "$d" ] || continue
-            slug=$(basename "$d")
-            loc=$(locate_dep_slug "$slug")
+            key=$(basename "$d")
+            owner=$(worktree_owner "$d")
+            if [ -n "$owner" ]; then
+                loc=$(locate_dep_slug "$owner")
+                [ "$loc" = review ] && loc="${RED}review${RESET}"
+                who="owner ${owner} (${loc}/)"
+            else
+                who="${DIM}no owner${RESET}"
+            fi
+            n_flight=$(printf '%s\n' "$wt_active" | grep -cxF -- "$key" || true)
+            n_wait=$(printf '%s\n' "$wt_waiting" | grep -cxF -- "$key" || true)
             if GIT_OPTIONAL_LOCKS=0 worktree_dirty "$d" >/dev/null; then
                 state="${YELLOW}uncommitted changes${RESET}"
             else
                 state="${DIM}clean${RESET}"
             fi
-            [ "$loc" = review ] && loc="${RED}review${RESET}"
-            wt_out+=$(printf '    %-43s  task in %b/  %b' "$slug" "$loc" "$state")$'\n'
+            extra=""
+            [ "$n_wait" -gt 0 ] && extra="  ${RED}${n_wait} waiting on it${RESET}"
+            wt_out+=$(printf '    %-43s  %b  %s in flight  %b%b' "$key" "$who" "$n_flight" "$state" "$extra")$'\n'
         done
     done
 fi
