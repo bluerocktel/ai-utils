@@ -301,6 +301,30 @@ git -C "$REPO" cherry-pick ai/act-open >/dev/null
 [ "$(worktree_action "$REPO" act-open main 0 0)" = done ] || fail "patch-merged branch must be done"
 [ "$(worktree_action "$REPO" no-such-key main 0 0)" = done ] || fail "missing branch must be done"
 
+# ── branch_base: the merge target recorded per branch ──────────────────────
+[ "$(branch_base "$REPO" bb-key main)" = main ] || fail "unrecorded base must fall back"
+[ "$(branch_base "$REPO" bb-key)" = HEAD ] || fail "unrecorded base, no fallback, must be HEAD"
+branch_base_record "$REPO" bb-key '' || fail "empty base must be a no-op"
+[ "$(branch_base "$REPO" bb-key main)" = main ] || fail "empty base must record nothing"
+git -C "$REPO" branch -q feature/x main
+git -C "$REPO" branch -q ai/bb-key main
+branch_base_record "$REPO" bb-key feature/x || fail "recording a base failed"
+branch_base_record "$REPO" bb-key other || fail "second record must not fail"
+[ "$(branch_base "$REPO" bb-key main)" = feature/x ] || fail "first recorded base must win"
+# Survives the worktree: recorded in the repository, not in .git/worktrees/.
+WB=$(worktree_ensure "$REPO" bb-key 2>/dev/null) || fail "bb-key ensure failed"
+echo b > "$WB/b.txt"; git -C "$WB" add b.txt && git -C "$WB" commit -q -m b
+git -C "$REPO" worktree remove "$WB"
+[ "$(branch_base "$REPO" bb-key main)" = feature/x ] || fail "base must survive worktree removal"
+# Merged into its own base, not the project's: done, though main lacks it.
+git -C "$REPO" checkout -q feature/x && git -C "$REPO" merge -q ai/bb-key
+git -C "$REPO" checkout -q main
+[ "$(worktree_action "$REPO" bb-key "$(branch_base "$REPO" bb-key main)" 0 0)" = done ] \
+    || fail "branch merged into its recorded base must be done"
+[ "$(worktree_action "$REPO" bb-key main 0 0)" = merge ] || fail "against the project base it is still unmerged"
+git -C "$REPO" branch -q -D ai/bb-key
+[ "$(branch_base "$REPO" bb-key main)" = main ] || fail "deleting the branch must drop the record"
+
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"
     exit 0

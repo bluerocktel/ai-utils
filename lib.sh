@@ -1163,6 +1163,28 @@ worktree_action() {
     echo done
 }
 
+# The branch a task branch is meant to be merged into, recorded per branch in
+# the repository's git config (branch.ai/<key>.aiBase). ai-task records the
+# base task_base_branch resolved the first time it uses the branch; dtask reads
+# it back to decide what is merged. It lives in the config rather than in the
+# worktree's git dir because the worktree is pruned BEFORE the human merges,
+# and `git branch -d` removes the entry with the branch. Never re-resolved from
+# task files, which may be archived by then.
+#   branch_base_record <repo> <key> <base>   first value wins; no-op if empty
+#   branch_base <repo> <key> [fallback]      the recorded base, else fallback
+branch_base_record() {
+    local repo="$1" key="$2" base="${3:-}"
+    [ -n "$base" ] || return 0
+    git -C "$repo" config --get "branch.ai/$key.aiBase" >/dev/null 2>&1 && return 0
+    git -C "$repo" config "branch.ai/$key.aiBase" "$base"
+}
+
+branch_base() {
+    local repo="$1" key="$2" fallback="${3:-HEAD}" base
+    base=$(git -C "$repo" config --get "branch.ai/$key.aiBase" 2>/dev/null) || base=""
+    printf '%s\n' "${base:-$fallback}"
+}
+
 # Remove the worktrees of one repository whose task is no longer in flight.
 # Prints each removed slug. A dirty worktree is reported and kept: its changes
 # are the only copy. Branches are never deleted.

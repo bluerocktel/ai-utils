@@ -642,6 +642,9 @@ if [ "$MODE" = "run" ]; then
         fi
         rm -f "$WT_ERR"
         WORKTREE_BRANCH="ai/$WT_KEY"
+        # Where the branch should be merged, for dtask (branch_base). Best
+        # effort: a config write failing must not stop the task.
+        branch_base_record "$MAIN_WORKDIR" "$WT_KEY" "$WT_BASE_BRANCH" 2>/dev/null || true
         CONTAINER_PATH=$(project_field "$ISO_PROJECT" 'Container Path')
 
         # A brief's worktree is shared, so it may hold a SIBLING task's

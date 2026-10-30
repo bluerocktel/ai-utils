@@ -669,11 +669,13 @@ offline test is `tests/test_worktree.sh`. Ten things to keep right:
       does not.** The first is missing metadata, the second is a branch a
       human named that does not exist, and `worktree_base_ref` refuses it
       exactly as it refuses a bad project value. Do not add a fallback there.
-    - **`dtask` still reads the project's base** to decide what is merged. A
-      branch started from a customer branch therefore shows as pending until
-      that branch is merged. Fixing it means recording the base per branch
-      (for example beside `ai-owner` in the worktree's git dir); do not
-      re-resolve it from task files that may be archived.
+    - **`dtask` reads the base recorded per branch** (`branch_base`, in
+      the repository's git config as `branch.ai/<key>.aiBase`), written by
+      `ai-task` the first time it uses the branch, first value wins. It is
+      not kept in the worktree's git dir because the worktree is pruned
+      before the human merges, and it is never re-resolved from task files
+      that may be archived. A branch with no record falls back to the
+      project's base.
 
 ## Split grading (`eval_runner`)
 

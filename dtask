@@ -289,7 +289,10 @@ if [ "$wt_any" -eq 1 ]; then
             wt_n_review=0
             [ -n "$wt_slugs" ] && wt_n_review=$(wc -w <<< "$wt_slugs")
             wt_n_live=${wt_live[$wt_key]:-0}
-            wt_action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$wt_top" "$wt_key" "$wt_base" "$wt_n_live" "$wt_n_review")
+            # The base ai-task recorded for this branch (a brief may name its
+            # own), else the project's.
+            wt_kbase=$(branch_base "$wt_top" "$wt_key" "$wt_base")
+            wt_action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$wt_top" "$wt_key" "$wt_kbase" "$wt_n_live" "$wt_n_review")
             wt_name=$(_wt_name "$wt_key" "$wt_proj")
             wt_path="${wt_top/#"$HOME"/\~}/$WORKTREE_DIRNAME/$wt_key"
             case "$wt_action" in
@@ -302,8 +305,8 @@ if [ "$wt_any" -eq 1 ]; then
                     wt_attention+=("$wt_proj"$'\t'"$wt_name"$'\t'"uncommitted changes, no task left") ;;
                 merge)
                     wt_rank=3 wt_icon="⇢" wt_color="$YELLOW"
-                    wt_text="ready to merge into $wt_base: git merge ai/$wt_key"
-                    wt_attention+=("$wt_proj"$'\t'"$wt_name"$'\t'"ready to merge into $wt_base") ;;
+                    wt_text="ready to merge into $wt_kbase: git merge ai/$wt_key"
+                    wt_attention+=("$wt_proj"$'\t'"$wt_name"$'\t'"ready to merge into $wt_kbase") ;;
                 prune)
                     wt_rank=4 wt_icon="·" wt_color="$DIM"
                     wt_text="finished, worktree removed by the next sweep" ;;
