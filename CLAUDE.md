@@ -977,3 +977,74 @@ another reason gotcha 4 must hold.
    repository's own `README.md`, and do **not** publish it into
    `~/tasks/scheduled/`: that is the human `cp` from `ai-agent --publish-plan`.
 7. Do **not** install a symlink or a cron line. Document the command instead.
+
+## Notes moved from the old README (2026-10-30)
+
+The README was split into a short page plus `docs/` on 2026-10-30. User rules
+now live in `docs/`; the design reasoning below left the README with them and
+was not yet written down here. Two references earlier in this file still point
+at README sections that no longer exist:
+
+- "See the README section 'Acceptance criteria must be scoped to the task'"
+  (in Other things to watch out for): the user checklist is now
+  `docs/writing-briefs.md`, and the case behind the first scoping rule is the
+  first bullet below.
+- "Document the exact commands in `README.md`" (Hard boundaries, cutover): the
+  original cutover is now the historical page `docs/history/cutover-2026-08.md`,
+  and the generic symlink and cron commands for a new install are in
+  `docs/getting-started.md`. Document new manual steps there.
+
+The reasoning that moved:
+
+- **Why baseline-plus-delta criteria are banned.** Both halves are unsafe. The
+  baseline moves if anything else touches the data between decomposition and
+  execution, and the delta is a guess exploration cannot fully verify. The
+  case that prompted the rule asserted `439 + 143`: two product labels that
+  differed only in one letter's case folded into a single row under a
+  case-insensitive collation, so 143 new items could only ever be 142.
+- **The `ai-brief` repair pass.** Before extraction, `ai-brief` validates the
+  draft and makes ONE repair call when it finds a risky criterion (a clean git
+  state assertion, including `git -C` and multiline checklist items; a phrase
+  search on wrapped extracted text; an abbreviated command with an ellipsis; a
+  missing acceptance checklist) or malformed task delimiters. The repair uses
+  the same provider and model, gets the brief, the draft and the findings, and
+  shares the original `brief_timeout_min` budget, so an ordinary valid draft
+  still costs one call. If the repair fails, still trips validation, or
+  changes task filenames, nothing is extracted: the brief returns to
+  `briefs/` and the draft plus findings go to a `.raw` file under `run/`. An
+  auth failure during repair sets that provider's cooldown. A repaired draft
+  goes through the normal runner stamp, graph check and human review gate.
+  It is a check for known risky shapes, not a proof that every criterion is
+  satisfiable.
+- **`dtask` RECENT ACTIVITY resolves each entry's runner in a fixed order:**
+  the `## Runner` of the archived `<base>.task.md` beside the result, then the
+  result file's own `**Runner:**` line, then `default_runner`. The order is
+  load-bearing. `DONE.md`'s `**Result:**` path names the result file, which
+  carries the runner as a bold field, not a `## Runner` heading; resolving it
+  directly found nothing and rendered every archived entry as
+  `default_runner`. The end-to-end smoke run caught it: a task that ran on one
+  provider displayed as the other.
+- **A dangling `## Awaiting-Eval` pointer never wedges a task.** If the named
+  report is gone, the section is stripped, the reason printed, and the task
+  runs normally. Leaving it in place would make every claim a grade-only
+  resume of a report that cannot be found.
+- **`ai-eval` exit `3` never emits a verdict line.** An empty evaluator
+  response is inconclusive, not a FAIL, and partial text is reported with its
+  `VERDICT:` lines stripped so the caller's grep cannot mistake a half-finished
+  run for a decision.
+- **A grader runner that cannot be loaded exits `3`, not `1`.** A missing
+  adapter is a configuration fault; exit `1` would burn a retry on every task
+  in the queue for it.
+- **Cross-provider grading costs real retries, and two things bound it.**
+  `## Test Command` runs before the grading call, so objective failures never
+  reach the judge. And the judge should stay fixed rather than alternate
+  between providers, so verdicts stay comparable from one attempt to the next.
+- **`ai-task` with no `ai-eval` installed records the run ungraded, not
+  failed.** A missing grader is not evidence that the work is wrong.
+- **Open follow-up outside this repo: the auth alert watches the old marker.**
+  The `claude-auth-alert` cron entry (see What stays in claude-utils) watches
+  the old global `$TASKS_DIR/.auth-cooldown`, while `ai-task` writes
+  `.auth-cooldown-<runner>`. Since the cutover it does not see a pipeline auth
+  stall; `dtask`'s per-runner banner is the only signal until the alert is
+  taught the per-runner markers, which means editing `claude-utils` and is
+  therefore the user's call.
