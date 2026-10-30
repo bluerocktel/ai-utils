@@ -215,7 +215,127 @@ while IFS=$'\t' read -r b_task b_dep b_loc; do
     n_blocked=$((n_blocked + 1))
 done < <(blocked_inbox_tasks)
 
-total_attention=$((n_brev + n_review + n_blocked))
+# ── Worktrees (## Isolation: worktree projects only) ─────────────
+# Scanned here, rendered further down, because a branch to merge or a worktree
+# holding orphaned changes also belongs in NEEDS ATTENTION. Nothing is
+# collected unless some project opts in, so the dashboard of a tree with none
+# is unchanged. One row per ai/<key> branch (or worktree left without one);
+# the action is worktree_action in lib.sh, and the text says in plain words
+# what to do. Merged branches fold into one row past WT_DONE_SHOWN, since the
+# pipeline never deletes a branch and they only accumulate.
+#
+# Read-only like the rest of dtask: GIT_OPTIONAL_LOCKS=0 stops `git status`
+# from refreshing the index, which is a write into the repository.
+WT_DONE_SHOWN=3
+wt_rows=()        # rank \t project \t name \t icon \t color \t text
+wt_attention=()   # project \t name \t short reason, for NEEDS ATTENTION
+wt_w_proj=0 wt_w_name=0
+declare -A wt_seen wt_live wt_review_slugs
+wt_any=0
+if [ -d "$PROJECTS_DIR" ]; then
+    for wt_pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$wt_pf" ] || continue
+        [ "$(project_isolation "$(basename "$wt_pf" .md)" 2>/dev/null)" = worktree ] && { wt_any=1; break; }
+    done
+fi
+
+# A brief's name without what the reader already knows: the ai/ prefix, the
+# project it sits under, and the -brief suffix every brief file carries.
+_wt_name() {
+    local wt_key="$1" wt_proj="$2"
+    wt_key="${wt_key#"$wt_proj"-}"
+    wt_key="${wt_key%-brief}"
+    printf '%s' "${wt_key:-$1}"
+}
+
+if [ "$wt_any" -eq 1 ]; then
+    # Task keys still queued or running, and the review/ slugs, scanned once.
+    for wt_dir in "$INBOX" "$RUN_DIR" "$REVIEW_DIR"; do
+        [ -d "$wt_dir" ] || continue
+        for wt_f in "$wt_dir"/*.md; do
+            [ -f "$wt_f" ] || continue
+            wt_k=$(worktree_key "$wt_f" 2>/dev/null) || continue
+            if [ "$wt_dir" = "$REVIEW_DIR" ]; then
+                wt_review_slugs[$wt_k]+="$(task_slug_from_name "$wt_f") "
+            else
+                wt_live[$wt_k]=$(( ${wt_live[$wt_k]:-0} + 1 ))
+            fi
+        done
+    done
+
+    for wt_pf in "$PROJECTS_DIR"/*.md; do
+        [ -f "$wt_pf" ] || continue
+        wt_proj=$(basename "$wt_pf" .md)
+        [ "$(project_isolation "$wt_proj" 2>/dev/null)" = worktree ] || continue
+        wt_wd=$(project_working_dir "$wt_proj") || continue
+        wt_top=$(git -C "$wt_wd" rev-parse --show-toplevel 2>/dev/null) || continue
+        [ -z "${wt_seen[$wt_top]:-}" ] || continue
+        wt_seen[$wt_top]=1
+        wt_base=$(project_field "$wt_proj" 'Base Branch')
+        wt_base="${wt_base:-HEAD}"
+
+        wt_keys=$(
+            GIT_OPTIONAL_LOCKS=0 git -C "$wt_top" for-each-ref --format='%(refname:short)' \
+                refs/heads/ai/ 2>/dev/null | sed 's|^ai/||'
+            for wt_d in "$wt_top/$WORKTREE_DIRNAME"/*/; do
+                [ -d "$wt_d" ] && basename "$wt_d"
+            done
+        )
+        wt_done_rows=()
+        while IFS= read -r wt_key; do
+            [ -n "$wt_key" ] || continue
+            wt_slugs="${wt_review_slugs[$wt_key]:-}"
+            wt_slugs="${wt_slugs% }"
+            wt_n_review=0
+            [ -n "$wt_slugs" ] && wt_n_review=$(wc -w <<< "$wt_slugs")
+            wt_n_live=${wt_live[$wt_key]:-0}
+            wt_action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$wt_top" "$wt_key" "$wt_base" "$wt_n_live" "$wt_n_review")
+            wt_name=$(_wt_name "$wt_key" "$wt_proj")
+            wt_path="${wt_top/#"$HOME"/\~}/$WORKTREE_DIRNAME/$wt_key"
+            case "$wt_action" in
+                fix)
+                    wt_rank=1 wt_icon="✗" wt_color="$RED"
+                    wt_text="${wt_slugs// /, } failed review: fix it, then ai-task --unblock ${wt_slugs%% *}" ;;
+                commit)
+                    wt_rank=2 wt_icon="⚠" wt_color="$YELLOW"
+                    wt_text="changes left uncommitted, no task left: commit or discard in $wt_path"
+                    wt_attention+=("$wt_proj"$'\t'"$wt_name"$'\t'"uncommitted changes, no task left") ;;
+                merge)
+                    wt_rank=3 wt_icon="⇢" wt_color="$YELLOW"
+                    wt_text="ready to merge into $wt_base: git merge ai/$wt_key"
+                    wt_attention+=("$wt_proj"$'\t'"$wt_name"$'\t'"ready to merge into $wt_base") ;;
+                prune)
+                    wt_rank=4 wt_icon="·" wt_color="$DIM"
+                    wt_text="finished, worktree removed by the next sweep" ;;
+                wait)
+                    wt_rank=5 wt_icon="⏳" wt_color="$DIM"
+                    if [ "$wt_n_live" -eq 1 ]; then
+                        wt_text="1 task still to run, nothing to do yet"
+                    else
+                        wt_text="$wt_n_live tasks still to run, nothing to do yet"
+                    fi ;;
+                *)
+                    wt_rank=6 wt_icon="✓" wt_color="$DIM"
+                    wt_text="merged, can be deleted: git branch -d ai/$wt_key"
+                    wt_done_rows+=("$wt_rank"$'\t'"$wt_proj"$'\t'"$wt_name"$'\t'"$wt_icon"$'\t'"$wt_color"$'\t'"$wt_text")
+                    continue ;;
+            esac
+            wt_rows+=("$wt_rank"$'\t'"$wt_proj"$'\t'"$wt_name"$'\t'"$wt_icon"$'\t'"$wt_color"$'\t'"$wt_text")
+        done < <(printf '%s\n' "$wt_keys" | sort -u)
+        if [ "${#wt_done_rows[@]}" -gt "$WT_DONE_SHOWN" ]; then
+            wt_rows+=("6"$'\t'"$wt_proj"$'\t'"+${#wt_done_rows[@]} merged branches"$'\t'"✓"$'\t'"$DIM"$'\t'"can be deleted: git branch -d ai/…")
+        elif [ "${#wt_done_rows[@]}" -gt 0 ]; then
+            wt_rows+=("${wt_done_rows[@]}")
+        fi
+    done
+    for wt_r in "${wt_rows[@]}"; do
+        IFS=$'\t' read -r _ wt_p wt_n _ <<< "$wt_r"
+        [ "${#wt_p}" -gt "$wt_w_proj" ] && wt_w_proj=${#wt_p}
+        [ "${#wt_n}" -gt "$wt_w_name" ] && wt_w_name=${#wt_n}
+    done
+fi
+
+total_attention=$((n_brev + n_review + n_blocked + ${#wt_attention[@]}))
 
 # ── Today's stats from DONE.md ──────────────────────────────────
 today=$(date '+%Y-%m-%d')
@@ -286,6 +406,14 @@ else
             "$RED" "$RESET" "$(_display "$b_task")" "$CYAN" "$runner" "$RESET" \
             "$DIM" "$why" "$RESET"
     done < <(printf '%s' "$blocked_dead")
+
+    # Worktree branches waiting on a human (merge, or orphaned changes). A
+    # task in review/ is already listed above, so fix is not repeated here.
+    for a in "${wt_attention[@]}"; do
+        IFS=$'\t' read -r a_proj a_name a_why <<< "$a"
+        printf '  %s⇢%s %-40s  %s[%s]%s  %s(%s, see WORKTREES)%s\n' \
+            "$YELLOW" "$RESET" "$a_name" "$CYAN" "$a_proj" "$RESET" "$DIM" "$a_why" "$RESET"
+    done
 fi
 
 # ── Pipeline ────────────────────────────────────────────────────
@@ -351,112 +479,15 @@ else
     done
 fi
 
-# ── Worktrees (## Isolation: worktree projects only) ─────────────
-# Rendered only when some project opts in, so the dashboard of a tree with
-# none is unchanged. One line per ai/<key> branch (or worktree left without
-# one), ending in the next human action, decided by worktree_action in
-# lib.sh. Merged branches are folded into one line past WT_DONE_SHOWN, since
-# the pipeline never deletes a branch and they only accumulate.
-#
-# Read-only like the rest of dtask: GIT_OPTIONAL_LOCKS=0 stops `git status`
-# from refreshing the index, which is a write into the repository.
-WT_DONE_SHOWN=3
-wt_out=""
-declare -A wt_seen
-wt_any=0
-if [ -d "$PROJECTS_DIR" ]; then
-    for pf in "$PROJECTS_DIR"/*.md; do
-        [ -f "$pf" ] || continue
-        [ "$(project_isolation "$(basename "$pf" .md)" 2>/dev/null)" = worktree ] && { wt_any=1; break; }
-    done
-fi
-if [ "$wt_any" -eq 1 ]; then
-    # Task keys still queued or running, and in review/, scanned once.
-    declare -A wt_live wt_review wt_owner_of
-    for dir in "$INBOX" "$RUN_DIR" "$REVIEW_DIR"; do
-        [ -d "$dir" ] || continue
-        for f in "$dir"/*.md; do
-            [ -f "$f" ] || continue
-            k=$(worktree_key "$f" 2>/dev/null) || continue
-            if [ "$dir" = "$REVIEW_DIR" ]; then
-                wt_review[$k]=$(( ${wt_review[$k]:-0} + 1 ))
-            else
-                wt_live[$k]=$(( ${wt_live[$k]:-0} + 1 ))
-            fi
-        done
-    done
-
-    wt_rows=()
-    wt_w_proj=0 wt_w_branch=0
-    for pf in "$PROJECTS_DIR"/*.md; do
-        [ -f "$pf" ] || continue
-        proj=$(basename "$pf" .md)
-        [ "$(project_isolation "$proj" 2>/dev/null)" = worktree ] || continue
-        wd=$(project_working_dir "$proj") || continue
-        top=$(git -C "$wd" rev-parse --show-toplevel 2>/dev/null) || continue
-        [ -z "${wt_seen[$top]:-}" ] || continue
-        wt_seen[$top]=1
-        base=$(project_field "$proj" 'Base Branch')
-
-        # Every branch, plus any worktree directory whose branch is gone.
-        keys=$(
-            GIT_OPTIONAL_LOCKS=0 git -C "$top" for-each-ref --format='%(refname:short)' \
-                refs/heads/ai/ 2>/dev/null | sed 's|^ai/||'
-            for d in "$top/$WORKTREE_DIRNAME"/*/; do
-                [ -d "$d" ] && basename "$d"
-            done
-        )
-        n_done=0
-        while IFS= read -r key; do
-            [ -n "$key" ] || continue
-            action=$(GIT_OPTIONAL_LOCKS=0 worktree_action "$top" "$key" "${base:-HEAD}" \
-                "${wt_live[$key]:-0}" "${wt_review[$key]:-0}")
-            n_live=${wt_live[$key]:-0}
-            case "$action" in
-                fix)    color="$RED";    detail="${wt_review[$key]} in review/: --unblock it, or discard the worktree changes" ;;
-                wait)   color="$DIM";    detail="$n_live in flight" ;;
-                commit) color="$YELLOW"; detail="uncommitted changes, no task left: commit or discard" ;;
-                prune)  color="$DIM";    detail="clean worktree, removed by the next sweep" ;;
-                merge)  color="$YELLOW"; detail="into ${base:-HEAD}" ;;
-                *)      color="$DIM";    detail="merged, branch can be deleted"
-                        n_done=$((n_done + 1)) ;;
-            esac
-            if [ "$action" = wait ] || [ "$action" = fix ]; then
-                owner=$(worktree_owner "$top/$WORKTREE_DIRNAME/$key" 2>/dev/null || true)
-                [ -n "$owner" ] && detail+=", owner $owner ($(locate_dep_slug "$owner")/)"
-            fi
-            wt_rows+=("$proj"$'\t'"ai/$key"$'\t'"$action"$'\t'"$color"$'\t'"$detail")
-            [ "${#proj}" -gt "$wt_w_proj" ] && wt_w_proj=${#proj}
-            [ "$((${#key} + 3))" -gt "$wt_w_branch" ] && wt_w_branch=$((${#key} + 3))
-        done < <(printf '%s\n' "$keys" | sort -u)
-        # Fold this repository's merged branches once there are too many.
-        if [ "$n_done" -gt "$WT_DONE_SHOWN" ]; then
-            kept=()
-            for r in "${wt_rows[@]}"; do
-                IFS=$'\t' read -r p _ a _ _ <<< "$r"
-                [ "$p" = "$proj" ] && [ "$a" = done ] && continue
-                kept+=("$r")
-            done
-            folded="+$n_done merged branches"
-            wt_rows=("${kept[@]}" "$proj"$'\t'"$folded"$'\t'"done"$'\t'"$DIM"$'\t'"git branch -d to remove them")
-            [ "${#folded}" -gt "$wt_w_branch" ] && wt_w_branch=${#folded}
-        fi
-    done
-
-    # Most urgent first: what blocks work, then what waits on a human, then
-    # what resolves on its own.
-    for want in fix commit merge prune wait done; do
-        for r in "${wt_rows[@]}"; do
-            IFS=$'\t' read -r proj branch action color detail <<< "$r"
-            [ "$action" = "$want" ] || continue
-            wt_out+=$(printf '  %-*s  %-*s  %s%-6s%s  %s' "$wt_w_proj" "$proj" \
-                "$wt_w_branch" "$branch" "$color$BOLD" "$action" "$RESET" "$detail")$'\n'
-        done
-    done
-fi
-if [ -n "$wt_out" ]; then
+# ── Worktrees (scanned above, before NEEDS ATTENTION) ────────────
+# Most urgent first: what blocks work, then what waits on a human, then what
+# resolves on its own.
+if [ "${#wt_rows[@]}" -gt 0 ]; then
     _section "  WORKTREES"
-    printf '%s' "$wt_out"
+    while IFS=$'\t' read -r _ wt_proj wt_name wt_icon wt_color wt_text; do
+        printf '  %-*s  %-*s  %s%s %s%s\n' "$wt_w_proj" "$wt_proj" "$wt_w_name" "$wt_name" \
+            "$wt_color" "$wt_icon" "$wt_text" "$RESET"
+    done < <(printf '%s\n' "${wt_rows[@]}" | sort -s -t $'\t' -k1,1n)
 fi
 
 # ── Today's stats ────────────────────────────────────────────────
