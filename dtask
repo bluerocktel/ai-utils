@@ -226,8 +226,12 @@ done < <(blocked_inbox_tasks)
 #
 # Read-only like the rest of dtask: GIT_OPTIONAL_LOCKS=0 stops `git status`
 # from refreshing the index, which is a write into the repository.
+# Row fields are joined by the unit separator, not a tab: a tab is IFS
+# whitespace, so `read` would merge the empty color field of a NO_COLOR run
+# with its neighbour and shift every field after it.
+US=$'\x1f'
 WT_DONE_SHOWN=3
-wt_rows=()        # rank \t project \t name \t icon \t color \t text
+wt_rows=()        # rank, project, name, icon, color, text; joined by $US
 wt_attention=()   # project \t name \t short reason, for NEEDS ATTENTION
 wt_w_proj=0 wt_w_name=0
 declare -A wt_seen wt_live wt_review_slugs
@@ -320,25 +324,157 @@ if [ "$wt_any" -eq 1 ]; then
                 *)
                     wt_rank=6 wt_icon="✓" wt_color="$DIM"
                     wt_text="merged, can be deleted: git branch -d ai/$wt_key"
-                    wt_done_rows+=("$wt_rank"$'\t'"$wt_proj"$'\t'"$wt_name"$'\t'"$wt_icon"$'\t'"$wt_color"$'\t'"$wt_text")
+                    wt_done_rows+=("$wt_rank$US$wt_proj$US$wt_name$US$wt_icon$US$wt_color$US$wt_text")
                     continue ;;
             esac
-            wt_rows+=("$wt_rank"$'\t'"$wt_proj"$'\t'"$wt_name"$'\t'"$wt_icon"$'\t'"$wt_color"$'\t'"$wt_text")
+            wt_rows+=("$wt_rank$US$wt_proj$US$wt_name$US$wt_icon$US$wt_color$US$wt_text")
         done < <(printf '%s\n' "$wt_keys" | sort -u)
         if [ "${#wt_done_rows[@]}" -gt "$WT_DONE_SHOWN" ]; then
-            wt_rows+=("6"$'\t'"$wt_proj"$'\t'"+${#wt_done_rows[@]} merged branches"$'\t'"✓"$'\t'"$DIM"$'\t'"can be deleted: git branch -d ai/…")
+            wt_rows+=("6$US$wt_proj$US+${#wt_done_rows[@]} merged branches$US✓$US$DIM${US}can be deleted: git branch -d ai/…")
         elif [ "${#wt_done_rows[@]}" -gt 0 ]; then
             wt_rows+=("${wt_done_rows[@]}")
         fi
     done
     for wt_r in "${wt_rows[@]}"; do
-        IFS=$'\t' read -r _ wt_p wt_n _ <<< "$wt_r"
+        IFS="$US" read -r _ wt_p wt_n _ <<< "$wt_r"
         [ "${#wt_p}" -gt "$wt_w_proj" ] && wt_w_proj=${#wt_p}
         [ "${#wt_n}" -gt "$wt_w_name" ] && wt_w_name=${#wt_n}
     done
 fi
 
-total_attention=$((n_brev + n_review + n_blocked + ${#wt_attention[@]}))
+# ── Agents (scanned here, rendered at the end) ───────────────────
+# What each PUBLISHED routine is doing, one line each, most urgent first: will
+# not run (the published file has a schedule or permission ai-scheduled
+# rejects), overdue (no run for over two periods, which in practice means the
+# engine is not in cron), found something in the last 7 days, waiting for its
+# first run, quiet. Routines defined but not published fold into one line.
+# The configuration (kind, schedule, permission) is ai-agent's listing.
+#
+# Everything comes from state ai-scheduled already keeps: the <slug>.run stamp
+# and the memory ledger (agent_memory_summary). The ledger records conclusive
+# runs only, so a failing routine shows as overdue, not as failed.
+#
+# Strictly read-only, like the rest of this script, and prints NOTHING AT ALL,
+# not even the header, when no routine is defined: a tree with no agents must
+# render exactly the dashboard it rendered before this section existed.
+AGENTS_DIR="$(agents_dir)"
+
+# Routine definition files, as absolute paths: agents/<agent>/routines/<slug>.md
+_routine_files() {
+    [ -d "$AGENTS_DIR" ] || return
+    find "$AGENTS_DIR" -mindepth 3 -maxdepth 3 -type f -path '*/routines/*.md' \
+        2>/dev/null | sort
+}
+
+# Seconds as a short age: 45m, 30h, 25 days.
+_ago() {
+    local s="$1"
+    if   [ "$s" -lt 3600 ];   then echo "$(( s / 60 ))m"
+    elif [ "$s" -lt 172800 ]; then echo "$(( s / 3600 ))h"
+    else echo "$(( s / 86400 )) days"
+    fi
+}
+
+# A ledger outcome ('messages=2, briefs=a,b, report=x.md') in plain words.
+_ag_outcome() {
+    local part out="" item
+    while IFS= read -r part; do
+        case "$part" in
+            messages=1)  item="1 message" ;;
+            messages=*)  item="${part#messages=} messages" ;;
+            briefs=*)    item="brief ${part#briefs=}"; item="${item//,/, }" ;;
+            report=*)    item="report" ;;
+            stub=*)      item="suggestion ${part#stub=}" ;;
+            stubs=1)     item="1 suggestion" ;;
+            stubs=*)     item="${part#stubs=} suggestions" ;;
+            *)           continue ;;
+        esac
+        out="${out:+$out, }$item"
+    done < <(printf '%s\n' "$1" | sed 's/, /\n/g')
+    printf '%s' "$out"
+}
+
+_ag_label() {
+    case "$1" in
+        every:*h) echo "every ${1#every:}" ;;
+        weekly*)  echo "weekly" ;;
+        *)        echo "$1" ;;
+    esac
+}
+
+ag_rows=()        # rank, slug, agent, icon, color, text, stats; joined by $US
+ag_attention=()   # slug \t agent \t short reason, for NEEDS ATTENTION
+ag_any=0 ag_unpub=0 ag_w_slug=0 ag_w_agent=0
+_agent_routines=$(_routine_files)
+if [ -n "$_agent_routines" ]; then
+    ag_any=1
+    ag_now=$(date +%s)
+    while IFS= read -r rfile; do
+        [ -f "$rfile" ] || continue
+        rslug=$(basename "$rfile" .md)
+        # <agents_dir>/<agent>/routines/<slug>.md → <agent>
+        ragent=$(basename "$(dirname "$(dirname "$rfile")")")
+        # What runs is the PUBLISHED copy, so that is the one judged.
+        ag_pf="$SCHEDULED_DIR/$rslug.md"
+        if [ ! -f "$ag_pf" ]; then
+            ag_unpub=$((ag_unpub + 1))
+            continue
+        fi
+        ag_sched=$(field_from_task Schedule "$ag_pf" | awk 'NR == 1 {print $1}')
+        ag_stats=""
+        IFS=$'\t' read -r ag_runs ag_sigs ag_capped ag_lt ag_lo \
+            < <(agent_memory_summary "$rslug" 7) || true
+        if [ "${ag_runs:-0}" -gt 0 ]; then
+            ag_plus=""; [ "${ag_capped:-0}" -eq 1 ] && ag_plus="+"
+            ag_stats="7d: ${ag_runs}${ag_plus} runs, ${ag_sigs} signals"
+        fi
+        ag_last=""
+        [ -f "$SCHED_STATE_DIR/$rslug.run" ] \
+            && ag_last=$(head -n1 "$SCHED_STATE_DIR/$rslug.run" 2>/dev/null | tr -dc '0-9')
+
+        if ! ag_period=$(schedule_period_sec "$ag_sched"); then
+            ag_rank=1 ag_icon="✗" ag_color="$RED"
+            ag_text="will not run: invalid schedule '${ag_sched}'"
+            ag_attention+=("$rslug"$'\t'"$ragent"$'\t'"will not run, invalid schedule")
+        elif ! permission_from_job "$ag_pf" >/dev/null 2>&1; then
+            ag_rank=1 ag_icon="✗" ag_color="$RED"
+            ag_text="will not run: unrecognised permission '$(field_from_task Permission "$ag_pf" | awk 'NR == 1 {print $1}')'"
+            ag_attention+=("$rslug"$'\t'"$ragent"$'\t'"will not run, unrecognised permission")
+        else
+            # Two periods plus an hour of slack for the sweep interval.
+            ag_grace=$(( 2 * ag_period + 3600 ))
+            ag_lt_s=""
+            [ -n "${ag_lt:-}" ] && ag_lt_s=$(date -d "$ag_lt" +%s 2>/dev/null || true)
+            if [ -z "$ag_last" ]; then
+                ag_pub_s=$(stat -c %Y "$ag_pf" 2>/dev/null || echo "$ag_now")
+                if [ $(( ag_now - ag_pub_s )) -gt "$ag_grace" ]; then
+                    ag_rank=2 ag_icon="⚠" ag_color="$YELLOW"
+                    ag_text="overdue: runs $(_ag_label "$ag_sched"), published $(_ago $(( ag_now - ag_pub_s ))) ago and never run (is ai-scheduled in cron?)"
+                    ag_attention+=("$rslug"$'\t'"$ragent"$'\t'"overdue, never run")
+                else
+                    ag_rank=4 ag_icon="⏳" ag_color="$DIM"
+                    ag_text="published, waiting for its first run"
+                fi
+            elif [ $(( ag_now - ag_last )) -gt "$ag_grace" ]; then
+                ag_rank=2 ag_icon="⚠" ag_color="$YELLOW"
+                ag_text="overdue: runs $(_ag_label "$ag_sched"), last run $(_ago $(( ag_now - ag_last ))) ago (is ai-scheduled in cron?)"
+                ag_attention+=("$rslug"$'\t'"$ragent"$'\t'"overdue")
+            elif [ -n "$ag_lt_s" ]; then
+                ag_rank=3 ag_icon="✉" ag_color="$GREEN"
+                ag_what=$(_ag_outcome "${ag_lo:-}")
+                ag_text="found something $(_ago $(( ag_now - ag_lt_s ))) ago${ag_what:+: $ag_what}"
+            else
+                ag_rank=5 ag_icon="✓" ag_color="$DIM"
+                ag_text="nothing to report (ran $(_ago $(( ag_now - ag_last ))) ago)"
+            fi
+        fi
+        ag_rows+=("$ag_rank$US$rslug$US$ragent$US$ag_icon$US$ag_color$US$ag_text$US$ag_stats")
+        [ "${#rslug}" -gt "$ag_w_slug" ] && ag_w_slug=${#rslug}
+        [ "${#ragent}" -gt "$ag_w_agent" ] && ag_w_agent=${#ragent}
+    done <<< "$_agent_routines"
+fi
+
+total_attention=$((n_brev + n_review + n_blocked + ${#wt_attention[@]} + ${#ag_attention[@]}))
 
 # ── Today's stats from DONE.md ──────────────────────────────────
 today=$(date '+%Y-%m-%d')
@@ -417,6 +553,13 @@ else
         printf '  %s⇢%s %-40s  %s[%s]%s  %s(%s, see WORKTREES)%s\n' \
             "$YELLOW" "$RESET" "$a_name" "$CYAN" "$a_proj" "$RESET" "$DIM" "$a_why" "$RESET"
     done
+
+    # Routines that will not run, or have stopped running (see AGENTS).
+    for a in "${ag_attention[@]}"; do
+        IFS=$'\t' read -r a_slug a_agent a_why <<< "$a"
+        printf '  %s⚠%s %-40s  %s[%s]%s  %s(%s, see AGENTS)%s\n' \
+            "$YELLOW" "$RESET" "$a_slug" "$CYAN" "$a_agent" "$RESET" "$DIM" "$a_why" "$RESET"
+    done
 fi
 
 # ── Pipeline ────────────────────────────────────────────────────
@@ -487,10 +630,10 @@ fi
 # resolves on its own.
 if [ "${#wt_rows[@]}" -gt 0 ]; then
     _section "  WORKTREES"
-    while IFS=$'\t' read -r _ wt_proj wt_name wt_icon wt_color wt_text; do
+    while IFS="$US" read -r _ wt_proj wt_name wt_icon wt_color wt_text; do
         printf '  %-*s  %-*s  %s%s %s%s\n' "$wt_w_proj" "$wt_proj" "$wt_w_name" "$wt_name" \
             "$wt_color" "$wt_icon" "$wt_text" "$RESET"
-    done < <(printf '%s\n' "${wt_rows[@]}" | sort -s -t $'\t' -k1,1n)
+    done < <(printf '%s\n' "${wt_rows[@]}" | sort -s -t "$US" -k1,1n)
 fi
 
 # ── Today's stats ────────────────────────────────────────────────
@@ -648,79 +791,23 @@ else
     printf '  %s(no log yet)%s\n' "$DIM" "$RESET"
 fi
 
-# ── Agents ───────────────────────────────────────────────────────
-# Inventory of the agent layer (agents/CONTRACT.md): one line per routine
-# defined in THIS repo, grouped by its owning agent.
-#
-# Strictly read-only, like the rest of this script: it reads the definition root
-# and $SCHEDULED_DIR, and writes nothing anywhere. Both are guarded, so an
-# absent agents/ or scheduled/ is silence, not an error.
-#
-# Prints NOTHING AT ALL, not even the header, when no routine is defined: a
-# tree with no agents must render exactly the dashboard it rendered before this
-# section existed.
-AGENTS_DIR="$(agents_dir)"
-
-# Routine definition files, as absolute paths: agents/<agent>/routines/<slug>.md
-_routine_files() {
-    [ -d "$AGENTS_DIR" ] || return
-    find "$AGENTS_DIR" -mindepth 3 -maxdepth 3 -type f -path '*/routines/*.md' \
-        2>/dev/null | sort
-}
-
-_agent_routines=$(_routine_files)
-
-if [ -n "$_agent_routines" ]; then
+# ── Agents (scanned above, before NEEDS ATTENTION) ───────────────
+if [ "$ag_any" -eq 1 ]; then
     _section "  AGENTS"
-
-    _last_agent=""
-    while IFS= read -r rfile; do
-        [ -n "$rfile" ] || continue
-        [ -f "$rfile" ] || continue
-
-        rslug=$(basename "$rfile" .md)
-        # <agents_dir>/<agent>/routines/<slug>.md → <agent>
-        ragent=$(basename "$(dirname "$(dirname "$rfile")")")
-        rkind=$(field_from_task Kind "$rfile" | awk 'NR == 1 {print $1}')
-        rsched=$(field_from_task Schedule "$rfile" | awk 'NR == 1 {print $1}')
-        # permission_from_job prints nothing and returns 1 on a value it does
-        # not recognise: show that as "?", never as the default, which it is
-        # not — an unrecognised permission makes ai-scheduled skip the job.
-        rperm=$(permission_from_job "$rfile" 2>/dev/null || true)
-        [ -n "$rperm" ] || rperm="?"
-
-        # `act` is the level that can reach outside this pipeline, so it is
-        # the one that has to be visible at a glance.
-        case "$rperm" in
-            act)     perm_color="$RED" ;;
-            propose) perm_color="$YELLOW" ;;
-            read)    perm_color="$DIM" ;;
-            *)       perm_color="$RED" ;;
-        esac
-
-        # Published = the slug is live as a job file in scheduled/.
-        rstate="${DIM}not published${RESET}"
-        if [ -f "$SCHEDULED_DIR/$rslug.md" ]; then
-            rstate="${GREEN}published${RESET}"
-            # <slug>.run holds the epoch seconds of the last dispatch and is
-            # written at that instant, so its mtime is the same moment: reuse
-            # _elapsed rather than growing a second time formatter.
-            if [ -f "$SCHED_STATE_DIR/$rslug.run" ]; then
-                rstate="$rstate ${DIM}· ran $(_elapsed "$SCHED_STATE_DIR/$rslug.run") ago${RESET}"
-            else
-                rstate="$rstate ${DIM}· never run${RESET}"
-            fi
-        fi
-
-        if [ "$ragent" != "$_last_agent" ]; then
-            printf '  %s%s%s\n' "$BOLD" "$ragent" "$RESET"
-            _last_agent="$ragent"
-        fi
-
-        printf '    %-26s %-9s %-12s %b%-8s%b  %b\n' \
-            "$rslug" "${rkind:-?}" "${rsched:-?}" \
-            "$perm_color" "$rperm" "$RESET" "$rstate"
-    done <<< "$_agent_routines"
+    if [ "${#ag_rows[@]}" -gt 0 ]; then
+        while IFS="$US" read -r _ ag_slug ag_agent ag_icon ag_color ag_text ag_stats; do
+            printf '  %s%s%s %-*s  %s%-*s%s  %s%s%s' "$ag_color" "$ag_icon" "$RESET" \
+                "$ag_w_slug" "$ag_slug" "$DIM" "$ag_w_agent" "$ag_agent" "$RESET" \
+                "$ag_color" "$ag_text" "$RESET"
+            [ -n "$ag_stats" ] && printf '  %s· %s%s' "$DIM" "$ag_stats" "$RESET"
+            printf '\n'
+        done < <(printf '%s\n' "${ag_rows[@]}" | sort -s -t "$US" -k1,1n)
+    fi
+    if [ "$ag_unpub" -gt 0 ]; then
+        ag_s="s"; [ "$ag_unpub" -eq 1 ] && ag_s=""
+        printf '  %s· %d routine%s defined, not published: ai-agent --publish-plan%s\n' \
+            "$DIM" "$ag_unpub" "$ag_s" "$RESET"
+    fi
 fi
 
 printf '\n%s%s%s\n' "$DIM" "$(date '+Updated: %H:%M:%S')  ·  live: dtask -w" "$RESET"

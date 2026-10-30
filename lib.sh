@@ -299,6 +299,53 @@ agent_memory_path() {
     printf '%s\n' "$SCHED_STATE_DIR/${slug}.memory.md"
 }
 
+# Length of one period of a job schedule, in seconds, for "is it overdue?".
+#   schedule_period_sec <schedule>  →  seconds; returns 1 on what is_due rejects
+# monthly is 31 days, so a routine is never called late for a short month.
+schedule_period_sec() {
+    local n
+    case "${1:-}" in
+        daily) echo 86400 ;;
+        weekly|weekly-mon|weekly-tue|weekly-wed|weekly-thu|weekly-fri|weekly-sat|weekly-sun)
+            echo 604800 ;;
+        monthly) echo 2678400 ;;
+        every:*h)
+            n="${1#every:}"; n="${n%h}"
+            case "$n" in ''|*[!0-9]*) return 1 ;; esac
+            [ "$n" -gt 0 ] || return 1
+            echo $(( n * 3600 )) ;;
+        *) return 1 ;;
+    esac
+}
+
+# What one routine's memory ledger says about the last <days> days (default 7).
+#   agent_memory_summary <slug> [days]
+#   →  runs \t signals \t capped \t last-signal-time \t last-signal-outcome
+# Ledger lines are 'YYYY-MM-DD HH:MM | perm=.. | signal=.. | outcome', so the
+# window is a string comparison. capped is 1 when every line kept is inside the
+# window and the ledger is at its trim bound (agent_memory_lines): older runs
+# in the window were trimmed away, and the count is a lower bound. Prints
+# nothing for a missing or empty ledger. Read-only.
+agent_memory_summary() {
+    local slug="$1" days="${2:-7}" mem cutoff bound="${agent_memory_lines:-40}"
+    case "$bound" in ''|*[!0-9]*|0) bound=40 ;; esac
+    mem=$(agent_memory_path "$slug") || return 0
+    [ -s "$mem" ] || return 0
+    cutoff=$(date -d "$days days ago" '+%Y-%m-%d %H:%M')
+    awk -F' [|] ' -v cutoff="$cutoff" -v bound="$bound" '
+        NF < 3 { next }
+        { total++; if (first == "" || $1 < first) first = $1 }
+        $1 >= cutoff {
+            runs++
+            if ($3 == "signal=yes") { signals++; lt = $1; lo = $4 }
+        }
+        END {
+            if (total == 0) exit
+            capped = (total >= bound && first >= cutoff) ? 1 : 0
+            printf "%d\t%d\t%d\t%s\t%s\n", runs, signals, capped, lt, lo
+        }' "$mem"
+}
+
 # Root directory holding the agent-layer DEFINITIONS (agents/CONTRACT.md).
 #   agents_dir  →  absolute path on stdout; always returns 0
 #
