@@ -23,6 +23,9 @@ BRIEFS_DIR="$TASKS_DIR/briefs"
 BRIEFS_DONE_DIR="$TASKS_DIR/briefs/done"
 BACKLOG_REVIEW_DIR="$TASKS_DIR/backlog-for-review"
 LOCK_DIR="$TASKS_DIR/.locks"
+# One status file per inbox task whose ## Precondition currently fails. Written
+# and removed only by ai-task's pre-claim pass; read by the picker and dtask.
+PRECONDITION_DIR="$TASKS_DIR/.precondition"
 LOG="$TASKS_DIR/DONE.md"
 
 # Recurring-job engine (ai-scheduled). All four of these already exist in the
@@ -749,6 +752,53 @@ project_working_dir() {
     esac
     [ -n "$raw" ] || return 1
     printf '%s\n' "$raw"
+}
+
+# ── ## Precondition ────────────────────────────────────────────────────────
+#
+# Commands that must all exit 0 before a task may be claimed: something only a
+# human can supply (a secret, a file, an access). Without it a task that needs
+# one claims a run, reaches its STOP step, fails grading, and does that again
+# until max_retries is spent: three full runs to rediscover one missing file.
+#
+# One command per line; blank lines and lines starting with # are skipped. Each
+# runs with `timeout bash -c` in the project's working directory, exactly like
+# ai-eval's ## Test Command, so it grants nothing a reviewed task file could
+# not already do. stdin is /dev/null so an ssh in the command cannot swallow
+# the loop's input.
+precondition_lines() {
+    awk '/^## Precondition[[:space:]]*$/{f=1; next}
+         f && /^## /{exit}
+         f && NF && !/^[[:space:]]*#/{print}' "$1"
+}
+
+# precondition_check FILE [TIMEOUT_SEC]
+# 0 when every command passes (or the section is absent). Otherwise returns 1
+# and prints the failing command, its exit status and the last lines of its
+# output, which the caller stores as the task's status file.
+precondition_check() {
+    local f="$1" t="${2:-30}" proj wd line out rc
+    proj=$(project_from_task "$f")
+    wd=""
+    if [ -n "$proj" ]; then
+        wd=$(project_working_dir "$(canonical_project "$proj")" 2>/dev/null) || wd=""
+    fi
+    [ -n "$wd" ] && [ -d "$wd" ] || wd="$HOME"
+    while IFS= read -r line; do
+        rc=0
+        out=$(cd "$wd" && timeout "$t" bash -c "$line" 2>&1 </dev/null) || rc=$?
+        if [ "$rc" -ne 0 ]; then
+            printf 'command: %s\n' "$line"
+            if [ "$rc" -eq 124 ]; then
+                printf 'exit: 124 (timed out after %ss)\n' "$t"
+            else
+                printf 'exit: %s\n' "$rc"
+            fi
+            [ -n "$out" ] && printf '%s\n' "$out" | tail -n 5
+            return 1
+        fi
+    done < <(precondition_lines "$f")
+    return 0
 }
 
 # Render explicitly referenced project instructions into a prompt. The legacy

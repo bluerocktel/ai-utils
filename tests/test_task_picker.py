@@ -9,7 +9,9 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-class TaskPickerTests(unittest.TestCase):
+class PickerHarness:
+    """Throwaway tree, stub providers and stub tmux; holds no tests."""
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
@@ -52,6 +54,8 @@ fi
         return subprocess.run([str(self.root / 'ai-task'), *args],
                               env=self.env, capture_output=True, text=True)
 
+
+class TaskPickerTests(PickerHarness, unittest.TestCase):
     def test_automatic_dispatch_records_and_passes_task_runner(self):
         task = self.task('first', 'beta')
         dry = self.call('--dry-run')
@@ -112,3 +116,90 @@ fi
             f.write('eval_runner=alpha\n')
         (self.tasks / '.auth-cooldown-alpha').touch()
         self.assertIn(f'would claim: {third}', self.call('--dry-run').stdout)
+
+
+class PreconditionTests(PickerHarness, unittest.TestCase):
+    """## Precondition: checked before the inbox lock, waiting burns nothing."""
+
+    def setUp(self):
+        super().setUp()
+        notify = self.root / 'bin' / 'notify-send'
+        notify.write_text('#!/bin/bash\nprintf "%s\\n" "$*" >> "$NOTIFY_LOG"\n')
+        notify.chmod(0o755)
+        self.notify_log = self.root / 'notify.txt'
+        self.env['NOTIFY_LOG'] = str(self.notify_log)
+        self.state = self.tasks / '.precondition'
+
+    def precond(self, name, command):
+        return self.task(name, 'beta', f'\n## Precondition\n{command}\n\n## Tasks\n1. work\n')
+
+    def notifications(self):
+        return self.notify_log.read_text().splitlines() if self.notify_log.exists() else []
+
+    def test_passing_precondition_is_claimable(self):
+        task = self.precond('first', 'true')
+        self.assertIn(f'would claim: {task}', self.call('--dry-run').stdout)
+
+    def test_failing_precondition_waits_without_touching_the_task(self):
+        flag = self.root / 'secret'
+        waiting = self.precond('first', f'test -f {flag}')
+        before = waiting.read_text()
+        second = self.task('second', 'beta')
+        result = self.call()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Waiting on precondition: first', result.stdout)
+        self.assertFalse(second.exists())          # the next task was claimed
+        self.assertEqual(waiting.read_text(), before)  # no retry, no feedback
+        marker = (self.state / 'first').read_text()
+        self.assertIn(f'command: test -f {flag}', marker)
+        self.assertIn('exit: 1', marker)
+        since = marker.splitlines()[0]
+        self.assertEqual(len(self.notifications()), 1)
+
+        # A second sweep keeps the first-seen time and does not notify again.
+        self.call()
+        self.assertEqual((self.state / 'first').read_text().splitlines()[0], since)
+        self.assertEqual(len(self.notifications()), 1)
+
+        # Once the human supplies what was missing, the task is claimable.
+        flag.touch()
+        result = self.call()
+        self.assertIn('Precondition met, task claimable again: first', result.stdout)
+        self.assertFalse((self.state / 'first').exists())
+        self.assertFalse(waiting.exists())
+
+    def test_timeout_counts_as_failure(self):
+        with (self.root / 'config').open('a') as f:
+            f.write('precondition_timeout_sec=1\n')
+        self.precond('first', 'sleep 5')
+        self.assertEqual(self.call('--dry-run').returncode, 1)
+        self.call()
+        self.assertIn('exit: 124 (timed out after 1s)',
+                      (self.state / 'first').read_text())
+
+    def test_dry_run_writes_no_status_file(self):
+        self.precond('first', 'false')
+        self.assertIn('would claim: (nothing eligible)', self.call('--dry-run').stdout)
+        self.assertFalse(self.state.exists() and any(self.state.iterdir()))
+        self.assertEqual(self.notifications(), [])
+
+    def test_blocked_dependency_is_not_checked(self):
+        probe = self.root / 'probe'
+        self.task('first', 'beta',
+                  f'\n## Depends-on\nmissing\n\n## Precondition\ntouch {probe}\n')
+        self.call('--dry-run')
+        self.assertFalse(probe.exists())
+
+    def test_status_file_of_a_task_that_left_inbox_is_removed(self):
+        self.state.mkdir(parents=True)
+        (self.state / 'gone').write_text('since: x\n')
+        self.task('other', 'beta')
+        self.call()
+        self.assertFalse((self.state / 'gone').exists())
+
+    def test_named_task_runs_with_a_warning(self):
+        task = self.precond('first', 'false')
+        result = self.call(str(task))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('## Precondition fails for first.md', result.stderr)
+        self.assertTrue((self.tasks / 'run/first.state').exists())

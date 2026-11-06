@@ -109,6 +109,9 @@ INBOX_LOCK_WAIT_SEC=30
 # generate_suggestions below.
 SUGGEST_ENABLED=1
 SUGGEST_MAX=3
+# Per-command cap on a ## Precondition check. Checks run before the inbox lock
+# is taken (see refresh_preconditions), so this never stalls another launcher.
+PRECONDITION_TIMEOUT_SEC=30
 
 load_config
 MAX_RETRIES=${max_retries:-$MAX_RETRIES}
@@ -117,6 +120,8 @@ PROJECT_LOCK_WAIT_MIN=${project_lock_wait_min:-$PROJECT_LOCK_WAIT_MIN}
 AUTH_COOLDOWN_MIN=${auth_cooldown_min:-$AUTH_COOLDOWN_MIN}
 SUGGEST_ENABLED=${suggest_enabled:-$SUGGEST_ENABLED}
 SUGGEST_MAX=${suggest_max:-$SUGGEST_MAX}
+PRECONDITION_TIMEOUT_SEC=${precondition_timeout_sec:-$PRECONDITION_TIMEOUT_SEC}
+case "$PRECONDITION_TIMEOUT_SEC" in ''|*[!0-9]*|0) PRECONDITION_TIMEOUT_SEC=30 ;; esac
 
 # Prefix for write_stub's own messages (it lives in lib.sh and is shared with
 # ai-scheduled, so it logs through this rather than through a local log()).
@@ -1297,6 +1302,9 @@ select_candidate() {
         ( load_provider "$r" >/dev/null ) || continue
         runner_available "$r" || continue
         grader_available "$f" || continue
+        # Decided by refresh_preconditions BEFORE the lock: only a file test
+        # here, because this loop runs under inbox.lock.
+        [ -e "$PRECOND_STATE/$(basename "$f" .md)" ] && continue
         worktree_blocker "$f" >/dev/null && continue
         # An existing session for this name means a previous attempt is still
         # in flight; leave the file alone rather than run it twice.
@@ -1305,6 +1313,66 @@ select_candidate() {
         return 0
     done < <(inbox_by_age)
     return 1
+}
+
+# ── Preconditions ──────────────────────────────────────────────────────────
+#
+# ## Precondition commands can take seconds (an ssh), and select_candidate runs
+# under inbox.lock, which must be held for milliseconds. So the checks run
+# here, BEFORE the claim and outside any lock, and leave one status file per
+# failing task in $PRECOND_STATE. The picker only tests whether that file
+# exists; dtask reads it and never runs a command itself.
+#
+# A failing precondition is waiting, not failure: the task stays in inbox/
+# untouched, no retry is burned, and the picker moves on to the next task.
+# Only tasks the picker could otherwise take are checked (dependency met,
+# runner matching), so a blocked chain triggers no ssh.
+#
+# The notification fires when a task STARTS waiting, never on later sweeps:
+# a task waiting for a password would otherwise alert every fifteen minutes,
+# and get muted long before the password arrives.
+refresh_preconditions() {
+    local dir="$1" notify_on="$2" f name marker report since tmp
+    mkdir -p "$dir"
+    for marker in "$dir"/*; do
+        [ -f "$marker" ] || continue
+        [ -f "$INBOX/$(basename "$marker").md" ] || rm -f "$marker"
+    done
+    while IFS= read -r f; do
+        [ -n "$f" ] && [ -f "$f" ] || continue
+        grep -q '^## Precondition[[:space:]]*$' "$f" || continue
+        dep_satisfied "$f" || continue
+        runner_matches "$f" || continue
+        name=$(basename "$f" .md)
+        marker="$dir/$name"
+        if report=$(precondition_check "$f" "$PRECONDITION_TIMEOUT_SEC"); then
+            if [ -f "$marker" ]; then
+                rm -f "$marker"
+                echo "Precondition met, task claimable again: $name"
+            fi
+            continue
+        fi
+        since=""
+        [ -f "$marker" ] && since=$(sed -n 's/^since: //p' "$marker" | head -n 1)
+        tmp=$(mktemp "$dir/.tmp.XXXXXX")
+        {
+            printf 'since: %s
+' "${since:-$(date '+%Y-%m-%d %H:%M')}"
+            printf 'checked: %s
+' "$(date '+%Y-%m-%d %H:%M')"
+            printf '%s
+' "$report"
+        } > "$tmp"
+        mv -f "$tmp" "$marker"
+        echo "Waiting on precondition: $name ($(printf '%s
+' "$report" | sed -n 's/^exit: //p'))"
+        if [ -z "$since" ] && [ "$notify_on" = 1 ]; then
+            notify -u critical "ai-task: Waiting on Precondition" \
+                "$name will not be claimed until its ## Precondition passes. Failed: $(printf '%s
+' "$report" | sed -n 's/^command: //p')"
+        fi
+    done < <(inbox_by_age)
+    return 0
 }
 
 # ── Blocked-chain reporting ────────────────────────────────────────────────
@@ -1396,20 +1464,40 @@ report_blocked_chains() {
     return 0
 }
 
+# ── Precondition pass (outside every lock) ─────────────────────────────────
+# A dry run checks into a throwaway directory: it claims nothing and must
+# write nothing into the tree either, including status files.
+PRECOND_STATE="$PRECONDITION_DIR"
+if [ -z "$TASK_ARG" ]; then
+    if [ "$DRY_RUN" -eq 1 ]; then
+        PRECOND_STATE=$(mktemp -d)
+        refresh_preconditions "$PRECOND_STATE" 0
+    else
+        refresh_preconditions "$PRECOND_STATE" 1
+    fi
+elif [ "$DRY_RUN" -eq 0 ] && [ -f "$TASK_ARG" ] && ! PRECOND_REPORT=$(precondition_check "$TASK_ARG" "$PRECONDITION_TIMEOUT_SEC"); then
+    # A named task is run as asked, like the cooldown bypass: say so loudly.
+    echo "Warning: ## Precondition fails for $(basename "$TASK_ARG"); running anyway because it was named." >&2
+    printf '%s\n' "$PRECOND_REPORT" | sed 's/^/  /' >&2
+fi
+
 # ── Dry run: selection only, claims nothing ────────────────────────────────
 if [ "$DRY_RUN" -eq 1 ]; then
     if [ -n "$TASK_ARG" ]; then
         echo "--dry-run does not take a task file argument" >&2
         exit 1
     fi
+    DRY_STATUS=1
     if PICK=$(select_candidate); then
         echo "runner: $(resolve_runner "$PICK")"
         echo "would claim: $PICK"
-        exit 0
+        DRY_STATUS=0
+    else
+        echo "runner: ${INVOCATION_RUNNER:-automatic}"
+        echo "would claim: (nothing eligible)"
     fi
-    echo "runner: ${INVOCATION_RUNNER:-automatic}"
-    echo "would claim: (nothing eligible)"
-    exit 1
+    [ "$PRECOND_STATE" != "$PRECONDITION_DIR" ] && rm -rf "$PRECOND_STATE"
+    exit "$DRY_STATUS"
 fi
 
 # Clear the worktrees of tasks that finished since the last sweep. After the
