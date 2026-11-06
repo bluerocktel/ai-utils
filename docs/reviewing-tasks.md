@@ -113,6 +113,14 @@ first FAIL.
 | slug matches two files in `review/` | refused, both named: two dated attempts of one task, and picking one would be a guess. Remove the stale one by hand |
 | argument contains a path | the path is stripped before the lookup, so it can only ever move a file out of `review/` |
 
+## Waiting on a precondition
+
+`dtask` shows `⏸ waiting: precondition since <time>` for a task in `inbox/`
+whose `## Precondition` fails. Nothing is wrong with the task: it is waiting
+for something only you can supply. `cat ~/tasks/.precondition/<task>` shows the
+failing command and its output. Provide what is missing; the next sweep claims
+the task. To run it anyway, name the file: `ai-task ~/tasks/inbox/<task>.md`.
+
 ## Dead dependency chains
 
 A task with `## Depends-on` waits until its parent is in `done/`. A parent in

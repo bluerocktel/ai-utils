@@ -510,6 +510,15 @@ seed-schema
 - Every ## Depends-on value MUST match a SLUG you emit in this response. Never depend on a task you did not write. Never invent a setup task and then forget to emit it.
 - Omit the ## Depends-on section entirely when there is no dependency. Do not leave a placeholder.
 
+PRECONDITIONS (optional extra section):
+- When a task needs something only the human can supply and no task can create (a secret or password, a credential file, an access grant, a file the human must upload), do NOT write a STOP step for it inside ## Tasks. Add a ## Precondition section instead: one shell command per line, each exiting 0 only when that input is in place. The launcher runs these commands before claiming the task and leaves the task waiting in the queue, without using a retry, until every one passes. A STOP step costs a full run and a retry every time it is reached.
+- Each command must be fast (well under 30 seconds), read-only and non-interactive, and must never print the secret: test for presence only, for example 'grep -q ^API_PASSWORD=. /path/to/.env', 'test -s /path/to/file', or 'ssh -o BatchMode=yes -p 2222 user@host test -r /path/to/file'.
+- Never use ## Precondition for something another task in this batch produces: that is ## Depends-on. Never use it for a count or a state the task itself changes.
+- Omit the section entirely when there is none. Example:
+
+## Precondition
+ssh -o BatchMode=yes -p 2222 user@host 'grep -q ^API_PASSWORD=. /home/user/app/.env'
+
 CRITICAL RULES:
 - Output ONLY the delimited task blocks. No preamble, no commentary, no closing remarks, no code fences.
 - Every task must be self-contained: an autonomous agent picking it up cold must execute it with zero prior context.

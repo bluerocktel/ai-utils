@@ -31,6 +31,11 @@ project_lock_wait_min=60
 # Per-command timeout (minutes) for ## Test Command runs in ai-eval (default 20).
 test_timeout_min=20
 
+# Per-command timeout (seconds) for a task's ## Precondition checks (default
+# 30). They run before the inbox lock is taken, never inside it. A timeout
+# counts as "not met": the task keeps waiting, no retry burned.
+precondition_timeout_sec=30
+
 # After a task completes AND passes evaluation, propose follow-up task stubs
 # into ~/tasks/suggestions/ for you to read and promote by hand. Nothing there
 # runs until you move it into inbox/ yourself. Set to 0 to disable (default 1).

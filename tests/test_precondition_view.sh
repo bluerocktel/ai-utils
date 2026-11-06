@@ -1,0 +1,62 @@
+#!/bin/bash
+# Offline regression test for dtask's "waiting: precondition" rows. dtask only
+# READS .precondition/<task> (written by ai-task's pre-claim pass) and must
+# never run a check itself. A tree with no status file renders exactly what the
+# previous dtask rendered.
+#
+# Builds a throwaway HOME and TASKS_DIR and runs a copy of the scripts with its
+# own config. Never touches the live tree.
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_DIR=$(dirname "$SCRIPT_DIR")
+
+tmp=$(mktemp -d)
+cleanup() { rm -rf "$tmp"; }
+trap cleanup EXIT
+
+export HOME="$tmp/home"
+export TASKS_DIR="$tmp/tasks"
+export NO_COLOR=1
+T="$TASKS_DIR"
+mkdir -p "$HOME" "$T"/{projects,inbox,run,review,done,briefs,backlog-for-review}
+
+FAILURES=0
+fail() { echo "FAIL: $*" >&2; FAILURES=$((FAILURES + 1)); }
+
+APP="$tmp/app"
+mkdir -p "$APP"
+cp "$REPO_DIR/dtask" "$REPO_DIR/lib.sh" "$APP/"
+printf 'default_runner=nonexistent\n' > "$APP/config"
+D() { "$APP/dtask" 2>/dev/null; }
+stable() { grep -vE '^ai-dash|^Updated:'; }
+
+printf '# t\n\n## Precondition\ntouch %s/ran\n' "$tmp" > "$T/inbox/wait-task.md"
+printf '# t\n' > "$T/inbox/plain-task.md"
+
+# ── no status file: byte-identical to the previous dtask ─────────────────────
+if git -C "$REPO_DIR" show HEAD:dtask > "$APP/dtask.old" 2>/dev/null \
+    && ! grep -q 'precond_rows' "$APP/dtask.old"; then
+    chmod +x "$APP/dtask.old"
+    cmp -s <(D | stable) <("$APP/dtask.old" 2>/dev/null | stable) \
+        || fail "no status file: output differs from the previous dtask"
+fi
+[ -e "$tmp/ran" ] && fail "dtask ran a precondition command"
+
+# ── a waiting task, plus a stale file whose task has left inbox/ ─────────────
+mkdir -p "$T/.precondition"
+printf 'since: 2026-11-06 05:56\nchecked: 2026-11-06 06:10\ncommand: false\nexit: 124 (timed out after 30s)\n' \
+    > "$T/.precondition/wait-task"
+printf 'since: 2026-11-01 00:00\nexit: 1\n' > "$T/.precondition/gone-task"
+out=$(D)
+grep -q '⏸ wait-task .*waiting: precondition since 2026-11-06 05:56, exit 124 (timed out after 30s), see .precondition/wait-task' <<< "$out" \
+    || fail "waiting row missing or malformed"
+grep -q 'gone-task' <<< "$out" && fail "stale status file was rendered"
+grep -q '1 item(s) require your input' <<< "$out" || fail "attention count should be 1"
+[ -e "$tmp/ran" ] && fail "dtask ran a precondition command"
+
+if [ "$FAILURES" -gt 0 ]; then
+    echo "$FAILURES failure(s)" >&2
+    exit 1
+fi
+echo "OK: precondition view"

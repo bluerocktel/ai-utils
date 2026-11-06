@@ -111,6 +111,7 @@ Only a real FAIL verdict costs a retry.
 |---|---|---|
 | Inbox claim | `$TASKS_DIR/.locks/inbox.lock` | Shared by all runners. Held for milliseconds: select, move to `run/`, write the state marker. Two invocations can never claim the same task. |
 | Per project | `$TASKS_DIR/.locks/<canonical-project>.lock` | Shared by all runners, held for the whole run and grading: two agents must never be in the same repository at once. A wait timeout is a deferral. |
+| Waiting on a precondition | `$TASKS_DIR/.precondition/<task>` | Per task. Written by `ai-task` when the task's `## Precondition` fails, removed when it passes or the task leaves `inbox/`. Read by the picker and `dtask`. |
 | Auth cooldown | `$TASKS_DIR/.auth-cooldown-<runner>` | Per runner: a 401 on one provider never pauses another. A grading auth failure touches the grader's marker. Lasts `auth_cooldown_min`. |
 
 **Aliases share one lock.** The project lock name goes through
@@ -127,6 +128,34 @@ lock name changes: `## Project` still means the raw value for loading the
 project file, the prompt, the log and `DONE.md`. So a task written with an
 undeclared spelling still does not load its project file: use the canonical
 name.
+
+### Preconditions
+
+A task may carry a `## Precondition` section: shell commands, one per line,
+that must all exit `0` before the task can be claimed. It is for what only you
+can supply (a secret, a credential file, an access grant), never for work
+another task produces (that is `## Depends-on`).
+
+```
+## Precondition
+ssh -o BatchMode=yes -p 65022 fedora@worker-001.example 'grep -q "^SFTP_PASS=." ~/app/.env'
+```
+
+- Each command runs with `timeout bash -c` (`precondition_timeout_sec`) in
+  the project's working directory, like `## Test Command`.
+- The checks run on every sweep, **before** the inbox lock, and only for tasks
+  the picker could otherwise take: a task blocked by its dependency is not
+  checked.
+- A failing check leaves the task in `inbox/` unchanged: no retry, no feedback
+  section. The picker moves on to the next task. The failure is written to
+  `.precondition/<task>` (time it started waiting, last check, failing command,
+  exit status, last 5 output lines) and `dtask` shows the task as
+  `⏸ waiting: precondition`.
+- One notification when a task starts waiting; one log line per sweep.
+- `--dry-run` checks into a temporary directory and writes nothing.
+- A task named on the command line runs anyway, with a warning: same rule as
+  the auth cooldown.
+- Never print the secret in a check: test for presence (`grep -q`, `test -s`).
 
 ## ai-eval
 

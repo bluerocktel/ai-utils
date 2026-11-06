@@ -189,6 +189,12 @@ when it writes criteria, so use it to review the tasks it produces too.
 - One repair pass when the draft has a risky criterion or broken task
   delimiters. If the repair fails, the brief goes back to `briefs/` and the
   draft is kept in `run/` as a `.raw` file.
+- `## Precondition` on a task that needs something only you can supply (a
+  password, a credential file, an access). The task then waits in `inbox/`,
+  without using a retry, until the check passes, instead of running, hitting a
+  STOP step and failing. Say in the brief what you will have to provide, so the
+  decomposer can write the check. See
+  [reference: preconditions](reference.md#preconditions).
 - A dependency check: a `## Depends-on` that names a task that was not emitted
   is removed; a cycle or a chain with no starting task rejects the whole batch.
 

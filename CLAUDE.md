@@ -579,6 +579,30 @@ error body could plausibly contain is **broad**, not strong.
   picking one would requeue an arbitrary half of the history. It makes no agent
   call, loads no provider, and takes `.locks/inbox.lock` for the move like every
   other write into `inbox/`.
+- **`## Precondition` is checked BEFORE `inbox.lock`, never inside it.**
+  Added 2026-11-06 after `globeo-sftp-deploy-worker001` spent three full runs
+  stopping at the same STOP step because a password only the user could
+  install was missing. A check can be an ssh that takes seconds, and
+  `select_candidate` runs under a lock meant to be held for milliseconds, so
+  `refresh_preconditions` in `ai-task` runs the checks first and leaves
+  `.precondition/<task>`; the picker only tests that the file exists, and
+  `dtask` only reads it. Four things to keep right:
+  - **Waiting burns nothing.** The task file is not touched, no retry, no
+    feedback section. Do not "record the wait" in the task: a human promoting
+    it later would read it as a failed attempt.
+  - **Only tasks the picker could take are checked** (dependency met, runner
+    matching). A dead chain must not ssh somewhere every sweep.
+  - **One notification per wait, keyed on the status file's absence.** The
+    `since:` line is carried over on every rewrite; lose it and the
+    notification fires every sweep, the same reason `report_blocked_chains
+    dead-only` never notifies.
+  - **`dtask` never runs a check.** Opening the dashboard must not reach
+    another host. `--dry-run` checks into a temporary directory, since it
+    must write nothing into the tree.
+  `ai-brief`'s prompt tells the decomposer to use the section instead of a
+  STOP step for anything only the human can supply. Tests:
+  `tests/test_task_picker.py` (`PreconditionTests`),
+  `tests/test_precondition_view.sh`.
 - **`dtask` is the only script here safe to run against the live tree,** because
   it is read-only: no agent call, no file move, no write into `$TASKS_DIR`.
 

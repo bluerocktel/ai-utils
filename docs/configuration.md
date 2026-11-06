@@ -36,6 +36,7 @@ $EDITOR config                # at least set default_runner=
 | `auth_cooldown_min` | `30` | Minutes a runner's unattended queue pauses after an auth failure. The marker is `$TASKS_DIR/.auth-cooldown-<runner>`, per runner: a 401 on one provider never pauses another. Naming a task file explicitly bypasses the pause. | [reference: locks](reference.md#locks-and-markers) |
 | `task_timeout_min` | `45` | Wall-clock cap on the main agent run of one task. An overrun (exit `124`) is a deferral and burns no retry. | |
 | `project_lock_wait_min` | `60` | How long a task waits for `$TASKS_DIR/.locks/<project>.lock`. The lock is shared by all runners. A timeout is a deferral, not a failure. | [reference: locks](reference.md#locks-and-markers) |
+| `precondition_timeout_sec` | `30` | Cap per `## Precondition` command. A timeout counts as not met: the task keeps waiting in `inbox/`, no retry burned. Checks run before the inbox lock is taken, so a slow one never stalls another launcher. | [reference: preconditions](reference.md#preconditions) |
 | `brief_timeout_min` | `45` | Cap on one `ai-brief` decomposition run, repair pass included. A timeout puts the brief back in `briefs/`. | [reference: ai-brief](reference.md#ai-brief-and-ai-briefs) |
 
 ### Grading
