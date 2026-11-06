@@ -112,6 +112,8 @@ SUGGEST_MAX=3
 # Per-command cap on a ## Precondition check. Checks run before the inbox lock
 # is taken (see refresh_preconditions), so this never stalls another launcher.
 PRECONDITION_TIMEOUT_SEC=30
+# Draft a fix proposal (ai-propose) when grading sends a task to review/.
+REVIEW_PROPOSALS=1
 
 load_config
 MAX_RETRIES=${max_retries:-$MAX_RETRIES}
@@ -122,12 +124,32 @@ SUGGEST_ENABLED=${suggest_enabled:-$SUGGEST_ENABLED}
 SUGGEST_MAX=${suggest_max:-$SUGGEST_MAX}
 PRECONDITION_TIMEOUT_SEC=${precondition_timeout_sec:-$PRECONDITION_TIMEOUT_SEC}
 case "$PRECONDITION_TIMEOUT_SEC" in ''|*[!0-9]*|0) PRECONDITION_TIMEOUT_SEC=30 ;; esac
+REVIEW_PROPOSALS=${review_proposals:-$REVIEW_PROPOSALS}
 
 # Prefix for write_stub's own messages (it lives in lib.sh and is shared with
 # ai-scheduled, so it logs through this rather than through a local log()).
 STUB_LOG_PREFIX="ai-task: "
 
 # ── Shared helpers ─────────────────────────────────────────────────────────
+
+# Start ai-propose for a task that grading just moved to review/. Only for the
+# two grading outcomes (UNSATISFIABLE, retries spent): a worktree
+# misconfiguration is a config fault, not a task file to fix.
+#
+# DETACHED, because this run must end now: its tmux session and run state
+# would otherwise show the task as running for up to propose_timeout_min.
+# The lock descriptors are closed in the child, or it would keep the project
+# lock (fd 9) for its whole agent call and stall every task of the project.
+# A missing or failing ai-propose changes nothing about the task's outcome.
+launch_proposal() {
+    [ "$REVIEW_PROPOSALS" = 1 ] || return 0
+    local bin="$SCRIPT_DIR/ai-propose" out=/dev/null
+    [ -x "$bin" ] || return 0
+    [ -f "$TASKS_DIR/cron.log" ] && out="$TASKS_DIR/cron.log"
+    TASKS_DIR="$TASKS_DIR" setsid "$bin" "$TASK_NAME" \
+        </dev/null >>"$out" 2>&1 7>&- 8>&- 9>&- &
+    return 0
+}
 
 # Runner for one task: an explicit --runner flag wins, otherwise the task's own
 # ## Runner section, which itself falls back to default_runner from config.
@@ -1056,6 +1078,7 @@ ${TASK_TEXT}" \
         rm -f "$EVAL_OUTPUT"
         notify -u critical "ai-task [$RUNNER]: Unsatisfiable Criteria" \
             "$TASK_NAME cannot pass as written. The TASK FILE needs fixing, not the code — see ## Unsatisfiable Criteria in the report. Moved to review/, no retry burned."
+        launch_proposal
         exit 1
     fi
 
@@ -1145,6 +1168,7 @@ $(cat "$TASK_FILE")" \
             rm -f "$EVAL_OUTPUT"
             notify -u critical "ai-task [$RUNNER]: Needs Review" \
                 "$TASK_NAME failed evaluation after $MAX_RETRIES retries."
+            launch_proposal
             exit 1
         fi
     fi

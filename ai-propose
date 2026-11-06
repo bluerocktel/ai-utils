@@ -1,0 +1,335 @@
+#!/bin/bash
+# ai-propose: draft the fix for a task that landed in review/.
+#
+# A task reaches review/ because grading failed, and in practice the cause is
+# far more often the TASK FILE (a criterion no correct run can pass, a wrong
+# assumption in its Context, a missing human-supplied input) than the work.
+# The evaluator usually names the fix in its feedback already; what costs the
+# human time is turning that into an edit, and noticing that later tasks of
+# the same brief carry the same defect.
+#
+# One agent call reads the task (with all its evaluator feedback), its latest
+# report and the not-yet-run tasks of the same brief, and proposes a cause plus
+# replacement blocks. Every block is CHECKED IN CODE before it is offered: its
+# file must belong to the same brief, its old text must occur exactly once,
+# and it must sit above the first evaluator section (history is never
+# rewritten). Nothing is applied here: --apply is a separate human step, and
+# so is ai-task --unblock.
+#
+# Writes only review/<task>.proposal and review/<task>.proposal.json. Never
+# touches a cooldown marker: like ai-ask and ai-history it is a convenience,
+# and an auth failure here must pause no queue.
+#
+# Usage:
+#   ai-propose SLUG             Draft a proposal for the task SLUG in review/
+#   ai-propose --apply SLUG     Apply the checked edits of SLUG's proposal
+#   ai-propose --context SLUG   Print the prompt that would be sent; no call
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/lib.sh"
+load_config
+
+usage() {
+    sed -n '/^# Usage:/,/^set -euo/p' "$0" | sed '$d; s/^# \{0,1\}//'
+}
+
+MODE=propose
+SLUG=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --apply) MODE=apply; shift ;;
+        --context) MODE=context; shift ;;
+        -h|--help) usage; exit 0 ;;
+        -*) echo "ai-propose: unknown option '$1'" >&2; usage >&2; exit 2 ;;
+        *) SLUG="$1"; shift ;;
+    esac
+done
+[ -n "$SLUG" ] || { usage >&2; exit 2; }
+
+PROPOSE_TIMEOUT_MIN="${propose_timeout_min:-10}"
+case "$PROPOSE_TIMEOUT_MIN" in ''|*[!0-9]*|0) PROPOSE_TIMEOUT_MIN=10 ;; esac
+AUTH_COOLDOWN_MIN="${auth_cooldown_min:-30}"
+CAP_TASK=40000 CAP_REPORT=8000 CAP_SIBLING=12000 MAX_SIBLINGS=8
+
+log() { printf 'ai-propose: %s\n' "$*"; }
+
+# ── Resolve the task in review/ (same rules as ai-task --unblock) ───────────
+# Path components and the extension are stripped, so the argument can only
+# ever name a file inside review/. Two dated attempts of one slug are refused.
+SLUG=$(basename "${SLUG%.md}")
+MATCHES=$(find "$REVIEW_DIR" -maxdepth 1 -type f \
+               \( -name "${SLUG}.md" -o -name "*_${SLUG}.md" \) 2>/dev/null | sort)
+COUNT=$(printf '%s\n' "$MATCHES" | grep -c . || true)
+if [ "$COUNT" -eq 0 ]; then
+    log "no task matching '$SLUG' in $REVIEW_DIR" >&2; exit 1
+fi
+if [ "$COUNT" -gt 1 ]; then
+    log "ambiguous: '$SLUG' matches $COUNT files in $REVIEW_DIR, pass the full basename" >&2
+    exit 1
+fi
+TASK_FILE="$MATCHES"
+TASK_NAME=$(basename "$TASK_FILE" .md)
+PROPOSAL="$REVIEW_DIR/${TASK_NAME}.proposal"
+EDITS_JSON="$REVIEW_DIR/${TASK_NAME}.proposal.json"
+
+# The edit engine. Python because the checks compare multi-line strings
+# exactly, which is where shell quoting goes wrong. Same interpreter dtask's
+# viewer already needs. Run isolated (-I): it reads agent output.
+edit_engine() {
+    python3 -I - "$@" <<'PY'
+import difflib, json, os, re, sys, tempfile
+
+HISTORY = re.compile(r'^## (Evaluator Feedback|Retry Strategy|Issues|Retries)\b', re.M)
+
+def history_start(text):
+    m = HISTORY.search(text)
+    return m.start() if m else len(text)
+
+def check(edit, files):
+    """Reason the edit is refused, or None. files maps basename -> path."""
+    name = edit.get('file', '')
+    if name not in files:
+        return 'file is not this task or a pending task of the same brief'
+    old, new = edit.get('old', ''), edit.get('new', '')
+    if not old.strip():
+        return 'empty old text'
+    if old == new:
+        return 'old and new are identical'
+    text = open(files[name], encoding='utf-8').read()
+    n = text.count(old)
+    if n != 1:
+        return f'old text occurs {n} times, must occur exactly once'
+    if text.index(old) + len(old) > history_start(text):
+        return 'edit reaches into the evaluator history, which is never rewritten'
+    return None
+
+def parse(raw):
+    cause = re.search(r'^===CAUSE===\n(.*?)(?=^===)', raw, re.M | re.S)
+    commands = re.search(r'^===COMMANDS===\n(.*?)(?=^===END===|\Z)', raw, re.M | re.S)
+    edits = []
+    for m in re.finditer(r'^===EDIT (.+?)===\n---OLD---\n(.*?)\n---NEW---\n(.*?)\n?^===END EDIT===',
+                         raw, re.M | re.S):
+        edits.append({'file': os.path.basename(m.group(1).strip()),
+                      'old': m.group(2), 'new': m.group(3)})
+    return (cause.group(1).strip() if cause else ''), edits, \
+           (commands.group(1).strip() if commands else '')
+
+def build(raw_path, files_json, out_md, out_json, header):
+    files = {os.path.basename(l): l for l in open(files_json).read().splitlines() if l}
+    cause, edits, commands = parse(open(raw_path, encoding='utf-8').read())
+    if not cause:
+        print('no ===CAUSE=== block in the answer', file=sys.stderr)
+        return 1
+    kept, rejected = [], []
+    for e in edits:
+        why = check(e, files)
+        (rejected if why else kept).append((e, why))
+    md = [header, '', '## Cause', '', cause, '']
+    md += ['## Proposed edits', '']
+    if not kept:
+        md += ['(none)', '']
+    for i, (e, _) in enumerate(kept, 1):
+        diff = difflib.unified_diff(e['old'].splitlines(), e['new'].splitlines(),
+                                    'before', 'after', lineterm='')
+        md += [f'### {i}. {e["file"]}', '', '```diff', *diff, '```', '']
+    if rejected:
+        md += ['## Rejected edits (not applied by --apply)', '']
+        md += [f'- {e["file"] or "(no file)"}: {why}' for e, why in rejected] + ['']
+    if commands:
+        md += ['## Commands suggested by the agent', '', commands, '']
+    tmp = out_md + '.tmp'
+    open(tmp, 'w', encoding='utf-8').write('\n'.join(md))
+    os.replace(tmp, out_md)
+    if kept:
+        json.dump({'files': files, 'edits': [e for e, _ in kept]},
+                  open(out_json + '.tmp', 'w'), indent=1)
+        os.replace(out_json + '.tmp', out_json)
+    elif os.path.exists(out_json):
+        os.remove(out_json)
+    print(f'{len(kept)} edit(s) kept, {len(rejected)} rejected')
+    return 0
+
+def apply(in_json):
+    data = json.load(open(in_json))
+    files, edits = data['files'], data['edits']
+    # Re-check everything first: the files may have changed since the
+    # proposal was written. All or nothing.
+    for e in edits:
+        why = check(e, files)
+        if why:
+            print(f'refused, nothing applied: {e["file"]}: {why}', file=sys.stderr)
+            return 1
+    texts = {}
+    for e in edits:
+        p = files[e['file']]
+        texts.setdefault(p, open(p, encoding='utf-8').read())
+        if texts[p].count(e['old']) != 1:
+            print(f'refused, nothing applied: {e["file"]}: edits overlap', file=sys.stderr)
+            return 1
+        texts[p] = texts[p].replace(e['old'], e['new'], 1)
+    for p, t in texts.items():
+        fd, tmp = tempfile.mkstemp(dir=os.path.dirname(p))
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(t)
+        os.chmod(tmp, os.stat(p).st_mode & 0o7777)
+        os.replace(tmp, p)
+        print(f'edited {p}')
+    return 0
+
+cmd = sys.argv[1]
+sys.exit(build(*sys.argv[2:7]) if cmd == 'build' else apply(sys.argv[2]))
+PY
+}
+
+# ── --apply ─────────────────────────────────────────────────────────────────
+if [ "$MODE" = apply ]; then
+    if [ ! -f "$EDITS_JSON" ]; then
+        log "no checked edits for $TASK_NAME (read $PROPOSAL)" >&2; exit 1
+    fi
+    mkdir -p "$LOCK_DIR"
+    # Sibling tasks sit in inbox/: every write there goes through inbox.lock.
+    (
+        exec 8>"$LOCK_DIR/inbox.lock"
+        flock -w 30 8 || { log "inbox lock busy, try again" >&2; exit 1; }
+        edit_engine apply "$EDITS_JSON"
+    )
+    printf '\n_Applied %s._\n' "$(date '+%Y-%m-%d %H:%M')" >> "$PROPOSAL"
+    rm -f "$EDITS_JSON"
+    echo "Next: ai-task --unblock ${TASK_NAME#*_}"
+    exit 0
+fi
+
+# ── Gather the context ──────────────────────────────────────────────────────
+capped() {
+    local file="$1" n="$2" size
+    size=$(wc -c < "$file")
+    if [ "$size" -le "$n" ]; then cat "$file"
+    else printf '[... first %s bytes cut ...]\n' "$((size - n))"; tail -c "$n" "$file"
+    fi
+}
+
+brief_of() { section_from_task Brief "$1" | sed -n '/[^[:space:]]/{s/^[[:space:]]*//; s/[[:space:]]*$//; p; q}'; }
+
+BRIEF=$(brief_of "$TASK_FILE")
+SIBLINGS=()
+if [ -n "$BRIEF" ]; then
+    while IFS= read -r f; do
+        [ -n "$f" ] && [ "$f" != "$TASK_FILE" ] || continue
+        [ "$(brief_of "$f")" = "$BRIEF" ] || continue
+        SIBLINGS+=("$f")
+        [ "${#SIBLINGS[@]}" -ge "$MAX_SIBLINGS" ] && break
+    done < <(find "$INBOX" "$BACKLOG_REVIEW_DIR" -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort)
+fi
+
+REPORT=$(find "$DONE_DIR" -maxdepth 1 -type f -name "*_${TASK_NAME}.md" ! -name '*.task.md' \
+             2>/dev/null | sort | tail -n 1)
+
+context() {
+    printf '=== TASK FILE: %s (in review/) ===\n' "$(basename "$TASK_FILE")"
+    capped "$TASK_FILE" "$CAP_TASK"
+    printf '\n=== LATEST REPORT ===\n'
+    if [ -n "$REPORT" ]; then capped "$REPORT" "$CAP_REPORT"; else echo "(none)"; fi
+    local f
+    for f in ${SIBLINGS[@]+"${SIBLINGS[@]}"}; do
+        printf '\n=== PENDING TASK OF THE SAME BRIEF: %s (in %s/) ===\n' \
+            "$(basename "$f")" "$(basename "$(dirname "$f")")"
+        capped "$f" "$CAP_SIBLING"
+    done
+}
+
+read -r -d '' INSTRUCTIONS <<'EOF' || true
+FIX PROPOSAL MODE. The task below failed grading and was moved to review/. A human will read your proposal and decide whether to apply it. You change nothing yourself: do not run commands, do not edit files.
+
+Diagnose why it failed, from the evaluator feedback sections, the retry strategies and the report. Classify the cause as exactly one of:
+- bad-criterion: an acceptance criterion that no correct run can pass (wrong range, conflicting criteria, a count measured before the task changes it, a check on shared state the task does not own).
+- wrong-assumption: the Context or Tasks state something false about the system, found out by the run.
+- missing-precondition: the task needs something only the human can supply (a secret, a file, an access).
+- implementation: the task file is right and the work is wrong.
+
+Then propose replacement blocks that fix the TASK FILE, and the same defect in any pending task of the same brief shown below. Rules:
+- Fix what the criterion is meant to check; never weaken it until anything passes. Deleting a criterion is a last resort and must be explained in the cause.
+- Copy each OLD text verbatim from the file, with enough lines to occur exactly once. Edits that do not match exactly once are discarded.
+- Never edit an Evaluator Feedback, Issues, Retry Strategy or Retries section: they are history.
+- For missing-precondition, add a ## Precondition section (one read-only shell command per line, exiting 0 only when the input is in place, never printing a secret) and say what the human must provide.
+- For implementation, propose no edit unless an instruction in Tasks caused the mistake.
+- Edit a pending task only for the same defect, never to improve it otherwise.
+- No character U+2014 (long dash) in your text.
+
+Answer in exactly this format and nothing else:
+
+===CAUSE===
+category: <one of the four>
+<two to six lines: what failed, the evidence, why the change fixes it>
+===EDIT <file basename>===
+---OLD---
+<exact text>
+---NEW---
+<replacement text>
+===END EDIT===
+(repeat ===EDIT=== blocks as needed, or none)
+===COMMANDS===
+<commands the human should run besides the edits, for example what to install for a precondition; or: none>
+===END===
+EOF
+
+PROMPT="$INSTRUCTIONS
+
+$(context)"
+
+if [ "$MODE" = context ]; then
+    printf '%s\n' "$PROMPT"; exit 0
+fi
+
+# ── The call ────────────────────────────────────────────────────────────────
+# Clear proposals whose task has left review/ (unblocked, or deleted by hand).
+for p in "$REVIEW_DIR"/*.proposal "$REVIEW_DIR"/*.proposal.json; do
+    [ -f "$p" ] || continue
+    b=$(basename "$p"); b="${b%.json}"; b="${b%.proposal}"
+    [ -f "$REVIEW_DIR/$b.md" ] || rm -f "$p"
+done
+
+RUNNER=$(runner_from_task "$TASK_FILE") || { log "no runner for $TASK_NAME" >&2; exit 1; }
+marker=$(cooldown_path "$RUNNER") || marker=""
+if [ -n "$marker" ] && [ -f "$marker" ] \
+    && find "$marker" -mmin -"$AUTH_COOLDOWN_MIN" 2>/dev/null | grep -q .; then
+    log "runner '$RUNNER' is in auth cooldown, no proposal for $TASK_NAME" >&2; exit 1
+fi
+( load_provider "$RUNNER" ) >/dev/null 2>&1 || {
+    log "runner '$RUNNER' has no usable provider" >&2; exit 1; }
+load_provider "$RUNNER"
+MODEL_ID=$(ai_model_alias "$(model_from_task "$TASK_FILE")")
+[ -n "$MODEL_ID" ] || MODEL_ID=$(ai_model_alias "${default_model:-}")
+
+WORKDIR=$(mktemp -d); JSON=$(mktemp); ERR=$(mktemp); RAW=$(mktemp); FILES=$(mktemp)
+trap 'rm -rf "$WORKDIR" "$JSON" "$ERR" "$RAW" "$FILES"' EXIT
+# Separate stdout and stderr captures, never 2>&1 (gotcha 1). The working
+# directory is empty: everything the agent may use is in the prompt.
+set +e
+ai_run "$PROMPT" "$MODEL_ID" "$WORKDIR" "$((PROPOSE_TIMEOUT_MIN * 60))" "$JSON" "$ERR"
+RC=$?
+set -e
+if ai_is_auth_failure "$JSON" || ai_is_auth_failure "$ERR"; then
+    log "auth failure on runner '$RUNNER', no proposal for $TASK_NAME" >&2; exit 1
+fi
+[ "$RC" -eq 124 ] && { log "no answer within ${PROPOSE_TIMEOUT_MIN}m for $TASK_NAME" >&2; exit 1; }
+ai_json_text "$JSON" > "$RAW" 2>/dev/null || true
+if ! grep -q '[^[:space:]]' "$RAW"; then
+    log "empty answer (exit $RC), no proposal for $TASK_NAME" >&2; exit 1
+fi
+
+# The files an edit may target: this task and the pending siblings, by name.
+printf '%s\n' "$TASK_FILE" ${SIBLINGS[@]+"${SIBLINGS[@]}"} > "$FILES"
+
+HEADER="# Fix proposal: $TASK_NAME
+
+Drafted $(date '+%Y-%m-%d %H:%M') by runner $RUNNER. Nothing has been applied.
+Read the edits, then: ai-propose --apply ${TASK_NAME#*_} && ai-task --unblock ${TASK_NAME#*_}"
+
+if ! RESULT=$(edit_engine build "$RAW" "$FILES" "$PROPOSAL" "$EDITS_JSON" "$HEADER"); then
+    log "unusable answer, no proposal for $TASK_NAME" >&2; exit 1
+fi
+log "$TASK_NAME: proposal written to $PROPOSAL ($RESULT)"
+notify "ai-propose: Fix Proposal Ready" "$TASK_NAME: $RESULT. Read $PROPOSAL"
+exit 0
