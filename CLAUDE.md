@@ -61,6 +61,7 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
 | `dtask` | read-only dashboard across every runner (plus a `WORKTREES` section when a project opts into worktree isolation, and an `AGENTS` section when routines are defined). |
 | `ai-history` | per-project history and current state. Facts rebuilt on each run; one cached agent paragraph in `$TASKS_DIR/.history/`, its only write. |
 | `ai-ask` | ask one agent about its own work, from its charter and its routines' state. One agent call, writes nothing. |
+| `ai-propose` | draft the task-file fix for a task in `review/` (started by `ai-task`, detached); `--apply` applies the checked edits. Writes only `review/<task>.proposal[.json]` and, on `--apply`, the task files of that brief. |
 | `agents/CONTRACT.md` | the agent-layer contract: layout, headers, the three permission levels, and a worked example. **The only thing under `agents/`:** this repo ships no agents, see The agent layer. |
 | `<agents-root>/<agent>/AGENT.md` | one agent's charter: `## Domain`, `## Sources`, `## Permission-Ceiling`. Lives wherever `agents_dir` resolves. |
 | `<agents-root>/<agent>/routines/<slug>.md` | one routine: an `ai-scheduled` job file plus `## Agent` and `## Permission`. |
@@ -79,7 +80,7 @@ That is the whole architectural bet: the previous generation had `~/tasks/` and
   ```sh
   grep -rniE '\bgrok\b|\bclaude\b|\bxai\b|\banthropic\b' \
       lib.sh init ai-task ai-eval ai-brief ai-briefs ai-scheduled dtask ai-agent \
-      ai-history ai-ask
+      ai-history ai-ask ai-propose
   ```
   Hits in comments that describe the abstraction are acceptable; a hit in
   executed code is a bug.
@@ -602,7 +603,7 @@ error body could plausibly contain is **broad**, not strong.
   `ai-brief`'s prompt tells the decomposer to use the section instead of a
   STOP step for anything only the human can supply. Tests:
   `tests/test_task_picker.py` (`PreconditionTests`),
-  `tests/test_precondition_view.sh`.
+  `tests/test_review_views.sh`.
 - **`dtask` is the only script here safe to run against the live tree,** because
   it is read-only: no agent call, no file move, no write into `$TASKS_DIR`.
 
@@ -969,6 +970,46 @@ a run. Tests: `tests/test_history.sh`, `tests/test_ask.sh`,
    whitespace, so `read` merges an empty field (the colour, under `NO_COLOR`)
    with its neighbour and shifts every field after it. WORKTREES had exactly
    this bug.
+
+## Fix proposals (`ai-propose`)
+
+Added 2026-11-06. Of the tasks that reach `review/`, most are blocked by the
+TASK FILE (a criterion no correct run can pass, a false premise in Context, a
+missing human input), and the evaluator usually names the fix. `ai-propose`
+turns that into checked edits for the task and for the pending tasks of the
+same brief that share the defect, which is the step a human otherwise does by
+hand. Tests: `tests/test_propose.sh`, `tests/test_propose_launch.sh`,
+`tests/test_review_views.sh`. Five things to keep right:
+
+1. **Nothing is applied automatically, and nothing is unblocked.** Changing a
+   criterion is the human decision the UNSATISFIABLE design reserves for a
+   human; an agent that rewrote criteria and released tasks would be grading
+   its own exam, and the first criterion it weakened would pass unseen.
+   `--apply` and `ai-task --unblock` stay two separate human commands.
+2. **The edits are checked in code, never trusted from the answer.** An edit
+   must name this task or a pending task (`inbox/`, `backlog-for-review/`)
+   with the SAME `## Brief` line, its old text must occur exactly once, and it
+   must end above the first `## Evaluator Feedback`/`Issues`/`Retry
+   Strategy`/`Retries` heading: history is never rewritten. File names are
+   reduced to their basename and looked up in that set, so no answer can
+   steer a write elsewhere. `--apply` re-runs every check (the file may have
+   been edited since) and is all or nothing.
+3. **`ai-task` launches it detached, with fds 7, 8 and 9 closed.** fd 9 is the
+   project lock: inherited, it would hold the lock for the whole agent call
+   and stall every task of the project. `tests/test_propose_launch.sh` fails
+   if the `9>&-` is removed; that was checked. Detached because the run must
+   end now, or `dtask` would show the task as running for the whole call.
+4. **Only the two grading outcomes launch it** (UNSATISFIABLE, retries spent).
+   A worktree misconfiguration is a config fault, not a task file to fix.
+5. **Proposal files carry no `.md` extension.** Every list and count of
+   `review/` (dtask, `--unblock`, `locate_dep_slug`) globs `*.md`; a
+   `.proposal.md` would be listed as another task needing review. Orphans
+   (task no longer in `review/`) are cleared on the next draft.
+
+Like `ai-ask` and `ai-history`, it touches no cooldown marker and runs its
+call in an empty directory with separate stdout and stderr captures. The
+prompt is a quoted heredoc, so the `$`/backtick/`"` hazards of `ai-brief`'s
+prompt do not apply to it.
 
 ## Hard boundaries
 

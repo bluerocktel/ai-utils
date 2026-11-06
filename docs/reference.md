@@ -24,6 +24,7 @@ Requires `bash`, `tmux`, `jq`, `flock`, `timeout`, and each provider's CLI on
 | `ai-agent` | `ai-agent` | Read-only view of the agent layer: list, show, validate, print the publish command. | `--list`, `--show SLUG`, `--validate`, `--publish-plan [SLUG]` |
 | `dtask` | `dtask` | Read-only dashboard of the whole tree, across every runner. | `-w` |
 | `ai-history` | `ai-history` | What was done on a project and where it stands. Facts are rebuilt on each run; only the summary paragraph is written by an agent and cached. | `PROJECT`, `--facts`, `--refresh`, `-n N` |
+| `ai-propose` | `ai-propose` | Draft the task-file fix for a task in `review/`, and apply it on request. Started by `ai-task` automatically; install the symlink only to run it by hand. | `SLUG`, `--apply SLUG`, `--context SLUG` |
 | `ai-ask` | `ai-ask` | Ask one agent a question about its own work, answered from its charter and its routines' state. Writes nothing. | `AGENT QUESTION`, `AGENT --context` |
 
 Supporting files: `lib.sh` (shared helpers, sourced, names no vendor) and

@@ -36,6 +36,14 @@ test_timeout_min=20
 # counts as "not met": the task keeps waiting, no retry burned.
 precondition_timeout_sec=30
 
+# When grading sends a task to review/ (unsatisfiable criteria, or retries
+# spent), draft the fix in review/<task>.proposal with ai-propose: one agent
+# call on the task's runner, detached, never applied by itself. 0 disables it.
+review_proposals=1
+
+# Cap (minutes) on that one ai-propose call (default 10).
+propose_timeout_min=10
+
 # After a task completes AND passes evaluation, propose follow-up task stubs
 # into ~/tasks/suggestions/ for you to read and promote by hand. Nothing there
 # runs until you move it into inbox/ yourself. Set to 0 to disable (default 1).

@@ -545,8 +545,16 @@ else
     while IFS= read -r name; do
         [ -z "$name" ] && continue
         runner=$(_runner_of "$REVIEW_DIR/${name}.md")
-        printf '  %s●%s %-40s  %s[%s]%s  %s(failed, needs review)%s\n' \
-            "$RED" "$RESET" "$(_display "$name")" "$CYAN" "$runner" "$RESET" "$DIM" "$RESET"
+        # ai-propose output, when there is some. Files without .md, so no list
+        # or count in this script ever takes them for tasks.
+        hint=""
+        if [ -f "$REVIEW_DIR/${name}.proposal.json" ]; then
+            hint=", fix proposed: ai-propose --apply ${name#*_}"
+        elif [ -f "$REVIEW_DIR/${name}.proposal" ]; then
+            hint=", see ${name}.proposal"
+        fi
+        printf '  %s●%s %-40s  %s[%s]%s  %s(failed, needs review%s)%s\n' \
+            "$RED" "$RESET" "$(_display "$name")" "$CYAN" "$runner" "$RESET" "$DIM" "$hint" "$RESET"
     done < <(_list "$REVIEW_DIR")
 
     # Dead dependency chains. These are NOT in review/ themselves: they sit in

@@ -72,7 +72,7 @@ Put the scripts on your `PATH` (nothing here installs symlinks for you):
 ```sh
 mkdir -p ~/bin
 ln -s ~/Scripts/ai-utils/init ~/bin/ai-init
-for s in ai-task ai-eval ai-brief ai-briefs ai-scheduled ai-agent ai-history dtask; do
+for s in ai-task ai-eval ai-brief ai-briefs ai-scheduled ai-agent ai-history ai-propose dtask; do
     ln -s ~/Scripts/ai-utils/$s ~/bin/$s
 done
 ```
@@ -119,6 +119,7 @@ dtask
 | `ai-scheduled` | dispatch the recurring jobs in `scheduled/` that are due. |
 | `ai-agent` | read-only view of the agent layer: list, show, validate. |
 | `ai-history` | what was done on a project and where it stands. |
+| `ai-propose` | the drafted fix for a task in `review/`, and `--apply` to take it. |
 | `dtask` | read-only dashboard across every runner. |
 
 Every flag is in [the reference](docs/reference.md).

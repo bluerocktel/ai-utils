@@ -79,7 +79,7 @@ yourself:
 ```sh
 mkdir -p ~/bin
 ln -s ~/Scripts/ai-utils/init         ~/bin/ai-init
-for s in ai-task ai-eval ai-brief ai-briefs ai-scheduled ai-agent ai-history ai-ask dtask; do
+for s in ai-task ai-eval ai-brief ai-briefs ai-scheduled ai-agent ai-history ai-ask ai-propose dtask; do
     ln -s ~/Scripts/ai-utils/$s ~/bin/$s
 done
 export PATH="$HOME/bin:$PATH"   # add this line to your shell profile too

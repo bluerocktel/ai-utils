@@ -1,8 +1,9 @@
 #!/bin/bash
-# Offline regression test for dtask's "waiting: precondition" rows. dtask only
-# READS .precondition/<task> (written by ai-task's pre-claim pass) and must
-# never run a check itself. A tree with no status file renders exactly what the
-# previous dtask rendered.
+# Offline regression test for two dtask rows: a task waiting on its
+# ## Precondition, and a review/ task with an ai-propose proposal. dtask only
+# READS .precondition/<task> (written by ai-task's pre-claim pass) and never
+# runs a check itself; proposal files are not .md, so they are never listed as
+# tasks. A tree with neither renders exactly what the previous dtask rendered.
 #
 # Builds a throwaway HOME and TASKS_DIR and runs a copy of the scripts with its
 # own config. Never touches the live tree.
@@ -54,6 +55,21 @@ grep -q '⏸ wait-task .*waiting: precondition since 2026-11-06 05:56, exit 124 
 grep -q 'gone-task' <<< "$out" && fail "stale status file was rendered"
 grep -q '1 item(s) require your input' <<< "$out" || fail "attention count should be 1"
 [ -e "$tmp/ran" ] && fail "dtask ran a precondition command"
+
+# ── review rows: proposal hints, and proposal files are never tasks ──────────
+printf '# r\n' > "$T/review/2026-11-06_with-edits.md"
+printf 'x\n' > "$T/review/2026-11-06_with-edits.proposal"
+printf '{}\n' > "$T/review/2026-11-06_with-edits.proposal.json"
+printf '# r\n' > "$T/review/2026-11-06_no-edits.md"
+printf 'x\n' > "$T/review/2026-11-06_no-edits.proposal"
+printf '# r\n' > "$T/review/2026-11-06_bare.md"
+out=$(D)
+grep -q 'with-edits .*(failed, needs review, fix proposed: ai-propose --apply with-edits)' <<< "$out" \
+    || fail "proposal-ready hint missing"
+grep -q 'no-edits .*(failed, needs review, see 2026-11-06_no-edits.proposal)' <<< "$out" \
+    || fail "proposal-without-edits hint missing"
+grep -q 'bare .*(failed, needs review)$' <<< "$out" || fail "plain review row changed"
+[ "$(grep -c 'failed, needs review' <<< "$out")" = 3 ] || fail "a proposal file was listed as a task"
 
 if [ "$FAILURES" -gt 0 ]; then
     echo "$FAILURES failure(s)" >&2

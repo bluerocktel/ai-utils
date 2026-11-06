@@ -86,6 +86,42 @@ impossible) and the evidence is shown; otherwise it is a normal FAIL.
 
 When the file is fixed, send it back with `--unblock`.
 
+## Fix proposals
+
+When grading sends a task to `review/`, `ai-task` starts `ai-propose` in the
+background (`review_proposals=1`, the default). One agent call reads the task
+with all its evaluator feedback, its latest report, and the tasks of the same
+brief still in `inbox/` or `backlog-for-review/`, and writes
+`review/<task>.proposal`:
+
+- the cause, as one of `bad-criterion`, `wrong-assumption`,
+  `missing-precondition`, `implementation`;
+- the proposed edits, as diffs, for this task and for any pending task of the
+  same brief with the same defect;
+- edits it refused, and why;
+- anything else you need to do (for a precondition: what to install).
+
+You get a notification when it is ready, and `dtask` shows
+`fix proposed: ai-propose --apply <slug>` on the task.
+
+```sh
+less ~/tasks/review/<task>.proposal
+ai-propose --apply <slug>
+ai-task --unblock <slug>
+```
+
+The edits offered are checked before you see them, not just trusted: each one
+must target this task or a pending task of the same brief, its old text must
+occur exactly once, and it must sit above the first evaluator section, which
+is history and never rewritten. `--apply` checks them again (you may have
+edited the file since), applies all or nothing, and takes `inbox.lock` for the
+tasks in `inbox/`. It never unblocks: that is still your call.
+
+No proposal (auth failure, timeout, empty answer) changes nothing about the
+task. To draft one by hand, for a task already in `review/`:
+`ai-propose <slug>`; `ai-propose --context <slug>` prints what the agent
+would be given.
+
 ## ai-task --unblock
 
 ```sh

@@ -37,6 +37,8 @@ $EDITOR config                # at least set default_runner=
 | `task_timeout_min` | `45` | Wall-clock cap on the main agent run of one task. An overrun (exit `124`) is a deferral and burns no retry. | |
 | `project_lock_wait_min` | `60` | How long a task waits for `$TASKS_DIR/.locks/<project>.lock`. The lock is shared by all runners. A timeout is a deferral, not a failure. | [reference: locks](reference.md#locks-and-markers) |
 | `precondition_timeout_sec` | `30` | Cap per `## Precondition` command. A timeout counts as not met: the task keeps waiting in `inbox/`, no retry burned. Checks run before the inbox lock is taken, so a slow one never stalls another launcher. | [reference: preconditions](reference.md#preconditions) |
+| `review_proposals` | `1` | When grading sends a task to `review/`, start `ai-propose` to draft the fix. One agent call on the task's runner, detached, never applied by itself. `0` turns it off. | [reviewing tasks](reviewing-tasks.md#fix-proposals) |
+| `propose_timeout_min` | `10` | Cap on that call. A timeout writes no proposal and changes nothing else. | |
 | `brief_timeout_min` | `45` | Cap on one `ai-brief` decomposition run, repair pass included. A timeout puts the brief back in `briefs/`. | [reference: ai-brief](reference.md#ai-brief-and-ai-briefs) |
 
 ### Grading
