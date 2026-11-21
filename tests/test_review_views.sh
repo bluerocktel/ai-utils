@@ -1,6 +1,7 @@
 #!/bin/bash
 # Offline regression test for two dtask rows: a task waiting on its
-# ## Precondition, and a review/ task with an ai-propose proposal. dtask only
+# ## Precondition, and a review/ task with an ai-propose proposal, plus the
+# SUGGESTIONS section (absent with no stub, newest first, capped at five). dtask only
 # READS .precondition/<task> (written by ai-task's pre-claim pass) and never
 # runs a check itself; proposal files are not .md, so they are never listed as
 # tasks. A tree with neither renders exactly what the previous dtask rendered.
@@ -70,6 +71,29 @@ grep -q 'no-edits .*(failed, needs review, see 2026-11-06_no-edits.proposal)' <<
     || fail "proposal-without-edits hint missing"
 grep -q 'bare .*(failed, needs review)$' <<< "$out" || fail "plain review row changed"
 [ "$(grep -c 'failed, needs review' <<< "$out")" = 3 ] || fail "a proposal file was listed as a task"
+
+# ── suggestions: absent when empty, newest first, capped, warns on a pile ────
+D | grep -q 'SUGGESTIONS' && fail "SUGGESTIONS shown with no suggestions/ folder"
+mkdir -p "$T/suggestions"
+D | grep -q 'SUGGESTIONS' && fail "SUGGESTIONS shown with an empty folder"
+printf '# s\n\n## Project\ndemo\n' > "$T/suggestions/old-stub.md"
+touch -d '20 days ago' "$T/suggestions/old-stub.md"
+for i in 1 2 3 4 5; do
+    printf '# s\n\n## Project: demo%s\n' "$i" > "$T/suggestions/new-stub-$i.md"
+    touch -d "$i hours ago" "$T/suggestions/new-stub-$i.md"
+done
+printf 'x\n' > "$T/suggestions/not-a-stub.raw"
+out=$(D)
+grep -q '^  6 stubs  · 5 new in the last 7 days · oldest 20d$' <<< "$out" \
+    || fail "suggestions summary line missing or wrong"
+rows=$(grep '✦' <<< "$out" || true)
+[ "$(wc -l <<< "$rows")" = 5 ] || fail "should list exactly 5 stubs"
+head -n1 <<< "$rows" | grep -q '\[demo1\]  new-stub-1$' || fail "newest stub (inline Project) not first"
+grep -q 'old-stub' <<< "$rows" && fail "oldest stub listed beyond the cap"
+grep -q 'not-a-stub' <<< "$out" && fail "a non-.md file was listed"
+printf '# s\n\n## Project\ndemo\n' > "$T/suggestions/z.md"
+touch "$T/suggestions/z.md"
+grep -q '\[demo\]  z$' <<< "$(D)" || fail "next-line Project not read"
 
 if [ "$FAILURES" -gt 0 ]; then
     echo "$FAILURES failure(s)" >&2

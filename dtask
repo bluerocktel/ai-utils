@@ -781,6 +781,38 @@ else
     done
 fi
 
+# ── Suggestions ───────────────────────────────────────────────────
+# Follow-up stubs from ai-task and ai-scheduled. A reading pile, not a queue:
+# nothing in suggestions/ runs, so a pile nobody looks at grows silently. Not
+# in NEEDS ATTENTION on purpose: stubs are optional, and a permanent warning
+# there would be learned and ignored. Absent when the folder holds no stub.
+SUGGEST_SHOW=5
+SUGGEST_WARN=30
+n_suggest=$(_count "$SUGGEST_DIR")
+if [ "$n_suggest" -gt 0 ]; then
+    _section "  SUGGESTIONS"
+    now=$(date +%s)
+    # "<mtime> <basename>", newest first. Names are sanitised by write_stub
+    # ([A-Za-z0-9._-]), so a space split is safe.
+    sg_rows=$(find "$SUGGEST_DIR" -maxdepth 1 -type f -name '*.md' -printf '%T@ %f\n' \
+        | sort -rn)
+    sg_new=$(awk -v c=$((now - 7 * 86400)) '$1 >= c' <<< "$sg_rows" | wc -l)
+    sg_oldest=$(tail -n1 <<< "$sg_rows" | cut -d' ' -f1)
+    sg_oldest=$(( (now - ${sg_oldest%.*}) / 86400 ))
+    sg_s="s"; [ "$n_suggest" -eq 1 ] && sg_s=""
+    sg_color=""
+    [ "$n_suggest" -gt "$SUGGEST_WARN" ] && sg_color="${BOLD}${YELLOW}"
+    printf '  %s%d stub%s%s  %s· %d new in the last 7 days · oldest %dd%s\n' \
+        "$sg_color" "$n_suggest" "$sg_s" "$RESET" "$DIM" "${sg_new// /}" "$sg_oldest" "$RESET"
+    while read -r sg_t sg_f; do
+        [ -n "$sg_f" ] || continue
+        sg_proj=$(field_from_task Project "$SUGGEST_DIR/$sg_f" | head -n1)
+        printf '  %s✦%s %4s  %s[%s]%s  %s\n' "$CYAN" "$RESET" \
+            "$(( (now - ${sg_t%.*}) / 86400 ))d" "$CYAN" "${sg_proj:-?}" "$RESET" "${sg_f%.md}"
+    done < <(head -n "$SUGGEST_SHOW" <<< "$sg_rows")
+    printf '  %s· promote: mv to backlog-for-review/ or briefs/, delete the rest%s\n' "$DIM" "$RESET"
+fi
+
 # ── Recent activity ───────────────────────────────────────────────
 _section "  RECENT ACTIVITY"
 

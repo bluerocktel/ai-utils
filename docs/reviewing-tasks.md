@@ -196,7 +196,9 @@ When a task passes, `ai-task` may propose up to `suggest_max` follow-up task
 stubs into `suggestions/`. Monitor and planner jobs from `ai-scheduled` write
 stubs there too.
 
-`suggestions/` is a reading pile, not a queue. Nothing in it runs. To act on a
+`suggestions/` is a reading pile, not a queue. Nothing in it runs, so `dtask`
+shows it in a SUGGESTIONS section: the count (yellow above 30), how many
+arrived in the last 7 days, and the 5 newest stubs. To act on a
 stub, turn it into a full task (or a brief) and move it yourself:
 
 ```sh

@@ -495,7 +495,15 @@ slug_file_in_dir() {
     [ -n "$dir" ] && [ -d "$dir" ] || return 1
     [ -n "$slug" ] || return 1
     [ -f "${dir}/${slug}${suffix}" ] && return 0
-    find "$dir" -maxdepth 1 -type f -name "*_${slug}${suffix}" 2>/dev/null | grep -q .
+    find "$dir" -maxdepth 1 -type f -name "*_${slug}${suffix}" 2>/dev/null | grep -q . && return 0
+    # Inbox, run and review contain both ordinary .md tasks and .task.md
+    # tasks. The dependency checker already accepts done/*.task.md; the
+    # dashboard must also find a parent while it is still in the queue.
+    if [ "$suffix" = .md ]; then
+        [ -f "${dir}/${slug}.task.md" ] && return 0
+        find "$dir" -maxdepth 1 -type f -name "*_${slug}.task.md" 2>/dev/null | grep -q . && return 0
+    fi
+    return 1
 }
 
 # Where a ## Depends-on slug currently lives.
@@ -507,24 +515,26 @@ locate_dep_slug() {
         echo none
         return 0
     fi
-    if slug_file_in_dir "$DONE_DIR" ".task.md" "$slug"; then
-        echo done
-        return 0
-    fi
     if slug_file_in_dir "$REVIEW_DIR" ".md" "$slug"; then
         echo review
+        return 0
+    fi
+    # run/ wins over an early result preamble in done/; the task has not
+    # passed evaluation while its task file remains in run/.
+    if slug_file_in_dir "$RUN_DIR" ".md" "$slug"; then
+        echo run
         return 0
     fi
     if slug_file_in_dir "$INBOX" ".md" "$slug"; then
         echo inbox
         return 0
     fi
-    if slug_file_in_dir "$RUN_DIR" ".md" "$slug"; then
-        echo run
-        return 0
-    fi
     if slug_file_in_dir "$BACKLOG_REVIEW_DIR" ".md" "$slug"; then
         echo backlog
+        return 0
+    fi
+    if slug_file_in_dir "$DONE_DIR" ".task.md" "$slug"; then
+        echo done
         return 0
     fi
     echo missing

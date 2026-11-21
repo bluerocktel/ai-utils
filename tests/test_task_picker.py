@@ -117,6 +117,23 @@ class TaskPickerTests(PickerHarness, unittest.TestCase):
         (self.tasks / '.auth-cooldown-alpha').touch()
         self.assertIn(f'would claim: {third}', self.call('--dry-run').stdout)
 
+    def test_parent_result_preamble_does_not_satisfy_running_dependency(self):
+        child = self.task('child', 'beta', '\n## Depends-on\nparent\n')
+        run = self.tasks / 'run'
+        done = self.tasks / 'done'
+        run.mkdir()
+        done.mkdir()
+        (run / 'parent.task.md').write_text('# parent\n')
+        (done / '2026-11-12_21-30_parent.task.md').write_text('# result preamble\n')
+        self.assertIn('would claim: (nothing eligible)', self.call('--dry-run').stdout)
+        review = self.tasks / 'review'
+        review.mkdir(exist_ok=True)
+        (run / 'parent.task.md').rename(review / 'parent.task.md')
+        self.assertIn('would claim: (nothing eligible)', self.call('--dry-run').stdout)
+        (review / 'parent.task.md').rename(run / 'parent.task.md')
+        (run / 'parent.task.md').rename(done / '2026-11-12_21-31_parent.task.md')
+        self.assertIn(f'would claim: {child}', self.call('--dry-run').stdout)
+
 
 class PreconditionTests(PickerHarness, unittest.TestCase):
     """## Precondition: checked before the inbox lock, waiting burns nothing."""

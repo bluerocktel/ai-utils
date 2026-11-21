@@ -200,6 +200,12 @@ dep_satisfied() {
     dep=$(depends_on_from_task "$1")
     [ -z "$dep" ] && return 0
     dep="${dep%.md}"
+    # A result preamble is created in done/ when execution starts. The parent
+    # task itself stays in run/ until grading passes, so its dependents must
+    # wait even when that early result file already exists.
+    slug_file_in_dir "$RUN_DIR" ".md" "$dep" && return 1
+    slug_file_in_dir "$REVIEW_DIR" ".md" "$dep" && return 1
+    slug_file_in_dir "$INBOX" ".md" "$dep" && return 1
     find "$DONE_DIR" -maxdepth 1 -type f -name "*_${dep}.task.md" 2>/dev/null | grep -q .
 }
 
