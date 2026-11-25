@@ -10,7 +10,8 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 REPO_DIR=$(dirname "$SCRIPT_DIR")
 
 tmp=$(mktemp -d)
-cleanup() { rm -rf "$tmp"; }
+# chmod first: case 10e makes a directory read-only on purpose.
+cleanup() { chmod -R u+w "$tmp" 2>/dev/null || true; rm -rf "$tmp"; }
 trap cleanup EXIT
 
 export HOME="$tmp/home"
@@ -324,6 +325,112 @@ git -C "$REPO" checkout -q main
 [ "$(worktree_action "$REPO" bb-key main 0 0)" = merge ] || fail "against the project base it is still unmerged"
 git -C "$REPO" branch -q -D ai/bb-key
 [ "$(branch_base "$REPO" bb-key main)" = main ] || fail "deleting the branch must drop the record"
+
+# ── 10. ## Worktree Teardown and leftover directories ─────────────────────
+TD_MARK="$tmp/teardown-marks"
+TEARDOWN='```bash
+echo "td $(basename "$AI_WORKTREE") main=$AI_MAIN_WORKDIR cwt=${AI_CONTAINER_WORKTREE:-none} pwd=$(basename "$PWD") gitfile=$([ -e .git ] && echo yes || echo no)" >> '"$TD_MARK"'
+```'
+# Parser: the teardown section ends at the next ## heading and is not glued
+# onto the setup script, even with # comment lines inside either block.
+printf '## Worktree Setup\n# a comment\necho setup\n\n## Worktree Teardown\n# another comment\necho teardown\n\n## Description\nx\n' \
+    > "$TASKS_DIR/projects/hooks.md"
+[ "$(section_from_task 'Worktree Setup' "$TASKS_DIR/projects/hooks.md" | grep -c teardown)" = 0 ] \
+    || fail "teardown script leaked into the setup section"
+[ "$(section_from_task 'Worktree Teardown' "$TASKS_DIR/projects/hooks.md" | grep -c 'echo teardown')" = 1 ] \
+    || fail "teardown section not read"
+
+# (a) teardown runs from inside the worktree, before removal, with the env.
+worktree_ensure "$REPO" td-a >/dev/null 2>&1 || fail "td-a ensure failed"
+worktree_remove "$REPO" td-a "$TEARDOWN" /srv/demo iso 2>/dev/null || fail "td-a removal failed"
+grep -qx "td td-a main=$REPO cwt=/srv/demo/.ai-worktrees/td-a pwd=td-a gitfile=yes" "$TD_MARK" \
+    || fail "teardown did not run before removal with AI_WORKTREE/AI_CONTAINER_WORKTREE: $(cat "$TD_MARK" 2>/dev/null)"
+[ -e "$REPO/.ai-worktrees/td-a" ] && fail "td-a still on disk after removal"
+# No container path from a subdirectory working dir: the mount cannot see it.
+worktree_ensure "$REPO" td-sub >/dev/null 2>&1
+worktree_remove "$REPO/sub" td-sub "$TEARDOWN" /srv/demo 2>/dev/null || fail "td-sub removal failed"
+grep -q "^td td-sub .*cwt=none" "$TD_MARK" || fail "container worktree set for a subdirectory working dir"
+# A dirty worktree is kept and its teardown NOT run.
+worktree_ensure "$REPO" td-dirty >/dev/null || fail "td-dirty ensure failed"
+echo wip > "$REPO/.ai-worktrees/td-dirty/td-uncommitted.txt"
+worktree_remove "$REPO" td-dirty "$TEARDOWN" 2>/dev/null && fail "dirty worktree removed"
+grep -q "^td td-dirty " "$TD_MARK" && fail "teardown ran on a dirty worktree"
+rm -f "$REPO/.ai-worktrees/td-dirty/td-uncommitted.txt"
+
+# (b) a failing teardown warns and the worktree is still removed.
+worktree_ensure "$REPO" td-b >/dev/null 2>&1
+ERR=$(worktree_remove "$REPO" td-b 'echo trying; exit 7' "" iso 2>&1 >/dev/null) || fail "failing teardown aborted the removal"
+[ -e "$REPO/.ai-worktrees/td-b" ] && fail "worktree kept after a failing teardown"
+printf '%s\n' "$ERR" | grep -q "project 'iso'.*exit 7.*td-b" || fail "teardown failure warning missing: $ERR"
+
+# (c) leftover of a failed removal (no .git, unregistered, inactive) is
+# cleared by prune, after its teardown ran.
+mkdir -p "$REPO/.ai-worktrees/td-left/storage"
+echo log > "$REPO/.ai-worktrees/td-left/storage/laravel.log"
+# (d) kept: a directory WITH a .git entry, and an inactive-looking one whose
+# key belongs to a task in flight.
+mkdir -p "$REPO/.ai-worktrees/td-clone"
+git -C "$REPO/.ai-worktrees/td-clone" init -q
+mkdir -p "$REPO/.ai-worktrees/td-gitfile"
+echo "gitdir: /nowhere" > "$REPO/.ai-worktrees/td-gitfile/.git"
+mkdir -p "$REPO/.ai-worktrees/td-active"
+touch "$TASKS_DIR/inbox/2026-11-25_td-active.md"
+PRUNED=$(worktree_prune "$REPO" "$TEARDOWN" /srv/demo iso 2>/dev/null)
+printf '%s\n' "$PRUNED" | grep -qx td-left || fail "leftover directory not reported as pruned"
+[ -e "$REPO/.ai-worktrees/td-left" ] && fail "leftover directory not removed"
+grep -qx "td td-left main=$REPO cwt=/srv/demo/.ai-worktrees/td-left pwd=td-left gitfile=no" "$TD_MARK" \
+    || fail "teardown did not run in the leftover directory"
+[ -d "$REPO/.ai-worktrees/td-clone/.git" ] || fail "directory with a .git directory removed"
+[ -f "$REPO/.ai-worktrees/td-gitfile/.git" ] || fail "directory with a .git file removed"
+[ -d "$REPO/.ai-worktrees/td-active" ] || fail "leftover of an in-flight task removed"
+printf '%s\n' "$PRUNED" | grep -qxE 'td-(clone|gitfile|active)' && fail "kept directory reported as pruned"
+[ -d "$REPO/.ai-worktrees/gamma" ] || fail "dirty registered worktree removed by the leftover sweep"
+rm -f "$TASKS_DIR/inbox/2026-11-25_td-active.md"
+rm -rf "$REPO/.ai-worktrees/td-clone" "$REPO/.ai-worktrees/td-gitfile" "$REPO/.ai-worktrees/td-active"
+
+# (e) a removal git refuses (an undeletable file, as a root-run container
+# leaves) is reported on stderr with a non-zero status. Root ignores mode
+# bits, so the case only means something for an ordinary user.
+if [ "$(id -u)" -ne 0 ]; then
+    worktree_ensure "$REPO" td-e >/dev/null 2>&1
+    mkdir -p "$REPO/.ai-worktrees/td-e/cache"
+    echo x > "$REPO/.ai-worktrees/td-e/cache/services.php"
+    git -C "$REPO/.ai-worktrees/td-e" add -A && git -C "$REPO/.ai-worktrees/td-e" commit -qm cache
+    chmod 555 "$REPO/.ai-worktrees/td-e/cache"
+    RC=0
+    ERR=$(worktree_remove "$REPO" td-e 2>&1 >/dev/null) || RC=$?
+    [ "$RC" -ne 0 ] || fail "failed removal returned 0"
+    printf '%s\n' "$ERR" | grep -q "could not remove worktree $REPO/.ai-worktrees/td-e" \
+        || fail "failed removal not reported with its path: $ERR"
+    # Git deletes in directory order, so whether the .git link survived the
+    # failed removal depends on the filesystem. Either way the registration
+    # is gone; with a .git link left, prune must keep the directory.
+    worktree_registered "$REPO" "$REPO/.ai-worktrees/td-e" && fail "td-e still registered"
+    chmod 755 "$REPO/.ai-worktrees/td-e/cache"
+    if [ -e "$REPO/.ai-worktrees/td-e/.git" ]; then
+        worktree_prune "$REPO" >/dev/null 2>&1
+        [ -d "$REPO/.ai-worktrees/td-e" ] || fail "leftover with a .git link removed"
+        rm -rf "$REPO/.ai-worktrees/td-e"
+    else
+        PRUNED=$(worktree_prune "$REPO" 2>/dev/null)
+        printf '%s\n' "$PRUNED" | grep -qx td-e || fail "leftover td-e not pruned once deletable"
+    fi
+
+    # A leftover prune itself cannot delete is reported on stderr, not listed
+    # as pruned, and cleared by a later sweep once deletable.
+    mkdir -p "$REPO/.ai-worktrees/td-e2/cache"
+    echo x > "$REPO/.ai-worktrees/td-e2/cache/packages.php"
+    chmod 555 "$REPO/.ai-worktrees/td-e2/cache"
+    RC=0
+    OUT=$(worktree_prune "$REPO" 2>"$tmp/prune.err") || RC=$?
+    printf '%s\n' "$OUT" | grep -qx td-e2 && fail "undeletable leftover reported as pruned"
+    grep -q "could not remove leftover worktree directory $REPO/.ai-worktrees/td-e2" "$tmp/prune.err" \
+        || fail "undeletable leftover not reported on stderr: $(cat "$tmp/prune.err")"
+    chmod 755 "$REPO/.ai-worktrees/td-e2/cache"
+    PRUNED=$(worktree_prune "$REPO" 2>/dev/null)
+    printf '%s\n' "$PRUNED" | grep -qx td-e2 || fail "leftover td-e2 not pruned once deletable"
+    [ -e "$REPO/.ai-worktrees/td-e2" ] && fail "td-e2 still on disk"
+fi
 
 if [ "$FAILURES" -eq 0 ]; then
     echo "PASS: worktree helpers"

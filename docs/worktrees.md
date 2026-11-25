@@ -25,7 +25,14 @@ Add these sections to the project file, `projects/<name>.md`:
 ## Worktree Setup
 cp -a "$AI_MAIN_WORKDIR/vendor" vendor
 ln -s ../../.env .env
+
+## Worktree Teardown
+[ -n "${AI_CONTAINER_WORKTREE:-}" ] && docker exec -u root app chown -R "$(id -u):$(id -g)" "$AI_CONTAINER_WORKTREE" || true
 ```
+
+The two hook sections are separate fields: each ends at the next `## `
+heading, so a `# comment` line inside a script is fine but a line starting
+with `##` would end it.
 
 | Section | Meaning |
 |---|---|
@@ -33,6 +40,7 @@ ln -s ../../.env .env
 | `## Base Branch` | Where a new branch starts. Unset: the main tree's current `HEAD`. A name that does not resolve is an error, never a fallback. A brief or a task can override it, see [Base branch](#base-branch). |
 | `## Container Path` | Where a container mounts the working directory, so `docker exec ... cd /var/www/demo` lines point at the worktree too. Only used when the working directory is the repository top. |
 | `## Worktree Setup` | One bash script, run with `-e` from the worktree, once per worktree, for what git does not carry: dependency folders, `.env`. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported. What it leaves untracked is recorded and never committed. |
+| `## Worktree Teardown` | Optional. One bash script, run with `-e` from the worktree right before it is removed (only once it holds no uncommitted work), and from a leftover directory before it is cleared. For what a plain delete cannot undo: files a container created as root, a per-worktree database. `AI_MAIN_WORKDIR` and `AI_WORKTREE` are exported, plus `AI_CONTAINER_WORKTREE` (the worktree inside the container: `## Container Path` + `/.ai-worktrees/<key>`) when the project declares a container path and the working directory is the repository top. A failure is a warning on stderr; the removal is still attempted. |
 
 Before enabling it:
 
@@ -92,6 +100,13 @@ git -C <worktree> checkout -- . && git -C <worktree> clean -fd
   `inbox/`, `run/` and `review/`. It skips projects whose lock is held and any
   worktree with uncommitted changes. `ai-task --prune-worktrees` does the same
   on demand.
+- A removal git refuses (typically a file a container created as root that
+  you cannot delete) is reported in `cron.log` with the worktree path and
+  git's error. Git has usually unregistered the worktree by then. The next
+  sweep runs `## Worktree Teardown` in that leftover directory and deletes it,
+  but only when it is directly under `.ai-worktrees/`, is not a registered
+  worktree, has no `.git` entry, and no task in flight uses its key. Anything
+  else is left for you.
 - Branches are never deleted.
 - Tasks of one project still run **one at a time**: a worktree isolates files,
   not the database, containers or test ports.

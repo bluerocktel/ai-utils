@@ -468,7 +468,7 @@ name.
 | `## Relationships` | Other projects a follow-up suggestion may target (see below). |
 | `## Automation: auto` | Lets this project's `template` jobs skip the review gate. See [scheduled jobs](scheduled-jobs.md#the-review-gate-and-its-one-exception). |
 | `## Isolation: worktree` | One git worktree per brief. Absent or `shared`: the normal shared tree. |
-| `## Base Branch`, `## Container Path`, `## Worktree Setup` | Worktree settings. See [worktrees](worktrees.md). |
+| `## Base Branch`, `## Container Path`, `## Worktree Setup`, `## Worktree Teardown` | Worktree settings. See [worktrees](worktrees.md). |
 
 `## Relationships` lists one target per bullet, as `verb → project: note`
 (`->` also works):

@@ -234,8 +234,14 @@ commit_message_from_report() {
 # project whose lock is held has a task running in it, and the sweep simply
 # leaves that project for the next one rather than queueing behind it.
 # Silent when there is nothing to remove, because it runs on every sweep.
+#
+# worktree_prune's stderr (a removal git refused, a teardown that failed) goes
+# to this script's stderr, prefixed with the project, which under cron is
+# cron.log: a failed removal used to be silenced here and left directories
+# behind for weeks. A dirty worktree being kept is NOT reported there, so a
+# quiet sweep stays quiet.
 prune_isolated_worktrees() {
-    local file proj wd removed slug
+    local file proj wd removed slug errf teardown container
     [ -d "$PROJECTS_DIR" ] || return 0
     mkdir -p "$LOCK_DIR"
     for file in "$PROJECTS_DIR"/*.md; do
@@ -244,11 +250,18 @@ prune_isolated_worktrees() {
         [ "$(project_isolation "$proj" 2>/dev/null)" = worktree ] || continue
         wd=$(project_working_dir "$proj") || continue
         [ -d "$wd" ] || continue
+        teardown=$(section_from_task 'Worktree Teardown' "$file")
+        container=$(project_field "$proj" 'Container Path')
+        errf=$(mktemp)
         removed=$(
             exec 7>"$LOCK_DIR/$(canonical_project "$proj").lock"
             flock -n 7 || exit 0
-            worktree_prune "$wd" 2>/dev/null
+            worktree_prune "$wd" "$teardown" "$container" "$proj" 2>"$errf"
         ) || true
+        if [ -s "$errf" ]; then
+            sed "s|^|ai-task: worktree prune $proj: |" "$errf" >&2
+        fi
+        rm -f "$errf"
         while IFS= read -r slug; do
             if [ -n "$slug" ]; then
                 echo "ai-task: pruned worktree $proj/$slug (branch ai/$slug kept)"
@@ -1202,13 +1215,21 @@ $(cat "$TASK_FILE")" \
             # flight: the next one continues the same branch, and its
             # ## Worktree Setup has already run.
             WT_SIBLINGS=$(active_task_keys "$TASK_FILE" | grep -cxF -- "$WT_KEY" || true)
+            WT_RM_ERR=$(mktemp)
             if [ "${WT_SIBLINGS:-0}" -gt 0 ]; then
                 WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree kept for $WT_SIBLINGS more task(s) of the brief)"
-            elif worktree_remove "$MAIN_WORKDIR" "$WT_KEY" 2>/dev/null; then
+            elif worktree_remove "$MAIN_WORKDIR" "$WT_KEY" \
+                    "$(section_from_task 'Worktree Teardown' "$PROJECTS_DIR/${ISO_PROJECT}.md")" \
+                    "$CONTAINER_PATH" "$ISO_PROJECT" 2>"$WT_RM_ERR"; then
                 WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree removed)"
             else
                 WORKTREE_NOTE="$WORKTREE_BRANCH at $WT_HEAD (worktree kept: $WORKTREE)"
             fi
+            # A teardown warning or git's refusal, visible in the run output.
+            if [ -s "$WT_RM_ERR" ]; then
+                sed 's/^/ai-task: /' "$WT_RM_ERR" >&2
+            fi
+            rm -f "$WT_RM_ERR"
         else
             WORKTREE_NOTE="$WORKTREE_BRANCH NOT COMMITTED (commit refused); the work is uncommitted in $WORKTREE"
             notify -u critical "ai-task [$RUNNER]: Commit Refused" \

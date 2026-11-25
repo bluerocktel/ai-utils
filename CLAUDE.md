@@ -647,6 +647,16 @@ offline test is `tests/test_worktree.sh`. Ten things to keep right:
    never deleted, and a directory at the target path that git does not know as
    a worktree is refused, never cleared. A commit refused by a hook keeps the
    task PASSED and the worktree on disk. Do not add `--no-verify`.
+   `## Worktree Teardown` (added 2026-11-25) runs right before a removal,
+   only after the dirty check, and its failure is a warning, never a veto.
+   A refused `git worktree remove` (root-owned files from a container) has
+   already unregistered the worktree, so `worktree_prune` also clears such a
+   LEFTOVER: a direct child of `.ai-worktrees/`, unregistered, with no `.git`
+   entry and no active key, teardown first, then `rm -rf`. Keep all four
+   guards and keep the path built from `$top/$WORKTREE_DIRNAME/<basename>`;
+   `worktree_remove` itself has no `rm -rf` fallback. `ai-task` sends prune's
+   stderr to its own stderr (cron.log) prefixed with the project, so a dirty
+   worktree being kept must stay silent there.
 7. **Setup artefacts are recorded, not guessed.** `worktree_setup` records what
    it left untracked in the worktree's own git dir (`ai-setup-paths`, next to
    the `ai-setup-done` marker), and both `worktree_commit` and

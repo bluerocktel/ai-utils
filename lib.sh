@@ -1094,18 +1094,74 @@ worktree_setup() {
     local wt="$1" main="$2" script="${3:-}" limit="${4:-600}" gitdir before after rc
     gitdir=$(worktree_gitdir "$wt") || return 2
     [ -f "$gitdir/ai-setup-done" ] && return 0
-    script=$(printf '%s\n' "$script" | grep -vE '^[[:space:]]*(```|~~~)' || true)
-    if [ -n "${script//[[:space:]]/}" ]; then
+    script=$(worktree_hook_script "$script")
+    if [ -n "$script" ]; then
         before=$(git -C "$wt" ls-files --others --exclude-standard --directory --full-name :/ 2>/dev/null | sort)
         rc=0
-        ( cd "$wt" && AI_MAIN_WORKDIR="$main" AI_WORKTREE="$wt" \
-            timeout "$limit" bash -e -c "$script" ) >&2 || rc=$?
+        worktree_run_hook "$wt" "$main" "$script" "$limit" || rc=$?
         [ "$rc" -eq 0 ] || { echo "worktree setup failed (exit $rc) in $wt" >&2; return 2; }
         after=$(git -C "$wt" ls-files --others --exclude-standard --directory --full-name :/ 2>/dev/null | sort)
         comm -13 <(printf '%s\n' "$before") <(printf '%s\n' "$after") \
             | sed -E 's#/$##' | grep -v '^$' > "$gitdir/ai-setup-paths" || true
     fi
     : > "$gitdir/ai-setup-done"
+}
+
+# The body of a ## Worktree Setup / ## Worktree Teardown section, code fences
+# dropped; prints nothing when the section holds only whitespace. Shared by
+# setup and teardown so the two hooks are read the same way.
+worktree_hook_script() {
+    local script
+    script=$(printf '%s\n' "${1:-}" | grep -vE '^[[:space:]]*(```|~~~)' || true)
+    [ -n "${script//[[:space:]]/}" ] || return 0
+    printf '%s\n' "$script"
+}
+
+# Run one project hook script with bash -e from inside <dir>, its output on
+# stderr (callers read paths from stdout). AI_MAIN_WORKDIR and AI_WORKTREE are
+# exported, plus AI_CONTAINER_WORKTREE when [container-wt] is given.
+#   worktree_run_hook <dir> <main-workdir> <script> <timeout-sec> [container-wt]
+# Returns the script's exit status (124 on timeout).
+worktree_run_hook() {
+    local dir="$1" main="$2" script="$3" limit="${4:-600}" cwt="${5:-}"
+    ( cd "$dir" || exit 1
+      export AI_MAIN_WORKDIR="$main" AI_WORKTREE="$dir"
+      if [ -n "$cwt" ]; then export AI_CONTAINER_WORKTREE="$cwt"; fi
+      timeout "$limit" bash -e -c "$script" ) >&2
+}
+
+# Run a project's ## Worktree Teardown from inside <dir>, right before the
+# directory is removed (a worktree whose dirty check passed, or the leftover
+# of a failed removal). Used to hand back files a container created as
+# another user, drop a per-worktree database, and so on. A failure is a
+# warning, never a veto: the removal is still attempted, because a teardown
+# that cannot run must not keep a finished worktree forever.
+#   worktree_teardown <dir> <main-workdir> <script> [container-path] [label]
+# AI_CONTAINER_WORKTREE is <container-path>/$WORKTREE_DIRNAME/<basename dir>,
+# set only when a container path is given. Always returns 0.
+worktree_teardown() {
+    local dir="$1" main="$2" script="${3:-}" container="${4%/}" label="${5:-}" cwt="" rc=0
+    script=$(worktree_hook_script "$script")
+    [ -n "$script" ] || return 0
+    [ -n "$container" ] && cwt="$container/$WORKTREE_DIRNAME/$(basename "$dir")"
+    worktree_run_hook "$dir" "$main" "$script" "${WORKTREE_TEARDOWN_TIMEOUT_SEC:-300}" "$cwt" || rc=$?
+    if [ "$rc" -ne 0 ]; then
+        echo "warning: ## Worktree Teardown${label:+ of project '$label'} failed (exit $rc) in $dir; removing it anyway" >&2
+    fi
+    return 0
+}
+
+# The container path to hand a teardown for worktrees of <workdir>: the
+# project's ## Container Path only when <workdir> is the repository top, the
+# same restriction as rewrite_workdir_paths (a mount of a subdirectory cannot
+# see .ai-worktrees/). Prints nothing otherwise.
+#   worktree_container_path <workdir> <container-path>
+worktree_container_path() {
+    local prefix
+    [ -n "${2:-}" ] || return 0
+    prefix=$(git -C "$1" rev-parse --show-prefix 2>/dev/null) || return 0
+    [ -z "$prefix" ] && printf '%s\n' "${2%/}"
+    return 0
 }
 
 # Uncommitted changes in a worktree that are NOT setup artefacts, as
@@ -1207,9 +1263,15 @@ worktree_blocker() {
 # Remove one task's worktree, keeping its branch. Refuses (returns 1) while
 # the worktree holds uncommitted work: --force is only ever used to clear the
 # setup artefacts worktree_dirty already ignores.
-#   worktree_remove <workdir> <task-name>
+#   worktree_remove <workdir> <task-name> [teardown-script] [container-path] [project]
+# Once the dirty check has passed, the project's ## Worktree Teardown (passed
+# in, like worktree_setup's script) runs from inside the worktree; its failure
+# is a warning only. A failed `git worktree remove` (typically files a
+# container created as another user) is reported with git's own error and
+# returns 1. There is deliberately no rm -rf fallback here: worktree_prune
+# clears the leftover directory on a later sweep, under its own guards.
 worktree_remove() {
-    local workdir="$1" slug top wt
+    local workdir="$1" teardown="${3:-}" container="${4:-}" proj="${5:-}" slug top wt err rc
     slug=$(worktree_slug "$2") || return 1
     top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || return 1
     wt="$top/$WORKTREE_DIRNAME/$slug"
@@ -1218,7 +1280,14 @@ worktree_remove() {
         echo "keeping $wt: it holds uncommitted changes" >&2
         return 1
     fi
-    git -C "$top" worktree remove --force "$wt" >&2
+    worktree_teardown "$wt" "${workdir%/}" "$teardown" \
+        "$(worktree_container_path "$workdir" "$container")" "$proj"
+    rc=0
+    err=$(git -C "$top" worktree remove --force "$wt" 2>&1 >/dev/null) || rc=$?
+    if [ "$rc" -ne 0 ]; then
+        echo "could not remove worktree $wt (git exit $rc): ${err:-no message}" >&2
+        return 1
+    fi
 }
 
 # Worktree keys of every task still in flight (inbox/, run/, review/), one per
@@ -1293,21 +1362,50 @@ branch_base() {
 }
 
 # Remove the worktrees of one repository whose task is no longer in flight.
-# Prints each removed slug. A dirty worktree is reported and kept: its changes
-# are the only copy. Branches are never deleted.
-#   worktree_prune <workdir>
+# Prints each removed slug. A dirty worktree is kept, silently (this runs on
+# every sweep): its changes are the only copy. Branches are never deleted.
+#   worktree_prune <workdir> [teardown-script] [container-path] [project]
+#
+# It also clears the LEFTOVER of a failed removal: `git worktree remove
+# --force` deletes the .git link and the registration first, so a removal that
+# then hits a file it cannot delete leaves a directory git no longer knows,
+# which worktree_ensure refuses to reuse forever. Such a directory is removed
+# only when ALL of these hold: it is a direct child of
+# $top/$WORKTREE_DIRNAME/ (the path is built from that and the basename, never
+# taken from anywhere else), it is not a registered worktree, it has no .git
+# entry (a .git means a checkout git may still own, or somebody's clone), and
+# no task in flight uses its key. The teardown runs from inside it first, so
+# a container can hand its files back before the rm.
 worktree_prune() {
-    local workdir="$1" top active d slug
+    local workdir="$1" teardown="${2:-}" container="${3:-}" proj="${4:-}"
+    local top active d slug path cpath
     top=$(git -C "$workdir" rev-parse --show-toplevel 2>/dev/null) || return 0
     [ -d "$top/$WORKTREE_DIRNAME" ] || return 0
     active=$(active_task_keys)
+    cpath=$(worktree_container_path "$workdir" "$container")
+    # Forget registrations whose directory is gone, so the checks below see
+    # the current state.
+    git -C "$top" worktree prune >&2 2>/dev/null || true
     for d in "$top/$WORKTREE_DIRNAME"/*/; do
         [ -d "$d" ] || continue
         slug=$(basename "$d")
+        case "$slug" in ""|.|..) continue ;; esac
+        path="$top/$WORKTREE_DIRNAME/$slug"
+        [ -L "$path" ] && continue
         printf '%s\n' "$active" | grep -qxF -- "$slug" && continue
-        worktree_registered "$top" "${d%/}" || continue
-        if worktree_remove "$top" "$slug"; then
+        if worktree_registered "$top" "$path"; then
+            worktree_dirty "$path" >/dev/null && continue
+            if worktree_remove "$workdir" "$slug" "$teardown" "$container" "$proj"; then
+                printf '%s\n' "$slug"
+            fi
+            continue
+        fi
+        [ -e "$path/.git" ] || [ -L "$path/.git" ] && continue
+        worktree_teardown "$path" "${workdir%/}" "$teardown" "$cpath" "$proj"
+        if rm -rf -- "$path" 2>/dev/null; then
             printf '%s\n' "$slug"
+        else
+            echo "could not remove leftover worktree directory $path (permission denied?)" >&2
         fi
     done
     git -C "$top" worktree prune >&2 2>/dev/null || true
