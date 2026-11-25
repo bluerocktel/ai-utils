@@ -141,7 +141,10 @@ ai_is_auth_failure() {
     local file="${1:-}"
     [ -f "$file" ] || return 1
 
-    local strong='API Error: 401|please run .?claude login|OAuth token( has)? expired|OAuth token revoked|ANTHROPIC_API_KEY'
+    # 'login reached its time limit' / 'claude auth login' / 'setup-token': the
+    # CLI's wording since late 2026 for an expired claude.ai login. It arrives as
+    # the JSON .result, so the broad list (skipped when .result is set) misses it.
+    local strong='API Error: 401|please run .?claude login|run .?claude auth login|login reached its time limit|claude setup-token|OAuth token( has)? expired|OAuth token revoked|ANTHROPIC_API_KEY'
     local broad='HTTP 401|status.?401|Invalid authentication|authentication (failed|error|required)|Failed to authenticate|not authenticated|Unauthorized|credentials? (expired|invalid|missing)'
 
     if grep -qiE "$strong" "$file"; then
